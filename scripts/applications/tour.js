@@ -31,13 +31,13 @@ let states = {
         await genericUtils.sleep(500);
     },
     7: async () => {
-        ui.activeWindow.close();
+        foundry.applications.instances.get('medkit-window-item')?.close();
         let item = await compendiumUtils.getItemFromCompendium(constants.packs.spells, 'Fire Shield');
         if (!item) return;
         item.sheet.close();
         let pack = game.packs.get(constants.packs.spells);
         if (!pack) return;
-        let compendiumApp = Object.values(ui.windows).find(i => i.metadata?.id === pack.metadata.id);
+        let compendiumApp = [...foundry.applications.instances.values()].find(i => (i.collection?.metadata?.id ?? i.metadata?.id) === pack.metadata.id);
         if (compendiumApp) compendiumApp.close();
         let actor = await compendiumUtils.getItemFromCompendium('dnd5e.heroes', 'Akra (Dragonborn Cleric)');
         if (!actor) return;

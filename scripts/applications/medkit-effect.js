@@ -174,8 +174,8 @@ export class EffectMedkit extends HandlebarsApplicationMixin(ApplicationV2) {
                 }
             },
             overTime: {
-                original: effect?.changes?.find(i => i.key === 'flags.midi-qol.OverTime')?.value,
-                show: effect?.changes?.find(i => i.key === 'flags.midi-qol.OverTime')?.value ? true : false
+                original: effect?.system?.changes?.find(i => i.key === 'flags.midi-qol.OverTime')?.value,
+                show: effect?.system?.changes?.find(i => i.key === 'flags.midi-qol.OverTime')?.value ? true : false
             },
             macros: {
                 effect: JSON?.stringify(effect.flags['chris-premades']?.macros?.effect) ?? '',
@@ -373,13 +373,15 @@ export class EffectMedkit extends HandlebarsApplicationMixin(ApplicationV2) {
             overTimeFields.forEach(i => {
                 if (i.value && (i.value != '')) overTimeValue += i.key + '=' + i.value + ',';
             });
-            if (effectData.changes.find(i => i.key === 'flags.midi-qol.OverTime')) {
-                effectData.changes.find(i => i.key === 'flags.midi-qol.OverTime').value = overTimeValue;
+            effectData.system ??= {};
+            effectData.system.changes ??= [];
+            if (effectData.system.changes.find(i => i.key === 'flags.midi-qol.OverTime')) {
+                effectData.system.changes.find(i => i.key === 'flags.midi-qol.OverTime').value = overTimeValue;
             } else {
-                effectData.changes.push({
+                effectData.system.changes.push({
                     key: 'flags.midi-qol.OverTime',
                     value: overTimeValue,
-                    mode: 0,
+                    type: 'custom',
                     priority: 20
                 });
             }

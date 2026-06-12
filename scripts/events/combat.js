@@ -102,7 +102,9 @@ function collectTokenMacros(token, pass, distance, target) {
     let templates;
     if (pass === 'turnStartSource' || pass === 'turnEndSource') {
         let check = pass === 'turnEndSource' ? 'previous' : 'current';
-        templates = token.parent.templates.filter(template => {
+        // v14: placed templates are Region documents flagged flags.core.MeasuredTemplate (Scene#templates is a deprecated ephemeral shim)
+        templates = token.parent.regions.filter(template => {
+            if (!genericUtils.isTemplateRegion(template)) return;
             if (!template.flags.dnd5e?.origin) return;
             let originItem = fromUuidSync(template.flags.dnd5e.item);
             if (!originItem) return;
@@ -135,6 +137,7 @@ function collectTokenMacros(token, pass, distance, target) {
     if (pass === 'turnStartSource' || pass === 'turnEndSource') {
         let check = pass === 'turnEndSource' ? 'previous' : 'current';
         regions = token.parent.regions.filter(region => {
+            if (genericUtils.isTemplateRegion(region)) return;
             let origin = getRegionOrigin(region);
             if (!origin?.actor) return;
             let firstToken = actorUtils.getFirstToken(origin.actor);
@@ -144,7 +147,8 @@ function collectTokenMacros(token, pass, distance, target) {
             return true;
         });
     } else {
-        regions =  token.regions;
+        // v14: template-backed regions are handled by the template loop above
+        regions = token.regions.filter(i => !genericUtils.isTemplateRegion(i));
     }
     regions.forEach(region => {
         let macroList = regionEvents.collectMacros(region).filter(i => i.region?.find(j => j.pass === pass)).flatMap(k => k.region).filter(l => l.pass === pass).concat(macroUtils.getEmbeddedMacros(region, 'region', {pass}));
@@ -284,8 +288,9 @@ async function combatStartEnd(combat, isEnd) {
         if (token) await executeMacroPass([token], pass);
     }
     scenes = Array.from(scenes);
-    let sceneTemplates = scenes.map(i => Array.from(i.templates)).flat();
-    let sceneRegions = scenes.map(i => Array.from(i.regions)).flat();
+    // v14: placed templates are Region documents flagged flags.core.MeasuredTemplate (Scene#templates is a deprecated ephemeral shim)
+    let sceneTemplates = scenes.map(i => i.regions.filter(j => genericUtils.isTemplateRegion(j))).flat();
+    let sceneRegions = scenes.map(i => i.regions.filter(j => !genericUtils.isTemplateRegion(j))).flat();
     await templateEvents.executeMacroPass(sceneTemplates ?? [], pass);
     await regionEvents.executeMacroPass(sceneRegions ?? [], pass);
     if (!isEnd) return;

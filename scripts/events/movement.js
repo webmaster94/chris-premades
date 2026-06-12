@@ -177,7 +177,8 @@ async function moveToken(token, movement, options, user) {
     let ignore = genericUtils.getProperty(options, 'chris-premades.movement.ignore');
     let skipMove = genericUtils.getCPRSetting('movementPerformance') < 2 && !isFinalMovement;
     let previousTemplates = Array.from(templateUtils.getTemplatesInToken(token.object));
-    let previousRegions = token.parent.regions.filter(region => token.testInsideRegion(region, movement.origin));
+    // v14: template-backed regions are handled by the template events below
+    let previousRegions = token.parent.regions.filter(region => !genericUtils.isTemplateRegion(region) && token.testInsideRegion(region, movement.origin));
     // eslint-disable-next-line no-undef
     await token.object.movementAnimationPromise;
     let startTime = performance.now();
@@ -197,7 +198,8 @@ async function moveToken(token, movement, options, user) {
         let leavingTemplates = previousTemplates.filter(i => !currentTemplates.includes(i));
         let enteringTemplates = currentTemplates.filter(i => !previousTemplates.includes(i));
         let stayingTemplates = previousTemplates.filter(i => currentTemplates.includes(i));
-        let throughTemplates = token.parent.templates.reduce((acc, template) => {
+        // v14: placed templates are Region documents flagged flags.core.MeasuredTemplate (Scene#templates is a deprecated ephemeral shim)
+        let throughTemplates = token.parent.regions.filter(i => genericUtils.isTemplateRegion(i)).reduce((acc, template) => {
             let intersected = templateUtils.rayIntersectsTemplate(template, moveRay);
             if (!intersected) return acc;
             acc.push(template);
@@ -215,11 +217,12 @@ async function moveToken(token, movement, options, user) {
         for (let template of enteringTemplates) await templateExtension.templateEffectTokenEnter(template, token.object);
         if (stayingTemplates.length) count += await templateEvents.executeMacroPass(stayingTemplates, 'stay', token.object, options);
         if (enteredAndLeftTemplates.length) count += await templateEvents.executeMacroPass(enteredAndLeftTemplates, 'passedThrough', token.object, options);
-        let currentRegions = Array.from(token.regions);
+        let currentRegions = Array.from(token.regions).filter(i => !genericUtils.isTemplateRegion(i));
         let leavingRegions = previousRegions.filter(i => !currentRegions.includes(i));
         let enteringRegions = currentRegions.filter(i => !previousRegions.includes(i));
         let stayingRegions = previousRegions.filter(i => currentRegions.includes(i));
         let throughRegions = token.parent.regions.reduce((acc, region) => {
+            if (genericUtils.isTemplateRegion(region)) return acc;
             let intersected = regionUtils.rayIntersectsRegion(region, moveRay);
             if (!intersected) return acc;
             acc.push(region);

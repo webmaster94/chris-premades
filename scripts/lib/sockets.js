@@ -98,7 +98,7 @@ async function addFavorites(actorUuid, entityUuids) {
         let entityType = entity.documentName;
         if (entityType === 'Item') {
             await actor.system.addFavorite({
-                id: entity.getRelativeUUID(entity.actor),
+                id: foundry.utils.buildRelativeUuid(entity, entity.actor),
                 type: 'item'
             });
         } else if (entityType === 'Activity') {
@@ -117,7 +117,7 @@ async function removeFavorites(actorUuid, entityUuids, type='item') {
         return await fromUuid(i);
     }).filter(j => j));
     if (type === 'item') {
-        for (let i of entities) await actor.system.removeFavorite(i.getRelativeUUID(i.actor));
+        for (let i of entities) await actor.system.removeFavorite(foundry.utils.buildRelativeUuid(i, i.actor));
     } else if (type === 'activity') {
         for (let i of entities) await actor.system.removeFavorite(i.relativeUUID);
     }
@@ -140,7 +140,7 @@ async function createSidebarActor(actorUuid, {folderId} = {}) {
     let compendiumActor = await fromUuid(actorUuid);
     if (!compendiumActor) return;
     let actorData = compendiumActor.toObject();
-    genericUtils.setProperty(actorData, 'flags.core.sourceId', compendiumActor.uuid);
+    genericUtils.setProperty(actorData, '_stats.compendiumSource', compendiumActor.uuid);
     if (folderId) genericUtils.setProperty(actorData, 'folder', folderId);
     let actor = await Actor.create(actorData);
     return actor.uuid;

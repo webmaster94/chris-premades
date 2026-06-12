@@ -37,14 +37,16 @@ async function late({trigger: {entity: item, token}, workflow}) {
             img: item.img,
             origin: item.uuid,
             duration: itemUtils.convertDuration(item.system.activities.find(i => i)),
-            changes: [
-                {
-                    key: 'system.bonuses.All-Attacks',
-                    mode: 2,
-                    value: modifier,
-                    priority: 20
-                }
-            ],
+            system: {
+                changes: [
+                    {
+                        key: 'system.bonuses.All-Attacks',
+                        type: 'add',
+                        value: modifier,
+                        priority: 20
+                    }
+                ]
+            },
             flags: {
                 dae: {
                     showIcon: true,

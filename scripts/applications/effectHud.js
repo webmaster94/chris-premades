@@ -3,7 +3,7 @@ function renderTokenHUD(app, html, data, options) {
     if (!app.document) return;
     let statusEffects = html.querySelector('.status-effects');
     let effects = actorUtils.getEffects(app.document.actor).filter(i => {
-        if (CONFIG.statusEffects.find(j => j._id === i._id)) return false;
+        if (Object.values(CONFIG.statusEffects).find(j => j?._id === i._id)) return false;
         if (!i.isTemporary) return false;
         return true;
     });

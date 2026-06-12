@@ -60,6 +60,8 @@ function collectActorCheckMacros(actor, pass) {
             });
         });
         token.document.regions.forEach(region => {
+            // v14: template-backed regions are handled by the template loop above
+            if (genericUtils.isTemplateRegion(region)) return;
             let macroList = collectMacros(region).filter(i => i.toolCheck?.find(j => j.pass === pass)).flatMap(k => k.toolCheck).filter(l => l.pass === pass).concat(macroUtils.getEmbeddedMacros(region, 'toolCheck', {pass}));
             if (!macroList.length) return;
             triggers.push({
@@ -280,7 +282,7 @@ async function rollToolCheck(wrapped, config, dialog, message) {
         }
         messageData = message.data;
         if (overtimeActorUuid) messageData['flags.midi-qol.overtimeActorUuid'] = overtimeActorUuid;
-        rollMode = message.rollMode ?? game.settings.get('core', 'rollMode');
+        rollMode = message.rollMode ?? game.settings.get('core', 'messageMode');
     };
     Hooks.once('dnd5e.preRollTool', messageDataFunc);
     if (Object.entries(options).length) config.rolls = [{options}];
@@ -325,7 +327,9 @@ async function rollToolCheck(wrapped, config, dialog, message) {
         genericUtils.mergeObject(messageData, {flags: options.flags ?? {} });
         genericUtils.setProperty(messageData, 'flags.midi-qol.lmrtfy.requestId', options.flags?.lmrtfy?.data?.requestId);
         messageData.template = 'modules/midi-qol/templates/roll-base.html';
-        await returnData.toMessage(messageData, {rollMode: returnData.options?.rollMode ?? rollMode});
+        let messageMode = returnData.options?.rollMode ?? rollMode;
+        if (messageMode) messageMode = Roll._mapLegacyRollMode(messageMode) ?? messageMode;
+        await returnData.toMessage(messageData, {messageMode});
     }
     await executeMacroPass(this, 'post', toolId, options, returnData, config, dialog, message);
     return shouldBeArray ? [returnData] : returnData;

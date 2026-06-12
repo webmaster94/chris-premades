@@ -72,7 +72,7 @@ async function createDeleteUpdateActiveEffect(...args) {
     }
     if (!socketUtils.isTheGM()) return;
     if (effect.target?.documentName !== 'Actor') return;
-    let change = effect.changes.find(i => i.key === 'system.traits.size');
+    let change = effect.system.changes.find(i => i.key === 'system.traits.size');
     if (!change) return;
     let animate = effect.flags?.['chris-premades']?.effect?.sizeAnimation ?? true;
     let old = genericUtils.getProperty(options, 'chris-premades.effect.size.old');
@@ -81,13 +81,13 @@ async function createDeleteUpdateActiveEffect(...args) {
 }
 async function preCreateUpdateActiveEffect(effect, updates, options, userId) {
     if (effect.target?.documentName !== 'Actor') return;
-    let change = (updates.changes ?? effect.changes).find(i => i.key === 'system.traits.size');
+    let change = (updates.system?.changes ?? updates.changes ?? effect.system.changes).find(i => i.key === 'system.traits.size');
     if (!change) return;
     genericUtils.setProperty(options, 'chris-premades.effect.size.old', effect.target.system.traits.size);
 }
 async function preDeleteActiveEffect(effect, options, userId) {
     if (effect.target?.documentName !== 'Actor') return;
-    let change = effect.changes.find(i => i.key === 'system.traits.size');
+    let change = effect.system.changes.find(i => i.key === 'system.traits.size');
     if (!change) return;
     genericUtils.setProperty(options, 'chris-premades.effect.size.old', effect.target.system.traits.size);
 }

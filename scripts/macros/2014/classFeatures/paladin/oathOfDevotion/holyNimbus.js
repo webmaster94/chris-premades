@@ -8,20 +8,22 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
-            {
-                key: 'ATL.light.dim',
-                mode: 4,
-                value: 60,
-                priority: 20
-            },
-            {
-                key: 'ATL.light.bright',
-                mode: 4,
-                value: 30,
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'ATL.light.dim',
+                    type: 'upgrade',
+                    value: 60,
+                    priority: 20
+                },
+                {
+                    key: 'ATL.light.bright',
+                    type: 'upgrade',
+                    value: 30,
+                    priority: 20
+                }
+            ]
+        }
     };
     effectUtils.addMacro(effectData, 'combat', ['holyNimbusActive']);
     await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'holyNimbus'});

@@ -126,9 +126,9 @@ async function use({workflow}) {
     if (!effect) return;
     if (drakeUpgrades) {
         let upgradeUpdates = {
-            changes: [{
+            'system.changes': [{
                 key: 'system.traits.dr.value',
-                mode: 2,
+                type: 'add',
                 priority: 20,
                 value: damageType
             }]
@@ -181,14 +181,16 @@ async function postAttack({trigger: {entity: effect, token}, workflow}) {
         name: feature.name,
         img: feature.img,
         origin: feature.item.uuid,
-        changes: [
-            {
-                key: 'system.traits.dr.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.traits.dr.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [

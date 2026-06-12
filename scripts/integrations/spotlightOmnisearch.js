@@ -2,7 +2,7 @@ import {Summons} from '../lib/summons.js';
 import {summonEffects} from '../macros/animations/summonEffects.js';
 import {actorUtils, compendiumUtils, constants, effectUtils, errors, genericUtils, itemUtils} from '../utils.js';
 async function doSummon(event, uuid) {
-    let dialogApp = Object.values(ui.windows).find(i => i.title === 'spotlight-omnisearch.spotlight.title');
+    let dialogApp = [...foundry.applications.instances.values()].find(i => i.title === 'spotlight-omnisearch.spotlight.title');
     if (dialogApp) dialogApp.close();
     let selectedToken = canvas.tokens.controlled[0];
     if (!selectedToken) {

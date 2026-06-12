@@ -230,14 +230,16 @@ async function grappleHelper(sourceToken, targetToken, item, {noContest = false,
         name: targetEffectName,
         img: 'icons/environment/traps/net.webp',
         origin: sourceActor.uuid,
-        changes: [
-            {
-                key: 'flags.Rideable.RegisteredActorEffectsFlag.grapple',
-                mode: 2,
-                value: targetEffectName,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.Rideable.RegisteredActorEffectsFlag.grapple',
+                    type: 'add',
+                    value: targetEffectName,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 showIcon: true
@@ -354,7 +356,7 @@ async function grappleHelper(sourceToken, targetToken, item, {noContest = false,
 function isGrappledBy(target, source) {
     let effects = effectUtils.getAllEffectsByIdentifier(target.actor, 'grappled');
     if (!effects.length) return false;
-    return !!effects.find(effect => effect.flags['chris-premades']?.grapple?.tokenId === source.document.id);
+    return !!effects.find(effect => effect.flags['chris-premades']?.grapple?.tokenId === source.document.id && !effect.duration?.expired && !effect.disabled);
 }
 function getMovementHitTokens(startPoint, endPoint, radius, {collisionType='move', includeAlreadyHit=false}={}) {
     function getIntersection(ray, intersectShape) {

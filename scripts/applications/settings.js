@@ -147,7 +147,7 @@ export async function settingButton(id) {
         case 'spellCompendium': await selectCompendium('spellCompendium', 'Item'); break;
         case 'macroCompendium': await selectCompendium('macroCompendium', 'Macro'); break;
         case 'tour': {
-            Object.values(ui.windows).find(i => i.id === 'chris-troubleshoot-settings')?.close();
+            [...foundry.applications.instances.values()].find(i => i.id === 'chris-troubleshoot-settings')?.close();
             game.settings.sheet.close();
             tours.guidedTour();
             break;

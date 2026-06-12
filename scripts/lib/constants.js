@@ -574,16 +574,19 @@ const immuneEffectData = {
     name: 'Immune',
     img: tempConditionIcon,
     duration: {
-        turns: 1
+        value: 1,
+        units: 'turns'
     },
-    changes: [
-        {
-            key: 'flags.midi-qol.min.ability.save.all',
-            value: 100,
-            mode: 5,
-            priority: 120
-        }
-    ],
+    system: {
+        changes: [
+            {
+                key: 'flags.midi-qol.min.ability.save.all',
+                value: 100,
+                type: 'override',
+                priority: 120
+            }
+        ]
+    },
     flags: {
         dae: {
             specialDuration: [
@@ -601,16 +604,19 @@ const advantageEffectData = {
     name: 'Advantage',
     img: tempConditionIcon,
     duration: {
-        turns: 1
+        value: 1,
+        units: 'turns'
     },
-    changes: [
-        {
-            key: 'flags.midi-qol.advantage.save.all',
-            value: 1,
-            mode: 5,
-            priority: 120
-        }
-    ],
+    system: {
+        changes: [
+            {
+                key: 'flags.midi-qol.advantage.save.all',
+                value: 1,
+                type: 'override',
+                priority: 120
+            }
+        ]
+    },
     flags: {
         dae: {
             specialDuration: [
@@ -628,16 +634,19 @@ const disadvantageEffectData = {
     name: 'Disadvantage',
     img: tempConditionIcon,
     duration: {
-        turns: 1
+        value: 1,
+        units: 'turns'
     },
-    changes: [
-        {
-            key: 'flags.midi-qol.disadvantage.save.all',
-            value: 1,
-            mode: 5,
-            priority: 120
-        }
-    ],
+    system: {
+        changes: [
+            {
+                key: 'flags.midi-qol.disadvantage.save.all',
+                value: 1,
+                type: 'override',
+                priority: 120
+            }
+        ]
+    },
     flags: {
         dae: {
             specialDuration: [
@@ -655,16 +664,19 @@ const autoFailSaveEffectData = {
     name: 'Auto Fail',
     img: tempConditionIcon,
     duration: {
-        seconds: 1
+        value: 1,
+        units: 'seconds'
     },
-    changes: [
-        {
-            key: 'flags.midi-qol.fail.ability.save.all',
-            value: 1,
-            mode: 0,
-            priority: 20
-        }
-    ],
+    system: {
+        changes: [
+            {
+                key: 'flags.midi-qol.fail.ability.save.all',
+                value: 1,
+                type: 'custom',
+                priority: 20
+            }
+        ]
+    },
     flags: {
         dae: {
             specialDuration: [

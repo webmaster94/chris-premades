@@ -90,6 +90,8 @@ function collectMacros(effect, pass) {
                 });
             });
             token.document.regions.forEach(region => {
+                // v14: template-backed regions are handled by the template loop above
+                if (genericUtils.isTemplateRegion(region)) return;
                 let macroList = collectEffectMacros(region).filter(i => i.effect?.find(j => j.pass === pass)).flatMap(k => k.effect).filter(l => l.pass === pass).concat(macroUtils.getEmbeddedMacros(effect, 'effect', {pass}));
                 if (!macroList.length) return;
                 triggers.push({
@@ -179,7 +181,7 @@ async function createActiveEffect(effect, options, userId) {
     await executeMacroPass(effect, 'actorCreated', options);
     if (effect.statuses.has('dead')) await death.executeMacroPass(effect.parent, 'dead');
     if (effect.statuses.size) await effects.specialDurationConditions(effect);
-    if (effect.parent instanceof Actor && effect.changes.find(change => change.key.includes('system.attributes.movement.'))) await effects.specialDurationZeroSpeed(effect.parent);
+    if (effect.parent instanceof Actor && effect.system.changes.find(change => change.key.includes('system.attributes.movement.'))) await effects.specialDurationZeroSpeed(effect.parent);
 }
 async function deleteActiveEffect(effect, options, userId) {
     if (!socketUtils.isTheGM()) return;

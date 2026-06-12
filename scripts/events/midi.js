@@ -36,7 +36,7 @@ function collectAllMacros({activity, item, token, actor}, pass) {
     if (item) {
         let macroList = collectItemMacros(item, pass, activityUtils.getIdentifier(activity)).concat(macroUtils.getEmbeddedMacros(item, 'midi.item', {pass}));
         if (activity) macroList = macroList.concat(macroUtils.getEmbeddedMacros(activity, 'midi.item', {pass}));
-        let enchantments = item.effects.filter(effect => effect.type === 'enchantment');
+        let enchantments = item.effects.filter(effect => effect.type === 'enchantment' && !effect.duration?.expired);
         if (enchantments.length) {
             enchantments.forEach(effect => {
                 let effectMacroList = collectItemMacros(effect, pass).concat(macroUtils.getEmbeddedMacros(effect, 'midi.item', {pass}));
@@ -105,6 +105,8 @@ function collectAllMacros({activity, item, token, actor}, pass) {
             });
         });
         token.document.regions.forEach(i => {
+            // v14: template-backed regions are handled by the template loop above
+            if (genericUtils.isTemplateRegion(i)) return;
             let macroList = collectActorMacros(i, pass).concat(macroUtils.getEmbeddedMacros(i, 'midi.actor', {pass}));
             if (!macroList.length) return;
             triggers.push({

@@ -1,4 +1,4 @@
-import {activityUtils, actorUtils, constants, effectUtils, genericUtils, itemUtils, rollUtils, socketUtils} from '../../utils.js';
+import {activityUtils, actorUtils, constants, effectUtils, genericUtils, itemUtils, rollUtils, socketUtils, templateUtils} from '../../utils.js';
 import {socket, sockets} from '../sockets.js';
 async function bonusDamage(workflow, formula, {ignoreCrit = false, damageType}={}) {
     formula = String(formula);
@@ -239,6 +239,8 @@ function getTotalDamageOfType(damageDetail, actor, type) {
 }
 async function handleInstantTemplate(workflow) {
     if (!workflow.template) return;
+    // workflow.template may be a Region-backed document in v14 — resolve the real RegionDocument so dependents are tracked under the Region UUID
+    let templateDoc = templateUtils.getRegionDoc(workflow.template) ?? workflow.template;
     let templateEffectName = genericUtils.format('CHRISPREMADES.GenericEffects.TemplateEffect', {itemName: workflow.item.name});
     let templateEffect = workflow.actor.effects.getName(templateEffectName);
     if (templateEffect) {
@@ -251,7 +253,7 @@ async function handleInstantTemplate(workflow) {
         };
         effectUtils.addMacro(effectData, 'combat', ['removeTemplate']);
         let effect = await effectUtils.createEffect(workflow.actor, effectData);
-        await effectUtils.addDependent(effect, [workflow.template]);
+        await effectUtils.addDependent(effect, [templateDoc]);
     }
 }
 function getCastData(workflow) {
@@ -267,20 +269,23 @@ async function specialItemUse(item, targets, sourceFeature, {activity, consumeUs
     let effectData = {
         name: sourceFeature.name,
         img: constants.tempConditionIcon,
-        changes: Object.keys(CONFIG.DND5E.activityTypes).flatMap(i => ([{
-            key: 'activities[' + i + '].activation.type',
-            mode: 5,
-            value: 'special',
-            priority: 20
+        system: {
+            changes: Object.keys(CONFIG.DND5E.activityTypes).flatMap(i => ([{
+                key: 'activities[' + i + '].activation.type',
+                type: 'override',
+                value: 'special',
+                priority: 20
+            },
+            {
+                key: 'system.activation.type',
+                type: 'override',
+                value: 'special',
+                priority: 20
+            }]))
         },
-        {
-            key: 'system.activation.type',
-            mode: 5,
-            value: 'special',
-            priority: 20
-        }])),
         duration: {
-            seconds: 1
+            value: 1,
+            units: 'seconds'
         },
         origin: sourceFeature.uuid
     };

@@ -785,11 +785,9 @@ export class ItemMedkit extends HandlebarsApplicationMixin(ApplicationV2) {
             'system.equipped',
             'system.materials',
             'system.quantity',
-            'system.sourceClass',
             'system.source',
             'system.prepared',
             'system.method',
-            'flags.core.sourceId',
             'system.sourceItem'
         ];
         if (item.type === 'spell') keepPaths.push('system.uses');
@@ -807,9 +805,7 @@ export class ItemMedkit extends HandlebarsApplicationMixin(ApplicationV2) {
         for (let field of cleanPaths) {
             let fieldValue = genericUtils.getProperty(sourceItemData, field);
             if (fieldValue) continue;
-            let fieldArray = field.split('.');
-            let newPath = fieldArray.slice(0, -1).concat('-=' + fieldArray.slice(-1)).join('.');
-            if (!fieldValue) genericUtils.setProperty(sourceItemData, newPath, null);
+            genericUtils.setProperty(sourceItemData, field, new foundry.data.operators.ForcedDeletion());
         }
         if (source) genericUtils.setProperty(sourceItemData, 'flags.chris-premades.info.source', source);
         if (version) genericUtils.setProperty(sourceItemData, 'flags.chris-premades.info.version', version);
@@ -847,7 +843,7 @@ export class ItemMedkit extends HandlebarsApplicationMixin(ApplicationV2) {
         if (!source) return;
         /* Keep the CPR flags */
         this._cleanObject(this.flags); // Clean up any leftover undefined flags from adding/removing properties
-        await this.item.update({'flags.==chris-premades': genericUtils.deepClone(this.flags)});
+        await this.item.update({'flags.chris-premades': foundry.data.operators.ForcedReplacement.create(genericUtils.deepClone(this.flags))});
         await ItemMedkit.update(this.item, source.document, {source: source.source, version: source.version});
         this.flags = genericUtils?.deepClone(this.item?.flags['chris-premades']) ?? {};
         this.selectedGenericFeatures = Object.keys(this.flags?.config?.generic ?? {});
@@ -878,14 +874,14 @@ export class ItemMedkit extends HandlebarsApplicationMixin(ApplicationV2) {
                 return [key, value];
             }));
         }
-        await this.item.update({'flags.==chris-premades': genericUtils.deepClone(this.flags)});
+        await this.item.update({'flags.chris-premades': foundry.data.operators.ForcedReplacement.create(genericUtils.deepClone(this.flags))});
         // If the current source is not the selected source, change it, if the select source is none, clear out the flags we add, if the selected source is development, do nothing.
         if (this._source != this.selectedSource) {
             // Different sources, do something about it
             if (!this.selectedSource) {
                 genericUtils.log('dev', 'Applying "NONE" automation');
                 // The 'none' option was selected, so we want to clear out the CPR flags
-                await this.item.update({'flags.-=chris-premades': null}); // May need to clear more flags here for MISC/GPS integration.
+                await this.item.update({'flags.chris-premades': new foundry.data.operators.ForcedDeletion()}); // May need to clear more flags here for MISC/GPS integration.
             } else if (this.selectedSource === 'development') { // This takes slightly too long, but is there any way to change that??
                 if (this._macro) {
                     genericUtils.log('dev', 'Applying source, version, and macros for ' + this.identifier);

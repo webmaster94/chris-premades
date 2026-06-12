@@ -8,14 +8,16 @@ async function create({trigger: {entity: item, target, identifier}}) {
         name: item.name,
         img: item.img,
         origin: item.uuid,
-        changes: [
-            {
-                key: 'system.traits.dr.custom',
-                mode: 0,
-                value: 'spell',
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.traits.dr.custom',
+                    type: 'custom',
+                    value: 'spell',
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 aura: true,

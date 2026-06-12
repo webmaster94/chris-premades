@@ -24,10 +24,12 @@ function updateEffect(effect) {
     document.name = effect.name;
     if (document.flags['chris-premades']?.effectInterface.customStatus) {
         let id = effect.name.toLowerCase().slugify();
-        let status = CONFIG.statusEffects.find(i => i._id === effect.id);
+        let status = Object.values(CONFIG.statusEffects).find(i => i?._id === effect.id);
         if (status) {
+            delete CONFIG.statusEffects[status.id];
             status.id = id;
-            status.label = effect.name;
+            status.name = effect.name;
+            CONFIG.statusEffects[id] = status;
         }
         if (!effect.statuses.has(id)) genericUtils.update(effect, {statuses: [...Array.from(document.statuses), id]});
     }
@@ -152,7 +154,10 @@ class EffectDirectory extends foundry.applications.sidebar.DocumentDirectory {
                 callback: async (li) => {
                     let document = getDocument(li);
                     if (!document) return;
-                    if (document.flags['chris-premades']?.effectInterface?.customStatus) CONFIG.statusEffects = CONFIG.statusEffects.filter(i => i._id != document.id);
+                    if (document.flags['chris-premades']?.effectInterface?.customStatus) {
+                        let status = Object.values(CONFIG.statusEffects).find(i => i?._id === document.id);
+                        if (status) delete CONFIG.statusEffects[status.id];
+                    }
                     this.collection.delete(document.id);
                     await document.delete();
                     this.render(true);
@@ -161,7 +166,7 @@ class EffectDirectory extends foundry.applications.sidebar.DocumentDirectory {
                     let document = getDocument(li);
                     if (!document) return false;
                     if (!game.user.isGM) return false;
-                    if (document.flags['chris-premades']?.effectInterface?.status && CONFIG.statusEffects.find(i => i?._id === document.id)) return false;
+                    if (document.flags['chris-premades']?.effectInterface?.status && Object.values(CONFIG.statusEffects).find(i => i?._id === document.id)) return false;
                     return true;
                 },
                 icon: '<i class="fas fa-trash"></i>',
@@ -190,13 +195,13 @@ class EffectDirectory extends foundry.applications.sidebar.DocumentDirectory {
                     if (!document) return;
                     let id = document.name.toLowerCase().slugify();
                     await genericUtils.update(document, {statuses: [...Array.from(document.statuses), id], 'flags.chris-premades.effectInterface.customStatus': id});
-                    CONFIG.statusEffects.push({
+                    CONFIG.statusEffects[id] = {
                         id: id,
                         img: document.img,
                         name: document.name,
                         _id: document.id,
                         customStatus: true
-                    });
+                    };
                     this.collection.initializeTree();
                 },
                 condition: (li) => {
@@ -215,7 +220,8 @@ class EffectDirectory extends foundry.applications.sidebar.DocumentDirectory {
                     if (!document) return;
                     let id = document.name.toLowerCase().slugify();
                     await genericUtils.update(document, {statuses: Array.from(document.statuses).filter(i => i != id), 'flags.chris-premades.effectInterface.customStatus': false});
-                    CONFIG.statusEffects = CONFIG.statusEffects.filter(i => i._id != document.id);
+                    let status = Object.values(CONFIG.statusEffects).find(i => i?._id === document.id);
+                    if (status) delete CONFIG.statusEffects[status.id];
                     this.collection.initializeTree();
                 },
                 condition: (li) => {
@@ -370,7 +376,7 @@ async function checkEffectItem() {
     }
     let ignoreList = genericUtils.getCPRSetting('disableNonConditionStatusEffects') ? conditions.ignoredStatusEffects : [];
     ignoreList.push('exhaustion');
-    let statusEffectDatas = (await Promise.all(CONFIG.statusEffects.filter(i => {
+    let statusEffectDatas = (await Promise.all(Object.values(CONFIG.statusEffects).filter(i => {
         if (!i._id?.includes('dnd')) return;
         if (ignoreList.includes(i.id)) return;
         return true;
@@ -424,13 +430,14 @@ function statusEffects() {
     if (!effectItem) return;
     effectItem.effects.forEach(effect => {
         if (!effect.flags['chris-premades']?.effectInterface?.customStatus) return;
-        CONFIG.statusEffects.push({
-            id: effect.name.toLowerCase().slugify(),
+        let id = effect.name.toLowerCase().slugify();
+        CONFIG.statusEffects[id] = {
+            id: id,
             img: effect.img,
             name: effect.name,
             _id: effect.id,
             customStatus: true
-        }); 
+        };
     });
 }
 export let effectInterface = {

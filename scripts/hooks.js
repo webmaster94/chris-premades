@@ -30,6 +30,18 @@ import {combat} from './extensions/combat.js';
 import {concentration} from './extensions/concentration.js';
 import {time} from './events/time.js';
 export function registerHooks() {
+    // v14: expired effects are UPDATED (duration.expired = true) by default rather than deleted (times-up
+    // behavior moved into core/DAE) — fire delete-side cleanup at expiry, and skip it on a later hard
+    // delete of an already-expired effect so handlers never run twice.
+    let onEffectExpired = handler => (effect, updates, context, userId) => {
+        if (!genericUtils.getProperty(updates, 'duration.expired')) return;
+        return handler(effect, context, userId);
+    };
+    let unlessExpired = handler => (effect, context, userId) => {
+        if (effect.duration?.expired) return;
+        return handler(effect, context, userId);
+    };
+
     // Setting caching
     Hooks.on('createSetting', genericUtils.createUpdateSetting);
     Hooks.on('updateSetting', genericUtils.createUpdateSetting);
@@ -84,10 +96,12 @@ export function registerHooks() {
     Hooks.on('preCreateActiveEffect', effectEvents.preCreateActiveEffect);
     Hooks.on('preUpdateActiveEffect', effectEvents.preUpdateActiveEffect);
     Hooks.on('createActiveEffect', effects.unhideActivities);
-    Hooks.on('deleteActiveEffect', effects.rehideActivities);
+    Hooks.on('deleteActiveEffect', unlessExpired(effects.rehideActivities));
+    Hooks.on('updateActiveEffect', onEffectExpired(effects.rehideActivities));
     Hooks.on('preCreateActiveEffect', effects.preImageCreate);
     Hooks.on('createActiveEffect', effects.imageCreate);
-    Hooks.on('deleteActiveEffect', effects.imageRemove);
+    Hooks.on('deleteActiveEffect', unlessExpired(effects.imageRemove));
+    Hooks.on('updateActiveEffect', onEffectExpired(effects.imageRemove));
 
     // Custom macro
     Hooks.on('preCreateMacro', custom.preCreateMacro);
@@ -158,10 +172,12 @@ export function registerHooks() {
         Hooks.on('combatStart', combatEvents.combatStart);
         Hooks.on('deleteCombat', combatEvents.deleteCombat);
         Hooks.on('createActiveEffect', effectEvents.createActiveEffect);
-        Hooks.on('deleteActiveEffect', effectEvents.deleteActiveEffect);
+        Hooks.on('deleteActiveEffect', unlessExpired(effectEvents.deleteActiveEffect));
+        Hooks.on('updateActiveEffect', onEffectExpired(effectEvents.deleteActiveEffect));
         Hooks.on('moveToken', movementEvents.moveToken);
         Hooks.on('createActiveEffect', conditions.createActiveEffect);
-        Hooks.on('deleteActiveEffect', conditions.deleteActiveEffect);
+        Hooks.on('deleteActiveEffect', unlessExpired(conditions.deleteActiveEffect));
+        Hooks.on('updateActiveEffect', onEffectExpired(conditions.deleteActiveEffect));
         Hooks.on('updateRegion', (doc, updates, context, userId) => {
             if (!genericUtils.isTemplateRegion(doc)) return;
             return templateEvents.updateMeasuredTemplate(doc, updates, context, userId);

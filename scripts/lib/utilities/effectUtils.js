@@ -159,7 +159,7 @@ function getAllEffectsByIdentifier(actor, name) {
     return actorUtils.getEffects(actor).filter(i => genericUtils.getIdentifier(i) === name);
 }
 function getEffectByStatusID(actor, statusID) {
-    return actorUtils.getEffects(actor).find(i => i.id === CONFIG.statusEffects.find(j => j.id === statusID)?._id);
+    return actorUtils.getEffects(actor).find(i => i.id === CONFIG.statusEffects[statusID]?._id);
 }
 async function applyConditions(actor, conditions, {overlay = false} = {}) {
     let updates = [];
@@ -186,7 +186,7 @@ async function sidebarEffectHelper(documentId, toggle) {
     }
     let effectData = document.toObject();
     delete effectData.id;
-    genericUtils.setProperty(effectData, 'duration.startTime', game.time.worldTime);
+    genericUtils.setProperty(effectData, 'start.time', game.time?.worldTime ?? 0);
     genericUtils.setProperty(effectData, 'flags.chris-premades.effectInterface.id', document.id);
     selectedTokens.forEach(i => {
         if (!i.actor) return;
@@ -259,7 +259,7 @@ function getConditions(effect) {
         'macro.StatusEffect',
         'StatusEffect'
     ];
-    effect.changes.forEach(element => {
+    effect.system.changes.forEach(element => {
         if (validKeys.includes(element.key)) conditions.add(element.value.toLowerCase());
     });
     let effectConditions = effect.flags['chris-premades']?.conditions;

@@ -299,7 +299,7 @@ export async function run() {
         addLine('Notes: ' + scene.notes.size);
         addLine('Regions: ' + scene.regions.size);
         addLine('Sounds: ' + scene.sounds.size);
-        addLine('Templates: ' + scene.templates.size);
+        addLine('Templates: ' + scene.regions.filter(i => genericUtils.isTemplateRegion(i)).length);
         addLine('Tiles: ' + scene.tiles.size);
         addLine('Tokens: ' + scene.tokens.size);
         let nonActors = scene.tokens.filter(i => !i.actor);
@@ -327,12 +327,12 @@ export async function run() {
         if (token.document) {
             addLine('Name: ' + token.document.name);
             addLine('Linked: ' + token.document.actorLink);
-            let detectionModes = token.document.detectionModes;
+            let detectionModes = Object.entries(token.document.detectionModes ?? {});
             if (!detectionModes.length) {
                 addLine('Vision Enabled: false');
             } else {
-                detectionModes.forEach(i => {
-                    addLine(i.id.capitalize() + ': ' + i.enabled);
+                detectionModes.forEach(([id, dm]) => {
+                    addLine(id.capitalize() + ': ' + dm.enabled);
                 });
             }
             addLine('Size: ' + token.document.width);

@@ -21,7 +21,7 @@ async function aimCrosshair({token, maxRange, crosshairsConfig, centerpoint, dra
             let radius = (canvas.grid.size * ((maxRange + fudgeDistance + widthAdjust) / canvas.grid.distance));
             drawing = new PIXI.Graphics();
             drawing.lineStyle(5, 0xffffff);
-            let matchTemplates = game.settings.get('core', 'gridTemplates') && (game.settings.get('core', 'gridDiagonals') !== CONST.GRID_DIAGONALS.EXACT);
+            let matchTemplates = game.settings.get('core', 'gridDiagonals') !== CONST.GRID_DIAGONALS.EXACT;
             if (matchTemplates) {
                 drawing.drawPolygon(canvas.grid.getCircle(centerpoint, maxRange + fudgeDistance + widthAdjust));
             } else {

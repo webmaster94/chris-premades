@@ -302,7 +302,7 @@ async function selectSpellSlot(actor, title, content, {maxLevel = 9, minLevel = 
         if (i[1].value > 0 && i[1].max > 0) return true;
     }).map(j => {
         if (j[0] === 'pact') {
-            return [CONFIG.DND5E.spellPreparationModes.pact.label + ' (' + j[1].level + ')', 'pact'];
+            return [CONFIG.DND5E.spellcasting.pact.label + ' (' + j[1].level + ')', 'pact'];
         } else {
             return [CONFIG.DND5E.spellLevels[j[1].level], j[1].level];
         }

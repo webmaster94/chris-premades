@@ -32,7 +32,7 @@ function addFlags(fieldData) {
 }
 function modifySpecials(specKey, specials) {
     for (let field of daeFieldBrowserFields) {
-        specials[field] = [new foundry.data.fields.StringField(), 5];
+        specials[field] = [new foundry.data.fields.StringField(), 'override'];
     }
     delete specials['flags.chris-premades.senses.magicalDarkness'];
 }

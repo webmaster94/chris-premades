@@ -62,6 +62,8 @@ function collectActorSkillMacros(actor, pass) {
             });
         });
         token.document.regions.forEach(region => {
+            // v14: template-backed regions are handled by the template loop above
+            if (genericUtils.isTemplateRegion(region)) return;
             let macroList = collectMacros(region).filter(i => i.skill?.find(j => j.pass === pass)).flatMap(k => k.skill).filter(l => l.pass === pass).concat(macroUtils.getEmbeddedMacros(region, 'skill', {pass}));
             if (!macroList.length) return;
             triggers.push({
@@ -285,7 +287,7 @@ async function rollSkill(wrapped, config, dialog = {}, message = {}) {
         }
         messageData = message.data;
         if (overtimeActorUuid) messageData['flags.midi-qol.overtimeActorUuid'] = overtimeActorUuid;
-        rollMode = message.rollMode ?? game.settings.get('core', 'rollMode');
+        rollMode = message.rollMode ?? game.settings.get('core', 'messageMode');
     };
     Hooks.once('dnd5e.preRollSkillV2', messageDataFunc);
     if (Object.entries(options).length) config.rolls = [{options}];
@@ -327,7 +329,9 @@ async function rollSkill(wrapped, config, dialog = {}, message = {}) {
         messageData ??= {};
         let messageId = event?.target.closest('[data-message-id]')?.dataset.messageId;
         if (messageId) genericUtils.mergeObject(messageData, {'flags.dnd5e.originatingMessage': messageId});
-        await returnData.toMessage(messageData, {rollMode: returnData.options?.rollMode ?? rollMode});
+        let messageMode = returnData.options?.rollMode ?? rollMode;
+        if (messageMode) messageMode = Roll._mapLegacyRollMode(messageMode) ?? messageMode;
+        await returnData.toMessage(messageData, {messageMode});
     }
     await executeMacroPass(this, 'post', skillId, options, returnData, config, dialog, message);
     return shouldBeArray ? [returnData] : returnData;

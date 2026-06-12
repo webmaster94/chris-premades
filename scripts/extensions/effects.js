@@ -1,7 +1,8 @@
 import {activityUtils, actorUtils, constants, effectUtils, genericUtils, itemUtils, socketUtils, workflowUtils} from '../utils.js';
 function activityDC(effect, updates, options, id) {
     if (game.user.id != id || effect.transfer || !(effect.parent instanceof Actor) || !effect.origin) return;
-    if (!updates.changes?.length) return;
+    let updateChanges = updates.system?.changes ?? updates.changes;
+    if (!updateChanges?.length) return;
     let origin = fromUuidSync(effect?.origin, {strict: false});
     if (!origin) return;
     if (!(origin instanceof Item)) {
@@ -13,15 +14,15 @@ function activityDC(effect, updates, options, id) {
         }
     }
     let changed = false;
-    updates.changes.forEach(i => {
+    updateChanges.forEach(i => {
         if (i.key != 'flags.midi-qol.OverTime') return;
-        if (i.value.includes('$activity.dc')) {
+        if (typeof i.value === 'string' && i.value.includes('$activity.dc')) {
             changed = true;
             i.value = i.value.replaceAll('$activity.dc', itemUtils.getSaveDC(origin));
         }
     });
     if (!changed) return;
-    effect.updateSource({changes: updates.changes});
+    effect.updateSource({'system.changes': updateChanges});
 }
 function noAnimation(...args) {
     if (!args[0].flags['chris-premades']?.effect?.noAnimation) return;

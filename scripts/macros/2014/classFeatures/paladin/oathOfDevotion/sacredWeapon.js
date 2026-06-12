@@ -18,20 +18,22 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
-            {
-                key: 'ATL.light.dim',
-                mode: 4,
-                value: 40,
-                priority: 20
-            },
-            {
-                key: 'ATL.light.bright',
-                mode: 4,
-                value: 20,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'ATL.light.dim',
+                    type: 'upgrade',
+                    value: 40,
+                    priority: 20
+                },
+                {
+                    key: 'ATL.light.bright',
+                    type: 'upgrade',
+                    value: 20,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [
@@ -45,26 +47,28 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
-            {
-                key: 'name',
-                mode: 5,
-                value: '{} (' + genericUtils.translate('CHRISPREMADES.Macros.SacredWeapon.Sacred') + ')',
-                priority: 20
-            },
-            {
-                key: 'activities[attack].attack.bonus',
-                mode: 2,
-                value: '+' + Math.max(workflow.actor.system.abilities.cha.mod, 1),
-                priority: 20
-            },
-            {
-                key: 'system.properties',
-                mode: 2,
-                value: 'mgc',
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'name',
+                    type: 'override',
+                    value: '{} (' + genericUtils.translate('CHRISPREMADES.Macros.SacredWeapon.Sacred') + ')',
+                    priority: 20
+                },
+                {
+                    key: 'activities[attack].attack.bonus',
+                    type: 'add',
+                    value: '+' + Math.max(workflow.actor.system.abilities.cha.mod, 1),
+                    priority: 20
+                },
+                {
+                    key: 'system.properties',
+                    type: 'add',
+                    value: 'mgc',
+                    priority: 20
+                }
+            ]
+        }
     };
     let effect = await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'sacredWeapon'});
     await itemUtils.enchantItem(selectedWeapon, enchantData, {parentEntity: effect});

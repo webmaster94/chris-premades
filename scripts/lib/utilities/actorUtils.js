@@ -7,6 +7,10 @@ function getEffects(actor, {includeItemEffects = false} = {}) {
     let enchantmentEffects = actor.items.contents.flatMap(item => item.effects.contents).filter(effect => effect.type === 'enchantment' && effect.isAppliedEnchantment);
     return effects.concat(enchantmentEffects);
 }
+// v14: expired effects are updated (duration.expired = true), not deleted — use this getter when presence gates behavior (TUP-2)
+function getActiveEffects(actor, options = {}) {
+    return getEffects(actor, options).filter(e => !e.duration?.expired && !e.disabled);
+}
 async function addFavorites(actor, entities) {
     if (!actor.system.addFavorite) return;
     let hasPermission = socketUtils.hasPermission(actor, game.user.id);
@@ -15,8 +19,8 @@ async function addFavorites(actor, entities) {
             const entityType = entity.documentName;
             if (entityType === 'Item') {
                 await actor.system.addFavorite({
-                    id: entity.getRelativeUUID(entity.actor),
-                    type: 'item' 
+                    id: foundry.utils.buildRelativeUuid(entity, entity.actor),
+                    type: 'item'
                 });
             } else if (entityType === 'Activity') {
                 await actor.system.addFavorite({
@@ -37,7 +41,7 @@ async function removeFavorites(actor, entities) {
             const entityType = entity.documentName;
             
             if (entityType === 'Item') {
-                await actor.system.removeFavorite(entity.getRelativeUUID(entity.actor));
+                await actor.system.removeFavorite(foundry.utils.buildRelativeUuid(entity, entity.actor));
             } else if (entityType === 'Activity') {
                 await actor.system.removeFavorite(entity.relativeUUID);
             }
@@ -74,14 +78,14 @@ function getCRFromProf(prof) {
 }
 async function getSidebarActor(actor, {autoImport} = {}) {
     if (!actor.compendium) return actor;
-    let sidebarActor = game.actors.find(i => i.flags.core?.sourceId === actor.uuid);
+    let sidebarActor = game.actors.find(i => i._stats?.compendiumSource === actor.uuid);
     if (!sidebarActor && autoImport) {
         if (!game.user.can('ACTOR_CREATE')) {
             let actorUuid = await socket.executeAsGM(sockets.createSidebarActor.name, actor.uuid);
             sidebarActor = await fromUuid(actorUuid);
         } else {
             let actorData = actor.toObject();
-            genericUtils.setProperty(actorData, 'flags.core.sourceId', actor.uuid);
+            genericUtils.setProperty(actorData, '_stats.compendiumSource', actor.uuid);
             sidebarActor = await Actor.create(actorData);
         }
     }
@@ -221,13 +225,13 @@ async function hasConditionBy(sourceActor, targetActor, statusId) {
     let condition = effectUtils.getEffectByStatusID(targetActor, statusId);
     if (!condition) return false;
     let validKeys = ['macro.CE', 'macro.CUB', 'macro.StatusEffect', 'StatusEffect'];
-    let hasCondition = await actorUtils.getEffects(targetActor).find(async effect => {
+    let hasCondition = await actorUtils.getActiveEffects(targetActor).find(async effect => {
         let originItem = await effectUtils.getOriginItem(effect);
         if (!originItem) return;
         if (originItem?.actor != sourceActor) return;
         if (effect.statuses.has(statusId)) return true;
         if (effect.flags['chris-premades']?.conditions?.includes(statusId)) return true;
-        if (effect.changes.find(i => validKeys.includes(i.key) && i.value.toLowerCase() === statusId)) return true;
+        if (effect.system.changes.find(i => validKeys.includes(i.key) && i.value.toLowerCase() === statusId)) return true;
     });
     return hasCondition ? true : false;
 }
@@ -280,6 +284,7 @@ async function giveHeroicInspiration(actor) {
 }
 export let actorUtils = {
     getEffects,
+    getActiveEffects,
     addFavorites,
     removeFavorites,
     getFirstToken,

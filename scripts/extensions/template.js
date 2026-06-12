@@ -37,7 +37,7 @@ async function templateEffectTokenEnter(template, token) {
     let effects = originItem.effects.filter(effect => effect.flags['chris-premades']?.templateEffectActivities?.includes(activity.id));
     if (!effects.length) return;
     let effectDatas = effects.map(effect => {
-        if (actorUtils.getEffects(token.actor).find(i => i.name === effect.name && effect.origin === template.uuid)) return false;
+        if (actorUtils.getEffects(token.actor).find(i => i.name === effect.name && effect.origin === template.uuid && !i.duration?.expired)) return false;
         let effectData = genericUtils.duplicate(effect.toObject());
         effectData.origin = template.uuid;
         effectData.duration = {};

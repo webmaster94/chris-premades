@@ -8,7 +8,7 @@ function getSaveDC(item) {
     if (item.hasSave) return item.system.activities.getByType('save')[0].save.dc.value;
     let spellChanges = item.effects.get('dnd5espellchange');
     if (spellChanges) {
-        let value = spellChanges.changes.find(i => i.key === 'activities[save].save.dc.formula')?.value;
+        let value = spellChanges.system.changes.find(i => i.key === 'activities[save].save.dc.formula')?.value;
         if (value) return Number(value);
     }
     return item.actor?.system?.abilities?.[item.abilityMod]?.dc ?? item?.actor?.system?.attributes?.spell?.dc ?? 10;
@@ -121,7 +121,7 @@ async function syntheticItem(itemData, actor) {
     let item = new CONFIG.Item.documentClass(itemData, {parent: actor});
     item.prepareData();
     item.prepareFinalAttributes();
-    item.applyActiveEffects();
+    item.applyActiveEffects('initial');
     return item;
 }
 async function enchantItem(item, effectData, {effects = [], items = [], concentrationItem, parentEntity, identifier, vae, interdependent, strictlyInterdependent} = {}) {

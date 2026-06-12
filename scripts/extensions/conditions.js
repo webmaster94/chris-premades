@@ -15,7 +15,7 @@ async function deleteActiveEffect(effect, options, userId) {
     if (!effectConditions) return;
     let ids = [];
     effectConditions.forEach(i => {
-        let otherEffect = actorUtils.getEffects(effect.parent).find(j => j.id != effect.id && j.flags['chris-premades']?.conditions?.includes(i));
+        let otherEffect = actorUtils.getEffects(effect.parent).find(j => j.id != effect.id && !j.duration?.expired && !j.disabled && j.flags['chris-premades']?.conditions?.includes(i));
         if (otherEffect) return;
         let cEffect = effectUtils.getEffectByStatusID(effect.parent, i);
         if (cEffect) ids.push(cEffect.id);
@@ -24,14 +24,14 @@ async function deleteActiveEffect(effect, options, userId) {
 }
 function setStatusEffectIcons() {
     let icons = genericUtils.getCPRSetting('statusEffectIcons');
-    let validStatusEffects = CONFIG.statusEffects.filter(k => !k.customStatus && !k.name?.startsWith('MonksLittleDetails'));
+    let validStatusEffects = Object.values(CONFIG.statusEffects).filter(k => !k.customStatus && !k.name?.startsWith('MonksLittleDetails'));
     validStatusEffects.forEach(i => {
         if (icons[i.id] && i.img !== icons[i.id]) i.img = icons[i.id];
     });
 }
 async function configureStatusEffectIcons() {
     let icons = genericUtils.getCPRSetting('statusEffectIcons');
-    let validStatusEffects = CONFIG.statusEffects.filter(k => !k.customStatus && !k.name?.startsWith('MonksLittleDetails'));
+    let validStatusEffects = Object.values(CONFIG.statusEffects).filter(k => !k.customStatus && !k.name?.startsWith('MonksLittleDetails'));
     let inputs = validStatusEffects.map(i => ({
         label: i.name,
         name: i.id,
@@ -66,14 +66,15 @@ let ignoredStatusEffects = [
     'suffocation'
 ];
 function disableNonConditionStatusEffects() {
-    CONFIG.statusEffects = CONFIG.statusEffects.filter(i => !ignoredStatusEffects.includes(i.id));
+    // v14: CONFIG.statusEffects is an id-keyed Proxy collection — never replace it wholesale
+    ignoredStatusEffects.forEach(i => delete CONFIG.statusEffects[i]);
 }
 async function preCreateActiveEffect(effect, updates, options, userId) {
     if (game.user.id != userId) return;
     if (!updates.statuses || !updates.statuses.length) return;
     if (options?.['chris-premades']?.ignore) return;
     let splitConditions = genericUtils.getCPRSetting('displayNestedConditions');
-    let statusId = CONFIG.statusEffects.find(i => i._id === updates._id)?.id;
+    let statusId = Object.values(CONFIG.statusEffects).find(i => i._id === updates._id)?.id;
     if (splitConditions && !statusId) return;
     let statuses = splitConditions ? [statusId] : updates.statuses;
     let removeStatuses = [];
@@ -94,13 +95,13 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                         changes.push(
                             {
                                 key: 'flags.midi-qol.disadvantage.attack.all',
-                                mode: 0,
+                                type: 'custom',
                                 value: 1,
                                 priority: 20
                             },
                             {
                                 key: 'flags.midi-qol.grants.advantage.attack.all',
-                                mode: 0,
+                                type: 'custom',
                                 value: 1,
                                 priority: 20
                             }
@@ -111,13 +112,13 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                     changes.push(
                         {
                             key: 'flags.midi-qol.disadvantage.attack.all',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.disadvantage.check.all',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         }
@@ -128,7 +129,7 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                         changes.push(
                             {
                                 key: 'flags.dnd5e.initiativeAdv',
-                                mode: 0,
+                                type: 'custom',
                                 value: 1,
                                 priority: 20
                             }
@@ -139,25 +140,25 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                     changes.push(
                         {
                             key: 'flags.midi-qol.fail.ability.save.dex',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.fail.ability.save.str',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.grants.advantage.attack.all',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.grants.critical.range',
-                            mode: 5,
+                            type: 'override',
                             value: 5,
                             priority: 20
                         }
@@ -168,37 +169,37 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                     changes.push(
                         {
                             key: 'flags.midi-qol.grants.advantage.attack.all',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.fail.ability.save.dex',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.fail.ability.save.str',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'system.traits.di.value',
-                            mode: 2,
+                            type: 'add',
                             value: 'poison',
                             priority: 20
                         },
                         {
                             key: 'system.traits.dr.all',
-                            mode: 0,
+                            type: 'custom',
                             value: 'physical',
                             priority: 20
                         },
                         {
                             key: 'system.traits.dr.all',
-                            mode: 0,
+                            type: 'custom',
                             value: 'magical',
                             priority: 20
                         }
@@ -209,13 +210,13 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                     changes.push(
                         {
                             key: 'flags.midi-qol.disadvantage.attack.all',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.disadvantage.check.all',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         }
@@ -225,25 +226,25 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                     changes.push(
                         {
                             key: 'flags.midi-qol.grants.advantage.attack.all',
-                            mode: 0,
+                            type: 'custom',
                             value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.first()) <= 5',
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.grants.disadvantage.attack.all',
-                            mode: 0,
+                            type: 'custom',
                             value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.first()) > 5',
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.disadvantage.attack.all',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'system.attributes.movement.walk',
-                            mode: 1,
+                            type: 'multiply',
                             value: 0.5,
                             priority: 20
                         }
@@ -253,19 +254,19 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                     changes.push(
                         {
                             key: 'flags.midi-qol.disadvantage.save.dex',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.disadvantage.attack.all',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.grants.advantage.attack.all',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         }
@@ -286,7 +287,7 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                     changes.push(
                         {
                             key: 'flags.midi-qol.fail.spell.vocal',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         }
@@ -296,19 +297,19 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                     changes.push(
                         {
                             key: 'flags.midi-qol.fail.ability.save.dex',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.fail.ability.save.str',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.grants.advantage.attack.all',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         }
@@ -319,43 +320,43 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                     changes.push(
                         {
                             key: 'flags.midi-qol.fail.ability.save.dex',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.fail.ability.save.str',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.grants.advantage.attack.all',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.grants.critical.mwak',
-                            mode: 0,
+                            type: 'custom',
                             value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.first()) <= 5',
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.grants.critical.rwak',
-                            mode: 0,
+                            type: 'custom',
                             value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.first()) <= 5',
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.grants.critical.msak',
-                            mode: 0,
+                            type: 'custom',
                             value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.first()) <= 5',
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.grants.critical.rsak',
-                            mode: 0,
+                            type: 'custom',
                             value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.first()) <= 5',
                             priority: 20
                         }
@@ -367,7 +368,7 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                     changes.push(
                         {
                             key: 'flags.dnd5e.initiativeDisadv',
-                            mode: 0,
+                            type: 'custom',
                             value: 1,
                             priority: 20
                         }
@@ -380,7 +381,7 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                 changes.push(
                     {
                         key: 'system.attributes.movement.' + i,
-                        mode: 3,
+                        type: 'downgrade',
                         value: 0,
                         priority: 20
                     }
@@ -390,7 +391,7 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
     }
     if (!changes.length && !removeStatuses.length) return;
     let sourceUpdates = {
-        changes: (updates.changes ?? []).concat(changes),
+        'system.changes': (updates.system?.changes ?? updates.changes ?? []).concat(changes),
         statuses: updates.statuses.filter(i => !removeStatuses.includes(i))
     };
     if (splitConditions) genericUtils.setProperty(sourceUpdates, 'flags.chris-premades.conditions', removeStatuses);
