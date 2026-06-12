@@ -51,7 +51,8 @@ async function templateEffectTokenEnter(template, token) {
 }
 async function templateEffectTokenLeave(template, token) {
     genericUtils.log('dev', 'Template Effect Left: ' + template.id);
-    let effects = actorUtils.getEffects(token.actor).filter(effect => effect.origin === template.uuid);
+    let templateUuid = templateUtils.normalizeTemplateUuid(template.uuid);
+    let effects = actorUtils.getEffects(token.actor).filter(effect => templateUtils.normalizeTemplateUuid(effect.origin) === templateUuid);
     if (!effects.length) return;
     await genericUtils.deleteEmbeddedDocuments(token.actor, 'ActiveEffect', effects.map(effect => effect.id));
     let oldTokens = template.flags['chris-premades']?.templateEffect?.tokens ?? [];
@@ -73,7 +74,8 @@ async function templateEffectDeleted(template) {
     for (let uuid of oldTokens) {
         let token = await fromUuid(uuid);
         if (!token) continue;
-        let effects = actorUtils.getEffects(token.actor).filter(effect => effect.origin === template.uuid);
+        let templateUuid = templateUtils.normalizeTemplateUuid(template.uuid);
+        let effects = actorUtils.getEffects(token.actor).filter(effect => templateUtils.normalizeTemplateUuid(effect.origin) === templateUuid);
         if (!effects.length) continue;
         await genericUtils.deleteEmbeddedDocuments(token.actor, 'ActiveEffect', effects.map(effect => effect.id));
     }
@@ -85,7 +87,8 @@ async function templateEffectCreated(template) {
     for (let token of tokens) await templateEffectTokenEnter(template, token);
 }
 async function preUpdateMeasuredTemplate(template, updates, options, userId) {
-    if (updates.x || updates.y) genericUtils.setProperty(options, 'chris-premades.oldPosition', {x: template.x, y: template.y});
+    // v14: template-backed Region movement arrives as a shapes replacement, not x/y
+    if (updates.x || updates.y || updates.shapes) genericUtils.setProperty(options, 'chris-premades.oldPosition', templateUtils.getPosition(template));
 }
 export let template = {
     preCreateMeasuredTemplate,

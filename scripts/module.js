@@ -44,6 +44,9 @@ import {quickConditions} from './extensions/quickConditions.js';
 import {setupConstants} from './lib/constants.js';
 Hooks.once('socketlib.ready', registerSockets);
 Hooks.once('init', () => {
+    // v14: suppress known deprecation noise from intentional shim usage (template previews via the
+    // MeasuredTemplate compat layer, mirroring dnd5e 5.3.x's own suppression list)
+    CONFIG.compatibility.excludePatterns.push(/MeasuredTemplate/, /MeasuredTemplateDocument/, /Scene#templates/, /core\.gridTemplates/, /core\.coneTemplateType/);
     Hooks.on('dae.modifySpecials', dae.modifySpecials);
     registerSettings();
     if (utils.genericUtils.getCPRSetting('useLocalCompendiums')) utils.constants.setUseLocalCompendium(true);

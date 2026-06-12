@@ -130,11 +130,17 @@ export function registerHooks() {
     Hooks.on('preDeleteItem', equipment.remove);
     Hooks.on('preCreateItem', equipment.addOrUpdate);
     Hooks.on('dnd5e.restCompleted', rest);
-    Hooks.on('preCreateMeasuredTemplate', template.preCreateMeasuredTemplate);
-    //Hooks.on('preCreateRegion', region.preCreateRegion);
+    // v14: MeasuredTemplate CRUD hooks no longer fire; templates are Region-backed (flags.core.MeasuredTemplate)
+    Hooks.on('preCreateRegion', (doc, data, options, userId) => {
+        if (!genericUtils.isTemplateRegion(doc)) return;
+        return template.preCreateMeasuredTemplate(doc, data, options, userId);
+    });
 
     // Template Attachments
-    Hooks.on('preUpdateMeasuredTemplate', template.preUpdateMeasuredTemplate);
+    Hooks.on('preUpdateRegion', (doc, updates, options, userId) => {
+        if (!genericUtils.isTemplateRegion(doc)) return;
+        return template.preUpdateMeasuredTemplate(doc, updates, options, userId);
+    });
 
     //Circle Casting
     Hooks.on('preDeleteActiveEffect', concentration.preRemove);
@@ -156,9 +162,18 @@ export function registerHooks() {
         Hooks.on('moveToken', movementEvents.moveToken);
         Hooks.on('createActiveEffect', conditions.createActiveEffect);
         Hooks.on('deleteActiveEffect', conditions.deleteActiveEffect);
-        Hooks.on('updateMeasuredTemplate', templateEvents.updateMeasuredTemplate);
-        Hooks.on('deleteMeasuredTemplate', templateEvents.deleteMeasuredTemplate);
-        Hooks.on('createMeasuredTemplate', templateEvents.createMeasuredTemplate);
+        Hooks.on('updateRegion', (doc, updates, context, userId) => {
+            if (!genericUtils.isTemplateRegion(doc)) return;
+            return templateEvents.updateMeasuredTemplate(doc, updates, context, userId);
+        });
+        Hooks.on('deleteRegion', (doc, options, userId) => {
+            if (!genericUtils.isTemplateRegion(doc)) return;
+            return templateEvents.deleteMeasuredTemplate(doc, options, userId);
+        });
+        Hooks.on('createRegion', (doc, options, userId) => {
+            if (!genericUtils.isTemplateRegion(doc)) return;
+            return templateEvents.createMeasuredTemplate(doc, options, userId);
+        });
         Hooks.on('createToken', auras.createToken);
         Hooks.on('deleteToken', auras.deleteToken);
         Hooks.on('canvasReady', auras.canvasReady);

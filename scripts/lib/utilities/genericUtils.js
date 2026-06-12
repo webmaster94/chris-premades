@@ -21,6 +21,10 @@ function getProperty(object, key) {
 function duplicate(object) {
     return foundry.utils.duplicate(object);
 }
+// v14: placed measured templates are Region documents flagged flags.core.MeasuredTemplate
+function isTemplateRegion(doc) {
+    return doc?.documentName === 'Region' && !!foundry.utils.getProperty(doc, 'flags.core.MeasuredTemplate');
+}
 function deepClone(object) {
     return foundry.utils.deepClone(object);
 }
@@ -192,6 +196,7 @@ export let genericUtils = {
     format,
     setProperty,
     duplicate,
+    isTemplateRegion,
     update,
     remove,
     setFlag,

@@ -92,9 +92,11 @@ async function executeMacroPass(templates, pass, token, options) {
 }
 async function updateMeasuredTemplate(template, updates, context, userId) {
     if (!socketUtils.isTheGM()) return;
-    let moved = updates.x || updates.y;
-    if (!moved) return;
-    await attach.updateAttachments(template, {x: template.x - context['chris-premades'].oldPosition.x, y: template.y - context['chris-premades'].oldPosition.y});
+    // v14: template-backed Region movement arrives as a shapes replacement, not x/y
+    let moved = updates.x || updates.y || updates.shapes;
+    if (!moved || !context['chris-premades']?.oldPosition) return;
+    let position = templateUtils.getPosition(template);
+    await attach.updateAttachments(template, {x: position.x - context['chris-premades'].oldPosition.x, y: position.y - context['chris-premades'].oldPosition.y});
     await executeMacroPass([template], 'moved');
     await templateExtension.templateEffectMoved(template);
 }

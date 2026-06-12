@@ -14,6 +14,12 @@ async function createRegions(regionDatas, scene, {parentEntity, excludeGPSRegion
     return regions;
 }
 function templateToRegionShape(template, {hole = false} = {}) {
+    // v14: a placed template already IS a Region — reuse its polygon geometry directly
+    let regionDoc = template?.documentName === 'Region' ? template : (template?.parent ?? canvas.scene)?.regions?.get(template?.id);
+    if (regionDoc) {
+        let polygon = regionDoc.polygons?.at?.(0);
+        if (polygon) return {hole, type: 'polygon', points: Array.from(polygon.points)};
+    }
     let origShape = template.object.shape ?? template.object._computeShape();
     let points = origShape.points ?? origShape.toPolygon().points;
     return {
@@ -94,9 +100,8 @@ function tokenInRegion(region, tokenDocument) {
     if (!tokenDocument.object.bounds.overlaps(region.bounds)) return false;
     if (region.elevation.bottom > tokenDocument.elevation || tokenDocument.elevation > region.elevation.top) return false;
     let regionShape = region.polygonTree;
-    tokenUtils.getTokenCenterPoints(tokenDocument).forEach(p => {
-        if (regionShape.testPoint(p)) return true;
-    });
+    // tolerance 1: Clipper containment is boundary-exclusive, v13 shape.contains was not
+    if (tokenUtils.getTokenCenterPoints(tokenDocument).some(p => regionShape.testPoint(p, 1))) return true;
     let dx = tokenDocument.object.position.x;
     let dy = tokenDocument.object.position.y;
     let shape = tokenDocument.object.shape.clone();
@@ -105,7 +110,7 @@ function tokenInRegion(region, tokenDocument) {
     for (let i = 0; i < tokenPoints.length; i += 2) {
         tokenPoints[i] += dx;
         tokenPoints[i + 1] += dy;
-        if (regionShape.testPoint({x: tokenPoints[i], y: tokenPoints[i + 1]})) return true;
+        if (regionShape.testPoint({x: tokenPoints[i], y: tokenPoints[i + 1]}, 1)) return true;
     }
     for (let p of region.polygons) {
         let regionPoints = p.points;

@@ -44,7 +44,7 @@ export class Summons {
         let tokenUpdates = updates.token;
         let tokenDocument = await actor.getTokenDocument(tokenUpdates);
         let scene = await fromUuid(sceneUuid);
-        await tokenDocument.delta.updateSource(actorUpdates);
+        tokenDocument.updateSource({delta: actorUpdates}); // v14: TokenDocument#delta#updateSource removed
         let [token] = await genericUtils.createEmbeddedDocuments(scene, 'Token', [tokenDocument]);
         return token.uuid;
     }
@@ -245,7 +245,7 @@ export class Summons {
         this.handleSpecialUpdates();
         if (game.user.can('TOKEN_CREATE')) {
             let tokenDocument = await this.sourceActor.getTokenDocument(this.tokenUpdates);
-            await tokenDocument.delta.updateSource(this.actorUpdates);
+            tokenDocument.updateSource({delta: this.actorUpdates}); // v14: TokenDocument#delta#updateSource removed
             let spawnedToken = await genericUtils.createEmbeddedDocuments(this.summonerToken.scene, 'Token', [tokenDocument]);
             this.spawnedTokens.push(spawnedToken[0]);
         } else {

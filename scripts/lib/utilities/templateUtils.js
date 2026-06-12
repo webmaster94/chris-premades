@@ -1,4 +1,39 @@
 import {genericUtils, tokenUtils} from '../../utils.js';
+// v14: placed templates are Region documents (flags.core.MeasuredTemplate). The MeasuredTemplate
+// document/placeable survives only as a deprecated shim (previews still use it). Every helper here
+// accepts a MeasuredTemplateDocument, a RegionDocument, a placeable, or a UUID string.
+function getRegionDoc(template) {
+    if (!template) return undefined;
+    let doc = template;
+    if (typeof doc === 'string') doc = fromUuidSync(doc, {strict: false});
+    if (!doc) return undefined;
+    if (doc.documentName === 'Region') return doc;
+    if (doc.document) doc = doc.document;
+    let scene = doc.parent ?? canvas.scene;
+    return scene?.regions?.get(doc.id ?? doc._id);
+}
+// Old MeasuredTemplate UUIDs and their backing Region share the document id but not the UUID string.
+function normalizeTemplateUuid(uuid) {
+    return uuid?.replace('.MeasuredTemplate.', '.Region.');
+}
+function getPosition(template) {
+    let regionDoc = getRegionDoc(template);
+    if (regionDoc) {
+        let shape = regionDoc.shapes?.at?.(0);
+        return {x: shape?.x ?? 0, y: shape?.y ?? 0};
+    }
+    return {x: template?.x ?? 0, y: template?.y ?? 0};
+}
+// Boundary-inclusive containment: Region/Clipper treats the boundary as outside, old shape.contains
+// did not — tolerance 1px restores v13 targeting parity (midi-qol uses the same value).
+function regionContainsPoint(regionDoc, point) {
+    return regionDoc.polygonTree.testPoint(point, 1);
+}
+function tokenInElevationBand(regionDoc, tokenDocument) {
+    let {bottom, top} = regionDoc.elevation ?? {};
+    let elevation = tokenDocument.elevation ?? 0;
+    return (bottom ?? -Infinity) <= elevation && elevation <= (top ?? Infinity);
+}
 function getTokensInShape(shape, scene, {x: offsetX, y: offsetY}={x: 0, y: 0}) {
     let tokens = new Set();
     if (!shape && !scene) return tokens;
@@ -16,25 +51,43 @@ function getTokensInShape(shape, scene, {x: offsetX, y: offsetY}={x: 0, y: 0}) {
     return tokens;
 }
 function getTokensInTemplate(template) {
-    return getTokensInShape(template?.object?.shape, template?.parent, template);
+    let regionDoc = getRegionDoc(template);
+    if (regionDoc) {
+        let tokens = new Set();
+        let scene = regionDoc.parent;
+        if (!scene) return tokens;
+        for (let token of scene.tokens) {
+            if (!tokenInElevationBand(regionDoc, token)) continue;
+            if (tokenUtils.getTokenCenterPoints(token).some(p => regionContainsPoint(regionDoc, p))) tokens.add(token.object);
+        }
+        return tokens;
+    }
+    // Preview templates have no backing Region yet — fall back to the placeable's shape
+    return getTokensInShape(template?.object?.shape, template?.parent ?? template?.document?.parent, getPosition(template));
 }
 function getTemplatesInToken(token) {
     let templates = new Set();
     let scene = token?.document?.parent;
     if (!scene) return templates;
-    let sceneTemplates = scene.templates;
     let pointsToTest = tokenUtils.getTokenCenterPoints(token.document);
-    for (let template of sceneTemplates) {
-        if (template.object?.shape && pointsToTest.some(i => template.object.testPoint(i))) {
-            templates.add(template);
-        }
+    for (let region of scene.regions) {
+        if (!genericUtils.isTemplateRegion(region)) continue;
+        if (!tokenInElevationBand(region, token.document)) continue;
+        if (pointsToTest.some(i => regionContainsPoint(region, i))) templates.add(region);
     }
     return templates;
 }
 function findGrids(A, B, template) {
     let locations = new Set();
-    let scene = template.parent;
+    let regionDoc = getRegionDoc(template);
+    let scene = regionDoc?.parent ?? template.parent;
     if (!scene) return locations;
+    let containsPoint;
+    if (regionDoc) {
+        containsPoint = point => regionContainsPoint(regionDoc, point);
+    } else if (template.object?.shape) {
+        containsPoint = point => template.object.shape.contains(point.x - template.object.center.x, point.y - template.object.center.y);
+    } else return locations;
     let ray = new foundry.canvas.geometry.Ray(A, B);
     if (!ray.distance) return locations;
     let gridCenter = scene.grid.size / 2;
@@ -47,21 +100,13 @@ function findGrids(A, B, template) {
         let {i: r1, j: c1} = scene.grid.getOffset(ray.project(t));
         if (r0 === r1 && c0 === c1) continue;
         let {x: x1, y: y1} = scene.grid.getTopLeftPoint({i: r1, j: c1});
-        let contained = template.object.shape.contains(
-            x1 + gridCenter - template.object.center.x,
-            y1 + gridCenter - template.object.center.y
-        );
-        if (contained) locations.add({x: x1, y: y1});
+        if (containsPoint({x: x1 + gridCenter, y: y1 + gridCenter})) locations.add({x: x1, y: y1});
         prior = [r1, c1];
         if (i === 0) continue;
         if (!scene.grid.testAdjacency({i: r0, j: c0}, {i: r1, j: c1})) {
             let th = tMax[i - 1] + (0.5 / nMax);
             let {x: xh, y: yh} = scene.grid.getTopLeftPoint(ray.project(th));
-            let contained = template.object.shape.contains(
-                xh + gridCenter - template.object.center.x,
-                yh + gridCenter - template.object.center.y
-            );
-            if (contained) locations.add({x: xh, y: yh});
+            if (containsPoint({x: xh + gridCenter, y: yh + gridCenter})) locations.add({x: xh, y: yh});
         }
     }
     return locations;
@@ -109,6 +154,8 @@ async function placeTemplate(templateData, returnTokens=false) {
     try {
         [template] = await previewTemplate.drawPreview();
     } catch (error) {/* Why does this throw an error when a template isn't placed by the user? */}
+    // v14: the created doc is a shim proxy — hand back the backing Region so flags/uuids stay consistent
+    if (template) template = getRegionDoc(template) ?? template;
     if (!returnTokens) return template;
     if (!template) return {template: null, tokens: []};
     await genericUtils.sleep(100);
@@ -116,9 +163,33 @@ async function placeTemplate(templateData, returnTokens=false) {
     return {template, tokens};
 }
 function rayIntersectsTemplate(templateDoc, ray) {
-    return getIntersections(templateDoc.object, ray.A, ray.B, true);
+    return getIntersections(templateDoc, ray.A, ray.B, true);
+}
+function getRegionIntersections(regionDoc, A, B, boolOnly = false) {
+    let totalIntersections = [];
+    for (let shape of regionDoc.polygons) {
+        if (shape.segmentIntersections) {
+            let intersections = shape.segmentIntersections(A, B);
+            if (boolOnly && intersections.length) return true;
+            totalIntersections.push(...intersections);
+            continue;
+        }
+        let points = shape.points;
+        for (let i = 0; i < points.length; i += 2) {
+            let currCoord = {x: points[i], y: points[i + 1]};
+            let nextCoord = {x: points[(i + 2) % points.length], y: points[(i + 3) % points.length]};
+            if (foundry.utils.lineSegmentIntersects(A, B, currCoord, nextCoord)) {
+                if (boolOnly) return true;
+                totalIntersections.push(foundry.utils.lineLineIntersection(A, B, currCoord, nextCoord));
+            }
+        }
+    }
+    if (boolOnly) return totalIntersections.length > 0;
+    return totalIntersections;
 }
 function getIntersections(templateObj, A, B, boolOnly = false) {
+    let regionDoc = getRegionDoc(templateObj);
+    if (regionDoc) return getRegionIntersections(regionDoc, A, B, boolOnly);
     if (templateObj.shape.segmentIntersections) {
         let adjustedA = {
             x: A.x - templateObj.center.x,
@@ -154,21 +225,27 @@ function getIntersections(templateObj, A, B, boolOnly = false) {
 async function getSourceActor(template) {
     return (await fromUuid(template.flags.dnd5e?.origin))?.parent;
 }
+function getAbsolutePolygons(template) {
+    let regionDoc = getRegionDoc(template);
+    if (regionDoc) return regionDoc.polygons.map(p => p instanceof PIXI.Polygon ? p : p.toPolygon());
+    let shape = template.object?.shape;
+    if (!shape) return [];
+    let polygon = (shape.type === PIXI.SHAPES.POLY ? shape : shape.toPolygon()).clone();
+    for (let i = 0; i < polygon.points.length; i++) {
+        if (i % 2) polygon.points[i] += template.y;
+        else polygon.points[i] += template.x;
+    }
+    return [polygon];
+}
 function overlap(template1, template2) {
-    let shape1 = template1.object.shape;
-    let shape2 = template2.object.shape;
-    shape1 = (shape1.type === PIXI.SHAPES.POLY ? shape1 : shape1.toPolygon()).clone();
-    shape2 = (shape2.type === PIXI.SHAPES.POLY ? shape2 : shape2.toPolygon()).clone();
-    for (let i = 0; i < shape1.points.length; i++) {
-        if (i % 2) shape1.points[i] += template1.y;
-        else shape1.points[i] += template1.x;
+    let polygons1 = getAbsolutePolygons(template1);
+    let polygons2 = getAbsolutePolygons(template2);
+    for (let shape1 of polygons1) {
+        for (let shape2 of polygons2) {
+            if (shape1.intersectPolygon(shape2).points.length > 0) return true;
+        }
     }
-    for (let i = 0; i < shape2.points.length; i++) {
-        if (i % 2) shape2.points[i] += template2.y;
-        else shape2.points[i] += template2.x;
-    }
-    let intersects = shape1.intersectPolygon(shape2);
-    return intersects.points.length > 0;
+    return false;
 }
 async function attachToTemplate(template, uuidsToAttach) {
     let currAttached = template.flags?.['chris-premades']?.attached?.attachedEntityUuids ?? [];
@@ -183,6 +260,9 @@ async function attachToTemplate(template, uuidsToAttach) {
     });
 }
 export let templateUtils = {
+    getRegionDoc,
+    normalizeTemplateUuid,
+    getPosition,
     getTokensInShape,
     getTokensInTemplate,
     getTemplatesInToken,

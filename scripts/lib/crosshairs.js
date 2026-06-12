@@ -137,6 +137,14 @@ export class Crosshairs extends foundry.canvas.placeables.MeasuredTemplate {
         return {x: snapped.x + offset, y: snapped.y + offset};
     }
     static ERROR_TEXTURE = 'icons/svg/hazard.svg'; // Update this to be a setting
+    // v14: core.gridTemplates no longer drives rendering (grid conformance is per-shape now); read defensively
+    static #useGridTemplates() {
+        try {
+            return game.settings.get('core', 'gridTemplates');
+        } catch {
+            return false;
+        }
+    }
     /**
      * Main function of the Crosshairs Class, will return the finished Crosshairs object which the X and Y can be taken from for position
      */
@@ -158,11 +166,10 @@ export class Crosshairs extends foundry.canvas.placeables.MeasuredTemplate {
     }
     /** @override */
     async draw() {
-        this.clear();
+        this.removeChildren(); // v14: PlaceableObject#clear is a no-op
         const texture = this.document.texture;
         if (texture)  {
-            // eslint-disable-next-line no-undef
-            this._texture = await loadTexture(texture, {fallback: 'icons/svg/hazard.svg'}); // Update to be the setting
+            this._texture = await foundry.canvas.loadTexture(texture, {fallback: 'icons/svg/hazard.svg'}); // Update to be the setting
         } else {
             this._texture = null;
         }
@@ -356,7 +363,7 @@ export class Crosshairs extends foundry.canvas.placeables.MeasuredTemplate {
             shape.x = this.scene.grid.size / -2;
         } else if (crosshairs.document.t === 'ray') {
             // Figure out a way to get the template to center on the crosshairs...
-        } else if (crosshairs.document.t === 'circle' && !game.settings.get('core', 'gridTemplates')) {
+        } else if (crosshairs.document.t === 'circle' && !Crosshairs.#useGridTemplates()) {
             shape.radius = Math.round(shape.radius / (canvas.grid.size / 2)) * (canvas.grid.size / 2);
         }
         return shape;
