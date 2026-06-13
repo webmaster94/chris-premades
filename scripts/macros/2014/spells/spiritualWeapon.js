@@ -94,16 +94,21 @@ async function use({workflow}) {
     let animation = itemUtils.getConfig(workflow.item, 'animation');
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'spiritualWeaponAttack', {strict: true});
     if (!feature) return;
+    let attackButton = {
+        type: 'use',
+        name: feature.name,
+        identifier: 'spiritualWeapon',
+        activityIdentifier: 'spiritualWeaponAttack'
+    };
     let summonedTokens = await Summons.spawn(sourceActor, updates, workflow.item, workflow.token, {
         duration: itemUtils.convertDuration(workflow.item).seconds, 
         range: 60, 
         animation, 
         initiativeType: 'none', 
-        additionalVaeButtons: [{
-            type: 'use', 
-            name: feature.name,
-            identifier: 'spiritualWeapon', 
-            activityIdentifier: 'spiritualWeaponAttack'
+        additionalVaeButtons: [attackButton],
+        additionalSummonVaeButtons: [{
+            ...attackButton,
+            itemUuid: workflow.item.uuid
         }],
         unhideActivities: {
             itemUuid: workflow.item.uuid,

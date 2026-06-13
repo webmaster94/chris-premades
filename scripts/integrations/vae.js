@@ -11,7 +11,9 @@ function createEffectButtons(effect, buttons) {
                         let actor = effect.parent;
                         if (actor?.documentName !== 'Actor') actor = actor.actor;
                         let item;
-                        if (i.identifier) {
+                        if (i.itemUuid) {
+                            item = fromUuidSync(i.itemUuid);
+                        } else if (i.identifier) {
                             item = itemUtils.getItemByIdentifier(actor, i.identifier);
                         } else {
                             item = actor.items.getName(i.name);
