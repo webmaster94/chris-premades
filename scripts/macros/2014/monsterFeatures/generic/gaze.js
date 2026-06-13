@@ -15,16 +15,22 @@ async function turnStart({trigger: {entity: item, token, target}}) {
                 img: 'icons/creatures/eyes/humanoid-single-blue.webp',
                 origin: item.uuid,
                 duration: {
-                    seconds: 12
+                    value: 12,
+                    units: 'seconds'
                 },
-                changes: [
-                    {
-                        key: 'flags.midi-qol.disadvantage.attack.all',
-                        mode: 0,
-                        value: 'targetActorUuid === "' + token.actor.uuid + '"',
-                        priority: 20
-                    }
-                ],
+                start: {
+                    time: game.time?.worldTime ?? 0
+                },
+                system: {
+                    changes: [
+                        {
+                            key: 'flags.midi-qol.disadvantage.attack.all',
+                            type: 'custom',
+                            value: 'targetActorUuid === "' + token.actor.uuid + '"',
+                            priority: 20
+                        }
+                    ]
+                },
                 flags: {
                     dae: {
                         specialDuration: ['turnStart']
@@ -32,9 +38,9 @@ async function turnStart({trigger: {entity: item, token, target}}) {
                 }
             };
             if (gazeConfig.avertGrantsAdvantage) {
-                effectData.changes.push({
+                effectData.system.changes.push({
                     key: 'flags.midi-qol.grants.advantage.attack.all',
-                    mode: 0,
+                    type: 'custom',
                     value: 'targetActorUuid === "' + token.actor.uuid + '"',
                     priority: 20
                 });

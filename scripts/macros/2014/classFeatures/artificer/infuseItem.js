@@ -50,14 +50,16 @@ async function use({workflow}) {
                 name: workflow.item.name + ': ' + infusionLabel,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'system.attributes.movement.walk',
-                        mode: 2,
-                        value: 5,
-                        priority: 20
-                    }
-                ]
+                system: {
+                    changes: [
+                        {
+                            key: 'system.attributes.movement.walk',
+                            type: 'add',
+                            value: 5,
+                            priority: 20
+                        }
+                    ]
+                }
             };
             let itemData = await compendiumUtils.getItemFromCompendium(constants.featurePacks.classFeatureItems, 'Arcane Propulsion Gauntlet', {object: true, getDescription: true, translate: 'CHRISPREMADES.Macros.InfuseItem.ArcanePropulsionGauntlet', identifier: 'arcanePropulsionGauntlet'});
             if (!itemData) {
@@ -68,26 +70,28 @@ async function use({workflow}) {
                 name: workflow.item.name,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'name',
-                        mode: 5,
-                        value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.properties',
-                        mode: 2,
-                        value: 'mgc',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.attunement',
-                        mode: 5,
-                        value: 'required',
-                        priority: 20
-                    }
-                ]
+                system: {
+                    changes: [
+                        {
+                            key: 'name',
+                            type: 'override',
+                            value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.properties',
+                            type: 'add',
+                            value: 'mgc',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.attunement',
+                            type: 'override',
+                            value: 'required',
+                            priority: 20
+                        }
+                    ]
+                }
             };
             let enchantEffect = await itemUtils.enchantItem(selectedItem, enchantData, {identifier: selection});
             await effectUtils.createEffect(selectedItem, effectData, {parentEntity: enchantEffect, strictlyInterdependent: true});
@@ -114,75 +118,79 @@ async function use({workflow}) {
                 name: workflow.item.name + ': ' + infusionLabel,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'flags.midi-qol.optional.MagicalStrength.check.str',
-                        mode: 2,
-                        value: '@abilities.int.mod',
-                        priority: 20
-                    },
-                    {
-                        key: 'flags.midi-qol.optional.MagicalStrength.save.str',
-                        mode: 2,
-                        value: '@abilities.int.mod',
-                        priority: 20
-                    },
-                    {
-                        key: 'flags.midi-qol.optional.MagicalStrength.count',
-                        mode: 5,
-                        value: 'ItemUses.' + selectedItem.name + ' (' + workflow.item.name + ': ' + infusionLabel + ')',
-                        priority: 20
-                    },
-                    {
-                        key: 'flags.midi-qol.optional.MagicalStrength.countAlt',
-                        mode: 5,
-                        value: 'reaction',
-                        priority: 20
-                    }
-                ]
+                system: {
+                    changes: [
+                        {
+                            key: 'flags.midi-qol.optional.MagicalStrength.check.str',
+                            type: 'add',
+                            value: '@abilities.int.mod',
+                            priority: 20
+                        },
+                        {
+                            key: 'flags.midi-qol.optional.MagicalStrength.save.str',
+                            type: 'add',
+                            value: '@abilities.int.mod',
+                            priority: 20
+                        },
+                        {
+                            key: 'flags.midi-qol.optional.MagicalStrength.count',
+                            type: 'override',
+                            value: 'ItemUses.' + selectedItem.name + ' (' + workflow.item.name + ': ' + infusionLabel + ')',
+                            priority: 20
+                        },
+                        {
+                            key: 'flags.midi-qol.optional.MagicalStrength.countAlt',
+                            type: 'override',
+                            value: 'reaction',
+                            priority: 20
+                        }
+                    ]
+                }
             };
             let enchantData = {
                 name: workflow.item.name,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'name',
-                        mode: 5,
-                        value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.properties',
-                        mode: 2,
-                        value: 'mgc',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.uses.recovery',
-                        mode: 5,
-                        value: '{period: "dawn", type: "formula", formula: "1d6"}',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.uses.max',
-                        mode: 5,
-                        value: 6,
-                        priority: 20
-                    },
-                    {
-                        key: 'activities[utility].activation.type',
-                        mode: 5,
-                        value: 'special',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.attunement',
-                        mode: 5,
-                        value: 'required',
-                        priority: 20
-                    }
-                ]
+                system: {
+                    changes: [
+                        {
+                            key: 'name',
+                            type: 'override',
+                            value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.properties',
+                            type: 'add',
+                            value: 'mgc',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.uses.recovery',
+                            type: 'override',
+                            value: '{period: "dawn", type: "formula", formula: "1d6"}',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.uses.max',
+                            type: 'override',
+                            value: 6,
+                            priority: 20
+                        },
+                        {
+                            key: 'activities[utility].activation.type',
+                            type: 'override',
+                            value: 'special',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.attunement',
+                            type: 'override',
+                            value: 'required',
+                            priority: 20
+                        }
+                    ]
+                }
             };
             let enchantEffect = await itemUtils.enchantItem(selectedItem, enchantData, {identifier: selection});
             await effectUtils.createEffect(selectedItem, effectData, {parentEntity: enchantEffect, strictlyInterdependent: true});
@@ -210,40 +218,44 @@ async function use({workflow}) {
                 name: workflow.item.name + ': ' + infusionLabel,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'system.bonuses.spell.attack',
-                        mode: 2,
-                        value: classLevel > 9 ? 2 : 1,
-                        priority: 20
-                    }
-                ]
+                system: {
+                    changes: [
+                        {
+                            key: 'system.bonuses.spell.attack',
+                            type: 'add',
+                            value: classLevel > 9 ? 2 : 1,
+                            priority: 20
+                        }
+                    ]
+                }
             };
             effectUtils.addMacro(effectData, 'midi.actor', ['wandOfTheWarMage']);
             let enchantData = {
                 name: workflow.item.name,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'name',
-                        mode: 5,
-                        value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.properties',
-                        mode: 2,
-                        value: 'mgc',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.attunement',
-                        mode: 5,
-                        value: 'required',
-                        priority: 20
-                    }
-                ]
+                system: {
+                    changes: [
+                        {
+                            key: 'name',
+                            type: 'override',
+                            value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.properties',
+                            type: 'add',
+                            value: 'mgc',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.attunement',
+                            type: 'override',
+                            value: 'required',
+                            priority: 20
+                        }
+                    ]
+                }
             };
             let enchantEffect = await itemUtils.enchantItem(selectedItem, enchantData, {identifier: selection});
             await effectUtils.createEffect(selectedItem, effectData, {parentEntity: enchantEffect, strictlyInterdependent: true});
@@ -262,26 +274,28 @@ async function use({workflow}) {
                 name: workflow.item.name,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'name',
-                        mode: 5,
-                        value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.properties',
-                        mode: 2,
-                        value: 'mgc',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.armor.magicalBonus',
-                        mode: 5,
-                        value: classLevel > 9 ? 2 : 1,
-                        priority: 20
-                    }
-                ]
+                system: {
+                    changes: [
+                        {
+                            key: 'name',
+                            type: 'override',
+                            value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.properties',
+                            type: 'add',
+                            value: 'mgc',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.armor.magicalBonus',
+                            type: 'override',
+                            value: classLevel > 9 ? 2 : 1,
+                            priority: 20
+                        }
+                    ]
+                }
             };
             await itemUtils.enchantItem(selectedItem, enchantData, {identifier: selection});
             break;
@@ -306,26 +320,28 @@ async function use({workflow}) {
                 name: workflow.item.name,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'name',
-                        mode: 5,
-                        value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.properties',
-                        mode: 2,
-                        value: 'mgc',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.magicalBonus',
-                        mode: 5,
-                        value: classLevel > 9 ? 2 : 1,
-                        priority: 20
-                    }
-                ]
+                system: {
+                    changes: [
+                        {
+                            key: 'name',
+                            type: 'override',
+                            value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.properties',
+                            type: 'add',
+                            value: 'mgc',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.magicalBonus',
+                            type: 'override',
+                            value: classLevel > 9 ? 2 : 1,
+                            priority: 20
+                        }
+                    ]
+                }
             };
             await itemUtils.enchantItem(selectedItem, enchantData, {identifier: selection});
             break;
@@ -369,20 +385,22 @@ async function use({workflow}) {
                 name: workflow.item.name,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'name',
-                        mode: 5,
-                        value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.properties',
-                        mode: 2,
-                        value: 'mgc',
-                        priority: 20
-                    }
-                ]
+                system: {
+                    changes: [
+                        {
+                            key: 'name',
+                            type: 'override',
+                            value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.properties',
+                            type: 'add',
+                            value: 'mgc',
+                            priority: 20
+                        }
+                    ]
+                }
             };
             let enchantEffect = await itemUtils.enchantItem(selectedItem, enchantData, {identifier: selection});
             await itemUtils.createItems(target, [featureData], {parentEntity: enchantEffect});
@@ -408,32 +426,34 @@ async function use({workflow}) {
                 name: workflow.item.name,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'name',
-                        mode: 5,
-                        value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.properties',
-                        mode: 2,
-                        value: 'mgc',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.magicalBonus',
-                        mode: 5,
-                        value: 1,
-                        priority: 20
-                    },
-                    {
-                        key: 'system.attunement',
-                        mode: 5,
-                        value: 'required',
-                        priority: 20
-                    }
-                ]
+                system: {
+                    changes: [
+                        {
+                            key: 'name',
+                            type: 'override',
+                            value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.properties',
+                            type: 'add',
+                            value: 'mgc',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.magicalBonus',
+                            type: 'override',
+                            value: 1,
+                            priority: 20
+                        },
+                        {
+                            key: 'system.attunement',
+                            type: 'override',
+                            value: 'required',
+                            priority: 20
+                        }
+                    ]
+                }
             };
             let lightFeatureData = await compendiumUtils.getItemFromCompendium(constants.featurePacks.classFeatureItems, 'Radiant Weapon: Light', {object: true, getDescription: true, translate: 'CHRISPREMADES.Macros.InfuseItem.RadiantLight', identifier: 'radiantWeaponLight'});
             let blindFeatureData = await compendiumUtils.getItemFromCompendium(constants.featurePacks.classFeatureItems, 'Radiant Weapon: Blind', {object: true, getDescription: true, translate: 'CHRISPREMADES.Macros.InfuseItem.RadiantBlind', identifier: 'radiantWeaponBlind', flatDC: target.system.attributes.spell.dc});
@@ -466,38 +486,40 @@ async function use({workflow}) {
                 name: workflow.item.name,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'name',
-                        mode: 5,
-                        value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.properties',
-                        mode: 2,
-                        value: 'mgc',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.properties',
-                        mode: 2,
-                        value: '-lod',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.magicalBonus',
-                        mode: 5,
-                        value: 1,
-                        priority: 20
-                    },
-                    {
-                        key: 'system.attunement',
-                        mode: 5,
-                        value: 'required',
-                        priority: 20
-                    }
-                ]
+                system: {
+                    changes: [
+                        {
+                            key: 'name',
+                            type: 'override',
+                            value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.properties',
+                            type: 'add',
+                            value: 'mgc',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.properties',
+                            type: 'add',
+                            value: '-lod',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.magicalBonus',
+                            type: 'override',
+                            value: 1,
+                            priority: 20
+                        },
+                        {
+                            key: 'system.attunement',
+                            type: 'override',
+                            value: 'required',
+                            priority: 20
+                        }
+                    ]
+                }
             };
             await itemUtils.enchantItem(selectedItem, enchantData, {identifier: selection});
             break;
@@ -520,32 +542,34 @@ async function use({workflow}) {
                 name: workflow.item.name,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'name',
-                        mode: 5,
-                        value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.properties',
-                        mode: 2,
-                        value: 'mgc',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.armor.magicalBonus',
-                        mode: 5,
-                        value: 1,
-                        priority: 20
-                    },
-                    {
-                        key: 'system.attunement',
-                        mode: 5,
-                        value: 'required',
-                        priority: 20
-                    }
-                ]
+                system: {
+                    changes: [
+                        {
+                            key: 'name',
+                            type: 'override',
+                            value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.properties',
+                            type: 'add',
+                            value: 'mgc',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.armor.magicalBonus',
+                            type: 'override',
+                            value: 1,
+                            priority: 20
+                        },
+                        {
+                            key: 'system.attunement',
+                            type: 'override',
+                            value: 'required',
+                            priority: 20
+                        }
+                    ]
+                }
             };
             let enchantEffect = await itemUtils.enchantItem(selectedItem, enchantData, {identifier: selection});
             itemUtils.createItems(target, [featureData], {parentEntity: enchantEffect});
@@ -568,39 +592,43 @@ async function use({workflow}) {
                 name: workflow.item.name + ': ' + infusionLabel,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'system.traits.dr.value',
-                        mode: 2,
-                        value: damageType,
-                        priority: 20
-                    }
-                ]
+                system: {
+                    changes: [
+                        {
+                            key: 'system.traits.dr.value',
+                            type: 'add',
+                            value: damageType,
+                            priority: 20
+                        }
+                    ]
+                }
             };
             let enchantData = {
                 name: workflow.item.name,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'name',
-                        mode: 5,
-                        value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.properties',
-                        mode: 2,
-                        value: 'mgc',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.attunement',
-                        mode: 5,
-                        value: 'required',
-                        priority: 20
-                    }
-                ]
+                system: {
+                    changes: [
+                        {
+                            key: 'name',
+                            type: 'override',
+                            value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.properties',
+                            type: 'add',
+                            value: 'mgc',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.attunement',
+                            type: 'override',
+                            value: 'required',
+                            priority: 20
+                        }
+                    ]
+                }
             };
             let enchantEffect = await itemUtils.enchantItem(selectedItem, enchantData, {identifier: selection});
             await effectUtils.createEffect(selectedItem, effectData, {parentEntity: enchantEffect, strictlyInterdependent: true});
@@ -619,32 +647,34 @@ async function use({workflow}) {
                 name: workflow.item.name,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'name',
-                        mode: 5,
-                        value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.properties',
-                        mode: 2,
-                        value: 'mgc',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.properties',
-                        mode: 2,
-                        value: 'ret',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.magicalBonus',
-                        mode: 5,
-                        value: 1,
-                        priority: 20
-                    }
-                ]
+                system: {
+                    changes: [
+                        {
+                            key: 'name',
+                            type: 'override',
+                            value: '{} (' + workflow.item.name + ': ' + infusionLabel + ')',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.properties',
+                            type: 'add',
+                            value: 'mgc',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.properties',
+                            type: 'add',
+                            value: 'ret',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.magicalBonus',
+                            type: 'override',
+                            value: 1,
+                            priority: 20
+                        }
+                    ]
+                }
             };
             await itemUtils.enchantItem(selectedItem, enchantData, {identifier: selection});
             break;
@@ -729,12 +759,12 @@ async function bootsWindingLate({workflow}) {
         range,
         validityFunctions: [c => {
             c.document.object.shape = c.computeShape(c);
-            return rays.some(r => templateUtils.rayIntersectsTemplate(c.document, r));
+            return rays.some(r => templateUtils.rayIntersectsTemplate(c.document.object, r));
         }]
     });
 }
 async function repulsionShieldLate({workflow}) {
-    if (!workflow.targets.size === 1) return;
+    if (workflow.targets.size !== 1) return;
     await tokenUtils.pushToken(workflow.token, workflow.targets.first(), 15);
 }
 async function spellRingLate({workflow}) {
@@ -839,16 +869,22 @@ async function homunculusLate({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            seconds: 1
+            value: 1,
+            units: 'seconds'
         },
-        changes: [
-            {
-                key: 'flags.midi-qol.rangeOverride.attack.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        start: {
+            time: game.time?.worldTime ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.rangeOverride.attack.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [

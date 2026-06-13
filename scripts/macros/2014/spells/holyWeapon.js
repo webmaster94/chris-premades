@@ -27,46 +27,50 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
-            {
-                key: 'name',
-                mode: 5,
-                value: '{} (' + workflow.item.name + ')',
-                priority: 20
-            },
-            {
-                key: 'system.properties',
-                mode: 2,
-                value: 'mgc',
-                priority: 20
-            },
-            {
-                key: 'system.damage.parts',
-                mode: 2,
-                value: JSON.stringify([[formula, damageType]]),
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'name',
+                    type: 'override',
+                    value: '{} (' + workflow.item.name + ')',
+                    priority: 20
+                },
+                {
+                    key: 'system.properties',
+                    type: 'add',
+                    value: 'mgc',
+                    priority: 20
+                },
+                {
+                    key: 'system.damage.parts',
+                    type: 'add',
+                    value: JSON.stringify([[formula, damageType]]),
+                    priority: 20
+                }
+            ]
+        }
     };
     let targetEffectData = {
         name: genericUtils.translate('CHRISPREMADES.Macros.HolyWeapon.Target'),
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: weaponEffectData.duration,
-        changes: [
-            {
-                key: 'ATL.light.bright',
-                mode: 4,
-                value: 30,
-                priority: 20
-            },
-            {
-                key: 'ATL.light.dim',
-                mode: 4,
-                value: 60,
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'ATL.light.bright',
+                    type: 'upgrade',
+                    value: 30,
+                    priority: 20
+                },
+                {
+                    key: 'ATL.light.dim',
+                    type: 'upgrade',
+                    value: 60,
+                    priority: 20
+                }
+            ]
+        }
     };
     let casterEffectData = {
         name: workflow.item.name,

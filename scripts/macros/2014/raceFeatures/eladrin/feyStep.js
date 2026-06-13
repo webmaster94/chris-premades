@@ -38,7 +38,11 @@ async function use({workflow}) {
                         name: genericUtils.translate('CHRISPREMADES.Macros.FeyStep.Charmed'),
                         img: feature.img,
                         duration: {
-                            seconds: 60
+                            value: 60,
+                            units: 'seconds'
+                        },
+                        start: {
+                            time: game.time?.worldTime ?? 0
                         },
                         origin: workflow.item.uuid,
                         flags: {
@@ -303,7 +307,11 @@ async function combinedAnimation(season, sourceToken, teleToken, targetTokens, f
                     name: genericUtils.translate('CHRISPREMADES.Macros.FeyStep.Charmed'),
                     img: feature.img,
                     duration: {
-                        seconds: 60
+                        value: 60,
+                        units: 'seconds'
+                    },
+                    start: {
+                        time: game.time?.worldTime ?? 0
                     },
                     origin: feature.item.uuid,
                     flags: {

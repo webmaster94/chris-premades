@@ -32,9 +32,7 @@ async function use({workflow}) {
         name: genericUtils.translate('CHRISPREMADES.Macros.HuntersMark.Marked'),
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        duration: {
-            seconds
-        }
+        duration: {value: seconds, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0}
     };
     let foeSlayer = itemUtils.getItemByIdentifier(workflow.actor, 'foeSlayer');
     let damageFormulaItem = foeSlayer ? foeSlayer : workflow.item;
@@ -42,9 +40,7 @@ async function use({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        duration: {
-            seconds
-        },
+        duration: {value: seconds, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
         flags: {
             'chris-premades': {
                 huntersMark: {
@@ -74,7 +70,7 @@ async function use({workflow}) {
         }
     });
     await Promise.all(workflow.targets.map(async i => await effectUtils.createEffect(i.actor, targetEffectData, {parentEntity: casterEffect, identifier: 'huntersMarkMarked'})));
-    if (concentrationEffect) await genericUtils.update(concentrationEffect, {'duration.seconds': seconds});
+    if (concentrationEffect) await genericUtils.update(concentrationEffect, {'duration.value': seconds, 'duration.units': 'seconds'});
 }
 async function move({workflow}) {
     if (workflow.targets.size !== 1) return;
@@ -99,14 +95,12 @@ async function move({workflow}) {
     targetUuids = targetUuids.filter(i => i !== selection?.document.uuid);
     targetUuids.push(workflow.targets.first().document.uuid);
     await genericUtils.setFlag(effect, 'chris-premades', 'huntersMark.targets', targetUuids);
-    let seconds = effect.duration.remaining;
+    let seconds = effectUtils.getRemainingDurationSeconds(effect);
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.Macros.HuntersMark.Marked'),
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        duration: {
-            seconds
-        }
+        duration: {value: seconds, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0}
     };
     await effectUtils.createEffect(workflow.targets.first().actor, effectData, {parentEntity: effect, identifier: 'huntersMarkMarked'});
 }

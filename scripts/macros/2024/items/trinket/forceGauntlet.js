@@ -17,17 +17,15 @@ async function used({trigger: {entity: item}, workflow}) {
             name: genericUtils.translate('CHRISPREMADES.GenericEffects.InvalidTarget'),
             img: constants.tempConditionIcon,
             origin: workflow.item.uuid,
-            duration: {
-                turns: 1
-            },
-            changes: [
+            duration: {value: 1, units: 'turns'}, start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0},
+            system: {changes: [
                 {
                     key: 'flags.midi-qol.min.ability.save.all',
                     value: 99,
-                    mode: 5,
+                    type: 'override',
                     priority: 120
                 }
-            ],
+            ]},
             flags: {
                 dae: {
                     specialDuration: [

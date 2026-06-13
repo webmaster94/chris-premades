@@ -5,7 +5,7 @@ async function use({workflow}) {
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     let roll = await new Roll('1d4').evaluate();
     roll.toMessage({
-        rollMode: 'roll',
+        messageMode: 'roll',
         speaker: ChatMessage.implementation.getSpeaker({token: workflow.token}),
         flavor: workflow.item.name
     });
@@ -14,34 +14,40 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.actor.uuid,
         duration: {
-            seconds: 3600 * roll.total
+            value: 3600 * roll.total,
+            units: 'seconds'
         },
-        changes: [
-            {
-                key: 'system.bonuses.mwak.damage',
-                mode: 2,
-                value: '-1d4',
-                priority: 20
-            },
-            {
-                key: 'system.bonuses.rwak.damage',
-                mode: 2,
-                value: '-1d4',
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.disadvantage.check.str',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.disadvantage.save.str',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ], 
+        start: {
+            time: game.time?.worldTime ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'system.bonuses.mwak.damage',
+                    type: 'add',
+                    value: '-1d4',
+                    priority: 20
+                },
+                {
+                    key: 'system.bonuses.rwak.damage',
+                    type: 'add',
+                    value: '-1d4',
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.disadvantage.check.str',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.disadvantage.save.str',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 enlargeReduce: {

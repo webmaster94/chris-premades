@@ -66,7 +66,11 @@ async function use({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         duration: {
-            seconds: 86400
+            value: 86400,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         }
     };
     let effect = await effectUtils.createEffect(workflow.actor, effectData);

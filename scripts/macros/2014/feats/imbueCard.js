@@ -17,7 +17,7 @@ async function use({workflow}) {
         system: {
             'activation.type': 'bonus',
             uses: {max: 1, recovery: [{period: 'lr', type: 'recoverAll'}], spent: 0},
-            'preparation.mode': 'atwill'
+            method: 'atwill'
         },
         flags: {
             'chris-premades': {
@@ -34,7 +34,11 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            seconds: 28800
+            value: 28800,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         }
     };
     let effect = await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'imbueCard', vae: [{type: 'use', name: spellData.name, identifier: 'imbueCardSpell'}]});

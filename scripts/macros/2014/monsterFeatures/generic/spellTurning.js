@@ -8,17 +8,23 @@ async function early({trigger: {entity: item}, workflow}) {
         name: item.name,
         img: constants.tempConditionIcon,
         duration: {
-            seconds: 1
+            value: 1,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         origin: item.uuid,
-        changes: [
-            {
-                key: 'flags.midi-qol.magicResistance.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.magicResistance.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: ['isSave']

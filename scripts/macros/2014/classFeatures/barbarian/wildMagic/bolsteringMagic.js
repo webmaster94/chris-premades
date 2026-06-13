@@ -15,22 +15,28 @@ async function use({workflow}) {
             img: workflow.item.img,
             origin: workflow.item.uuid,
             duration: {
-                seconds: 600
+                value: 600,
+                units: 'seconds'
             },
-            changes: [
-                {
-                    key: 'system.bonuses.All-Attacks',
-                    mode: 2,
-                    value: '1d3',
-                    priority: 20
-                },
-                {
-                    key: 'system.bonuses.abilities.check',
-                    mode: 2,
-                    value: '1d3',
-                    priority: 20
-                }
-            ]
+            start: {
+                time: game.time?.worldTime ?? 0
+            },
+            system: {
+                changes: [
+                    {
+                        key: 'system.bonuses.All-Attacks',
+                        type: 'add',
+                        value: '1d3',
+                        priority: 20
+                    },
+                    {
+                        key: 'system.bonuses.abilities.check',
+                        type: 'add',
+                        value: '1d3',
+                        priority: 20
+                    }
+                ]
+            }
         };
         await effectUtils.createEffect(targetActor, effectData, {identifier: 'bolsteringMagicBuff'});
     } else {

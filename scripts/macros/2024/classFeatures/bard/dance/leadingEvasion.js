@@ -5,7 +5,8 @@ async function early({trigger: {entity: item}, workflow}) {
     let sourceEffect = item.effects.contents?.[0];
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
-    effectData.duration.seconds = 1;
+    effectData.duration = {value: 1, units: 'seconds'};
+    effectData.start = {time: game.time?.worldTime ?? 0};
     let used = false;
     await Promise.all(workflow.targets.map(async token => {
         if (itemUtils.getItemByIdentifier(token.actor, 'leadingEvasion')) return;

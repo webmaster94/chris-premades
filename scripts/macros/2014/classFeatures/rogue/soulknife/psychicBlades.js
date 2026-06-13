@@ -44,7 +44,12 @@ async function late({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            turns: 1
+            value: 1,
+            units: 'turns'
+        },
+        start: {
+            round: game.combat?.round ?? 0,
+            turn: game.combat?.turn ?? 0
         },
         flags: {
             dae: {

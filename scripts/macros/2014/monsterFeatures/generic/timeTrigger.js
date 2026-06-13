@@ -39,7 +39,7 @@ async function use({trigger, workflow}) {
 }
 async function timeUpdated({trigger: {entity: effect, worldTime, token}}) {
     if (!token) return;
-    let lastUsed = effect.flags['chris-premades']?.timeTrigger?.lastUsed ?? effect.duration.startTime;
+    let lastUsed = effect.flags['chris-premades']?.timeTrigger?.lastUsed ?? effect.start?.time;
     if (lastUsed > worldTime) return;
     let diff = worldTime - lastUsed;
     let units = effect.flags['chris-premades']?.timeTrigger?.timeFormat;

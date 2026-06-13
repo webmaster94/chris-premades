@@ -13,7 +13,7 @@ async function selfRoll({trigger: {entity: item, roll}}, rollType, abilityId) {
         if (rollType === 'save') {
             newRoll = (await item.actor.rollSavingThrow({ability: abilityId}, undefined, {create: false}))?.[0];
         } else if (rollType === 'check') {
-            newRoll = (await item.actor.rollAbilityTest({ability: abilityId}, undefined, {create: false}))?.[0];
+            newRoll = (await item.actor.rollAbilityCheck({ability: abilityId}, undefined, {create: false}))?.[0];
         } else if (rollType === 'skill') {
             newRoll = (await item.actor.rollSkill({skill: abilityId}, undefined, {create: false}))?.[0];
         }
@@ -58,7 +58,7 @@ async function thirdPartyRoll({trigger: {entity: item, config, sourceActor, roll
             if (rollType === 'save') {
                 returnRoll = (await sourceActor.rollSavingThrow(config, undefined, {create: false}))?.[0];
             } else if (rollType === 'check') {
-                returnRoll = (await sourceActor.rollAbilityTest(config, undefined, {create: false}))?.[0];
+                returnRoll = (await sourceActor.rollAbilityCheck(config, undefined, {create: false}))?.[0];
             } else if (rollType === 'skill') {
                 returnRoll = (await sourceActor.rollSkill(config, undefined, {create: false}))?.[0];
             }

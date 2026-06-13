@@ -1,4 +1,4 @@
-import {activityUtils, animationUtils, combatUtils, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
+import {activityUtils, animationUtils, combatUtils, effectUtils, genericUtils, itemUtils, templateUtils, workflowUtils} from '../../../utils.js';
 async function use({workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
     let template = workflow.template;
@@ -30,9 +30,7 @@ async function use({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        duration: {
-            seconds: itemUtils.convertDuration(workflow.item).seconds
-        },
+        duration: itemUtils.convertDuration(workflow.item),
         flags: {
             'chris-premades': {
                 cloudkill: {
@@ -43,7 +41,7 @@ async function use({workflow}) {
     };
     effectUtils.addMacro(effectData, 'combat', ['cloudkillSource']);
     await effectUtils.createEffect(workflow.actor, effectData, {concentrationItem: workflow.item, strictlyInterdependent: true, identifier: 'cloudkill'});
-    if (concentrationEffect) await genericUtils.update(concentrationEffect, {'duration.seconds': effectData.duration.seconds});
+    if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
     if (!itemUtils.getConfig(workflow.item, 'playAnimation')) return;
     if (animationUtils.jb2aCheck() != 'patreon') return;
     new Sequence()
@@ -53,23 +51,25 @@ async function use({workflow}) {
         .aboveInterface()
         .opacity(0.9)
         .xray(true)
-        .mask(template)
+        .mask(canvas.scene.regions.get(template.id)?.object ?? template.object ?? template)
         .persist(true)
         .attachTo(template)
         .play();
 }
 async function move({trigger: {entity: effect, token}}) {
     function getAllowedMoveLocation(casterToken, template, maxSquares) {
+        let templateObject = templateUtils.getRegionDoc(template)?.object ?? template.object;
+        let templateCenter = templateUtils.getPosition(template);
         for (let i = maxSquares; i > 0; i--) {
             let movePixels = i * canvas.grid.size;
-            let ray = new foundry.canvas.geometry.Ray(casterToken.center, template.object.center);
+            let ray = new foundry.canvas.geometry.Ray(casterToken.center, templateCenter);
             let newCenter = ray.project((ray.distance + movePixels)/ray.distance);
-            let isAllowedLocation = canvas.visibility.testVisibility(newCenter, {object: template.object});
+            let isAllowedLocation = canvas.visibility.testVisibility(newCenter, {object: templateObject});
             if (isAllowedLocation) return newCenter;
         }
         return false;
     }
-    let template = await fromUuid(effect.flags['chris-premades']?.cloudkill?.templateUuid);
+    let template = await fromUuid(templateUtils.normalizeTemplateUuid(effect.flags['chris-premades']?.cloudkill?.templateUuid));
     if (!template) return;
     let newCenter = getAllowedMoveLocation(token, template, 2);
     if (!newCenter) {
@@ -77,7 +77,23 @@ async function move({trigger: {entity: effect, token}}) {
         return;
     }
     newCenter = canvas.grid.getSnappedPoint(newCenter, {mode: CONST.GRID_SNAPPING_MODES.TOP_LEFT_CORNER});
-    await genericUtils.update(template, {x: newCenter.x, y: newCenter.y});
+    let regionDoc = templateUtils.getRegionDoc(template);
+    if (regionDoc) {
+        let oldPosition = templateUtils.getPosition(regionDoc);
+        let deltaX = newCenter.x - oldPosition.x;
+        let deltaY = newCenter.y - oldPosition.y;
+        let shapes = regionDoc.toObject().shapes;
+        for (let shape of shapes) {
+            if (shape.points) shape.points = shape.points.map((p, i) => i % 2 ? p + deltaY : p + deltaX);
+            else {
+                shape.x += deltaX;
+                shape.y += deltaY;
+            }
+        }
+        await genericUtils.update(regionDoc, {shapes});
+    } else {
+        await genericUtils.update(template, {x: newCenter.x, y: newCenter.y});
+    }
 }
 async function enterOrTurn({trigger: {entity: template, castData, token}}) {
     if (combatUtils.inCombat()) {

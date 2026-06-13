@@ -19,10 +19,10 @@ async function use({trigger, workflow}) {
     effectData.duration = itemUtils.convertDuration(workflow.activity);
     if (actorUtils.checkTrait(workflow.targets.first().actor, 'di', damageType)) return;
     if (actorUtils.checkTrait(workflow.targets.first().actor, 'dr', damageType)) {
-        effectData.changes[0].key = 'system.traits.dr.value';
-        effectData.changes[0].value = '-' + damageType;
+        effectData.system.changes[0].key = 'system.traits.dr.value';
+        effectData.system.changes[0].value = '-' + damageType;
     } else {
-        effectData.changes[0].value = damageType;
+        effectData.system.changes[0].value = damageType;
     }
     genericUtils.setProperty(effectData, 'flags.chris-premades.debilitatingBarrage.damageType', damageType);
     let immuneEffect = workflow.activity.effects[1]?.effect;
@@ -41,7 +41,7 @@ async function hit({trigger, workflow}) {
         let damageType = effect.flags['chris-premades']?.debilitatingBarrage?.damageType;
         if (!damageType) return;
         if (!damageTypes.has(damageType)) return;
-        await genericUtils.update(effect, {duration: {rounds: 0, turns: 1, seconds: 1}});
+        await genericUtils.update(effect, {duration: {value: 1, units: 'turns'}, start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0}});
     }));
 }
 async function added({trigger: {entity: item}}) {

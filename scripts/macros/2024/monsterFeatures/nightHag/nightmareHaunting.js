@@ -15,30 +15,30 @@ async function use({trigger: {entity: item}, workflow}) {
         let totalMax = token.actor.system.attributes.hp.max;
         let effect = effectUtils.getEffectByIdentifier(token.actor, 'nightmareHauntingEffect');
         if (effect) {
-            let currReduction = parseInt(effect.changes[0].value);
+            let currReduction = parseInt(effect.system.changes[0].value);
             await genericUtils.update(effect, {
-                changes: [
+                system: {changes: [
                     {
                         key: 'system.attributes.hp.tempmax',
-                        mode: 2,
+                        type: 'add',
                         value: Math.max(-totalMax, currReduction - damageApplied),
                         priority: 20
                     }
-                ]
+                ]}
             });
         } else {
             let effectData = {
                 name: item.name,
                 img: item.img,
                 origin: item.uuid,
-                changes: [
+                system: {changes: [
                     {
                         key: 'system.attributes.hp.tempmax',
-                        mode: 2,
+                        type: 'add',
                         value: -damageApplied,
                         priority: 20
                     }
-                ],
+                ]},
                 flags: {
                     dae: {
                         showIcon: true

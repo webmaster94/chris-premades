@@ -12,13 +12,17 @@ async function use({trigger, workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            seconds: seconds
+            value: seconds,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         }
     };
     await Promise.all(savedTargets.map(async token => await effectUtils.createEffect(token.actor, effectData)));
     let firstEffectName = workflow.item.effects.contents.length ? workflow.item.effects.contents[0].name : workflow.item.name;
     await Promise.all(workflow.failedSaves.map(async token => {
-        let effect = actorUtils.getEffects(token.actor).find(j => j.name === firstEffectName);
+        let effect = actorUtils.getEffects(token.actor).find(j => j.name === firstEffectName && !j.duration?.expired && !j.disabled);
         if (!effect) return;
         let currentMacroList = genericUtils.getProperty(effect, 'flags.chris-premades.macros.effect') ?? [];
         await genericUtils.setFlag(effect, 'chris-premades', 'macros.effect', currentMacroList.concat(['effectImmunityRemove']));
@@ -32,8 +36,8 @@ async function early({trigger, workflow}) {
     let firstEffectName = workflow.item.effects.contents.length ? workflow.item.effects.contents[0].name : workflow.item.name;
     let validTargets = workflow.targets.filter(i => {
         let effects = actorUtils.getEffects(i.actor);
-        if (effects.find(j => j.name === name)) return;
-        if (effects.find(j => j.name === firstEffectName)) return;
+        if (effects.find(j => j.name === name && !j.duration?.expired && !j.disabled)) return;
+        if (effects.find(j => j.name === firstEffectName && !j.duration?.expired && !j.disabled)) return;
         return true;
     });
     await workflowUtils.updateTargets(workflow, validTargets);
@@ -41,7 +45,7 @@ async function early({trigger, workflow}) {
 async function removed({trigger}) {
     //let expiryReason = trigger.options['expiry-reason'];
     await genericUtils.sleep(200);
-    let effect = actorUtils.getEffects(trigger.entity.parent).find(i => i.name === trigger.entity.name && i.origin === trigger.entity.origin);
+    let effect = actorUtils.getEffects(trigger.entity.parent).find(i => i.name === trigger.entity.name && i.origin === trigger.entity.origin && !i.duration?.expired && !i.disabled);
     if (effect) return;
     let origin = await effectUtils.getOriginItem(trigger.entity);
     if (!origin) return;
@@ -53,7 +57,11 @@ async function removed({trigger}) {
         img: origin.img,
         origin: origin.uuid,
         duration: {
-            seconds: seconds
+            value: seconds,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         }
     };
     await effectUtils.createEffect(trigger.entity.parent, effectData);

@@ -9,16 +9,23 @@ async function early({workflow}) {
         img: constants.tempConditionIcon,
         origin: workflow.item.uuid,
         duration: {
-            turns: 1
+            value: 1,
+            units: 'turns'
         },
-        changes: [
-            {
-                key: 'flags.midi-qol.advantage.save.all',
-                value: 1,
-                mode: 5,
-                priority: 120
-            }
-        ],
+        start: {
+            round: game.combat?.round ?? 0,
+            turn: game.combat?.turn ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.advantage.save.all',
+                    value: 1,
+                    type: 'override',
+                    priority: 120
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [

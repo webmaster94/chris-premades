@@ -20,22 +20,28 @@ async function create({trigger: {entity: effect, target, identifier}}) {
         img: effect.img,
         origin: effect.uuid,
         duration: {
-            seconds: effect.duration.remaining
+            value: effectUtils.getRemainingDurationSeconds(effect),
+            units: 'seconds'
         },
-        changes: [
-            {
-                key: 'system.bonuses.mwak.damage',
-                mode: 2,
-                value: '1d4[radiant]',
-                priority: 20
-            },
-            {
-                key: 'system.bonuses.rwak.damage',
-                mode: 2,
-                value: '1d4[radiant]',
-                priority: 20
-            }
-        ],
+        start: {
+            time: game.time?.worldTime ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'system.bonuses.mwak.damage',
+                    type: 'add',
+                    value: '1d4[radiant]',
+                    priority: 20
+                },
+                {
+                    key: 'system.bonuses.rwak.damage',
+                    type: 'add',
+                    value: '1d4[radiant]',
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 aura: true,

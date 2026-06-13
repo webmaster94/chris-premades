@@ -8,14 +8,14 @@ async function use({trigger, workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'flags.midi-qol.OverTime',
-                mode: 0,
+                type: 'custom',
                 priority: 20,
                 value: 'turn=end, allowIncapacitated=true, rollType=save, saveAbility=con, saveDC=' + itemUtils.getSaveDC(workflow.item) + ', saveMagic=true'
             }
-        ]
+        ]}
     };
     await Promise.all(workflow.failedSaves.map(async token => {
         await effectUtils.createEffect(token.actor, effectData, {concentrationItem: workflow.item, conditions: [identifier]});

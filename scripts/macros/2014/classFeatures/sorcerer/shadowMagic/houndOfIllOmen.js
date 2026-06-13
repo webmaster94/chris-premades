@@ -71,16 +71,23 @@ async function early({trigger: {entity: item}, workflow}) {
             name: 'Condition Disadvantage',
             img: constants.tempConditionIcon,
             duration: {
-                turns: 1
+                value: 1,
+                units: 'turns'
             },
-            changes: [
-                {
-                    key: 'flags.midi-qol.disadvantage.save.all',
-                    value: '1',
-                    mode: 5,
-                    priority: 120
-                }
-            ],
+            start: {
+                round: game.combat?.round ?? 0,
+                turn: game.combat?.turn ?? 0
+            },
+            system: {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.save.all',
+                        value: '1',
+                        type: 'override',
+                        priority: 120
+                    }
+                ]
+            },
             flags: {
                 'chris-premades': {
                     specialDuration: ['endOfWorkflow']

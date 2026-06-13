@@ -7,14 +7,14 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         statuses: ['coverHalf'],
-        changes: [
+        system: {changes: [
             {
                 key: 'system.traits.dr.value',
-                mode: 2,
-                value: effectUtils.getEffectByIdentifier(workflow.actor, 'naturesWard')?.changes[1].value ?? 'fire',
+                type: 'add',
+                value: effectUtils.getEffectByIdentifier(workflow.actor, 'naturesWard').system.changes[1].value ?? 'fire',
                 priority: 20
             }
-        ]
+        ]}
     };
     await genericUtils.update(template, {
         flags: {

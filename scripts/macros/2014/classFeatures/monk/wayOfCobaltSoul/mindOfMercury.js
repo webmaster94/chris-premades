@@ -2,7 +2,7 @@ import {combatUtils, effectUtils, genericUtils, itemUtils, workflowUtils} from '
 async function reaction({trigger: {entity: item, target}}) {
     if (!target.statuses.has('reaction')) return;
     if (!combatUtils.inCombat()) return;
-    let change = target.changes.find(i => i.key === 'flags.midi-qol.actions.reactionsUsed');
+    let change = target.system.changes.find(i => i.key === 'flags.midi-qol.actions.reactionsUsed');
     if (!change) return;
     let reactionsUsed = Number(change.value);
     if (reactionsUsed <= 1) return;
@@ -16,9 +16,9 @@ async function updated({trigger: {entity, item}}) {
     let effect = effectUtils.getEffectByIdentifier(entity.actor, 'mindOfMercuryEffect');
     if (!effect) return;
     if (item.system.uses.value) {
-        if (effect.changes[0].value != '2') await genericUtils.update(effect, {changes: [{key: 'flags.midi-qol.actions.reactionsMax', mode: 5, priority: 20, value: '2'}]});
+        if (effect.system.changes[0].value != '2') await genericUtils.update(effect, {'system.changes': [{key: 'flags.midi-qol.actions.reactionsMax', type: 'override', priority: 20, value: '2'}]});
     } else {
-        if (effect.changes[0].value != '1') await genericUtils.update(effect, {changes: [{key: 'flags.midi-qol.actions.reactionsMax', mode: 5, priority: 20, value: '1'}]});
+        if (effect.system.changes[0].value != '1') await genericUtils.update(effect, {'system.changes': [{key: 'flags.midi-qol.actions.reactionsMax', type: 'override', priority: 20, value: '1'}]});
     }
 }
 async function turn({trigger: {entity: item}}) {
@@ -29,9 +29,9 @@ async function turn({trigger: {entity: item}}) {
     if (!monksFocus?.system?.uses?.value) return;
     let reactionUsed = effectUtils.getEffectByStatusID(item.actor, 'reaction');
     let effectData = genericUtils.duplicate(reactionUsed.toObject());
-    let change = effectData.changes.find(i => i.key === 'flags.midi-qol.actions.reactionsUsed');
+    let change = effectData.system.changes.find(i => i.key === 'flags.midi-qol.actions.reactionsUsed');
     if (change) change.value = '1';
-    await genericUtils.update(reactionUsed, {changes: effectData.changes});
+    await genericUtils.update(reactionUsed, {'system.changes': effectData.system.changes});
 }
 async function added({trigger: {entity: item}}) {
     let monkItem = itemUtils.getItemByIdentifier(item.actor, 'ki') ?? itemUtils.getItemByIdentifier(item.actor, 'monksFocus');

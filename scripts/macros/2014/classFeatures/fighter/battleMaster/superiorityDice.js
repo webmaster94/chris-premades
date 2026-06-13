@@ -70,7 +70,7 @@ export async function superiorityHelper(workflow) {
     let useSmall = genericUtils.getProperty(workflow.actor, 'flags.chris-premades.useSmallSuperiorityDie');
     if (!useSmall && superiorityDie === 'd6') await genericUtils.setFlag(workflow.actor, 'chris-premades', 'useSmallSuperiorityDie', true);
     await workflowUtils.completeItemUse(selected);
-    if (!useSmall && superiorityDie === 'd6') await genericUtils.update(workflow.actor, {'flags.chris-premades.-=useSmallSuperiorityDie': null});
+    if (!useSmall && superiorityDie === 'd6') await genericUtils.unsetFlag(workflow.actor, 'chris-premades', 'useSmallSuperiorityDie');
     await genericUtils.update(itemToUse, {'system.uses.spent': itemToUse.system.uses.spent + 1});
 }
 export let superiorityDice = {

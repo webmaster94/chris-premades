@@ -23,28 +23,34 @@ async function late({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            seconds: 86400
+            value: 86400,
+            units: 'seconds'
         },
-        changes: [
-            {
-                key: 'flags.midi-qol.advantage.attack.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.advantage.save.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.advantage.check.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ]
+        start: {
+            time: game.time?.worldTime ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.advantage.attack.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.advantage.save.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.advantage.check.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        }
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['blackrazor']);
     await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'blackrazor'});

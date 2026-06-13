@@ -48,7 +48,11 @@ async function use({workflow}) {
     };
     if (!isNaN(duration)) {
         targetEffectData.duration = {
-            seconds: duration
+            value: duration,
+            units: 'seconds'
+        };
+        targetEffectData.start = {
+            time: game.time?.worldTime ?? 0
         };
     }
     switch (activityIdentifier) {
@@ -56,20 +60,22 @@ async function use({workflow}) {
             let abilityChoices = Object.entries(CONFIG.DND5E.abilities).map(([abbr, {label}]) => [label, abbr]);
             let ability = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.BestowCurse.AbilitySelect', abilityChoices);
             if (!ability) return;
-            targetEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.disadvantage.check.' + ability,
-                    mode: 0, 
-                    value: true,
-                    priority: 20
-                }, 
-                {
-                    key: 'flags.midi-qol.disadvantage.save.' + ability,
-                    mode: 0,
-                    value: true,
-                    priority: 20
-                }
-            ];
+            targetEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.check.' + ability,
+                        type: 'custom',
+                        value: true,
+                        priority: 20
+                    },
+                    {
+                        key: 'flags.midi-qol.disadvantage.save.' + ability,
+                        type: 'custom',
+                        value: true,
+                        priority: 20
+                    }
+                ]
+            };
             break;
         }
         case 'bestowCurseDamage':
@@ -78,7 +84,11 @@ async function use({workflow}) {
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
                 duration: {
-                    seconds: null
+                    value: null,
+                    units: 'seconds'
+                },
+                start: {
+                    time: game.time?.worldTime ?? 0
                 },
                 flags: {
                     'chris-premades': {
@@ -93,7 +103,7 @@ async function use({workflow}) {
             effectUtils.addMacro(casterEffectData, 'midi.actor', ['bestowCurseDamageSource']);
             effectUtils.addMacro(casterEffectData, 'effect', ['bestowCurse']);
             effectUtils.addMacro(targetEffectData, 'midi.actor', ['bestowCurseDamageTarget']);
-            if (!isNaN(duration)) casterEffectData.duration.seconds = duration;
+            if (!isNaN(duration)) casterEffectData.duration.value = duration;
             break;
         case 'bestowCurseAttack':
             targetEffectData.flags = {
@@ -107,14 +117,16 @@ async function use({workflow}) {
             break;
         case 'bestowCurseTurn': {
             let saveDC = itemUtils.getSaveDC(workflow.item);
-            targetEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.OverTime',
-                    mode: 0,
-                    value: 'turn=start,saveAbility=wis,saveMagic=true,saveRemove=false,saveDC=' + saveDC + ',label="' + workflow.item.name + ' (' + genericUtils.translate('CHRISPREMADES.Turns.StartOfTurn') + ')"',
-                    priority: 20
-                }
-            ];
+            targetEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.OverTime',
+                        type: 'custom',
+                        value: 'turn=start,saveAbility=wis,saveMagic=true,saveRemove=false,saveDC=' + saveDC + ',label="' + workflow.item.name + ' (' + genericUtils.translate('CHRISPREMADES.Turns.StartOfTurn') + ')"',
+                        priority: 20
+                    }
+                ]
+            };
             break;
         }
     }
@@ -142,7 +154,7 @@ async function use({workflow}) {
     }
     if (concentration && !isNaN(duration)) {
         let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-        if (concentrationEffect) await genericUtils.update(concentrationEffect, {'duration.seconds': duration});
+        if (concentrationEffect) await genericUtils.update(concentrationEffect, {'duration.value': duration, 'duration.units': 'seconds'});
     }
 }
 async function attack({workflow}) {

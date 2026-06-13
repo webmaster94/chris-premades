@@ -43,16 +43,22 @@ async function lateCrit({trigger: {entity: item}, workflow}) {
         img: item.img,
         origin: item.uuid,
         duration: {
-            seconds: 12
+            value: 12,
+            units: 'seconds'
         },
-        changes: [
-            {
-                key: 'flags.midi-qol.grants.advantage.attack.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        start: {
+            time: game.time?.worldTime ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.grants.advantage.attack.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: ['turnStartSource']

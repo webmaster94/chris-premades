@@ -1,12 +1,16 @@
-import {effectUtils, genericUtils, tokenUtils} from '../../../../../utils.js';
+import {effectUtils, genericUtils, templateUtils, tokenUtils} from '../../../../../utils.js';
 async function use({trigger, workflow}) {
     if (!workflow.failedSaves.size || !workflow.token || !workflow.template) return;
+    let regionDoc = templateUtils.getRegionDoc(workflow.template);
+    let templateDoc = regionDoc ? foundry.documents.MeasuredTemplateDocument._fromRegion(regionDoc) : workflow.template;
+    let templateAngle = Math.toRadians(templateDoc.direction ?? 0);
+    let templateDistance = (templateDoc.distance ?? 0) * canvas.dimensions.distancePixels;
     await Promise.all(workflow.failedSaves.map(async token => {
-        let ray = Ray.fromAngle(token.x, token.y, workflow.template.object.ray.angle, workflow.template.object.ray.distance);
+        let ray = foundry.canvas.geometry.Ray.fromAngle(token.x, token.y, templateAngle, templateDistance);
         await tokenUtils.moveTokenAlongRay(token, ray, 30);
         await effectUtils.applyConditions(token.actor, ['prone']);
     }));
-    let ray = Ray.fromAngle(workflow.token.x, workflow.token.y, workflow.template.object.ray.angle, workflow.template.object.ray.distance);
+    let ray = foundry.canvas.geometry.Ray.fromAngle(workflow.token.x, workflow.token.y, templateAngle, templateDistance);
     await tokenUtils.moveTokenAlongRay(workflow.token, ray, 30);
 }
 export let shieldCharge = {

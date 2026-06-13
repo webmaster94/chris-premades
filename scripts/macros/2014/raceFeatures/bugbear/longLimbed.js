@@ -8,22 +8,29 @@ async function turnStart({trigger: {entity: item}}) {
         img: item.img,
         origin: item.uuid,
         duration: {
-            turns: 1
+            value: 1,
+            units: 'turns'
         },
-        changes: [
-            {
-                key: 'flags.midi-qol.range.mwak',
-                mode: 2,
-                value: 5,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.range.msak',
-                mode: 2,
-                value: 5,
-                priority: 20
-            }
-        ],
+        start: {
+            round: game.combat?.round ?? 0,
+            turn: game.combat?.turn ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.range.mwak',
+                    type: 'add',
+                    value: 5,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.range.msak',
+                    type: 'add',
+                    value: 5,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 effect: {

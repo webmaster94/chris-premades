@@ -16,26 +16,28 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.actor.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
-            {
-                key: 'name',
-                mode: 5,
-                value: '{} (' + workflow.item.name + ')',
-                priority: 20
-            },
-            {
-                key: 'system.properties',
-                mode: 2,
-                value: 'mgc',
-                priority: 20
-            },
-            {
-                key: 'system.magicalBonus',
-                mode: 2,
-                value: 3,
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'name',
+                    type: 'override',
+                    value: '{} (' + workflow.item.name + ')',
+                    priority: 20
+                },
+                {
+                    key: 'system.properties',
+                    type: 'add',
+                    value: 'mgc',
+                    priority: 20
+                },
+                {
+                    key: 'system.magicalBonus',
+                    type: 'add',
+                    value: 3,
+                    priority: 20
+                }
+            ]
+        }
     };
     await itemUtils.enchantItem(selectedWeapon, enchantData, {identifier: 'oilOfSharpness'});
 }

@@ -128,7 +128,7 @@ async function early({workflow}) {
                 break;  
         }
     }
-    new Sequence().effect().file(file).atLocation(template.object.position).stretchTo(template.object).play();
+    new Sequence().effect().file(file).atLocation(templateUtils.getPosition(template)).stretchTo(canvas.scene.regions.get(template.id)?.object ?? template.object ?? template).play();
 }
 export let breathOfTheDragon = {
     name: 'Breath of the Dragon',

@@ -128,7 +128,7 @@ async function late({workflow}) {
             }
         });
         let effect = workflow.actor.effects.find(i => i.getDependents().map(j => j.uuid)?.includes(template.uuid));
-        if (effect) await genericUtils.update(effect, {'duration.turns': 1});
+        if (effect) await genericUtils.update(effect, {'duration.value': 1, 'duration.units': 'turns', start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0}});
         if (itemUtils.getConfig(workflow.item, 'useRealDarkness')) {
             let offset = (template.width / 2) * canvas.grid.size / canvas.grid.distance;
             let darknessSourceArr = await genericUtils.createEmbeddedDocuments(template.parent, 'AmbientLight', [{config: {negative: true, dim: template.width / 2, animation: {type: itemUtils.getConfig(workflow.item, 'darknessAnimation')}}, x: template.object.center.x + offset, y: template.object.center.y + offset}]);

@@ -141,14 +141,14 @@ async function early({activity, actor, config, dialog}) {
         name: activity.name,
         img: activity.item.img,
         origin: activity.item.uuid,
-        changes: [
+        system: {changes: [
             {
                 key: 'flags.midi-qol.rangeOverride.attack.all',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             'chris-premades': {
                 effect: {

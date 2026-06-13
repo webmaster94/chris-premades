@@ -26,20 +26,22 @@ async function late({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        changes: [
-            {
-                key: 'system.bonuses.All-Attacks',
-                mode: 2,
-                value: damageDealt,
-                priority: 20
-            },
-            {
-                key: 'system.bonuses.abilities.check',
-                mode: 2,
-                value: damageDealt,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.bonuses.All-Attacks',
+                    type: 'add',
+                    value: damageDealt,
+                    priority: 20
+                },
+                {
+                    key: 'system.bonuses.abilities.check',
+                    type: 'add',
+                    value: damageDealt,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [

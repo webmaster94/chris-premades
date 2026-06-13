@@ -17,7 +17,11 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            seconds: 60
+            value: 60,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         flags: {
             'chris-premades': {

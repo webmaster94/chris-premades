@@ -28,14 +28,16 @@ async function use({workflow}) {
             name: workflow.item.name + ' (' + genericUtils.translate('CHRISPREMADES.Light.Dim') + ')',
             img: workflow.item.img,
             origin: workflow.item.uuid,
-            changes: [
-                {
-                    key: 'ATL.light.dim',
-                    mode: 4,
-                    value: 5,
-                    priority: 20
-                }
-            ]
+            system: {
+                changes: [
+                    {
+                        key: 'ATL.light.dim',
+                        type: 'upgrade',
+                        value: 5,
+                        priority: 20
+                    }
+                ]
+            }
         };
         await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'lanternOfRevealingDim', parentEntity: workflow.item, vae: [{type: 'use', name: workflow.item.name, identifier: 'lanternOfRevealing'}]});
         return;
@@ -45,20 +47,22 @@ async function use({workflow}) {
             name: workflow.item.name + ' (' + genericUtils.translate('CHRISPREMADES.Light.Bright') + ')',
             img: workflow.item.img,
             origin: workflow.item.uuid,
-            changes: [
-                {
-                    key: 'ATL.light.bright',
-                    mode: 4,
-                    value: 30,
-                    priority: 20
-                },
-                {
-                    key: 'ATL.light.dim',
-                    mode: 4,
-                    value: 60,
-                    priority: 20
-                }
-            ]
+            system: {
+                changes: [
+                    {
+                        key: 'ATL.light.bright',
+                        type: 'upgrade',
+                        value: 30,
+                        priority: 20
+                    },
+                    {
+                        key: 'ATL.light.dim',
+                        type: 'upgrade',
+                        value: 60,
+                        priority: 20
+                    }
+                ]
+            }
         };
         effectUtils.addMacro(effectData, 'aura', ['lanternOfRevealing']);
         await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'lanternOfRevealingBright', parentEntity: workflow.item, vae: [{type: 'use', name: workflow.item.name, identifier: 'lanternOfRevealing'}]});
@@ -77,14 +81,16 @@ async function create({trigger: {entity: effect, target, identifier}}) {
         name: effect.name,
         img: effect.img,
         origin: effect.uuid,
-        changes: [
-            {
-                key: 'system.traits.ci.value',
-                mode: 2,
-                value: 'invisible',
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.traits.ci.value',
+                    type: 'add',
+                    value: 'invisible',
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 aura: true

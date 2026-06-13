@@ -41,14 +41,16 @@ async function use({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        changes: [
-            {
-                key: 'system.attributes.movement.all',
-                mode: 0,
-                value: 0,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.attributes.movement.all',
+                    type: 'custom',
+                    value: 0,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 showIcon: true
@@ -65,11 +67,15 @@ async function use({workflow}) {
     } else {
         let dc = workflow.activity.save.dc.value;
         effectData.duration = {
-            seconds: 60
+            value: 60,
+            units: 'seconds'
         };
-        effectData.changes.push({
+        effectData.start = {
+            time: game.time?.worldTime ?? 0
+        };
+        effectData.system.changes.push({
             key: 'flags.midi-qol.OverTime',
-            mode: 0,
+            type: 'custom',
             value: 'label=' + workflow.item.name + ' (' + genericUtils.translate('CHRISPREMADES.Medkit.Effect.OverTime.Labels.End') + '),turn=end,saveDC=' + dc + ',saveAbility=str,rollType=save,saveRemove=true',
             priority: 20
         });

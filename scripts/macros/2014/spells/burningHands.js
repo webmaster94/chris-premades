@@ -1,10 +1,11 @@
-import {animationUtils, itemUtils} from '../../../utils.js';
+import {animationUtils, itemUtils, templateUtils} from '../../../utils.js';
 async function use ({workflow}) {
     // Animations by: eskiemoh
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     if (!playAnimation || animationUtils.jb2aCheck() !== 'patreon') return;
     let sourceToken = workflow.token;
-    let template = (await fromUuid(workflow.templateUuid))?.object;
+    let templateDoc = templateUtils.getRegionDoc(templateUtils.normalizeTemplateUuid(workflow.templateUuid)) ?? await fromUuid(workflow.templateUuid);
+    let template = templateDoc?.object;
     if (!sourceToken || !template) return;
     new Sequence()
         .effect()
@@ -52,7 +53,7 @@ async function use ({workflow}) {
 
         .effect()
         .file('jb2a.burning_hands.02.orange')
-        .atLocation(template.position, {cacheLocation: true})
+        .atLocation(templateUtils.getPosition(templateDoc), {cacheLocation: true})
         .stretchTo(template, {cacheLocation: true})
         .zIndex(3)
         .play();

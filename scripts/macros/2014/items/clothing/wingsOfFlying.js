@@ -6,14 +6,16 @@ async function use({trigger, workflow}) {
         duration: itemUtils.convertDuration(workflow.activity),
         name: workflow.item.name,
         img: workflow.item.img,
-        changes: [
-            {
-                key: 'system.attributes.movement.fly',
-                mode: 4,
-                value: 60,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.attributes.movement.fly',
+                    type: 'upgrade',
+                    value: 60,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 wingsOfFlying: {
@@ -36,7 +38,11 @@ async function end({trigger}) {
         img: trigger.entity.img,
         origin: trigger.entity.origin,
         duration: {
-            seconds: 3600 * roll.total
+            value: 3600 * roll.total,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         }
     };
     effectUtils.addMacro(effectData, 'effect', ['wingsOfFlyingRecharge']);

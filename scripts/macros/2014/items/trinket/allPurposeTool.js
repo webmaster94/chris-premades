@@ -23,8 +23,8 @@ async function useCreative({workflow}) {
     let spells = await spellUtils.getSpellsOfLevel(0);
     let selection = await dialogUtils.selectDocumentDialog(workflow.item.name, 'CHRISPREMADES.Macros.AllPurposeTool.Spell', spells, {sortAlphabetical: true});
     if (!selection) return;
-    let itemData = duplicate(selection.toObject());
-    genericUtils.setProperty(itemData, 'system.sourceClass', 'artificer');
+    let itemData = genericUtils.duplicate(selection.toObject()); // v14: bare duplicate global removed
+    genericUtils.setProperty(itemData, 'system.sourceItem', 'class:artificer');
     itemData.system.properties.push('material');
     itemData.name = genericUtils.translate('CHRISPREMADES.Macros.AllPurposeTool.Name') + ': ' + itemData.name;
     let effectData = {

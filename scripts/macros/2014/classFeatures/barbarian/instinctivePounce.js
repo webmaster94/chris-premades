@@ -9,15 +9,18 @@ async function use({workflow}) {
             name: workflow.item.name,
             img: workflow.item.img,
             origin: workflow.item.uuid,
-            duration: {turns: 1},
-            changes: [
-                {
-                    key: 'system.attributes.movement.speed',
-                    mode: 2,
-                    value: maxRange,
-                    priority: 20
-                }
-            ]
+            duration: {value: 1, units: 'turns'},
+            start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0},
+            system: {
+                changes: [
+                    {
+                        key: 'system.attributes.movement.speed',
+                        type: 'add',
+                        value: maxRange,
+                        priority: 20
+                    }
+                ]
+            }
         }, {identifier: 'instinctivePounce'});
     }
     let position = await crosshairUtils.aimCrosshair({

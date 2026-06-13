@@ -40,26 +40,28 @@ async function use({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        changes: [
-            {
-                key: 'name',
-                mode: 5,
-                value: '{} (' + workflow.item.name + ')',
-                priority: 20
-            },
-            {
-                key: 'system.properties',
-                mode: 2,
-                value: 'mgc',
-                priority: 20
-            },
-            {
-                key: 'activities[attack].damage.parts',
-                mode: 2,
-                value: JSON.stringify({denomination: scale.faces, number: scale.number, types: selection}),
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'name',
+                    type: 'override',
+                    value: '{} (' + workflow.item.name + ')',
+                    priority: 20
+                },
+                {
+                    key: 'system.properties',
+                    type: 'add',
+                    value: 'mgc',
+                    priority: 20
+                },
+                {
+                    key: 'activities[attack].damage.parts',
+                    type: 'add',
+                    value: JSON.stringify({denomination: scale.faces, number: scale.number, types: selection}),
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 crimsonRite: {
@@ -77,20 +79,22 @@ async function use({workflow}) {
             name: riteButtons.find(i => i[1] === selection)[0],
             img: workflow.item.img,
             origin: selectedWeapon.uuid,
-            changes: [
-                {
-                    key: 'ATL.light.bright',
-                    mode: 4,
-                    value: 20,
-                    priority: 20
-                },
-                {
-                    key: 'system.traits.dr.value',
-                    mode: 2,
-                    value: 'necrotic',
-                    priority: 20
-                }
-            ],
+            system: {
+                changes: [
+                    {
+                        key: 'ATL.light.bright',
+                        type: 'upgrade',
+                        value: 20,
+                        priority: 20
+                    },
+                    {
+                        key: 'system.traits.dr.value',
+                        type: 'add',
+                        value: 'necrotic',
+                        priority: 20
+                    }
+                ]
+            },
             flags: {
                 'chris-premades': {
                     effect: {

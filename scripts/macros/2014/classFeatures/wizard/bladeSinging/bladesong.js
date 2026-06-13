@@ -5,32 +5,34 @@ async function use({trigger, workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
-            {
-                key: 'system.attributes.ac.bonus',
-                mode: 2,
-                value: '+' + workflow.actor.system.abilities.int.mod,
-                priority: 20
-            },
-            {
-                key: 'system.attributes.movement.walk',
-                mode: 2,
-                value: '+10',
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.advantage.skill.acr',
-                mode: 0,
-                value: '1',
-                priority: 20
-            },
-            {
-                key: 'system.attributes.concentration.bonuses.save',
-                mode: 2,
-                value: '+' + workflow.actor.system.abilities.int.mod,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.attributes.ac.bonus',
+                    type: 'add',
+                    value: '+' + workflow.actor.system.abilities.int.mod,
+                    priority: 20
+                },
+                {
+                    key: 'system.attributes.movement.walk',
+                    type: 'add',
+                    value: '+10',
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.advantage.skill.acr',
+                    type: 'custom',
+                    value: '1',
+                    priority: 20
+                },
+                {
+                    key: 'system.attributes.concentration.bonuses.save',
+                    type: 'add',
+                    value: '+' + workflow.actor.system.abilities.int.mod,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [
@@ -41,9 +43,9 @@ async function use({trigger, workflow}) {
     };
     let songOfVictory = itemUtils.getItemByIdentifier(workflow.actor, 'songOfVictory');
     if (songOfVictory) {
-        effectData.changes.push({
+        effectData.system.changes.push({
             key: 'system.bonuses.mwak.damage',
-            mode: 2,
+            type: 'add',
             value: '+' + workflow.actor.system.abilities.int.mod,
             priority: 20
         });

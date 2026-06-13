@@ -57,17 +57,15 @@ async function push({workflow}) {
 async function sap({workflow}) {
     if (!workflow.hitTargets.size) return;
     let effectData = {
-        changes: [
+        system: {changes: [
             {
                 key: 'flags.midi-qol.disadvantage.attack.all',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             }
-        ],
-        duration: {
-            seconds: 12
-        },
+        ]},
+        duration: {value: 12, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
         img: 'icons/skills/melee/sword-damaged-broken-red.webp',
         name: genericUtils.translate('CHRISPREMADES.Mastery.Sap.Name'),
         origin: workflow.item.uuid,
@@ -87,17 +85,15 @@ async function sap({workflow}) {
 async function slow({workflow}) {
     if (!workflow.hitTargets.size) return;
     let effectData = {
-        changes: [
+        system: {changes: [
             {
                 key: 'system.attributes.movement.all',
-                mode: 0,
+                type: 'custom',
                 value: -10,
                 priority: 20
             }
-        ],
-        duration: {
-            seconds: 12
-        },
+        ]},
+        duration: {value: 12, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
         img: 'icons/equipment/feet/boots-galosh-white.webp',
         name: genericUtils.translate('CHRISPREMADES.Mastery.Slow.Name'),
         origin: workflow.item.uuid,
@@ -126,17 +122,15 @@ async function vex({workflow}) {
     if (!workflow.damageItem) return;
     if (!workflow.hitTargets.size || (workflow.damageItem.oldHP === workflow.damageItem.newHP && workflow.damageItem.oldTempHP === workflow.damageItem.newTempHP)) return;
     let effectData = {
-        changes: [
+        system: {changes: [
             {
                 key: 'flags.midi-qol.advantage.attack.all',
-                mode: 2,
+                type: 'add',
                 value: 'workflow.targets.first().id === "' + workflow.targets.first().id + '"',
                 priority: 20
             }
-        ],
-        duration: {
-            seconds: 12
-        },
+        ]},
+        duration: {value: 12, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
         img: 'icons/magic/control/fear-fright-mask-yellow.webp',
         name: genericUtils.translate('CHRISPREMADES.Mastery.Vex.Name'),
         origin: workflow.item.uuid,

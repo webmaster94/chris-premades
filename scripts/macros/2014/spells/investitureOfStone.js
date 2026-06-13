@@ -13,14 +13,14 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'system.traits.dr.custom',
-                mode: 0,
+                type: 'custom',
                 value: 'Non-Magical Physical',
                 priority: 20
             }
-        ]
+        ]}
     };
     await effectUtils.createEffect(workflow.actor, effectData, {
         concentrationItem: workflow.item, 

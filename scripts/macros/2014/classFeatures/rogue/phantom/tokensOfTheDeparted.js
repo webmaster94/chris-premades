@@ -5,20 +5,22 @@ async function added({trigger: {entity: item, actor}}) {
         name: item.name,
         img: item.img,
         origin: item.uuid,
-        changes: [
-            {
-                key: 'flags.midi-qol.advantage.save.con',
-                value: `(token.actor.items.get('${item.id}')?.system.uses.value ?? 0) > 0`,
-                mode: 0,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.advantage.deathSave',
-                value: `(token.actor.items.get('${item.id}')?.system.uses.value ?? 0) > 0`,
-                mode: 0,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.advantage.save.con',
+                    value: `(token.actor.items.get('${item.id}')?.system.uses.value ?? 0) > 0`,
+                    type: 'custom',
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.advantage.deathSave',
+                    value: `(token.actor.items.get('${item.id}')?.system.uses.value ?? 0) > 0`,
+                    type: 'custom',
+                    priority: 20
+                }
+            ]
+        },
         'flags.chris-premades.info.identifier': 'tokensOfTheDeparted'
     };
     if (existing) await genericUtils.update(existing, effectData);

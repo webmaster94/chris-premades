@@ -7,14 +7,14 @@ async function cast({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
+        system: {changes: [
             {
                 key: 'system.attributes.death.roll.mode',
                 value: 1,
-                mode: 2,
+                type: 'add',
                 priority: 20
             }
-        ]
+        ]}
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['deathArmorEffect']);
     await effectUtils.createEffect(target, effectData, {identifier: 'deathArmorEffect', rules: 'modern'});

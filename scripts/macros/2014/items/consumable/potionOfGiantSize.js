@@ -8,38 +8,40 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.actor.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
-            {
-                key: 'system.abilities.str.value',
-                mode: 4,
-                value: 25,
-                priority: 20
-            },
-            {
-                key: 'system.attributes.hp.tempmax',
-                mode: 5,
-                value: actor.system.attributes.hp.max,
-                priority: 21
-            },
-            {
-                key: 'flags.midi-qol.range.mwak',
-                mode: 2,
-                value: 5,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.range.msak',
-                mode: 2,
-                value: 5,
-                priority: 20
-            },
-            {
-                key: 'system.traits.size',
-                mode: 5,
-                value: 'huge',
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'system.abilities.str.value',
+                    type: 'upgrade',
+                    value: 25,
+                    priority: 20
+                },
+                {
+                    key: 'system.attributes.hp.tempmax',
+                    type: 'override',
+                    value: actor.system.attributes.hp.max,
+                    priority: 21
+                },
+                {
+                    key: 'flags.midi-qol.range.mwak',
+                    type: 'add',
+                    value: 5,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.range.msak',
+                    type: 'add',
+                    value: 5,
+                    priority: 20
+                },
+                {
+                    key: 'system.traits.size',
+                    type: 'override',
+                    value: 'huge',
+                    priority: 20
+                }
+            ]
+        }
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['potionOfGiantSize']);
     effectUtils.addMacro(effectData, 'effect', ['potionOfGiantSize']);

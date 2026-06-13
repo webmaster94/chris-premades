@@ -5,14 +5,16 @@ async function use({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        changes: [
-            {
-                key: 'system.traits.di.value',
-                mode: 2,
-                value: 'healing',
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.traits.di.value',
+                    type: 'add',
+                    value: 'healing',
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 showIcon: true,
@@ -47,7 +49,7 @@ async function turnStart({trigger: {entity: effect}}) {
     let currActor = combatUtils.getCurrentCombatantToken().actor;
     let originActor = (await effectUtils.getOriginItem(effect))?.parent;
     if (originActor !== currActor) return;
-    await genericUtils.update(effect, {changes: []});
+    await genericUtils.update(effect, {'system.changes': []});
 }
 export let chillTouch = {
     name: 'Chill Touch',

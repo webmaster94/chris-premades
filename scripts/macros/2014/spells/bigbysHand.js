@@ -186,7 +186,11 @@ async function late({workflow}) {
             img: workflow.item.img,
             origin: workflow.item.uuid,
             duration: {
-                seconds: 60
+                value: 60,
+                units: 'seconds'
+            },
+            start: {
+                time: game.time?.worldTime ?? 0
             }
         };
         let effect = await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'bigbysHandInterposingSource'});
@@ -215,7 +219,11 @@ async function late({workflow}) {
             img: feature.img,
             origin: workflow.item.uuid,
             duration: {
-                seconds: 60
+                value: 60,
+                units: 'seconds'
+            },
+            start: {
+                time: game.time?.worldTime ?? 0
             }
         };
         let effect = await effectUtils.createEffect(workflow.actor, effectData, {
@@ -248,9 +256,15 @@ async function otherEarly({trigger, workflow}) {
         img: 'icons/environment/settlement/fence-wooden-picket.webp',
         origin: trigger.entity.uuid,
         duration: {
-            seconds: 1
+            value: 1,
+            units: 'seconds'
         },
-        changes: [],
+        start: {
+            time: game.time?.worldTime ?? 0
+        },
+        system: {
+            changes: []
+        },
         flags: {
             'chris-premades': {
                 effect: {
@@ -266,14 +280,14 @@ async function otherEarly({trigger, workflow}) {
     } else
     */
     if (effectUtils.getEffectByIdentifier(targetActor, 'halfCover')) return;
-    effectData.changes.push({
+    effectData.system.changes.push({
         key: 'system.attributes.ac.bonus',
-        mode: 2,
+        type: 'add',
         value: 2,
         priority: 20
     }, {
         key: 'system.abilities.dex.bonuses.save',
-        mode: 2,
+        type: 'add',
         value: 2,
         priority: 20
     });

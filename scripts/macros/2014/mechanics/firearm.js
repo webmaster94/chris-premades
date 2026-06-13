@@ -15,37 +15,42 @@ async function misfire({trigger, workflow}) {
         name: genericUtils.translate('CHRISPREMADES.Firearm.Damaged'),
         img: workflow.item.img,
         origin: workflow.actor.uuid,
-        changes: [
-            {
-                key: 'name',
-                mode: 5,
-                value: '{} (' + genericUtils.translate('CHRISPREMADES.Firearm.Damaged') + ')',
-                priority: 20
-            },
-            {
-                key: 'flags.chris-premades.config.status',
-                mode: 5,
-                value: 1,
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'name',
+                    type: 'override',
+                    value: '{} (' + genericUtils.translate('CHRISPREMADES.Firearm.Damaged') + ')',
+                    priority: 20
+                },
+                {
+                    key: 'flags.chris-premades.config.status',
+                    type: 'override',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        }
     };
     await itemUtils.enchantItem(workflow.item, damagedEnchant, {identifier: 'damaged'});
     let effectData = {
         img: constants.tempConditionIcon,
         origin: workflow.item.uuid,
         duration: {
-            seconds: 1
+            value: 1,
+            units: 'seconds'
         },
         name: genericUtils.translate('CHRISPREMADES.Firearm.Misfire'),
-        changes: [
-            {
-                key: 'flags.midi-qol.fail.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.fail.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [
@@ -176,16 +181,22 @@ async function late({workflow}) {
                 img: hemorrhagingCritical.img,
                 origin: hemorrhagingCritical.uuid,
                 duration: {
-                    seconds: 12
+                    value: 12,
+                    units: 'seconds'
                 },
-                changes: [
-                    {
-                        key: 'flags.midi-qol.OverTime',
-                        mode: 0,
-                        value: 'turn=end,damageRoll=' + damage + ',damageType=' + workflow.defaultDamageType + ',label=' + hemorrhagingCritical.name,
-                        priority: 20
-                    }
-                ],
+                start: {
+                    time: game.time?.worldTime ?? 0
+                },
+                system: {
+                    changes: [
+                        {
+                            key: 'flags.midi-qol.OverTime',
+                            type: 'custom',
+                            value: 'turn=end,damageRoll=' + damage + ',damageType=' + workflow.defaultDamageType + ',label=' + hemorrhagingCritical.name,
+                            priority: 20
+                        }
+                    ]
+                },
                 flags: {
                     dae: {
                         specialDuration: [
@@ -243,20 +254,22 @@ async function repair({workflow}) {
             name: genericUtils.translate('CHRISPREMADES.Firearm.Broken'),
             img: weapon.img,
             origin: workflow.actor.uuid,
-            changes: [
-                {
-                    key: 'name',
-                    mode: 5,
-                    value: '{} (' + genericUtils.translate('CHRISPREMADES.Firearm.Broken') + ')',
-                    priority: 20
-                },
-                {
-                    key: 'flags.chris-premades.config.status',
-                    mode: 5,
-                    value: 2,
-                    priority: 20
-                }
-            ]
+            system: {
+                changes: [
+                    {
+                        key: 'name',
+                        type: 'override',
+                        value: '{} (' + genericUtils.translate('CHRISPREMADES.Firearm.Broken') + ')',
+                        priority: 20
+                    },
+                    {
+                        key: 'flags.chris-premades.config.status',
+                        type: 'override',
+                        value: 2,
+                        priority: 20
+                    }
+                ]
+            }
         };
         content = genericUtils.format('CHRISPREMADES.Firearm.RepairFailure', {weaponName: weapon.name});
         await itemUtils.enchantItem(weapon, brokenEffectData, {identifier: 'broken'});

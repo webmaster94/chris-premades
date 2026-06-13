@@ -39,12 +39,14 @@ async function rest({trigger: {entity: item}, actor}) {
         name: item.name,
         img: item.img,
         origin: item.uuid,
-        changes: [{
-            key: `system.${selection.id}.value`,
-            value: 1,
-            mode: 4,
-            priority: 20
-        }],
+        system: {
+            changes: [{
+                key: `system.${selection.id}.value`,
+                value: 1,
+                type: 'upgrade',
+                priority: 20
+            }]
+        },
         flags: { dae: {
             stackable: 'noneName'
         }}

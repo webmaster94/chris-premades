@@ -46,20 +46,20 @@ async function use({trigger, workflow}) {
 async function attack({trigger, workflow}) {
     if (!workflow.activity || !workflow.item) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'crownOfStarsEffect');
-    if (!effect) return;
+    if (!effect || effect.duration?.expired || effect.disabled) return;
     let uses = workflow.actor.items.get(workflow.item.id).system.activities.get(workflow.activity.id).uses.value;
     if (uses > 3) return;
     if (!uses) {
         await genericUtils.remove(effect);
         return;
     }
-    if (Number(effect.changes[0].value) === 30) return;
+    if (Number(effect.system.changes[0].value) === 30) return;
     await genericUtils.update(effect, {
-        changes: [
+        'system.changes': [
             {
                 key: 'ATL.light.dim',
                 value: 30,
-                mode: 4
+                type: 'upgrade'
             }
         ]
     });

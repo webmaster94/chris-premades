@@ -13,20 +13,22 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
-            {
-                key: 'flags.midi-qol.advantage.check.str',
-                mode: 5,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.advantage.save.str',
-                mode: 5,
-                value: 1,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.advantage.check.str',
+                    type: 'override',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.advantage.save.str',
+                    type: 'override',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 giantsMight: {
@@ -48,9 +50,9 @@ async function use({workflow}) {
             });
             genericUtils.setProperty(effectData, 'flags.chris-premades.effect.sizeAnimation', false);
         } else {
-            effectData.changes.push({
+            effectData.system.changes.push({
                 key: 'system.traits.size',
-                mode: 5,
+                type: 'override',
                 value: canBeHuge ? 'huge' : 'lg',
                 priority: 20
             });

@@ -15,38 +15,40 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
-            {
-                key: 'flags.midi-qol.advantage.check.str',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.advantage.save.str',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'system.bonuses.mwak.damage',
-                mode: 2,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'system.bonuses.msak.damage',
-                mode: 2,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'system.traits.dr.custom',
-                mode: 0,
-                value: 'non-silver-physical',
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.advantage.check.str',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.advantage.save.str',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'system.bonuses.mwak.damage',
+                    type: 'add',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'system.bonuses.msak.damage',
+                    type: 'add',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'system.traits.dr.custom',
+                    type: 'custom',
+                    value: 'non-silver-physical',
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 showIcon: true,
@@ -63,10 +65,10 @@ async function use({workflow}) {
             }
         }
     };
-    if (workflow.actor.armor?.system.type?.value !== 'heavy') effectData.changes.push(
+    if (workflow.actor.armor?.system.type?.value !== 'heavy') effectData.system.changes.push(
         {
             key: 'system.attributes.ac.bonus',
-            mode: 2,
+            type: 'add',
             value: 1,
             priority: 20
         }
@@ -76,14 +78,14 @@ async function use({workflow}) {
     let attackActivityId = Object.keys(weaponData.system.activities)[0];
     if (classLevel >= 18) {
         weaponData.system.activities[attackActivityId].attack.bonus = '+3';
-        effectData.changes[2].value = 3;
-        effectData.changes[3].value = 3;
+        effectData.system.changes[2].value = 3;
+        effectData.system.changes[3].value = 3;
         weaponData.system.damage.base.denomination = 8;
         delete effectData.duration;
     } else if (classLevel >= 11) {
         weaponData.system.activities[attackActivityId].attack.bonus = '+2';
-        effectData.changes[2].value = 2;
-        effectData.changes[3].value = 2;
+        effectData.system.changes[2].value = 2;
+        effectData.system.changes[3].value = 2;
         weaponData.system.damage.base.denomination = 8;
     } else if (classLevel >= 7) {
         weaponData.system.activities[attackActivityId].attack.bonus = '+1';
@@ -165,27 +167,31 @@ async function turnStart({trigger: {entity: effect, token}}) {
         effectData = {
             name: genericUtils.translate('CHRISPREMADES.GenericEffects.ConditionFailure'),
             img: constants.tempConditionIcon,
-            changes: [
-                {
-                    key: 'flags.midi-qol.fail.ability.save.wis',
-                    mode: 0,
-                    value: 1,
-                    priority: 21
-                }
-            ]
+            system: {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.fail.ability.save.wis',
+                        type: 'custom',
+                        value: 1,
+                        priority: 21
+                    }
+                ]
+            }
         };
     } else if (bloodlustAdv) {
         effectData = {
             name: genericUtils.translate('CHRISPREMADES.GenericEffects.ConditionAdvantage'),
             img: constants.tempConditionIcon,
-            changes: [
-                {
-                    key: 'flags.midi-qol.advantage.save.wis',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ]
+            system: {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.advantage.save.wis',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            }
         };
     }
     if (effectData) {

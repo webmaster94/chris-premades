@@ -14,14 +14,16 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
-            {
-                key: 'system.skills.' + selection + '.value',
-                mode: 4,
-                value: 1,
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'system.skills.' + selection + '.value',
+                    type: 'upgrade',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        }
     };
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'borrowedKnowledge');
     if (effect) await genericUtils.remove(effect);

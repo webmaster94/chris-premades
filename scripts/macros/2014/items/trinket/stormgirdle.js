@@ -3,35 +3,37 @@ async function use({trigger, workflow}) {
     if (!itemUtils.getEquipmentState(workflow.item)) return;
     let effectData = {
         name: workflow.item.name + ': ' + genericUtils.translate('CHRISPREMADES.Macros.Stormgridle.Avatar'),
-        changes: [
-            {
-                key: 'system.traits.di.value',
-                mode: 2,
-                value: 'lightning',
-                priority: 20
-            },
-            {
-                key: 'system.traits.di.value',
-                mode: 2,
-                value: 'thunder',
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.traits.di.value',
+                    type: 'add',
+                    value: 'lightning',
+                    priority: 20
+                },
+                {
+                    key: 'system.traits.di.value',
+                    type: 'add',
+                    value: 'thunder',
+                    priority: 20
+                }
+            ]
+        },
         img: workflow.item.img,
         duration: itemUtils.convertDuration(workflow.activity)
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['stormAvatar']);
     let identifier = genericUtils.getIdentifier(workflow.item);
     if (identifier === 'stormgirdleA' || identifier === 'stormgirdleE') {
-        effectData.changes.push({
+        effectData.system.changes.push({
             key: 'system.attributes.movement.fly',
-            mode: 4,
+            type: 'upgrade',
             value: 30,
             priority: 20
         });
-        effectData.changes.push({
+        effectData.system.changes.push({
             key: 'system.attributes.movement.hover',
-            mode: 5,
+            type: 'override',
             value: 1,
             priority: 20
         });

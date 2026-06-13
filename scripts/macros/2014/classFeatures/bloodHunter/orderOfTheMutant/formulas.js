@@ -27,383 +27,455 @@ async function use({workflow}) {
     let identifier = genericUtils.getIdentifier(workflow.item);
     switch (identifier) {
         case 'formulaAether':
-            positiveEffectData.changes = [
-                {
-                    key: 'system.attributes.movement.fly',
-                    mode: 4,
-                    value: 20,
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.disadvantage.check.str',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                },
-                {
-                    key: 'flags.midi-qol.disadvantage.check.dex',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.attributes.movement.fly',
+                        type: 'upgrade',
+                        value: 20,
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.check.str',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    },
+                    {
+                        key: 'flags.midi-qol.disadvantage.check.dex',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
             positiveEffectData.duration = itemUtils.convertDuration(workflow.activity);
             negativeEffectData.duration = itemUtils.convertDuration(workflow.activity);
             break;
         case 'formulaAlluring':
-            positiveEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.advantage.check.cha',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [
-                {
-                    key: 'flags.dnd5e.flags.dnd5e.initiativeDisadv',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.advantage.check.cha',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.dnd5e.flags.dnd5e.initiativeDisadv',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaCelerity':
-            positiveEffectData.changes = [
-                {
-                    key: 'system.abilities.dex.value',
-                    mode: 2,
-                    value: classLevel >= 18 ? 5 : (classLevel >= 11 ? 4 : 3),
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.disadvantage.save.wis',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.abilities.dex.value',
+                        type: 'add',
+                        value: classLevel >= 18 ? 5 : (classLevel >= 11 ? 4 : 3),
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.save.wis',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaConversant':
-            positiveEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.advantage.check.int',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.disadvantage.check.wis',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.advantage.check.int',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.check.wis',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaCruelty':
-            positiveEffectData.changes = [];
-            negativeEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.disadvantage.save.int',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                },
-                {
-                    key: 'flags.midi-qol.disadvantage.save.wis',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                },
-                {
-                    key: 'flags.midi-qol.disadvantage.save.cha',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {changes: []};
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.save.int',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    },
+                    {
+                        key: 'flags.midi-qol.disadvantage.save.wis',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    },
+                    {
+                        key: 'flags.midi-qol.disadvantage.save.cha',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaDeftness':
-            positiveEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.advantage.check.dex',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.disadvantage.check.wis',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.advantage.check.dex',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.check.wis',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaEmbers':
-            positiveEffectData.changes = [
-                {
-                    key: 'system.traits.dr.value',
-                    mode: 2,
-                    value: 'fire',
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [
-                {
-                    key: 'system.traits.dv.value',
-                    mode: 2,
-                    value: 'cold',
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.traits.dr.value',
+                        type: 'add',
+                        value: 'fire',
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.traits.dv.value',
+                        type: 'add',
+                        value: 'cold',
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaGelid':
-            positiveEffectData.changes = [
-                {
-                    key: 'system.traits.dr.value',
-                    mode: 2,
-                    value: 'cold',
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [
-                {
-                    key: 'system.traits.dv.value',
-                    mode: 2,
-                    value: 'fire',
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.traits.dr.value',
+                        type: 'add',
+                        value: 'cold',
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.traits.dv.value',
+                        type: 'add',
+                        value: 'fire',
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaImpermeable':
-            positiveEffectData.changes = [
-                {
-                    key: 'system.traits.dr.value',
-                    mode: 2,
-                    value: 'piercing',
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [
-                {
-                    key: 'system.traits.dv.value',
-                    mode: 2,
-                    value: 'slashing',
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.traits.dr.value',
+                        type: 'add',
+                        value: 'piercing',
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.traits.dv.value',
+                        type: 'add',
+                        value: 'slashing',
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaMobility':
-            positiveEffectData.changes = [
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.traits.ci.value',
+                        type: 'add',
+                        value: 'grappled',
+                        priority: 20
+                    },
+                    {
+                        key: 'system.traits.ci.value',
+                        type: 'add',
+                        value: 'restrained',
+                        priority: 20
+                    }
+                ]
+            };
+            if (classLevel >= 11) positiveEffectData.system.changes.push(
                 {
                     key: 'system.traits.ci.value',
-                    mode: 2,
-                    value: 'grappled',
-                    priority: 20
-                },
-                {
-                    key: 'system.traits.ci.value',
-                    mode: 2,
-                    value: 'restrained',
-                    priority: 20
-                }
-            ];
-            if (classLevel >= 11) positiveEffectData.changes.push(
-                {
-                    key: 'system.traits.ci.value',
-                    mode: 2,
+                    type: 'add',
                     value: 'paralyzed',
                     priority: 20
                 }
             );
-            negativeEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.disadvantage.check.str',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.check.str',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaNighteye':
-            positiveEffectData.changes = [
-                {
-                    key: 'system.attributes.senses.darkvision',
-                    mode: 4,
-                    value: (workflow.actor.system.attributes.senses.darkvision ?? 0) + 60,
-                    priority: 30
-                },
-                {
-                    key: 'ATL.sight.range',
-                    mode: 2,
-                    value: (workflow.actor.system.attributes.senses.darkvision ?? 0) + 60,
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.attributes.senses.ranges.darkvision',
+                        type: 'upgrade',
+                        value: (workflow.actor.system.attributes.senses.ranges.darkvision ?? 0) + 60,
+                        priority: 30
+                    },
+                    {
+                        key: 'ATL.sight.range',
+                        type: 'add',
+                        value: (workflow.actor.system.attributes.senses.ranges.darkvision ?? 0) + 60,
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {changes: []};
             effectUtils.addMacro(negativeEffectData, 'midi.actor', ['formulaNighteye']);
             effectUtils.addMacro(positiveEffectData, 'skill', ['formulaNighteye']);
             break;
         case 'formulaPercipient':
-            positiveEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.advantage.check.wis',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.disadvantage.check.cha',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.advantage.check.wis',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.check.cha',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaPotency':
-            positiveEffectData.changes = [
-                {
-                    key: 'system.abilities.str.value',
-                    mode: 2,
-                    value: classLevel >= 18 ? 5 : (classLevel >= 11 ? 4 : 3),
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.disadvantage.save.dex',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.abilities.str.value',
+                        type: 'add',
+                        value: classLevel >= 18 ? 5 : (classLevel >= 11 ? 4 : 3),
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.save.dex',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaPrecision':
-            positiveEffectData.changes = [
-                {
-                    key: 'flags.dnd5e.weaponCriticalThreshold',
-                    mode: 5,
-                    value: 19,
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.disadvantage.save.str',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.dnd5e.weaponCriticalThreshold',
+                        type: 'override',
+                        value: 19,
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.save.str',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaRapidity':
-            positiveEffectData.changes = [
-                {
-                    key: 'system.attributes.movement.all',
-                    mode: 0,
-                    value: '+' + (classLevel >= 15 ? '15' : '10'),
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.disadvantage.check.int',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.attributes.movement.all',
+                        type: 'custom',
+                        value: '+' + (classLevel >= 15 ? '15' : '10'),
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.check.int',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaReconstruction':
-            positiveEffectData.changes = [];
+            positiveEffectData.system = {changes: []};
             effectUtils.addMacro(positiveEffectData, 'combat', ['formulaReconstruction']);
-            negativeEffectData.changes = [
-                {
-                    key: 'system.attributes.movement.all',
-                    mode: 0,
-                    value: '-10',
-                    priority: 20
-                }
-            ];
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.attributes.movement.all',
+                        type: 'custom',
+                        value: '-10',
+                        priority: 20
+                    }
+                ]
+            };
             positiveEffectData.duration = itemUtils.convertDuration(workflow.activity);
             negativeEffectData.duration = itemUtils.convertDuration(workflow.activity);
             break;
         case 'formulaSagacity':
-            positiveEffectData.changes = [
-                {
-                    key: 'system.abilities.int.value',
-                    mode: 2,
-                    value: classLevel >= 18 ? 5 : (classLevel >= 11 ? 4 : 3),
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.disadvantage.save.cha',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.abilities.int.value',
+                        type: 'add',
+                        value: classLevel >= 18 ? 5 : (classLevel >= 11 ? 4 : 3),
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.save.cha',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaShielded':
-            positiveEffectData.changes = [
-                {
-                    key: 'system.traits.dr.value',
-                    mode: 2,
-                    value: 'slashing',
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [
-                {
-                    key: 'system.traits.dv.value',
-                    mode: 2,
-                    value: 'bludgeoning',
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.traits.dr.value',
+                        type: 'add',
+                        value: 'slashing',
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.traits.dv.value',
+                        type: 'add',
+                        value: 'bludgeoning',
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaUnbreakable':
-            positiveEffectData.changes = [
-                {
-                    key: 'system.traits.dr.value',
-                    mode: 2,
-                    value: 'bludgeoning',
-                    priority: 20
-                }
-            ];
-            negativeEffectData.changes = [
-                {
-                    key: 'system.traits.dv.value',
-                    mode: 2,
-                    value: 'piercing',
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.traits.dr.value',
+                        type: 'add',
+                        value: 'bludgeoning',
+                        priority: 20
+                    }
+                ]
+            };
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'system.traits.dv.value',
+                        type: 'add',
+                        value: 'piercing',
+                        priority: 20
+                    }
+                ]
+            };
             break;
         case 'formulaVermillion': {
             let feature = itemUtils.getItemByIdentifier(workflow.actor, 'bloodMaledict');
             if (feature) await genericUtils.update(feature, {'system.uses.spent': feature.system.uses.spent - 1});
-            positiveEffectData.changes = [];
-            negativeEffectData.changes = [
-                {
-                    key: 'flags.midi-qol.disadvantage.deathSave',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ];
+            positiveEffectData.system = {changes: []};
+            negativeEffectData.system = {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.deathSave',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            };
             break;
         }
     }

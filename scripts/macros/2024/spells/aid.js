@@ -5,14 +5,14 @@ async function use({trigger, workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'system.attributes.hp.tempmax',
-                mode: 2,
+                type: 'add',
                 value: 5 * (workflowUtils.getCastLevel(workflow) - 1),
                 priority: 20
             }
-        ],
+        ]},
         origin: workflow.item.uuid
     };
     await Promise.all(workflow.targets.map(async token => {

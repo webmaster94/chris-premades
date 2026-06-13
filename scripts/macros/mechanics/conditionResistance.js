@@ -9,17 +9,15 @@ let validKeys = [
 let effectData = {
     name: 'Condition Advantage',
     img: constants.tempConditionIcon,
-    duration: {
-        turns: 1
-    },
-    changes: [
+    duration: {value: 1, units: 'turns'}, start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0},
+    system: {changes: [
         {
             key: 'flags.midi-qol.advantage.save.all',
             value: '1',
-            mode: 5,
+            type: 'override',
             priority: 120
         }
-    ]
+    ]}
 };
 async function preambleComplete(workflow) {
     if (!workflow.targets.size || !workflow.item) return;
@@ -28,9 +26,9 @@ async function preambleComplete(workflow) {
     if (workflow.workflowOptions.isOverTime) {
         try {
             let effects = actorUtils.getEffects(workflow.targets.first().actor);
-            let effect = effects.find(i => i.changes.find(j => j.key === 'flags.midi-qol.OverTime' && j.value.includes(workflow.item.name))) ?? effects.find(i => i.name === workflow.item.name && i.changes.find(j => j.key === 'flags.midi-qol.OverTime'));
+            let effect = effects.find(i => i.system.changes.find(j => j.key === 'flags.midi-qol.OverTime' && j.value.includes(workflow.item.name))) ?? effects.find(i => i.name === workflow.item.name && i.system.changes.find(j => j.key === 'flags.midi-qol.OverTime'));
             if (effect) {
-                effect.changes.forEach(element => {
+                effect.system.changes.forEach(element => {
                     if (validKeys.includes(element.key)) activityConditions.add(element.value.toLowerCase());
                 });
                 let effectConditions = effect.flags['chris-premades']?.conditions;

@@ -45,7 +45,7 @@ async function beginning({trigger, workflow}) {
     let sourceEffect = workflow.activity.effects[0]?.effect;
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
-    effectData.changes[0].value = workflow.utilityRolls[0].total;
+    effectData.system.changes[0].value = workflow.utilityRolls[0].total;
     effectData.duration = itemUtils.convertDuration(workflow.activity);
     effectData.origin = sourceEffect.uuid;
     await effectUtils.createEffect(workflow.actor, effectData);
@@ -68,8 +68,9 @@ async function chaos({trigger, workflow}) {
     let sourceEffect = workflow.activity.effects[0]?.effect;
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
-    effectData.changes[0].value = type;
-    effectData.duration = {seconds: workflow.utilityRolls[0].total * 86400};
+    effectData.system.changes[0].value = type;
+    effectData.duration = {value: workflow.utilityRolls[0].total * 86400, units: 'seconds'};
+    effectData.start = {time: game.time?.worldTime ?? 0};
     effectData.origin = sourceEffect.uuid;
     await effectUtils.createEffect(workflow.actor, effectData);
 }
@@ -111,14 +112,15 @@ async function end({trigger, workflow}) {
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.duration = itemUtils.convertDuration(workflow.activity);
     effectData.origin = sourceEffect.uuid;
-    effectData.changes[0].value = delta;
+    effectData.system.changes[0].value = delta;
     await effectUtils.createEffect(workflow.actor, effectData);
 }
 async function isolation({trigger, workflow}) {
     let sourceEffect = workflow.activity.effects[0]?.effect;
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
-    effectData.duration = {seconds: workflow.utilityRolls[0].total * 60};
+    effectData.duration = {value: workflow.utilityRolls[0].total * 60, units: 'seconds'};
+    effectData.start = {time: game.time?.worldTime ?? 0};
     effectData.origin = sourceEffect.uuid;
     await effectUtils.createEffect(workflow.actor, effectData);
 }
@@ -194,8 +196,9 @@ async function order({trigger, workflow}) {
     let sourceEffect = workflow.activity.effects[0]?.effect;
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
-    effectData.changes[0].value = type;
-    effectData.duration = {seconds: workflow.utilityRolls[0].total * 86400};
+    effectData.system.changes[0].value = type;
+    effectData.duration = {value: workflow.utilityRolls[0].total * 86400, units: 'seconds'};
+    effectData.start = {time: game.time?.worldTime ?? 0};
     effectData.origin = sourceEffect.uuid;
     await effectUtils.createEffect(workflow.actor, effectData);
 }
@@ -231,18 +234,18 @@ async function vulture({trigger, workflow}) {
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.duration = itemUtils.convertDuration(workflow.activity);
     effectData.origin = sourceEffect.uuid;
-    effectData.changes = [
+    effectData.system.changes = [
         {
             key: 'name',
             value: genericUtils.translate('CHRISPREMADES.Macros.DeckOfWonder.Vulture.Lost'),
-            mode: 5,
+            type: 'override',
             priority: 50
         }
     ];
-    if (selection.system.equipped) effectData.changes.push({
+    if (selection.system.equipped) effectData.system.changes.push({
         key: 'system.equipped',
         value: 0,
-        mode: 5,
+        type: 'override',
         priority: 50
     });
     await itemUtils.enchantItem(selection, effectData, {parentEntity: effect});

@@ -6,26 +6,28 @@ async function use({workflow}) {
         img: workflow.item.img,
         duration: itemUtils.convertDuration(workflow.activity),
         origin: workflow.item.uuid,
-        changes: [
-            {
-                key: 'system.traits.dr.value',
-                mode: 2,
-                value: 'lightning',
-                priority: 20
-            },
-            {
-                key: 'system.traits.dr.value',
-                mode: 2,
-                value: 'thunder',
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.grants.disadvantage.attack.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.traits.dr.value',
+                    type: 'add',
+                    value: 'lightning',
+                    priority: 20
+                },
+                {
+                    key: 'system.traits.dr.value',
+                    type: 'add',
+                    value: 'thunder',
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.grants.disadvantage.attack.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [

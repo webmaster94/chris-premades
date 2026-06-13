@@ -2,11 +2,12 @@ import {effectUtils, genericUtils, workflowUtils} from '../../../../../utils.js'
 async function attack({trigger: {entity: item}, workflow}) {
     if (!workflowUtils.isAttackType(workflow, 'attack') || !workflow.actor || !workflow.targets.size) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.targets.first().actor, 'balefulInterdictEffect');
-    if (!effect) return;
+    if (!effect || effect.duration?.expired || effect.disabled) return;
     let sourceEffect = item.effects.contents?.[0];
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
-    effectData.duration = {seconds: 1};
+    effectData.duration = {value: 1, units: 'seconds'};
+    effectData.start = {time: game.time?.worldTime ?? 0};
     effectData.origin = sourceEffect.uuid;
     await effectUtils.createEffect(workflow.targets.first().actor, effectData, {animate: false});
 }

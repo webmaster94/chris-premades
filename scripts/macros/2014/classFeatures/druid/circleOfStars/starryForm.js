@@ -26,94 +26,96 @@ async function use({workflow}) {
                 rules: genericUtils.getRules(workflow.item)
             }
         },
-        changes: [
-            {
-                key: 'ATL.light.bright',
-                value: 10,
-                mode: 4,
-                priority: 20
-            },
-            {
-                key: 'ATL.light.dim',
-                value: 20,
-                mode: 4,
-                priority: 20
-            },
-            {
-                key: 'ATL.light.color',
-                value: '#ffffff',
-                mode: 5,
-                priority: 20
-            },
-            {
-                key: 'ATL.light.alpha',
-                value: 0.25,
-                mode: 5,
-                priority: 20
-            },
-            {
-                key: 'ATL.light.animation',
-                value: '{type: \'starlight\', speed: 1, intensity: 3}',
-                mode: 5,
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'ATL.light.bright',
+                    value: 10,
+                    type: 'upgrade',
+                    priority: 20
+                },
+                {
+                    key: 'ATL.light.dim',
+                    value: 20,
+                    type: 'upgrade',
+                    priority: 20
+                },
+                {
+                    key: 'ATL.light.color',
+                    value: '#ffffff',
+                    type: 'override',
+                    priority: 20
+                },
+                {
+                    key: 'ATL.light.alpha',
+                    value: 0.25,
+                    type: 'override',
+                    priority: 20
+                },
+                {
+                    key: 'ATL.light.animation',
+                    value: '{type: \'starlight\', speed: 1, intensity: 3}',
+                    type: 'override',
+                    priority: 20
+                }
+            ]
+        }
     };
     if (tier === 3) {
-        effectData.changes.push(
+        effectData.system.changes.push(
             {
                 key: 'system.traits.dr.value',
                 value: 'slashing',
-                mode: 2,
+                type: 'add',
                 priority: 20
-            }, 
+            },
             {
                 key: 'system.traits.dr.value',
                 value: 'piercing',
-                mode: 2,
+                type: 'add',
                 priority: 20
             },
             {
                 key: 'system.traits.dr.value',
                 value: 'bludgeoning',
-                mode: 2,
+                type: 'add',
                 priority: 20
             }
         );
     }
     if (activityIdentifier === 'starryFormDragon') {
-        effectData.changes.push(
+        effectData.system.changes.push(
             {
                 key: 'system.abilities.wis.check.roll.min',
                 value: 10,
-                mode: 4,
+                type: 'upgrade',
                 priority: 20
             },
             {
                 key: 'system.abilities.int.check.roll.min',
                 value: 10,
-                mode: 4,
+                type: 'upgrade',
                 priority: 20
             },
             {
                 key: 'system.attributes.concentration.roll.min',
                 value: 10,
-                mode: 4,
+                type: 'upgrade',
                 priority: 20
             }
         );
         if (tier > 1) {
-            effectData.changes.push(
+            effectData.system.changes.push(
                 {
                     key: 'system.attributes.movement.fly',
                     value: 20,
-                    mode: 4,
+                    type: 'upgrade',
                     priority: 20
                 },
                 {
                     key: 'system.attributes.movement.hover',
                     value: 1,
-                    mode: 5,
+                    type: 'override',
                     priority: 20
                 }
             );

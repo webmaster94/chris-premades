@@ -85,23 +85,21 @@ async function dialog(workflow, targetToken, effect) {
         name: genericUtils.translate('CHRISPREMADES.Macros.HeatMetal.Held'),
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        duration: {
-            seconds: 12
-        },
-        changes: [
+        duration: {value: 12, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
+        system: {changes: [
             {
                 key: 'flags.midi-qol.disadvantage.attack.all',
                 value: 1,
-                mode: 0,
+                type: 'custom',
                 priority: 20
             },
             {
                 key: 'flags.midi-qol.disadvantage.ability.all',
                 value: 1,
-                mode: 0,
+                type: 'custom',
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             dae: {
                 specialDuration: [

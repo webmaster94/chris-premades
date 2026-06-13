@@ -33,32 +33,32 @@ async function use({trigger, workflow}) {
             img: workflow.item.img,
             origin: workflow.item.uuid,
             duration: itemUtils.convertDuration(workflow.item),
-            changes: [
+            system: {changes: [
                 {
                     key: 'name',
-                    mode: 5,
+                    type: 'override',
                     value: selectedWeapon.name + ' (' + CONFIG.DND5E.damageTypes[selection].label + ')',
                     priority: 20
                 },
                 {
                     key: 'system.properties',
-                    mode: 2,
+                    type: 'add',
                     value: 'mgc',
                     priority: 20
                 },
                 {
                     key: 'system.attack.bonus',
-                    mode: 5,
+                    type: 'override',
                     value: '+ ' + bonus,
                     priority: 20
                 },
                 {
                     key: 'system.damage.parts',
-                    mode: 2,
+                    type: 'add',
                     value: JSON.stringify([[formula, selection]]),
                     priority: 20
                 }
-            ]
+            ]}
         };
         await itemUtils.enchantItem(selectedWeapon, effectData, {concentrationItem: workflow.item});
     }

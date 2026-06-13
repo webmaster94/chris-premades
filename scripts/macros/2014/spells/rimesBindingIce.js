@@ -116,14 +116,14 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'system.attributes.movement.all',
-                mode: 0,
+                type: 'custom',
                 value: '*0',
                 priority: 20
             }
-        ]
+        ]}
     };
     effectUtils.addMacro(effectData, 'effect', ['rimesBindingIceFrozen']);
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.jb2aCheck() === 'patreon';

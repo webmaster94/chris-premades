@@ -92,14 +92,16 @@ async function onHit({trigger: {entity: item, token}, workflow}) {
                     name: genericUtils.translate('CHRISPREMADES.Macros.Regeneration.Dead'),
                     img: CONFIG.DND5E.statusEffects.dead.icon,
                     origin: item.uuid,
-                    changes: [
-                        {
-                            key: 'system.traits.ci.value',
-                            mode: 2,
-                            value: 'dead',
-                            priority: 20
-                        }
-                    ],
+                    system: {
+                        changes: [
+                            {
+                                key: 'system.traits.ci.value',
+                                type: 'add',
+                                value: 'dead',
+                                priority: 20
+                            }
+                        ]
+                    },
                     flags: {
                         'chris-premades': {
                             conditions: ['prone'],

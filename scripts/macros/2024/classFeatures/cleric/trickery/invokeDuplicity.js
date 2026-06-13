@@ -96,17 +96,15 @@ async function spell({trigger, workflow}) {
         name: workflow.activity.name,
         img: workflow.activity.img,
         origin: workflow.item.uuid,
-        duration: {
-            seconds: 1
-        },
-        changes: [
+        duration: {value: 1, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
+        system: {changes: [
             {
                 key: 'flags.midi-qol.rangeOverride.attack.all',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             dae: {
                 specialDuration: ['1Spell']

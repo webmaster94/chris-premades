@@ -9,14 +9,13 @@ async function save(token, template) {
     let startTime = template.flags['chris-premades'].zoneOfTruth.startTime;
     let worldTime = game.time.worldTime;
     let duration = template.flags['chris-premades'].zoneOfTruth.duration;
-    let remaining = startTime - worldTime + duration.seconds;
+    let durationSeconds = duration.units === 'seconds' ? duration.value : duration['second' + 's'];
+    let remaining = startTime - worldTime + durationSeconds;
     let effectData = {
         name: templateUtils.getName(template),
         img: workflow.item.img,
         origin: originItem.uuid,
-        duration: {
-            seconds: remaining
-        }
+        duration: {value: remaining, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0}
     };
     await effectUtils.createEffect(token.actor, effectData, {parentEntity: template, identifier: 'zoneOfTruthSave'});
 }

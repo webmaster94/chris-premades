@@ -5,7 +5,7 @@ async function use({trigger: {entity: item}, workflow}) {
     if (!itemUtils.getItemByIdentifier(workflow.actor, 'potentSpellcasting')) return;
     if (workflowUtils.getCastLevel(workflow) != 0) return;
     let classIdentifier = itemUtils.getConfig(item, 'classIdentifier');
-    if (workflow.item.system.sourceClass != classIdentifier) return;
+    if (itemUtils.getSourceClassIdentifier(workflow.item) != classIdentifier) return;
     if (workflowUtils.isSustainedRoll(workflow)) return;
     let feature = activityUtils.getActivityByIdentifier(item, 'improvedPotentSpellcasting', {strict: true});
     if (!feature) return;

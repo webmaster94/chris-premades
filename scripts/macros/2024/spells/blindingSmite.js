@@ -8,14 +8,14 @@ async function use({trigger, workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'flags.midi-qol.OverTime',
-                mode: 0,
+                type: 'custom',
                 value: 'turn=end, allowIncapacitated=true, rollType=save, saveAbility=' + ability + ', saveDC=' + itemUtils.getSaveDC(workflow.item) + ', saveDamage=nodamage, saveRemove=true, saveMagic=true',
                 priority: 20
             }
-        ]
+        ]}
     };
     await Promise.all(workflow.targets.map(async token => {
         if (actorUtils.checkTrait(token.actor, 'ci', 'blinded')) return;

@@ -6,26 +6,26 @@ async function use({trigger, workflow}) {
         img: workflow.item.img,
         duration: itemUtils.convertDuration(workflow.item),
         origin: workflow.item.uuid,
-        changes: [
+        system: {changes: [
             {
                 key: 'system.traits.dr.all',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             },
             {
                 key: 'system.attributes.ac.bonus',
-                mode: 2,
+                type: 'add',
                 value: '+1',
                 priority: 20
             },
             {
                 key: 'system.bonuses.abilities.save',
-                mode: 2,
+                type: 'add',
                 value: '+1',
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             'chris-premades': {
                 wardingBond: {

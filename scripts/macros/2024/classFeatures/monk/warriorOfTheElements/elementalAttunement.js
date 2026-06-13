@@ -7,7 +7,7 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [],
+        system: {changes: []},
         flags: {
             dae: {
                 stackable: 'noneName',
@@ -17,28 +17,28 @@ async function use({workflow}) {
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['elementalAttunementElementalStrikes']);
     if (itemUtils.getItemByIdentifier(workflow.actor, 'strideOfTheElements')) {
-        effectData.changes.push(
+        effectData.system.changes.push(
             {
                 key: 'system.attributes.movement.fly',
                 value: '@attributes.movement.speed',
-                mode: 4,
+                type: 'upgrade',
                 priority: 20
             },
             {
                 key: 'system.attributes.movement.swim',
                 value: '@attributes.movement.speed',
-                mode: 4,
+                type: 'upgrade',
                 priority: 20
             }
         );
     }
     let epitome = itemUtils.getItemByIdentifier(workflow.actor, 'elementalEpitome');
     if (epitome) {
-        effectData.changes.push(
+        effectData.system.changes.push(
             {
                 key: 'system.traits.dr.value',
                 value: await chooseResistance(epitome),
-                mode: 2,
+                type: 'add',
                 priority: 20
             }
         );
@@ -63,17 +63,17 @@ async function use({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        changes: [
+        system: {changes: [
             {
                 key: 'system.range.reach',
-                mode: 4,
+                type: 'upgrade',
                 value: 15,
                 priority: 20
             }
-        ]
+        ]}
     };
     await Promise.all(items.map(async i => {
-        enchantmentData.changes[0].value = (i.system.range.reach ?? 5) + 10;
+        enchantmentData.system.changes[0].value = (i.system.range.reach ?? 5) + 10;
         await itemUtils.enchantItem(i, enchantmentData, {parentEntity: effect, strictlyInterdependent: true, identifier: 'elementalAttunementEnchantment'});
     }));
 }

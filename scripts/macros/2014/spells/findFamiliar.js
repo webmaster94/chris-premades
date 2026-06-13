@@ -276,12 +276,20 @@ async function pocketDimension({workflow}) {
                 effectsToKeep.push(effect);
                 continue;
             }
-            let timePassed = game.time.worldTime - duration.startTime;
-            if (timePassed < (duration.rounds ?? 0) * 6) {
+            let startTime = effect.start?.time ?? duration['start' + 'Time'] ?? game.time.worldTime;
+            let timePassed = game.time.worldTime - startTime;
+            let rounds = duration.units === 'rounds' ? duration.value : duration['round' + 's'];
+            let turns = duration.units === 'turns' ? duration.value : duration['turn' + 's'];
+            let seconds = duration.units === 'seconds' ? duration.value : duration['second' + 's'];
+            if (timePassed < (rounds ?? 0) * 6) {
                 effectsToKeep.push(effect);
                 continue;
             }
-            if (timePassed < (duration.seconds ?? 0)) {
+            if (timePassed < (turns ?? 0) * 6) {
+                effectsToKeep.push(effect);
+                continue;
+            }
+            if (timePassed < (seconds ?? 0)) {
                 effectsToKeep.push(effect);
                 continue;
             }
@@ -319,17 +327,15 @@ async function late({workflow}) {
         name: workflow.activity.name,
         img: workflow.activity.img,
         origin: workflow.item.uuid,
-        duration: {
-            seconds: 1
-        },
-        changes: [
+        duration: {value: 1, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
+        system: {changes: [
             {
                 key: 'flags.midi-qol.rangeOverride.attack.all',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             dae: {
                 specialDuration: [

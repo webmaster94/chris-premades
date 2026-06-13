@@ -45,20 +45,18 @@ async function manual({workflow}) {
     let effectData = {
         name: workflow.activity.name,
         img: workflow.activity.img,
-        duration: {
-            seconds: 1
-        },
+        duration: {value: 1, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
         flags: {
             dae: {
                 specialDuration: ['1Attack', 'isSave', 'isCheck', 'isInitiative']
             }
         },
-        changes: changesKeys.map(i => ({
+        system: {changes: changesKeys.map(i => ({
             key: i,
-            mode: 2,
+            type: 'add',
             value: bonus,
             priority: 20
-        }))
+        }))}
     };
     await effectUtils.createEffect(workflow.targets.first().actor, effectData);
 }

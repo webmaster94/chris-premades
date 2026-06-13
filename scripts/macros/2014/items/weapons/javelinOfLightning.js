@@ -25,8 +25,8 @@ async function early({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            seconds: 1,
-            turns: 1
+            value: 1,
+            units: 'seconds'
         }
     };
     await genericUtils.sleep(100);

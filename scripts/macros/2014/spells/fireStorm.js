@@ -28,7 +28,7 @@ async function early({workflow}) {
         let template = new game.dnd5e.canvas.AbilityTemplate(templateDoc);
         try {
             let [finalTemplate] = await template.drawPreview();
-            templates.push(finalTemplate);
+            templates.push(templateUtils.getRegionDoc(finalTemplate) ?? finalTemplate);
         } catch {/* empty */}
         if (templates.length != i + 1) break;
     }
@@ -36,7 +36,8 @@ async function early({workflow}) {
     if (!templates.length) return;
     let targets = new Set();
     for (let i of templates) {
-        let position = i.object.ray.project(0.5);
+        let shape = i.shapes?.at?.(0);
+        let position = shape ? {x: shape.x + (shape.width ?? 0) / 2, y: shape.y + (shape.height ?? 0) / 2} : templateUtils.getPosition(i);
         if (playAnimation && animationUtils.jb2aCheck()) {
             new Sequence()
                 .effect()
@@ -55,7 +56,11 @@ async function early({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            seconds: 1
+            value: 1,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         }
     };
     let effect = await effectUtils.createEffect(workflow.actor, effectData);

@@ -28,7 +28,11 @@ async function braceMeleeUse({trigger, workflow}) {
         img: trigger.entity.img,
         origin: trigger.entity.uuid,
         duration: {
-            seconds: 1
+            value: 1,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         flags: {
             dae: {
@@ -104,16 +108,22 @@ async function concussiveSmashUsed({trigger, workflow}) {
         let effectData = {
             name: genericUtils.translate('CHRISPREMADES.BG3.Dazed'),
             img: 'modules/chris-premades/images/bg3/Dazed.webp',
-            changes: [
-                {
-                    key: 'flags.midi-qol.disadvantage.save.wis',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ],
+            system: {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.save.wis',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            },
             duration: {
-                seconds: 12
+                value: 12,
+                units: 'seconds'
+            },
+            start: {
+                time: game.time?.worldTime ?? 0
             },
             origin: workflow.item.uuid
         };
@@ -130,9 +140,9 @@ async function concussiveSmashUsed({trigger, workflow}) {
             dex = token.actor.system.abilities.dex.mod;
         }
         if (dex > 0) {
-            effectData.changes.push({
+            effectData.system.changes.push({
                 key: 'system.attributes.ac.bonus',
-                mode: 2,
+                type: 'add',
                 value: -dex,
                 priority: 20
             });
@@ -159,40 +169,46 @@ async function maimingStrikeUse({trigger, workflow}) {
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.Maimed'),
         img: 'modules/chris-premades/images/bg3/Maimed.webp',
-        changes: [
-            {
-                key: 'flags.midi-qol.disadvantage.save.dex',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'system.attributes.movement.burrow',
-                mode: 3,
-                value: 0,
-                priority: 20
-            },
-            {
-                key: 'system.attributes.movement.climb',
-                mode: 3,
-                value: 0,
-                priority: 20
-            },
-            {
-                key: 'system.attributes.movement.swim',
-                mode: 3,
-                value: 0,
-                priority: 20
-            },
-            {
-                key: 'system.attributes.movement.walk',
-                mode: 3,
-                value: 0,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.disadvantage.save.dex',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'system.attributes.movement.burrow',
+                    type: 'downgrade',
+                    value: 0,
+                    priority: 20
+                },
+                {
+                    key: 'system.attributes.movement.climb',
+                    type: 'downgrade',
+                    value: 0,
+                    priority: 20
+                },
+                {
+                    key: 'system.attributes.movement.swim',
+                    type: 'downgrade',
+                    value: 0,
+                    priority: 20
+                },
+                {
+                    key: 'system.attributes.movement.walk',
+                    type: 'downgrade',
+                    value: 0,
+                    priority: 20
+                }
+            ]
+        },
         duration: {
-            seconds: 12
+            value: 12,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         origin: workflow.item.uuid,
         flags: {
@@ -243,28 +259,34 @@ async function flourishUse({trigger, workflow}) {
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.OffBalance'),
         img: 'modules/chris-premades/images/bg3/OffBalance.webp',
-        changes: [
-            {
-                key: 'flags.midi-qol.disadvantage.check.str',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.disadvantage.check.dex',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.grants.advantage.attack.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.disadvantage.check.str',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.disadvantage.check.dex',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.grants.advantage.attack.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         duration: {
-            seconds: 12
+            value: 12,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         origin: workflow.item.uuid,
         flags: {
@@ -296,16 +318,22 @@ async function heartstopperUse({trigger, workflow}) {
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.ChestTrauma'),
         img: 'modules/chris-premades/images/bg3/ChestTrauma.webp',
-        changes: [
-            {
-                key: 'flags.midi-qol.disadvantage.save.con',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.disadvantage.save.con',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         duration: {
-            seconds: 12
+            value: 12,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         origin: workflow.item.uuid,
         flags: {
@@ -337,22 +365,28 @@ async function lacerateUse({trigger, workflow}) {
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.Bleeding'),
         img: 'modules/chris-premades/images/bg3/Bleeding.webp',
-        changes: [
-            {
-                key: 'flags.midi-qol.OverTime',
-                mode: 0,
-                value: 'turn=start,allowIncapacitated=true,damageRoll=2[slashing],damageType=slashing',
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.disadvantage.save.con',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.OverTime',
+                    type: 'custom',
+                    value: 'turn=start,allowIncapacitated=true,damageRoll=2[slashing],damageType=slashing',
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.disadvantage.save.con',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         duration: {
-            seconds: 12
+            value: 12,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         origin: workflow.item.uuid,
         flags: {
@@ -392,7 +426,11 @@ async function piercingStrikeUse({trigger, workflow}) {
         name: genericUtils.translate('CHRISPREMADES.BG3.GapingWounds'),
         img: 'modules/chris-premades/images/bg3/GapingWounds.webp',
         duration: {
-            seconds: 12
+            value: 12,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         origin: workflow.item.uuid,
         flags: {
@@ -451,16 +489,22 @@ async function pommelStrikeUse({trigger, workflow}) {
         let effectData = {
             name: genericUtils.translate('CHRISPREMADES.BG3.Dazed'),
             img: 'modules/chris-premades/images/bg3/Dazed.webp',
-            changes: [
-                {
-                    key: 'flags.midi-qol.disadvantage.save.wis',
-                    mode: 0,
-                    value: 1,
-                    priority: 20
-                }
-            ],
+            system: {
+                changes: [
+                    {
+                        key: 'flags.midi-qol.disadvantage.save.wis',
+                        type: 'custom',
+                        value: 1,
+                        priority: 20
+                    }
+                ]
+            },
             duration: {
-                seconds: 12
+                value: 12,
+                units: 'seconds'
+            },
+            start: {
+                time: game.time?.worldTime ?? 0
             },
             origin: workflow.item.uuid
         };
@@ -477,9 +521,9 @@ async function pommelStrikeUse({trigger, workflow}) {
             dex = token.actor.system.abilities.dex.mod;
         }
         if (dex > 0) {
-            effectData.changes.push({
+            effectData.system.changes.push({
                 key: 'system.attributes.ac.bonus',
-                mode: 2,
+                type: 'add',
                 value: -dex,
                 priority: 20
             });
@@ -505,16 +549,22 @@ async function prepareUse({trigger, workflow}) {
     let effectData = {
         name: workflow.item.name,
         img: workflow.item.img,
-        changes: [
-            {
-                key: 'system.bonuses.mwak.damage',
-                mode: 2,
-                value: '+ @abilities.str.mod[slashing]',
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.bonuses.mwak.damage',
+                    type: 'add',
+                    value: '+ @abilities.str.mod[slashing]',
+                    priority: 20
+                }
+            ]
+        },
         duration: {
-            seconds: 1
+            value: 1,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         origin: workflow.item.uuid
     };
@@ -539,28 +589,34 @@ async function rushUse({trigger, workflow}) {
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.OffBalance'),
         img: 'modules/chris-premades/images/bg3/OffBalance.webp',
-        changes: [
-            {
-                key: 'flags.midi-qol.disadvantage.check.str',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.disadvantage.check.dex',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.grants.advantage.attack.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.disadvantage.check.str',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.disadvantage.check.dex',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.grants.advantage.attack.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         duration: {
-            seconds: 12
+            value: 12,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         origin: workflow.item.uuid,
         flags: {
@@ -625,22 +681,28 @@ async function weakeningStrikeUse({trigger, workflow}) {
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.WeakGrip'),
         img: 'modules/chris-premades/images/bg3/WeakGrip.webp',
-        changes: [
-            {
-                key: 'flags.midi-qol.disadvantage.attack.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.disadvantage.save.str',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.disadvantage.attack.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.disadvantage.save.str',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         duration: {
-            seconds: 12
+            value: 12,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         origin: workflow.item.uuid
     };
@@ -671,7 +733,11 @@ async function braceRangedUse({trigger, workflow}) {
         img: trigger.entity.img,
         origin: trigger.entity.uuid,
         duration: {
-            seconds: 1
+            value: 1,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         flags: {
             dae: {
@@ -730,16 +796,22 @@ async function hamstringShotUse({trigger, workflow}) {
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.Hamstrung'),
         img: 'modules/chris-premades/images/bg3/Hamstrung.webp',
-        changes: [
-            {
-                key: 'system.attributes.movement.all',
-                mode: 0,
-                value: '/2',
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.attributes.movement.all',
+                    type: 'custom',
+                    value: '/2',
+                    priority: 20
+                }
+            ]
+        },
         duration: {
-            seconds: 12
+            value: 12,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         origin: workflow.item.uuid,
         flags: {
@@ -788,7 +860,11 @@ async function piercingShotUse({trigger, workflow}) {
         name: genericUtils.translate('CHRISPREMADES.BG3.GapingWounds'),
         img: 'modules/chris-premades/images/bg3/GapingWounds.webp',
         duration: {
-            seconds: 12
+            value: 12,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         origin: workflow.item.uuid,
         flags: {
@@ -975,7 +1051,7 @@ async function configure() {
     await game.settings.set('chris-premades', 'bg3WeaponActionConfig', selection);
 }
 async function rest(actor) {
-    await genericUtils.update(actor, {'flags.chris-premades.-=bg3WeaponActions': null});
+    await genericUtils.unsetFlag(actor, 'chris-premades', 'bg3WeaponActions');
 }
 export let bg3 = {
     changeItem,

@@ -18,32 +18,32 @@ async function use({workflow}) {
             img: workflow.item.img,
             origin: workflow.item.uuid,
             duration: itemUtils.convertDuration(workflow.item),
-            changes: [
+            system: {changes: [
                 {
                     key: 'system.bonuses.mwak.damage',
-                    mode: 2,
+                    type: 'add',
                     value: '+1d4',
                     priority: 20
                 },
                 {
                     key: 'system.bonuses.rwak.damage',
-                    mode: 2,
+                    type: 'add',
                     value: '+1d4',
                     priority: 20
                 },
                 {
                     key: 'flags.midi-qol.advantage.check.str',
-                    mode: 0,
+                    type: 'custom',
                     value: 1,
                     priority: 20
                 },
                 {
                     key: 'flags.midi-qol.advantage.save.str',
-                    mode: 0,
+                    type: 'custom',
                     value: 1,
                     priority: 20
                 }
-            ], 
+            ]},
             flags: {
                 'chris-premades': {
                     enlargeReduce: {
@@ -57,28 +57,28 @@ async function use({workflow}) {
             }
         };
         if (titanStone === 2) {
-            effectData.changes = effectData.changes.concat([
+            effectData.system.changes = effectData.system.changes.concat([
                 {
                     key: 'system.traits.dr.value',
-                    mode: 2,
+                    type: 'add',
                     priority: 20,
                     value: 'cold'
                 },
                 {
                     key: 'system.traits.dr.value',
-                    mode: 2,
+                    type: 'add',
                     priority: 20,
                     value: 'fire'
                 },
                 {
                     key: 'system.traits.dr.value',
-                    mode: 2,
+                    type: 'add',
                     priority: 20,
                     value: 'lightning'
                 },
                 {
                     key: 'system.traits.dr.value',
-                    mode: 2,
+                    type: 'add',
                     priority: 20,
                     value: 'thunder'
                 }
@@ -124,32 +124,32 @@ async function use({workflow}) {
             img: workflow.item.img,
             origin: workflow.item.uuid,
             duration: itemUtils.convertDuration(workflow.item),
-            changes: [
+            system: {changes: [
                 {
                     key: 'system.bonuses.mwak.damage',
-                    mode: 2,
+                    type: 'add',
                     value: '-1d4',
                     priority: 20
                 },
                 {
                     key: 'system.bonuses.rwak.damage',
-                    mode: 2,
+                    type: 'add',
                     value: '-1d4',
                     priority: 20
                 },
                 {
                     key: 'flags.midi-qol.disadvantage.check.str',
-                    mode: 0,
+                    type: 'custom',
                     value: 1,
                     priority: 20
                 },
                 {
                     key: 'flags.midi-qol.disadvantage.save.str',
-                    mode: 0,
+                    type: 'custom',
                     value: 1,
                     priority: 20
                 }
-            ], 
+            ]},
             flags: {
                 'chris-premades': {
                     enlargeReduce: {
@@ -196,14 +196,14 @@ export async function start({trigger: {entity: effect}}) {
     if (!token) return;
     if (!playAnimation || animationUtils.jb2aCheck() !== 'patreon') {
         let updates = {
-            changes: effect.changes.concat(
+            system: {changes: effect.system.changes.concat(
                 {
                     key: 'system.traits.size',
-                    mode: 5,
+                    type: 'override',
                     value: newSize,
                     priority: 20
                 }
-            ),
+            )},
             'flags.chris-premades.effect.sizeAnimation': true
         };
         await genericUtils.update(effect, updates);
@@ -257,14 +257,14 @@ export async function start({trigger: {entity: effect}}) {
             
             .thenDo(async () => {
                 let updates = {
-                    changes: effect.changes.concat(
+                    system: {changes: effect.system.changes.concat(
                         {
                             key: 'system.traits.size',
-                            mode: 5,
+                            type: 'override',
                             value: newSize,
                             priority: 20
                         }
-                    )
+                    )}
                 };
                 await genericUtils.update(effect, updates);
                 let updates2 = {
@@ -371,14 +371,14 @@ export async function start({trigger: {entity: effect}}) {
 
             .thenDo(async () => {
                 let updates = {
-                    changes: effect.changes.concat(
+                    system: {changes: effect.system.changes.concat(
                         {
                             key: 'system.traits.size',
-                            mode: 5,
+                            type: 'override',
                             value: newSize,
                             priority: 20
                         }
-                    )
+                    )}
                 };
                 await genericUtils.update(effect, updates);
                 let updates2 = {

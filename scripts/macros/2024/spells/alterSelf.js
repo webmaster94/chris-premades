@@ -43,44 +43,44 @@ async function naturalWeapons({trigger, workflow}) {
         img: workflow.activity.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'system.properties',
-                mode: 2,
+                type: 'add',
                 value: 'mgc',
                 priority: 20
             },
             {
                 key: 'system.damage.base.number',
-                mode: 5,
+                type: 'override',
                 value: 1,
                 priority: 20
             },
             {
                 key: 'system.damage.base.denomination',
-                mode: 5,
+                type: 'override',
                 value: 6,
                 priority: 20
             },
             {
                 key: 'system.damage.base.custom',
-                mode: 5,
+                type: 'override',
                 value: false,
                 priority: 20
             },
             {
                 key: 'system.ability',
-                mode: 5,
+                type: 'override',
                 value: workflow.item.system.ability === '' ? 'spellcasting' : workflow.item.system.ability,
                 priority: 20
             },
             {
                 key: 'system.damage.base.types',
-                mode: 5,
+                type: 'override',
                 value: JSON.stringify([selection]),
                 priority: 20
             }
-        ]
+        ]}
     };
     await itemUtils.enchantItem(unarmedStrike, effectData, {
         concentrationItem: workflow.item,

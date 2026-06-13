@@ -102,29 +102,35 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            seconds: Math.floor(druidLevel / 2) * 3600
+            value: Math.floor(druidLevel / 2) * 3600,
+            units: 'seconds'
         },
-        changes: []
+        start: {
+            time: game.time?.worldTime ?? 0
+        },
+        system: {
+            changes: []
+        }
     };
     if (!customKeepSpells && druidLevel < 20) {
-        effectData.changes.push({
+        effectData.system.changes.push({
             key: 'flags.midi-qol.fail.spell.material',
             value: 1,
-            mode: 0,
+            type: 'custom',
             priority: 20
         });
     }
     if (!customKeepSpells && druidLevel < 18) {
-        effectData.changes.push(
+        effectData.system.changes.push(
             {
                 key: 'flags.midi-qol.fail.spell.vocal',
                 value: 1,
-                mode: 0,
+                type: 'custom',
                 priority: 20
             }, {
                 key: 'flags.midi-qol.fail.spell.somatic',
                 value: 1,
-                mode: 0,
+                type: 'custom',
                 priority: 20
             }
         );

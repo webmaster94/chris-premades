@@ -5,7 +5,7 @@ async function use({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        duration: { seconds: 6 }
+        duration: {value: 6, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0}
     };
     await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'haymaker'});
 }

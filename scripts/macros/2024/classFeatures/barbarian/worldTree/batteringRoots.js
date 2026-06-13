@@ -9,17 +9,15 @@ async function turnStart({trigger: {entity: item}}) {
         name: item.name,
         img: item.img,
         origin: item.uuid,
-        changes: [
+        system: {changes: [
             {
                 key: 'system.range.reach',
-                mode: 2,
+                type: 'add',
                 value: range,
                 priority: 20
             }
-        ],
-        duration: {
-            turns: 1
-        }
+        ]},
+        duration: {value: 1, units: 'turns'}, start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0}
     };
     await Promise.all(validWeapons.map(async weapon => {
         await itemUtils.enchantItem(weapon, effectData);

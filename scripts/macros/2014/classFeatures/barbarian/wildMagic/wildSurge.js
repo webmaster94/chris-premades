@@ -45,7 +45,11 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            seconds: rageEffect.duration.remaining
+            value: effectUtils.getRemainingDurationSeconds(rageEffect),
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         }
     };
     let feature;
@@ -122,45 +126,51 @@ async function use({workflow}) {
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
                 duration: {
-                    seconds: rageEffect.duration.remaining
+                    value: effectUtils.getRemainingDurationSeconds(rageEffect),
+                    units: 'seconds'
                 },
-                changes: [
-                    {
-                        key: 'name',
-                        mode: 5,
-                        value: '{} (' + genericUtils.translate('CHRISPREMADES.Macros.WildSurge.MagicInfusion') + ')',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.damage.base.types',
-                        mode: 5,
-                        value: '["force"]',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.properties',
-                        mode: 2,
-                        value: '["thr", "lgt"]',
-                        priority: 20
-                    },
-                    {
-                        key: 'system.range.value',
-                        mode: 4,
-                        value: 20,
-                        priority: 20
-                    },
-                    {
-                        key: 'system.range.long',
-                        mode: 4,
-                        value: 60,
-                        priority: 20
-                    }
-                ]
+                start: {
+                    time: game.time?.worldTime ?? 0
+                },
+                system: {
+                    changes: [
+                        {
+                            key: 'name',
+                            type: 'override',
+                            value: '{} (' + genericUtils.translate('CHRISPREMADES.Macros.WildSurge.MagicInfusion') + ')',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.damage.base.types',
+                            type: 'override',
+                            value: '["force"]',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.properties',
+                            type: 'add',
+                            value: '["thr", "lgt"]',
+                            priority: 20
+                        },
+                        {
+                            key: 'system.range.value',
+                            type: 'upgrade',
+                            value: 20,
+                            priority: 20
+                        },
+                        {
+                            key: 'system.range.long',
+                            type: 'upgrade',
+                            value: 60,
+                            priority: 20
+                        }
+                    ]
+                }
             };
             if (weapon.isVersatile) {
-                enchantData.changes.push({
+                enchantData.system.changes.push({
                     key: 'system.damage.versatile.types',
-                    mode: 5,
+                    type: 'override',
                     value: '["force"]',
                     priority: 20
                 });
@@ -193,6 +203,7 @@ async function use({workflow}) {
             };
             // This looks bad but actually it's good, they'll be allowed to do this and it means not socketing game.user
             let [template] = await canvas.scene.createEmbeddedDocuments('MeasuredTemplate', [templateData]);
+            template = templateUtils.getRegionDoc(template) ?? template;
             await tokenUtils.attachToToken(workflow.token, [template.uuid]);
             effect = await effectUtils.createEffect(workflow.actor, effectData, {parentEntity: rageEffect, identifier: 'wildSurge'});
             await effectUtils.addDependent(effect, [template]);
@@ -300,16 +311,22 @@ async function protectiveLights({trigger: {entity: effect, target, identifier}})
         img: effect.img,
         origin: effect.uuid,
         duration: {
-            seconds: effect.duration.remaining
+            value: effectUtils.getRemainingDurationSeconds(effect),
+            units: 'seconds'
         },
-        changes: [
-            {
-                key: 'system.attributes.ac.bonus',
-                mode: 2,
-                value: 1,
-                priority: 20
-            }
-        ],
+        start: {
+            time: game.time?.worldTime ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'system.attributes.ac.bonus',
+                    type: 'add',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 aura: true,

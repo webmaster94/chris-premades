@@ -13,20 +13,22 @@ async function equip(item) {
         name: item.name,
         img: item.img,
         origin: item.uuid,
-        changes: [
-            {
-                key: 'system.properties',
-                mode: 2,
-                value: 'mgc',
-                priority: 20
-            },
-            {
-                key: 'system.magicalBonus',
-                mode: 2,
-                value: bonus,
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'system.properties',
+                    type: 'add',
+                    value: 'mgc',
+                    priority: 20
+                },
+                {
+                    key: 'system.magicalBonus',
+                    type: 'add',
+                    value: bonus,
+                    priority: 20
+                }
+            ]
+        }
     };
     await Promise.all(items.map(async i => {
         await itemUtils.enchantItem(i, enchantmentData, {parentEntity: effect, strictlyInterdependent: true, identifier: 'eldritchClawTattooEnchantment'});

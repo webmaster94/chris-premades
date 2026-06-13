@@ -33,17 +33,15 @@ async function damage({trigger: {entity: effect}, workflow}) {
         name: genericUtils.translate('CHRISPREMADES.Macros.SearingSmite.Fire'),
         img: effect.img,
         origin: effect.uuid,
-        duration: {
-            seconds: effect.duration.remaining
-        },
-        changes: [
+        duration: {value: effectUtils.getRemainingDurationSeconds(effect), units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
+        system: {changes: [
             {
                 key: 'flags.midi-qol.OverTime',
-                mode: 0,
+                type: 'custom',
                 value: `turn=start, saveAbility=con, saveDC=${effect.flags['chris-premades'].searingSmite.dc}, saveMagic=true, damageRoll=1d6[fire], damageType=fire, name=${effect.name}`,
                 priority: 20
             }
-        ]
+        ]}
     };
     await effectUtils.createEffect(workflow.hitTargets.first().actor, effectData, {parentEntity: effect, strictlyInterdependent: true});
 }

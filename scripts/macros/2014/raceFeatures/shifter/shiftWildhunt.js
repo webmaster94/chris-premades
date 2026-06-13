@@ -5,20 +5,22 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
-            {
-                key: 'flags.midi-qol.advantage.check.wis',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.grants.noAdvantage.attack.all',
-                mode: 0,
-                value: 'checkDistance(tokenUuid, targetUuid, 30)',
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.advantage.check.wis',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.grants.noAdvantage.attack.all',
+                    type: 'custom',
+                    value: 'checkDistance(tokenUuid, targetUuid, 30)',
+                    priority: 20
+                }
+            ]
+        }
     };
     await effectUtils.createEffect(workflow.actor, effectData, {
         identifier: 'shiftWildhuntEffect',

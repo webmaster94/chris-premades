@@ -41,14 +41,16 @@ async function light({workflow}) {
             name: workflow.item.name + ' (' + genericUtils.translate('CHRISPREMADES.Light.Dim') + ')',
             img: workflow.item.img,
             origin: workflow.item.uuid,
-            changes: [
-                {
-                    key: 'ATL.light.dim',
-                    mode: 4,
-                    value: 10,
-                    priority: 20
-                }
-            ]
+            system: {
+                changes: [
+                    {
+                        key: 'ATL.light.dim',
+                        type: 'upgrade',
+                        value: 10,
+                        priority: 20
+                    }
+                ]
+            }
         };
         await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'crystalBladeDim', vae: [{type: 'use', name: workflow.item.name, identifier: 'crystalBladeLight'}]});
         return;
@@ -58,20 +60,22 @@ async function light({workflow}) {
             name: workflow.item.name + ' (' + genericUtils.translate('CHRISPREMADES.Light.Bright') + ')',
             img: workflow.item.img,
             origin: workflow.item.uuid,
-            changes: [
-                {
-                    key: 'ATL.light.bright',
-                    mode: 4,
-                    value: 30,
-                    priority: 20
-                },
-                {
-                    key: 'ATL.light.dim',
-                    mode: 4,
-                    value: 60,
-                    priority: 20
-                }
-            ]
+            system: {
+                changes: [
+                    {
+                        key: 'ATL.light.bright',
+                        type: 'upgrade',
+                        value: 30,
+                        priority: 20
+                    },
+                    {
+                        key: 'ATL.light.dim',
+                        type: 'upgrade',
+                        value: 60,
+                        priority: 20
+                    }
+                ]
+            }
         };
         await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'crystalBladeBright', vae: [{type: 'use', name: workflow.item.name, identifier: 'crystalBladeLight'}]});
         return;

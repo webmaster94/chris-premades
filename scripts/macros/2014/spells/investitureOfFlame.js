@@ -14,32 +14,32 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'system.traits.dr.value',
-                mode: 2,
+                type: 'add',
                 value: 'cold',
                 priority: 20
             },
             {
                 key: 'system.traits.di.value',
-                mode: 2,
+                type: 'add',
                 value: 'fire',
                 priority: 20
             },
             {
                 key: 'ATL.light.dim',
-                mode: 4,
+                type: 'upgrade',
                 value: 60,
                 priority: 20
             },
             {
                 key: 'ATL.light.bright',
-                mode: 4,
+                type: 'upgrade',
                 value: 30,
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             'chris-premades': {
                 fireShield: {

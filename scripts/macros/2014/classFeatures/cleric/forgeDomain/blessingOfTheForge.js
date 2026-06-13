@@ -16,26 +16,28 @@ async function use({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        changes: [
-            {
-                key: 'name',
-                mode: 5,
-                value: '{} (' + workflow.item.name + ')',
-                priority: 20
-            },
-            {
-                key: 'system.properties',
-                mode: 2,
-                value: 'mgc',
-                priority: 20
-            },
-            {
-                key: selectedItem.system.isArmor ? 'system.armor.magicalBonus' : 'system.magicalBonus',
-                mode: 5,
-                value: 1,
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'name',
+                    type: 'override',
+                    value: '{} (' + workflow.item.name + ')',
+                    priority: 20
+                },
+                {
+                    key: 'system.properties',
+                    type: 'add',
+                    value: 'mgc',
+                    priority: 20
+                },
+                {
+                    key: selectedItem.system.isArmor ? 'system.armor.magicalBonus' : 'system.magicalBonus',
+                    type: 'override',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        }
     };
     await itemUtils.enchantItem(selectedItem, enchantData, {identifier: 'blessingOfTheForge'});
     let blessedUuids = workflow.item.flags['chris-premades']?.blessingOfTheForge?.uuids ?? [];

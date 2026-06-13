@@ -58,9 +58,7 @@ async function late({workflow}) {
         name: workflow.activity.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        duration: {
-            seconds: 60
-        },
+        duration: {value: 60, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
         flags: {
             'chris-premades': {
                 maximiliansEarthenGrasp: {
@@ -87,10 +85,10 @@ async function late({workflow}) {
     if (!effect) return;
     // TODO: also add one to the summon & make it come off if it moves?
     genericUtils.setProperty(effectData, 'flags.chris-premades.conditions', ['restrained']);
-    effectData.changes = [
+    effectData.system.changes = [
         {
             key: 'flags.midi-qol.OverTime',
-            mode: 0,
+            type: 'custom',
             value: 'turn=start,label=' + genericUtils.translate('CHRISPREMADES.Macros.MaximiliansEarthenGrasp.Overtime') + ',allowIncapacitated=true,rollType=check,saveDC=' + itemUtils.getSaveDC(workflow.item) + ',saveDamage=nodamage,saveAbility=str,saveRemove=true,actionSave=true,rollMode=publicroll',
             priority: 20
         }

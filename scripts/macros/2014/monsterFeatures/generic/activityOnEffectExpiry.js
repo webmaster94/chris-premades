@@ -17,7 +17,7 @@ async function deleted({trigger: {entity, options}}) {
     let sourceItem = await effectUtils.getOriginItem(entity);
     if (!sourceItem) return;
     let config = itemUtils.getGenericFeatureConfig(sourceItem, 'activityOnEffectExpiry');
-    if (config.endEarly && entity.duration.remaining && !options['expiry-reason']) return;
+    if (config.endEarly && !entity.duration?.expired && Number.isFinite(entity.duration.value) && !options['expiry-reason']) return;
     let triggerActivities = config.triggerActivities.map(i => sourceItem.system.activities.find(j => j.id === i));
     for (let i of triggerActivities) {
         await workflowUtils.syntheticActivityRoll(i, [token]);

@@ -35,13 +35,13 @@ async function use({trigger, workflow}) {
         let effect = effectUtils.getConcentrationEffect(workflow.actor, newWorkflow.item);
         if (effect) {
             let effectData = genericUtils.duplicate(effect.toObject());
-            effectData.changes.push({
+            effectData.system.changes.push({
                 key: 'flags.midi-qol.advantage.concentration',
-                mode: 0,
+                type: 'custom',
                 value: true,
                 priority: 20
             });
-            await genericUtils.update(effect, {changes: effectData.changes});
+            await genericUtils.update(effect, {'system.changes': effectData.system.changes});
         }
     }
 }

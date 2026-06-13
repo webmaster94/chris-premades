@@ -55,7 +55,7 @@ function animation(workflow, dependent) {
     /* eslint-disable indent */
     new Sequence()
         .effect(itemUtils.getConfig(workflow.item, 'animationColor'))
-            .atLocation(workflow.template)
+            .atLocation(canvas.scene.regions.get(workflow.template.id)?.object ?? workflow.template.object ?? workflow.template)
             .tieToDocuments(dependent)
             .scaleToObject()
             .randomSpriteRotation()

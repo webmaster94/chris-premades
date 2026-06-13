@@ -15,16 +15,22 @@ async function useAdaptation({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            seconds: 1
+            value: 1,
+            units: 'seconds'
         },
-        changes: [
-            {
-                key: 'system.traits.dr.value',
-                mode: 2,
-                value: damageType,
-                priority: 20
-            }
-        ],
+        start: {
+            time: game.time?.worldTime ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'system.traits.dr.value',
+                    type: 'add',
+                    value: damageType,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: ['longRest']

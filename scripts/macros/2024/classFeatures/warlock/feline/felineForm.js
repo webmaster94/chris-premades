@@ -47,8 +47,8 @@ async function use({trigger, workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        duration: {seconds: Math.floor(levels / 2) * 3600},
-        changes: [],
+        duration: {value: Math.floor(levels / 2) * 3600, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
+        system: {changes: []},
         flags: {
             'chris-premades': {
                 specialDuration: [

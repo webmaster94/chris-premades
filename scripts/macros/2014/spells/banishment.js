@@ -20,44 +20,46 @@ export async function banishmentHelper(workflow, otherPlanarTokens = []) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
-            {
-                key: 'flags.midi-qol.superSaver.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }, 
-            {
-                key: 'system.attributes.ac.bonus',
-                mode: 5,
-                value: 99,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.min.ability.save.all',
-                mode: 5,
-                value: 99,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.grants.noCritical.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.neverTarget',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'macro.tokenMagic',
-                mode: 0,
-                value: 'spectral-body',
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.superSaver.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'system.attributes.ac.bonus',
+                    type: 'override',
+                    value: 99,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.min.ability.save.all',
+                    type: 'override',
+                    value: 99,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.grants.noCritical.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.neverTarget',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'macro.tokenMagic',
+                    type: 'custom',
+                    value: 'spectral-body',
+                    priority: 20
+                }
+            ]
+        }
     };
     effectUtils.addMacro(effectData, 'effect', ['banishmentBanished']);
     for (let token of workflow.failedSaves) {
@@ -78,7 +80,7 @@ async function remove({trigger: {entity}}) {
     if (!actor) return;
     let token = actorUtils.getFirstToken(actor);
     if (!token) return;
-    if (effect.flags['chris-premades']?.banishment?.samePlane || effect.duration.remaining !== 0) return;
+    if (effect.flags['chris-premades']?.banishment?.samePlane || !effect.duration?.expired) return;
     await genericUtils.update(token.document, {hidden: true});
 }
 export let banishment = {

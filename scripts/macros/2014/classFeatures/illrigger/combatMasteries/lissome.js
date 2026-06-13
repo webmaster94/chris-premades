@@ -3,11 +3,12 @@ async function attack({trigger: {entity: item}, workflow}) {
     if (!workflow.activity || !workflow.hitTargets.size) return;
     if (!workflowUtils.isAttackType(workflow, 'meleeAttack')) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'combatMasteryLissomeEffect');
-    if (effect) return;
+    if (effect && !effect.duration?.expired && !effect.disabled) return;
     let sourceEffect = item.effects.contents?.[0];
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
-    effectData.duration = {seconds: 1};
+    effectData.duration = {value: 1, units: 'seconds'};
+    effectData.start = {time: game.time?.worldTime ?? 0};
     await effectUtils.createEffect(workflow.actor, effectData);
 }
 export let combatMasteryLissome = {

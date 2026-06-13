@@ -10,7 +10,11 @@ async function sourceAttack({trigger: {entity: item}, workflow}) {
         img: item.img,
         origin: item.uuid,
         duration: {
-            seconds: 12
+            value: 12,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         flags: {
             dae: {
@@ -46,14 +50,16 @@ async function late({workflow}) {
     let effectData = {
         name: origin.name + ' Resistance',
         img: constants.tempConditionIcon,
-        changes: [
-            {
-                key: 'system.traits.dr.all',
-                value: 1,
-                mode: 0,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.traits.dr.all',
+                    value: 1,
+                    type: 'custom',
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 effect: {

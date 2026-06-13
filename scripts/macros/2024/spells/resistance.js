@@ -14,15 +14,15 @@ async function targeted({trigger, workflow}) {
         let effectData = {
             name: genericUtils.translate('CHRISPREMADES.Macros.Resistance.Name') + ': ' + damageType,
             img: effect.img,
-            duration: {seconds: 1},
-            changes: [
+            duration: {value: 1, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
+            system: {changes: [
                 {
                     key: 'system.traits.dm.amount.' + damageType,
-                    mode: 2,
+                    type: 'add',
                     priority: 20,
                     value: -roll.total
                 }
-            ],
+            ]},
             flags: {
                 'chris-premades': {
                     specialDuration: [

@@ -42,9 +42,9 @@ async function damage({trigger: {entity: item}, workflow}) {
     let rollResult = workflow.damageRolls.at(-1).total;
     switch (selection) {
         case 'DF':
-            await genericUtils.update(item.effects.get(defensiveFeature.effects[0]._id), {changes: [{
+            await genericUtils.update(item.effects.get(defensiveFeature.effects[0]._id), {'system.changes': [{
                 key: 'system.attributes.ac.bonus',
-                mode: 2,
+                type: 'add',
                 value: rollResult,
                 priority: 20
             }]});

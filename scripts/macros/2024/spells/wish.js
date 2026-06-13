@@ -8,7 +8,8 @@ async function stress({trigger, workflow}) {
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     let roll = await rollUtils.rollDice(itemUtils.getConfig(workflow.item, 'stressDurationFormula'), {chatMessage: true, flavor: workflow.item.name});
-    effectData.duration.seconds = roll.roll.total * 86400;
+    effectData.duration = {value: roll.roll.total * 86400, units: 'seconds'};
+    effectData.start = {time: game.time?.worldTime ?? 0};
     effectData.origin = workflow.item.uuid;
     await effectUtils.createEffect(workflow.actor, effectData);
     let chanceNumber = itemUtils.getConfig(workflow.item, 'chanceNumber');
@@ -36,9 +37,9 @@ async function instantHealth({trigger, workflow}) {
             let found = false;
             abilities.forEach(ability => {
                 if (found) return;
-                if (effect.changes.find(i => i.key === 'system.abilities.' + ability + '.value' && i.value < 0)) found = true;
+                if (effect.system.changes.find(i => i.key === 'system.abilities.' + ability + '.value' && i.value < 0)) found = true;
             });
-            if (effect.changes.find(i => i.key === 'system.attributes.hp.tempmax' && i.value < 0)) found = true;
+            if (effect.system.changes.find(i => i.key === 'system.attributes.hp.tempmax' && i.value < 0)) found = true;
             if (found) await genericUtils.remove(effect);
         }));
         await genericUtils.update(token.actor, {'system.attributes.hp.value': token.actor.system.attributes.hp.max});
@@ -53,7 +54,7 @@ async function resistance({trigger, workflow}) {
     if (!resistanceEffect) return;
     let effectData = genericUtils.duplicate(resistanceEffect.toObject());
     effectData.origin = workflow.item.uuid;
-    effectData.changes[0].value = selection;
+    effectData.system.changes[0].value = selection;
     await Promise.all(workflow.targets.map(async token => await effectUtils.createEffect(token.actor, effectData)));
 }
 async function spellImmunity({trigger, workflow}) {
@@ -124,10 +125,11 @@ async function stressSpellDamage({trigger: {entity: effect}, workflow}) {
 async function rest({trigger: {entity: effect}}) {
     let selection = await dialogUtils.confirm(effect.name, 'CHRISPREMADES.Macros.Wish.Rest', {buttons: 'yesNo'});
     if (!selection) return;
-    if (effect.duration.seconds - 86400 <= 0) {
+    let remaining = effectUtils.getRemainingDurationSeconds(effect);
+    if (remaining - 86400 <= 0) {
         await genericUtils.remove(effect);
     } else {
-        await genericUtils.update(effect, {'duration.seconds': effect.duration.seconds - 86400});
+        await genericUtils.update(effect, {'duration.value': remaining - 86400, 'duration.units': 'seconds', start: {time: game.time?.worldTime ?? 0}});
     }
 }
 async function targeted({trigger: {entity: effect, token}, workflow}) {

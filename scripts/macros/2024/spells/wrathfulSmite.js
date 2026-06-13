@@ -7,14 +7,14 @@ async function use({trigger, workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'flags.midi-qol.OverTime',
-                mode: 0,
+                type: 'custom',
                 value: 'turn=end, allowIncapacitated=true, rollType=save, saveAbility=' + workflow.activity.save.ability.first() + ', saveDC=' + itemUtils.getSaveDC(workflow.item) + ', saveDamage=nodamage, saveRemove=true, saveMagic=true',
                 priority: 20
             }
-        ]
+        ]}
     };
     await Promise.all(workflow.failedSaves.map(async token => {
         if (actorUtils.checkTrait(token.actor, 'ci', 'frightened')) return;

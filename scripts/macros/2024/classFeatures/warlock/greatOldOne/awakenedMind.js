@@ -27,16 +27,16 @@ async function use({workflow}) {
     };
     let sourceEffect = await effectUtils.createEffect(workflow.actor, effectData);
     if (failedSave) {
-        effectData.changes = [
+        effectData.system.changes = [
             {
                 key: 'flags.midi-qol.disadvantage.attack.all',
-                mode: 5,
+                type: 'override',
                 value: 'targetId === "' + workflow.token.id + '"',
                 priority: 20
             },
             {
                 key: 'flags.midi-qol.grants.advantage.attack.all',
-                mode: 5,
+                type: 'override',
                 value: 'targetId === "' + workflow.token.id + '"',
                 priority: 20
             }

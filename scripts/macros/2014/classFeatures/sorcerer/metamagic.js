@@ -56,14 +56,16 @@ async function earlyCareful({trigger: {entity: effect}, workflow}) {
         name: effect.name,
         img: constants.tempConditionIcon,
         origin: effect.uuid,
-        changes: [
-            {
-                key: 'flags.midi-qol.min.ability.save.all',
-                mode: 5,
-                value: 100,
-                priority: 120
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.min.ability.save.all',
+                    type: 'override',
+                    value: 100,
+                    priority: 120
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [
@@ -186,7 +188,7 @@ async function damageEmpowered({trigger: {entity: item}, workflow}) {
             await newRoll.toMessage({
                 speaker: ChatMessage.implementation.getSpeaker({token: workflow.token}),
                 flavor: genericUtils.format('CHRISPREMADES.Generic.Rerolling', {origDie: 'd' + existingRoll.faces, origResult: existingRoll.results[currInd]}),
-                rollMode: game.settings.get('core', 'rollMode')
+                messageMode: game.settings.get('core', 'messageMode')
             });
             newDamageRolls[roll].terms[term].results[currInd].result = newRoll.total;
         }
@@ -199,7 +201,10 @@ async function useExtended({workflow}) {
         genericUtils.notify('CHRISPREMADES.Macros.Metamagic.NotEnough', 'info');
         return;
     }
-    let validSpells = actorUtils.getCastableSpells(workflow.actor).filter(i => itemUtils.convertDuration(i).seconds >= 60);
+    let validSpells = actorUtils.getCastableSpells(workflow.actor).filter(i => {
+        let converted = itemUtils.convertDuration(i);
+        return (converted?.units === 'seconds' ? converted.value : 0) >= 60;
+    });
     if (!validSpells.length) {
         genericUtils.notify('CHRISPREMADES.Macros.Metamagic.NoValid', 'info');
     }
@@ -211,13 +216,14 @@ async function useExtended({workflow}) {
     });
     if (!selection) return;
     await genericUtils.update(sorcPoints, {'system.uses.spent': sorcPoints.system.uses.spent + 1});
-    let oldDuration = itemUtils.convertDuration(selection).seconds;
+    let convertedDuration = itemUtils.convertDuration(selection);
+    let oldDuration = convertedDuration?.units === 'seconds' ? convertedDuration.value : undefined;
     let newDuration = Math.min(86400, oldDuration * 2);
     let newItem = selection.clone({
         'system.duration': {value: newDuration / 60, units: 'minute'},
         effects: Array.from(selection.effects).map(i => {
-            if (i.duration?.seconds === oldDuration) {
-                return genericUtils.mergeObject(i.toObject(), {'duration.seconds': newDuration});
+            if (i.duration?.units === 'seconds' && i.duration.value === oldDuration) {
+                return genericUtils.mergeObject(i.toObject(), {'duration.value': newDuration});
             } else {
                 return i.toObject();
             }
@@ -282,14 +288,16 @@ async function earlyHeightened({trigger: {entity: effect}, workflow}) {
         name: effect.name,
         img: constants.tempConditionIcon,
         origin: effect.uuid,
-        changes: [
-            {
-                key: 'flags.midi-qol.disadvantage.save.all',
-                mode: 5,
-                value: 1,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.disadvantage.save.all',
+                    type: 'override',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [

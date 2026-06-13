@@ -11,7 +11,7 @@ async function create({trigger: {entity: item, target, identifier}}) {
         (
             i.statuses.has('frightened') || // Status Effect dropdown on details page
             i.flags['chris-premades']?.conditions?.includes('frightened') || // CPR effect medkit
-            i.changes.find(j => validKeys.includes(j.key) && j.value.toLowerCase() === 'frightened') // dae/midi key
+            i.system.changes.find(j => validKeys.includes(j.key) && j.value.toLowerCase() === 'frightened') // dae/midi key
         )
         && await effectUtils.getOriginItem(i)?.actor === item.actor
     );
@@ -21,14 +21,16 @@ async function create({trigger: {entity: item, target, identifier}}) {
         name: item.name,
         img: item.img,
         origin: item.uuid,
-        changes: [
-            {
-                key: 'system.attributes.movement.all',
-                mode: 0,
-                value: 0,
-                priority: 100
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.attributes.movement.all',
+                    type: 'custom',
+                    value: 0,
+                    priority: 100
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 aura: true,

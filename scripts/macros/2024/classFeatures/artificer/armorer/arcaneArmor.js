@@ -17,9 +17,9 @@ async function select({trigger, workflow}) {
     let effectData = effect.toObject();
     delete effectData._id;
     effectData.origin = effect.uuid;
-    effectData.changes.push({
+    effectData.system.changes.push({
         key: 'name',
-        mode: 5,
+        type: 'override',
         value: '{} (' + workflow.item.name + ')',
         priority: 50
     });

@@ -32,17 +32,15 @@ async function inescapable({trigger: {entity: item}, workflow}) {
     let effectData = {
         name: workflow.item.name + ':' + genericUtils.translate('DND5E.Disadvantage'),
         img: constants.tempConditionIcon,
-        duration: {
-            turns: 1
-        },
-        changes: [
+        duration: {value: 1, units: 'turns'}, start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0},
+        system: {changes: [
             {
                 key: 'flags.midi-qol.disadvantage.save.all',
                 value: '1',
-                mode: 5,
+                type: 'override',
                 priority: 120
             }
-        ]
+        ]}
     };
     let choice = await dialogUtils.confirm(
         item.name, 

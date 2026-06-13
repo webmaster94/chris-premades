@@ -16,7 +16,11 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            seconds: 604800
+            value: 604800,
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         flags: {
             dae: {
@@ -28,14 +32,16 @@ async function use({workflow}) {
         }
     };
     if (selection !== 'jump') {
-        effectData.changes = [
-            {
-                key: 'system.attributes.movement.' + selection,
-                mode: 4,
-                value: '@attributes.movement.walk',
-                priority: 20
-            }
-        ];
+        effectData.system = {
+            changes: [
+                {
+                    key: 'system.attributes.movement.' + selection,
+                    type: 'upgrade',
+                    value: '@attributes.movement.walk',
+                    priority: 20
+                }
+            ]
+        };
     }
     await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'bestialSoul'});
 }

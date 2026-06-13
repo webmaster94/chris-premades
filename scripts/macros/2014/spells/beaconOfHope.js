@@ -6,20 +6,22 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
-            {
-                key: 'flags.midi-qol.advantage.save.wis',
-                mode: 5,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.advantage.deathSave',
-                mode: 5,
-                value: 1,
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.advantage.save.wis',
+                    type: 'override',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.advantage.deathSave',
+                    type: 'override',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        }
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['beaconOfHopeHopeful']);
     for (let token of workflow.targets) {

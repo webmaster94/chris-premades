@@ -44,47 +44,45 @@ async function turnEnd({trigger: {entity: effect, token}}) {
         name: genericUtils.translate('CHRISPREMADES.Macros.Blink.Away'),
         img: effect.img,
         origin: effect.uuid,
-        duration: {
-            rounds: 2
-        },
-        changes: [
+        duration: {value: 2, units: 'rounds'}, start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0},
+        system: {changes: [
             {
                 key: 'flags.midi-qol.superSaver.all',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             },
             {
                 key: 'system.attributes.ac.bonus',
-                mode: 4,
+                type: 'upgrade',
                 value: 99,
                 priority: 20
             },
             {
                 key: 'flags.midi-qol.min.ability.save.all',
-                mode: 0,
+                type: 'custom',
                 value: 99,
                 priority: 20
             },
             {
                 key: 'flags.midi-qol.grants.noCritical.all',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             },
             {
                 key: 'flags.midi-qol.neverTarget',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             },
             {
                 key: 'macro.tokenMagic',
-                mode: 0,
+                type: 'custom',
                 value: 'spectral-body',
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             'chris-premades': {
                 blink: {

@@ -29,7 +29,10 @@ async function use({workflow}) {
         }
     });
     if (useRealDarkness) {
-        let [darknessSource] = await genericUtils.createEmbeddedDocuments(template.parent, 'AmbientLight', [{config: {negative: true, dim: template.distance, animation: {type: darknessAnimation}}, x: template.x, y: template.y}]);
+        let regionDoc = templateUtils.getRegionDoc(template);
+        let {x, y} = templateUtils.getPosition(template);
+        let dim = regionDoc ? (regionDoc.shapes.at(0)?.radius ?? 0) / ((regionDoc.parent ?? canvas.scene).dimensions.distancePixels) : template.distance;
+        let [darknessSource] = await genericUtils.createEmbeddedDocuments((regionDoc ?? template).parent, 'AmbientLight', [{config: {negative: true, dim, animation: {type: darknessAnimation}}, x, y}]);
         effectUtils.addDependent(template, [darknessSource]);
     }
     let targets = templateUtils.getTokensInTemplate(template);

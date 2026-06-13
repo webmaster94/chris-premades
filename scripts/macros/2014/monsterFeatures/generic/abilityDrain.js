@@ -18,10 +18,10 @@ async function use({workflow}) {
     let actualChange = Math.min(currAbility, drainRoll.total);
     let effect = await effectUtils.getAllEffectsByIdentifier(targetToken.actor, 'abilityDrain').find(async i => (await effectUtils.getOriginItem(i))?.uuid === workflow.item.uuid);
     if (effect) {
-        let currDowngrade = parseInt(effect.changes[0].value);
-        await genericUtils.update(effect, {changes: [{
+        let currDowngrade = parseInt(effect.system.changes[0].value);
+        await genericUtils.update(effect, {'system.changes': [{
             key: 'system.abilities.' + ability + '.value',
-            mode: 2,
+            type: 'add',
             value: currDowngrade - actualChange,
             priority: 20
         }]});
@@ -30,14 +30,16 @@ async function use({workflow}) {
             name: workflow.item.name,
             img: workflow.item.img,
             origin: workflow.item.uuid,
-            changes: [
-                {
-                    key: 'system.abilities.' + ability + '.value',
-                    mode: 2,
-                    value: -actualChange,
-                    priority: 20
-                }
-            ],
+            system: {
+                changes: [
+                    {
+                        key: 'system.abilities.' + ability + '.value',
+                        type: 'add',
+                        value: -actualChange,
+                        priority: 20
+                    }
+                ]
+            },
             flags: {
                 dae: {
                     showIcon: true

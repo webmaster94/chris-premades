@@ -16,10 +16,10 @@ async function makeMaps({trigger: {entity: item}, workflow}) {
     };
     let source = await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'adventurersAtlasCreator', rules: 'modern'});
     effectData.name = item.name;
-    effectData.changes = [{
+    effectData.system.changes = [{
         key: 'system.attributes.init.bonus',
         value: '1d4',
-        mode: 2,
+        type: 'add',
         priority: 20
     }];
     genericUtils.setProperty(effectData, 'flags.dae.showIcon', true);

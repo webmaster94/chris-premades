@@ -13,20 +13,22 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
-            {
-                key: 'ATL.light.dim',
-                mode: 4,
-                value: 20,
-                priority: 20
-            },
-            {
-                key: 'ATL.light.bright',
-                mode: 4,
-                value: 10,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'ATL.light.dim',
+                    type: 'upgrade',
+                    value: 20,
+                    priority: 20
+                },
+                {
+                    key: 'ATL.light.bright',
+                    type: 'upgrade',
+                    value: 10,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 castData: workflow.castData

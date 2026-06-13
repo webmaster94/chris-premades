@@ -5,12 +5,13 @@ async function damaged({trigger, workflow}) {
     if (identifer === 'balefulInterdict') return;
     let effectCounts = [];
     for (let token of workflow.hitTargets) {
-        let effects = effectUtils.getAllEffectsByIdentifier(token.actor, 'balefulInterdictEffect');
+        let effects = effectUtils.getAllEffectsByIdentifier(token.actor, 'balefulInterdictEffect').filter(i => !i.duration?.expired && !i.disabled);
         if (!effects.length) continue;
         for (let effect of effects) {
             let originItem = await effectUtils.getOriginItem(effect);
             if (!originItem) continue;
-            if (effectUtils.getEffectByStatusID(originItem.actor, 'incapacitated')) continue;
+            let incapacitatedEffect = effectUtils.getEffectByStatusID(originItem.actor, 'incapacitated');
+            if (incapacitatedEffect && !incapacitatedEffect.duration?.expired && !incapacitatedEffect.disabled) continue;
             let firstToken = actorUtils.getFirstToken(originItem.actor);
             if (!firstToken) continue;
             let canSee = tokenUtils.canSee(firstToken, token);
@@ -97,6 +98,7 @@ async function move({trigger, workflow}) {
     let validTokens = workflow.token.document.parent.tokens.filter(token => {
         if (!token.actor) return;
         let effect = effectUtils.getAllEffectsByIdentifier(token.actor, 'balefulInterdictEffect').find(effect => {
+            if (effect.duration?.expired || effect.disabled) return;
             let originItem = effectUtils.getOriginItemSync(effect);
             if (!originItem) return;
             if (!token.actor.statuses.has('dead') && !token.actor.statuses.has('unconscious')) return;
@@ -122,6 +124,7 @@ async function move({trigger, workflow}) {
         return;
     }
     let effects = effectUtils.getAllEffectsByIdentifier(targetToken.actor, 'balefulInterdictEffect').filter(effect => {
+        if (effect.duration?.expired || effect.disabled) return;
         let originItem = effectUtils.getOriginItemSync(effect);
         if (!originItem) return;
         if (originItem.actor.uuid === workflow.actor.uuid) return true;
@@ -213,7 +216,8 @@ async function burnEarly({trigger, workflow}) {
     let sourceEffect = superiorInterdict.effects.contents?.[0];
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
-    effectData.duration = {seconds: 1};
+    effectData.duration = {value: 1, units: 'seconds'};
+    effectData.start = {time: game.time?.worldTime ?? 0};
     await effectUtils.createEffect(workflow.actor, effectData, {animate: false});
 }
 export let balefulInterdict = {

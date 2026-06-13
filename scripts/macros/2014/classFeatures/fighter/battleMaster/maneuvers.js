@@ -23,16 +23,23 @@ async function useBaitAndSwitch({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            rounds: 1
+            value: 1,
+            units: 'rounds'
         },
-        changes: [
-            {
-                key: 'system.attributes.ac.bonus',
-                mode: 2,
-                value: superiorityRoll.total,
-                priority: 20
-            }
-        ]
+        start: {
+            round: game.combat?.round ?? 0,
+            turn: game.combat?.turn ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'system.attributes.ac.bonus',
+                    type: 'add',
+                    value: superiorityRoll.total,
+                    priority: 20
+                }
+            ]
+        }
     };
     let sourceUpdate = {
         _id: workflow.token.document.id,
@@ -65,14 +72,16 @@ async function useBrace({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        changes: [
-            {
-                key: 'system.bonuses.mwak.damage',
-                mode: 2,
-                value: superiorityDie,
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'system.bonuses.mwak.damage',
+                    type: 'add',
+                    value: superiorityDie,
+                    priority: 20
+                }
+            ]
+        }
     };
     let effect = await effectUtils.createEffect(workflow.actor, effectData);
     await workflowUtils.syntheticItemRoll(selected, [workflow.targets.first()]);
@@ -103,16 +112,23 @@ async function useCommandersStrike({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            turns: 1
+            value: 1,
+            units: 'turns'
         },
-        changes: [
-            {
-                key: 'system.bonuses.weapon.damage',
-                mode: 2,
-                value: superiorityDie,
-                priority: 20
-            }
-        ],
+        start: {
+            round: game.combat?.round ?? 0,
+            turn: game.combat?.turn ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'system.bonuses.weapon.damage',
+                    type: 'add',
+                    value: superiorityDie,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [
@@ -134,16 +150,23 @@ async function useDistractingStrike({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            rounds: 1
+            value: 1,
+            units: 'rounds'
         },
-        changes: [
-            {
-                key: 'flags.midi-qol.grants.advantage.attack.all',
-                mode: 0,
-                value: 'targetActorUuid !== "' + workflow.actor.uuid + '"',
-                priority: 20
-            }
-        ],
+        start: {
+            round: game.combat?.round ?? 0,
+            turn: game.combat?.turn ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.grants.advantage.attack.all',
+                    type: 'custom',
+                    value: 'targetActorUuid !== "' + workflow.actor.uuid + '"',
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [
@@ -171,16 +194,23 @@ async function useGoadingAttack({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            rounds: 1
+            value: 1,
+            units: 'rounds'
         },
-        changes: [
-            {
-                key: 'flags.midi-qol.disadvantage.attack.all',
-                mode: 0,
-                value: 'targetActorUuid !== "' + workflow.actor.uuid + '"',
-                priority: 20
-            }
-        ],
+        start: {
+            round: game.combat?.round ?? 0,
+            turn: game.combat?.turn ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.disadvantage.attack.all',
+                    type: 'custom',
+                    value: 'targetActorUuid !== "' + workflow.actor.uuid + '"',
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [
@@ -217,14 +247,16 @@ async function useGrapplingStrike({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        changes: [
-            {
-                key: 'system.skills.ath.bonuses.check',
-                mode: 2,
-                value: rollTotal,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.skills.ath.bonuses.check',
+                    type: 'add',
+                    value: rollTotal,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 effect: {

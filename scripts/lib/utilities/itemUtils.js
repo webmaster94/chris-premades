@@ -60,6 +60,10 @@ async function setConfig(item, key, value) {
 function getItemByIdentifier(actor, identifier) {
     return actor.items.find(i => genericUtils.getIdentifier(i) === identifier);
 }
+function getSourceClassIdentifier(item) {
+    let sourceItem = fromUuidSync(item?.system?.sourceItem, {strict: false});
+    return genericUtils.getIdentifier(sourceItem) ?? sourceItem?.system?.identifier ?? item?.system?.sourceClass;
+}
 function getAllItemsByIdentifier(actor, identifier) {
     return actor.items.filter(i => genericUtils.getIdentifier(i) === identifier);
 }
@@ -254,6 +258,7 @@ export let itemUtils = {
     isSpellFeature,
     getConfig,
     getItemByIdentifier,
+    getSourceClassIdentifier,
     getAllItemsByIdentifier,
     getVersion,
     getSource,

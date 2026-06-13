@@ -58,40 +58,40 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: []
+        system: {changes: []}
     };
     effectUtils.addMacro(effectData, 'effect', ['wildShapeActive']);
     effectUtils.addMacro(effectData, 'midi.actor', ['wildShapeActive']);
     let improvedCircleForms = itemUtils.getItemByIdentifier(workflow.actor, 'improvedCircleForms');
-    if (improvedCircleForms) effectData.changes.push({
+    if (improvedCircleForms) effectData.system.changes.push({
         key: 'system.abilities.con.bonuses.save',
-        mode: 2,
+        type: 'add',
         value: '@abilities.wis.mod',
         priority: 20
     });
     let lunarForm = itemUtils.getItemByIdentifier(workflow.actor, 'lunarForm');
-    if (lunarForm) effectData.changes.push(...[
+    if (lunarForm) effectData.system.changes.push(...[
         {
             key: 'flags.midi-qol.optional.LunarForm.damage.mwak',
-            mode: 5,
+            type: 'override',
             value: `${itemUtils.getConfig(lunarForm, 'formula')}[${itemUtils.getConfig(lunarForm, 'damageType')}]`,
             priority: 20
         },
         {
             key: 'flags.midi-qol.optional.LunarForm.damage.mwak',
-            mode: 5,
+            type: 'override',
             value: `${itemUtils.getConfig(lunarForm, 'formula')}[${itemUtils.getConfig(lunarForm, 'damageType')}]`,
             priority: 20
         },
         {
             key: 'flags.midi-qol.optional.LunarForm.activation',
-            mode: 5,
+            type: 'override',
             value: 'workflow.hitTargets.size > 0 && ["natural", "monster"].includes(item.type?.value)',
             priority: 20
         },
         {
             key: 'flags.midi-qol.optional.LunarForm.count',
-            mode: 5,
+            type: 'override',
             value: 'each-turn',
             priority: 20
         }

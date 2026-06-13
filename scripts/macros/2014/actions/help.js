@@ -8,17 +8,15 @@ async function use({trigger, workflow}) {
             name: workflow.item.name,
             img: workflow.item.img,
             origin: workflow.item.uuid,
-            duration: {
-                seconds: combatUtils.inCombat() ? 12 : 3600
-            },
-            changes: [
+            duration: {value: combatUtils.inCombat() ? 12 : 3600, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
+            system: {changes: [
                 {
                     key: 'flags.midi-qol.advantage.ability.all',
-                    mode: 0,
+                    type: 'custom',
                     value: 1,
                     priority: 20
                 }
-            ],
+            ]},
             flags: {
                 dae: {
                     specialDuration: [
@@ -33,17 +31,15 @@ async function use({trigger, workflow}) {
             name: workflow.item.name,
             img: workflow.item.img,
             origin: workflow.item.uuid,
-            duration: {
-                seconds: 12
-            },
-            changes: [
+            duration: {value: 12, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
+            system: {changes: [
                 {
                     key: 'flags.midi-qol.grants.advantage.attack.all',
-                    mode: 0,
+                    type: 'custom',
                     value: 'workflow.token.document.id != "' + workflow.token.document.id + '"',
                     priority: 20
                 }
-            ],
+            ]},
             flags: {
                 dae: {
                     specialDuration: [

@@ -29,9 +29,7 @@ async function create({trigger: {entity: effect, target, identifier}}) {
         name: effect.name.split(':')[0],
         img: effect.img,
         origin: effect.uuid,
-        duration: {
-            seconds: effect.duration.remaining
-        },
+        duration: {value: effectUtils.getRemainingDurationSeconds(effect), units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
         flags: {
             'chris-premades': {
                 aura: true,

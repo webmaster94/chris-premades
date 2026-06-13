@@ -12,30 +12,34 @@ async function use({workflow}) {
     let identifier = genericUtils.getIdentifier(workflow.item);
     let damageType = itemUtils.getConfig(workflow.item, 'damageType');
     if (identifier === 'aasimarRadiantSoul') {
-        effectData.changes = [
-            {
-                key: 'system.attributes.movement.fly',
-                mode: 4,
-                value: workflow.actor.system.attributes.movement.walk,
-                priority: 20
-            }
-        ];
+        effectData.system = {
+            changes: [
+                {
+                    key: 'system.attributes.movement.fly',
+                    type: 'upgrade',
+                    value: workflow.actor.system.attributes.movement.walk,
+                    priority: 20
+                }
+            ]
+        };
         genericUtils.setProperty(effectData, 'flags.chris-premades.celestialRevelation.damageType', damageType ?? 'radiant');
     } else if (identifier === 'aasimarRadiantConsumption') {
-        effectData.changes = [
-            {
-                key: 'ATL.light.bright',
-                mode: 4,
-                value: 10,
-                priority: 20
-            },
-            {
-                key: 'ATL.light.dim',
-                mode: 4,
-                value: 20,
-                priority: 20
-            }
-        ];
+        effectData.system = {
+            changes: [
+                {
+                    key: 'ATL.light.bright',
+                    type: 'upgrade',
+                    value: 10,
+                    priority: 20
+                },
+                {
+                    key: 'ATL.light.dim',
+                    type: 'upgrade',
+                    value: 20,
+                    priority: 20
+                }
+            ]
+        };
         effectUtils.addMacro(effectData, 'combat', ['aasimarRadiantConsumption']);
         genericUtils.setProperty(effectData, 'flags.chris-premades.celestialRevelation.damageType', damageType ?? 'radiant');
     } else {

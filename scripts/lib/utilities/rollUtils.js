@@ -100,11 +100,18 @@ async function getChangedDamageRoll(origRoll, newType) {
 async function rollDice(formula, {entity, chatMessage, flavor, mode = 'publicroll', options} = {}) {
     let roll = await new Roll(formula, entity?.getRollData()).evaluate(options);
     if (chatMessage) {
+        const legacyModes = {
+            roll: game.settings.get('core', 'messageMode'),
+            publicroll: 'public',
+            gmroll: 'gm',
+            blindroll: 'blind',
+            selfroll: 'self'
+        };
         let message = await roll.toMessage({
             speaker: {alias: name},
             flavor: flavor
         }, {
-            rollMode: mode
+            messageMode: legacyModes[mode] ?? mode
         });
         return {message: message, roll: roll};
     }

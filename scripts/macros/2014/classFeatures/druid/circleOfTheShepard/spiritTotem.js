@@ -136,9 +136,15 @@ async function create({trigger: {entity: effect, target, identifier}}) {
         img: effect.img,
         origin: effect.uuid,
         duration: {
-            seconds: effect.duration.remaining
+            value: effectUtils.getRemainingDurationSeconds(effect),
+            units: 'seconds'
         },
-        changes: [],
+        start: {
+            time: game.time?.worldTime ?? 0
+        },
+        system: {
+            changes: []
+        },
         flags: {
             'chris-premades': {
                 aura: true,
@@ -153,23 +159,23 @@ async function create({trigger: {entity: effect, target, identifier}}) {
     };
     switch (totemType) {
         case 'bear':
-            effectData.changes.push({
+            effectData.system.changes.push({
                 key: 'flags.midi-qol.advantage.check.str',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             },
             {
                 key: 'flags.midi-qol.advantage.save.str',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             });
             break;
         case 'hawk':
-            effectData.changes.push({
+            effectData.system.changes.push({
                 key: 'flags.midi-qol.advantage.skill.prc',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             });

@@ -91,18 +91,20 @@ async function use({workflow}) {
             name: workflow.item.name,
             img: workflow.item.img,
             origin: workflow.item.uuid,
-            changes: [
-                {
-                    key: 'name',
-                    mode: 5,
-                    value: '{} (' + genericUtils.translate('CHRISPREMADES.Macros.CreatePactWeapon.Weapon') + ')',
-                    priority: 20
-                }
-            ]
+            system: {
+                changes: [
+                    {
+                        key: 'name',
+                        type: 'override',
+                        value: '{} (' + genericUtils.translate('CHRISPREMADES.Macros.CreatePactWeapon.Weapon') + ')',
+                        priority: 20
+                    }
+                ]
+            }
         };
-        if (improvedPactWeapon) enchantData.changes.push({
+        if (improvedPactWeapon) enchantData.system.changes.push({
             key: 'system.magicalBonus',
-            mode: 4,
+            type: 'upgrade',
             value: 1,
             priority: 20
         });
@@ -127,9 +129,9 @@ async function use({workflow}) {
                     changed = true;
                 }
             }
-            if (changed) enchantData.changes.push({
+            if (changed) enchantData.system.changes.push({
                 key: 'activities[attack].attack.ability',
-                mode: 5,
+                type: 'override',
                 value: ability,
                 priority: 20
             });

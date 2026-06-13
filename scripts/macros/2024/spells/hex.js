@@ -37,21 +37,19 @@ async function use({trigger, workflow}) {
         name: genericUtils.translate('CHRISPREMADES.Macros.Hex.Hexed'),
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        duration: {
-            seconds: seconds
-        },
-        changes: [
+        duration: {value: seconds, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
+        system: {changes: [
             {
                 key: 'flags.midi-qol.disadvantage.check.' + selection,
-                mode: 0,
+                type: 'custom',
                 value: true,
                 priority: 20
             }
-        ]
+        ]}
     };
-    if (itemUtils.getItemByIdentifier(workflow.actor, 'eldritchHex')) targetEffectData.changes.push({
+    if (itemUtils.getItemByIdentifier(workflow.actor, 'eldritchHex')) targetEffectData.system.changes.push({
         key: 'flags.midi-qol.disadvantage.save.' + selection,
-        mode: 0,
+        type: 'custom',
         value: true,
         priority: 20
     });
@@ -59,9 +57,7 @@ async function use({trigger, workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        duration: {
-            seconds: seconds
-        },
+        duration: {value: seconds, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
         flags: {
             'chris-premades': {
                 hex: {
@@ -97,7 +93,7 @@ async function use({trigger, workflow}) {
     for (let i of workflow.targets) {
         if (i.actor) await effectUtils.createEffect(i.actor, targetEffectData, {parentEntity: casterEffect, identifier: 'hexed'});
     }
-    if (concentrationEffect) await genericUtils.update(concentrationEffect, {'duration.seconds': seconds});
+    if (concentrationEffect) await genericUtils.update(concentrationEffect, {'duration.value': seconds, 'duration.units': 'seconds'});
 }
 export let hex = {
     name: 'Hex',

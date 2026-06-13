@@ -6,20 +6,22 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
-            {
-                key: 'flags.midi-qol.advantage.check.str',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.advantage.save.str',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.advantage.check.str',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.advantage.save.str',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 enlargeReduce: {
@@ -35,16 +37,16 @@ async function use({workflow}) {
     if (config.doubleDice) {
         effectUtils.addMacro(effectData, 'midi.actor', ['enlargeEnlarged']);
     } else {
-        effectData.changes.push(
+        effectData.system.changes.push(
             {
                 key: 'system.bonuses.mwak.damage',
-                mode: 2,
+                type: 'add',
                 value: '+1d4',
                 priority: 20
             },
             {
                 key: 'system.bonuses.rwak.damage',
-                mode: 2,
+                type: 'add',
                 value: '+1d4',
                 proirity: 20
             }

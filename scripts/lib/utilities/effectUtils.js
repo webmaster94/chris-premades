@@ -149,6 +149,20 @@ function addMacro(effectData, type, macroList) {
     let currentMacroList = genericUtils.getProperty(effectData, 'flags.chris-premades.macros.' + type) ?? [];
     return genericUtils.setProperty(effectData, 'flags.chris-premades.macros.' + type, currentMacroList.concat(macroList));
 }
+function getRemainingDurationSeconds(effect) {
+    let duration = effect?.duration;
+    if (!duration) return 0;
+    if (duration.remaining === Infinity) return Infinity;
+    if (Number.isFinite(duration.remaining)) {
+        if (duration.units === 'seconds') return duration.remaining;
+        if (Number.isFinite(duration.seconds) && Number.isFinite(duration.value) && duration.value) return Math.ceil(duration.remaining * duration.seconds / duration.value);
+        return duration.remaining;
+    }
+    if (!Number.isFinite(duration.value)) return duration.value ?? 0;
+    if (duration.units === 'seconds') return Math.max(((effect.start?.time ?? game.time?.worldTime ?? 0) + duration.value) - (game.time?.worldTime ?? 0), 0);
+    if (Number.isFinite(duration.seconds)) return Math.max(((effect.start?.time ?? game.time?.worldTime ?? 0) + duration.seconds) - (game.time?.worldTime ?? 0), 0);
+    return duration.value;
+}
 function getConcentrationEffect(actor, item) {
     return MidiQOL.getConcentrationEffect(actor, item);
 }
@@ -280,6 +294,7 @@ export let effectUtils = {
     createEffects,
     addDependent,
     addMacro,
+    getRemainingDurationSeconds,
     getConcentrationEffect,
     getEffectByIdentifier,
     getAllEffectsByIdentifier,

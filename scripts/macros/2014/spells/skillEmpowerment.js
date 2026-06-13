@@ -22,14 +22,14 @@ async function use({workflow}) {
             img: workflow.item.img,
             origin: workflow.item.uuid,
             duration: itemUtils.convertDuration(workflow.item),
-            changes: [
+            system: {changes: [
                 {
                     key: 'system.skills.' + selection + '.value',
-                    mode: 4,
+                    type: 'upgrade',
                     value: 2,
                     priority: 20
                 }
-            ]
+            ]}
         };
         let effect = effectUtils.getEffectByIdentifier(targetActor, 'skillEmpowerment');
         if (effect) await genericUtils.remove(effect);

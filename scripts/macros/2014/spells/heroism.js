@@ -12,14 +12,14 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'system.traits.ci.value',
-                mode: 2,
+                type: 'add',
                 value: 'frightened',
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             'chris-premades': {
                 heroism: {

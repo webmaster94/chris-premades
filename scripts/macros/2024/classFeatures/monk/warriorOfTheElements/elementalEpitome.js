@@ -4,17 +4,17 @@ async function swapResistance({trigger: {entity: item}}) {
     let effect = effectUtils.getEffectByIdentifier(item.parent, 'elementalAttunementEffect');
     if (!effect) return;
     let damageType = await chooseResistance(item);
-    let resistance = effect.changes.find(c => c.key === 'system.traits.dr.value');
+    let resistance = effect.system.changes.find(c => c.key === 'system.traits.dr.value');
     if (resistance) resistance.value = damageType;
-    else effect.changes.push(
+    else effect.system.changes.push(
         {
             key: 'system.traits.dr.value',
             value: damageType,
-            mode: 2,
+            type: 'add',
             priority: 20
         }
     );
-    await genericUtils.update(effect, {changes: effect.changes});
+    await genericUtils.update(effect, {system: {changes: effect.system.changes}});
 }
 export async function chooseResistance(item, context='CHRISPREMADES.Macros.InfuseItem.ResistanceType') {
     let damageTypes = itemUtils.getConfig(item, 'damageTypes');
@@ -51,18 +51,15 @@ export async function startDestructiveStride(item) {
         name: item.name,
         img: item.img,
         origin: item.uuid,
-        changes: [
+        system: {changes: [
             {
                 key: 'system.attributes.movement.speed',
                 value: 20,
-                mode: 2,
+                type: 'add',
                 priority: 20
             }
-        ],
-        duration: {
-            seconds: 1,
-            turns: 1
-        },
+        ]},
+        duration: {value: 1, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
         flags: {
             'chris-premades':{
                 damageType,

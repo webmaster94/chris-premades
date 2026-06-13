@@ -55,20 +55,22 @@ async function healTheConstruct(item) {
         name: item.name,
         img: item.img,
         origin: item.uuid,
-        changes: [
-            {
-                key: 'system.details.type.value',
-                value: 'humanoid',
-                mode: 5,
-                priority: 20
-            },
-            {
-                key: 'system.details.race.name',
-                value: 'Human',
-                mode: 5,
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'system.details.type.value',
+                    value: 'humanoid',
+                    type: 'override',
+                    priority: 20
+                },
+                {
+                    key: 'system.details.race.name',
+                    value: 'Human',
+                    type: 'override',
+                    priority: 20
+                }
+            ]
+        }
     }, {identifier: 'conditionResistance'});
 }
 export let healingMachine = {

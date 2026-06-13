@@ -12,14 +12,16 @@ async function create({trigger: {entity: item, target, identifier}}) {
         name: item.name,
         img: item.img,
         origin: item.uuid,
-        changes: [
-            {
-                key: 'system.bonuses.abilities.save',
-                mode: 2,
-                value: Math.max(item.actor.system.abilities[ability].mod, 1),
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.bonuses.abilities.save',
+                    type: 'add',
+                    value: Math.max(item.actor.system.abilities[ability].mod, 1),
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 aura: true,

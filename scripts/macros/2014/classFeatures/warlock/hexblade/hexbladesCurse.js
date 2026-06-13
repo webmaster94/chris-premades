@@ -31,14 +31,16 @@ async function early({workflow}) {
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.GenericEffects.CriticalThreshold'),
         img: constants.tempConditionIcon,
-        changes: [
-            {
-                key: 'flags.midi-qol.grants.criticalThreshold',
-                value: 19,
-                mode: 5,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.grants.criticalThreshold',
+                    value: 19,
+                    type: 'override',
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [
@@ -110,8 +112,10 @@ async function remove({trigger: {entity: effect}}) {
             img: effect.img,
             origin: effect.origin,
             duration: {
-                seconds: effect.duration.remaining
+                value: effect.duration.value,
+                units: effect.duration.units
             },
+            start: effect.toObject().start,
             flags: {
                 dae: {
                     specialDuration: [

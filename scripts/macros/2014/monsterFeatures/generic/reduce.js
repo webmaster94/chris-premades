@@ -6,20 +6,22 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
-            {
-                key: 'flags.midi-qol.disadvantage.check.str',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.disadvantage.save.str',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.disadvantage.check.str',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.disadvantage.save.str',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 enlargeReduce: {
@@ -35,40 +37,40 @@ async function use({workflow}) {
     if (config.oneDamage) {
         effectUtils.addMacro(effectData, 'midi.actor', ['reduceReduced']);
     } else {
-        effectData.changes.push(
+        effectData.system.changes.push(
             {
                 key: 'system.bonuses.mwak.damage',
-                mode: 2,
+                type: 'add',
                 value: '-1d4',
                 priority: 20
             },
             {
                 key: 'system.bonuses.rwak.damage',
-                mode: 2,
+                type: 'add',
                 value: '-1d4',
                 proirity: 20
             }
         );
     }
     if (config.attackDisadvantage) {
-        effectData.changes.push({
+        effectData.system.changes.push({
             key: 'flags.midi-qol.disadvantage.attack.str',
-            mode: 5,
+            type: 'override',
             value: 1,
             priority: 20
         });
     }
     if (config.stealthACBonus) {
-        effectData.changes.push(
+        effectData.system.changes.push(
             {
                 key: 'system.skills.ste.bonuses.check',
-                mode: 2,
+                type: 'add',
                 value: 5,
                 priority: 20
             },
             {
                 key: 'system.attributes.ac.bonus',
-                mode: 2,
+                type: 'add',
                 value: 5,
                 priority: 20
             }

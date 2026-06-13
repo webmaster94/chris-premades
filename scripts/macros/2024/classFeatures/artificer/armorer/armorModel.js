@@ -99,26 +99,26 @@ async function giantStature({trigger, workflow}) {
         img: workflow.activity.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
+        system: {changes: [
             {
                 key: 'flags.midi-qol.range.all',
-                mode: 0,
+                type: 'custom',
                 value: perfectedArmor ? 10 : 5,
                 priority: 20
             }
-        ]
+        ]}
     };
     if (perfectedArmor) {
-        effectData.changes.push(...[
+        effectData.system.changes.push(...[
             {
                 key: 'flags.midi-qol.advantage.check.str',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             },
             {
                 key: 'flags.midi-qol.advantage.save.str',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             }
@@ -153,9 +153,9 @@ async function giantStature({trigger, workflow}) {
                 });
                 genericUtils.setProperty(effectData, 'flags.chris-premades.effect.sizeAnimation', false);
             } else {
-                effectData.changes.push({
+                effectData.system.changes.push({
                     key: 'system.traits.size',
-                    mode: 5,
+                    type: 'override',
                     value: newSize,
                     priority: 20
                 });

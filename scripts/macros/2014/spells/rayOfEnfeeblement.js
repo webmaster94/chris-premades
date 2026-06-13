@@ -11,20 +11,20 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'flags.midi-qol.OverTime',
-                mode: 0,
+                type: 'custom',
                 value: 'label=' + genericUtils.translate('CHRISPREMADES.Macros.RayOfEnfeeblement.Overtime') + ',turn=end,saveDC=' + itemUtils.getSaveDC(workflow.item) + ',saveAbility=con,savingThrow=true,saveMagic=true',
                 priority: 20
             }
-        ]
+        ]}
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['rayOfEnfeeblementEnfeebled']);
     for (let target of workflow.hitTargets) {
         await effectUtils.createEffect(target.actor, effectData, {concentrationItem: workflow.item, interdependent: true, identifier: 'rayOfEnfeeblementEnfeebled'});
     }
-    if (concentrationEffect) await genericUtils.update(concentrationEffect, {'duration.seconds': effectData.duration.seconds});
+    if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
 }
 async function damage({workflow}) {
     if (workflow.isFumble || workflow.item.type !== 'weapon') return;

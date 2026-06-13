@@ -19,14 +19,16 @@ async function use({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        changes: [
-            {
-                key: 'name',
-                mode: 5,
-                value: '{} (' + workflow.item.name + ')',
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'name',
+                    type: 'override',
+                    value: '{} (' + workflow.item.name + ')',
+                    priority: 20
+                }
+            ]
+        }
     };
     let cha = workflow.actor.system.abilities.cha.mod;
     let ability = selection.system.activities.getByType('attack')[0]?.attack.ability;
@@ -47,9 +49,9 @@ async function use({workflow}) {
             changed = true;
         }
     }
-    if (changed) enchantData.changes.push({
+    if (changed) enchantData.system.changes.push({
         key: 'activities[attack].attack.ability',
-        mode: 5,
+        type: 'override',
         value: ability,
         priority: 20
     });

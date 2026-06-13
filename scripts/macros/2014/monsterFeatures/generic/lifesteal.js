@@ -62,12 +62,12 @@ async function use({trigger, workflow}) {
             let effect = await effectUtils.getAllEffectsByIdentifier(token.actor, 'reduceMaxHP').find(async i => (await effectUtils.getOriginItem(i))?.uuid === trigger.entity.uuid);
             let totalMax = token.actor.system.attributes.hp.max;
             if (effect) {
-                let currReduction = parseInt(effect.changes[0].value);
+                let currReduction = parseInt(effect.system.changes[0].value);
                 await genericUtils.update(effect, {
-                    changes: [
+                    'system.changes': [
                         {
                             key: 'system.attributes.hp.tempmax',
-                            mode: 2,
+                            type: 'add',
                             value: Math.max(-totalMax, currReduction - testhp),
                             priority: 20
                         }
@@ -78,14 +78,16 @@ async function use({trigger, workflow}) {
                     name: trigger.entity.name,
                     img: trigger.entity.img,
                     origin: trigger.entity.uuid,
-                    changes: [
-                        {
-                            key: 'system.attributes.hp.tempmax',
-                            mode: 2,
-                            value: -testhp,
-                            priority: 20
-                        }
-                    ],
+                    system: {
+                        changes: [
+                            {
+                                key: 'system.attributes.hp.tempmax',
+                                type: 'add',
+                                value: -testhp,
+                                priority: 20
+                            }
+                        ]
+                    },
                     flags: {
                         dae: {
                             showIcon: true

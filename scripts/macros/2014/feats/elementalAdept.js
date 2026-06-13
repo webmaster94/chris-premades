@@ -32,13 +32,19 @@ async function damage({trigger: {entity: item}, workflow}) {
                 img: item.img,
                 origin: item.uuid,
                 duration: {
-                    seconds: 1
+                    value: 1,
+                    units: 'seconds'
                 },
-                changes: validTypes.map(i => ({
-                    key: 'system.traits.idr.value',
-                    mode: 2,
-                    value: i
-                })),
+                start: {
+                    time: game.time?.worldTime ?? 0
+                },
+                system: {
+                    changes: validTypes.map(i => ({
+                        key: 'system.traits.idr.value',
+                        type: 'add',
+                        value: i
+                    }))
+                },
                 flags: {
                     'chris-premades': {
                         effect: {
@@ -56,17 +62,23 @@ async function damage({trigger: {entity: item}, workflow}) {
                 img: item.img,
                 origin: item.uuid,
                 duration: {
-                    seconds: 1
+                    value: 1,
+                    units: 'seconds'
                 },
-                changes: validTypes.map(i => ({
-                    key: 'system.traits.idi.value',
-                    mode: 2,
-                    value: i
-                })).concat(validTypes.map(i => ({
-                    key: 'system.traits.idr.value',
-                    mode: 2,
-                    value: i
-                }))),
+                start: {
+                    time: game.time?.worldTime ?? 0
+                },
+                system: {
+                    changes: validTypes.map(i => ({
+                        key: 'system.traits.idi.value',
+                        type: 'add',
+                        value: i
+                    })).concat(validTypes.map(i => ({
+                        key: 'system.traits.idr.value',
+                        type: 'add',
+                        value: i
+                    })))
+                },
                 flags: {
                     'chris-premades': {
                         effect: {
@@ -84,17 +96,23 @@ async function damage({trigger: {entity: item}, workflow}) {
                 img: item.img,
                 origin: item.uuid,
                 duration: {
-                    seconds: 1
+                    value: 1,
+                    units: 'seconds'
                 },
-                changes: validTypes.map(i => ({
-                    key: 'system.traits.idi.value',
-                    mode: 2,
-                    value: i
-                })).concat(validTypes.map(i => ({
-                    key: 'system.traits.idr.value',
-                    mode: 2,
-                    value: i
-                }))),
+                start: {
+                    time: game.time?.worldTime ?? 0
+                },
+                system: {
+                    changes: validTypes.map(i => ({
+                        key: 'system.traits.idi.value',
+                        type: 'add',
+                        value: i
+                    })).concat(validTypes.map(i => ({
+                        key: 'system.traits.idr.value',
+                        type: 'add',
+                        value: i
+                    })))
+                },
                 flags: {
                     'chris-premades': {
                         effect: {
@@ -114,17 +132,23 @@ async function damage({trigger: {entity: item}, workflow}) {
                     img: item.img,
                     origin: item.uuid,
                     duration: {
-                        seconds: 1
+                        value: 1,
+                        units: 'seconds'
                     },
-                    changes: downgrades.map(i => ({
-                        key: 'system.traits.di.value',
-                        mode: 2,
-                        value: '-' + i
-                    })).concat(downgrades.map(i => ({
-                        key: 'system.traits.dr.value',
-                        mode: 2,
-                        value: i
-                    }))),
+                    start: {
+                        time: game.time?.worldTime ?? 0
+                    },
+                    system: {
+                        changes: downgrades.map(i => ({
+                            key: 'system.traits.di.value',
+                            type: 'add',
+                            value: '-' + i
+                        })).concat(downgrades.map(i => ({
+                            key: 'system.traits.dr.value',
+                            type: 'add',
+                            value: i
+                        })))
+                    },
                     flags: {
                         'chris-premades': {
                             effect: {
@@ -146,21 +170,27 @@ async function damage({trigger: {entity: item}, workflow}) {
                     img: item.img,
                     origin: item.uuid,
                     duration: {
-                        seconds: 1
+                        value: 1,
+                        units: 'seconds'
                     },
-                    changes: downgradeImmunity.map(i => ({
-                        key: 'system.traits.di.value',
-                        mode: 2,
-                        value: '-' + i
-                    })).concat(downgradeImmunity.map(i => ({
-                        key: 'system.traits.dr.value',
-                        mode: 2,
-                        value: i
-                    }))).concat(downgradeResistance.map(i => ({
-                        key: 'system.traits.dr.value',
-                        mode: 2,
-                        value: '-' + i
-                    }))),
+                    start: {
+                        time: game.time?.worldTime ?? 0
+                    },
+                    system: {
+                        changes: downgradeImmunity.map(i => ({
+                            key: 'system.traits.di.value',
+                            type: 'add',
+                            value: '-' + i
+                        })).concat(downgradeImmunity.map(i => ({
+                            key: 'system.traits.dr.value',
+                            type: 'add',
+                            value: i
+                        }))).concat(downgradeResistance.map(i => ({
+                            key: 'system.traits.dr.value',
+                            type: 'add',
+                            value: '-' + i
+                        })))
+                    },
                     flags: {
                         'chris-premades': {
                             effect: {

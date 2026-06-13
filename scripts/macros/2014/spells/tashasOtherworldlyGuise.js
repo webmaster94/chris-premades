@@ -9,42 +9,42 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'system.traits.di.value',
-                mode: 2,
+                type: 'add',
                 value: isLower ? 'fire' : 'radiant',
                 priority: 20
             },
             {
                 key: 'system.traits.di.value',
-                mode: 2,
+                type: 'add',
                 value: isLower ? 'poison' : 'necrotic',
                 priority: 20
             },
             {
                 key: 'system.traits.ci.value',
-                mode: 2,
+                type: 'add',
                 value: isLower ? 'poisoned' : 'charmed',
                 priority: 20
             },
             {
                 key: 'system.attributes.movement.fly',
-                mode: 4,
+                type: 'upgrade',
                 value: 40,
                 priority: 20
             },
             {
                 key: 'system.attributes.ac.bonus',
-                mode: 2,
+                type: 'add',
                 value: '+2',
                 priority: 20
             }
-        ]
+        ]}
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['tashasOtherworldlyGuiseBuffed']);
     await effectUtils.createEffect(workflow.actor, effectData, {concentrationItem: workflow.item, strictlyInterdependent: true, identifier: 'tashasOtherworldlyGuise'});
-    if (concentrationEffect) await genericUtils.update(concentrationEffect, {'duration.seconds': effectData.duration.seconds});
+    if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
 }
 async function early({trigger: {entity: effect}, workflow}) {
     if (workflow.item.type !== 'weapon') return;

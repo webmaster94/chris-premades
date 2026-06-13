@@ -4,17 +4,15 @@ async function early({trigger, workflow}) {
     let effectData = {
         name: 'Auto Fail',
         img: constants.tempConditionIcon,
-        duration: {
-            seconds: 1
-        },
-        changes: [
+        duration: {value: 1, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
+        system: {changes: [
             {
                 key: 'flags.midi-qol.fail.ability.save.all',
                 value: 1,
-                mode: 0,
+                type: 'custom',
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             dae: {
                 specialDuration: [

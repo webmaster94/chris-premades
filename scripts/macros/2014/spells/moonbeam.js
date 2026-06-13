@@ -82,17 +82,15 @@ async function enterOrTurn({trigger: {entity: template, castData, token}}) {
             name: genericUtils.translate('CHRISPREMADES.GenericEffects.ConditionDisadvantage'),
             img: constants.tempConditionIcon,
             origin: template.uuid,
-            duration: {
-                turns: 1
-            },
-            changes: [
+            duration: {value: 1, units: 'turns'}, start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0},
+            system: {changes: [
                 {
                     key: 'flags.midi-qol.disadvantage.save.all',
                     value: 1,
-                    mode: 5,
+                    type: 'override',
                     priority: 120
                 }
-            ],
+            ]},
             flags: {
                 dae: {
                     specialDuration: [

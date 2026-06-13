@@ -42,46 +42,53 @@ async function turnEnd({trigger: {entity: effect, token}}) {
         img: effect.img,
         origin: effect.uuid,
         duration: {
-            rounds: 2
+            value: 2,
+            units: 'rounds'
         },
-        changes: [
-            {
-                key: 'flags.midi-qol.superSaver.all',
-                value: 1,
-                mode: 5,
-                priority: 20
-            },
-            {
-                key: 'system.attributes.ac.bonus',
-                value: 100,
-                mode: 5,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.min.ability.save.all',
-                value: 100,
-                mode: 5,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.grants.noCritical.all',
-                value: 1,
-                mode: 5,
-                priority: 20
-            },
-            {
-                key: 'macro.tokenMagic',
-                value: 'spectral-body',
-                mode: 0,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.neverTarget',
-                value: true,
-                mode: 0,
-                priority: 20
-            }
-        ],
+        start: {
+            round: game.combat?.round ?? 0,
+            turn: game.combat?.turn ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.superSaver.all',
+                    value: 1,
+                    type: 'override',
+                    priority: 20
+                },
+                {
+                    key: 'system.attributes.ac.bonus',
+                    value: 100,
+                    type: 'override',
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.min.ability.save.all',
+                    value: 100,
+                    type: 'override',
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.grants.noCritical.all',
+                    value: 1,
+                    type: 'override',
+                    priority: 20
+                },
+                {
+                    key: 'macro.tokenMagic',
+                    value: 'spectral-body',
+                    type: 'custom',
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.neverTarget',
+                    value: true,
+                    type: 'custom',
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 blink: {

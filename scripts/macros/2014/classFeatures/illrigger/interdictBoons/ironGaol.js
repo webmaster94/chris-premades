@@ -13,48 +13,50 @@ async function use({trigger, workflow}) {
         img: sourceEffect.img,
         origin: sourceEffect.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
-            {
-                key: 'flags.midi-qol.superSaver.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }, 
-            {
-                key: 'system.attributes.ac.bonus',
-                mode: 5,
-                value: 99,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.min.ability.save.all',
-                mode: 5,
-                value: 99,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.grants.noCritical.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.neverTarget',
-                mode: 0,
-                value: 1,
-                priority: 20
-            },
-            {
-                key: 'macro.tokenMagic',
-                mode: 0,
-                value: 'spectral-body',
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.superSaver.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'system.attributes.ac.bonus',
+                    type: 'override',
+                    value: 99,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.min.ability.save.all',
+                    type: 'override',
+                    value: 99,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.grants.noCritical.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.neverTarget',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                },
+                {
+                    key: 'macro.tokenMagic',
+                    type: 'custom',
+                    value: 'spectral-body',
+                    priority: 20
+                }
+            ]
+        }
     };
     if (!native) {
         let sourceEffectData = genericUtils.duplicate(sourceEffect.toObject());
-        effectData.changes.push(...sourceEffectData.changes);
+        effectData.system.changes.push(...sourceEffectData.system.changes);
     } else {
         genericUtils.setProperty(effectData, 'flags.dae.showIcon', true);
         delete effectData.duration;

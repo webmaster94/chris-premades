@@ -7,18 +7,18 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'system.traits.dr.value',
-                mode: 2,
+                type: 'add',
                 value: 'radiant',
                 priority: 20
             }
-        ]
+        ]}
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['shadowOfMoilBuffed']);
     await effectUtils.createEffect(workflow.actor, effectData, {concentrationItem: workflow.item, strictlyInterdependent: true, identifier: 'shadowOfMoil'});
-    if (concentrationEffect) await genericUtils.update(concentrationEffect, {'duration.seconds': effectData.duration.seconds});
+    if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
 }
 async function early({trigger:workflow}) {
     let sourceToken = workflow.token;

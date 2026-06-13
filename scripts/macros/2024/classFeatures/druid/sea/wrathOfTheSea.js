@@ -19,30 +19,30 @@ async function use({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: []
+        system: {changes: []}
     };
-    if (stormborn) effectData.changes.push([
+    if (stormborn) effectData.system.changes.push([
         {
             key: 'system.attributes.movement.fly',
-            mode: 4,
+            type: 'upgrade',
             value: '@attributes.movement.walk',
             priority: 100
         },
         {
             key: 'system.traits.dr.value',
-            mode: 2,
+            type: 'add',
             value: 'cold',
             priority: 20
         },
         {
             key: 'system.traits.dr.value',
-            mode: 2,
+            type: 'add',
             value: 'lightning',
             priority: 20
         },
         {
             key: 'system.traits.dr.value',
-            mode: 2,
+            type: 'add',
             value: 'thunder',
             priority: 20
         }

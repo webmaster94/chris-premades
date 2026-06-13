@@ -298,16 +298,20 @@ async function create({trigger: {entity: effect, target, identifier}}) {
         img: effect.img,
         origin: effect.uuid,
         duration: {
-            seconds: effect.duration.remaining
+            value: effect.duration.value,
+            units: effect.duration.units
         },
-        changes: [
-            {
-                key: 'flags.midi-qol.grants.disadvantage.attack.all',
-                value: '!canSense(tokenUuid, workflow.targets.first(), ' + JSON.stringify(nonSightDetectionModes) + ')',
-                mode: 5,
-                priority: 20
-            }
-        ],
+        start: effect.toObject().start,
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.grants.disadvantage.attack.all',
+                    value: '!canSense(tokenUuid, workflow.targets.first(), ' + JSON.stringify(nonSightDetectionModes) + ')',
+                    type: 'override',
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 aura: true,
@@ -333,7 +337,7 @@ async function turnStart({trigger: {entity: effect, token, target}}) {
         (
             i.statuses.has('frightened') || // Status Effect dropdown on details page
             i.flags['chris-premades']?.conditions?.includes('frightened') || // CPR effect medkit
-            i.changes.find(j => validKeys.includes(j.key) && j.value.toLowerCase() === 'frightened') // dae/midi key
+            i.system.changes.find(j => validKeys.includes(j.key) && j.value.toLowerCase() === 'frightened') // dae/midi key
         )
         && await effectUtils.getOriginItem(i)?.actor === token.actor
     );

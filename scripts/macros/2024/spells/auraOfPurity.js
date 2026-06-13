@@ -17,25 +17,23 @@ async function create({trigger: {entity: effect, target, identifier}}) {
         name: effect.name.split(':')[0],
         img: effect.img,
         origin: effect.uuid,
-        duration: {
-            seconds: effect.duration.remaining
-        },
-        changes: [
+        duration: {value: effectUtils.getRemainingDurationSeconds(effect), units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
+        system: {changes: [
             {
                 key: 'system.traits.dr.value',
-                mode: 2,
+                type: 'add',
                 value: 'poison',
                 priority: 20
             },
             ...conditionResistances.map(condition => { 
                 return {
                     key: 'flags.chris-premades.CR.' + condition,
-                    mode: 5,
+                    type: 'override',
                     value: 1,
                     priority: 20
                 };
             })
-        ],
+        ]},
         flags: {
             'chris-premades': {
                 aura: true,

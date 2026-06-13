@@ -17,17 +17,15 @@ async function turnEarly({trigger, workflow}) {
     let advData = {
         name: 'Turn Advantage',
         img: constants.tempConditionIcon,
-        duration: {
-            turns: 1
-        },
-        changes: [
+        duration: {value: 1, units: 'turns'}, start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0},
+        system: {changes: [
             {
                 key: 'flags.midi-qol.advantage.save.wis',
                 value: 1,
-                mode: 5,
+                type: 'override',
                 priority: 120
             }
-        ],
+        ]},
         flags: {
             dae: {
                 specialDuration: [
@@ -44,17 +42,15 @@ async function turnEarly({trigger, workflow}) {
     let immuneData = {
         name: 'Turn Immunity',
         img: constants.tempConditionIcon,
-        duration: {
-            turns: 1
-        },
-        changes: [
+        duration: {value: 1, units: 'turns'}, start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0},
+        system: {changes: [
             {
                 key: 'flags.midi-qol.min.ability.save.wis',
                 value: 100,
-                mode: 5,
+                type: 'override',
                 priority: 120
             }
-        ],
+        ]},
         flags: {
             dae: {
                 specialDuration: [

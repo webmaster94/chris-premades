@@ -16,16 +16,22 @@ async function use({workflow}) {
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
                 duration: {
-                    seconds: 12
+                    value: 12,
+                    units: 'seconds'
                 },
-                changes: [
-                    {
-                        key: 'flags.midi-qol.disadvantage.attack.all',
-                        mode: 0,
-                        value: 1,
-                        priority: 20
-                    }
-                ],
+                start: {
+                    time: game.time?.worldTime ?? 0
+                },
+                system: {
+                    changes: [
+                        {
+                            key: 'flags.midi-qol.disadvantage.attack.all',
+                            type: 'custom',
+                            value: 1,
+                            priority: 20
+                        }
+                    ]
+                },
                 flags: {
                     dae: {
                         specialDuration: [

@@ -15,64 +15,64 @@ async function imbueWeapon ({trigger: {entity: item}, workflow}) {
         name: item.name,
         img: item.img,
         origin: item.uuid,
-        changes: [
+        system: {changes: [
             {
                 key: 'name',
                 value: `${item.name}: {}`,
-                mode: 5,
+                type: 'override',
                 priority: 20
             },
             {
                 key: 'system.properties',
                 value: 'mgc',
-                mode: 2,
+                type: 'add',
                 priority: 20
             },
             {
                 key: 'system.properties',
                 value: 'thr',
-                mode: 2,
+                type: 'add',
                 priority: 20
             },
             {
                 key: 'system.properties',
                 value: 'ret',
-                mode: 2,
+                type: 'add',
                 priority: 20
             },
             {
                 key: 'system.magicalBonus',
                 value: getBonus(workflow.actor),
-                mode: 4,
+                type: 'upgrade',
                 priority: 20
             },
             {
                 key: 'system.range.value',
                 value: '30',
-                mode: 5,
+                type: 'override',
                 priority: 20
             },
             {
                 key: 'system.range.long',
                 value: '120',
-                mode: 5,
+                type: 'override',
                 priority: 20
             }
-        ]
+        ]}
     };
     let enchant = await itemUtils.enchantItem(selection, enchantmentData, {parentEntity: item, identifier: 'ghaalShaaratEnchantment'});    
     let effectData = {
         name: item.name,
         img: item.img,
         origin: item.uuid,
-        changes: [
+        system: {changes: [
             {
                 key: 'flags.chris-premades.activeGhaalShaarat',
                 value: enchant.uuid,
-                mode: 5,
+                type: 'override',
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             dae: {
                 stackable: 'noneName',
@@ -94,15 +94,15 @@ function getBonus(actor) {
 async function upgradeBonus({trigger: {entity: item}}) {
     let activeGhaalShaarat = await fromUuid(item.parent.flags['chris-premades']?.activeGhaalShaarat);
     if (!activeGhaalShaarat) return;
-    let bonus = activeGhaalShaarat.changes.find(c => c.key === 'system.magicalBonus');
+    let bonus = activeGhaalShaarat.system.changes.find(c => c.key === 'system.magicalBonus');
     if (bonus) bonus.value = getBonus(item.parent);
-    else activeGhaalShaarat.changes.push({
+    else activeGhaalShaarat.system.changes.push({
         key: 'system.magicalBonus',
         value: getBonus(item.parent),
-        mode: 4,
+        type: 'upgrade',
         priority: 20
     });
-    return await genericUtils.update(activeGhaalShaarat, {changes: activeGhaalShaarat.changes});
+    return await genericUtils.update(activeGhaalShaarat, {system: {changes: activeGhaalShaarat.system.changes}});
 }
 export let ghaalShaarat = {
     name: 'Ghaal\'Shaarat',

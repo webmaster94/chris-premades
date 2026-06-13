@@ -92,7 +92,7 @@ async function use({workflow}) {
             flavor: genericUtils.translate(flavors[flavor]),
             whisper: [socketUtils.gmID()]
         }, {
-            rollMode: CONST.DICE_ROLL_MODES.BLIND
+            messageMode: 'blind'
         });
     }
     if (totalDamage > 0) {
@@ -112,7 +112,7 @@ async function use({workflow}) {
             flavor: genericUtils.translate('CHRISPREMADES.Macros.Teleport.Distance'),
             whisper: [socketUtils.gmID()]
         }, {
-            rollMode: CONST.DICE_ROLL_MODES.BLIND
+            messageMode: 'blind'
         });
         let roll2 = await new Roll('1d8').evaluate();
         roll.toMessage({
@@ -121,7 +121,7 @@ async function use({workflow}) {
             flavor: genericUtils.translate('CHRISPREMADES.Macros.Teleport.Direction'),
             whisper: [socketUtils.gmID()]
         }, {
-            rollMode: CONST.DICE_ROLL_MODES.BLIND
+            messageMode: 'blind'
         });
         let distance = roll.total;
         let directions = [

@@ -436,9 +436,9 @@ async function shapechange({trigger, workflow}) {
         });
         activityIdentifiers.push('claws');
     } else {
-        effectData.changes.push({
+        effectData.system.changes.push({
             key: 'system.attributes.movement.walk',
-            mode: 4,
+            type: 'upgrade',
             value: 40,
             priority: 20
         });

@@ -13,16 +13,19 @@ async function attacked({trigger, workflow}) {
         name: trigger.entity.name,
         img: trigger.entity.img,
         duration: {
-            seconds: 1
+            value: 1,
+            units: 'seconds'
         },
-        changes: [
-            {
-                key: 'system.attributes.ac.bonus',
-                mode: 2,
-                priority: 20,
-                value: '+2'
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.attributes.ac.bonus',
+                    type: 'add',
+                    priority: 20,
+                    value: '+2'
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 shieldGuardianShield: {

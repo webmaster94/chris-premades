@@ -3,4 +3,4 @@ export let relentlessEndurance = {
     ...relentlessEnduranceLegacy,
     version: '1.5.21',
     rules: 'modern'
-}
+};

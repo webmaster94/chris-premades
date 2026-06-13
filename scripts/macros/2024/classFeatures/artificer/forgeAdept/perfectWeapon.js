@@ -20,14 +20,14 @@ async function attack({trigger: {entity: item}, workflow}) {
         name: item.name,
         img: item.img,
         origin: item.uuid,
-        changes: [
+        system: {changes: [
             {
                 key: 'system.attributes.ac.bonus',
                 value: bonus,
-                mode: 2,
+                type: 'add',
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             dae: {
                 specialDuration: ['turnStart']
@@ -39,14 +39,14 @@ async function attack({trigger: {entity: item}, workflow}) {
         name: item.name,
         img: item.img,
         origin: item.uuid,
-        changes: [
+        system: {changes: [
             {
                 key: 'system.magicalBonus',
                 value: originalBonus - bonus,
-                mode: 5,
+                type: 'override',
                 priority: 20
             }
-        ]
+        ]}
     };
     await itemUtils.enchantItem(activeGhaalShaarat.parent, enchantmentData, {identifier: 'perfectWeaponOverride', parentEntity: effect, strictlyInterdependent: true});    
     workflow.item = activeGhaalShaarat.parent;

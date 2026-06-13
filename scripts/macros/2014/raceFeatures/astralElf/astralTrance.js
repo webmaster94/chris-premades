@@ -41,14 +41,16 @@ async function use({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        changes: [
-            {
-                key: 'system.skills.' + skillSelected + '.value',
-                mode: 4,
-                value: 1,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.skills.' + skillSelected + '.value',
+                    type: 'upgrade',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: ['longRest']
@@ -56,28 +58,28 @@ async function use({workflow}) {
         }
     };
     if (Object.keys(CONFIG.DND5E.weaponIds).includes(weapToolSelected)) {
-        effectData.changes.push({
+        effectData.system.changes.push({
             key: 'system.traits.weaponProf.value',
-            mode: 2,
+            type: 'add',
             value: weapToolSelected,
             priority: 20
         });
     } else {
         let ability = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.AstralTrance.Ability', Object.values(CONFIG.DND5E.abilities).map(i => [i.label, i.abbreviation]));
         if (!ability) ability = 'int';
-        effectData.changes.push({
+        effectData.system.changes.push({
             key: 'system.tools.' + weapToolSelected + '.value',
-            mode: 4,
+            type: 'upgrade',
             value: 1,
             priority: 20
         }, {
             key: 'system.tools.' + weapToolSelected + '.roll.mode',
-            mode: 4,
+            type: 'upgrade',
             value: 0,
             priority: 20
         }, {
             key: 'system.tools.' + weapToolSelected + '.ability',
-            mode: 5,
+            type: 'override',
             value: ability,
             priority: 20
         });

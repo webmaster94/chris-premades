@@ -11,14 +11,14 @@ async function use({trigger, workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'flags.midi-qol.OverTime',
-                mode: 0,
+                type: 'custom',
                 value: 'turn=start, allowIncapacitated=true, saveAbility=con, rollType=save, saveDamage=fulldamage, saveRemove=true, saveDC=' + itemUtils.getSaveDC(workflow.item) + ', saveMagic=true, damageRoll=' + formula + ', damageType=' + damageType + ', name=' + workflow.item.name,
                 priority: 20
             }
-        ]
+        ]}
     };
     await Promise.all(workflow.targets.map(async token => {
         await effectUtils.createEffect(token.actor, effectData);

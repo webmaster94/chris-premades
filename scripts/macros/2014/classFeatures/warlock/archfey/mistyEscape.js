@@ -7,7 +7,12 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            rounds: 1
+            value: 1,
+            units: 'rounds'
+        },
+        start: {
+            round: game.combat?.round ?? 0,
+            turn: game.combat?.turn ?? 0
         },
         flags: {
             dae: {

@@ -15,7 +15,8 @@ async function psychicWhispersUse({trigger, workflow}) {
     let sourceEffect = workflow.item.effects.contents?.[0];
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
-    effectData.duration.seconds = workflow.utilityRolls[0].total * 3600;
+    effectData.duration = {value: workflow.utilityRolls[0].total * 3600, units: 'seconds'};
+    effectData.start = {time: game.time?.worldTime ?? 0};
     workflow.targets.add(workflow.token);
     await Promise.all(workflow.targets.map(async token => {
         await effectUtils.createEffect(token.actor, effectData);

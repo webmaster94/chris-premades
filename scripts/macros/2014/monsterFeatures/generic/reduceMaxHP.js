@@ -36,12 +36,12 @@ async function late({workflow}) {
         let totalMax = token.actor.system.attributes.hp.max;
         let effect = await effectUtils.getAllEffectsByIdentifier(token.actor, 'reduceMaxHP').find(async i => (await effectUtils.getOriginItem(i))?.uuid === workflow.item.uuid);
         if (effect) {
-            let currReduction = parseInt(effect.changes[0].value);
+            let currReduction = parseInt(effect.system.changes[0].value);
             await genericUtils.update(effect, {
-                changes: [
+                'system.changes': [
                     {
                         key: 'system.attributes.hp.tempmax',
-                        mode: 2,
+                        type: 'add',
                         value: Math.max(-totalMax, currReduction - damageApplied),
                         priority: 20
                     }
@@ -52,14 +52,16 @@ async function late({workflow}) {
                 name: workflow.item.name,
                 img: workflow.item.img,
                 origin: workflow.item.uuid,
-                changes: [
-                    {
-                        key: 'system.attributes.hp.tempmax',
-                        mode: 2,
-                        value: -damageApplied,
-                        priority: 20
-                    }
-                ],
+                system: {
+                    changes: [
+                        {
+                            key: 'system.attributes.hp.tempmax',
+                            type: 'add',
+                            value: -damageApplied,
+                            priority: 20
+                        }
+                    ]
+                },
                 flags: {
                     dae: {
                         showIcon: true

@@ -42,20 +42,20 @@ async function startOrEnter({trigger: {entity: template, castData, token}}) {
             name: originItem?.name ?? templateUtils.getName(template),
             img: originItem.img ?? 'icons/magic/light/orb-beams-green.webp',
             origin: template.uuid,
-            changes: [
+            system: {changes: [
                 {
                     key: 'ATL.light.dim',
-                    mode: 4,
+                    type: 'upgrade',
                     value: 5,
                     priority: 20
                 },
                 {
                     key: 'system.traits.ci.value',
-                    mode: 2,
+                    type: 'add',
                     value: 'invisible',
                     priority: 20
                 }
-            ],
+            ]},
             flags: {
                 'chris-premades': {
                     sickeningRadiance: {

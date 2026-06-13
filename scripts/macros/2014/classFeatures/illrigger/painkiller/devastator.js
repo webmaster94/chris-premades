@@ -2,7 +2,7 @@ import {dialogUtils, effectUtils, genericUtils, workflowUtils} from '../../../..
 async function use({trigger, workflow}) {
     if (!workflow.targets.size) return;
     let enemies = workflow.targets.filter(token => token.document.disposition != workflow.token.document.disposition);
-    if (!enemies.size === 1 && (workflow.targets.size - 1) > workflow.actor.system.attributes.prof) {
+    if (enemies.size !== 1 && (workflow.targets.size - 1) > workflow.actor.system.attributes.prof) {
         genericUtils.notify('CHRISPREMADES.Macros.Devastator.Message', 'info', {localize: true});
         return;
     }
@@ -14,7 +14,8 @@ async function use({trigger, workflow}) {
     let sourceEffect = workflow.item.effects.contents?.[0];
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
-    effectData.duration = {turns: 1};
+    effectData.duration = {value: 1, units: 'turns'};
+    effectData.start = {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0};
     effectData.origin = sourceEffect.uuid;
     await Promise.all(workflow.targets.map(async token => {
         if (token.document.id == workflow.token.document.id || token.document.disposition != workflow.token.document.disposition) return;

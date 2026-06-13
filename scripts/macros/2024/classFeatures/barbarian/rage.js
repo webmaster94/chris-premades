@@ -85,7 +85,7 @@ async function use({trigger, workflow}) {
         let frightenedEffect = effectUtils.getEffectByStatusID(workflow.actor, 'frightened');
         if (frightenedEffect) await genericUtils.remove(frightenedEffect);
         let effect = mindlessRage.effects.contents?.[0];
-        if (effect) effectData.changes.push(...effect.changes);
+        if (effect) effectData.system.changes.push(...effect.system.changes);
         if (charmedEffect || frightenedEffect) await workflowUtils.completeItemUse(mindlessRage);
     }
     let berserkerRetaliation = itemUtils.getItemByIdentifier(workflow.actor, 'berserkerRetaliation');
@@ -115,7 +115,7 @@ async function use({trigger, workflow}) {
         switch (selection) {
             case 'bear': {
                 let effect = rageOfTheWilds.effects.contents?.[0];
-                if (effect) effectData.changes.push(...effect.changes);
+                if (effect) effectData.system.changes.push(...effect.system.changes);
                 break;
             }
             case 'wolf': {
@@ -142,7 +142,7 @@ async function use({trigger, workflow}) {
         switch (selection) {
             case 'falcon': {
                 let effect = powerOfTheWilds.effects.contents?.[0];
-                if (effect) effectData.changes.push(...effect.changes);
+                if (effect) effectData.system.changes.push(...effect.system.changes);
                 break;
             }
             case 'lion': {

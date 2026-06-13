@@ -9,26 +9,26 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'flags.midi-qol.grants.advantage.attack.all',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             },
             {
                 key: 'system.traits.ci.value',
-                mode: 2,
+                type: 'add',
                 value: 'invisible',
                 priority: 20
             },
             {
                 key: 'ATL.light.dim',
-                mode: 4,
+                type: 'upgrade',
                 value: 10,
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             'chris-premades': {
                 faerieFire: {

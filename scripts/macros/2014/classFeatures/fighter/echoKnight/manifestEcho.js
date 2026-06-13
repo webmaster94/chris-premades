@@ -219,14 +219,16 @@ export async function attack({workflow}) {
         name: 'Range Override',
         img: constants.tempConditionIcon,
         origin: workflow.item.uuid,
-        changes: [
-            {
-                key: 'flags.midi-qol.rangeOverride.attack.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.rangeOverride.attack.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 effect: {

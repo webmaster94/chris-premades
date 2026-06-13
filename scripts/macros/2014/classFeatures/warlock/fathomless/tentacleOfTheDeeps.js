@@ -54,15 +54,18 @@ async function early({activity, token, actor}) {
         name: activity.item.name,
         img: activity.item.img,
         origin: activity.item.uuid,
-        duration: {seconds: 1},
-        changes: [
-            {
-                key: 'flags.midi-qol.rangeOverride.attack.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        duration: {value: 1, units: 'seconds'},
+        start: {time: game.time?.worldTime ?? 0},
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.rangeOverride.attack.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 effect: {

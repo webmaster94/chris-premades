@@ -17,7 +17,7 @@ async function use({trigger, workflow}) {
                     let heliodsDevoteeEffect = heliodsDevotee.effects?.contents?.[0];
                     if (heliodsDevoteeEffect) {
                         let heliodsDevoteeEffectData = genericUtils.duplicate(heliodsDevoteeEffect.toObject());
-                        effectData.changes.push(...heliodsDevoteeEffectData.changes);
+                        effectData.system.changes.push(...heliodsDevoteeEffectData.system.changes);
                     }
                 }
             }

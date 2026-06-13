@@ -41,14 +41,14 @@ async function use({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        changes: [
+        system: {changes: [
             {
                 key: 'system.attributes.prof',
-                mode: 5,
+                type: 'override',
                 value: prof,
                 priority: 20
             }
-        ]
+        ]}
     };
     choices.forEach(c => {
         let d = c.document;

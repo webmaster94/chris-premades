@@ -10,16 +10,22 @@ async function use({trigger, workflow}) {
         img: trigger.entity.img,
         origin: trigger.entity.uuid,
         duration: {
-            seconds: 1
+            value: 1,
+            units: 'seconds'
         },
-        changes: [
-            {
-                key: 'system.attributes.ac.bonus',
-                mode: 2,
-                value: '+ ' + config.formula,
-                priority: 20
-            }
-        ],
+        start: {
+            time: game.time?.worldTime ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'system.attributes.ac.bonus',
+                    type: 'add',
+                    value: '+ ' + config.formula,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [

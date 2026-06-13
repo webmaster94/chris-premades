@@ -104,14 +104,14 @@ async function use({workflow}) {
     let resistanceType = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.SummonDraconicSpirit.ResistanceType', sharedOptions);
     if (!resistanceType) return;
     let effectUpdates = {
-        changes: [
+        system: {changes: [
             {
                 key: 'system.traits.dr.value',
-                mode: 2,
+                type: 'add',
                 priority: 20,
                 value: resistanceType
             }
-        ]
+        ]}
     };
     await genericUtils.update(effect, effectUpdates);
 }

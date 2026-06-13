@@ -11,44 +11,44 @@ async function use({trigger, workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'flags.midi-qol.superSaver.all',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             },
             {
                 key: 'system.attributes.ac.bonus',
-                mode: 4,
+                type: 'upgrade',
                 value: 99,
                 priority: 20
             },
             {
                 key: 'flags.midi-qol.min.ability.save.all',
-                mode: 0,
+                type: 'custom',
                 value: 99,
                 priority: 20
             },
             {
                 key: 'flags.midi-qol.grants.noCritical.all',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             },
             {
                 key: 'flags.midi-qol.neverTarget',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             },
             {
                 key: 'macro.tokenMagic',
-                mode: 0,
+                type: 'custom',
                 value: 'spectral-body',
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             'chris-premades': {
                 banishment: {
@@ -68,7 +68,7 @@ async function use({trigger, workflow}) {
     }));
 }
 async function remove({trigger}) {
-    if (trigger.entity.duration.remaining != 0) return;
+    if (effectUtils.getRemainingDurationSeconds(trigger.entity) > 0) return;
     let creatureTypes = trigger.entity.flags['chris-premades']?.banishment?.creatureTypes;
     if (!creatureTypes?.length) return;
     if (!creatureTypes.includes(actorUtils.typeOrRace(trigger.entity.parent))) return;

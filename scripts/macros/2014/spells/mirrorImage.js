@@ -5,14 +5,14 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
+        system: {changes: [
             {
                 key: 'macro.tokenMagic',
-                mode: 0,
+                type: 'custom',
                 value: 'images',
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             'chris-premades': {
                 mirrorImage: {

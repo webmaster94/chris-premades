@@ -13,16 +13,23 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            rounds: 1
+            value: 1,
+            units: 'rounds'
         },
-        changes: [
-            {
-                key: 'system.traits.dr.all',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ],
+        start: {
+            round: game.combat?.round ?? 0,
+            turn: game.combat?.turn ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'system.traits.dr.all',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [
@@ -31,9 +38,9 @@ async function use({workflow}) {
             }
         }
     };
-    if (playAnimation) effectData.changes.push({
+    if (playAnimation) effectData.system.changes.push({
         key: 'macro.tokenMagic',
-        mode: 0,
+        type: 'custom',
         value: 'fog',
         priority: 20
     });

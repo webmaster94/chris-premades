@@ -18,9 +18,7 @@ async function apply(actor, item, options = {startsOutOfAir: false, parentEffect
         name: genericUtils.translate('CHRISPREMADES.Macros.Suffocation.Name.HoldingBreath'),
         img: item?.system?.icon ?? 'icons/magic/air/wind-tornado-funnel-blue.webp',
         origin: item.document ? item.document.uuid : item.uuid,
-        duration: {
-            seconds: Math.max((conMod + 1 ) * 60, 30)
-        },
+        duration: {value: Math.max((conMod + 1 ) * 60, 30), units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
         flags: {
             'chris-premades': {
                 macros: {
@@ -36,7 +34,7 @@ async function apply(actor, item, options = {startsOutOfAir: false, parentEffect
     await effectUtils.createEffect(actor, effectData, effectOptions);
 }
 async function holdingBreathDeleted({trigger: {entity}}) {
-    if (entity.duration.remaining > 0) return;
+    if (effectUtils.getRemainingDurationSeconds(entity) > 0) return;
     let actor = entity.parent;
     if (!actor) return;
     let item = effectUtils.getOriginItem(entity);
@@ -48,9 +46,7 @@ async function outOfAirApply(actor, item, options = {parentEntity: {}}) {
         name: genericUtils.translate('CHRISPREMADES.Macros.Suffocation.Name.OutOfAir'),
         img: item?.system?.icon ?? 'icons/magic/air/wind-tornado-funnel-blue.webp',
         origin: item.document ? item.document.uuid : item.uuid,
-        duration: {
-            seconds: 86400
-        },
+        duration: {value: 86400, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0},
         flags: {
             'chris-premades': {
                 macros: {

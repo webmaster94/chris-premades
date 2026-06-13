@@ -25,20 +25,22 @@ async function use({workflow}) {
         name: workflow.item.name,
         img: workflow.item.img,
         origin: workflow.item.uuid,
-        changes: [
-            {
-                key: 'system.attributes.movement.walk',
-                mode: 2,
-                value: 5,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.advantage.skill.ste',
-                mode: 0,
-                value: 1,
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'system.attributes.movement.walk',
+                    type: 'add',
+                    value: 5,
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.advantage.skill.ste',
+                    type: 'custom',
+                    value: 1,
+                    priority: 20
+                }
+            ]
+        }
     };
     let effect = await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'infiltratorArmor', vae: [{type: 'use', name: featureData.name, identifier: 'lightningLauncher'}]});
     if (!effect) return;

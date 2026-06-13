@@ -47,49 +47,55 @@ async function infuseWeapon(workflow, selectedWeapon) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            seconds: rageEffect.duration.remaining
+            value: effectUtils.getRemainingDurationSeconds(rageEffect),
+            units: 'seconds'
         },
-        changes: [
-            {
-                key: 'name',
-                mode: 5,
-                value: '{} (' + genericUtils.translate('CHRISPREMADES.Macros.ElementalCleaver.ElementalCleaver') + ': ' + genericUtils.translate(buttons.find(i => i[1] === damageType)[0]) + ')',
-                priority: 20
-            },
-            {
-                key: 'system.damage.base.custom.enabled',
-                mode: 5,
-                value: '"true"',
-                priority: 20
-            },
-            {
-                key: 'system.damage.base.custom.formula',
-                mode: 5,
-                value: newFormula,
-                priority: 20
-            },
-            {
-                key: 'system.damage.base.types',
-                mode: 5,
-                value: '["' + damageType + '"]',
-                priority: 20
-            }
-        ]
+        start: {
+            time: game.time?.worldTime ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'name',
+                    type: 'override',
+                    value: '{} (' + genericUtils.translate('CHRISPREMADES.Macros.ElementalCleaver.ElementalCleaver') + ': ' + genericUtils.translate(buttons.find(i => i[1] === damageType)[0]) + ')',
+                    priority: 20
+                },
+                {
+                    key: 'system.damage.base.custom.enabled',
+                    type: 'override',
+                    value: '"true"',
+                    priority: 20
+                },
+                {
+                    key: 'system.damage.base.custom.formula',
+                    type: 'override',
+                    value: newFormula,
+                    priority: 20
+                },
+                {
+                    key: 'system.damage.base.types',
+                    type: 'override',
+                    value: '["' + damageType + '"]',
+                    priority: 20
+                }
+            ]
+        }
     };
     if (versatile?.length) {
-        enchantData.changes.push({
+        enchantData.system.changes.push({
             key: 'system.damage.versatile.custom.enabled',
-            mode: 5,
+            type: 'override',
             value: '"true"',
             priority: 20
         }, {
             key: 'system.damage.versatile.custom.formula',
-            mode: 5,
+            type: 'override',
             value: versatile,
             priority: 20
         }, {
             key: 'system.damage.versatile.types',
-            mode: 5,
+            type: 'override',
             value: '["' + damageType + '"]',
             priority: 20
         });
@@ -101,7 +107,11 @@ async function infuseWeapon(workflow, selectedWeapon) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            seconds: rageEffect.duration.remaining
+            value: effectUtils.getRemainingDurationSeconds(rageEffect),
+            units: 'seconds'
+        },
+        start: {
+            time: game.time?.worldTime ?? 0
         },
         flags: {
             'chris-premades': {

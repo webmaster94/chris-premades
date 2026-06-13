@@ -113,16 +113,23 @@ async function turnStart({trigger: {entity: item, token, target}}) {
         img: item.img,
         origin: item.uuid,
         duration: {
-            turns: 1
+            value: 1,
+            units: 'turns'
         },
-        changes: [
-            {
-                key: 'system.attributes.movement.walk',
-                mode: 2,
-                value: speedDiff,
-                priority: 20
-            }
-        ],
+        start: {
+            round: game.combat?.round ?? 0,
+            turn: game.combat?.turn ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'system.attributes.movement.walk',
+                    type: 'add',
+                    value: speedDiff,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [

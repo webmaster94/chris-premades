@@ -24,17 +24,15 @@ async function early({workflow}) {
             name: genericUtils.translate('CHRISPREMADES.Macros.Protection.Protected'),
             img: protection.img,
             origin: protection.uuid,
-            changes: [
+            system: {changes: [
                 {
                     key: 'flags.midi-qol.grants.disadvantage.attack.all',
-                    mode: 5,
+                    type: 'override',
                     value: '1',
                     priority: 20
                 }
-            ],
-            duration: {
-                rounds: 1
-            },
+            ]},
+            duration: {value: 1, units: 'rounds'}, start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0},
             flags: {
                 'chris-premades': {
                     protection: {
@@ -47,9 +45,7 @@ async function early({workflow}) {
             name: protection.name,
             img: protection.img,
             origin: protection.uuid,
-            duration: {
-                rounds: 1
-            },
+            duration: {value: 1, units: 'rounds'}, start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0},
             flags: {
                 'chris-premades': {
                     protection: {

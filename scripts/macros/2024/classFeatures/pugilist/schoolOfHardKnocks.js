@@ -45,9 +45,9 @@ async function applyEffect({trigger: {token: self}, workflow}) {
             genericUtils.setProperty(effectData, 'flags.chris-premades.originWorkflow', workflow.workflowOptions.originWorkflow);
             break;
         case 'provoke':
-            effectData.changes = [{
+            effectData.system.changes = [{
                 key: 'flags.midi-qol.disadvantage.attack.all',
-                mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                type: 'custom',
                 value: `!workflow.targets.some(t => t.id === '${self.id}')`,
                 priority: 20
             }];

@@ -35,22 +35,28 @@ async function damage({workflow}) {
         img: effect.img,
         origin: effect.uuid,
         duration: {
-            seconds: effect.duration.remaining
+            value: effectUtils.getRemainingDurationSeconds(effect),
+            units: 'seconds'
         },
-        changes: [
-            {
-                key: 'ATL.light.dim',
-                mode: 4,
-                value: 5,
-                priority: 20
-            }, 
-            {
-                key: 'system.traits.ci.value',
-                mode: 2,
-                value: 'invisible',
-                priority: 20
-            }
-        ]
+        start: {
+            time: game.time?.worldTime ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'ATL.light.dim',
+                    type: 'upgrade',
+                    value: 5,
+                    priority: 20
+                },
+                {
+                    key: 'system.traits.ci.value',
+                    type: 'add',
+                    value: 'invisible',
+                    priority: 20
+                }
+            ]
+        }
     };
     await effectUtils.createEffect(workflow.hitTargets.first().actor, effectData, {parentEntity: effect, strictlyInterdependent: true});
 }

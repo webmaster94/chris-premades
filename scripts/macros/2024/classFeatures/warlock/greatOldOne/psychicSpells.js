@@ -2,7 +2,7 @@ import {constants, dialogUtils, genericUtils, itemUtils} from '../../../../../ut
 async function early({trigger: {entity: item}, workflow}) {
     if (workflow.item.type !== 'spell') return;
     let classIdentifier = itemUtils.getConfig(item, 'classIdentifier');
-    if (workflow.item.system.sourceClass !== classIdentifier) return;
+    if (itemUtils.getSourceClassIdentifier(workflow.item) !== classIdentifier) return;
     let itemData = workflow.item.toObject();
     itemData.system.activities[workflow.activity.id] = await getDamage(item, workflow);
     let schools = itemUtils.getConfig(item, 'spellSchools');

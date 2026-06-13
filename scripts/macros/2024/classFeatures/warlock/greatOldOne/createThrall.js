@@ -44,20 +44,20 @@ export function addThrallBonuses(summonData, workflow) {
         name: feature.name,
         img: feature.img,
         origin: feature.origin,
-        changes: [
+        system: {changes: [
             {
                 key: 'flags.chris-premades.hexBonusDamageType',
-                mode: 5,
+                type: 'override',
                 value: damageType,
                 priority: 20
             },
             {
                 key: 'flags.chris-premades.summonerUuid',
-                mode: 5,
+                type: 'override',
                 value: workflow.actor.uuid,
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             'chris-premades': {
                 rules: thrallBonus.rules,

@@ -16,58 +16,60 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: []
+        system: {
+            changes: []
+        }
     };
     if (selection === 'beast') {
-        effectData.changes = [
+        effectData.system.changes = [
             {
                 key: 'system.attributes.movement.walk',
-                mode: 2,
+                type: 'add',
                 value: '+10',
                 priority: 20
             },
             {
-                key: 'system.attributes.senses.darkvision',
-                mode: 4,
+                key: 'system.attributes.senses.ranges.darkvision',
+                type: 'upgrade',
                 value: 120,
                 priority: 20
             },
             {
                 key: 'ATL.dimSight',
-                mode: 4,
+                type: 'upgrade',
                 value: 120,
                 priority: 20
             },
             {
                 key: 'flags.midi-qol.advantage.attack.str',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             },
             {
                 key: 'system.bonuses.mwak.damage',
-                mode: 2,
+                type: 'add',
                 value: '+1d6[force]',
                 priority: 20
             }
         ];
     } else {
-        effectData.changes = [
+        effectData.system.changes = [
             {
                 key: 'flags.midi-qol.advantage.save.con',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             },
             {
                 key: 'flags.midi-qol.advantage.attack.dex',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             },
             {
                 key: 'flags.midi-qol.advantage.attack.wis',
-                mode: 0,
+                type: 'custom',
                 value: 1,
                 priority: 20
             }

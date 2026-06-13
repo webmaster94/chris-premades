@@ -21,62 +21,64 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.activity),
-        changes: [
-            {
-                key: 'flags.midi-qol.advantage.check.str',
-                mode: 0,
-                value: 1,
-                priority: 0
-            },
-            {
-                key: 'flags.midi-qol.advantage.save.str',
-                mode: 0,
-                value: 1,
-                priority: 0
-            },
-            {
-                key: 'system.traits.dr.value',
-                mode: 2,
-                value: 'slashing',
-                priority: 20
-            },
-            {
-                key: 'system.traits.dr.value',
-                mode: 2,
-                value: 'piercing',
-                priority: 20
-            },
-            {
-                key: 'system.traits.dr.value',
-                mode: 2,
-                value: 'bludgeoning',
-                priority: 20
-            },
-            {
-                key: 'system.bonuses.mwak.damage',
-                mode: 2,
-                value: '+ @scale.barbarian.rage-damage',
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.fail.spell.vocal',
-                value: 1,
-                mode: 0,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.fail.spell.somatic',
-                value: 1,
-                mode: 0,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.fail.spell.material',
-                value: 1,
-                mode: 0,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.advantage.check.str',
+                    type: 'custom',
+                    value: 1,
+                    priority: 0
+                },
+                {
+                    key: 'flags.midi-qol.advantage.save.str',
+                    type: 'custom',
+                    value: 1,
+                    priority: 0
+                },
+                {
+                    key: 'system.traits.dr.value',
+                    type: 'add',
+                    value: 'slashing',
+                    priority: 20
+                },
+                {
+                    key: 'system.traits.dr.value',
+                    type: 'add',
+                    value: 'piercing',
+                    priority: 20
+                },
+                {
+                    key: 'system.traits.dr.value',
+                    type: 'add',
+                    value: 'bludgeoning',
+                    priority: 20
+                },
+                {
+                    key: 'system.bonuses.mwak.damage',
+                    type: 'add',
+                    value: '+ @scale.barbarian.rage-damage',
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.fail.spell.vocal',
+                    value: 1,
+                    type: 'custom',
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.fail.spell.somatic',
+                    value: 1,
+                    type: 'custom',
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.fail.spell.material',
+                    value: 1,
+                    type: 'custom',
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             dae: {
                 specialDuration: [
@@ -91,58 +93,58 @@ async function use({workflow}) {
         effectUtils.addMacro(effectData, 'combat', ['rageRaging']);
     }
     if (itemUtils.getItemByIdentifier(workflow.actor, 'totemSpiritBear')) {
-        effectData.changes.push(...[
+        effectData.system.changes.push(...[
             {
                 key: 'system.traits.dr.value',
-                mode: 2,
+                type: 'add',
                 value: 'acid',
                 priority: 20
             },
             {
                 key: 'system.traits.dr.value',
-                mode: 2,
+                type: 'add',
                 value: 'cold',
                 priority: 20
             },
             {
                 key: 'system.traits.dr.value',
-                mode: 2,
+                type: 'add',
                 value: 'fire',
                 priority: 20
             },
             {
                 key: 'system.traits.dr.value',
-                mode: 2,
+                type: 'add',
                 value: 'force',
                 priority: 20
             },
             {
                 key: 'system.traits.dr.value',
-                mode: 2,
+                type: 'add',
                 value: 'lightning',
                 priority: 20
             },
             {
                 key: 'system.traits.dr.value',
-                mode: 2,
+                type: 'add',
                 value: 'necrotic',
                 priority: 20
             },
             {
                 key: 'system.traits.dr.value',
-                mode: 2,
+                type: 'add',
                 value: 'poison',
                 priority: 20
             },
             {
                 key: 'system.traits.dr.value',
-                mode: 2,
+                type: 'add',
                 value: 'radiant',
                 priority: 20
             },
             {
                 key: 'system.traits.dr.value',
-                mode: 2,
+                type: 'add',
                 value: 'thunder',
                 priority: 20
             }
@@ -189,9 +191,9 @@ async function use({workflow}) {
                 });
                 genericUtils.setProperty(effectData, 'flags.chris-premades.effect.sizeAnimation', false);
             } else {
-                effectData.changes.push({
+                effectData.system.changes.push({
                     key: 'system.traits.size',
-                    mode: 5,
+                    type: 'override',
                     value: newSize,
                     priority: 20
                 });

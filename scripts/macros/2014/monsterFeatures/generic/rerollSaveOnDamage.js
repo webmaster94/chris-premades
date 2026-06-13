@@ -7,6 +7,7 @@ async function rollFinished({trigger, workflow}) {
     if (!targets.size) return;
     await Promise.all(targets.map(async i => {
         let effect = actorUtils.getEffects(i.actor).find(j => {
+            if (j.duration?.expired || j.disabled) return false;
             return !j?.origin ? false : workflow.activity.effects.map(k => k.effect.uuid).includes(j.origin) ? true : fromUuidSync(j.origin)?.flags?.dnd5e?.itemUuid === workflow.activity.uuid;
         });
         if (!effect) return;

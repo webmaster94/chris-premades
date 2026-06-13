@@ -57,7 +57,7 @@ async function damageReroll({trigger: {entity: item}, workflow}) {
     await newRoll.toMessage({
         speaker: ChatMessage.implementation.getSpeaker({token: workflow.token}),
         flavor: genericUtils.format('CHRISPREMADES.Generic.Rerolling', {origDie: 'd' + existingRoll.faces, origResult: existingRoll.results[worstInd]}),
-        rollMode: game.settings.get('core', 'rollMode')
+        messageMode: game.settings.get('core', 'messageMode')
     });
     newDamageRolls[roll].terms[term].results[worstInd].result = newRoll.total;
     await workflow.setDamageRolls(newDamageRolls);

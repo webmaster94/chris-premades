@@ -26,28 +26,34 @@ async function late({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: {
-            seconds: effect.duration.remaining
+            value: effectUtils.getRemainingDurationSeconds(effect),
+            units: 'seconds'
         },
-        changes: [
-            {
-                key: 'flags.midi-qol.optional.CallTheHunt.damage.all',
-                value: '1d6',
-                mode: 5,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.optional.CallTheHunt.count',
-                value: 'turn',
-                mode: 5,
-                priority: 20
-            },
-            {
-                key: 'flags.midi-qol.optional.CallTheHunt.label',
-                value: genericUtils.translate('CHRISPREMADES.Macros.CallTheHunt.Bonus'),
-                mode: 5,
-                priority: 20
-            }
-        ]
+        start: {
+            time: game.time?.worldTime ?? 0
+        },
+        system: {
+            changes: [
+                {
+                    key: 'flags.midi-qol.optional.CallTheHunt.damage.all',
+                    value: '1d6',
+                    type: 'override',
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.optional.CallTheHunt.count',
+                    value: 'turn',
+                    type: 'override',
+                    priority: 20
+                },
+                {
+                    key: 'flags.midi-qol.optional.CallTheHunt.label',
+                    value: genericUtils.translate('CHRISPREMADES.Macros.CallTheHunt.Bonus'),
+                    type: 'override',
+                    priority: 20
+                }
+            ]
+        }
     };
     for (let target of workflow.targets) {
         await effectUtils.createEffect(target.actor, effectData, {parentEntity: effect, identifier: 'callTheHunt'});

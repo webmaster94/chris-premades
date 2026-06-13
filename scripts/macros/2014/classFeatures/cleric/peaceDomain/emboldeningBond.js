@@ -12,7 +12,9 @@ async function checkBonus(token, checkTurnOn, checkTurnOff) {
     let distance = expansive ?? 30;
     let nearbyTargets = tokenUtils.findNearby(token, distance, 'ally').filter(i => effectUtils.getEffectByIdentifier(i.actor, 'emboldeningBond'));
     let updates = {
-        changes: [],
+        system: {
+            changes: []
+        },
         flags: {
             'chris-premades': {
                 emboldeningBond: {
@@ -26,9 +28,9 @@ async function checkBonus(token, checkTurnOn, checkTurnOff) {
         return;
     }
     if (bonusActive) return;
-    updates.changes.push({
+    updates.system.changes.push({
         key: 'system.attributes.init.bonus',
-        mode: 2,
+        type: 'add',
         value: '1d4',
         priority: 20
     });
@@ -57,12 +59,14 @@ async function use({workflow}) {
                 }
             }
         },
-        changes: [{
-            key: 'system.attributes.init.bonus',
-            mode: 2,
-            value: '1d4',
-            priority: 20
-        }]
+        system: {
+            changes: [{
+                key: 'system.attributes.init.bonus',
+                type: 'add',
+                value: '1d4',
+                priority: 20
+            }]
+        }
     };
     for (let triggerType of ['midi.actor', 'movement', 'combat', 'save', 'skill', 'check']) {
         effectUtils.addMacro(effectData, triggerType, ['emboldeningBondEmboldened']);

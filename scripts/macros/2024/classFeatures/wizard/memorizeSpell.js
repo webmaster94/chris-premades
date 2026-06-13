@@ -5,7 +5,7 @@ async function use({trigger, workflow}) {
         if (item.type !== 'spell') return;
         if (item.flags.dnd5e?.cachedFor) return;
         if (!item.system.level) return;
-        if (item.system.sourceClass !== classIdentifier) return;
+        if (itemUtils.getSourceClassIdentifier(item) !== classIdentifier) return;
         if (item.system.method !== 'spell') return;
         if (![0, 1].includes(item.system.prepared)) return;
         return true;

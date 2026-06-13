@@ -9,20 +9,22 @@ async function late({trigger: {entity: item}, workflow}) {
         name: item.name,
         img: item.img,
         origin: item.uuid,
-        changes: [
-            {
-                key: 'system.attributes.ac.bonus',
-                mode: 2,
-                value: 2,
-                priority: 20
-            },
-            {
-                key: 'system.bonuses.abilities.save',
-                mode: 2,
-                value: 2,
-                priority: 20
-            }
-        ]
+        system: {
+            changes: [
+                {
+                    key: 'system.attributes.ac.bonus',
+                    type: 'add',
+                    value: 2,
+                    priority: 20
+                },
+                {
+                    key: 'system.bonuses.abilities.save',
+                    type: 'add',
+                    value: 2,
+                    priority: 20
+                }
+            ]
+        }
     };
     await effectUtils.createEffect(workflow.actor, effectData, {parentEntity: concEffect, identifier: 'durableMagic'});
 }

@@ -8,14 +8,16 @@ async function use({workflow}) {
         img: workflow.item.img,
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item),
-        changes: [
-            {
-                key: 'system.attributes.movement.fly',
-                mode: 4,
-                value: 60,
-                priority: 20
-            }
-        ],
+        system: {
+            changes: [
+                {
+                    key: 'system.attributes.movement.fly',
+                    type: 'upgrade',
+                    value: 60,
+                    priority: 20
+                }
+            ]
+        },
         flags: {
             'chris-premades': {
                 fly: {
@@ -28,7 +30,7 @@ async function use({workflow}) {
     for (let token of workflow.targets) {
         await effectUtils.createEffect(token.actor, effectData, {concentrationItem: workflow.item, interdependent: true});
     }
-    if (concentrationEffect) await genericUtils.update(concentrationEffect, {'duration.seconds': effectData.duration.seconds});
+    if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
 }
 async function start({trigger: {entity: effect}}) {
     let playAnimation = effect.flags['chris-premades']?.fly?.playAnimation;

@@ -29,26 +29,26 @@ async function targeted({trigger, workflow}) {
             name: item.name,
             img: item.img,
             duration: itemUtils.convertDuration(activity),
-            changes: [
+            system: {changes: [
                 {
                     key: 'system.prepared',
-                    mode: 5,
+                    type: 'override',
                     value: 0,
                     priority: 20
                 },
                 {
                     key: 'system.method',
-                    mode: 5,
+                    type: 'override',
                     value: 'spell',
                     priority: 20
                 },
                 {
                     key: 'name',
-                    mode: 5,
+                    type: 'override',
                     value: '{} (' + genericUtils.translate('CHRISPREMADES.Generic.Disabled') + ')',
                     priority: 20
                 }
-            ],
+            ]},
             origin: item.uuid
         };
         await itemUtils.enchantItem(workflow.item, enchantData, {parentEntity: effect});

@@ -41,17 +41,15 @@ async function damage({workflow}) {
         name: genericUtils.translate('CHRISPREMADES.Macros.SpiritShroud.Hit'),
         img: effect.img,
         workflow: effect.origin,
-        duration: {
-            rounds: 1
-        },
-        changes: [
+        duration: {value: 1, units: 'rounds'}, start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0},
+        system: {changes: [
             {
                 key: 'system.traits.di.value',
                 value: 'healing',
-                mode: 2,
+                type: 'add',
                 priority: 120
             }
-        ],
+        ]},
         flags: {
             dae: {
                 specialDuration: [
@@ -75,17 +73,15 @@ async function everyTurn({trigger: {entity: effect, token, target}}) {
         name: genericUtils.translate('CHRISPREMADES.Macros.SpiritShroud.Slow'),
         img: effect.img,
         origin: effect.parent.uuid, // Not item uuid to prevent AA from killing the anim on the source actor(?)
-        duration: {
-            rounds: 1
-        },
-        changes: [
+        duration: {value: 1, units: 'rounds'}, start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0},
+        system: {changes: [
             {
                 key: 'system.attributes.movement.all',
-                mode: 0,
+                type: 'custom',
                 value: -10,
                 priority: 20
             }
-        ],
+        ]},
         flags: {
             dae: {
                 specialDuration: [
