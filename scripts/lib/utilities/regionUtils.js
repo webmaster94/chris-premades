@@ -14,7 +14,7 @@ async function createRegions(regionDatas, scene, {parentEntity, excludeGPSRegion
     return regions;
 }
 function templateToRegionShape(template, {hole = false} = {}) {
-    // v14: a placed template already IS a Region — reuse its polygon geometry directly
+    // v14: placed templates are Region-backed; use the Region polygon when available.
     let regionDoc = template?.documentName === 'Region' ? template : (template?.parent ?? canvas.scene)?.regions?.get(template?.id);
     if (regionDoc) {
         let polygon = regionDoc.polygons?.at?.(0);

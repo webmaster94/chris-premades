@@ -1,7 +1,7 @@
 import {genericUtils, tokenUtils} from '../../utils.js';
-// v14: placed templates are Region documents (flags.core.MeasuredTemplate). The MeasuredTemplate
-// document/placeable survives only as a deprecated shim (previews still use it). Every helper here
-// accepts a MeasuredTemplateDocument, a RegionDocument, a placeable, or a UUID string.
+// v14: placed templates are backed by Region documents (flags.core.MeasuredTemplate), while
+// placeTemplate preserves CPR's old contract and returns the MeasuredTemplate shim. Every helper
+// here accepts a MeasuredTemplateDocument, a RegionDocument, a placeable, or a UUID string.
 function getRegionDoc(template) {
     if (!template) return undefined;
     let doc = template;
@@ -154,8 +154,8 @@ async function placeTemplate(templateData, returnTokens=false) {
     try {
         [template] = await previewTemplate.drawPreview();
     } catch (error) {/* Why does this throw an error when a template isn't placed by the user? */}
-    // v14: the created doc is a shim proxy — hand back the backing Region so flags/uuids stay consistent
-    if (template) template = getRegionDoc(template) ?? template;
+    // Keep the historical contract: callers receive the MeasuredTemplate shim document/placeable.
+    // Use getRegionDoc(template) at call sites that need the backing Region.
     if (!returnTokens) return template;
     if (!template) return {template: null, tokens: []};
     await genericUtils.sleep(100);
