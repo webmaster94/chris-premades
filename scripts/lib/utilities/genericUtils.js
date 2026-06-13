@@ -58,10 +58,10 @@ function decimalToFraction(decimal) {
     return '1/' + 1 / Number(decimal);
 }
 function getCPRSetting(key) {
-    let setting = getProperty(cachedSettings, key);
+    let setting = foundry.utils.getProperty(cachedSettings, key);
     if (setting) return setting;
     setting = game.settings.get('chris-premades', key);
-    setProperty(cachedSettings, key, setting);
+    foundry.utils.setProperty(cachedSettings, key, setting);
     return setting;
 }
 async function setCPRSetting(key, value) {
@@ -70,7 +70,7 @@ async function setCPRSetting(key, value) {
 async function createUpdateSetting({key, value}) {
     if (key?.split('.')[0] !== 'chris-premades') return;
     key = key.split('.').slice(1).join('.');
-    setProperty(cachedSettings, key, value);
+    foundry.utils.setProperty(cachedSettings, key, value);
 }
 function isNewerVersion(v1, v0) {
     return foundry.utils.isNewerVersion(v1, v0);
@@ -145,7 +145,7 @@ async function updateTargets(targets, user = game.user) {
 }
 function collapseObjects(...objects) {
     let object = {};
-    objects.forEach(o => mergeObject(object, o));
+    objects.forEach(o => foundry.utils.mergeObject(object, o));
     return object;
 }
 function log(type, message) {

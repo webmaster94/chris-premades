@@ -68,13 +68,13 @@ async function move({workflow}) {
     if (!template) return;
     let castData = template.getFlag('chris-premades', 'castData');
     await workflow.actor.sheet.minimize();
-    let position = await crosshairUtils.aimCrosshair({token: workflow.token, maxRange: 60, centerpoint: template.object.center, crosshairsConfig: {icon: effect.img, resolution: 2, size: template.distance}, drawBoundries: true});
+    let position = await crosshairUtils.aimCrosshair({token: workflow.token, maxRange: 60, centerpoint: templateUtils.getPosition(template), crosshairsConfig: {icon: effect.img, resolution: 2, size: templateUtils.getDistance(template)}, drawBoundries: true});
     await workflow.actor.sheet.maximize();
     if (position.cancelled) return;
-    let startPoint = {x: template.x, y: template.y};
-    let endPoint = {x: position.x ?? template.x, y: position.y ?? template.y};
-    await genericUtils.update(template, endPoint);
-    let targets = tokenUtils.getMovementHitTokens(startPoint, endPoint, template.distance);
+    let startPoint = templateUtils.getPosition(template);
+    let endPoint = {x: position.x ?? startPoint.x, y: position.y ?? startPoint.y};
+    await templateUtils.moveTemplate(template, endPoint);
+    let targets = tokenUtils.getMovementHitTokens(startPoint, endPoint, templateUtils.getDistance(template));
     for (const target of targets) {
         let [targetCombatant] = game.combat.getCombatantsByToken(target.document);
         if (!targetCombatant) continue;

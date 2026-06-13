@@ -65,14 +65,11 @@ async function use({workflow}) {
 async function move({workflow}) {
     let newTemplate = workflow.template;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'naturesSanctuarySource');
-    let template = await fromUuid(effect?.flags['chris-premades'].naturesSanctuary.templateUuid);
+    let template = await fromUuid(templateUtils.normalizeTemplateUuid(effect?.flags['chris-premades'].naturesSanctuary.templateUuid));
     if (!template) return;
     let preTokens = new Set(template.parent.tokens.filter(t => t.actor && effectUtils.getEffectByIdentifier(t.actor, 'naturesSanctuary')).map(t => t.object));
     let postTokens = workflow.targets;
-    await genericUtils.update(template, {
-        x: newTemplate.x ?? template.x,
-        y: newTemplate.y ?? template.y
-    });
+    await templateUtils.moveTemplate(template, templateUtils.getPosition(newTemplate));
     await genericUtils.remove(newTemplate);
     let toRemove = preTokens.difference(postTokens);
     let toAdd = postTokens.difference(preTokens);

@@ -275,7 +275,7 @@ async function safeguard({trigger, workflow}) {
     let number = Math.max(activityUtils.getMod(workflow.activity) + participants, 1);
     let templateData = {
         t: 'rect',
-        user: game.user.id,
+        author: game.user.id,
         distance: 7.07,
         direction: 45,
         x: 0,

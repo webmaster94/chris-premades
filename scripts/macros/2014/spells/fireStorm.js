@@ -3,7 +3,7 @@ async function early({workflow}) {
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     let templateData = {
         t: 'rect',
-        user: game.user,
+        author: game.user.id,
         distance: 14.14,
         direction: 45,
         x: 3080,

@@ -3,7 +3,7 @@ export class Crosshairs extends foundry.canvas.placeables.MeasuredTemplate {
     constructor(config, callbacks = {}) {
         const templateData = {
             t: config.shape ?? 'circle',
-            user: game.user.id,
+            author: game.user.id,
             distance: config.size,
             x: config.x,
             y: config.y,
@@ -133,7 +133,7 @@ export class Crosshairs extends foundry.canvas.placeables.MeasuredTemplate {
     }
     static getSnappedPosition({x,y}, resolution){
         const offset = resolution < 0 ? canvas.grid.size/2 : 0;
-        const snapped = canvas.grid.getSnappedPoint({x: x - offset, y: y - offset}, {mode: 1, resolution: resolution});
+        const snapped = canvas.grid.getSnappedPoint({x: x - offset, y: y - offset}, {mode: CONST.GRID_SNAPPING_MODES.CENTER, resolution: resolution});
         return {x: snapped.x + offset, y: snapped.y + offset};
     }
     static ERROR_TEXTURE = 'icons/svg/hazard.svg'; // Update this to be a setting

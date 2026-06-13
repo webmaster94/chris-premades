@@ -22,15 +22,20 @@ async function use({workflow}) {
 }
 async function enterOrPassThrough({trigger: {entity: template, token}, options}, left) {
     if (options.teleport) return;
+    let regionDoc = templateUtils.getRegionDoc(template);
     let templateObj = template.object;
+    if (!regionDoc && !templateObj?.shape) return;
+    let containsPoint = regionDoc
+        ? point => regionDoc.polygonTree.testPoint(point, 1)
+        : point => templateObj.shape.contains(point.x - templateObj.center.x, point.y - templateObj.center.y);
     let prevCoords = genericUtils.duplicate(options._movement[token.id].origin);
     if (!prevCoords) return;
     if (canvas.scene.grid.units !== 'ft') return;
     if (canvas.scene.grid.type === CONST.GRID_TYPES.GRIDLESS) {
-        let startedIn = templateObj.shape.contains(prevCoords.x - templateObj.center.x, prevCoords.y - templateObj.center.y);
-        let endedIn = templateObj.shape.contains(token.center.x - templateObj.center.x, token.center.y - templateObj.center.y);
+        let startedIn = containsPoint(prevCoords);
+        let endedIn = containsPoint(token.center);
         let pointA, pointB;
-        let intersections = templateUtils.getIntersections(templateObj, prevCoords, token.center);
+        let intersections = templateUtils.getIntersections(regionDoc ?? templateObj, prevCoords, token.center);
         if (!intersections.length) return;
         if (!startedIn && !endedIn) {
             // pass through - grab intersects and get distance between

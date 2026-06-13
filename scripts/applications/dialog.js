@@ -307,7 +307,7 @@ export class DialogApp extends HandlebarsApplicationMixin(ApplicationV2) {
                             label: currField.label, 
                             name: currField.name,
                             value: currField.options?.currentValue ?? '',
-                            type: currField.options?.type ?? 'any' // FilePicker.FILE_TYPES => ['image', 'audio', 'video', 'text', 'imagevideo', 'font', 'folder', 'any']
+                            type: currField.options?.type ?? 'any'
                         });
                     }
                     context.inputs.push({

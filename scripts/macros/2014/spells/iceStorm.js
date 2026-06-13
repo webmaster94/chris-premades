@@ -1,14 +1,16 @@
-import {animationUtils, itemUtils} from '../../../utils.js';
+import {animationUtils, itemUtils, templateUtils} from '../../../utils.js';
 
 async function early({workflow}) {
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     if (!playAnimation || animationUtils.jb2aCheck() !== 'patreon' || !workflow.template) return;
     let template = workflow.template;
+    let templateObject = templateUtils.getObject(template);
+    let templatePosition = templateUtils.getPosition(template);
     //Animations by: eskiemoh
     await new Sequence()
         .effect()
         .file('jb2a.magic_signs.circle.02.evocation.loop.blue')
-        .atLocation(template)
+        .atLocation(templateObject)
         .scaleIn(0, 500, {ease: 'easeOutCubic'})
         .fadeIn(750)
         .fadeOut(1000)
@@ -19,7 +21,7 @@ async function early({workflow}) {
 
         .effect()
         .file('jb2a.magic_signs.circle.02.evocation.loop.blue')
-        .atLocation(template)
+        .atLocation(templateObject)
         .scaleIn(0, 500, {ease: 'easeOutCubic'})
         .fadeIn(150, {delay: 500})
         .size(9, {gridUnits: true})
@@ -35,7 +37,7 @@ async function early({workflow}) {
         .scaleIn(0, 500, {ease: 'easeOutQuint'})
         .delay(400)
         .fadeOut(1000)
-        .atLocation(template)
+        .atLocation(templateObject)
         .duration(1000)
         .size(12, {gridUnits: true})
         .zIndex(1)
@@ -46,7 +48,7 @@ async function early({workflow}) {
     new Sequence()
         .effect()
         .file('jb2a.sleet_storm.blue')
-        .atLocation(template)
+        .atLocation(templateObject)
         .size(9.5, {gridUnits: true})
         .persist()
         .attachTo(template)
@@ -57,7 +59,7 @@ async function early({workflow}) {
 
         .effect()
         .file('jb2a.smoke.ring.01.white')
-        .atLocation(template)
+        .atLocation(templateObject)
         .size(12, {gridUnits: true})
         .fadeIn(4000)
         .opacity(0.2)
@@ -69,7 +71,7 @@ async function early({workflow}) {
 
         .effect()
         .file('jb2a.magic_signs.circle.02.evocation.loop.blue')
-        .atLocation(template)
+        .atLocation(templateObject)
         .fadeIn(6000)
         .fadeOut(1000)
         .delay(500)
@@ -91,8 +93,8 @@ async function early({workflow}) {
             .effect()
             .file('jb2a.spell_projectile.ice_shard')
             .scale(1)
-            .atLocation({x:template.x + offsetX, y: template.y + offsetY}, {offset: {y: -7}, gridUnits: true})
-            .stretchTo({x:template.x + offsetX, y: template.y + offsetY},{ offset: {y:0}, gridUnits: true})
+            .atLocation({x: templatePosition.x + offsetX, y: templatePosition.y + offsetY}, {offset: {y: -7}, gridUnits: true})
+            .stretchTo({x: templatePosition.x + offsetX, y: templatePosition.y + offsetY},{ offset: {y:0}, gridUnits: true})
             .zIndex(6)
 
             .play();

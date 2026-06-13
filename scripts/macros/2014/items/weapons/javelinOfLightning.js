@@ -14,7 +14,7 @@ async function early({workflow}) {
         x: ray.A.x,
         y: ray.A.y,
         t: 'ray',
-        user: game.user,
+        author: game.user.id,
         fillColor: game.user.color,
         width: 5
     };

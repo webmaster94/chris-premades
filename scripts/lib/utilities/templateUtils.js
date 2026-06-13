@@ -24,6 +24,69 @@ function getPosition(template) {
     }
     return {x: template?.x ?? 0, y: template?.y ?? 0};
 }
+function getObject(template) {
+    return getRegionDoc(template)?.object ?? template?.object ?? template;
+}
+function getDistance(template) {
+    let regionDoc = getRegionDoc(template);
+    if (regionDoc) {
+        let shape = regionDoc.shapes?.at?.(0);
+        let grid = regionDoc.parent?.grid ?? canvas.scene?.grid;
+        let distancePixels = (grid?.size ?? canvas.grid.size) / (grid?.distance ?? canvas.scene?.grid?.distance ?? 5);
+        if (shape?.type === 'circle' || shape?.type === 'cone') return (shape.radius ?? 0) / distancePixels;
+        if (shape?.type === 'line') return (shape.length ?? 0) / distancePixels;
+        if (shape?.type === 'rectangle') return grid.measurePath([{x: 0, y: 0}, {x: shape.width, y: shape.height}]).distance;
+        return 0;
+    }
+    return template?.distance ?? 0;
+}
+function getRadius(template) {
+    let regionDoc = getRegionDoc(template);
+    if (regionDoc) {
+        let shape = regionDoc.shapes?.at?.(0);
+        if (Number.isFinite(shape?.radius)) return shape.radius;
+        if (Number.isFinite(shape?.radiusX)) return shape.radiusX;
+        if (Number.isFinite(shape?.width)) return shape.width / 2;
+        return 0;
+    }
+    if (Number.isFinite(template?.object?.shape?.radius)) return template.object.shape.radius;
+    return (template?.width ?? 0) * (canvas.grid.size / canvas.grid.distance) / 2;
+}
+function getAngle(template) {
+    let regionDoc = getRegionDoc(template);
+    if (regionDoc) return Math.toRadians(regionDoc.shapes?.at?.(0)?.rotation ?? 0);
+    return template?.object?.ray?.angle ?? 0;
+}
+function getRay(template) {
+    let ray = template?.object?.ray;
+    if (ray) return ray;
+    let regionDoc = getRegionDoc(template);
+    let shape = regionDoc?.shapes?.at?.(0);
+    if (!shape || !['cone', 'line'].includes(shape.type)) return undefined;
+    return foundry.canvas.geometry.Ray.fromAngle(shape.x, shape.y, Math.toRadians(shape.rotation ?? 0), shape.radius ?? shape.length ?? 0);
+}
+async function moveTemplate(template, position) {
+    let regionDoc = getRegionDoc(template);
+    let oldPosition = getPosition(regionDoc ?? template);
+    let newPosition = {
+        x: position.x ?? oldPosition.x,
+        y: position.y ?? oldPosition.y
+    };
+    if (regionDoc) {
+        let deltaX = newPosition.x - oldPosition.x;
+        let deltaY = newPosition.y - oldPosition.y;
+        let shapes = regionDoc.toObject().shapes;
+        for (let shape of shapes) {
+            if (shape.points) shape.points = shape.points.map((p, i) => i % 2 ? p + deltaY : p + deltaX);
+            else {
+                if (Number.isFinite(shape.x)) shape.x += deltaX;
+                if (Number.isFinite(shape.y)) shape.y += deltaY;
+            }
+        }
+        return await genericUtils.update(regionDoc, {shapes});
+    }
+    return await genericUtils.update(template, newPosition);
+}
 // Boundary-inclusive containment: Region/Clipper treats the boundary as outside, old shape.contains
 // did not — tolerance 1px restores v13 targeting parity (midi-qol uses the same value).
 function regionContainsPoint(regionDoc, point) {
@@ -263,6 +326,12 @@ export let templateUtils = {
     getRegionDoc,
     normalizeTemplateUuid,
     getPosition,
+    getObject,
+    getDistance,
+    getRadius,
+    getAngle,
+    getRay,
+    moveTemplate,
     getTokensInShape,
     getTokensInTemplate,
     getTemplatesInToken,

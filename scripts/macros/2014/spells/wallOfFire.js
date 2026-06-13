@@ -13,7 +13,7 @@ async function early({trigger, workflow}) {
         if (!radius) return;
         radius = Number(radius);
         let templateData = {
-            user: game.user,
+            author: game.user.id,
             t: 'circle',
             distance: radius,
             direction: 0,
@@ -29,6 +29,7 @@ async function early({trigger, workflow}) {
         await workflow.actor.sheet.minimize();
         let template = await templateUtils.placeTemplate(templateData);
         await workflow.actor.sheet.maximize();
+        if (!template) return;
         await genericUtils.sleep(50);
         let facing = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.WallOfFire.CircleFacing', [['CHRISPREMADES.Macros.WallOfFire.Inward', 'inward'], ['CHRISPREMADES.Macros.WallOfFire.Outward', 'outward']], {displayAsRows: true});
         if (!facing) {
@@ -36,17 +37,22 @@ async function early({trigger, workflow}) {
             return;
         }
         let height = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.WallOfFire.Height', distance20Buttons, {displayAsRows: true});
-        if (!height) return;
+        if (!height) {
+            await genericUtils.remove(template);
+            return;
+        }
+        let {x: templateX, y: templateY} = templateUtils.getPosition(template);
+        let templateScale = templateUtils.getRadius(template) / radius;
         let regionData = {
             name: workflow.item.name,
             color: game.user.color,
             shapes: [
                 {
                     type: 'ellipse',
-                    x: template.x,
-                    y: template.y,
-                    radiusX: (template.object.shape.radius / radius) * (radius - 0.5),
-                    radiusY: (template.object.shape.radius / radius) * (radius - 0.5),
+                    x: templateX,
+                    y: templateY,
+                    radiusX: templateScale * (radius - 0.5),
+                    radiusY: templateScale * (radius - 0.5),
                     rotation: 0,
                     hole: false
                 }
@@ -78,10 +84,10 @@ async function early({trigger, workflow}) {
             shapes: [
                 {
                     type: 'ellipse',
-                    x: template.x,
-                    y: template.y,
-                    radiusX: (template.object.shape.radius / radius) * (radius + 2.5),
-                    radiusY: (template.object.shape.radius / radius) * (radius + 2.5),
+                    x: templateX,
+                    y: templateY,
+                    radiusX: templateScale * (radius + 2.5),
+                    radiusY: templateScale * (radius + 2.5),
                     rotation: 0,
                     hole: false
                 }
@@ -115,10 +121,10 @@ async function early({trigger, workflow}) {
         if (radius != 2.5) {
             visionRegionData.shapes.push({
                 type: 'ellipse',
-                x: template.x,
-                y: template.y,
-                radiusX: (template.object.shape.radius / radius) * (radius - 2.5),
-                radiusY: (template.object.shape.radius / radius) * (radius - 2.5),
+                x: templateX,
+                y: templateY,
+                radiusX: templateScale * (radius - 2.5),
+                radiusY: templateScale * (radius - 2.5),
                 rotation: 0,
                 hole: true
             });
@@ -128,17 +134,17 @@ async function early({trigger, workflow}) {
         if (facing === 'outward') {
             regionData.shapes.unshift({
                 type: 'ellipse',
-                x: template.x,
-                y: template.y,
-                radiusX: (template.object.shape.radius / radius) * (radius + 10.5),
-                radiusY: (template.object.shape.radius / radius) * (radius + 10.5),
+                x: templateX,
+                y: templateY,
+                radiusX: templateScale * (radius + 10.5),
+                radiusY: templateScale * (radius + 10.5),
                 hole: false
             });
             regionData.shapes[1].hole = true;
             
         } else {
-            regionData.shapes[0].radiusX = (template.object.shape.radius / radius) * (radius + 0.5);
-            regionData.shapes[0].radiusY = (template.object.shape.radius / radius) * (radius + 0.5);
+            regionData.shapes[0].radiusX = templateScale * (radius + 0.5);
+            regionData.shapes[0].radiusY = templateScale * (radius + 0.5);
         }
         let [visibilityRegion] = await regionUtils.createRegions([visionRegionData], workflow.token.scene, {parentEntity: concentration});
         await genericUtils.sleep(50);
@@ -148,19 +154,19 @@ async function early({trigger, workflow}) {
             shapes: [
                 {
                     type: 'ellipse',
-                    x: template.x,
-                    y: template.y,
-                    radiusX: (template.object.shape.radius / radius) * (radius + 0.5),
-                    radiusY: (template.object.shape.radius / radius) * (radius + 0.5),
+                    x: templateX,
+                    y: templateY,
+                    radiusX: templateScale * (radius + 0.5),
+                    radiusY: templateScale * (radius + 0.5),
                     rotation: 0,
                     hole: false
                 },
                 {
                     type: 'ellipse',
-                    x: template.x,
-                    y: template.y,
-                    radiusX: (template.object.shape.radius / radius) * (radius - 0.5),
-                    radiusY: (template.object.shape.radius / radius) * (radius - 0.5),
+                    x: templateX,
+                    y: templateY,
+                    radiusX: templateScale * (radius - 0.5),
+                    radiusY: templateScale * (radius - 0.5),
                     rotation: 0,
                     hole: true
                 }
@@ -193,7 +199,7 @@ async function early({trigger, workflow}) {
         if (!length) return;
         length = Number(length);
         let templateData = {
-            user: game.user,
+            author: game.user.id,
             t: 'ray',
             distance: length,
             direction: 0,
@@ -209,13 +215,20 @@ async function early({trigger, workflow}) {
         await workflow.actor.sheet.minimize();
         let template = await templateUtils.placeTemplate(templateData);
         await workflow.actor.sheet.maximize();
+        if (!template) return;
         await genericUtils.sleep(50);
         let height = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.WallOfFire.Height', distance20Buttons, {displayAsRows: true});
         if (!height) {
             await genericUtils.remove(template);
             return;
         }
-        let angle = Math.toDegrees(template.object.ray.angle);
+        let getRay = () => templateUtils.getRay(template);
+        let ray = getRay();
+        if (!ray) {
+            await genericUtils.remove(template);
+            return;
+        }
+        let angle = Math.toDegrees(ray.angle);
         if (angle < 0) angle = 360 + angle;
         let direction;
         if ((angle >= 135 && angle <= 225) || (angle >= 315 && angle < 360) || (angle >= 0 && angle <= 45)) {
@@ -227,7 +240,7 @@ async function early({trigger, workflow}) {
             await genericUtils.remove(template);
             return;
         }
-        let smallDistance = (template.object.ray.distance / length) * 5;
+        let smallDistance = (ray.distance / length) * 5;
         let shortAngle;
         if (angle >= 135 && angle <= 225) {
             if (direction === 'up') {
@@ -254,7 +267,7 @@ async function early({trigger, workflow}) {
                 shortAngle = -90;
             }
         }
-        let shortRay = template.object.ray.shiftAngle(Math.toRadians(shortAngle), smallDistance);
+        let shortRay = ray.shiftAngle(Math.toRadians(shortAngle), smallDistance);
         await genericUtils.update(template, {
             x: shortRay.B.x,
             y: shortRay.B.y,
@@ -307,23 +320,26 @@ async function early({trigger, workflow}) {
             ]
         });
         if (playAnimation) {
+            let animationRay = getRay();
             /* eslint-disable indent */
-            new Sequence()
-                .effect()
-                    .file('jb2a.wall_of_fire.300x100.' + color)
-                    .atLocation({x: template.object.ray.A.x, y: template.object.ray.A.y})
-                    .stretchTo({x: template.object.ray.B.x, y: template.object.ray.B.y})
-                    .scale({x: 1, y: (15 / length)})
-                    .persist()
-                    .name('wallOfFire')
-                    .tieToDocuments(visibilityRegion)
-                    .fadeIn(300)
-                    .fadeOut(300)
-                    .aboveInterface()
-                .sound()
-                    .playIf(sound)
-                    .file(sound)
-                .play();
+            if (animationRay) {
+                new Sequence()
+                    .effect()
+                        .file('jb2a.wall_of_fire.300x100.' + color)
+                        .atLocation({x: animationRay.A.x, y: animationRay.A.y})
+                        .stretchTo({x: animationRay.B.x, y: animationRay.B.y})
+                        .scale({x: 1, y: (15 / length)})
+                        .persist()
+                        .name('wallOfFire')
+                        .tieToDocuments(visibilityRegion)
+                        .fadeIn(300)
+                        .fadeOut(300)
+                        .aboveInterface()
+                    .sound()
+                        .playIf(sound)
+                        .file(sound)
+                    .play();
+            }
             /* eslint-enable indent */
         }
         await genericUtils.update(template, {

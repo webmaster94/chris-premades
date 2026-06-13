@@ -53,30 +53,32 @@ async function use({workflow}) {
         .aboveInterface()
         .opacity(0.9)
         .xray(true)
-        .mask(template)
+        .mask(templateUtils.getObject(template))
         .persist(true)
         .attachTo(template)
         .play();
 }
 async function move({trigger: {entity: effect, token}}) {
     function getAllowedMoveLocation(casterToken, template, maxSquares) {
+        let templateObject = templateUtils.getObject(template);
+        let templateCenter = templateUtils.getPosition(template);
         for (let i = maxSquares; i > 0; i--) {
             let movePixels = i * canvas.grid.size;
-            let ray = new foundry.canvas.geometry.Ray(casterToken.center, template.object.center);
+            let ray = new foundry.canvas.geometry.Ray(casterToken.center, templateCenter);
             let newCenter = ray.project((ray.distance + movePixels)/ray.distance);
-            let isAllowedLocation = canvas.visibility.testVisibility(newCenter, {object: template.object});
+            let isAllowedLocation = canvas.visibility.testVisibility(newCenter, {object: templateObject});
             if (isAllowedLocation) return newCenter;
         }
         return false;
     }
-    let template = await fromUuid(effect.flags['chris-premades']?.cloudkill?.templateUuid);
+    let template = await fromUuid(templateUtils.normalizeTemplateUuid(effect.flags['chris-premades']?.cloudkill?.templateUuid));
     if (!template) return;
     let newCenter = getAllowedMoveLocation(token, template, 2);
     if (!newCenter) {
         genericUtils.notify('CHRISPREMADES.Macros.Cloudkill.NoRoom', 'info');
     } else {
         newCenter = canvas.grid.getSnappedPoint(newCenter, {mode: CONST.GRID_SNAPPING_MODES.TOP_LEFT_CORNER});
-        await genericUtils.update(template, {x: newCenter.x, y: newCenter.y});
+        await templateUtils.moveTemplate(template, newCenter);
     }
     let targets = Array.from(templateUtils.getTokensInTemplate(template)) ?? [];
     if (combatUtils.inCombat()) {

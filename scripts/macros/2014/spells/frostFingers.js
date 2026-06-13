@@ -1,8 +1,10 @@
-import {animationUtils, genericUtils, itemUtils} from '../../../utils.js';
+import {animationUtils, genericUtils, itemUtils, templateUtils} from '../../../utils.js';
 
 async function early({workflow}) {
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
-    let template = await fromUuid(workflow.templateUuid);
+    let templateDoc = templateUtils.getRegionDoc(templateUtils.normalizeTemplateUuid(workflow.templateUuid)) ?? await fromUuid(workflow.templateUuid);
+    let template = templateUtils.getObject(templateDoc);
+    if (!template) return;
     if (playAnimation && animationUtils.jb2aCheck()) {
         await new Sequence()
             .effect()

@@ -1,4 +1,4 @@
-import {animationUtils, dialogUtils, effectUtils, genericUtils, itemUtils, tokenUtils} from '../../../utils.js';
+import {animationUtils, dialogUtils, effectUtils, genericUtils, itemUtils, templateUtils, tokenUtils} from '../../../utils.js';
 async function use({workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
@@ -39,16 +39,15 @@ async function use({workflow}) {
     let attachUuids = [template.uuid];
     let darknessSource;
     if (useRealDarkness) {
-        [darknessSource] = await genericUtils.createEmbeddedDocuments(template.parent, 'AmbientLight', [{config: {negative: true, dim: template.distance, animation: {type: darknessAnimation}}, x: template.x, y: template.y}]);
+        let regionDoc = templateUtils.getRegionDoc(template);
+        let {x, y} = templateUtils.getPosition(template);
+        [darknessSource] = await genericUtils.createEmbeddedDocuments((regionDoc ?? template).parent, 'AmbientLight', [{config: {negative: true, dim: templateUtils.getDistance(template), animation: {type: darknessAnimation}}, x, y}]);
         attachUuids.push(darknessSource.uuid);
         effectUtils.addDependent(template, [darknessSource]);
     }
     let attachToken = await dialogUtils.confirm(workflow.item.name, 'CHRISPREMADES.Macros.Darkness.Attach');
     if (attachToken) {
-        await genericUtils.update(template, {
-            x: token.center.x,
-            y: token.center.y
-        });
+        await templateUtils.moveTemplate(template, token.center);
         if (darknessSource) {
             await genericUtils.update(darknessSource, {
                 x: token.center.x,
@@ -67,7 +66,7 @@ async function use({workflow}) {
                 .aboveLighting()
                 .opacity(0.5)
                 .xray(xray)
-                .mask(template)
+                .mask(templateUtils.getObject(template))
                 .persist(true)
                 .attachTo(template)
                 .play();

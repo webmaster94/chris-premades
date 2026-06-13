@@ -62,13 +62,10 @@ async function move({workflow}) {
     let template = await fromUuid(effect?.flags['chris-premades'].dawn.templateUuid);
     if (!template) return;
     await workflow.actor.sheet.minimize();
-    let position = await crosshairUtils.aimCrosshair({token: workflow.token, maxRange: 60, centerpoint: template.object.center, crosshairsConfig: {icon: effect.img, resolution: 2, size: template.distance}, drawBoundries: true});
+    let position = await crosshairUtils.aimCrosshair({token: workflow.token, maxRange: 60, centerpoint: templateUtils.getPosition(template), crosshairsConfig: {icon: effect.img, resolution: 2, size: templateUtils.getDistance(template)}, drawBoundries: true});
     await workflow.actor.sheet.maximize();
     if (position.cancelled) return;
-    await genericUtils.update(template, {
-        x: position.x ?? template.x,
-        y: position.y ?? template.y
-    });
+    await templateUtils.moveTemplate(template, position);
 }
 async function endTurn({trigger: {entity: template, castData, token}}) {
     let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'dawnEndTurn', {strict: true});

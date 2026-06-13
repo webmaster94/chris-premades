@@ -6,7 +6,10 @@ async function getSpellsOfLevel(level, {identifier} = {}) {
     return documents.filter(i => i.system.level === level);
 }
 function isClassSpell(item, identifier) {
-    return item.system?.sourceClass === identifier;
+    let sourceItemUuid = item.system?.sourceItem;
+    if (sourceItemUuid?.startsWith('class:')) return sourceItemUuid.slice(6) === identifier;
+    let sourceItem = fromUuidSync(sourceItemUuid, {strict: false});
+    return (genericUtils.getIdentifier(sourceItem) ?? sourceItem?.system?.identifier) === identifier;
 }
 async function getCompendiumSpell(name, {identifier = false, rules, bySystemIdentifier = false, ignoreNotFound = false} = {}) {
     let packId = genericUtils.getCPRSetting('spellCompendium');

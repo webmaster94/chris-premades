@@ -6,7 +6,7 @@ async function early({workflow}) {
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     let templateData = {
         t: 'circle',
-        user: game.user,
+        author: game.user.id,
         distance: workflowUtils.getCastLevel(workflow) * 20,
         direction: 0,
         fillColor: game.user.color,
@@ -48,7 +48,7 @@ async function early({workflow}) {
                 .scaleToObject()
                 .aboveLighting()
                 .opacity(0.5)
-                .mask(template)
+                .mask(templateUtils.getObject(template))
                 .xray(xray)
                 .persist(true)
                 .attachTo(template)
@@ -67,9 +67,8 @@ async function early({workflow}) {
         }
     }
     if (useRealDarkness) {
-        let shape = template.shapes?.at?.(0);
         let position = templateUtils.getPosition(template);
-        let distance = shape?.radius ? shape.radius * template.parent.grid.distance / template.parent.grid.size : template.distance;
+        let distance = templateUtils.getDistance(template);
         let [darknessSource] = await genericUtils.createEmbeddedDocuments(template.parent, 'AmbientLight', [{config: {negative: true, dim: distance, animation: {type: darknessAnimation}}, x: position.x, y: position.y}]);
         effectUtils.addDependent(template, [darknessSource]);
     }

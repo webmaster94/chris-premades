@@ -68,11 +68,17 @@ async function move({workflow}) {
     let template = await fromUuid(effect?.flags['chris-premades'].gustOfWind.templateUuid);
     let newTemplate = workflow.template;
     if (!template || !newTemplate) return;
-    await genericUtils.update(template, {
-        x: newTemplate.x,
-        y: newTemplate.y,
-        direction: newTemplate.direction
-    });
+    let regionDoc = templateUtils.getRegionDoc(template);
+    let newRegionDoc = templateUtils.getRegionDoc(newTemplate);
+    if (regionDoc && newRegionDoc) {
+        await genericUtils.update(regionDoc, {shapes: newRegionDoc.toObject().shapes});
+    } else {
+        await genericUtils.update(template, {
+            x: newTemplate.x,
+            y: newTemplate.y,
+            direction: newTemplate.direction
+        });
+    }
     await genericUtils.remove(newTemplate);
     if (itemUtils.getConfig(workflow.item, 'pushOnMove')) {
         let feature = activityUtils.getActivityByIdentifier(workflow.item, 'gustOfWindPush', {strict: true});
@@ -89,7 +95,7 @@ async function endTurn({trigger: {entity: template, castData, token}}) {
 async function pushHelper(feature, targets, template) {
     let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, Array.from(targets));
     if (!featureWorkflow.failedSaves.size) return;
-    let gustAngle = template.object.ray.angle;
+    let gustAngle = templateUtils.getAngle(template);
     let ray = foundry.canvas.geometry.Ray.fromAngle(0, 0, gustAngle, canvas.dimensions.size);
     return Promise.all(featureWorkflow.failedSaves.map(async token => {
         return tokenUtils.moveTokenAlongRay(token, ray, 15);

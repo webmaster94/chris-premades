@@ -31,7 +31,7 @@ async function use({workflow}) {
     if (useRealDarkness) {
         let regionDoc = templateUtils.getRegionDoc(template);
         let {x, y} = templateUtils.getPosition(template);
-        let dim = regionDoc ? (regionDoc.shapes.at(0)?.radius ?? 0) / ((regionDoc.parent ?? canvas.scene).dimensions.distancePixels) : template.distance;
+        let dim = templateUtils.getDistance(template);
         let [darknessSource] = await genericUtils.createEmbeddedDocuments((regionDoc ?? template).parent, 'AmbientLight', [{config: {negative: true, dim, animation: {type: darknessAnimation}}, x, y}]);
         effectUtils.addDependent(template, [darknessSource]);
     }

@@ -61,8 +61,10 @@ function getItemByIdentifier(actor, identifier) {
     return actor.items.find(i => genericUtils.getIdentifier(i) === identifier);
 }
 function getSourceClassIdentifier(item) {
-    let sourceItem = fromUuidSync(item?.system?.sourceItem, {strict: false});
-    return genericUtils.getIdentifier(sourceItem) ?? sourceItem?.system?.identifier ?? item?.system?.sourceClass;
+    let sourceItemUuid = item?.system?.sourceItem;
+    if (sourceItemUuid?.startsWith('class:')) return sourceItemUuid.slice(6);
+    let sourceItem = fromUuidSync(sourceItemUuid, {strict: false});
+    return genericUtils.getIdentifier(sourceItem) ?? sourceItem?.system?.identifier;
 }
 function getAllItemsByIdentifier(actor, identifier) {
     return actor.items.filter(i => genericUtils.getIdentifier(i) === identifier);

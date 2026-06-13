@@ -1,6 +1,6 @@
-import {actorUtils, animationUtils, effectUtils, itemUtils} from '../../../utils.js';
+import {actorUtils, animationUtils, effectUtils, itemUtils, templateUtils} from '../../../utils.js';
 async function use({workflow}) {
-    let templateDoc = await fromUuid(workflow.templateUuid);
+    let templateDoc = templateUtils.getRegionDoc(templateUtils.normalizeTemplateUuid(workflow.templateUuid)) ?? await fromUuid(workflow.templateUuid);
     if (!templateDoc) return;
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     let color = itemUtils.getConfig(workflow.item, 'color');
@@ -53,8 +53,16 @@ async function use({workflow}) {
             tintColor = '0xdcace3';
             hue = 250;
     }
-    let template = templateDoc.object;
-    let position = template.ray.project(0.5);
+    let position = templateUtils.getPosition(templateDoc);
+    if (templateDoc.documentName === 'Region') {
+        let shape = templateDoc.shapes.at(0);
+        if (shape?.type === 'cone' || shape?.type === 'line') {
+            let ray = foundry.canvas.geometry.Ray.fromAngle(shape.x, shape.y, Math.toRadians(shape.rotation ?? 0), shape.radius ?? shape.length ?? 0);
+            position = ray.project(0.5);
+        }
+    } else {
+        position = templateDoc.object?.ray?.project(0.5) ?? position;
+    }
     let shouldAnimate = playAnimation && animationUtils.jb2aCheck() === 'patreon' && animationUtils.aseCheck();
     if (shouldAnimate) {
         new Sequence()

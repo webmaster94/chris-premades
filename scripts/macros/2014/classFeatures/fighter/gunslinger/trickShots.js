@@ -52,7 +52,7 @@ async function usePiercing({workflow}) {
         distance: weapon.system.range.value,
         t: 'ray',
         width: 5,
-        user: game.user,
+        author: game.user.id,
         fillColor: game.user.color
     };
     let {template, tokens} = await templateUtils.placeTemplate(templateData, true);

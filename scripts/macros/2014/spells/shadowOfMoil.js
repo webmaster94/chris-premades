@@ -24,7 +24,7 @@ async function early({trigger:workflow}) {
     let sourceToken = workflow.token;
     let sourceActor = workflow.actor;
     let sourceEffect = effectUtils.getEffectByIdentifier(sourceActor, 'shadowOfMoil');
-    let sourceSenses = sourceActor.system.attributes.senses;
+    let sourceSenses = sourceActor.system.attributes.senses.ranges ?? {};
     for (let targetToken of workflow.targets) {
         let targetActor = targetToken.actor;
         let targetEffect = effectUtils.getEffectByIdentifier(targetActor, 'shadowOfMoil');
@@ -34,9 +34,9 @@ async function early({trigger:workflow}) {
         let targetCanSeeSource = false;
         if (sourceEffect && !targetEffect) sourceCanSeeTarget = true;
         if (targetEffect && !sourceEffect) targetCanSeeSource = true;
-        let targetSenses = targetActor.system.attributes.senses;
-        if ((sourceSenses.tremorsense >= distance) || (sourceSenses.blindsight >= distance)) sourceCanSeeTarget = true;
-        if ((targetSenses.tremorsense >= distance) || (targetSenses.blindsight >= distance)) targetCanSeeSource = true;
+        let targetSenses = targetActor.system.attributes.senses.ranges ?? {};
+        if (((sourceSenses.tremorsense ?? 0) >= distance) || ((sourceSenses.blindsight ?? 0) >= distance)) sourceCanSeeTarget = true;
+        if (((targetSenses.tremorsense ?? 0) >= distance) || ((targetSenses.blindsight ?? 0) >= distance)) targetCanSeeSource = true;
         if (sourceCanSeeTarget && targetCanSeeSource) continue;
         if (sourceCanSeeTarget) {
             workflow.tracker.advantage.add(genericUtils.translate('CHRISPREMADES.Macros.ShadowOfMoil.Name'), genericUtils.translate('CHRISPREMADES.Template.TargetCantSeeAttacker'));

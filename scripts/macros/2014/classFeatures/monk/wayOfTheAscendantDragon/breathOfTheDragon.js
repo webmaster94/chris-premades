@@ -65,7 +65,7 @@ async function early({workflow}) {
         await genericUtils.update(ki, {'system.uses.spent': ki.system.uses.spent + 1});
     }
     let templateData = {
-        user: game.user,
+        author: game.user.id,
         t: shape === 'cone' ? 'cone' : 'ray',
         distance,
         fillColor: game.user.color,

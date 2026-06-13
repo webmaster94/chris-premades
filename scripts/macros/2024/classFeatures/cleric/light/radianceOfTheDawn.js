@@ -11,8 +11,12 @@ async function early({trigger, workflow}) {
 }
 async function use({trigger, workflow}) {
     if (!workflow.template) return;
-    let darknessTemplates = workflow.template.parent.templates.filter(template => template.flags['chris-premades']?.template?.visibility?.magicalDarkness).filter(template => templateUtils.overlap(workflow.template, template));
-    await genericUtils.deleteEmbeddedDocuments(workflow.template.parent, 'MeasuredTemplate', darknessTemplates.map(i => i.id));
+    let darknessTemplates = workflow.template.parent.regions.filter(template => {
+        if (!genericUtils.isTemplateRegion(template)) return false;
+        if (!template.flags['chris-premades']?.template?.visibility?.magicalDarkness) return false;
+        return templateUtils.overlap(workflow.template, template);
+    });
+    await genericUtils.deleteEmbeddedDocuments(workflow.template.parent, 'Region', darknessTemplates.map(i => i.id));
 }
 async function added({trigger: {entity: item}}) {
     await itemUtils.correctActivityItemConsumption(item, ['use'], 'channelDivinity');

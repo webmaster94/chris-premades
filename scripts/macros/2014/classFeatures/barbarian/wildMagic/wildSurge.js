@@ -198,7 +198,7 @@ async function use({workflow}) {
                 distance: 15,
                 direction: 0,
                 angle: 0,
-                user: game.user,
+                author: game.user.id,
                 fillColor: game.user.color
             };
             // This looks bad but actually it's good, they'll be allowed to do this and it means not socketing game.user
