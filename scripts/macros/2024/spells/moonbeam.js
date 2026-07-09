@@ -85,7 +85,7 @@ async function move({workflow}) {
         combatUtils.setTurnCheck(targetCombatant, 'moonbeam');
     }
     if (targets.size == 0) return;
-    let damageFeature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'moonbeamDamage', {strict: true});
+    let damageFeature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'moonbeamDamage', {strict: true});
     if (!damageFeature) return;
     await workflowUtils.syntheticActivityRoll(damageFeature, Array.from(targets), {atLevel: castData.castLevel, options: {asUser: socketUtils.firstOwner(damageFeature.actor, true)}});
 }
@@ -94,7 +94,7 @@ async function enter({trigger: {entity: template, castData, token}}) {
     if (!targetCombatant) return;
     if (!combatUtils.perTurnCheck(targetCombatant, 'moonbeam')) return;
     await combatUtils.setTurnCheck(targetCombatant, 'moonbeam');
-    let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'moonbeamDamage', {strict: true});
+    let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'moonbeamDamage', {strict: true});
     if (!feature) return;
     await workflowUtils.syntheticActivityRoll(feature, [token], {atLevel: castData.castLevel, options: {asUser: socketUtils.firstOwner(feature.actor, true)}});
 }
@@ -104,7 +104,7 @@ async function turnEnd({trigger: {entity: template, castData, token, previousRou
     let turnToCheck = previousRound + '-' + previousTurn;
     let lastDamagedTurn = targetCombatant.flags['chris-premades']?.['moonbeam']?.turn;
     if (lastDamagedTurn == turnToCheck) return;
-    let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'moonbeamDamage', {strict: true});
+    let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'moonbeamDamage', {strict: true});
     if (!feature) return;
     await workflowUtils.syntheticActivityRoll(feature, [token], {atLevel: castData.castLevel, options: {asUser: socketUtils.firstOwner(feature.actor, true)}});
 }

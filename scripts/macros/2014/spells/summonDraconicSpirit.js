@@ -36,9 +36,9 @@ async function use({workflow}) {
     let hpFormula = 50 + ((spellLevel - 5) * 10);
     let sharedOptions = [];
     if (creatureType === 'gem') {
-        sharedOptions = [['DND5E.DamageForce', 'force'], ['DND5E.DamageNecrotic', 'necrotic'], ['DND5E.DamagePsychic', 'psychic'], ['DND5E.DamageRadiant', 'radiant'], ['DND5E.DamageThunder', 'thunder']];
+        sharedOptions = [['DND5E.DAMAGE.Type.Force', 'force'], ['DND5E.DAMAGE.Type.Necrotic', 'necrotic'], ['DND5E.DAMAGE.Type.Psychic', 'psychic'], ['DND5E.DAMAGE.Type.Radiant', 'radiant'], ['DND5E.DAMAGE.Type.Thunder', 'thunder']];
     } else {
-        sharedOptions = [['DND5E.DamageAcid', 'acid'], ['DND5E.DamageCold', 'cold'], ['DND5E.DamageFire', 'fire'], ['DND5E.DamageLightning', 'lightning'], ['DND5E.DamagePoison', 'poison']];
+        sharedOptions = [['DND5E.DAMAGE.Type.Acid', 'acid'], ['DND5E.DAMAGE.Type.Cold', 'cold'], ['DND5E.DAMAGE.Type.Fire', 'fire'], ['DND5E.DAMAGE.Type.Lightning', 'lightning'], ['DND5E.DAMAGE.Type.Poison', 'poison']];
     }
     let updates = {
         actor: {
@@ -120,9 +120,9 @@ async function damage({workflow}) {
     if (!dragonType) return;
     let options;
     if (dragonType === 'gem') {
-        options = [['DND5E.DamageForce', 'force'], ['DND5E.DamageNecrotic', 'necrotic'], ['DND5E.DamagePsychic', 'psychic'], ['DND5E.DamageRadiant', 'radiant'], ['DND5E.DamageThunder', 'thunder']];
+        options = [['DND5E.DAMAGE.Type.Force', 'force'], ['DND5E.DAMAGE.Type.Necrotic', 'necrotic'], ['DND5E.DAMAGE.Type.Psychic', 'psychic'], ['DND5E.DAMAGE.Type.Radiant', 'radiant'], ['DND5E.DAMAGE.Type.Thunder', 'thunder']];
     } else {
-        options = [['DND5E.DamageAcid', 'acid'], ['DND5E.DamageCold', 'cold'], ['DND5E.DamageFire', 'fire'], ['DND5E.DamageLightning', 'lightning'], ['DND5E.DamagePoison', 'poison']];
+        options = [['DND5E.DAMAGE.Type.Acid', 'acid'], ['DND5E.DAMAGE.Type.Cold', 'cold'], ['DND5E.DAMAGE.Type.Fire', 'fire'], ['DND5E.DAMAGE.Type.Lightning', 'lightning'], ['DND5E.DAMAGE.Type.Poison', 'poison']];
     }
     let damageType = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Dialog.DamageType', options);
     if (!damageType) return;

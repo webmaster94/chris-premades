@@ -14,7 +14,8 @@ async function use({trigger, workflow}) {
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;
     if (levels >= 6) {
-        effectData.duration = {seconds: 3600};
+        effectData.duration = {value: 3600, units: 'seconds'};
+        effectData.start = {time: game.time?.worldTime ?? 0};
     } else {
         effectData.duration = itemUtils.convertDuration(workflow.activity);
     }

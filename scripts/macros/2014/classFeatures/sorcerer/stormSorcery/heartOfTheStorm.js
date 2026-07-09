@@ -9,8 +9,8 @@ async function early({trigger: {entity: item}, workflow}) {
 async function damage({workflow}) {
     if (!workflow.targets.size) return;
     let damageType = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Dialog.DamageType', [
-        ['DND5E.DamageLightning', 'lightning'],
-        ['DND5E.DamageThunder', 'thunder']
+        ['DND5E.DAMAGE.Type.Lightning', 'lightning'],
+        ['DND5E.DAMAGE.Type.Thunder', 'thunder']
     ]);
     if (!damageType) damageType = 'lightning';
     await workflowUtils.replaceDamage(workflow, workflow.activity.damage.parts[0].formula, {damageType});

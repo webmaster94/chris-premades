@@ -3,9 +3,9 @@ import {combatUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtil
 async function use({workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
     let buttons = [
-        ['DND5E.DamageNecrotic', 'necrotic', {image: 'icons/magic/unholy/orb-contained-pink.webp'}],
-        ['DND5E.DamageRadiant', 'radiant', {image: 'icons/magic/light/projectile-beam-yellow.webp'}],
-        ['DND5E.DamageCold', 'cold', {image: 'icons/magic/air/wind-tornado-wall-blue.webp'}]
+        ['DND5E.DAMAGE.Type.Necrotic', 'necrotic', {image: 'icons/magic/unholy/orb-contained-pink.webp'}],
+        ['DND5E.DAMAGE.Type.Radiant', 'radiant', {image: 'icons/magic/light/projectile-beam-yellow.webp'}],
+        ['DND5E.DAMAGE.Type.Cold', 'cold', {image: 'icons/magic/air/wind-tornado-wall-blue.webp'}]
     ];
     let damageType = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Dialog.DamageType', buttons);
     if (!damageType) damageType = 'necrotic';

@@ -8,7 +8,8 @@ async function cast({trigger: {entity: item}, workflow}) {
     let sourceEffect = item.effects.contents?.[0];
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
-    effectData.duration = {seconds: 1};
+    effectData.duration = {value: 1, units: 'seconds'};
+    effectData.start = {time: game.time?.worldTime ?? 0};
     genericUtils.setProperty(effectData, 'flags.chris-premades.magicalAmbush.spellUuid', workflow.item.uuid);
     effectData.name += ': ' + workflow.item.name;
     await Promise.all(workflow.targets.map(async token => {

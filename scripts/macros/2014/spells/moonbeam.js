@@ -72,7 +72,7 @@ async function enterOrTurn({trigger: {entity: template, castData, token}}) {
     if (!targetCombatant) return;
     if (!combatUtils.perTurnCheck(targetCombatant, 'moonbeam')) return;
     await combatUtils.setTurnCheck(targetCombatant, 'moonbeam');
-    let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'moonbeamDamage', {strict: true});
+    let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'moonbeamDamage', {strict: true});
     if (!feature) return;
     if (actorUtils.isShapeChanger(token.actor)) {
         let effectData = {

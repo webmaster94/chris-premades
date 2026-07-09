@@ -60,7 +60,7 @@ async function use({workflow}) {
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
 }
 async function endTurn({trigger: {entity: template, castData, token}}) {
-    let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'stormSphereTurn', {strict: true});
+    let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'stormSphereTurn', {strict: true});
     if (!feature) return;
     await workflowUtils.syntheticActivityRoll(feature, [token], {atLevel: castData.castLevel});
 }

@@ -255,7 +255,6 @@
       },
       "macros": {
         "item": [
-          "interdictStyxsApathy",
           "interdictBoonStyxsApathy"
         ]
       }

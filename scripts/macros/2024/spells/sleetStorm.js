@@ -41,7 +41,7 @@ async function enterOrStart({trigger: {entity: template, castData, token}}) {
     await combatUtils.setTurnCheck(targetCombatant, 'sleetStorm');
     if (actorUtils.checkTrait(token.actor, 'ci', 'prone')) return;
     if (effectUtils.getEffectByStatusID(token.actor, 'prone')) return;
-    let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'sleetStormProne', {strict: true});
+    let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'sleetStormProne', {strict: true});
     if (!feature) return;
     let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, [token]);
     if (!featureWorkflow.failedSaves.size) return;

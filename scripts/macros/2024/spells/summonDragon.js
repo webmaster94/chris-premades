@@ -18,7 +18,7 @@ async function use({workflow}) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
-    let sharedOptions = [['DND5E.DamageAcid', 'acid'], ['DND5E.DamageCold', 'cold'], ['DND5E.DamageFire', 'fire'], ['DND5E.DamageLightning', 'lightning'], ['DND5E.DamagePoison', 'poison']];
+    let sharedOptions = [['DND5E.DAMAGE.Type.Acid', 'acid'], ['DND5E.DAMAGE.Type.Cold', 'cold'], ['DND5E.DAMAGE.Type.Fire', 'fire'], ['DND5E.DAMAGE.Type.Lightning', 'lightning'], ['DND5E.DAMAGE.Type.Poison', 'poison']];
     let resistanceType = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.SummonDragon.ResistanceType', sharedOptions);
     if (!resistanceType) return;
     let breathWeaponSaveId = Object.keys(breathWeaponData.system.activities)[0];

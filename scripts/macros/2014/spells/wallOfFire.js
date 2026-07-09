@@ -1,7 +1,12 @@
 import {activityUtils, combatUtils, dialogUtils, effectUtils, genericUtils, itemUtils, regionUtils, templateUtils, workflowUtils} from '../../../utils.js';
+const fireSideDepth = 10;
+const wallWidth = 0.5;
+function localizeButtons(buttons) {
+    return buttons.map(([label, value, options]) => [genericUtils.translate(label), value, options]);
+}
 async function early({trigger, workflow}) {
     let concentration = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    let shape = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.WallOfFire.Shape', [['REGION.SHAPES.circle.label', 'circle'], ['DND5E.TARGET.Type.Line.Label', 'line']], {displayAsRows: true});
+    let shape = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.WallOfFire.Shape', localizeButtons([['DND5E.TARGET.Type.Circle.Label', 'circle'], ['DND5E.TARGET.Type.Line.Label', 'line']]), {displayAsRows: true});
     if (!shape) return;
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     let color = itemUtils.getConfig(workflow.item, 'color');
@@ -31,7 +36,7 @@ async function early({trigger, workflow}) {
         await workflow.actor.sheet.maximize();
         if (!template) return;
         await genericUtils.sleep(50);
-        let facing = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.WallOfFire.CircleFacing', [['CHRISPREMADES.Macros.WallOfFire.Inward', 'inward'], ['CHRISPREMADES.Macros.WallOfFire.Outward', 'outward']], {displayAsRows: true});
+        let facing = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.WallOfFire.CircleFacing', localizeButtons([['CHRISPREMADES.Macros.WallOfFire.Inward', 'inward'], ['CHRISPREMADES.Macros.WallOfFire.Outward', 'outward']]), {displayAsRows: true});
         if (!facing) {
             await genericUtils.remove(template);
             return;
@@ -51,8 +56,8 @@ async function early({trigger, workflow}) {
                     type: 'ellipse',
                     x: templateX,
                     y: templateY,
-                    radiusX: templateScale * (radius - 0.5),
-                    radiusY: templateScale * (radius - 0.5),
+                    radiusX: templateScale * (radius - wallWidth),
+                    radiusY: templateScale * (radius - wallWidth),
                     rotation: 0,
                     hole: false
                 }
@@ -136,15 +141,26 @@ async function early({trigger, workflow}) {
                 type: 'ellipse',
                 x: templateX,
                 y: templateY,
-                radiusX: templateScale * (radius + 10.5),
-                radiusY: templateScale * (radius + 10.5),
+                radiusX: templateScale * (radius + fireSideDepth + wallWidth),
+                radiusY: templateScale * (radius + fireSideDepth + wallWidth),
                 hole: false
             });
             regionData.shapes[1].hole = true;
             
         } else {
-            regionData.shapes[0].radiusX = templateScale * (radius + 0.5);
-            regionData.shapes[0].radiusY = templateScale * (radius + 0.5);
+            regionData.shapes[0].radiusX = templateScale * (radius + wallWidth);
+            regionData.shapes[0].radiusY = templateScale * (radius + wallWidth);
+            if (radius > fireSideDepth + wallWidth) {
+                regionData.shapes.push({
+                    type: 'ellipse',
+                    x: templateX,
+                    y: templateY,
+                    radiusX: templateScale * (radius - fireSideDepth - wallWidth),
+                    radiusY: templateScale * (radius - fireSideDepth - wallWidth),
+                    rotation: 0,
+                    hole: true
+                });
+            }
         }
         let [visibilityRegion] = await regionUtils.createRegions([visionRegionData], workflow.token.scene, {parentEntity: concentration});
         await genericUtils.sleep(50);
@@ -156,8 +172,8 @@ async function early({trigger, workflow}) {
                     type: 'ellipse',
                     x: templateX,
                     y: templateY,
-                    radiusX: templateScale * (radius + 0.5),
-                    radiusY: templateScale * (radius + 0.5),
+                    radiusX: templateScale * (radius + wallWidth),
+                    radiusY: templateScale * (radius + wallWidth),
                     rotation: 0,
                     hole: false
                 },
@@ -165,8 +181,8 @@ async function early({trigger, workflow}) {
                     type: 'ellipse',
                     x: templateX,
                     y: templateY,
-                    radiusX: templateScale * (radius - 0.5),
-                    radiusY: templateScale * (radius - 0.5),
+                    radiusX: templateScale * (radius - wallWidth),
+                    radiusY: templateScale * (radius - wallWidth),
                     rotation: 0,
                     hole: true
                 }
@@ -183,6 +199,7 @@ async function early({trigger, workflow}) {
                     .attachTo(visibilityRegion, {offset: {x: visibilityRegion.object.center.x, y: visibilityRegion.object.center.y}})
                     .persist()
                     .name('wallOfFire')
+                    .tieToDocuments(visibilityRegion)
                     .fadeIn(300)
                     .fadeOut(300)
                     .aboveInterface()
@@ -232,9 +249,9 @@ async function early({trigger, workflow}) {
         if (angle < 0) angle = 360 + angle;
         let direction;
         if ((angle >= 135 && angle <= 225) || (angle >= 315 && angle < 360) || (angle >= 0 && angle <= 45)) {
-            direction = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.WallOfFire.Side', [['CHRISPREMADES.Direction.Up', 'up'], ['CHRISPREMADES.Direction.Down', 'down']]);
+            direction = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.WallOfFire.Side', localizeButtons([['CHRISPREMADES.Direction.Up', 'up'], ['CHRISPREMADES.Direction.Down', 'down']]));
         } else {
-            direction = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.WallOfFire.Side', [['CHRISPREMADES.Direction.Left', 'left'], ['CHRISPREMADES.Direction.Right', 'right']]);
+            direction = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.WallOfFire.Side', localizeButtons([['CHRISPREMADES.Direction.Left', 'left'], ['CHRISPREMADES.Direction.Right', 'right']]));
         }
         if (!direction) {
             await genericUtils.remove(template);

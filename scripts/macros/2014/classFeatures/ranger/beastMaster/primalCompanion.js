@@ -162,8 +162,8 @@ async function use({workflow}) {
 }
 async function earlySea({workflow}) {
     let selection = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Dialog.DamageType', [
-        ['DND5E.DamagePiercing', 'piercing'],
-        ['DND5E.DamageBludgeoning', 'bludgeoning']
+        ['DND5E.DAMAGE.Type.Piercing', 'piercing'],
+        ['DND5E.DAMAGE.Type.Bludgeoning', 'bludgeoning']
     ]);
     if (!selection) selection = 'piercing';
     let activityData = activityUtils.withChangedDamage(workflow.activity, {}, [selection]);

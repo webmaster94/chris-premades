@@ -77,7 +77,7 @@ async function move({workflow}) {
     await genericUtils.remove(newTemplate);
 }
 async function startTurn({trigger: {entity: template, castData, token}}) {
-    let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'gustOfWindPush', {strict: true});
+    let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'gustOfWindPush', {strict: true});
     if (!feature) return;
     let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, [token]);
     if (!featureWorkflow.failedSaves.size) return;

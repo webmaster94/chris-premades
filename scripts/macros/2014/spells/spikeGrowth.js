@@ -85,7 +85,7 @@ async function damageHelper(pointA, pointB, template, token, {stay, gridless} = 
         timesToDamage = Math.floor(gridsMoved * canvas.grid.distance / 5);
     }
     if (timesToDamage <= 0) return;
-    let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'spikeGrowthDamage');
+    let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'spikeGrowthDamage');
     for (let i = 0; i < timesToDamage; i++) {
         await workflowUtils.syntheticActivityRoll(feature, [token]);
     }

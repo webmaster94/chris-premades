@@ -2,7 +2,7 @@ import {animationUtils, dialogUtils, itemUtils, workflowUtils} from '../../../ut
 import {proneOnFail} from '../generic/proneOnFail.js';
 
 async function damage({workflow}) {
-    let damageType = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Dialog.DamageType', [['DND5E.DamageRadiant', 'radiant'], ['DND5E.DamageNecrotic', 'necrotic']]);
+    let damageType = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Dialog.DamageType', [['DND5E.DAMAGE.Type.Radiant', 'radiant'], ['DND5E.DAMAGE.Type.Necrotic', 'necrotic']]);
     if (!damageType) damageType = 'radiant';
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     let jb2a = animationUtils.jb2aCheck();

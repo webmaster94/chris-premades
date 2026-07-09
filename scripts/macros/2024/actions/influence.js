@@ -29,7 +29,8 @@ async function use({trigger, workflow}) {
     if (sourceEffect) {
         let effectData = genericUtils.duplicate(sourceEffect.toObject());
         effectData.origin = sourceEffect.uuid;
-        effectData.duration = {seconds: 1};
+        effectData.duration = {value: 1, units: 'seconds'};
+        effectData.start = {time: game.time?.worldTime ?? 0};
         await effectUtils.createEffect(workflow.actor, effectData);
     }
     let activity = activityUtils.getActivityByIdentifier(workflow.item, 'check', {strict: true});

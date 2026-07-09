@@ -19,11 +19,11 @@ async function use({workflow}) {
     let resistanceFeature = activityUtils.getActivityByIdentifier(workflow.item, 'reflexiveResistance', {strict: true});
     if (!commandFeature || !resistanceFeature) return;
     let damageType = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.SummonDrakeCompanion.Select', [
-        ['DND5E.DamageAcid', 'acid'],
-        ['DND5E.DamageCold', 'cold'],
-        ['DND5E.DamageFire', 'fire'],
-        ['DND5E.DamageLightning', 'lightning'],
-        ['DND5E.DamagePoison', 'poison']
+        ['DND5E.DAMAGE.Type.Acid', 'acid'],
+        ['DND5E.DAMAGE.Type.Cold', 'cold'],
+        ['DND5E.DAMAGE.Type.Fire', 'fire'],
+        ['DND5E.DAMAGE.Type.Lightning', 'lightning'],
+        ['DND5E.DAMAGE.Type.Poison', 'poison']
     ]);
     genericUtils.setProperty(strikesData, 'flags.chris-premades.infusedStrikes.damageType', damageType);
     let scale = 0.8;

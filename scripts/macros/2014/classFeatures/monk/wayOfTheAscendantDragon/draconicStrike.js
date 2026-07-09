@@ -4,11 +4,11 @@ async function damage({trigger: {entity: item}, workflow}) {
     if (!workflow.hitTargets.size) return;
     if (!constants.unarmedAttacks.includes(genericUtils.getIdentifier(workflow.item))) return;
     let buttons = [
-        ['DND5E.DamageAcid', 'acid', {image: 'icons/magic/acid/projectile-faceted-glob.webp'}],
-        ['DND5E.DamageCold', 'cold', {image: 'icons/magic/air/wind-tornado-wall-blue.webp'}],
-        ['DND5E.DamageFire', 'fire', {image: 'icons/magic/fire/beam-jet-stream-embers.webp'}],
-        ['DND5E.DamageLightning', 'lightning', {image: 'icons/magic/lightning/bolt-blue.webp'}],
-        ['DND5E.DamagePoison', 'poison', {image: 'icons/magic/death/skull-poison-green.webp'}],
+        ['DND5E.DAMAGE.Type.Acid', 'acid', {image: 'icons/magic/acid/projectile-faceted-glob.webp'}],
+        ['DND5E.DAMAGE.Type.Cold', 'cold', {image: 'icons/magic/air/wind-tornado-wall-blue.webp'}],
+        ['DND5E.DAMAGE.Type.Fire', 'fire', {image: 'icons/magic/fire/beam-jet-stream-embers.webp'}],
+        ['DND5E.DAMAGE.Type.Lightning', 'lightning', {image: 'icons/magic/lightning/bolt-blue.webp'}],
+        ['DND5E.DAMAGE.Type.Poison', 'poison', {image: 'icons/magic/death/skull-poison-green.webp'}],
         ['CHRISPREMADES.Generic.No', false, {image: 'icons/svg/cancel.svg'}]
     ];
     let selection = await dialogUtils.buttonDialog(item.name, 'CHRISPREMADES.Macros.DraconicStrike.Select', buttons);

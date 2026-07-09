@@ -47,7 +47,7 @@ async function damage({trigger: {entity: item}, workflow}) {
         values = values.difference(oldDamageTypes);
     }
     if (!values.size) return;
-    let buttons = Array.from(values.map(i => ['DND5E.Damage' + i.capitalize(), i]));
+    let buttons = Array.from(values.map(i => ['DND5E.DAMAGE.Type.' + i.capitalize(), i]));
     buttons.push(['CHRISPREMADES.Generic.No', false]);
     let selection = await dialogUtils.buttonDialog(item.name, 'CHRISPREMADES.Macros.AwakenedSpellbook.Select', buttons);
     if (!selection) return;

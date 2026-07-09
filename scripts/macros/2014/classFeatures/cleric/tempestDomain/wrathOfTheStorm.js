@@ -2,8 +2,8 @@ import {dialogUtils, workflowUtils} from '../../../../../utils.js';
 
 async function damage({workflow}) {
     let selection = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Dialog.DamageType', [
-        ['DND5E.DamageLightning', 'lightning'],
-        ['DND5E.DamageThunder', 'thunder']
+        ['DND5E.DAMAGE.Type.Lightning', 'lightning'],
+        ['DND5E.DAMAGE.Type.Thunder', 'thunder']
     ]);
     if (!selection) selection = 'lightning';
     await workflowUtils.replaceDamage(workflow, workflow.damageRoll.formula, {damageType: selection});

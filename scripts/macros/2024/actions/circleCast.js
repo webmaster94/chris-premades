@@ -34,7 +34,8 @@ async function startRitual({trigger, workflow}) {
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;
-    effectData.duration = {seconds: 6, rounds: 1};
+    effectData.duration = {value: 1, units: 'rounds'};
+    effectData.start = {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0};
     let grids = itemUtils.getConfig(workflow.item, 'grids');
     genericUtils.setProperty(effectData, 'flags.chris-premades.circleCast', {
         participants: [],

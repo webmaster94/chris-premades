@@ -191,7 +191,6 @@
       },
       "macros": {
         "item": [
-          "interdictSoulEater",
           "interdictBoonSoulEater"
         ]
       }

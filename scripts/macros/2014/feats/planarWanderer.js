@@ -4,9 +4,9 @@ async function useAdaptation({workflow}) {
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'planarAdaptation');
     if (effect) await genericUtils.remove(effect);
     let buttons = [
-        ['DND5E.DamageAcid', 'acid', {image: 'icons/magic/acid/projectile-faceted-glob.webp'}],
-        ['DND5E.DamageCold', 'cold', {image: 'icons/magic/air/wind-tornado-wall-blue.webp'}],
-        ['DND5E.DamageFire', 'fire', {image: 'icons/magic/fire/beam-jet-stream-embers.webp'}]
+        ['DND5E.DAMAGE.Type.Acid', 'acid', {image: 'icons/magic/acid/projectile-faceted-glob.webp'}],
+        ['DND5E.DAMAGE.Type.Cold', 'cold', {image: 'icons/magic/air/wind-tornado-wall-blue.webp'}],
+        ['DND5E.DAMAGE.Type.Fire', 'fire', {image: 'icons/magic/fire/beam-jet-stream-embers.webp'}]
     ];
     let damageType = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Dialog.DamageType', buttons);
     if (!damageType) return;

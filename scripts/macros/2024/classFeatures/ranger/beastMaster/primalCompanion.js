@@ -79,9 +79,9 @@ async function use({workflow}) {
             return;
         }
         let selection = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Dialog.DamageType', [
-            ['DND5E.DamageBludgeoning', 'bludgeoning'],
-            ['DND5E.DamagePiercing', 'piercing'],
-            ['DND5E.DamageSlashing', 'slashing']
+            ['DND5E.DAMAGE.Type.Bludgeoning', 'bludgeoning'],
+            ['DND5E.DAMAGE.Type.Piercing', 'piercing'],
+            ['DND5E.DAMAGE.Type.Slashing', 'slashing']
         ]);
         if (!selection) selection = 'slashing';
         let types = [selection];
@@ -100,8 +100,8 @@ async function use({workflow}) {
             return;
         }
         let selection = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Dialog.DamageType', [
-            ['DND5E.DamageBludgeoning', 'bludgeoning'],
-            ['DND5E.DamagePiercing', 'piercing']
+            ['DND5E.DAMAGE.Type.Bludgeoning', 'bludgeoning'],
+            ['DND5E.DAMAGE.Type.Piercing', 'piercing']
         ]);
         if (!selection) selection = 'bludgeoning';
         let types = [selection];

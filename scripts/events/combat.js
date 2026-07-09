@@ -106,7 +106,7 @@ function collectTokenMacros(token, pass, distance, target) {
         templates = token.parent.regions.filter(template => {
             if (!genericUtils.isTemplateRegion(template)) return;
             if (!template.flags.dnd5e?.origin) return;
-            let originItem = fromUuidSync(template.flags.dnd5e.item);
+            let originItem = templateUtils.getOriginItemSync(template);
             if (!originItem) return;
             let firstToken = actorUtils.getFirstToken(originItem.actor);
             if (!firstToken?.combatant) return;

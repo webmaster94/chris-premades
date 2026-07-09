@@ -73,7 +73,7 @@ async function use({workflow}) {
     });
 }
 async function startTurn({trigger: {entity: template, castData, token}}) {
-    let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'hungerOfHadarCold', {strict: true});
+    let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'hungerOfHadarCold', {strict: true});
     if (!feature) return;
     let atLevel = 3;
     if (genericUtils.getProperty(template, 'flags.chris-premades.hungerOfHadar.buffCold')) {
@@ -82,7 +82,7 @@ async function startTurn({trigger: {entity: template, castData, token}}) {
     await workflowUtils.syntheticActivityRoll(feature, [token], {atLevel});
 }
 async function endTurn({trigger: {entity: template, castData, token}}) {
-    let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'hungerOfHadarTentacles', {strict: true});
+    let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'hungerOfHadarTentacles', {strict: true});
     if (!feature) return;
     let atLevel = 3;
     if (genericUtils.getProperty(template, 'flags.chris-premades.hungerOfHadar.buffAcid')) {

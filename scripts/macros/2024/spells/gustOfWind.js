@@ -58,7 +58,7 @@ async function use({workflow}) {
             favorite: true
         }
     });
-    let featurePush = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'gustOfWindPush', {strict: true});
+    let featurePush = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'gustOfWindPush', {strict: true});
     if (!featurePush) return;
     let targets = templateUtils.getTokensInTemplate(template);
     await pushHelper(featurePush, targets, template);
@@ -88,7 +88,7 @@ async function move({workflow}) {
     }
 }
 async function endTurn({trigger: {entity: template, castData, token}}) {
-    let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'gustOfWindPush', {strict: true});
+    let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'gustOfWindPush', {strict: true});
     if (!feature) return;
     await pushHelper(feature, [token], template);
 }

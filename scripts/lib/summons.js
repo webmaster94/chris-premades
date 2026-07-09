@@ -476,7 +476,8 @@ export class Summons {
             }
         };
         if (this.options.duration) {
-            effectData.duration = {seconds: this.options.duration};
+            effectData.duration = {value: this.options.duration, units: 'seconds'};
+            effectData.start = {time: game.time?.worldTime ?? 0};
         } else {
             effectData.flags.dae = {showIcon: true};
         }
@@ -523,7 +524,8 @@ export class Summons {
             }
         };
         if (this.options.duration) {
-            effectData.duration = {seconds: this.options.duration};
+            effectData.duration = {value: this.options.duration, units: 'seconds'};
+            effectData.start = {time: game.time?.worldTime ?? 0};
         } else {
             effectData.flags.dae = {showIcon: true};
         }

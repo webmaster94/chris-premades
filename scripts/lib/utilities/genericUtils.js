@@ -102,7 +102,44 @@ function checkMedkitPermission(permission, userId) {
 function notify(message, type = 'info', {localize = true, permanent = false} = {}) {
     ui.notifications[type](message, {localize: localize, permanent: permanent});
 }
+function normalizeActiveEffectData(effectData) {
+    if (!effectData) return;
+    let duration = effectData.duration;
+    if (duration?.seconds !== undefined) effectData.duration = {value: duration.seconds, units: 'seconds'};
+    else if (duration?.rounds !== undefined) effectData.duration = {value: duration.rounds, units: 'rounds'};
+    else if (duration?.turns !== undefined) effectData.duration = {value: duration.turns, units: 'turns'};
+    duration = effectData.duration;
+    if (duration?.value !== undefined && !effectData.start) {
+        if (['rounds', 'turns'].includes(duration.units)) effectData.start = {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0};
+        else effectData.start = {time: game.time?.worldTime ?? 0};
+    }
+    if (effectData.icon && !effectData.img) {
+        effectData.img = effectData.icon;
+        delete effectData.icon;
+    }
+    if (effectData.changes && !effectData.system?.changes) {
+        effectData.system ??= {};
+        effectData.system.changes = effectData.changes;
+        delete effectData.changes;
+    }
+    let changes = effectData.system?.changes;
+    if (!Array.isArray(changes)) return;
+    let modeMap = {
+        [CONST.ACTIVE_EFFECT_MODES.CUSTOM]: 'custom',
+        [CONST.ACTIVE_EFFECT_MODES.MULTIPLY]: 'multiply',
+        [CONST.ACTIVE_EFFECT_MODES.ADD]: 'add',
+        [CONST.ACTIVE_EFFECT_MODES.DOWNGRADE]: 'downgrade',
+        [CONST.ACTIVE_EFFECT_MODES.UPGRADE]: 'upgrade',
+        [CONST.ACTIVE_EFFECT_MODES.OVERRIDE]: 'override'
+    };
+    for (let change of changes) {
+        if (change.type || change.mode === undefined) continue;
+        change.type = modeMap[change.mode] ?? 'custom';
+        delete change.mode;
+    }
+}
 async function createEmbeddedDocuments(entity, type, updates, options) {
+    if (type === 'ActiveEffect') updates.forEach(normalizeActiveEffectData);
     let hasPermission = socketUtils.hasPermission(entity, game.user.id);
     let documents;
     if (hasPermission) {

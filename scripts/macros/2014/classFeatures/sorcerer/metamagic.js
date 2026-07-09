@@ -440,12 +440,12 @@ async function useTransmuted({workflow}) {
     let replacementOptions = Array.from(getDamageTypes(selection).intersection(new Set(damageTypes)));
     let damageTypeToChange;
     if (replacementOptions.length > 1) {
-        let selection2 = await dialogUtils.buttonDialog(selection.name, 'CHRISPREMADES.Macros.Metamagic.TransmutedFirst', replacementOptions.map(i => ['DND5E.Damage' + i.capitalize(), i]));
+        let selection2 = await dialogUtils.buttonDialog(selection.name, 'CHRISPREMADES.Macros.Metamagic.TransmutedFirst', replacementOptions.map(i => ['DND5E.DAMAGE.Type.' + i.capitalize(), i]));
         if (selection2) damageTypeToChange = selection2;
     }
     if (!damageTypeToChange) damageTypeToChange = replacementOptions[0];
     let newDamageTypes = damageTypes.filter(i => i !== damageTypeToChange);
-    let newDamageType = await dialogUtils.buttonDialog(selection.name, 'CHRISPREMADES.Macros.Metamagic.TransmutedSecond', newDamageTypes.map(i => ['DND5E.Damage' + i.capitalize(), i]));
+    let newDamageType = await dialogUtils.buttonDialog(selection.name, 'CHRISPREMADES.Macros.Metamagic.TransmutedSecond', newDamageTypes.map(i => ['DND5E.DAMAGE.Type.' + i.capitalize(), i]));
     if (!newDamageType) newDamageType = newDamageTypes[0];
     let newItem = selection.clone(createUpdateItem(selection, damageTypeToChange, newDamageType), {keepId: true});
     await workflowUtils.completeItemUse(newItem);

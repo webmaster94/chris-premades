@@ -65,8 +65,8 @@ async function use({workflow}) {
     let investmentOfTheChainMaster = itemUtils.getItemByIdentifier(workflow.actor, 'investmentOfTheChainMaster');
     if (investmentOfTheChainMaster) {
         let movementButtons = [
-            ['DND5E.MovementFly', 'fly'],
-            ['DND5E.MovementSwim', 'swim']
+            ['DND5E.MOVEMENT.Type.Fly', 'fly'],
+            ['DND5E.MOVEMENT.Type.Swim', 'swim']
         ];
         let movement = await dialogUtils.buttonDialog(investmentOfTheChainMaster.name, 'CHRISPREMADES.Macros.FindFamiliar.Movement', movementButtons);
         let weaponItems = sourceActor.items.filter(i => i.type === 'weapon');

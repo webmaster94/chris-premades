@@ -8,7 +8,7 @@ import {movementEvents} from './events/movement.js';
 import {templateEvents} from './events/template.js';
 import {dae} from './integrations/dae.js';
 import {appendHeaderControl, renderEffectConfig, renderCompendium, renderActivitySheet, copyUuid} from './extensions/titlebar.js';
-import {genericUtils} from './utils.js';
+import {effectUtils, genericUtils} from './utils.js';
 import {chat} from './extensions/chat.js';
 import {sidebar} from './extensions/sidebar.js';
 import {tokens} from './extensions/tokens.js';
@@ -157,7 +157,8 @@ export function registerHooks() {
     });
 
     //Circle Casting
-    Hooks.on('preDeleteActiveEffect', concentration.preRemove);
+    Hooks.on('preDeleteActiveEffect', unlessExpired(concentration.preRemove));
+    Hooks.on('updateActiveEffect', onEffectExpired(concentration.preRemove));
 
     // Add generic actions to tokens
     if (genericUtils.getCPRSetting('addActions')) Hooks.on('createToken', actions.createToken);
@@ -174,6 +175,8 @@ export function registerHooks() {
         Hooks.on('createActiveEffect', effectEvents.createActiveEffect);
         Hooks.on('deleteActiveEffect', unlessExpired(effectEvents.deleteActiveEffect));
         Hooks.on('updateActiveEffect', onEffectExpired(effectEvents.deleteActiveEffect));
+        Hooks.on('deleteActiveEffect', unlessExpired(effectUtils.deleteDependents));
+        Hooks.on('updateActiveEffect', onEffectExpired(effectUtils.deleteDependents));
         Hooks.on('moveToken', movementEvents.moveToken);
         Hooks.on('createActiveEffect', conditions.createActiveEffect);
         Hooks.on('deleteActiveEffect', unlessExpired(conditions.deleteActiveEffect));

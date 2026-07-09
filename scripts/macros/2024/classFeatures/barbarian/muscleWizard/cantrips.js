@@ -13,10 +13,11 @@ async function shockingGrasp({trigger, workflow}) {
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'rage');
     if (effect) {
         genericUtils.setProperty(effectData, 'flags.dae.specialDuration', ['turnStartSource']);
-        effectData.duration = {rounds: 2};
+        effectData.duration = {value: 2, units: 'rounds'};
     } else {
-        effectData.duration = {turns: 1};
+        effectData.duration = {value: 1, units: 'turns'};
     }
+    effectData.start = {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0};
     effectData.origin = sourceEffect.uuid;
     await effectUtils.createEffect(workflow.targets.first().actor, effectData);
 }

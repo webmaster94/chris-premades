@@ -12,7 +12,8 @@ async function use({trigger, workflow}) {
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;
-    effectData.duration = {seconds: 1};
+    effectData.duration = {value: 1, units: 'seconds'};
+    effectData.start = {time: game.time?.worldTime ?? 0};
     let effect = await effectUtils.createEffect(workflow.actor, effectData);
     await workflowUtils.syntheticItemRoll(selection, Array.from(workflow.targets), {consumeResources: true, consumeUsage: true});
     await genericUtils.sleep(100);

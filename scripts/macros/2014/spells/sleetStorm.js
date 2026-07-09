@@ -41,7 +41,7 @@ async function enterOrStart({trigger: {entity: template, castData, token}}) {
     if (effectUtils.getConcentrationEffect(token.actor)) await actorUtils.doConcentrationCheck(token.actor, castData.saveDC);
     if (actorUtils.checkTrait(token.actor, 'ci', 'prone')) return;
     if (effectUtils.getEffectByStatusID(token.actor, 'prone')) return;
-    let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'sleetStormProne', {strict: true});
+    let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'sleetStormProne', {strict: true});
     if (!feature) return;
     await workflowUtils.syntheticActivityRoll(feature, [token]);
 }

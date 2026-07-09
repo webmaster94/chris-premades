@@ -30,7 +30,57 @@ async function setSaveDC(effect, dc) {
     data.saveDC = dc;
     await setCastData(effect, data);
 }
+function normalizeEffectDuration(effectData) {
+    let duration = effectData?.duration;
+    if (!duration) return;
+    if (duration.seconds !== undefined) {
+        effectData.duration = {value: duration.seconds, units: 'seconds'};
+    } else if (duration.rounds !== undefined) {
+        effectData.duration = {value: duration.rounds, units: 'rounds'};
+    } else if (duration.turns !== undefined) {
+        effectData.duration = {value: duration.turns, units: 'turns'};
+    }
+    duration = effectData.duration;
+    if (duration.value === undefined || effectData.start) return;
+    if (['rounds', 'turns'].includes(duration.units)) {
+        effectData.start = {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0};
+    } else {
+        effectData.start = {time: game.time?.worldTime ?? 0};
+    }
+}
+function normalizeEffectChanges(effectData) {
+    if (!effectData) return;
+    if (effectData.icon && !effectData.img) {
+        effectData.img = effectData.icon;
+        delete effectData.icon;
+    }
+    if (effectData.changes && !effectData.system?.changes) {
+        effectData.system ??= {};
+        effectData.system.changes = effectData.changes;
+        delete effectData.changes;
+    }
+    let changes = effectData.system?.changes;
+    if (!Array.isArray(changes)) return;
+    let modeMap = {
+        [CONST.ACTIVE_EFFECT_MODES.CUSTOM]: 'custom',
+        [CONST.ACTIVE_EFFECT_MODES.MULTIPLY]: 'multiply',
+        [CONST.ACTIVE_EFFECT_MODES.ADD]: 'add',
+        [CONST.ACTIVE_EFFECT_MODES.DOWNGRADE]: 'downgrade',
+        [CONST.ACTIVE_EFFECT_MODES.UPGRADE]: 'upgrade',
+        [CONST.ACTIVE_EFFECT_MODES.OVERRIDE]: 'override'
+    };
+    for (let change of changes) {
+        if (change.type || change.mode === undefined) continue;
+        change.type = modeMap[change.mode] ?? 'custom';
+        delete change.mode;
+    }
+}
+function normalizeEffectData(effectData) {
+    normalizeEffectDuration(effectData);
+    normalizeEffectChanges(effectData);
+}
 async function createEffect(entity, effectData, {concentrationItem, parentEntity, identifier, vae, interdependent, strictlyInterdependent, unhideActivities, rules, macros, conditions, animate = true, tokenImg, avatarImg, tokenImgPriority = 50, avatarImgPriority = 50, keepId = false} = {}, {animationPath, animationSize = 1, animationFadeIn = 300, animationFadeOut = 300, animationSound} = {}) {
+    normalizeEffectData(effectData);
     let hasPermission = socketUtils.hasPermission(entity, game.user.id);
     let concentrationEffect;
     if (concentrationItem) concentrationEffect = getConcentrationEffect(concentrationItem.actor, concentrationItem);
@@ -99,6 +149,7 @@ async function createEffects(entity, effectDataArray, effectOptionsArray) {
     let concentrationEffects = [];
     for (let i = 0; i < effectDataArray.length; i++) {
         let effectData = effectDataArray[i];
+        normalizeEffectData(effectData);
         let {concentrationItem, parentEntity, identifier, vae, interdependent} = effectOptionsArray[i];
         let concentrationEffect;
         if (concentrationItem) concentrationEffect = getConcentrationEffect(concentrationItem.actor, concentrationItem);
@@ -143,6 +194,76 @@ async function addDependent(entity, dependents, forceGM = false) {
         await Promise.all(dependents.map(i => i.setFlag('dnd5e', 'dependentOn', entity.uuid)));
     } else {
         socket.executeAsGM(sockets.addDependent.name, entity.uuid, dependents.map(i => i.uuid));
+    }
+}
+let deletingDependentParents = new Set();
+function addDocumentIfValid(documents, document, parentUuid) {
+    if (!document?.uuid || document.uuid === parentUuid) return;
+    documents.set(document.uuid, document);
+}
+function addDocumentIfDependent(documents, document, parentUuid) {
+    if (document?.flags?.dnd5e?.dependentOn !== parentUuid) return;
+    addDocumentIfValid(documents, document, parentUuid);
+}
+function collectActorDependents(documents, actor, parentUuid) {
+    addDocumentIfDependent(documents, actor, parentUuid);
+    actor?.effects?.forEach(effect => addDocumentIfDependent(documents, effect, parentUuid));
+    actor?.items?.forEach(item => {
+        addDocumentIfDependent(documents, item, parentUuid);
+        item.effects?.forEach(effect => addDocumentIfDependent(documents, effect, parentUuid));
+    });
+}
+function collectDependentDocuments(entity) {
+    let parentUuid = entity?.uuid;
+    if (!parentUuid) return [];
+    let documents = new Map();
+    globalThis.MidiQOL?.MidiDependentsRegistry?.get?.(parentUuid)?.forEach(document => addDocumentIfValid(documents, document, parentUuid));
+    let flaggedDependents = entity.flags?.dnd5e?.dependents;
+    if (Array.isArray(flaggedDependents)) {
+        flaggedDependents.forEach(uuid => {
+            let document;
+            try {
+                document = fromUuidSync(uuid, {strict: false});
+            } catch {
+                try {
+                    document = fromUuidSync(uuid);
+                } catch {
+                    return;
+                }
+            }
+            addDocumentIfValid(documents, document, parentUuid);
+        });
+    }
+    game.actors?.forEach(actor => collectActorDependents(documents, actor, parentUuid));
+    game.items?.forEach(item => {
+        addDocumentIfDependent(documents, item, parentUuid);
+        item.effects?.forEach(effect => addDocumentIfDependent(documents, effect, parentUuid));
+    });
+    game.scenes?.forEach(scene => {
+        scene.tokens?.forEach(token => {
+            addDocumentIfDependent(documents, token, parentUuid);
+            collectActorDependents(documents, token.actor, parentUuid);
+        });
+        scene.regions?.forEach(region => addDocumentIfDependent(documents, region, parentUuid));
+        scene.templates?.forEach(template => addDocumentIfDependent(documents, template, parentUuid));
+        scene.lights?.forEach(light => addDocumentIfDependent(documents, light, parentUuid));
+    });
+    return Array.from(documents.values());
+}
+async function deleteDependents(entity) {
+    if (!entity?.uuid || deletingDependentParents.has(entity.uuid)) return;
+    deletingDependentParents.add(entity.uuid);
+    try {
+        let dependents = collectDependentDocuments(entity).filter(dependent => !deletingDependentParents.has(dependent.uuid));
+        for (let dependent of dependents) {
+            try {
+                await genericUtils.remove(dependent);
+            } catch (error) {
+                console.warn('CPR: Failed to delete dependent document for ' + entity.uuid, dependent, error);
+            }
+        }
+    } finally {
+        deletingDependentParents.delete(entity.uuid);
     }
 }
 function addMacro(effectData, type, macroList) {
@@ -247,6 +368,7 @@ async function createEffectFromSidebar(actor, name, options) {
     return await createEffect(actor, effectData, options);
 }
 async function syntheticActiveEffect(effectData, entity) {
+    normalizeEffectData(effectData);
     return new CONFIG.ActiveEffect.documentClass(effectData, {parent: entity});
 }
 async function getOriginItem(effect) {
@@ -293,6 +415,7 @@ export let effectUtils = {
     createEffect,
     createEffects,
     addDependent,
+    deleteDependents,
     addMacro,
     getRemainingDurationSeconds,
     getConcentrationEffect,

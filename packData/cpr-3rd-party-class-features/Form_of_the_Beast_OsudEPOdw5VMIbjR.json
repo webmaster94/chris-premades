@@ -53,15 +53,15 @@
           "specialDuration": [],
           "templateEffectActivities": [],
           "info": {
-            "identifier": "formOfTheBeastEffect"
+            "identifier": "formOfTheBeastWarlockEffect"
           },
           "rules": "legacy",
           "macros": {
             "effect": [
-              "formOfTheBeastEffect"
+              "formOfTheBeastWarlockEffect"
             ],
             "skill": [
-              "formOfTheBeastEffect"
+              "formOfTheBeastWarlockEffect"
             ],
             "midi": {
               "actor": [

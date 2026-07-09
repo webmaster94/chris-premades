@@ -16,6 +16,30 @@ function getRegionDoc(template) {
 function normalizeTemplateUuid(uuid) {
     return uuid?.replace('.MeasuredTemplate.', '.Region.');
 }
+function getOriginItemSync(template) {
+    let itemUuid = template?.flags?.dnd5e?.item;
+    let originUuid = template?.flags?.dnd5e?.origin;
+    let item;
+    if (itemUuid) {
+        try {
+            item = fromUuidSync(itemUuid, {strict: false});
+        } catch (error) {
+            console.warn('chris-premades | Failed to resolve template item uuid', itemUuid, error);
+        }
+    }
+    if (item?.documentName === 'Item') return item;
+    let origin;
+    if (originUuid) {
+        try {
+            origin = fromUuidSync(originUuid, {strict: false});
+        } catch (error) {
+            console.warn('chris-premades | Failed to resolve template origin uuid', originUuid, error);
+        }
+    }
+    if (origin?.documentName === 'Activity') return origin.item;
+    if (origin?.documentName === 'Item') return origin;
+    if (origin?.parent?.documentName === 'Item') return origin.parent;
+}
 function getPosition(template) {
     let regionDoc = getRegionDoc(template);
     if (regionDoc) {
@@ -325,6 +349,7 @@ async function attachToTemplate(template, uuidsToAttach) {
 export let templateUtils = {
     getRegionDoc,
     normalizeTemplateUuid,
+    getOriginItemSync,
     getPosition,
     getObject,
     getDistance,

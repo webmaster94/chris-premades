@@ -25,11 +25,11 @@ async function infuseWeapon(workflow, selectedWeapon) {
     let rageEffect = effectUtils.getEffectByIdentifier(workflow.actor, 'rage');
     if (!rageEffect) return;
     let buttons = [
-        ['DND5E.DamageAcid', 'acid', {image: 'icons/magic/acid/projectile-faceted-glob.webp'}],
-        ['DND5E.DamageCold', 'cold', {image: 'icons/magic/air/wind-tornado-wall-blue.webp'}],
-        ['DND5E.DamageFire', 'fire', {image: 'icons/magic/fire/beam-jet-stream-embers.webp'}],
-        ['DND5E.DamageThunder', 'thunder', {image: 'icons/magic/sonic/explosion-shock-wave-teal.webp'}],
-        ['DND5E.DamageLightning', 'lightning', {image: 'icons/magic/lightning/bolt-blue.webp'}]
+        ['DND5E.DAMAGE.Type.Acid', 'acid', {image: 'icons/magic/acid/projectile-faceted-glob.webp'}],
+        ['DND5E.DAMAGE.Type.Cold', 'cold', {image: 'icons/magic/air/wind-tornado-wall-blue.webp'}],
+        ['DND5E.DAMAGE.Type.Fire', 'fire', {image: 'icons/magic/fire/beam-jet-stream-embers.webp'}],
+        ['DND5E.DAMAGE.Type.Thunder', 'thunder', {image: 'icons/magic/sonic/explosion-shock-wave-teal.webp'}],
+        ['DND5E.DAMAGE.Type.Lightning', 'lightning', {image: 'icons/magic/lightning/bolt-blue.webp'}]
     ];
     let damageType = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Dialog.DamageType',buttons);
     if (!damageType) return;

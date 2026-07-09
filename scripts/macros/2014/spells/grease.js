@@ -1,4 +1,4 @@
-import {activityUtils, actorUtils, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
+import {activityUtils, actorUtils, effectUtils, genericUtils, itemUtils, templateUtils, workflowUtils} from '../../../utils.js';
 import {proneOnFail} from '../generic/proneOnFail.js';
 
 async function use({workflow}) {
@@ -22,7 +22,7 @@ async function use({workflow}) {
 async function enterOrEnd({trigger: {entity: template, castData, token}}) {
     if (actorUtils.checkTrait(token.actor, 'ci', 'prone')) return;
     if (effectUtils.getEffectByStatusID(token.actor, 'prone')) return;
-    let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'greaseFall', {strict: true});
+    let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'greaseFall', {strict: true});
     if (!feature) return;
     await workflowUtils.syntheticActivityRoll(feature, [token]);
 }

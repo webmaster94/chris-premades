@@ -4,12 +4,12 @@ async function createRegions(regionDatas, scene, {parentEntity, excludeGPSRegion
     if (origin) regionDatas.forEach(regionData => {
         genericUtils.setProperty(regionData, 'flags.chris-premades.region.originUuid', origin.uuid);
     });
-    let regions = await genericUtils.createEmbeddedDocuments(scene, 'Region', regionDatas);
     if (excludeGPSRegionHandling) {
         regionDatas.forEach(i => {
             genericUtils.setProperty(i, 'flags.gambits-premades.excludeGRegionHandling', true);
         });
     }
+    let regions = await genericUtils.createEmbeddedDocuments(scene, 'Region', regionDatas);
     if (parentEntity) await effectUtils.addDependent(parentEntity, regions);
     return regions;
 }

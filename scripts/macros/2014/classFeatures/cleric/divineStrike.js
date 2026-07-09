@@ -18,9 +18,9 @@ async function damage({trigger: {entity: item}, workflow}) {
                 break;
             case 'nature':
                 damageType = await dialogUtils.buttonDialog(item.name, 'CHRISPREMADES.Config.DamageType', [
-                    ['DND5E.DamageCold', 'cold'],
-                    ['DND5E.DamageFire', 'fire'],
-                    ['DND5E.DamageLightning', 'lightning']
+                    ['DND5E.DAMAGE.Type.Cold', 'cold'],
+                    ['DND5E.DAMAGE.Type.Fire', 'fire'],
+                    ['DND5E.DAMAGE.Type.Lightning', 'lightning']
                 ]);
                 damageType = damageType ?? 'cold';
                 break;

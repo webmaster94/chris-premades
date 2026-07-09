@@ -102,7 +102,7 @@ async function enterOrTurn({trigger: {entity: template, castData, token}}) {
         touchedTokens.push(token.id);
         await genericUtils.setFlag(template, 'chris-premades', 'cloudkill.touchedTokens.' + combatUtils.currentTurn(), touchedTokens);
     }
-    let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'cloudkillDamage', {strict: true});
+    let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'cloudkillDamage', {strict: true});
     if (!feature) return;
     await workflowUtils.syntheticActivityRoll(feature, [token], {atLevel: castData.castLevel});
 }

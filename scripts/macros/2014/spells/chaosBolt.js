@@ -7,14 +7,14 @@ async function use({workflow}) {
     if (!workflow.hitTargets.size) return;
     let chrisFlags = workflow.item.flags['chris-premades'];
     let buttons = [
-        ['DND5E.DamageAcid', 'acid', {image: 'icons/magic/acid/projectile-faceted-glob.webp'}],
-        ['DND5E.DamageCold', 'cold', {image: 'icons/magic/air/wind-tornado-wall-blue.webp'}],
-        ['DND5E.DamageFire', 'fire', {image: 'icons/magic/fire/beam-jet-stream-embers.webp'}],
-        ['DND5E.DamageForce', 'force', {image: 'icons/magic/sonic/projectile-sound-rings-wave.webp'}],
-        ['DND5E.DamageLightning', 'lightning', {image: 'icons/magic/lightning/bolt-blue.webp'}],
-        ['DND5E.DamagePoison', 'poison', {image: 'icons/magic/death/skull-poison-green.webp'}],
-        ['DND5E.DamagePsychic', 'psychic', {image: 'icons/magic/control/fear-fright-monster-grin-red-orange.webp'}],
-        ['DND5E.DamageThunder', 'thunder', {image: 'icons/magic/sonic/explosion-shock-wave-teal.webp'}]
+        ['DND5E.DAMAGE.Type.Acid', 'acid', {image: 'icons/magic/acid/projectile-faceted-glob.webp'}],
+        ['DND5E.DAMAGE.Type.Cold', 'cold', {image: 'icons/magic/air/wind-tornado-wall-blue.webp'}],
+        ['DND5E.DAMAGE.Type.Fire', 'fire', {image: 'icons/magic/fire/beam-jet-stream-embers.webp'}],
+        ['DND5E.DAMAGE.Type.Force', 'force', {image: 'icons/magic/sonic/projectile-sound-rings-wave.webp'}],
+        ['DND5E.DAMAGE.Type.Lightning', 'lightning', {image: 'icons/magic/lightning/bolt-blue.webp'}],
+        ['DND5E.DAMAGE.Type.Poison', 'poison', {image: 'icons/magic/death/skull-poison-green.webp'}],
+        ['DND5E.DAMAGE.Type.Psychic', 'psychic', {image: 'icons/magic/control/fear-fright-monster-grin-red-orange.webp'}],
+        ['DND5E.DAMAGE.Type.Thunder', 'thunder', {image: 'icons/magic/sonic/explosion-shock-wave-teal.webp'}]
     ];
     let currentTarget = workflow.targets.first();
     let origTargetUuid = chrisFlags?.chaosBolt?.targetUuid;

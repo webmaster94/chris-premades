@@ -104,7 +104,7 @@ async function enter({trigger: {entity: template, castData, token}}) {
     if (!targetCombatant) return;
     if (!combatUtils.perTurnCheck(targetCombatant, 'conjureCelestial')) return;
     await combatUtils.setTurnCheck(targetCombatant, 'conjureCelestial');
-    let originItem = fromUuidSync(template.flags.dnd5e.item);
+    let originItem = templateUtils.getOriginItemSync(template);
     let featureIdentifier;
     if (token.document.disposition === actorUtils.getFirstToken(originItem.parent)?.document.disposition) {
         featureIdentifier = 'conjureCelestialHeal';
@@ -120,7 +120,7 @@ async function turnEnd({trigger: {entity: template, castData, token, previousRou
     let turnToCheck = previousRound + '-' + previousTurn;
     let lastDamagedTurn = targetCombatant.flags['chris-premades']?.['conjureCelestial']?.turn;
     if (lastDamagedTurn === turnToCheck) return;
-    let originItem = fromUuidSync(template.flags.dnd5e.item);
+    let originItem = templateUtils.getOriginItemSync(template);
     let featureIdentifier;
     if (token.document.disposition === actorUtils.getFirstToken(originItem.parent)?.document.disposition) {
         featureIdentifier = 'conjureCelestialHeal';

@@ -49,12 +49,12 @@ async function use({workflow}) {
     for (let target of targets) await effectUtils.createEffect(target.actor, effectData, {parentEntity: template, identifier: 'hungerOfHadarBlinded'});
 }
 async function startTurn({trigger: {entity: template, token}}) {
-    let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'hungerOfHadarCold', {strict: true});
+    let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'hungerOfHadarCold', {strict: true});
     if (!feature) return;
     await workflowUtils.syntheticActivityRoll(feature, [token]);
 }
 async function endTurn({trigger: {entity: template, token}}) {
-    let feature = activityUtils.getActivityByIdentifier(fromUuidSync(template.flags.dnd5e.item), 'hungerOfHadarTentacles', {strict: true});
+    let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'hungerOfHadarTentacles', {strict: true});
     if (!feature) return;
     await workflowUtils.syntheticActivityRoll(feature, [token]);
 }

@@ -5,8 +5,8 @@ async function damage({trigger: {entity: item}, workflow})  {
     let damageTypes= workflowUtils.getDamageTypes(workflow.damageRolls);
     if (!damageTypes.has('fire') && !damageTypes.has('radiant')) return;
     let buttons = [];
-    if (damageTypes.has('fire')) buttons.push([genericUtils.format('CHRISPREMADES.Dialog.YesDetail', {detail: genericUtils.translate('DND5E.DamageFire')}), 'fire']);
-    if (damageTypes.has('radiant')) buttons.push([genericUtils.format('CHRISPREMADES.Dialog.YesDetail', {detail: genericUtils.translate('DND5E.DamageRadiant')}), 'radiant']);
+    if (damageTypes.has('fire')) buttons.push([genericUtils.format('CHRISPREMADES.Dialog.YesDetail', {detail: genericUtils.translate('DND5E.DAMAGE.Type.Fire')}), 'fire']);
+    if (damageTypes.has('radiant')) buttons.push([genericUtils.format('CHRISPREMADES.Dialog.YesDetail', {detail: genericUtils.translate('DND5E.DAMAGE.Type.Radiant')}), 'radiant']);
     buttons.push(['CHRISPREMADES.Generic.No', false]);
     let selected = await dialogUtils.buttonDialog(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name}), buttons);
     if (!selected?.length) return;
@@ -24,8 +24,8 @@ async function applyDamage({trigger: {entity: item}, workflow}) {
     if (!selection?.length) return;
     let target = selection[0];
     let buttons = [];
-    if (damageTypes.has('fire')) buttons.push([genericUtils.format('CHRISPREMADES.Dialog.YesDetail', {detail: genericUtils.translate('DND5E.DamageFire')}), 'fire']);
-    if (damageTypes.has('radiant')) buttons.push([genericUtils.format('CHRISPREMADES.Dialog.YesDetail', {detail: genericUtils.translate('DND5E.DamageRadiant')}), 'radiant']);
+    if (damageTypes.has('fire')) buttons.push([genericUtils.format('CHRISPREMADES.Dialog.YesDetail', {detail: genericUtils.translate('DND5E.DAMAGE.Type.Fire')}), 'fire']);
+    if (damageTypes.has('radiant')) buttons.push([genericUtils.format('CHRISPREMADES.Dialog.YesDetail', {detail: genericUtils.translate('DND5E.DAMAGE.Type.Radiant')}), 'radiant']);
     let selected;
     if (buttons.length === 2) {
         selected = await dialogUtils.buttonDialog(item.name, 'CHRISPREMADES.Dialog.DamageType', buttons);

@@ -3,9 +3,46 @@ import {CPRMultipleRollResolver} from '../applications/rollResolverMultiple.js';
 import {actorUtils, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../utils.js';
 import {Summons} from './summons.js';
 import {Teleport} from './teleport.js';
+function normalizeEffectData(effectData) {
+    if (!effectData) return;
+    let duration = effectData.duration;
+    if (duration?.seconds !== undefined) effectData.duration = {value: duration.seconds, units: 'seconds'};
+    else if (duration?.rounds !== undefined) effectData.duration = {value: duration.rounds, units: 'rounds'};
+    else if (duration?.turns !== undefined) effectData.duration = {value: duration.turns, units: 'turns'};
+    duration = effectData.duration;
+    if (duration?.value !== undefined && !effectData.start) {
+        if (['rounds', 'turns'].includes(duration.units)) effectData.start = {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0};
+        else effectData.start = {time: game.time?.worldTime ?? 0};
+    }
+    if (effectData.icon && !effectData.img) {
+        effectData.img = effectData.icon;
+        delete effectData.icon;
+    }
+    if (effectData.changes && !effectData.system?.changes) {
+        effectData.system ??= {};
+        effectData.system.changes = effectData.changes;
+        delete effectData.changes;
+    }
+    let changes = effectData.system?.changes;
+    if (!Array.isArray(changes)) return;
+    let modeMap = {
+        [CONST.ACTIVE_EFFECT_MODES.CUSTOM]: 'custom',
+        [CONST.ACTIVE_EFFECT_MODES.MULTIPLY]: 'multiply',
+        [CONST.ACTIVE_EFFECT_MODES.ADD]: 'add',
+        [CONST.ACTIVE_EFFECT_MODES.DOWNGRADE]: 'downgrade',
+        [CONST.ACTIVE_EFFECT_MODES.UPGRADE]: 'upgrade',
+        [CONST.ACTIVE_EFFECT_MODES.OVERRIDE]: 'override'
+    };
+    for (let change of changes) {
+        if (change.type || change.mode === undefined) continue;
+        change.type = modeMap[change.mode] ?? 'custom';
+        delete change.mode;
+    }
+}
 async function createEffect(entityUuid, effectData, {concentrationItemUuid, parentEntityUuid}) {
     let entity = await fromUuid(entityUuid);
     if (!entity) return;
+    normalizeEffectData(effectData);
     if (concentrationItemUuid) {
         let concentrationItem = await fromUuid(concentrationItemUuid);
         if (concentrationItem) {
@@ -21,6 +58,7 @@ async function createEffects(entityUuid, effectDataArray, {concentrationItemUuid
     let entity = await fromUuid(entityUuid);
     if (!entity) return;
     for (let i = 0; i < effectDataArray.length; i++) {
+        normalizeEffectData(effectDataArray[i]);
         if (concentrationItemUuidArray[i]) {
             let concentrationItem = await fromUuid(concentrationItemUuidArray[i]);
             if (concentrationItem) {
@@ -72,6 +110,7 @@ async function addDependent(entityUuid, dependentUuids) {
 async function createEmbeddedDocuments(entityUuid, type, updates, options) {
     let entity = await fromUuid(entityUuid);
     if (!entity) return;
+    if (type === 'ActiveEffect') updates.forEach(normalizeEffectData);
     let documents = await entity.createEmbeddedDocuments(type, updates, options ?? undefined);
     return documents.map(i => i.uuid);
 }
