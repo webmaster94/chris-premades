@@ -44,7 +44,7 @@ async function timeUpdated({trigger: {entity: effect, worldTime, token}}) {
     let diff = worldTime - lastUsed;
     let units = effect.flags['chris-premades']?.timeTrigger?.timeFormat;
     let value = effect.flags['chris-premades']?.timeTrigger?.time;
-    let convertedTime = DAE.convertDuration({units, value}, false).seconds;
+    let convertedTime = itemUtils.convertDurationData({units, value}).seconds;
     let intervalsPassed = Math.floor(diff / convertedTime);
     if (intervalsPassed <= 0) return;
     await genericUtils.setFlag(effect, 'chris-premades', 'timeTrigger.lastUsed', lastUsed + (intervalsPassed * convertedTime));

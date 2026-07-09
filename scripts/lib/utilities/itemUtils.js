@@ -145,11 +145,40 @@ async function enchantItem(item, effectData, {effects = [], items = [], concentr
     });
     return await effectUtils.createEffect(item, effectData, {concentrationItem, parentEntity, identifier, vae, interdependent, strictlyInterdependent});
 }
+// DAE's v14 convertDuration returns {type, value, units} with no seconds field; expose a
+// non-enumerable legacy seconds getter so callers that need raw seconds (Summons.spawn
+// durations) keep working without leaking an extra key into ActiveEffect create data.
+function withLegacySeconds(duration) {
+    if (!duration || Object.getOwnPropertyDescriptor(duration, 'seconds')) return duration;
+    let secondsPerUnit = {
+        seconds: 1,
+        minutes: 60,
+        hours: 3600,
+        days: 86400,
+        weeks: 604800,
+        months: 2592000,
+        years: 31536000,
+        rounds: CONFIG.time?.roundTime || 6,
+        turns: CONFIG.time?.roundTime || 6
+    };
+    Object.defineProperty(duration, 'seconds', {
+        get() {
+            if (!this.value) return undefined;
+            return this.value * (secondsPerUnit[this.units] ?? 1);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    return duration;
+}
+function convertDurationData(durationData) {
+    return withLegacySeconds(DAE.convertDuration(durationData));
+}
 function convertDuration(entity) {
     if (entity.documentName === 'Item') {
-        return DAE.convertDuration(entity.system.duration);
+        return convertDurationData(entity.system.duration);
     } else if (entity.documentName === 'Activity') {
-        return DAE.convertDuration(entity.duration);
+        return convertDurationData(entity.duration);
     }
 }
 function getEquipmentState(item) {
@@ -268,6 +297,7 @@ export let itemUtils = {
     syntheticItem,
     enchantItem,
     convertDuration,
+    convertDurationData,
     setConfig,
     getEquipmentState,
     getToolProficiency,
