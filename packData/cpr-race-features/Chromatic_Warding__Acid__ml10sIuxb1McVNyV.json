@@ -223,13 +223,10 @@
       "name": "Chromatic Warding (Acid)",
       "origin": "Compendium.world.cpr-race-features-old.Item.BRQ9b9sQ13ef4oLX",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -254,21 +251,24 @@
       "img": "icons/magic/air/fog-gas-smoke-dense-green.webp",
       "_id": "iOvmj4lDwJmxOMC3",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.di.value",
-          "mode": 2,
-          "value": "acid",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.di.value",
+            "value": "acid",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!ml10sIuxb1McVNyV.iOvmj4lDwJmxOMC3"
+      "_key": "!items.effects!ml10sIuxb1McVNyV.iOvmj4lDwJmxOMC3",
+      "start": null
     }
   ],
   "img": "icons/magic/air/fog-gas-smoke-dense-green.webp",

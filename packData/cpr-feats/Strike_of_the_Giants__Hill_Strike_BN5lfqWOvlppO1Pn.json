@@ -247,13 +247,10 @@
       "name": "Strike of the Giants: Hill Strike",
       "origin": "Compendium.world.cpr-feat-features.Item.58oytmExKiDypd6a",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -284,14 +281,16 @@
       "img": "icons/magic/sonic/explosion-impact-shock-wave.webp",
       "_id": "tB6qGbE8bS1fU9me",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!BN5lfqWOvlppO1Pn.tB6qGbE8bS1fU9me"
+      "_key": "!items.effects!BN5lfqWOvlppO1Pn.tB6qGbE8bS1fU9me",
+      "start": null
     }
   ],
   "img": "icons/magic/sonic/explosion-impact-shock-wave.webp",

@@ -335,28 +335,27 @@
   "effects": [
     {
       "name": "Slasher",
-      "changes": [
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "-10",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/melee/blade-tips-triple-bent-white.webp",
       "_id": "F8L7Pd008d5Koc6h",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.all",
+            "value": "-10",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -385,40 +384,38 @@
           "dontApply": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
         }
       },
-      "_key": "!items.effects!RAGnuUkw5zDras0t.F8L7Pd008d5Koc6h"
+      "_key": "!items.effects!RAGnuUkw5zDras0t.F8L7Pd008d5Koc6h",
+      "start": null
     },
     {
       "name": "Slasher: Critical",
-      "changes": [
-        {
-          "key": "flags.midi-qol.disadvantage.attack.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/melee/blade-tips-triple-bent-white.webp",
       "_id": "SMgFax4zX1F54yT6",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.disadvantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -447,15 +444,14 @@
           "dontApply": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
         }
       },
-      "_key": "!items.effects!RAGnuUkw5zDras0t.SMgFax4zX1F54yT6"
+      "_key": "!items.effects!RAGnuUkw5zDras0t.SMgFax4zX1F54yT6",
+      "start": null
     }
   ],
   "img": "icons/skills/melee/blade-tips-triple-bent-white.webp",

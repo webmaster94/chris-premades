@@ -4,52 +4,55 @@
   "effects": [
     {
       "name": "Rage",
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "bludgeoning",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "piercing",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "slashing",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.check.str",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.save.str",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/creatures/abilities/mouth-teeth-human.webp",
       "_id": "ThMOHzshB2077nV6",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "bludgeoning",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "piercing",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "slashing",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.check.str",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.save.str",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -84,7 +87,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!UzWJKNXRrzqkoCu5.ThMOHzshB2077nV6"
+      "_key": "!items.effects!UzWJKNXRrzqkoCu5.ThMOHzshB2077nV6",
+      "start": null
     }
   ],
   "system": {

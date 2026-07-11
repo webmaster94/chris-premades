@@ -3,7 +3,7 @@ async function stepOfTheWind(token, positions) {
     for (let e = 0; e < positions.length; e++) {
         if (e == 0) {
             /* eslint-disable indent */
-            await new Sequence()
+            await new Sequence({moduleName:'chris-premades', softFail:true})
                 .animation()
                     .on(token)
                     .opacity(0)
@@ -102,7 +102,7 @@ async function stepOfTheWind(token, positions) {
             if (positions.length === 1) await token.actor.sheet.maximize();
         } else if (e == positions.length - 1){
             /* eslint-disable indent */
-            await new Sequence()
+            await new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                     .file('animated-spell-effects-cartoon.smoke.69')
                     .atLocation(positions[e - 1])
@@ -182,7 +182,7 @@ async function stepOfTheWind(token, positions) {
             await token.actor.sheet.maximize();
         } else {
             /* eslint-disable indent */
-            await new Sequence()
+            await new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                     .file('animated-spell-effects-cartoon.smoke.69')
                     .atLocation(positions[e - 1])
@@ -252,7 +252,7 @@ async function cunningAction(token, positions) {
     for (let e = 0; e < positions.length; e++) {
         if(e == 0) {
             /* eslint-disable indent */
-            await new Sequence()
+            await new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                     .file('animated-spell-effects-cartoon.smoke.43')
                     .atLocation(token)
@@ -335,7 +335,7 @@ async function cunningAction(token, positions) {
             if (positions.length === 1) await token.actor.sheet.maximize();
         } else if (e == positions.length - 1) {
             /* eslint-disable indent */
-            await new Sequence()
+            await new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                     .file('animated-spell-effects-cartoon.smoke.43')
                     .atLocation(positions[e - 1])
@@ -378,7 +378,7 @@ async function cunningAction(token, positions) {
             await token.actor.sheet.maximize();
         } else {
             /* eslint-disable indent */
-            await new Sequence()
+            await new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                     .file('animated-spell-effects-cartoon.smoke.43')
                     .atLocation(positions[e - 1])
@@ -438,7 +438,7 @@ async function use({trigger, workflow}) {
             positions.push(positions[i]);
             i++;
             /* eslint-disable indent */
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                     .name('Disengage Crosshair')
                     .copySprite(workflow.token)

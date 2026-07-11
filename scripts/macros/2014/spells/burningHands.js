@@ -7,7 +7,7 @@ async function use ({workflow}) {
     let templateDoc = templateUtils.getRegionDoc(templateUtils.normalizeTemplateUuid(workflow.templateUuid)) ?? await fromUuid(workflow.templateUuid);
     let template = templateDoc?.object;
     if (!sourceToken || !template) return;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.energy_strands.in.yellow.01.0')
         .atLocation(sourceToken) 

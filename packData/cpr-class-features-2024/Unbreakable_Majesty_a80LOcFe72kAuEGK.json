@@ -5,21 +5,19 @@
   "effects": [
     {
       "name": "Unbreakable Majesty",
-      "changes": [],
       "transfer": false,
       "img": "icons/magic/light/explosion-beam-impact-silhouette.webp",
       "_id": "O1CtipiKgKC3eTdE",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -49,7 +47,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!a80LOcFe72kAuEGK.O1CtipiKgKC3eTdE"
+      "_key": "!items.effects!a80LOcFe72kAuEGK.O1CtipiKgKC3eTdE",
+      "start": null
     }
   ],
   "system": {

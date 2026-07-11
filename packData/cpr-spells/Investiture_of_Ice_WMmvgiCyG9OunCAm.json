@@ -407,24 +407,23 @@
       "transfer": false,
       "_id": "rEUmCVOp58mKR5K6",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "/2",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.all",
+            "value": "/2",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -441,16 +440,15 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
         }
       },
       "sort": 0,
-      "_key": "!items.effects!WMmvgiCyG9OunCAm.rEUmCVOp58mKR5K6"
+      "_key": "!items.effects!WMmvgiCyG9OunCAm.rEUmCVOp58mKR5K6",
+      "start": null
     }
   ],
   "img": "icons/magic/water/strike-ice-blade-axe.webp",

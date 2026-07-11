@@ -5,28 +5,11 @@
     {
       "name": "Tokens of the Departed",
       "statuses": [],
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.save.con",
-          "mode": 0,
-          "value": "(token.actor.items.getName('Tokens of the Departed')?.system.uses.value ?? 0) > 0",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.deathSave",
-          "mode": 0,
-          "value": "(token.actor.items.getName('Tokens of the Departed')?.system.uses.value ?? 0) > 0",
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": 456,
-        "rounds": null,
-        "turns": null,
-        "startRound": 4,
-        "startTurn": 3,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -67,10 +50,28 @@
       "img": "icons/commodities/metal/clasp-skull.webp",
       "_id": "VIick3K2Poos0qUW",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.save.con",
+            "value": "(token.actor.items.getName('Tokens of the Departed')?.system.uses.value ?? 0) > 0",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.deathSave",
+            "value": "(token.actor.items.getName('Tokens of the Departed')?.system.uses.value ?? 0) > 0",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": "Compendium.chris-premades.CPRClassFeatures.Item.FcPzaDbMl7SqYYF9",
       "sort": 0,
-      "_key": "!items.effects!FcPzaDbMl7SqYYF9.VIick3K2Poos0qUW"
+      "_key": "!items.effects!FcPzaDbMl7SqYYF9.VIick3K2Poos0qUW",
+      "start": null
     }
   ],
   "system": {

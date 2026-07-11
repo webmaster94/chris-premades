@@ -36,13 +36,10 @@
       "name": "Unarmored Defense",
       "origin": "Compendium.world.cpr-class-features.Item.KAZ3U0rT48B7H0ai",
       "duration": {
-        "rounds": null,
-        "startTime": 1392,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 233,
-        "startTurn": 3
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -63,21 +60,24 @@
       "img": "icons/magic/control/buff-flight-wings-runes-red.webp",
       "_id": "PJmHPx88WXnaIQG8",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.ac.calc",
-          "mode": 5,
-          "value": "unarmoredMonk",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.ac.calc",
+            "value": "unarmoredMonk",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!O7LF8tESQm3L9mWR.PJmHPx88WXnaIQG8"
+      "_key": "!items.effects!O7LF8tESQm3L9mWR.PJmHPx88WXnaIQG8",
+      "start": null
     }
   ],
   "flags": {

@@ -230,13 +230,10 @@
       "name": "Maneuvers: Lunging Attack",
       "origin": "Compendium.world.cpr-class-features.Item.PQkTLy77Wzxcl1DR",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": 1,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "turns",
+        "expiry": "turnStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -263,27 +260,31 @@
       "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
       "_id": "xFoSstaUJkXSPfDj",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.range.mwak",
-          "mode": 2,
-          "value": "5",
-          "priority": 20
-        },
-        {
-          "key": "system.bonuses.mwak.damage",
-          "mode": 2,
-          "value": "@scale.battle-master.combat-superiority-die",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.range.mwak",
+            "value": "5",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.bonuses.mwak.damage",
+            "value": "@scale.battle-master.combat-superiority-die",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!GjD9tu2ZTpmg4W9h.xFoSstaUJkXSPfDj"
+      "_key": "!items.effects!GjD9tu2ZTpmg4W9h.xFoSstaUJkXSPfDj",
+      "start": null
     }
   ],
   "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",

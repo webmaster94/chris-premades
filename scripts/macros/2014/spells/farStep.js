@@ -12,7 +12,7 @@ async function use({workflow}) {
     }
     await Teleport.target([workflow.token], workflow.token, {range: 60, animation: anim});
     if (anim === 'farStep') {
-        new Sequence()
+        new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('jb2a.token_border.circle.spinning.blue.001')
             .name('Far Step')

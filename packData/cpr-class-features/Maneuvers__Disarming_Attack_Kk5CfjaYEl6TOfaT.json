@@ -221,13 +221,10 @@
       "name": "Disarming Attack: Disarmed",
       "origin": "Compendium.world.cpr-class-features.Item.xx3GvWOUqgNQSxWZ",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -252,14 +249,16 @@
       "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
       "_id": "fYe3m3hupPOYePJ4",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!Kk5CfjaYEl6TOfaT.fYe3m3hupPOYePJ4"
+      "_key": "!items.effects!Kk5CfjaYEl6TOfaT.fYe3m3hupPOYePJ4",
+      "start": null
     }
   ],
   "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",

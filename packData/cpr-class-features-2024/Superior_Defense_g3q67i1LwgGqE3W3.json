@@ -5,88 +5,11 @@
     {
       "name": "Superior Defense",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "value": "bludgeoning",
-          "mode": 2,
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "value": "piercing",
-          "mode": 2,
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "value": "slashing",
-          "mode": 2,
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "value": "necrotic",
-          "mode": 2,
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "value": "acid",
-          "mode": 2,
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "value": "cold",
-          "mode": 2,
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "value": "fire",
-          "mode": 2,
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "value": "lightning",
-          "mode": 2,
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "value": "thunder",
-          "mode": 2,
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "value": "poison",
-          "mode": 2,
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "value": "psychic",
-          "mode": 2,
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "value": "radiant",
-          "mode": 2,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -138,10 +61,98 @@
       "img": "icons/magic/defensive/shield-barrier-blue.webp",
       "_id": "XcW5ncZZzYbanmQq",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "bludgeoning",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "piercing",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "slashing",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "necrotic",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "acid",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "cold",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "fire",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "lightning",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "thunder",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "poison",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "psychic",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "radiant",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!g3q67i1LwgGqE3W3.XcW5ncZZzYbanmQq"
+      "_key": "!items.effects!g3q67i1LwgGqE3W3.XcW5ncZZzYbanmQq",
+      "start": null
     }
   ],
   "system": {

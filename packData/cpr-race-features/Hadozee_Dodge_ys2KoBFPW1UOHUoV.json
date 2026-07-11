@@ -221,13 +221,10 @@
       "name": "Hadozee Dodge",
       "origin": "Compendium.world.cpr-race-features-old.Item.b8DQqew1izbnS1Wz",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -252,21 +249,24 @@
       "img": "icons/skills/movement/figure-running-gray.webp",
       "_id": "UgCQmGWyEungLRrN",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dm.midi.all",
-          "mode": 2,
-          "value": "-[[1d6 + @prof]]",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dm.midi.all",
+            "value": "-[[1d6 + @prof]]",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!ys2KoBFPW1UOHUoV.UgCQmGWyEungLRrN"
+      "_key": "!items.effects!ys2KoBFPW1UOHUoV.UgCQmGWyEungLRrN",
+      "start": null
     }
   ],
   "img": "icons/skills/movement/figure-running-gray.webp",

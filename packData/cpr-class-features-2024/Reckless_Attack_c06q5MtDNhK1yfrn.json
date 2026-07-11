@@ -4,34 +4,34 @@
   "effects": [
     {
       "name": "Reckless Attack",
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.attack.str",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.grants.advantage.attack.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/melee/strike-axe-blood-red.webp",
       "_id": "TGIL2N5i0mE3B7Mt",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.attack.str",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -49,9 +49,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -66,7 +64,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!c06q5MtDNhK1yfrn.TGIL2N5i0mE3B7Mt"
+      "_key": "!items.effects!c06q5MtDNhK1yfrn.TGIL2N5i0mE3B7Mt",
+      "start": null
     }
   ],
   "system": {

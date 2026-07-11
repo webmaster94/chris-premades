@@ -163,21 +163,19 @@
   "effects": [
     {
       "name": "Charm Person",
-      "changes": [],
       "transfer": false,
       "img": "icons/magic/life/heart-shadow-red.webp",
       "_id": "5iDlBsDMm8nzlD0x",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -221,7 +219,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!zHaAWVlE6hB7camF.5iDlBsDMm8nzlD0x"
+      "_key": "!items.effects!zHaAWVlE6hB7camF.5iDlBsDMm8nzlD0x",
+      "start": null
     }
   ],
   "name": "Charm Person",

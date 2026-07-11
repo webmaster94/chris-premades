@@ -120,13 +120,10 @@
       "name": "Wand of the War Mage, +1",
       "origin": "Compendium.world.cpr-items.Item.2ALPygS7Vk65RHd4",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -147,21 +144,24 @@
       "img": "icons/weapons/wands/wand-carved-fire.webp",
       "_id": "iRBex8ZcsUTemMug",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.bonuses.spell.attack",
-          "mode": 2,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.spell.attack",
+            "value": "1",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!OKfsWry6MfRGkH4l.iRBex8ZcsUTemMug"
+      "_key": "!items.effects!OKfsWry6MfRGkH4l.iRBex8ZcsUTemMug",
+      "start": null
     }
   ],
   "img": "icons/weapons/wands/wand-carved-fire.webp",

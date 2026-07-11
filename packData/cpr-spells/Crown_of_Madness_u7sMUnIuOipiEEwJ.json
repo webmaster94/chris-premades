@@ -5,23 +5,12 @@
   "effects": [
     {
       "_id": "9a1bnj7cx2dss3sv",
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "mode": 0,
-          "value": "label=Crown of Madness (End of Turn),turn=end,saveDC=@attributes.spell.dc,saveAbility=wis,savingThrow=true,saveMagic=true",
-          "priority": 20
-        }
-      ],
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "transfer": false,
       "flags": {
@@ -51,9 +40,20 @@
       "statuses": [],
       "img": "icons/commodities/metal/fragments-steel-barbed.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "label=Crown of Madness (End of Turn),turn=end,saveDC=@attributes.spell.dc,saveAbility=wis,savingThrow=true,saveMagic=true",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!u7sMUnIuOipiEEwJ.9a1bnj7cx2dss3sv"
+      "_key": "!items.effects!u7sMUnIuOipiEEwJ.9a1bnj7cx2dss3sv",
+      "start": null
     }
   ],
   "flags": {

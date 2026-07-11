@@ -5,22 +5,11 @@
     {
       "name": "Reliable Talent",
       "statuses": [],
-      "changes": [
-        {
-          "key": "flags.dnd5e.reliableTalent",
-          "value": "true",
-          "mode": 5,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": 36,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -43,10 +32,21 @@
       "img": "icons/magic/symbols/runes-star-magenta.webp",
       "_id": "TL3canJkR60dtCxr",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.dnd5e.reliableTalent",
+            "value": "true",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!oJINosdd6w2qMVk6.TL3canJkR60dtCxr"
+      "_key": "!items.effects!oJINosdd6w2qMVk6.TL3canJkR60dtCxr",
+      "start": null
     }
   ],
   "system": {

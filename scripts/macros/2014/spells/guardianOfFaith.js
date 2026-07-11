@@ -54,7 +54,7 @@ async function use({workflow}) {
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.jb2aCheck();
     if (!playAnimation) return;
     let color = itemUtils.getConfig(workflow.item, 'color') ?? 'yellow';
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.bless.400px.loop.' + color)
         .size(spawnedToken.width + 6, {gridUnits: true})

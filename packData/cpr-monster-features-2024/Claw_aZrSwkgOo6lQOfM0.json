@@ -351,17 +351,15 @@
       "transfer": false,
       "_id": "QMA0MrdCvWrJkq5a",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -392,15 +390,14 @@
           "dontApply": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
         }
       },
-      "_key": "!items.effects!aZrSwkgOo6lQOfM0.QMA0MrdCvWrJkq5a"
+      "_key": "!items.effects!aZrSwkgOo6lQOfM0.QMA0MrdCvWrJkq5a",
+      "start": null
     }
   ],
   "flags": {

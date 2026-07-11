@@ -46,24 +46,23 @@
       "origin": "Compendium.chris-premades.CPRClassFeatures2024.Item.TGlrHJHNckNX8VS8",
       "_id": "zEkzvOqfGZAbglTh",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.range.all",
-          "mode": 2,
-          "value": "((classes.druid?.levels >= 15) && (item.level === 0) && (item.sourceClass === \"druid\") && (activity.range?.value >= 10)) ? 300 : 0",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.range.all",
+            "value": "((classes.druid?.levels >= 15) && (item.level === 0) && (item.sourceClass === \"druid\") && (activity.range?.value >= 10)) ? 300 : 0",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -89,7 +88,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!TGlrHJHNckNX8VS8.zEkzvOqfGZAbglTh"
+      "_key": "!items.effects!TGlrHJHNckNX8VS8.zEkzvOqfGZAbglTh",
+      "start": null
     }
   ],
   "flags": {

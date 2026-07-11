@@ -200,13 +200,10 @@
       "name": "Claws",
       "origin": "Compendium.world.cpr-summon-features.Item.2YftLbuuH2gEGHgT",
       "duration": {
-        "rounds": 1,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "rounds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -218,9 +215,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ],
+          "specialDuration": [],
           "enableCondition": "",
           "selfTarget": false,
           "selfTargetAlways": false,
@@ -230,21 +225,24 @@
       "img": "icons/commodities/claws/claws-white.webp",
       "_id": "jTSlsy7Ghgvfrg9J",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.di.value",
-          "mode": 2,
-          "value": "healing",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.di.value",
+            "value": "healing",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!5xZzDm0654UHtoq7.jTSlsy7Ghgvfrg9J"
+      "_key": "!items.effects!5xZzDm0654UHtoq7.jTSlsy7Ghgvfrg9J",
+      "start": null
     }
   ],
   "flags": {

@@ -27,7 +27,7 @@ async function use({workflow}) {
     if (!playAnimation) return;
     let image = 'modules/chris-premades/images/twilightSanctuary.webp';
     /* eslint-disable indent */
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(250)
         .effect()
             .name('Twilight Sanctuary')

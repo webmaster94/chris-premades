@@ -69,7 +69,7 @@ async function startRitual({trigger, workflow}) {
             break;
     }
     effect = await effectUtils.createEffect(workflow.actor, effectData, {concentrationItem: workflow.item, rules: 'modern', identifier: 'circleCastEffect'});
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file(ritualAnimation + '.intro.' + schoolColor)
         .atLocation(workflow.token)
@@ -125,7 +125,7 @@ async function joinRitual({trigger, workflow}) {
     }
     await genericUtils.setFlag(effect, 'chris-premades', 'circleCast.participants', [workflow.token.document.uuid, ...participants]);
     let lineColor = itemUtils.getConfig(workflow.item, 'lineColor');
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.energy_beam.normal.' + lineColor + '.02')
         .fadeIn(500)
@@ -140,7 +140,7 @@ async function joinRitual({trigger, workflow}) {
     let strandColor = effect.flags['chris-premades'].circleCast.strandColor;
     let strands = effect.flags['chris-premades'].circleCast.strands;
     strands++;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.energy_strands.overlay.' + strandColor + '.01')
         .fadeIn(1000)
@@ -247,7 +247,7 @@ async function removed({trigger: {entity: effect}, workflow}) {
     if (tokenUuid) {
         let token = await fromUuid(tokenUuid);
         if (token) {
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                 .file(endAnimation)
                 .atLocation(token)

@@ -93,13 +93,10 @@
       "name": "Favored by the Gods",
       "origin": "Compendium.world.cpr-class-features.Item.nwv9Vq0T27GFRwoj",
       "duration": {
-        "rounds": null,
-        "startTime": 1416,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 237,
-        "startTurn": 9
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -120,39 +117,45 @@
       "img": "icons/magic/light/beam-rays-blue.webp",
       "_id": "CNNtqowzIxaj5ahc",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.optional.fbtg.attack.fail.all",
-          "mode": 0,
-          "value": "+2d4",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.fbtg.label",
-          "mode": 0,
-          "value": "Favored by the Gods",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.fbtg.count",
-          "mode": 0,
-          "value": "ItemUses.Favored by the Gods",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.fbtg.save.fail.all",
-          "mode": 0,
-          "value": "+2d4",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.optional.fbtg.attack.fail.all",
+            "value": "+2d4",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.fbtg.label",
+            "value": "Favored by the Gods",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.fbtg.count",
+            "value": "ItemUses.Favored by the Gods",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.fbtg.save.fail.all",
+            "value": "+2d4",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!Qt0G29csHWoR8qJu.CNNtqowzIxaj5ahc"
+      "_key": "!items.effects!Qt0G29csHWoR8qJu.CNNtqowzIxaj5ahc",
+      "start": null
     }
   ],
   "img": "icons/magic/light/beam-rays-blue.webp",

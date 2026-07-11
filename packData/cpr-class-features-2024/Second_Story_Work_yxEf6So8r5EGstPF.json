@@ -5,22 +5,11 @@
     {
       "name": "Second-Story Work",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.attributes.movement.climb",
-          "value": "@attributes.movement.walk",
-          "mode": 4,
-          "priority": 5
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": 738,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -45,10 +34,21 @@
       "img": "icons/environment/settlement/city-night.webp",
       "_id": "rH8msZ30PMa9mt5j",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.climb",
+            "value": "@attributes.movement.walk",
+            "priority": 5,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!yxEf6So8r5EGstPF.rH8msZ30PMa9mt5j"
+      "_key": "!items.effects!yxEf6So8r5EGstPF.rH8msZ30PMa9mt5j",
+      "start": null
     }
   ],
   "system": {

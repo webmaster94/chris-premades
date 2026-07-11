@@ -9,17 +9,15 @@
       "transfer": false,
       "_id": "g4xXe8M4FsctGbM1",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -63,32 +61,32 @@
           }
         }
       },
-      "_key": "!items.effects!Jp2HQNp12muCjI9W.g4xXe8M4FsctGbM1"
+      "_key": "!items.effects!Jp2HQNp12muCjI9W.g4xXe8M4FsctGbM1",
+      "start": null
     },
     {
       "name": "Orb of Damara",
-      "changes": [
-        {
-          "key": "system.attributes.movement.fly",
-          "mode": 4,
-          "value": "60",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "img": "icons/commodities/materials/glass-orb-blue.webp",
       "_id": "7qdyFvPD7OIg6VVv",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.fly",
+            "value": "60",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": 2142,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Item.XYdVuRrAIXqfpJ1D",
@@ -118,7 +116,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!Jp2HQNp12muCjI9W.7qdyFvPD7OIg6VVv"
+      "_key": "!items.effects!Jp2HQNp12muCjI9W.7qdyFvPD7OIg6VVv",
+      "start": null
     },
     {
       "name": "Orb of Damara: Fear",
@@ -127,17 +126,15 @@
       "transfer": false,
       "_id": "iwJlSPFvdzo1NA2Y",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -160,9 +157,7 @@
           "dontApply": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStart"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -180,7 +175,8 @@
           "rules": "modern"
         }
       },
-      "_key": "!items.effects!Jp2HQNp12muCjI9W.iwJlSPFvdzo1NA2Y"
+      "_key": "!items.effects!Jp2HQNp12muCjI9W.iwJlSPFvdzo1NA2Y",
+      "start": null
     },
     {
       "name": "Orb of Damara: Fear Immunity",
@@ -189,17 +185,15 @@
       "transfer": false,
       "_id": "lQUTLCxSajqmLZTN",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -238,7 +232,8 @@
           "rules": "modern"
         }
       },
-      "_key": "!items.effects!Jp2HQNp12muCjI9W.lQUTLCxSajqmLZTN"
+      "_key": "!items.effects!Jp2HQNp12muCjI9W.lQUTLCxSajqmLZTN",
+      "start": null
     }
   ],
   "system": {

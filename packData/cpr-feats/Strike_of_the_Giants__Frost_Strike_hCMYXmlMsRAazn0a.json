@@ -247,13 +247,10 @@
       "name": "Strike of the Giants: Frost Strike",
       "origin": "Compendium.world.cpr-feat-features.Item.XWSt2rH7F8iii28G",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -269,9 +266,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -280,21 +275,24 @@
       "img": "icons/magic/movement/trail-streak-impact-blue.webp",
       "_id": "IoebnvfDjGA6zB3a",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "0",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.all",
+            "value": "0",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!hCMYXmlMsRAazn0a.IoebnvfDjGA6zB3a"
+      "_key": "!items.effects!hCMYXmlMsRAazn0a.IoebnvfDjGA6zB3a",
+      "start": null
     }
   ],
   "img": "icons/magic/movement/trail-streak-impact-blue.webp",

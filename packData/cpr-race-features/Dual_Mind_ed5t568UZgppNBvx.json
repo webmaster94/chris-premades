@@ -77,13 +77,10 @@
       "name": "Dual Mind",
       "origin": "Compendium.world.cpr-race-features.Item.OJPi9N1sG1xuUJZL",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -104,21 +101,24 @@
       "img": "icons/magic/symbols/runes-star-blue.webp",
       "_id": "p63MU7ryRtHBnVFj",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.save.wis",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.save.wis",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!ed5t568UZgppNBvx.p63MU7ryRtHBnVFj"
+      "_key": "!items.effects!ed5t568UZgppNBvx.p63MU7ryRtHBnVFj",
+      "start": null
     }
   ],
   "img": "icons/magic/symbols/runes-star-blue.webp",

@@ -4,21 +4,19 @@
   "effects": [
     {
       "name": "Devastator",
-      "changes": [],
       "transfer": false,
       "img": "icons/skills/melee/strike-flail-spiked-pink.webp",
       "_id": "1xNVqu1BTxrjBXgU",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -50,7 +48,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!6Y9VApI7oPhzpwmW.1xNVqu1BTxrjBXgU"
+      "_key": "!items.effects!6Y9VApI7oPhzpwmW.1xNVqu1BTxrjBXgU",
+      "start": null
     }
   ],
   "system": {

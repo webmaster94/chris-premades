@@ -159,28 +159,27 @@
   "effects": [
     {
       "name": "Heliod's Devotee",
-      "changes": [
-        {
-          "key": "ATL.light.dim",
-          "mode": 4,
-          "value": "5",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/magic/holy/prayer-hands-glowing-yellow-green.webp",
       "_id": "2LbN8jkBS6xmGEMh",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "ATL.light.dim",
+            "value": "5",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -210,7 +209,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!w6z7L80XdjP9MGLY.2LbN8jkBS6xmGEMh"
+      "_key": "!items.effects!w6z7L80XdjP9MGLY.2LbN8jkBS6xmGEMh",
+      "start": null
     }
   ],
   "folder": "54yoOkXu6tnZRp7k",

@@ -33,7 +33,7 @@ async function early({workflow}) {
     let tokens = templateUtils.getTokensInTemplate(template);
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.jb2aCheck();
     if (playAnimation) {
-        new Sequence()
+        new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .atLocation(workflow.token)
             .stretchTo(targetToken)

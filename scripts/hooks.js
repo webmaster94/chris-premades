@@ -116,7 +116,7 @@ export function registerHooks() {
     }
 
     // Colorize headers (TODO: None of this will probably be functional currently, will have to be moved around)
-    if (genericUtils.getCPRSetting('colorizeDAE', Hooks.on('renderItemSheetV2', dae.renderItemSheet)));
+    dae.toggleRenderItemSheet(genericUtils.getCPRSetting('colorizeDAE'));
     if (genericUtils.getCPRSetting('colorizeAutomatedAnimations')) Hooks.on('renderItemSheetV2', automatedAnimations.renderItemSheet);
     
     // Auto-populate effect descriptions

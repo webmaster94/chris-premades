@@ -247,13 +247,10 @@
       "name": "Strike of the Giants: Cloud Strike",
       "origin": "Compendium.world.cpr-feat-features.Item.LcFJIDWQOKce2DtK",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -289,14 +286,16 @@
       "img": "icons/magic/air/air-wave-gust-blue.webp",
       "_id": "bgXW6xTbhGZrF1Pn",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!3kzG1TMjk683v2bf.bgXW6xTbhGZrF1Pn"
+      "_key": "!items.effects!3kzG1TMjk683v2bf.bgXW6xTbhGZrF1Pn",
+      "start": null
     }
   ],
   "img": "icons/magic/air/air-wave-gust-blue.webp",

@@ -7,7 +7,7 @@ async function early({workflow}) {
     let templateObject = templateUtils.getObject(template);
     let templatePosition = templateUtils.getPosition(template);
     //Animations by: eskiemoh
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.magic_signs.circle.02.evocation.loop.blue')
         .atLocation(templateObject)
@@ -45,7 +45,7 @@ async function early({workflow}) {
         .wait(1000)
 
         .play();
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.sleet_storm.blue')
         .atLocation(templateObject)
@@ -87,7 +87,7 @@ async function early({workflow}) {
     for (let e = 0; e < 44; e++) {
         let offsetX = (Math.random() * (3.5 + 3.5) - 3.5) * canvas.grid.size;
         let offsetY = (Math.random() * (3.5 + 3.5) - 3.5) * canvas.grid.size;
-        new Sequence()
+        new Sequence({moduleName:'chris-premades', softFail:true})
             .wait(150 * e + 1)
 
             .effect()
@@ -100,7 +100,7 @@ async function early({workflow}) {
             .play();
     }
     Array.from(workflow.targets).forEach(target => {
-        new Sequence()
+        new Sequence({moduleName:'chris-premades', softFail:true})
             .wait(1150)
 
             .effect()

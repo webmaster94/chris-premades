@@ -42,7 +42,7 @@ async function early({workflow}) {
     let xray = true;
     if (playAnimation && animationUtils.jb2aCheck()) {
         if (game.modules.get('walledtemplates')?.active) {
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                 .file('jb2a.fog_cloud.01.white')
                 .scaleToObject()
@@ -54,7 +54,7 @@ async function early({workflow}) {
                 .attachTo(template)
                 .play();
         } else {
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                 .file('jb2a.fog_cloud.01.white')
                 .scaleToObject()

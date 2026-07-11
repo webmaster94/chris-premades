@@ -361,13 +361,10 @@
       "name": "Celestial Revelation (Necrotic Shroud): Frightened",
       "origin": "Compendium.world.cpr-race-features.Item.ASZ6kJzW8OvQ45hH",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -383,9 +380,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEndSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -400,14 +395,16 @@
       "img": "icons/magic/control/buff-flight-wings-runes-purple-orange.webp",
       "_id": "LZ0zW6v5B0uls3lX",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!yqTJYlnEH8qTlLkP.LZ0zW6v5B0uls3lX"
+      "_key": "!items.effects!yqTJYlnEH8qTlLkP.LZ0zW6v5B0uls3lX",
+      "start": null
     }
   ],
   "img": "icons/magic/control/buff-flight-wings-runes-purple-orange.webp",

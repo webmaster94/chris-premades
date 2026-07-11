@@ -9,30 +9,30 @@
       "transfer": false,
       "_id": "tn0ihHWSkh9q4z73",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "ATL.light.bright",
-          "mode": 4,
-          "value": "15",
-          "priority": 20
-        },
-        {
-          "key": "ATL.light.dim",
-          "mode": 4,
-          "value": "30",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "ATL.light.bright",
+            "value": "15",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "ATL.light.dim",
+            "value": "30",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -66,32 +66,32 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!iMH0St5M7coQHoZl.tn0ihHWSkh9q4z73"
+      "_key": "!items.effects!iMH0St5M7coQHoZl.tn0ihHWSkh9q4z73",
+      "start": null
     },
     {
       "name": "Jewel of Three Prayers (Dormant)",
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "mode": 2,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "img": "icons/equipment/neck/collar-rounded-gold-purple.webp",
       "_id": "W3KGlyPJb1p6moas",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.ac.bonus",
+            "value": "1",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Actor.URkPN6VT7lcihy3n.Item.i0hlsfDvV7iNHLyR",
@@ -121,7 +121,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!iMH0St5M7coQHoZl.W3KGlyPJb1p6moas"
+      "_key": "!items.effects!iMH0St5M7coQHoZl.W3KGlyPJb1p6moas",
+      "start": null
     }
   ],
   "system": {

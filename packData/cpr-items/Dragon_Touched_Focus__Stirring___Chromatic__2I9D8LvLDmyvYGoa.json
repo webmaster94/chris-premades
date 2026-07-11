@@ -115,13 +115,10 @@
       "name": "Dragon-Touched Focus (Stirring / Chromatic)",
       "origin": "Compendium.world.items.Item.2I9D8LvLDmyvYGoa",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -142,21 +139,24 @@
       "img": "icons/commodities/flowers/lily-water-pink.webp",
       "_id": "bi8tfO1Rn7Z0cnrH",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.init.roll.mode",
-          "mode": 4,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.init.roll.mode",
+            "value": "1",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!2I9D8LvLDmyvYGoa.bi8tfO1Rn7Z0cnrH"
+      "_key": "!items.effects!2I9D8LvLDmyvYGoa.bi8tfO1Rn7Z0cnrH",
+      "start": null
     }
   ],
   "img": "icons/commodities/flowers/lily-water-pink.webp",

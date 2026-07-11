@@ -231,18 +231,14 @@
   "effects": [
     {
       "name": "Channel Divinity: Turn the Faithless",
-      "changes": [],
       "transfer": false,
       "_id": "rQAfRLmpB8sqWXzK",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -265,9 +261,12 @@
       "tint": "#ffffff",
       "img": "icons/magic/holy/saint-glass-portrait-halo.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "sort": 0,
-      "_key": "!items.effects!USudWVlpemmLo2C1.rQAfRLmpB8sqWXzK"
+      "_key": "!items.effects!USudWVlpemmLo2C1.rQAfRLmpB8sqWXzK",
+      "start": null
     }
   ],
   "img": "icons/magic/holy/saint-glass-portrait-halo.webp",

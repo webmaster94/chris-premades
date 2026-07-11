@@ -77,13 +77,10 @@
       "name": "Telepathic Insight",
       "origin": "Compendium.world.cpr-race-features.Item.cQF5OywEFSDFGr9y",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -104,27 +101,31 @@
       "img": "icons/magic/air/air-burst-spiral-teal-green.webp",
       "_id": "a6ljgIF3YcTz1sli",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.save.wis",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.save.cha",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.save.wis",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.save.cha",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!4G2y5gwJ6TQyliEw.a6ljgIF3YcTz1sli"
+      "_key": "!items.effects!4G2y5gwJ6TQyliEw.a6ljgIF3YcTz1sli",
+      "start": null
     }
   ],
   "img": "icons/magic/air/air-burst-spiral-teal-green.webp",

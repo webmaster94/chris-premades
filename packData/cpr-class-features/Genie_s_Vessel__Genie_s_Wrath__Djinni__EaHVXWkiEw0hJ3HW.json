@@ -85,55 +85,14 @@
   },
   "effects": [
     {
-      "changes": [
-        {
-          "key": "flags.midi-qol.optional.geniesWrath.label",
-          "mode": 0,
-          "value": "Genie's Wrath",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.geniesWrath.count",
-          "mode": 0,
-          "value": "turn",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.geniesWrath.damage.msak",
-          "mode": 0,
-          "value": "+@prof[thunder]",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.geniesWrath.damage.rsak",
-          "mode": 0,
-          "value": "+@prof[thunder]",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.geniesWrath.damage.mwak",
-          "mode": 0,
-          "value": "+@prof[thunder]",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.geniesWrath.damage.rwak",
-          "mode": 0,
-          "value": "+@prof[thunder]",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "_id": "4oMwtaT7oruA2w4r",
       "disabled": false,
       "duration": {
-        "startTime": 1416,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": 237,
-        "startTurn": 6
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "origin": "Compendium.world.cpr-class-features.Item.4EpUIdBDAlEH2UQt",
       "tint": "#ffffff",
@@ -158,9 +117,55 @@
       "statuses": [],
       "img": "icons/equipment/neck/necklace-carved-lantern-gold.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.optional.geniesWrath.label",
+            "value": "Genie's Wrath",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.geniesWrath.count",
+            "value": "turn",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.geniesWrath.damage.msak",
+            "value": "+@prof[thunder]",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.geniesWrath.damage.rsak",
+            "value": "+@prof[thunder]",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.geniesWrath.damage.mwak",
+            "value": "+@prof[thunder]",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.geniesWrath.damage.rwak",
+            "value": "+@prof[thunder]",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!EaHVXWkiEw0hJ3HW.4oMwtaT7oruA2w4r"
+      "_key": "!items.effects!EaHVXWkiEw0hJ3HW.4oMwtaT7oruA2w4r",
+      "start": null
     }
   ],
   "img": "icons/equipment/neck/necklace-carved-lantern-gold.webp",

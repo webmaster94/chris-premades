@@ -9,24 +9,23 @@
       "transfer": false,
       "_id": "ZOQZcwJniLpXzlGb",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.grants.disadvantage.attack.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.disadvantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -62,7 +61,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!LdVbFfdY0Xa6xs5g.ZOQZcwJniLpXzlGb"
+      "_key": "!items.effects!LdVbFfdY0Xa6xs5g.ZOQZcwJniLpXzlGb",
+      "start": null
     }
   ],
   "system": {

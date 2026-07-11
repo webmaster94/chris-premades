@@ -22,7 +22,7 @@ async function use({workflow}) {
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.jb2aCheck();
     for (let {document: target, value} of selection) {
         await workflowUtils.applyDamage([target], value, 'temphp');
-        if (playAnimation) new Sequence().effect().atLocation(target).file('jb2a.cure_wounds.400px.blue').play();
+        if (playAnimation) new Sequence({moduleName:'chris-premades', softFail:true}).effect().atLocation(target).file('jb2a.cure_wounds.400px.blue').play();
     }
 }
 export let inspiringSmite = {

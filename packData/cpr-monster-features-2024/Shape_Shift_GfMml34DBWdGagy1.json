@@ -368,30 +368,30 @@
       "transfer": false,
       "_id": "lPtlH8vlUPsC2bmS",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.size",
-          "mode": 5,
-          "value": "tiny",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.movement.air",
-          "mode": 4,
-          "value": "5",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.size",
+            "value": "tiny",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.air",
+            "value": "5",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -430,7 +430,8 @@
           "rules": "modern"
         }
       },
-      "_key": "!items.effects!GfMml34DBWdGagy1.lPtlH8vlUPsC2bmS"
+      "_key": "!items.effects!GfMml34DBWdGagy1.lPtlH8vlUPsC2bmS",
+      "start": null
     },
     {
       "name": "Shape-Shift: Mist",
@@ -439,24 +440,23 @@
       "transfer": false,
       "_id": "ijNAbqKZ431FmXW6",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -495,7 +495,8 @@
           "rules": "modern"
         }
       },
-      "_key": "!items.effects!GfMml34DBWdGagy1.ijNAbqKZ431FmXW6"
+      "_key": "!items.effects!GfMml34DBWdGagy1.ijNAbqKZ431FmXW6",
+      "start": null
     }
   ],
   "flags": {

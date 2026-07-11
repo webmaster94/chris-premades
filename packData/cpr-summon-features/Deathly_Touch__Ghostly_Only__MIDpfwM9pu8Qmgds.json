@@ -348,13 +348,10 @@
       "name": "Deathly Touch",
       "origin": "Compendium.world.cpr-summon-features.Item.oc8euGgOrHDb7fLA",
       "duration": {
-        "rounds": 1,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "rounds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -372,9 +369,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ],
+          "specialDuration": [],
           "enableCondition": "",
           "selfTarget": false,
           "selfTargetAlways": false,
@@ -384,14 +379,16 @@
       "img": "icons/equipment/hand/glove-simple-leather-purple.webp",
       "_id": "MFkhqaYIJVZwa8TC",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!MIDpfwM9pu8Qmgds.MFkhqaYIJVZwa8TC"
+      "_key": "!items.effects!MIDpfwM9pu8Qmgds.MFkhqaYIJVZwa8TC",
+      "start": null
     }
   ],
   "flags": {

@@ -61,7 +61,7 @@ async function use({workflow}) {
         return;
     }
     //Animation by Eskiemoh
-    let mainSequence = new Sequence()
+    let mainSequence = new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.energy_strands.in.red.01')
         .attachTo(workflow.token)
@@ -239,7 +239,7 @@ async function late({workflow}) {
     if (!playAnimation) return;
     let target = workflow.targets.first();
     //Animation by Eskiemoh
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.melee_generic.piercing.two_handed')
         .atLocation(target)

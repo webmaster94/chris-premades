@@ -118,22 +118,11 @@
   "effects": [
     {
       "img": "icons/equipment/hand/gauntlet-clawed-steel.webp",
-      "changes": [
-        {
-          "key": "system.abilities.str.value",
-          "value": "26",
-          "mode": 4,
-          "priority": 3
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -182,10 +171,21 @@
       "description": "",
       "_id": "0KnNIeGDDaRgSPEs",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.abilities.str.value",
+            "value": "26",
+            "priority": 3,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": "Compendium.world.3rd-party-items.Item.QxxpixNQLvtFGLyU",
       "sort": 0,
-      "_key": "!items.effects!QxxpixNQLvtFGLyU.0KnNIeGDDaRgSPEs"
+      "_key": "!items.effects!QxxpixNQLvtFGLyU.0KnNIeGDDaRgSPEs",
+      "start": null
     }
   ],
   "folder": "l9lGxARY0Wspxe7c",

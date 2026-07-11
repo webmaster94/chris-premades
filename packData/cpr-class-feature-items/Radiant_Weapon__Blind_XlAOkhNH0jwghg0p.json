@@ -182,13 +182,10 @@
       "name": "Radiant Weapon: Blind",
       "origin": "Compendium.world.cpr-class-feature-items.Item.L822nuegZo4fG1ft",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -204,9 +201,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -221,14 +216,16 @@
       "img": "icons/weapons/swords/sword-runed-glowing.webp",
       "_id": "ySGj8mFI3O3EOgam",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!XlAOkhNH0jwghg0p.ySGj8mFI3O3EOgam"
+      "_key": "!items.effects!XlAOkhNH0jwghg0p.ySGj8mFI3O3EOgam",
+      "start": null
     }
   ],
   "flags": {

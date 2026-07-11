@@ -222,13 +222,10 @@
       "name": "Rend Mind",
       "origin": "Compendium.world.cpr-class-features.Item.6690taxHL2Iw2YD7",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -259,21 +256,24 @@
       "img": "icons/magic/unholy/strike-beam-blood-large-red-blue.webp",
       "_id": "El4MoGn3z8vNkYUi",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "value": "turn=end,label=Rend Mind (End of Turn),allowIncapacitated=true,rollType=save,saveAbility=wis,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
-          "mode": 0,
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=end,label=Rend Mind (End of Turn),allowIncapacitated=true,rollType=save,saveAbility=wis,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!bMiKaR68yTo5GR6C.El4MoGn3z8vNkYUi"
+      "_key": "!items.effects!bMiKaR68yTo5GR6C.El4MoGn3z8vNkYUi",
+      "start": null
     }
   ],
   "img": "icons/magic/unholy/strike-beam-blood-large-red-blue.webp",

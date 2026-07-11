@@ -4,34 +4,34 @@
   "effects": [
     {
       "name": "Superior Interdict",
-      "changes": [
-        {
-          "key": "system.traits.idr.value",
-          "mode": 2,
-          "value": "fire",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.idr.value",
-          "mode": 2,
-          "value": "necrotic",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/magic/unholy/orb-beam-pink.webp",
       "_id": "ZvZI8wYfDhiqOOzg",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.idr.value",
+            "value": "fire",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.idr.value",
+            "value": "necrotic",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -68,7 +68,8 @@
           ]
         }
       },
-      "_key": "!items.effects!BA4P7cE2ImeRaJ4z.ZvZI8wYfDhiqOOzg"
+      "_key": "!items.effects!BA4P7cE2ImeRaJ4z.ZvZI8wYfDhiqOOzg",
+      "start": null
     }
   ],
   "system": {

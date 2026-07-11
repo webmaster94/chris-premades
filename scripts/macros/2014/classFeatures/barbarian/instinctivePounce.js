@@ -37,7 +37,7 @@ async function use({workflow}) {
         }
     });
     /* eslint-disable indent */
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .animation()
             .on(workflow.token)
             .opacity(0)

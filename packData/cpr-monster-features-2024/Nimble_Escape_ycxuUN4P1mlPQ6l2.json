@@ -276,28 +276,27 @@
   "effects": [
     {
       "name": "Disengage",
-      "changes": [
-        {
-          "key": "flags.gambits-premades.oaImmunity",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/movement/feet-winged-boots-blue.webp",
       "_id": "utpx5LNL0BcjoBVP",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.gambits-premades.oaImmunity",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "description": "",
       "origin": "Scene.L39dEBy0tiHToOQE.Token.EC6DM0OSitVd2jWW.Actor.FBt1e3bLdzHwQFMD.Item.PGxpRbW30tbh2vBM",
@@ -315,9 +314,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "ActiveAuras": {
           "isAura": false,
@@ -345,7 +342,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!ycxuUN4P1mlPQ6l2.utpx5LNL0BcjoBVP"
+      "_key": "!items.effects!ycxuUN4P1mlPQ6l2.utpx5LNL0BcjoBVP",
+      "start": null
     },
     {
       "name": "Hidden",
@@ -354,17 +352,15 @@
       "transfer": false,
       "_id": "gzqGpOdqmIW82RmO",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -419,7 +415,8 @@
           }
         }
       },
-      "_key": "!items.effects!ycxuUN4P1mlPQ6l2.gzqGpOdqmIW82RmO"
+      "_key": "!items.effects!ycxuUN4P1mlPQ6l2.gzqGpOdqmIW82RmO",
+      "start": null
     }
   ],
   "flags": {

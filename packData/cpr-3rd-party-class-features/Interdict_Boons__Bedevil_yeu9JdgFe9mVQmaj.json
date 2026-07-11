@@ -4,28 +4,27 @@
   "effects": [
     {
       "name": "Interdict Boons: Bedevil",
-      "changes": [
-        {
-          "key": "system.bonuses.abilities.save",
-          "mode": 2,
-          "value": "-@prof",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/targeting/crosshair-triple-strike-orange.webp",
       "_id": "8WWHsqXE1kv5M2CI",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.abilities.save",
+            "value": "-@prof",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetStart",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -55,7 +54,6 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [
-            "turnStart",
             "isSave"
           ]
         },
@@ -63,7 +61,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!yeu9JdgFe9mVQmaj.8WWHsqXE1kv5M2CI"
+      "_key": "!items.effects!yeu9JdgFe9mVQmaj.8WWHsqXE1kv5M2CI",
+      "start": null
     }
   ],
   "system": {

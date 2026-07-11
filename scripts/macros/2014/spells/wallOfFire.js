@@ -192,7 +192,7 @@ async function early({trigger, workflow}) {
         await genericUtils.remove(template);
         if (playAnimation) {
             /* eslint-disable indent */
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                     .file('jb2a.wall_of_fire.500x100.' + color)
                     .scaleToObject(1.05)
@@ -340,7 +340,7 @@ async function early({trigger, workflow}) {
             let animationRay = getRay();
             /* eslint-disable indent */
             if (animationRay) {
-                new Sequence()
+                new Sequence({moduleName:'chris-premades', softFail:true})
                     .effect()
                         .file('jb2a.wall_of_fire.300x100.' + color)
                         .atLocation({x: animationRay.A.x, y: animationRay.A.y})

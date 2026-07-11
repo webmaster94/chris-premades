@@ -390,22 +390,11 @@
       "img": "icons/creatures/fish/fish-bluefin-yellow-blue.webp",
       "name": "Aquatic Adaptation - Aquatic Adaptation",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.attributes.movement.swim",
-          "value": "@attributes.movement.walk",
-          "mode": 4,
-          "priority": 5
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -439,10 +428,21 @@
       "description": "",
       "_id": "r2nkQcLlBddzDEVv",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.swim",
+            "value": "@attributes.movement.walk",
+            "priority": 5,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!VhWmo8YftyVrLPSo.r2nkQcLlBddzDEVv"
+      "_key": "!items.effects!VhWmo8YftyVrLPSo.r2nkQcLlBddzDEVv",
+      "start": null
     }
   ],
   "name": "Alter Self",

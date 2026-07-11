@@ -216,13 +216,10 @@
       "name": "One with Shadows",
       "origin": "Compendium.world.cpr-class-features.Item.zkb7CEADjtYwiGLN",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -256,14 +253,16 @@
       "img": "icons/magic/perception/shadow-stealth-eyes-purple.webp",
       "_id": "YnE0Qmbjdsc1OwkA",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!M1kkWnzDKDvmwBQY.YnE0Qmbjdsc1OwkA"
+      "_key": "!items.effects!M1kkWnzDKDvmwBQY.YnE0Qmbjdsc1OwkA",
+      "start": null
     }
   ],
   "img": "icons/magic/perception/shadow-stealth-eyes-purple.webp",

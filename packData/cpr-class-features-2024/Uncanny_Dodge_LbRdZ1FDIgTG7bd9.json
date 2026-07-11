@@ -5,22 +5,11 @@
     {
       "name": "Uncanny Dodge",
       "statuses": [],
-      "changes": [
-        {
-          "key": "flags.midi-qol.uncanny-dodge",
-          "value": "1",
-          "mode": 0,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -45,10 +34,21 @@
       "_id": "jvdtYTCzJr7zCKRV",
       "img": "icons/skills/movement/feet-winged-boots-brown.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.uncanny-dodge",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!LbRdZ1FDIgTG7bd9.jvdtYTCzJr7zCKRV"
+      "_key": "!items.effects!LbRdZ1FDIgTG7bd9.jvdtYTCzJr7zCKRV",
+      "start": null
     }
   ],
   "system": {

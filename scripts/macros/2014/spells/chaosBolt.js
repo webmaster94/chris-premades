@@ -34,7 +34,7 @@ async function use({workflow}) {
     await workflow.setDamageRolls(workflow.damageRolls);
     if (playAnimation && animationUtils.jb2aCheck()) {
         let anim = 'jb2a.ranged.03.projectile.01.bluegreen';
-        await new Sequence()
+        await new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .atLocation(animSource)
             .stretchTo(currentTarget)

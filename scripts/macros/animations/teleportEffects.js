@@ -3,7 +3,7 @@ async function none(token, cornerPosition) {
 
 }
 async function defaultPre(token, cornerPosition) {
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.cast_generic.02.blue.0')
         .atLocation(token)
@@ -14,7 +14,7 @@ async function defaultPre(token, cornerPosition) {
         .play();
 }
 async function defaultPost(token, cornerPosition) {
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .delay(100)
         .file('jb2a.impact.011.blue')
@@ -24,7 +24,7 @@ async function defaultPost(token, cornerPosition) {
         .play();
 }
 async function mistyStepPre(token, cornerPosition) {
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.misty_step.01.blue')
         .atLocation(token)
@@ -40,7 +40,7 @@ async function mistyStepPre(token, cornerPosition) {
 }
 async function mistyStepPost(token, cornerPosition) {
     /* eslint-disable indent */
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
             .delay(100)
             .file('jb2a.misty_step.02.blue')
@@ -55,7 +55,7 @@ async function mistyStepPost(token, cornerPosition) {
         .play();
 }
 async function shadowStepPre(token, cornerPosition) {
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.misty_step.01.dark_black')
         .atLocation(token)
@@ -71,7 +71,7 @@ async function shadowStepPre(token, cornerPosition) {
 }
 async function shadowStepPost(token, cornerPosition) {
     /* eslint-disable indent */
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
             .delay(100)
             .file('jb2a.misty_step.02.dark_black')
@@ -86,7 +86,7 @@ async function shadowStepPost(token, cornerPosition) {
         .play();
 }
 async function crimsonMistPre(token, cornerPosition) {
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.misty_step.01.dark_red')
         .atLocation(token)
@@ -102,7 +102,7 @@ async function crimsonMistPre(token, cornerPosition) {
 }
 async function crimsonMistPost(token, cornerPosition) {
     /* eslint-disable indent */
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
             .delay(100)
             .file('jb2a.misty_step.02.dark_red')
@@ -118,7 +118,7 @@ async function crimsonMistPost(token, cornerPosition) {
 }
 async function hiddenPathsPre(token, cornerPosition) {
     let color = animationUtils.jb2aCheck() === 'patreon' ? 'green' : 'blue';
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.misty_step.01.' + color)
         .atLocation(token)
@@ -135,7 +135,7 @@ async function hiddenPathsPre(token, cornerPosition) {
 async function hiddenPathsPost(token, cornerPosition) {
     let color = animationUtils.jb2aCheck() === 'patreon' ? 'green' : 'blue';
     /* eslint-disable indent */
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
             .delay(100)
             .file('jb2a.misty_step.02.' + color)
@@ -151,7 +151,7 @@ async function hiddenPathsPost(token, cornerPosition) {
 }
 async function thunderStepPre(token, cornerPosition) {
     /* eslint-disable indent */
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
             .file('jb2a.thunderwave.center.blue')
             .atLocation(token, {cacheLocation: false})
@@ -176,7 +176,7 @@ async function thunderStepPre(token, cornerPosition) {
 async function vortexWarpPre(token, cornerPosition) {
     //Animations by: eskiemoh
     /* eslint-disable indent */
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
             .copySprite(token)
             .duration(1500)
@@ -238,7 +238,7 @@ async function vortexWarpPre(token, cornerPosition) {
 }
 async function vortexWarpPost(token, cornerPosition) {
     await genericUtils.sleep(200);
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
             .file('jb2a.portals.horizontal.vortex.purple')
             .atLocation(token)
@@ -306,7 +306,7 @@ async function farStepPre(token, cornerPosition) {
         y: cornerPosition.y + token.object.shape.height / 2
     };
     // Animations by: eskiemoh
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.explosion.07.bluewhite')
         .atLocation(position)
@@ -334,7 +334,7 @@ async function farStepPre(token, cornerPosition) {
         .play();
 }
 async function farStepPost(token, cornerPosition) {
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .animation()
         .on(token)
         .opacity(1)

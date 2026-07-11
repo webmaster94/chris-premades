@@ -88,13 +88,10 @@
       "name": "Lucky Footwork",
       "origin": "Compendium.world.cpr-race-features.Item.WA0L167QopK809Cr",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -115,33 +112,38 @@
       "img": "icons/equipment/neck/necklace-charm-clover.webp",
       "_id": "KUSgh1AReAjkrGY8",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.optional.luckyFootwork.label",
-          "mode": 0,
-          "value": "Lucky Footwork",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.luckyFootwork.save.fail.dex",
-          "mode": 0,
-          "value": "1d4",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.luckyFootwork.count",
-          "mode": 0,
-          "value": "reaction",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.optional.luckyFootwork.label",
+            "value": "Lucky Footwork",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.luckyFootwork.save.fail.dex",
+            "value": "1d4",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.luckyFootwork.count",
+            "value": "reaction",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!4V0OHmtTsWWyliGw.KUSgh1AReAjkrGY8"
+      "_key": "!items.effects!4V0OHmtTsWWyliGw.KUSgh1AReAjkrGY8",
+      "start": null
     }
   ],
   "img": "icons/equipment/neck/necklace-charm-clover.webp",

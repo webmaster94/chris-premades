@@ -9,24 +9,23 @@
       "transfer": false,
       "_id": "l75I7bKQ13Uq0w1I",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.disadvantage.attack.all",
-          "mode": 0,
-          "value": "targetId != \"@token\"",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.disadvantage.attack.all",
+            "value": "targetId != \"@token\"",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -54,15 +53,14 @@
           "dontApply": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
         }
       },
-      "_key": "!items.effects!wiARyI3bZ8MVCQmp.l75I7bKQ13Uq0w1I"
+      "_key": "!items.effects!wiARyI3bZ8MVCQmp.l75I7bKQ13Uq0w1I",
+      "start": null
     }
   ],
   "system": {

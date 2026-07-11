@@ -6,7 +6,7 @@ async function early({workflow}) {
     let template = templateUtils.getObject(templateDoc);
     if (!template) return;
     if (playAnimation && animationUtils.jb2aCheck()) {
-        await new Sequence()
+        await new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('jb2a.cone_of_cold.blue')
             .attachTo(template, {offset: {x: 1.5}, local: true, gridUnits: true})
@@ -17,7 +17,7 @@ async function early({workflow}) {
             .waitUntilFinished(-5000)
             .play();
         for (let i of workflow.targets) {
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                 .file('jb2a.markers.snowflake.blue.01')
                 .atLocation(i)
@@ -35,7 +35,7 @@ async function late({workflow}) {
     await genericUtils.sleep(2000);
     if (!playAnimation || !animationUtils.jb2aCheck()) return;
     for (let i of workflow.failedSaves) {
-        new Sequence()
+        new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('jb2a.impact_themed.ice_shard.blue')
             .atLocation(i)
@@ -45,7 +45,7 @@ async function late({workflow}) {
             .play();
     }
     for (let i of workflow.saves) {
-        new Sequence()
+        new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('jb2a.energy_field.02.above.blue')
             .duration(3000)

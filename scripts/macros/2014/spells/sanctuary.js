@@ -40,7 +40,7 @@ async function targeted({trigger: {entity: effect}, workflow}) {
     if (!saveWorkflow.failedSaves.size) return;
     let playAnimation = itemUtils.getConfig(originItem, 'playAnimation');
     if (playAnimation && animationUtils.jb2aCheck()) {
-        new Sequence().effect().atLocation(targetToken).scaleToObject(1.25).fadeIn(500).fadeOut(500).playbackRate(2).file('jb2a.energy_field.02.above.blue').play();
+        new Sequence({moduleName:'chris-premades', softFail:true}).effect().atLocation(targetToken).scaleToObject(1.25).fadeIn(500).fadeOut(500).playbackRate(2).file('jb2a.energy_field.02.above.blue').play();
     }
     ChatMessage.create({
         speaker: workflow.chatCard.speaker,

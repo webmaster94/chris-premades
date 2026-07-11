@@ -6,28 +6,11 @@
       "img": "icons/weapons/polearms/spear-hooked-double-jeweled.webp",
       "name": "Ruin's Wake",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.traits.languages.value",
-          "mode": 2,
-          "value": "abyssal",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.languages.value",
-          "mode": 2,
-          "value": "orc",
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": 1350,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -64,10 +47,28 @@
       "description": "",
       "_id": "ycRHI0lltgsRFpDP",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.languages.value",
+            "value": "abyssal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.languages.value",
+            "value": "orc",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": "Item.NtohOSZcvEhnoLCp",
       "sort": 0,
-      "_key": "!items.effects!A3r0OWfkSAwomQ4C.ycRHI0lltgsRFpDP"
+      "_key": "!items.effects!A3r0OWfkSAwomQ4C.ycRHI0lltgsRFpDP",
+      "start": null
     }
   ],
   "system": {

@@ -39,25 +39,14 @@
   },
   "effects": [
     {
-      "changes": [
-        {
-          "key": "flags.midi-qol.magicResistance.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "_id": "nf13tKQqLgvLjNTE",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "origin": null,
       "tint": "#ffffff",
@@ -79,9 +68,20 @@
       "statuses": [],
       "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.magicResistance.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!OHzM2dNm9ZIZjUtk.nf13tKQqLgvLjNTE"
+      "_key": "!items.effects!OHzM2dNm9ZIZjUtk.nf13tKQqLgvLjNTE",
+      "start": null
     }
   ],
   "flags": {

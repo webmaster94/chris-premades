@@ -281,28 +281,27 @@
   "effects": [
     {
       "name": "Melf's Acid Arrow",
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "mode": 0,
-          "value": "name=Acid Arrow (End of Turn),\nturn=end,\ndamageRoll=(@spellLevel)d4,\ndamageType=acid",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/ranged/arrow-flying-ornate-gold.webp",
       "_id": "Rn227ZetXWnSMEQB",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "name=Acid Arrow (End of Turn),\nturn=end,\ndamageRoll=(@spellLevel)d4,\ndamageType=acid",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": 12,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 12,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -318,13 +317,12 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEndSource"
-          ]
+          "specialDuration": []
         }
       },
       "sort": 0,
-      "_key": "!items.effects!YYTDJVU8zexhvxMS.Rn227ZetXWnSMEQB"
+      "_key": "!items.effects!YYTDJVU8zexhvxMS.Rn227ZetXWnSMEQB",
+      "start": null
     }
   ],
   "img": "icons/skills/ranged/arrow-flying-ornate-gold.webp",

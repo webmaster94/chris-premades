@@ -138,13 +138,10 @@
       "name": "Binding Strike",
       "origin": "Compendium.world.cpr-summon-features.Item.em9TEfBPJEMGyz19",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -175,14 +172,16 @@
       "img": "icons/tools/fishing/net-tan.webp",
       "_id": "nzof8LDA7sNWkH6K",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!2dYfidANgcPzR4fE.nzof8LDA7sNWkH6K"
+      "_key": "!items.effects!2dYfidANgcPzR4fE.nzof8LDA7sNWkH6K",
+      "start": null
     }
   ],
   "flags": {

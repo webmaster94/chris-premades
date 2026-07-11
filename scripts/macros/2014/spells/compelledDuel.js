@@ -138,7 +138,7 @@ async function targetMoved({trigger: {entity: effect}, options}) {
     }
     if (animationUtils.jb2aCheck()) {
         /* eslint-disable indent */
-        await new Sequence()
+        await new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
                 .file('jb2a.misty_step.01.blue')
                 .atLocation(token)
@@ -162,7 +162,7 @@ async function targetMoved({trigger: {entity: effect}, options}) {
             .play();
         /* eslint-enable indent */
     } else {
-        await new Sequence()
+        await new Sequence({moduleName:'chris-premades', softFail:true})
             .animation()
             .on(token)
             .teleportTo({x: tempToken.x, y: tempToken.y, elevation: tempToken.elevation})

@@ -13,7 +13,7 @@ async function damage({workflow}) {
         } else {
             anim += 'blue';
         }
-        new Sequence().effect().atLocation(workflow.token).file(anim).scale(2.2).playbackRate(0.5).play();
+        new Sequence({moduleName:'chris-premades', softFail:true}).effect().atLocation(workflow.token).file(anim).scale(2.2).playbackRate(0.5).play();
         await workflowUtils.bonusDamage(workflow, '5d6', {damageType});
     }
 }

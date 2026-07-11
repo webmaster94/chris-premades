@@ -5,28 +5,11 @@
     {
       "name": "Combat Mastery: Bravado",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.attributes.ac.formula",
-          "mode": 5,
-          "value": "10 + @abilities.dex.mod + @abilities.cha.mod",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.ac.calc",
-          "mode": 5,
-          "value": "custom",
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": 1068,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -64,10 +47,28 @@
       "img": "icons/skills/melee/maneuver-greatsword-yellow.webp",
       "_id": "ZsGzQQC8N5KL3HjC",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.ac.formula",
+            "value": "10 + @abilities.dex.mod + @abilities.cha.mod",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.ac.calc",
+            "value": "custom",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": "Actor.xH5x7LcFCU8mZwr5.Item.HGTsVgva3lKZEqIV",
       "sort": 0,
-      "_key": "!items.effects!xGC7TXkv5xmrK7hN.ZsGzQQC8N5KL3HjC"
+      "_key": "!items.effects!xGC7TXkv5xmrK7hN.ZsGzQQC8N5KL3HjC",
+      "start": null
     }
   ],
   "system": {

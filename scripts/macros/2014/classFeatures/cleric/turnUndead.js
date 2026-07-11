@@ -92,7 +92,7 @@ async function use({workflow}) {
         let CR = actorUtils.getLevelOrCR(i.actor) ?? 0;
         if (CR > destroyLevel) continue;
         destroyTokens.push(i);
-        if (playAnimation) new Sequence().effect().atLocation(i).file('jb2a.divine_smite.target.blueyellow').play();
+        if (playAnimation) new Sequence({moduleName:'chris-premades', softFail:true}).effect().atLocation(i).file('jb2a.divine_smite.target.blueyellow').play();
     }
     if (!destroyTokens.length) return;
     await workflowUtils.applyDamage(destroyTokens, 10000, 'none');

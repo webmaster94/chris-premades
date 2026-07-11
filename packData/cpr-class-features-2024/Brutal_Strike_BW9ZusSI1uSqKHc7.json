@@ -9,24 +9,23 @@
       "transfer": false,
       "_id": "RG0C8hGJ74T6eGmA",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "-15",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.all",
+            "value": "-15",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -43,16 +42,15 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
         }
       },
       "sort": 0,
-      "_key": "!items.effects!BW9ZusSI1uSqKHc7.RG0C8hGJ74T6eGmA"
+      "_key": "!items.effects!BW9ZusSI1uSqKHc7.RG0C8hGJ74T6eGmA",
+      "start": null
     },
     {
       "name": "Brutal Strike: Staggering Blow",
@@ -61,24 +59,23 @@
       "transfer": false,
       "_id": "qWqJjf4b79qPjGEc",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.disadvantage.save.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.disadvantage.save.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -104,7 +101,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!BW9ZusSI1uSqKHc7.qWqJjf4b79qPjGEc"
+      "_key": "!items.effects!BW9ZusSI1uSqKHc7.qWqJjf4b79qPjGEc",
+      "start": null
     },
     {
       "name": "Brutal Strike: Sundering Blow",
@@ -113,17 +111,15 @@
       "transfer": false,
       "_id": "w2JVbeEazQkViyED",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -140,9 +136,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -165,7 +159,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!BW9ZusSI1uSqKHc7.w2JVbeEazQkViyED"
+      "_key": "!items.effects!BW9ZusSI1uSqKHc7.w2JVbeEazQkViyED",
+      "start": null
     }
   ],
   "system": {

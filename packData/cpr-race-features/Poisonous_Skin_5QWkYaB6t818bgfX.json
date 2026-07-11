@@ -397,13 +397,10 @@
       "name": "Poisonous Skin",
       "origin": "Compendium.world.cpr-race-features.Item.SMviMje2dfbi6UiA",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -434,21 +431,24 @@
       "img": "icons/commodities/biological/hand-clawed-green.webp",
       "_id": "oOFuW0Jv7iVI6NgG",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "value": "turn=end,label=Poisonous Skin (End of Turn),allowIncapacitated=true,rollType=save,saveAbility=con,saveDC=12,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
-          "mode": 0,
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=end,label=Poisonous Skin (End of Turn),allowIncapacitated=true,rollType=save,saveAbility=con,saveDC=12,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!5QWkYaB6t818bgfX.oOFuW0Jv7iVI6NgG"
+      "_key": "!items.effects!5QWkYaB6t818bgfX.oOFuW0Jv7iVI6NgG",
+      "start": null
     }
   ],
   "img": "icons/commodities/biological/hand-clawed-green.webp",

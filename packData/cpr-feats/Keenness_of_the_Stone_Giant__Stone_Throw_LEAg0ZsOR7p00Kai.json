@@ -402,13 +402,10 @@
       "name": "Keenness of the Stone Giant: Stone Throw",
       "origin": "Compendium.world.cpr-feats.Item.DpF5wMvNbvlNNwuZ",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -439,14 +436,16 @@
       "img": "icons/magic/earth/projectile-boulder-dust.webp",
       "_id": "tknfyKv5TPrTJCxC",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!LEAg0ZsOR7p00Kai.tknfyKv5TPrTJCxC"
+      "_key": "!items.effects!LEAg0ZsOR7p00Kai.tknfyKv5TPrTJCxC",
+      "start": null
     }
   ],
   "img": "icons/magic/earth/projectile-boulder-dust.webp",

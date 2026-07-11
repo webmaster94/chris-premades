@@ -487,24 +487,23 @@
       "transfer": false,
       "_id": "dg8SEwPpDY7VDhxW",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "mode": 2,
-          "value": "+[[1d8]]",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.ac.bonus",
+            "value": "+[[1d8]]",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": 1,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "turns",
+        "expiry": "turnStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -530,7 +529,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!gwq979HIoLsld5U7.dg8SEwPpDY7VDhxW"
+      "_key": "!items.effects!gwq979HIoLsld5U7.dg8SEwPpDY7VDhxW",
+      "start": null
     }
   ],
   "img": "icons/creatures/abilities/cougar-pounce-stalk-black.webp",

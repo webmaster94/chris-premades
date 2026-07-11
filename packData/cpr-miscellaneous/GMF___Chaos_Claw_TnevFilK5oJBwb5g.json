@@ -759,17 +759,15 @@
       "transfer": false,
       "_id": "flrNw8FjoC08e76f",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": 1,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -805,7 +803,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!TnevFilK5oJBwb5g.flrNw8FjoC08e76f"
+      "_key": "!items.effects!TnevFilK5oJBwb5g.flrNw8FjoC08e76f",
+      "start": null
     },
     {
       "name": "Chaos Claw: Frightened",
@@ -814,17 +813,15 @@
       "transfer": false,
       "_id": "7OVp1f4UkAzkVNZT",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": 1,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -860,7 +857,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!TnevFilK5oJBwb5g.7OVp1f4UkAzkVNZT"
+      "_key": "!items.effects!TnevFilK5oJBwb5g.7OVp1f4UkAzkVNZT",
+      "start": null
     },
     {
       "name": "Chaos Claw: Poisoned",
@@ -869,17 +867,15 @@
       "transfer": false,
       "_id": "lGIvIdCXjvbTMzt6",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": 1,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -915,7 +911,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!TnevFilK5oJBwb5g.lGIvIdCXjvbTMzt6"
+      "_key": "!items.effects!TnevFilK5oJBwb5g.lGIvIdCXjvbTMzt6",
+      "start": null
     },
     {
       "name": "Chaos Claw: Incapacitated",
@@ -923,17 +920,15 @@
       "origin": "Scene.Tvew5jIsCHB2on1r.Token.I5D7Yw07BkKrvCXy.Actor.OVB5rjs4m9a82UTP.Item.hVJpxbq6H1R7lXSw",
       "transfer": false,
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": 1,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -965,7 +960,8 @@
         }
       },
       "_id": "cJi5YXiJ3mnebyYR",
-      "_key": "!items.effects!TnevFilK5oJBwb5g.cJi5YXiJ3mnebyYR"
+      "_key": "!items.effects!TnevFilK5oJBwb5g.cJi5YXiJ3mnebyYR",
+      "start": null
     }
   ],
   "folder": null,

@@ -5,34 +5,11 @@
     {
       "name": "Avatar of Battle",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "value": "bludgeoning",
-          "mode": 2,
-          "priority": 1
-        },
-        {
-          "key": "system.traits.dr.value",
-          "value": "piercing",
-          "mode": 2,
-          "priority": 1
-        },
-        {
-          "key": "system.traits.dr.value",
-          "value": "slashing",
-          "mode": 2,
-          "priority": 1
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": 36,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -57,10 +34,35 @@
       "img": "icons/equipment/shield/kite-wooden-oak-glow.webp",
       "_id": "mPsYo9tPxgn0NJEP",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "bludgeoning",
+            "priority": 1,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "piercing",
+            "priority": 1,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "slashing",
+            "priority": 1,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!xo3uw5c1TXSk6JHK.mPsYo9tPxgn0NJEP"
+      "_key": "!items.effects!xo3uw5c1TXSk6JHK.mPsYo9tPxgn0NJEP",
+      "start": null
     }
   ],
   "system": {

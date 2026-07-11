@@ -4,21 +4,19 @@
   "effects": [
     {
       "name": "Master of Hell: Darkness",
-      "changes": [],
       "transfer": false,
       "img": "icons/magic/water/wave-water-teal.webp",
       "_id": "jrga1oCU4pzsWA0v",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -58,7 +56,8 @@
           ]
         }
       },
-      "_key": "!items.effects!xjwU4lrLcYcueo1i.jrga1oCU4pzsWA0v"
+      "_key": "!items.effects!xjwU4lrLcYcueo1i.jrga1oCU4pzsWA0v",
+      "start": null
     },
     {
       "name": "Master of Hell: Inferno",
@@ -67,24 +66,23 @@
       "transfer": false,
       "_id": "VskREIgc4URBN40I",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "mode": 0,
-          "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=dex,saveDC=$activity.dc,saveDamage=halfdamage,saveRemove=true,damageRoll=1d10[fire]+1d10[necrotic],rollMode=publicroll,",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=dex,saveDC=$activity.dc,saveDamage=halfdamage,saveRemove=true,damageRoll=1d10[fire]+1d10[necrotic],rollMode=publicroll,",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": 60,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 60,
+        "units": "seconds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -127,7 +125,8 @@
           "templateEffectActivities": []
         }
       },
-      "_key": "!items.effects!xjwU4lrLcYcueo1i.VskREIgc4URBN40I"
+      "_key": "!items.effects!xjwU4lrLcYcueo1i.VskREIgc4URBN40I",
+      "start": null
     },
     {
       "name": "Master of Hell: Pestilence",
@@ -136,17 +135,15 @@
       "transfer": false,
       "_id": "aOgf4YOxPhXOe5Oy",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": 60,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 60,
+        "units": "seconds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -188,7 +185,8 @@
           "templateEffectActivities": []
         }
       },
-      "_key": "!items.effects!xjwU4lrLcYcueo1i.aOgf4YOxPhXOe5Oy"
+      "_key": "!items.effects!xjwU4lrLcYcueo1i.aOgf4YOxPhXOe5Oy",
+      "start": null
     }
   ],
   "system": {

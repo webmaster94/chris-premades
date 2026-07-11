@@ -208,30 +208,30 @@
       "transfer": false,
       "_id": "iyh4ElCOUTRMRCFs",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "ATL.light.dim",
-          "mode": 4,
-          "value": "5",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.ci.value",
-          "mode": 2,
-          "value": "invisible",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "ATL.light.dim",
+            "value": "5",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.ci.value",
+            "value": "invisible",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -260,7 +260,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!siFL7LXiapgQjMGs.iyh4ElCOUTRMRCFs"
+      "_key": "!items.effects!siFL7LXiapgQjMGs.iyh4ElCOUTRMRCFs",
+      "start": null
     }
   ],
   "flags": {

@@ -262,18 +262,14 @@
   },
   "effects": [
     {
-      "changes": [],
       "transfer": false,
       "_id": "xxTdqKyRn3IzYFHc",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": 2,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 2,
+        "units": "rounds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "origin": null,
       "tint": "#ffffff",
@@ -284,9 +280,7 @@
           "stackable": "noneName",
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ],
+          "specialDuration": [],
           "disableIncapacitated": false,
           "dontApply": false,
           "showIcon": false
@@ -303,9 +297,12 @@
       "statuses": [],
       "img": "icons/magic/lightning/bolt-strike-beam-yellow.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "sort": 0,
-      "_key": "!items.effects!VNdKmyD4KJS5SpBH.xxTdqKyRn3IzYFHc"
+      "_key": "!items.effects!VNdKmyD4KJS5SpBH.xxTdqKyRn3IzYFHc",
+      "start": null
     }
   ],
   "img": "icons/magic/lightning/bolt-strike-beam-yellow.webp",

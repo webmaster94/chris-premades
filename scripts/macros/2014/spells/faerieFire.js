@@ -65,7 +65,7 @@ async function use({workflow}) {
     }
     let shouldAnimate = playAnimation && animationUtils.jb2aCheck() === 'patreon' && animationUtils.aseCheck();
     if (shouldAnimate) {
-        new Sequence()
+        new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('animated-spell-effects-cartoon.flash.25')
             .atLocation(position)
@@ -162,7 +162,7 @@ async function use({workflow}) {
     for (let target of workflow.failedSaves) {
         await effectUtils.createEffect(target.actor, effectData, {concentrationItem: workflow.item});
         if (shouldAnimate) {
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                 .file('jb2a.fireflies.many.01.' + color)
                 .attachTo(target)

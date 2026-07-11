@@ -9,17 +9,15 @@
       "transfer": false,
       "_id": "r7THuXROmINM2Qnt",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -71,21 +69,18 @@
           }
         }
       },
-      "_key": "!items.effects!OsudEPOdw5VMIbjR.r7THuXROmINM2Qnt"
+      "_key": "!items.effects!OsudEPOdw5VMIbjR.r7THuXROmINM2Qnt",
+      "start": null
     },
     {
-      "changes": [],
       "transfer": false,
       "_id": "w2Q4B1P4wK0fqvx0",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "origin": "Actor.Xa8FMJqzCIpkkezs.Item.CHeeQhREMmgMPei6",
       "tint": "#ffffff",
@@ -103,9 +98,12 @@
       "statuses": [],
       "img": "icons/skills/movement/figure-running-gray.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "sort": 0,
-      "_key": "!items.effects!OsudEPOdw5VMIbjR.w2Q4B1P4wK0fqvx0"
+      "_key": "!items.effects!OsudEPOdw5VMIbjR.w2Q4B1P4wK0fqvx0",
+      "start": null
     },
     {
       "name": "Hidden",
@@ -114,17 +112,15 @@
       "transfer": false,
       "_id": "MoEJT2vF3KGWpE8M",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -170,7 +166,8 @@
           }
         }
       },
-      "_key": "!items.effects!OsudEPOdw5VMIbjR.MoEJT2vF3KGWpE8M"
+      "_key": "!items.effects!OsudEPOdw5VMIbjR.MoEJT2vF3KGWpE8M",
+      "start": null
     }
   ],
   "system": {

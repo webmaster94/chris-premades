@@ -28,7 +28,7 @@ async function use({trigger: {entity: item}, workflow}) {
         let currHP = target.actor.system.attributes.hp.value;
         let halfHP = Math.floor(target.actor.system.attributes.hp.max / 2);
         await workflowUtils.applyDamage([target], Math.min(value, halfHP - currHP), 'healing');
-        if (playAnimation) new Sequence().effect().atLocation(target).file('jb2a.cure_wounds.400px.blue').play();
+        if (playAnimation) new Sequence({moduleName:'chris-premades', softFail:true}).effect().atLocation(target).file('jb2a.cure_wounds.400px.blue').play();
     }
 }
 async function added({trigger: {entity: item}}) {

@@ -60,7 +60,7 @@ async function use({workflow}) {
             variation = '.ring';
         }
         let sound = itemUtils.getConfig(workflow.item, 'sound');
-        new Sequence()
+        new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('jb2a.spirit_guardians.' + color + variation)
             .size(workflow.token.document.width + 6, {gridUnits: true})

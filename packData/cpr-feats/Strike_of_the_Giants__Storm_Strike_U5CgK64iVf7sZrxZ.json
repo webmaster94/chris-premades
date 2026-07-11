@@ -247,13 +247,10 @@
       "name": "Strike of the Giants: Storm Strike",
       "origin": "Compendium.world.cpr-feat-features.Item.8Jw32O8AfZt2QRfH",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -269,9 +266,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -280,21 +275,24 @@
       "img": "icons/magic/lightning/bolt-beam-strike-blue.webp",
       "_id": "ZlOMIw59RpJUU89i",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.disadvantage.attack.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.disadvantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!U5CgK64iVf7sZrxZ.ZlOMIw59RpJUU89i"
+      "_key": "!items.effects!U5CgK64iVf7sZrxZ.ZlOMIw59RpJUU89i",
+      "start": null
     }
   ],
   "img": "icons/magic/lightning/bolt-beam-strike-blue.webp",

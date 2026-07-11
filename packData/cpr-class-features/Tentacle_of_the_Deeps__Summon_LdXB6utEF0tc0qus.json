@@ -405,24 +405,23 @@
       "origin": "Actor.tOXKAdjeDxHioIyz.Item.5YwilifbRspFfcaf",
       "_id": "dGk56fiJYl8F4GNe",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "-10",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.all",
+            "value": "-10",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -436,9 +435,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEndSource"
-          ],
+          "specialDuration": [],
           "enableCondition": "",
           "selfTarget": false,
           "selfTargetAlways": false,
@@ -449,7 +446,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!LdXB6utEF0tc0qus.dGk56fiJYl8F4GNe"
+      "_key": "!items.effects!LdXB6utEF0tc0qus.dGk56fiJYl8F4GNe",
+      "start": null
     }
   ],
   "img": "icons/commodities/biological/tentacle-purple-white.webp",

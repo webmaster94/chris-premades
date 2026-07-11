@@ -156,25 +156,14 @@
   },
   "effects": [
     {
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 0,
-          "value": "fire",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "_id": "I14hMxhWJgSwRoHT",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "origin": null,
       "tint": "#ffffff",
@@ -227,9 +216,20 @@
       "statuses": [],
       "img": "icons/tools/nautical/anchor-blue.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "fire",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!43fMH2UwvhJDYgt4.I14hMxhWJgSwRoHT"
+      "_key": "!items.effects!43fMH2UwvhJDYgt4.I14hMxhWJgSwRoHT",
+      "start": null
     }
   ],
   "flags": {

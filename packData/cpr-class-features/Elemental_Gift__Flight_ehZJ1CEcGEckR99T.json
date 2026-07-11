@@ -223,13 +223,10 @@
       "name": "Elemental Gift: Flight",
       "origin": "Compendium.world.cpr-class-features.Item.tq9HeAwX46SKf7mz",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -254,27 +251,31 @@
       "img": "icons/magic/control/debuff-energy-hold-levitate-yellow.webp",
       "_id": "6QwUd55vq9zKtms8",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.fly",
-          "mode": 4,
-          "value": "30",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.movement.hover",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.fly",
+            "value": "30",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.hover",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!ehZJ1CEcGEckR99T.6QwUd55vq9zKtms8"
+      "_key": "!items.effects!ehZJ1CEcGEckR99T.6QwUd55vq9zKtms8",
+      "start": null
     }
   ],
   "img": "icons/magic/control/debuff-energy-hold-levitate-yellow.webp",

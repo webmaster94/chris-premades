@@ -76,13 +76,10 @@
       "name": "Scion of the Outer Planes (Evil Outer Plane)",
       "origin": "Compendium.world.cpr-feats.Item.PY3NIhv0Rb46R2uE",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -103,21 +100,24 @@
       "img": "icons/magic/symbols/chevron-elipse-circle-blue.webp",
       "_id": "kn2RotIcLbcj3nG5",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "necrotic",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "necrotic",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!VsUfZOMGdvDfWSSG.kn2RotIcLbcj3nG5"
+      "_key": "!items.effects!VsUfZOMGdvDfWSSG.kn2RotIcLbcj3nG5",
+      "start": null
     }
   ],
   "img": "icons/magic/symbols/chevron-elipse-circle-blue.webp",

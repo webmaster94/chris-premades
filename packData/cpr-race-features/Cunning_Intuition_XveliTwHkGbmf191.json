@@ -77,13 +77,10 @@
       "name": "Cunning Intuition",
       "origin": "Compendium.world.cpr-race-features.Item.OZNACeYXFBA4A4jZ",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -104,27 +101,31 @@
       "img": "icons/equipment/back/cloak-plain-green.webp",
       "_id": "YAMSm1tsHOFnxJ4j",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.skills.ste.bonuses.check",
-          "mode": 2,
-          "value": "1d4",
-          "priority": 20
-        },
-        {
-          "key": "system.skills.prf.bonuses.check",
-          "mode": 2,
-          "value": "1d4",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.skills.ste.bonuses.check",
+            "value": "1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.skills.prf.bonuses.check",
+            "value": "1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!XveliTwHkGbmf191.YAMSm1tsHOFnxJ4j"
+      "_key": "!items.effects!XveliTwHkGbmf191.YAMSm1tsHOFnxJ4j",
+      "start": null
     }
   ],
   "img": "icons/equipment/back/cloak-plain-green.webp",

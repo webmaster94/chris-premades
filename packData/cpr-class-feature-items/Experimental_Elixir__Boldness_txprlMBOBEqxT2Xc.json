@@ -305,13 +305,10 @@
       "name": "Experimental Elixir: Boldness",
       "origin": "Compendium.world.cpr-class-feature-items.Item.jrCeCXzyNHPU7dI3",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -336,27 +333,31 @@
       "img": "icons/tools/laboratory/vial-orange.webp",
       "_id": "uZeu0mMTxXlcGOdp",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.bonuses.All-Attacks",
-          "mode": 2,
-          "value": "1d4",
-          "priority": 20
-        },
-        {
-          "key": "system.bonuses.abilities.save",
-          "mode": 2,
-          "value": "1d4",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.All-Attacks",
+            "value": "1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.bonuses.abilities.save",
+            "value": "1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!txprlMBOBEqxT2Xc.uZeu0mMTxXlcGOdp"
+      "_key": "!items.effects!txprlMBOBEqxT2Xc.uZeu0mMTxXlcGOdp",
+      "start": null
     }
   ],
   "flags": {

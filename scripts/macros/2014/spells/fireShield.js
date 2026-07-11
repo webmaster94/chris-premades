@@ -101,7 +101,7 @@ export async function start({trigger: {entity: effect}}) {
         cold: 'blue'
     };
     //Animations by: eskiemoh
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.impact.ground_crack.' + colors[selection] + '.01')
         .atLocation(token)

@@ -220,13 +220,10 @@
       "name": "Stone's Endurance",
       "origin": "Compendium.world.cpr-race-features.Item.NiMRg1SvodUGoH4Q",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -253,21 +250,24 @@
       "img": "icons/equipment/shield/heater-stone-orange.webp",
       "_id": "y4W9G2XYApqGOuS0",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dm.midi.all",
-          "mode": 2,
-          "value": "-[[1d12 + @abilities.con.mod]]",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dm.midi.all",
+            "value": "-[[1d12 + @abilities.con.mod]]",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!a567C0L9UuDOzGzC.y4W9G2XYApqGOuS0"
+      "_key": "!items.effects!a567C0L9UuDOzGzC.y4W9G2XYApqGOuS0",
+      "start": null
     }
   ],
   "img": "icons/equipment/shield/heater-stone-orange.webp",

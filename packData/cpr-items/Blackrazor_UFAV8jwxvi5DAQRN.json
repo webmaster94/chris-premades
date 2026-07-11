@@ -437,13 +437,10 @@
       "name": "Blackrazor",
       "origin": "Compendium.world.cpr-items.Item.P70HcoyneIUV7LJr",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -464,27 +461,31 @@
       "img": "icons/weapons/swords/greatsword-crossguard-blue.webp",
       "_id": "dK40Q7fr23qxFDZe",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.ci.value",
-          "mode": 2,
-          "value": "charmed",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.ci.value",
-          "mode": 2,
-          "value": "frightened",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.ci.value",
+            "value": "charmed",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.ci.value",
+            "value": "frightened",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!UFAV8jwxvi5DAQRN.dK40Q7fr23qxFDZe"
+      "_key": "!items.effects!UFAV8jwxvi5DAQRN.dK40Q7fr23qxFDZe",
+      "start": null
     }
   ],
   "img": "icons/weapons/swords/greatsword-crossguard-blue.webp",

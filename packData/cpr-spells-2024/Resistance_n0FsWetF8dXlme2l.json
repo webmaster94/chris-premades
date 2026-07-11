@@ -181,17 +181,15 @@
       "transfer": false,
       "_id": "iyvocti86X1XnxNG",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -237,7 +235,8 @@
           }
         }
       },
-      "_key": "!items.effects!n0FsWetF8dXlme2l.iyvocti86X1XnxNG"
+      "_key": "!items.effects!n0FsWetF8dXlme2l.iyvocti86X1XnxNG",
+      "start": null
     }
   ],
   "name": "Resistance",

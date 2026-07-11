@@ -503,15 +503,19 @@ async function skillNighteye({trigger: {actor, skillId}}) {
 async function turnStartReconstruction({trigger: {token}}) {
     let actor = token.actor;
     if (!actor) return;
-    let currHP = actor.system.attributes.hp.value;
-    let halfHP = Math.floor(actor.system.attributes.hp.max / 2);
-    if (!currHP || currHP >= halfHP) return;
-    let featureData = await compendiumUtils.getItemFromCompendium(constants.featurePacks.classFeatureItems, 'Reconstruction Formula: Healing', {object: true, getDescription: true, translate: 'CHRISPREMADES.Macros.Mutagencraft.ReconstructionHealing'});
-    if (!featureData) {
-        errors.missingPackItem();
-        return;
-    }
-    await workflowUtils.syntheticItemDataRoll(featureData, token.actor, [token]);
+    let hp = actor.system.attributes.hp;
+    if (!hp.value || hp.value >= hp.max / 2) return;
+    let healing = actor.system.attributes.prof;
+    if (!healing) return;
+    let previousHP = hp.value;
+    await actor.applyDamage([{type: 'healing', value: healing}]);
+    let appliedHealing = actor.system.attributes.hp.value - previousHP;
+    if (!appliedHealing) return;
+    await ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({actor, token}),
+        flavor: genericUtils.translate('CHRISPREMADES.Macros.Mutagencraft.ReconstructionHealing'),
+        content: '<p><strong>+' + appliedHealing + '</strong> ' + genericUtils.translate('DND5E.HEAL.Type.HealingShort') + '</p>'
+    });
 }
 export let formulas = {
     name: 'Formulas: Generic',
@@ -605,7 +609,7 @@ export let formulaRapidity = {
 };
 export let formulaReconstruction = {
     name: 'Formulas: Reconstruction',
-    version,
+    version: '1.1.1',
     combat: [
         {
             pass: 'turnStart',

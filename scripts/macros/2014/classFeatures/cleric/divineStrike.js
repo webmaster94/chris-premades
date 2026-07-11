@@ -82,7 +82,7 @@ async function damage({trigger: {entity: item}, workflow}) {
         }
         for (let i = 0; i < 4; i++) {
             /* eslint-disable indent */
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .wait(100)
                 .effect()
                     .name('DivineStrike')
@@ -106,7 +106,7 @@ async function damage({trigger: {entity: item}, workflow}) {
                     .zIndex(2)
                 .play();
         }
-        new Sequence()
+        new Sequence({moduleName:'chris-premades', softFail:true})
             .wait(500)
             .effect()
                 .file('jb2a.ranged.02.projectile.01.yellow')
@@ -136,7 +136,7 @@ async function damage({trigger: {entity: item}, workflow}) {
             {x: -0.05 * workflow.token.document.width, y: -0 * workflow.token.document.width}
         ];
         for (let i = 0; i < 4; i++) {
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .wait(100)
                 .effect()
                     .name('DivineStrike')
@@ -162,7 +162,7 @@ async function damage({trigger: {entity: item}, workflow}) {
                     .zIndex(2)
                 .play();
         }
-        new Sequence()
+        new Sequence({moduleName:'chris-premades', softFail:true})
             .wait(500)
             .canvasPan()
             .delay(300)

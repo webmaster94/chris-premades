@@ -8,23 +8,22 @@
       "img": "icons/equipment/hand/gauntlet-plate-gold.webp",
       "disabled": true,
       "_id": "Ja7VAJcoD4vHSWj9",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.strength",
-          "mode": 5,
-          "value": "0",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.strength",
+            "value": "0",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -61,7 +60,8 @@
           "rules": "modern"
         }
       },
-      "_key": "!items.effects!89DbViNQOQbCii5d.Ja7VAJcoD4vHSWj9"
+      "_key": "!items.effects!89DbViNQOQbCii5d.Ja7VAJcoD4vHSWj9",
+      "start": null
     }
   ],
   "system": {

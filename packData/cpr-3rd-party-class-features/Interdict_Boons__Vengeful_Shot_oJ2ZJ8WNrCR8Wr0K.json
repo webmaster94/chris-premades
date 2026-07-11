@@ -9,24 +9,23 @@
       "transfer": false,
       "_id": "RKczzZh43xxE7Qdg",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.bonuses.All-Damage",
-          "mode": 2,
-          "value": "+ floor(@classes.illrigger.levels / 2)",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.All-Damage",
+            "value": "+ floor(@classes.illrigger.levels / 2)",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -57,7 +56,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!oJ2ZJ8WNrCR8Wr0K.RKczzZh43xxE7Qdg"
+      "_key": "!items.effects!oJ2ZJ8WNrCR8Wr0K.RKczzZh43xxE7Qdg",
+      "start": null
     }
   ],
   "system": {

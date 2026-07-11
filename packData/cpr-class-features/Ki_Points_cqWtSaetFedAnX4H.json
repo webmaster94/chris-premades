@@ -616,34 +616,34 @@
   "effects": [
     {
       "name": "Dodge",
-      "changes": [
-        {
-          "key": "flags.midi-qol.grants.disadvantage.attack.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.save.dex",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/equipment/shield/buckler-wooden-boss-lightning.webp",
       "_id": "SDOy6JDgZIShjKSJ",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.disadvantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.save.dex",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "origin": "Compendium.chris-premades.CPRClassFeatures.Item.cqWtSaetFedAnX4H",
@@ -661,9 +661,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "dnd5e": {
           "riders": {
@@ -675,28 +673,18 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!cqWtSaetFedAnX4H.SDOy6JDgZIShjKSJ"
+      "_key": "!items.effects!cqWtSaetFedAnX4H.SDOy6JDgZIShjKSJ",
+      "start": null
     },
     {
-      "changes": [
-        {
-          "key": "flags.chris-premades.stepOfTheWindJump",
-          "mode": 5,
-          "value": "true",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "_id": "pacCwupgwsTU47Bz",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "origin": "Compendium.chris-premades.CPRClassFeatures.Item.cqWtSaetFedAnX4H",
       "tint": "#ffffff",
@@ -728,40 +716,51 @@
       "statuses": [],
       "img": "icons/skills/movement/figure-running-gray.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.chris-premades.stepOfTheWindJump",
+            "value": "true",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!cqWtSaetFedAnX4H.pacCwupgwsTU47Bz"
+      "_key": "!items.effects!cqWtSaetFedAnX4H.pacCwupgwsTU47Bz",
+      "start": null
     },
     {
       "name": "Disengage",
-      "changes": [
-        {
-          "key": "flags.gambits-premades.oaImmunity",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.chris-premades.stepOfTheWindJump",
-          "mode": 5,
-          "value": "true",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/movement/feet-winged-boots-blue.webp",
       "_id": "uoEEBz9sKVRBd8xS",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.gambits-premades.oaImmunity",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.chris-premades.stepOfTheWindJump",
+            "value": "true",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": 1,
-        "combat": null,
-        "rounds": null,
-        "turns": 1,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "description": "",
       "origin": "Compendium.chris-premades.CPRClassFeatures.Item.cqWtSaetFedAnX4H",
@@ -779,9 +778,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "dnd5e": {
           "riders": {
@@ -793,7 +790,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!cqWtSaetFedAnX4H.uoEEBz9sKVRBd8xS"
+      "_key": "!items.effects!cqWtSaetFedAnX4H.uoEEBz9sKVRBd8xS",
+      "start": null
     }
   ],
   "img": "icons/magic/symbols/runes-star-pentagon-blue.webp",

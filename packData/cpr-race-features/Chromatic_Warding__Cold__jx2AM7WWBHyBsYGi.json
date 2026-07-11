@@ -223,13 +223,10 @@
       "name": "Chromatic Warding (Cold)",
       "origin": "Compendium.world.cpr-race-features-old.Item.NGxaDm2jmoTKvh5D",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -254,21 +251,24 @@
       "img": "icons/creatures/abilities/dragon-ice-breath-blue.webp",
       "_id": "9csXGxwlhwrmk9nS",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.di.value",
-          "mode": 2,
-          "value": "cold",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.di.value",
+            "value": "cold",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!jx2AM7WWBHyBsYGi.9csXGxwlhwrmk9nS"
+      "_key": "!items.effects!jx2AM7WWBHyBsYGi.9csXGxwlhwrmk9nS",
+      "start": null
     }
   ],
   "img": "icons/creatures/abilities/dragon-ice-breath-blue.webp",

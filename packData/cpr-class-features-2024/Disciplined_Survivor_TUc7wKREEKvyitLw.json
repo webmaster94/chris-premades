@@ -4,58 +4,62 @@
   "effects": [
     {
       "name": "Disciplined Survivor",
-      "changes": [
-        {
-          "key": "system.abilities.str.proficient",
-          "mode": 4,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.abilities.dex.proficient",
-          "mode": 4,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.abilities.con.proficient",
-          "mode": 4,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.abilities.int.proficient",
-          "mode": 4,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.abilities.wis.proficient",
-          "mode": 4,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.abilities.cha.proficient",
-          "mode": 4,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "img": "icons/skills/wounds/injury-pain-body-orange.webp",
       "_id": "mIFKH4apaTR0velB",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.abilities.str.proficient",
+            "value": "1",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "system.abilities.dex.proficient",
+            "value": "1",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "system.abilities.con.proficient",
+            "value": "1",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "system.abilities.int.proficient",
+            "value": "1",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "system.abilities.wis.proficient",
+            "value": "1",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "system.abilities.cha.proficient",
+            "value": "1",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Actor.oGXY1CS6ZXBzNHP0.Item.U4qJX0eUAKEjnYEu",
@@ -85,7 +89,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!TUc7wKREEKvyitLw.mIFKH4apaTR0velB"
+      "_key": "!items.effects!TUc7wKREEKvyitLw.mIFKH4apaTR0velB",
+      "start": null
     }
   ],
   "system": {

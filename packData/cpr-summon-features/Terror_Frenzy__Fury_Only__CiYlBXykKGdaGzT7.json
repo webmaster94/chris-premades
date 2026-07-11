@@ -32,25 +32,14 @@
   },
   "effects": [
     {
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.attack.all",
-          "mode": 0,
-          "value": "workflow.targets.first().actor.statuses.has('frightened')",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "_id": "gfMvGSpk4jVWvUzc",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "origin": "Compendium.world.cpr-summon-features.Item.6YNzsgot01xXdOip",
       "tint": "#ffffff",
@@ -73,9 +62,20 @@
       "statuses": [],
       "img": "icons/magic/control/fear-fright-monster-purple-blue.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.attack.all",
+            "value": "workflow.targets.first().actor.statuses.has('frightened')",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!CiYlBXykKGdaGzT7.gfMvGSpk4jVWvUzc"
+      "_key": "!items.effects!CiYlBXykKGdaGzT7.gfMvGSpk4jVWvUzc",
+      "start": null
     }
   ],
   "flags": {

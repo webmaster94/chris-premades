@@ -2,7 +2,7 @@ import {activityUtils, actorUtils, dialogUtils, itemUtils, socketUtils, tokenUti
 import {rage} from '../rage.js';
 async function turnStart({trigger: {entity: effect}}) {
     let token = actorUtils.getFirstToken(effect.parent);
-    if (!token);
+    if (!token) return;
     let range = effect.flags['chris-premades']?.vitalityOfTheTree?.range;
     if (!range) return;
     let nearbyAllies = tokenUtils.findNearby(token, range, 'ally', {includeIncapacitated: true});

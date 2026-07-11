@@ -46,30 +46,30 @@
       "origin": "Compendium.chris-premades.CPRClassFeatures2024.Item.7lQd6oJ7yEGL7VRv",
       "_id": "oY53J1cpDUCFgIto",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.ci.value",
-          "mode": 2,
-          "value": "poisoned",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "fire",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.ci.value",
+            "value": "poisoned",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "fire",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -104,7 +104,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!7lQd6oJ7yEGL7VRv.oY53J1cpDUCFgIto"
+      "_key": "!items.effects!7lQd6oJ7yEGL7VRv.oY53J1cpDUCFgIto",
+      "start": null
     }
   ],
   "flags": {

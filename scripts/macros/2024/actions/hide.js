@@ -22,7 +22,7 @@ async function use({trigger, workflow}) {
     await effectUtils.createEffect(workflow.actor, effectData, {rules: 'modern', macros});
     if (!playAnimation) return;
     /* eslint-disable indent */
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
             .file('jb2a.smoke.puff.centered.dark_black')
             .atLocation(workflow.token)
@@ -56,7 +56,7 @@ async function removed({trigger: {entity: effect}}) {
     let token = actorUtils.getFirstToken(effect.parent);
     if (!token) return;
     /* eslint-disable indent */
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
             .file('jb2a.smoke.puff.centered.dark_black')
             .atLocation(token)

@@ -188,13 +188,10 @@
       "name": "Fire Rune",
       "origin": "Compendium.world.cpr-class-features.Item.CbQhfkmqdVnoOfSk",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": 60,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 60,
+        "units": "seconds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -225,27 +222,31 @@
       "img": "icons/commodities/treasure/token-engraved-eye-red.webp",
       "_id": "dNbCa8STrXF8aalM",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "mode": 0,
-          "value": "turn=start,damageRoll=2d6[fire],rollMode=publicroll,",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.OverTime",
-          "mode": 0,
-          "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=str,saveDC=@abilities.con.dc,saveDamage=fulldamage,saveRemove=true,damageBeforeSave=true,rollMode=publicroll",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=start,damageRoll=2d6[fire],rollMode=publicroll,",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=str,saveDC=@abilities.con.dc,saveDamage=fulldamage,saveRemove=true,damageBeforeSave=true,rollMode=publicroll",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!TGQFHJlgMdQ4p9eh.dNbCa8STrXF8aalM"
+      "_key": "!items.effects!TGQFHJlgMdQ4p9eh.dNbCa8STrXF8aalM",
+      "start": null
     }
   ],
   "flags": {

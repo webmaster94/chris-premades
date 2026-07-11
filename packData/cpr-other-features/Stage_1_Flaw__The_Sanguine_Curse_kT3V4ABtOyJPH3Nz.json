@@ -290,30 +290,30 @@
       "transfer": false,
       "_id": "EE3jk2qeTVcoexEH",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.disadvantage.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.OverTime",
-          "value": "turn=start,allowIncapacitated=true,saveDamage=nodamage,saveRemove=true,damageRoll=1d4,damageType=none,rollMode=publicroll,",
-          "mode": 0,
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.disadvantage.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=start,allowIncapacitated=true,saveDamage=nodamage,saveRemove=true,damageRoll=1d4,damageType=none,rollMode=publicroll,",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -348,7 +348,8 @@
           "templateEffectActivities": []
         }
       },
-      "_key": "!items.effects!kT3V4ABtOyJPH3Nz.EE3jk2qeTVcoexEH"
+      "_key": "!items.effects!kT3V4ABtOyJPH3Nz.EE3jk2qeTVcoexEH",
+      "start": null
     }
   ],
   "folder": "Xu8gZVI9iyVzXZ72",

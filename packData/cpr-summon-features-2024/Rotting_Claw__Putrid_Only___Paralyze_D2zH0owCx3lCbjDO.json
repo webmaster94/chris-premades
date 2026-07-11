@@ -150,13 +150,10 @@
       "name": "Rotting Claw: Paralyze",
       "origin": "Compendium.world.cpr-summon-features.Item.IZ7NJF2GIR5AtbQf",
       "duration": {
-        "rounds": 1,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "rounds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -172,9 +169,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "chris-premades": {
           "noAnimation": false,
@@ -186,14 +181,16 @@
       "img": "icons/commodities/claws/claws-white.webp",
       "_id": "DwPvQ17lBBsGNX6X",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!D2zH0owCx3lCbjDO.DwPvQ17lBBsGNX6X"
+      "_key": "!items.effects!D2zH0owCx3lCbjDO.DwPvQ17lBBsGNX6X",
+      "start": null
     }
   ],
   "flags": {

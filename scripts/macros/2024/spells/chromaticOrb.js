@@ -14,7 +14,7 @@ async function use({trigger, workflow}) {
     let lastTarget = await fromUuid(lastTargetUuid);
     if (itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.jb2aCheck()) {
         let anim = 'jb2a.ranged.03.projectile.01.bluegreen';
-        await new Sequence()
+        await new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .atLocation(lastTarget.object)
             .stretchTo(workflow.targets.first())

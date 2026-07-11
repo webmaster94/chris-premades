@@ -6,7 +6,7 @@ async function use({trigger, workflow}) {
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'hideEffect');
     if (effect) genericUtils.setFlag(effect, 'chris-premades', 'hide.animation', true);
     /* eslint-disable indent */
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
             .file('jb2a.smoke.puff.centered.dark_black')
             .atLocation(workflow.token)
@@ -40,7 +40,7 @@ async function removed({trigger: {entity: effect}}) {
     let token = actorUtils.getFirstToken(effect.parent);
     if (!token) return;
     /* eslint-disable indent */
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
             .file('jb2a.smoke.puff.centered.dark_black')
             .atLocation(token)

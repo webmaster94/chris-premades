@@ -77,13 +77,10 @@
       "name": "Elemental Gift (Efreeti)",
       "origin": "Compendium.world.cpr-class-features.Item.GNtDcSXYt09uo6ak",
       "duration": {
-        "rounds": null,
-        "startTime": 1416,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 237,
-        "startTurn": 6
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -104,21 +101,24 @@
       "img": "icons/magic/control/debuff-energy-hold-levitate-yellow.webp",
       "_id": "AIP2ypQSDAAEjFNL",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "fire",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "fire",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!ZwEwORnCi8Kj8gCg.AIP2ypQSDAAEjFNL"
+      "_key": "!items.effects!ZwEwORnCi8Kj8gCg.AIP2ypQSDAAEjFNL",
+      "start": null
     }
   ],
   "img": "icons/magic/control/debuff-energy-hold-levitate-yellow.webp",

@@ -82,13 +82,10 @@
       "name": "Ever Hospitable",
       "origin": "Compendium.world.cpr-race-features.Item.KXFeUdSxepWKwTPX",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -109,33 +106,38 @@
       "img": "icons/tools/cooking/fork-steel-brown.webp",
       "_id": "7hGo4SukSoB9jC8V",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.skills.per.bonuses.check",
-          "mode": 2,
-          "value": "1d4",
-          "priority": 20
-        },
-        {
-          "key": "system.tools.brewer.bonuses.check",
-          "mode": 2,
-          "value": "1d4",
-          "priority": 20
-        },
-        {
-          "key": "system.tools.cook.bonuses.check",
-          "mode": 2,
-          "value": "1d4",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.skills.per.bonuses.check",
+            "value": "1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.tools.brewer.bonuses.check",
+            "value": "1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.tools.cook.bonuses.check",
+            "value": "1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!1h83EFek4Fksdc83.7hGo4SukSoB9jC8V"
+      "_key": "!items.effects!1h83EFek4Fksdc83.7hGo4SukSoB9jC8V",
+      "start": null
     }
   ],
   "img": "icons/tools/cooking/fork-steel-brown.webp",

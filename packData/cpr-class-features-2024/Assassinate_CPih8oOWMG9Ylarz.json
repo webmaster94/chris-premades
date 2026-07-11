@@ -5,22 +5,11 @@
     {
       "name": "Assassinate",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.attributes.init.roll.mode",
-          "value": "1",
-          "mode": 2,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": 66,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -45,10 +34,21 @@
       "img": "icons/weapons/daggers/dagger-curved-black.webp",
       "_id": "jnNOrGfA3tLn0Xxq",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.init.roll.mode",
+            "value": "1",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!CPih8oOWMG9Ylarz.jnNOrGfA3tLn0Xxq"
+      "_key": "!items.effects!CPih8oOWMG9Ylarz.jnNOrGfA3tLn0Xxq",
+      "start": null
     }
   ],
   "system": {

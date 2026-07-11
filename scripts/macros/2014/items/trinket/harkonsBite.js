@@ -3,7 +3,7 @@ async function moonFrenzy(token, {color = 'white', tintMap = false, callback, na
     let tintColor = color === 'red' ? '#d53333' : '#ffffff';
     //Animations by: eskiemoh
     /* eslint-disable indent */
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
             .delay(500)
             .atLocation(token)
@@ -41,7 +41,7 @@ async function moonFrenzy(token, {color = 'white', tintMap = false, callback, na
             .fadeOut(3000)
             .zIndex(0.2)
         .play();
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(3000)
         .effect()
             .file('jb2a.extras.tmfx.outflow.circle.01')
@@ -271,7 +271,7 @@ async function moonFrenzy(token, {color = 'white', tintMap = false, callback, na
 }
 async function shapeChange(token, {callback} = {}) {
     /* eslint-disable indent */
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
             .file('jb2a.extras.tmfx.outflow.circle.01')
             .attachTo(token)

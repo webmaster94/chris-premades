@@ -227,13 +227,10 @@
       "name": "Fighting Spirit",
       "origin": "Compendium.world.cpr-class-features.Item.IQ46nzEV31gyQUcA",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -258,21 +255,24 @@
       "img": "icons/weapons/swords/sword-katana.webp",
       "_id": "B2wpjllxSqWPIbhg",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.attack.all",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!Krb9hd96VeujUyAK.B2wpjllxSqWPIbhg"
+      "_key": "!items.effects!Krb9hd96VeujUyAK.B2wpjllxSqWPIbhg",
+      "start": null
     }
   ],
   "img": "icons/weapons/swords/sword-katana.webp",

@@ -40,7 +40,7 @@ async function infuseWeapon(workflow, selectedWeapon) {
     let demiurgicColossus = itemUtils.getItemByIdentifier(workflow.actor, 'demiurgicColossus');
     let bonusDice = demiurgicColossus ? 2 : 1;
     newFormula += ' + ' + bonusDice + 'd6';
-    if (versatile?.length) versatile.replaceAll(baseType, damageType);
+    if (versatile?.length) versatile = versatile.replaceAll(baseType, damageType);
     if (versatile?.length) versatile += ' + ' + bonusDice + 'd6';
     let enchantData = {
         name: genericUtils.translate('CHRISPREMADES.Macros.ElementalCleaver.ElementalCleaver'),

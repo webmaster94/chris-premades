@@ -93,13 +93,10 @@
       "name": "Umbral Sight",
       "origin": "Compendium.world.cpr-class-features.Item.PoYMnh528iTEol4g",
       "duration": {
-        "rounds": null,
-        "startTime": 1404,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 235,
-        "startTurn": 2
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -120,33 +117,38 @@
       "img": "icons/magic/unholy/silhouette-robe-evil-power.webp",
       "_id": "Vlwv9kt1dP2aItx1",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "ATL.sight.visionMode",
-          "mode": 0,
-          "value": "darkvision",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.senses.darkvision",
-          "mode": 2,
-          "value": "60",
-          "priority": 40
-        },
-        {
-          "key": "ATL.sight.range",
-          "mode": 2,
-          "value": "60",
-          "priority": 40
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "ATL.sight.visionMode",
+            "value": "darkvision",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.senses.darkvision",
+            "value": "60",
+            "priority": 40,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "ATL.sight.range",
+            "value": "60",
+            "priority": 40,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!xtDMLfKE7jgJuImT.Vlwv9kt1dP2aItx1"
+      "_key": "!items.effects!xtDMLfKE7jgJuImT.Vlwv9kt1dP2aItx1",
+      "start": null
     }
   ],
   "img": "icons/magic/unholy/silhouette-robe-evil-power.webp",

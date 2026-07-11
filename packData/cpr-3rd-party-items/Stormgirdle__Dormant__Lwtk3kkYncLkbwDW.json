@@ -409,40 +409,41 @@
   "effects": [
     {
       "name": "Stormgirdle (Dormant)",
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "lightning",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "thunder",
-          "priority": 20
-        },
-        {
-          "key": "system.abilities.str.value",
-          "mode": 4,
-          "value": "21",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "img": "icons/equipment/waist/belt-thick-gemmed-steel-grey.webp",
       "_id": "LOw0fLjS0Ut0gso8",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "lightning",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "thunder",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.abilities.str.value",
+            "value": "21",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Actor.FIdg2qF9mgynCpEX.Item.ApcuCeuR1x9j8gkR",
@@ -479,7 +480,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!Lwtk3kkYncLkbwDW.LOw0fLjS0Ut0gso8"
+      "_key": "!items.effects!Lwtk3kkYncLkbwDW.LOw0fLjS0Ut0gso8",
+      "start": null
     }
   ],
   "img": "icons/equipment/waist/belt-thick-gemmed-steel-grey.webp",

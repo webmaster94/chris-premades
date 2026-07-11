@@ -155,25 +155,14 @@
   },
   "effects": [
     {
-      "changes": [
-        {
-          "key": "system.traits.dr.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "_id": "RXZSqkLCei6opPi3",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "origin": null,
       "tint": "#ffffff",
@@ -206,9 +195,20 @@
       "statuses": [],
       "img": "icons/creatures/mammals/bat-giant-tattered-purple.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!eTF3L09ihlLT1a0k.RXZSqkLCei6opPi3"
+      "_key": "!items.effects!eTF3L09ihlLT1a0k.RXZSqkLCei6opPi3",
+      "start": null
     }
   ],
   "img": "icons/creatures/mammals/bat-giant-tattered-purple.webp",

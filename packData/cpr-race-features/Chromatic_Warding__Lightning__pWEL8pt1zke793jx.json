@@ -223,13 +223,10 @@
       "name": "Chromatic Warding (Lightning)",
       "origin": "Compendium.world.cpr-race-features-old.Item.h9JoTDqOP4C2jpo8",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -254,21 +251,24 @@
       "img": "icons/creatures/abilities/dragon-ice-breath-blue.webp",
       "_id": "ak7MRXhraHjSEsUL",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.di.value",
-          "mode": 2,
-          "value": "lightning",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.di.value",
+            "value": "lightning",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!pWEL8pt1zke793jx.ak7MRXhraHjSEsUL"
+      "_key": "!items.effects!pWEL8pt1zke793jx.ak7MRXhraHjSEsUL",
+      "start": null
     }
   ],
   "img": "icons/creatures/abilities/dragon-ice-breath-blue.webp",

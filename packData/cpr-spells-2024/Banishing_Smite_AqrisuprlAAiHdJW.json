@@ -246,54 +246,58 @@
       "transfer": false,
       "_id": "UoD6VPnqomTghzQn",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.superSaver.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.ac.bonus",
-          "mode": 4,
-          "value": "99",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.min.ability.save.all",
-          "mode": 0,
-          "value": "99",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.grants.noCritical.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.neverTarget",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "macro.tokenMagic",
-          "mode": 0,
-          "value": "invalid",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.superSaver.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.ac.bonus",
+            "value": "99",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.min.ability.save.all",
+            "value": "99",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.grants.noCritical.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.neverTarget",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "macro.tokenMagic",
+            "value": "invalid",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -317,7 +321,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!AqrisuprlAAiHdJW.UoD6VPnqomTghzQn"
+      "_key": "!items.effects!AqrisuprlAAiHdJW.UoD6VPnqomTghzQn",
+      "start": null
     }
   ],
   "name": "Banishing Smite",

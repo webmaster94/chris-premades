@@ -9,19 +9,23 @@
       "transfer": false,
       "_id": "8Kxo0nRVEsivUp6s",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
       "statuses": [],
       "sort": 0,
       "flags": {},
-      "_key": "!items.effects!QsaQfB5HY0HJu4ki.8Kxo0nRVEsivUp6s"
+      "_key": "!items.effects!QsaQfB5HY0HJu4ki.8Kxo0nRVEsivUp6s",
+      "start": null
     },
     {
       "name": "Interdict Boons: Eyes of the Gate",
@@ -30,12 +34,15 @@
       "transfer": false,
       "_id": "b0xPUUmVXNvE64LN",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -50,7 +57,8 @@
           ]
         }
       },
-      "_key": "!items.effects!QsaQfB5HY0HJu4ki.b0xPUUmVXNvE64LN"
+      "_key": "!items.effects!QsaQfB5HY0HJu4ki.b0xPUUmVXNvE64LN",
+      "start": null
     }
   ],
   "system": {

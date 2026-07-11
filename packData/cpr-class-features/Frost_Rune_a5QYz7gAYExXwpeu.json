@@ -178,13 +178,10 @@
       "name": "Frost Rune",
       "origin": "Compendium.world.cpr-class-features.Item.kHWhq0RYBB8YZIUe",
       "duration": {
-        "rounds": null,
-        "startTime": 1368,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 229,
-        "startTurn": 3
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -205,39 +202,40 @@
       "img": "icons/commodities/treasure/token-engraved-spiral-grey.webp",
       "_id": "Q21xtwh5zG7ImWX9",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.skill.ani",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.skill.itm",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.skill.ani",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.skill.itm",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!a5QYz7gAYExXwpeu.Q21xtwh5zG7ImWX9"
+      "_key": "!items.effects!a5QYz7gAYExXwpeu.Q21xtwh5zG7ImWX9",
+      "start": null
     },
     {
       "name": "Frost Rune",
       "origin": "Compendium.world.cpr-class-features.Item.kHWhq0RYBB8YZIUe",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": 600,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 600,
+        "units": "seconds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -262,39 +260,45 @@
       "img": "icons/commodities/treasure/token-engraved-spiral-grey.webp",
       "_id": "8bJM69cAIYBgWfeX",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.abilities.str.bonuses.check",
-          "mode": 2,
-          "value": "2",
-          "priority": 20
-        },
-        {
-          "key": "system.abilities.str.bonuses.save",
-          "mode": 2,
-          "value": "2",
-          "priority": 20
-        },
-        {
-          "key": "system.abilities.con.bonuses.check",
-          "mode": 2,
-          "value": "2",
-          "priority": 20
-        },
-        {
-          "key": "system.abilities.con.bonuses.save",
-          "mode": 2,
-          "value": "2",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.abilities.str.bonuses.check",
+            "value": "2",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.abilities.str.bonuses.save",
+            "value": "2",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.abilities.con.bonuses.check",
+            "value": "2",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.abilities.con.bonuses.save",
+            "value": "2",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!a5QYz7gAYExXwpeu.8bJM69cAIYBgWfeX"
+      "_key": "!items.effects!a5QYz7gAYExXwpeu.8bJM69cAIYBgWfeX",
+      "start": null
     }
   ],
   "flags": {

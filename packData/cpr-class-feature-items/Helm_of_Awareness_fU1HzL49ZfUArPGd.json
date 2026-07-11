@@ -65,30 +65,30 @@
       "origin": "Actor.1ANL4qqWoi2V46iP.Item.CmhfGh9PNh95zUtA",
       "_id": "4KuDroH02DK9AvAj",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.init.roll.mode",
-          "mode": 2,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.ci.value",
-          "mode": 2,
-          "value": "surprised",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.init.roll.mode",
+            "value": "1",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.ci.value",
+            "value": "surprised",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -114,7 +114,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!fU1HzL49ZfUArPGd.4KuDroH02DK9AvAj"
+      "_key": "!items.effects!fU1HzL49ZfUArPGd.4KuDroH02DK9AvAj",
+      "start": null
     }
   ],
   "folder": null,

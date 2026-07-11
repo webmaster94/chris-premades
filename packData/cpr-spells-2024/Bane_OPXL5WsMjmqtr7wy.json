@@ -170,46 +170,11 @@
       "img": "icons/magic/unholy/hands-praying-fire-green.webp",
       "name": "Bane",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.bonuses.mwak.attack",
-          "value": "-1d4",
-          "mode": 2,
-          "priority": 0
-        },
-        {
-          "key": "system.bonuses.rwak.attack",
-          "value": "-1d4",
-          "mode": 2,
-          "priority": 0
-        },
-        {
-          "key": "system.bonuses.msak.attack",
-          "value": "-1d4",
-          "mode": 2,
-          "priority": 0
-        },
-        {
-          "key": "system.bonuses.rsak.attack",
-          "value": "-1d4",
-          "mode": 2,
-          "priority": 0
-        },
-        {
-          "key": "system.bonuses.abilities.save",
-          "value": "-1d4",
-          "mode": 2,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": 10,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": 10,
+        "units": "rounds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -231,10 +196,49 @@
       "description": "",
       "_id": "ZJEp9zJLvNcbfwu6",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.mwak.attack",
+            "value": "-1d4",
+            "priority": 0,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.bonuses.rwak.attack",
+            "value": "-1d4",
+            "priority": 0,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.bonuses.msak.attack",
+            "value": "-1d4",
+            "priority": 0,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.bonuses.rsak.attack",
+            "value": "-1d4",
+            "priority": 0,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.bonuses.abilities.save",
+            "value": "-1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!OPXL5WsMjmqtr7wy.ZJEp9zJLvNcbfwu6"
+      "_key": "!items.effects!OPXL5WsMjmqtr7wy.ZJEp9zJLvNcbfwu6",
+      "start": null
     }
   ],
   "name": "Bane",

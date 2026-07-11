@@ -148,25 +148,14 @@
   },
   "effects": [
     {
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.attack.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "_id": "9j8yZYQqQOpBvSCv",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": 1,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "turns",
+        "expiry": "turnStart",
+        "expired": false
       },
       "origin": null,
       "tint": "#ffffff",
@@ -193,9 +182,20 @@
       "statuses": [],
       "img": "icons/magic/control/debuff-energy-snare-green.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!FhnjzjP8Isu3cgOM.9j8yZYQqQOpBvSCv"
+      "_key": "!items.effects!FhnjzjP8Isu3cgOM.9j8yZYQqQOpBvSCv",
+      "start": null
     }
   ],
   "flags": {

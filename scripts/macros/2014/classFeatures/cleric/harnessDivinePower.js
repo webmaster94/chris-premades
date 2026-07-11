@@ -8,7 +8,7 @@ async function use({workflow}) {
         let key = 'spell' + i;
         if ((spells[key].value < spells[key].max) && spells[key].max > 0) buttons.push([CONFIG.DND5E.spellLevels[i], key]);
     }
-    if (spells.pact.max > 0 && spells.pact.level <= maxLevel && spells.pact.value < spells.pact.max) buttons.push([CONFIG.DND5E.spellPreparationModes.pact.label, 'pact']);
+    if (spells.pact.max > 0 && spells.pact.level <= maxLevel && spells.pact.value < spells.pact.max) buttons.push([CONFIG.DND5E.spellcasting.pact.label, 'pact']);
     if (!buttons.length) {
         genericUtils.notify('CHRISPREMADES.Macros.InfuseItem.NoMissing', 'info');
         return;

@@ -244,13 +244,10 @@
       "name": "Channel Divinity: Turn Undead",
       "origin": "Compendium.world.cpr-class-features.Item.H02Z3EHPO6hLPduW",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -288,14 +285,16 @@
       "img": "icons/magic/holy/barrier-shield-winged-blue.webp",
       "_id": "1dNxcrs4wIrIZgcE",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!WuIFqhTAiqsY0Ruu.1dNxcrs4wIrIZgcE"
+      "_key": "!items.effects!WuIFqhTAiqsY0Ruu.1dNxcrs4wIrIZgcE",
+      "start": null
     }
   ],
   "img": "icons/magic/holy/barrier-shield-winged-blue.webp",

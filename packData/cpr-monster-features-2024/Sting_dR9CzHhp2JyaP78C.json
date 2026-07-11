@@ -189,17 +189,15 @@
       "transfer": false,
       "_id": "8HnksBK43AZ9Am28",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -239,7 +237,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!dR9CzHhp2JyaP78C.8HnksBK43AZ9Am28"
+      "_key": "!items.effects!dR9CzHhp2JyaP78C.8HnksBK43AZ9Am28",
+      "start": null
     }
   ],
   "flags": {

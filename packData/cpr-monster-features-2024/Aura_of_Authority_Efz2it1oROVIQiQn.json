@@ -33,34 +33,34 @@
   "effects": [
     {
       "name": "Aura of Authority",
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.attack.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.save.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/sundries/flags/banner-skull-red.webp",
       "_id": "Py5SIpydN0Fm5ueW",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.save.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -90,7 +90,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!Efz2it1oROVIQiQn.Py5SIpydN0Fm5ueW"
+      "_key": "!items.effects!Efz2it1oROVIQiQn.Py5SIpydN0Fm5ueW",
+      "start": null
     }
   ],
   "flags": {

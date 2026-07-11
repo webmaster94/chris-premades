@@ -190,13 +190,10 @@
       "name": "Stone Rune",
       "origin": "Compendium.world.cpr-class-features.Item.iUwV4Dhf0uclyFfF",
       "duration": {
-        "rounds": null,
-        "startTime": 1368,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 229,
-        "startTurn": 3
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -217,51 +214,54 @@
       "img": "icons/commodities/treasure/token-runed-spiral-grey.webp",
       "_id": "NqAUcJO7SIiUUsNR",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.skill.ins",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.senses.darkvision",
-          "mode": 4,
-          "value": "120",
-          "priority": 20
-        },
-        {
-          "key": "ATL.sight.range",
-          "mode": 4,
-          "value": "120",
-          "priority": 20
-        },
-        {
-          "key": "ATL.sight.visionMode",
-          "mode": 0,
-          "value": "darkvision",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.skill.ins",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.senses.darkvision",
+            "value": "120",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "ATL.sight.range",
+            "value": "120",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "ATL.sight.visionMode",
+            "value": "darkvision",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!2MFhq9UsWqAh50BI.NqAUcJO7SIiUUsNR"
+      "_key": "!items.effects!2MFhq9UsWqAh50BI.NqAUcJO7SIiUUsNR",
+      "start": null
     },
     {
       "name": "Stone Rune",
       "origin": "Compendium.world.cpr-class-features.Item.iUwV4Dhf0uclyFfF",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": 60,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 60,
+        "units": "seconds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -293,27 +293,31 @@
       "img": "icons/commodities/treasure/token-runed-spiral-grey.webp",
       "_id": "XLQMVSUvbwKIgSl9",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "mode": 0,
-          "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=wis,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "0",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=wis,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.all",
+            "value": "0",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!2MFhq9UsWqAh50BI.XLQMVSUvbwKIgSl9"
+      "_key": "!items.effects!2MFhq9UsWqAh50BI.XLQMVSUvbwKIgSl9",
+      "start": null
     }
   ],
   "flags": {

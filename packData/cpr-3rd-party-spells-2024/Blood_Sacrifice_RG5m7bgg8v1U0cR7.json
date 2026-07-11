@@ -214,17 +214,15 @@
       "transfer": false,
       "_id": "B67wkqDochyODXPC",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -270,7 +268,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!RG5m7bgg8v1U0cR7.B67wkqDochyODXPC"
+      "_key": "!items.effects!RG5m7bgg8v1U0cR7.B67wkqDochyODXPC",
+      "start": null
     }
   ],
   "name": "Blood Sacrifice",

@@ -34,28 +34,27 @@
   "effects": [
     {
       "name": "Stage 2 Boon: Inhuman Reflexes",
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.save.dex",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "img": "icons/magic/unholy/strike-body-life-soul-green.webp",
       "_id": "zyoHy668RBmB0K6W",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.save.dex",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Item.0AkYOwc5Jl23XNRa",
@@ -85,7 +84,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!3ESJyOXITxiU4mZk.zyoHy668RBmB0K6W"
+      "_key": "!items.effects!3ESJyOXITxiU4mZk.zyoHy668RBmB0K6W",
+      "start": null
     }
   ],
   "folder": "Xu8gZVI9iyVzXZ72",

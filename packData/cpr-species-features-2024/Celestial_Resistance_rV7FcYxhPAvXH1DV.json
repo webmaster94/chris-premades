@@ -5,28 +5,11 @@
     {
       "name": "Celestial Resistance",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "value": "radiant",
-          "mode": 2,
-          "priority": 1
-        },
-        {
-          "key": "system.traits.dr.value",
-          "value": "necrotic",
-          "mode": 2,
-          "priority": 1
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": 1884,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -51,10 +34,28 @@
       "img": "icons/skills/wounds/blood-cells-disease-green.webp",
       "_id": "iA8W2m2xbIDLaxUB",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "radiant",
+            "priority": 1,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "necrotic",
+            "priority": 1,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!rV7FcYxhPAvXH1DV.iA8W2m2xbIDLaxUB"
+      "_key": "!items.effects!rV7FcYxhPAvXH1DV.iA8W2m2xbIDLaxUB",
+      "start": null
     }
   ],
   "system": {

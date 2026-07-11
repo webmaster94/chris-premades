@@ -4,21 +4,19 @@
   "effects": [
     {
       "name": "Bardic Inspiration",
-      "changes": [],
       "transfer": false,
       "img": "icons/magic/control/buff-flight-wings-runes-blue.webp",
       "_id": "NEy5SEovH82dypyl",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -68,7 +66,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!XNCB8wD9tGOzinO2.NEy5SEovH82dypyl"
+      "_key": "!items.effects!XNCB8wD9tGOzinO2.NEy5SEovH82dypyl",
+      "start": null
     }
   ],
   "system": {

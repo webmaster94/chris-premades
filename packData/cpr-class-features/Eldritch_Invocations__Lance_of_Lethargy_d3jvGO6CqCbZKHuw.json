@@ -10,24 +10,23 @@
       "transfer": false,
       "_id": "ATeMeLl2JSzhJHvG",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "-10",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.all",
+            "value": "-10",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -44,9 +43,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEndSource"
-          ]
+          "specialDuration": []
         },
         "dnd5e": {
           "riders": {
@@ -78,7 +75,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!d3jvGO6CqCbZKHuw.ATeMeLl2JSzhJHvG"
+      "_key": "!items.effects!d3jvGO6CqCbZKHuw.ATeMeLl2JSzhJHvG",
+      "start": null
     }
   ],
   "system": {

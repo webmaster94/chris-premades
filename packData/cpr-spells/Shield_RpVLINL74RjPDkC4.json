@@ -178,13 +178,10 @@
       "name": "Shield",
       "origin": "Compendium.world.cpr-spells.Item.Rc4AC3zaA8cnyDcA",
       "duration": {
-        "rounds": 1,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "rounds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -195,9 +192,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ],
+          "specialDuration": [],
           "selfTarget": false,
           "selfTargetAlways": false,
           "dontApply": false
@@ -211,21 +206,24 @@
       "img": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
       "_id": "UCDrTaPPNUCpMNEr",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "mode": 2,
-          "value": "5",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.ac.bonus",
+            "value": "5",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!RpVLINL74RjPDkC4.UCDrTaPPNUCpMNEr"
+      "_key": "!items.effects!RpVLINL74RjPDkC4.UCDrTaPPNUCpMNEr",
+      "start": null
     }
   ],
   "folder": null,

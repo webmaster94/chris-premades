@@ -327,34 +327,34 @@
   "effects": [
     {
       "name": "Crown of Stars",
-      "changes": [
-        {
-          "key": "ATL.light.dim",
-          "mode": 4,
-          "value": "60",
-          "priority": 20
-        },
-        {
-          "key": "ATL.light.bright",
-          "mode": 4,
-          "value": "30",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/magic/symbols/runes-star-pentagon-orange.webp",
       "_id": "VieQjI8rDm38CSUS",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "ATL.light.dim",
+            "value": "60",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "ATL.light.bright",
+            "value": "30",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -392,7 +392,8 @@
           }
         }
       },
-      "_key": "!items.effects!GyTu934ueYqWNU8C.VieQjI8rDm38CSUS"
+      "_key": "!items.effects!GyTu934ueYqWNU8C.VieQjI8rDm38CSUS",
+      "start": null
     }
   ],
   "name": "Crown of Stars",

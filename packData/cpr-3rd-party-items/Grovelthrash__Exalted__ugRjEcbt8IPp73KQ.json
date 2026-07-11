@@ -459,13 +459,10 @@
       "name": "Grovelthrash (Exalted)",
       "origin": "Compendium.world.cpr-items.Item.23ji3mtjLUe5D5A8",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -486,33 +483,38 @@
       "img": "icons/weapons/hammers/shorthammer-double-steel-embossed.webp",
       "_id": "isxys1AOGY7oD2nu",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.languages.value",
-          "mode": 2,
-          "value": "abyssal",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.languages.value",
-          "mode": 2,
-          "value": "infernal",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.movement.burrow",
-          "mode": 2,
-          "value": "@attributes.movement.walk",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.languages.value",
+            "value": "abyssal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.languages.value",
+            "value": "infernal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.burrow",
+            "value": "@attributes.movement.walk",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!ugRjEcbt8IPp73KQ.isxys1AOGY7oD2nu"
+      "_key": "!items.effects!ugRjEcbt8IPp73KQ.isxys1AOGY7oD2nu",
+      "start": null
     }
   ],
   "img": "icons/weapons/hammers/shorthammer-double-steel-embossed.webp",

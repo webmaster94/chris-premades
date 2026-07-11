@@ -328,17 +328,15 @@
       "transfer": false,
       "_id": "P9NY1EHjm9bPAmD7",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -367,7 +365,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!nY8v7uVD3GM2qgWG.P9NY1EHjm9bPAmD7"
+      "_key": "!items.effects!nY8v7uVD3GM2qgWG.P9NY1EHjm9bPAmD7",
+      "start": null
     }
   ],
   "name": "Spellfire Flare",

@@ -223,13 +223,10 @@
       "name": "Gem Flight",
       "origin": "Compendium.world.cpr-race-features-old.Item.Zz6ruEjCFdCClj96",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -254,27 +251,31 @@
       "img": "icons/commodities/treasure/trinket-wing-white.webp",
       "_id": "zVLR81lkPcerokUJ",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.fly",
-          "mode": 4,
-          "value": "@attributes.movement.walk",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.movement.hover",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.fly",
+            "value": "@attributes.movement.walk",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.hover",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!jL7NXUWKUoRgizu0.zVLR81lkPcerokUJ"
+      "_key": "!items.effects!jL7NXUWKUoRgizu0.zVLR81lkPcerokUJ",
+      "start": null
     }
   ],
   "img": "icons/commodities/treasure/trinket-wing-white.webp",

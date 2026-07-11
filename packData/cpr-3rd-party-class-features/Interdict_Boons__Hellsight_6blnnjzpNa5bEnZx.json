@@ -9,30 +9,30 @@
       "transfer": false,
       "_id": "GeqoudKhSipD1R9q",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.senses.truesight",
-          "mode": 4,
-          "value": "60",
-          "priority": 20
-        },
-        {
-          "key": "ATL.detectionModes.seeAll.range",
-          "mode": 4,
-          "value": "60",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.senses.truesight",
+            "value": "60",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "ATL.detectionModes.seeAll.range",
+            "value": "60",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -66,7 +66,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!6blnnjzpNa5bEnZx.GeqoudKhSipD1R9q"
+      "_key": "!items.effects!6blnnjzpNa5bEnZx.GeqoudKhSipD1R9q",
+      "start": null
     }
   ],
   "system": {

@@ -231,13 +231,10 @@
       "name": "Guile of the Cloud Giant: Cloudy Escape",
       "origin": "Compendium.world.cpr-feats-old.Item.VQaRit5FSYpdjGSO",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -264,21 +261,24 @@
       "img": "icons/magic/air/wind-swirl-gray-blue.webp",
       "_id": "9SOIkuYYBNObTP5P",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!vPUGLjZKMq1LxfOr.9SOIkuYYBNObTP5P"
+      "_key": "!items.effects!vPUGLjZKMq1LxfOr.9SOIkuYYBNObTP5P",
+      "start": null
     }
   ],
   "img": "icons/magic/air/wind-swirl-gray-blue.webp",

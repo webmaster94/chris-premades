@@ -65,7 +65,7 @@ async function use({workflow}) {
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.jb2aCheck() === 'patreon';
     if (!playAnimation) return;
     // Animation by Eskiemoh
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .attachTo(workflow.token)
         .file('jb2a.extras.tmfx.outflow.circle.01')

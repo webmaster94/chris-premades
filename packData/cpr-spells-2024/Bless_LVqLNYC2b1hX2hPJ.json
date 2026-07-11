@@ -160,46 +160,11 @@
       "img": "icons/magic/holy/prayer-hands-glowing-yellow-green.webp",
       "name": "Bless",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.bonuses.mwak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": 20
-        },
-        {
-          "key": "system.bonuses.rwak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": 20
-        },
-        {
-          "key": "system.bonuses.msak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": 20
-        },
-        {
-          "key": "system.bonuses.rsak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": 20
-        },
-        {
-          "key": "system.bonuses.abilities.save",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -237,10 +202,49 @@
       "description": "",
       "_id": "EPD3RAoj7cLUZyGR",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.mwak.attack",
+            "value": "+1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.bonuses.rwak.attack",
+            "value": "+1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.bonuses.msak.attack",
+            "value": "+1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.bonuses.rsak.attack",
+            "value": "+1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.bonuses.abilities.save",
+            "value": "+1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!LVqLNYC2b1hX2hPJ.EPD3RAoj7cLUZyGR"
+      "_key": "!items.effects!LVqLNYC2b1hX2hPJ.EPD3RAoj7cLUZyGR",
+      "start": null
     }
   ],
   "name": "Bless",

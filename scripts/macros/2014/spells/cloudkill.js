@@ -44,7 +44,7 @@ async function use({workflow}) {
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
     if (!itemUtils.getConfig(workflow.item, 'playAnimation')) return;
     if (animationUtils.jb2aCheck() != 'patreon') return;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.fog_cloud.02.green')
         .scaleToObject(1.05)

@@ -68,7 +68,7 @@ async function use({workflow}) {
     if (playAnimation) {
         /* eslint-disable indent */
         //Animations by: eskiemoh
-        new Sequence()
+        new Sequence({moduleName:'chris-premades', softFail:true})
             .wait(500)
             .effect()
                 .name('Healing Spirit Opening')

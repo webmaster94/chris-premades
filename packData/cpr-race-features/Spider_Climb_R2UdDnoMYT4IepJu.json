@@ -76,13 +76,10 @@
       "name": "Spider Climb",
       "origin": "Compendium.world.cpr-race-features.Item.UwI0X3nnYAQHU9L0",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -103,21 +100,24 @@
       "img": "icons/commodities/biological/legs-insect-brown.webp",
       "_id": "vWJ0l9hcU1puKAja",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.climb",
-          "mode": 4,
-          "value": "@attributes.movement.walk",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.climb",
+            "value": "@attributes.movement.walk",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!R2UdDnoMYT4IepJu.vWJ0l9hcU1puKAja"
+      "_key": "!items.effects!R2UdDnoMYT4IepJu.vWJ0l9hcU1puKAja",
+      "start": null
     }
   ],
   "img": "icons/commodities/biological/legs-insect-brown.webp",

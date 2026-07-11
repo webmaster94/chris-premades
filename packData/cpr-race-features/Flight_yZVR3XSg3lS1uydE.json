@@ -4,28 +4,27 @@
   "effects": [
     {
       "name": "Flight",
-      "changes": [
-        {
-          "key": "system.attributes.movement.fly",
-          "mode": 4,
-          "value": "@attributes.movement.walk",
-          "priority": 30
-        }
-      ],
       "transfer": true,
       "img": "icons/commodities/biological/wing-bird-white.webp",
       "_id": "Bk3FqffFFR7nee3P",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.fly",
+            "value": "@attributes.movement.walk",
+            "priority": 30,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": 1356,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Actor.Fzdxrc4QhMQo59at.Item.CdOpaPXG9RwqEkOE",
@@ -65,7 +64,8 @@
           "rules": "legacy"
         }
       },
-      "_key": "!items.effects!yZVR3XSg3lS1uydE.Bk3FqffFFR7nee3P"
+      "_key": "!items.effects!yZVR3XSg3lS1uydE.Bk3FqffFFR7nee3P",
+      "start": null
     }
   ],
   "system": {

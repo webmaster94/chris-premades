@@ -60,7 +60,7 @@ async function attack({trigger: {entity: effect}, workflow}) {
     }
 }
 async function damage({trigger: {entity: effect}, workflow}) {
-    if (!workflow.targets.size || workflow.item.type !== 'spell');
+    if (!workflow.targets.size || workflow.item.type !== 'spell') return;
     if (!workflow.hitTargets.size || !['msak', 'rsak', 'heal'].includes(workflowUtils.getActionType(workflow))) return;
     let {formula: bardDice, magical} = effect.flags['chris-premades'].bardicInspiration;
     if (!magical?.length) return;

@@ -82,13 +82,10 @@
       "name": "Lucky",
       "origin": "Compendium.world.cpr-race-features.Item.8ITEUJVZ5CPWSb9C",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -109,21 +106,24 @@
       "img": "icons/equipment/neck/necklace-charm-clover.webp",
       "_id": "YlEuZV2mHc7lSbe5",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.dnd5e.halflingLucky",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.dnd5e.halflingLucky",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!bxhSHWWTTpM3ROV7.YlEuZV2mHc7lSbe5"
+      "_key": "!items.effects!bxhSHWWTTpM3ROV7.YlEuZV2mHc7lSbe5",
+      "start": null
     }
   ],
   "img": "icons/equipment/neck/necklace-charm-clover.webp",

@@ -1,7 +1,7 @@
 import {activityUtils, animationUtils, combatUtils, dialogUtils, effectUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../utils.js';
 export async function animation(target, token, attackType) {
     //Animations by: eskiemoh
-    let hitSeq = new Sequence()
+    let hitSeq = new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .copySprite(target)
         .atLocation(target)
@@ -27,7 +27,7 @@ export async function animation(target, token, attackType) {
         .belowTokens(true);
     switch (attackType) {
         case 'slashing':
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                 .file('animated-spell-effects-cartoon.water.105')
                 .atLocation(token)
@@ -56,7 +56,7 @@ export async function animation(target, token, attackType) {
                 .play();
             return;
         case 'bludgeoning':
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                 .file('animated-spell-effects-cartoon.water.115')
                 .atLocation(target)
@@ -85,7 +85,7 @@ export async function animation(target, token, attackType) {
                 .play();
             return;
         case 'ranged':
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                 .file('animated-spell-effects-cartoon.water.109')
                 .atLocation(target)
@@ -114,7 +114,7 @@ export async function animation(target, token, attackType) {
                 .play();
             return;
         default:
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                 .file('animated-spell-effects-cartoon.water.107')
                 .atLocation(token)

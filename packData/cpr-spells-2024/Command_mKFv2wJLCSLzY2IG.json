@@ -568,17 +568,15 @@
       "transfer": false,
       "_id": "SOTIXYPUzcm24eB1",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -609,9 +607,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -631,7 +627,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!mKFv2wJLCSLzY2IG.SOTIXYPUzcm24eB1"
+      "_key": "!items.effects!mKFv2wJLCSLzY2IG.SOTIXYPUzcm24eB1",
+      "start": null
     },
     {
       "name": "Command: Drop",
@@ -640,17 +637,15 @@
       "transfer": false,
       "_id": "ut5o4sHbHGh5BHOf",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -667,9 +662,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -700,7 +693,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!mKFv2wJLCSLzY2IG.ut5o4sHbHGh5BHOf"
+      "_key": "!items.effects!mKFv2wJLCSLzY2IG.ut5o4sHbHGh5BHOf",
+      "start": null
     },
     {
       "name": "Command: Flee",
@@ -709,17 +703,15 @@
       "transfer": false,
       "_id": "dgKDpkVZdETfhvBG",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -736,9 +728,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -759,7 +749,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!mKFv2wJLCSLzY2IG.dgKDpkVZdETfhvBG"
+      "_key": "!items.effects!mKFv2wJLCSLzY2IG.dgKDpkVZdETfhvBG",
+      "start": null
     },
     {
       "name": "Command: Grovel",
@@ -768,17 +759,15 @@
       "transfer": false,
       "_id": "4smn6quV2K7jJRkV",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -795,9 +784,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -835,7 +822,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!mKFv2wJLCSLzY2IG.4smn6quV2K7jJRkV"
+      "_key": "!items.effects!mKFv2wJLCSLzY2IG.4smn6quV2K7jJRkV",
+      "start": null
     },
     {
       "name": "Command: Halt",
@@ -844,17 +832,15 @@
       "transfer": false,
       "_id": "1ZpzHVhZAuJdU7ap",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -871,9 +857,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -894,7 +878,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!mKFv2wJLCSLzY2IG.1ZpzHVhZAuJdU7ap"
+      "_key": "!items.effects!mKFv2wJLCSLzY2IG.1ZpzHVhZAuJdU7ap",
+      "start": null
     }
   ],
   "name": "Command",

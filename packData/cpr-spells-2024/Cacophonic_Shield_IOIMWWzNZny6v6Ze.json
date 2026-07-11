@@ -327,17 +327,15 @@
       "transfer": false,
       "_id": "Hh5REK5Yzu5kBVlW",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -368,9 +366,7 @@
           "dontApply": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -384,7 +380,8 @@
           "templateEffectActivities": []
         }
       },
-      "_key": "!items.effects!IOIMWWzNZny6v6Ze.Hh5REK5Yzu5kBVlW"
+      "_key": "!items.effects!IOIMWWzNZny6v6Ze.Hh5REK5Yzu5kBVlW",
+      "start": null
     },
     {
       "name": "Cacophonic Shield: Source",
@@ -393,36 +390,37 @@
       "transfer": false,
       "_id": "WsBnzlhxYTq68Xxb",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "thunder",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.grants.disadvantage.attack.rwak",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.grants.disadvantage.attack.rsak",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "thunder",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.grants.disadvantage.attack.rwak",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.grants.disadvantage.attack.rsak",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -469,7 +467,8 @@
           }
         }
       },
-      "_key": "!items.effects!IOIMWWzNZny6v6Ze.WsBnzlhxYTq68Xxb"
+      "_key": "!items.effects!IOIMWWzNZny6v6Ze.WsBnzlhxYTq68Xxb",
+      "start": null
     }
   ],
   "name": "Cacophonic Shield",

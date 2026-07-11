@@ -4,21 +4,19 @@
   "effects": [
     {
       "name": "\"Shocking Grasp\"",
-      "changes": [],
       "transfer": false,
       "img": "icons/magic/lightning/bolt-strike-blue.webp",
       "_id": "YK31xkhMckf2LnDw",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -48,7 +46,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!ZRPl8HIhLYdHD0IY.YK31xkhMckf2LnDw"
+      "_key": "!items.effects!ZRPl8HIhLYdHD0IY.YK31xkhMckf2LnDw",
+      "start": null
     }
   ],
   "system": {

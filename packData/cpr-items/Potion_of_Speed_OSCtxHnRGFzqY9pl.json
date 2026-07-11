@@ -242,13 +242,10 @@
       "name": "Potion of Speed",
       "origin": "Compendium.world.cpr-items.Item.8iXExHuB8Z5p7SFd",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -273,33 +270,38 @@
       "img": "icons/consumables/potions/potion-bottle-corked-fancy-orange.webp",
       "_id": "BiSjEUoKfuTCazDb",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "mode": 2,
-          "value": "2",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.save.dex",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "*2",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.ac.bonus",
+            "value": "2",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.save.dex",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.all",
+            "value": "*2",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!OSCtxHnRGFzqY9pl.BiSjEUoKfuTCazDb"
+      "_key": "!items.effects!OSCtxHnRGFzqY9pl.BiSjEUoKfuTCazDb",
+      "start": null
     }
   ],
   "img": "icons/consumables/potions/potion-bottle-corked-fancy-orange.webp",

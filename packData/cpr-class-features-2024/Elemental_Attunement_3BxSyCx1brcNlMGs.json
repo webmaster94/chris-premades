@@ -5,46 +5,11 @@
     {
       "name": "Elemental Attunement",
       "statuses": [],
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{} (Active)",
-          "priority": 1
-        },
-        {
-          "key": "activities[enchant].activation.type",
-          "mode": 5,
-          "value": "action",
-          "priority": 1
-        },
-        {
-          "key": "activities[enchant].activation.condition",
-          "mode": 5,
-          "value": "end of duration",
-          "priority": 1
-        },
-        {
-          "key": "activities[enchant].name",
-          "mode": 5,
-          "value": "End Attunement",
-          "priority": 1
-        },
-        {
-          "key": "activities[enchant].consumption.targets",
-          "mode": 5,
-          "value": "[]",
-          "priority": 1
-        }
-      ],
       "duration": {
-        "seconds": 600,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": 600,
+        "units": "seconds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -87,9 +52,48 @@
       "origin": null,
       "img": "icons/magic/fire/explosion-embers-orange.webp",
       "type": "enchantment",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} (Active)",
+            "priority": 1,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "activities[enchant].activation.type",
+            "value": "action",
+            "priority": 1,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "activities[enchant].activation.condition",
+            "value": "end of duration",
+            "priority": 1,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "activities[enchant].name",
+            "value": "End Attunement",
+            "priority": 1,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "activities[enchant].consumption.targets",
+            "value": "[]",
+            "priority": 1,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!3BxSyCx1brcNlMGs.p6hQ9ALKwpKw5ctw"
+      "_key": "!items.effects!3BxSyCx1brcNlMGs.p6hQ9ALKwpKw5ctw",
+      "start": null
     }
   ],
   "system": {

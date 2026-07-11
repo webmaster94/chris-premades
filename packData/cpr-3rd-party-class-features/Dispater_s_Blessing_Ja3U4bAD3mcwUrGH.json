@@ -4,28 +4,27 @@
   "effects": [
     {
       "name": "Dispater's Blessing",
-      "changes": [
-        {
-          "key": "system.traits.armorProf.value",
-          "mode": 2,
-          "value": "hvy",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "img": "icons/equipment/chest/breastplate-collared-steel-grey.webp",
       "_id": "mjOfwhzF8MOdP1df",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.armorProf.value",
+            "value": "hvy",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Actor.xH5x7LcFCU8mZwr5.Item.X1vQOxB29xC7ftxj",
@@ -55,7 +54,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!Ja3U4bAD3mcwUrGH.mjOfwhzF8MOdP1df"
+      "_key": "!items.effects!Ja3U4bAD3mcwUrGH.mjOfwhzF8MOdP1df",
+      "start": null
     }
   ],
   "system": {

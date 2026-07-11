@@ -349,15 +349,11 @@
       "statuses": [
         "poisoned"
       ],
-      "changes": [],
       "duration": {
-        "seconds": 96400,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": 96400,
+        "units": "seconds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -405,10 +401,13 @@
       "_id": "aNonhqenp3EHj0dZ",
       "img": "icons/creatures/abilities/mouth-teeth-misshapen-pink.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!nrENssDxonJG5I4g.aNonhqenp3EHj0dZ"
+      "_key": "!items.effects!nrENssDxonJG5I4g.aNonhqenp3EHj0dZ",
+      "start": null
     }
   ],
   "folder": null,

@@ -229,28 +229,11 @@
   },
   "effects": [
     {
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "mode": 2,
-          "value": "+2",
-          "priority": 20
-        },
-        {
-          "key": "macro.tokenMagic",
-          "mode": 0,
-          "value": "bloom",
-          "priority": 20
-        }
-      ],
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -268,9 +251,27 @@
       "statuses": [],
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.ac.bonus",
+            "value": "+2",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "macro.tokenMagic",
+            "value": "bloom",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!8ZsFXsPW3OVzYblM.ZMxPakKTD57nK9yJ"
+      "_key": "!items.effects!8ZsFXsPW3OVzYblM.ZMxPakKTD57nK9yJ",
+      "start": null
     }
   ],
   "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",

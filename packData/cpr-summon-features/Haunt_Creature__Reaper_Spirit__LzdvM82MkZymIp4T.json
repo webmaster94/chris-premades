@@ -283,21 +283,19 @@
     {
       "origin": "Item.LarhizZYvshonCT2",
       "duration": {
-        "rounds": 1,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "disabled": false,
       "name": "Haunt Creature: Haunt",
       "img": "icons/magic/death/skull-energy-light-white.webp",
       "_id": "U4kpjG4QrMfIJUhU",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
@@ -345,7 +343,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!LzdvM82MkZymIp4T.U4kpjG4QrMfIJUhU"
+      "_key": "!items.effects!LzdvM82MkZymIp4T.U4kpjG4QrMfIJUhU",
+      "start": null
     }
   ],
   "folder": "5Xlp5AJbQJnDcSbD",

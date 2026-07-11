@@ -5,23 +5,12 @@
   "effects": [
     {
       "_id": "19euxgc9vmso0mdr",
-      "changes": [
-        {
-          "key": "system.bonuses.abilities.save",
-          "mode": 2,
-          "value": "-1d4",
-          "priority": 20
-        }
-      ],
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "rounds": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "transfer": false,
       "flags": {
@@ -31,7 +20,6 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [
-            "turnEndSource",
             "isSave"
           ],
           "transfer": false,
@@ -48,9 +36,20 @@
       "statuses": [],
       "img": "icons/magic/light/beam-rays-magenta.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.abilities.save",
+            "value": "-1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!yifUefGRgr5GeG1m.19euxgc9vmso0mdr"
+      "_key": "!items.effects!yifUefGRgr5GeG1m.19euxgc9vmso0mdr",
+      "start": null
     }
   ],
   "flags": {

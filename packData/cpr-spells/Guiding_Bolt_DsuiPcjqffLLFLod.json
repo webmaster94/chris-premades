@@ -270,22 +270,11 @@
   },
   "effects": [
     {
-      "changes": [
-        {
-          "key": "flags.midi-qol.grants.advantage.attack.all",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "rounds": 1,
-        "turns": 1,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -313,9 +302,20 @@
       "statuses": [],
       "img": "icons/magic/fire/flame-burning-hand-purple.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!DsuiPcjqffLLFLod.TOA1xaUiNvosLR2h"
+      "_key": "!items.effects!DsuiPcjqffLLFLod.TOA1xaUiNvosLR2h",
+      "start": null
     }
   ],
   "img": "icons/magic/fire/flame-burning-hand-purple.webp",

@@ -773,7 +773,7 @@ async function spellRingLate({workflow}) {
     let {value: spell2, max: spell2Max} = workflow.actor.system.spells.spell2;
     let {value: spell3, max: spell3Max} = workflow.actor.system.spells.spell3;
     let buttons = [];
-    if (pactLevel <= 3 && pact < pactMax) buttons.push([CONFIG.DND5E.spellPreparationModes.pact.label, 'pact']);
+    if (pactLevel <= 3 && pact < pactMax) buttons.push([CONFIG.DND5E.spellcasting.pact.label, 'pact']);
     if (spell1 < spell1Max) buttons.push([CONFIG.DND5E.spellLevels[1], 'spell1']);
     if (spell2 < spell2Max) buttons.push([CONFIG.DND5E.spellLevels[2], 'spell2']);
     if (spell3 < spell3Max) buttons.push([CONFIG.DND5E.spellLevels[3], 'spell3']);

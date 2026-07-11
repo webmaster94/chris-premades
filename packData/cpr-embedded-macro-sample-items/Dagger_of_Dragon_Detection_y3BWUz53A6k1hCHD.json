@@ -4,28 +4,27 @@
   "effects": [
     {
       "name": "Dragon Detected",
-      "changes": [
-        {
-          "key": "macro.tokenMagic",
-          "mode": 0,
-          "value": "glow",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/creatures/abilities/wing-batlike-white-blue.webp",
       "_id": "wfhQHPVS5Bk8UdA8",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "macro.tokenMagic",
+            "value": "glow",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -80,7 +79,8 @@
           }
         }
       },
-      "_key": "!items.effects!y3BWUz53A6k1hCHD.wfhQHPVS5Bk8UdA8"
+      "_key": "!items.effects!y3BWUz53A6k1hCHD.wfhQHPVS5Bk8UdA8",
+      "start": null
     }
   ],
   "system": {

@@ -113,7 +113,7 @@ async function use({workflow}){
     await genericUtils.update(effect, effectUpdates);
     if (!summonedToken) return;
     if (!itemUtils.getConfig(workflow.item, 'playAnimation')) return;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.aura_themed.01.orbit.loop.nature.01.green')
         .size(summonedToken.width + 16, {gridUnits: true})

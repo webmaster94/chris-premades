@@ -159,13 +159,10 @@
       "name": "Weight of Sorrow",
       "origin": "Compendium.world.cpr-summon-features.Item.qfskNelMDRL7hcts",
       "duration": {
-        "rounds": 1,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "rounds",
+        "expiry": "targetStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -181,29 +178,30 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStart"
-          ]
+          "specialDuration": []
         }
       },
       "img": "icons/commodities/materials/slime-white.webp",
       "_id": "Yn5Oy8uQxdvGL6K3",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "-20",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.all",
+            "value": "-20",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!QIVZcmzPCo5lh9oq.Yn5Oy8uQxdvGL6K3"
+      "_key": "!items.effects!QIVZcmzPCo5lh9oq.Yn5Oy8uQxdvGL6K3",
+      "start": null
     }
   ],
   "flags": {

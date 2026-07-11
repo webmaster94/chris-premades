@@ -899,28 +899,27 @@
   "effects": [
     {
       "name": "Wish: Stress",
-      "changes": [
-        {
-          "key": "system.abilities.str.value",
-          "mode": 3,
-          "value": "3",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/magic/light/projectiles-star-purple.webp",
       "_id": "X2ZBxNbcXlkVu866",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.abilities.str.value",
+            "value": "3",
+            "priority": 20,
+            "type": "downgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -969,32 +968,32 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!a8sTx0QQxlVohhuL.X2ZBxNbcXlkVu866"
+      "_key": "!items.effects!a8sTx0QQxlVohhuL.X2ZBxNbcXlkVu866",
+      "start": null
     },
     {
       "name": "Wish: Resistance",
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "acid",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/magic/light/projectiles-star-purple.webp",
       "_id": "XInfXKso0FRMJlYD",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "acid",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -1032,25 +1031,24 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!a8sTx0QQxlVohhuL.XInfXKso0FRMJlYD"
+      "_key": "!items.effects!a8sTx0QQxlVohhuL.XInfXKso0FRMJlYD",
+      "start": null
     },
     {
       "name": "Wish: Spell Immunity",
-      "changes": [],
       "transfer": false,
       "img": "icons/magic/light/projectiles-star-purple.webp",
       "_id": "9NArL1Q03OPDZCDo",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -1096,7 +1094,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!a8sTx0QQxlVohhuL.9NArL1Q03OPDZCDo"
+      "_key": "!items.effects!a8sTx0QQxlVohhuL.9NArL1Q03OPDZCDo",
+      "start": null
     }
   ],
   "name": "Wish",

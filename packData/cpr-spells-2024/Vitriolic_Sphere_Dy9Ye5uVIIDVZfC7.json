@@ -270,25 +270,14 @@
   },
   "effects": [
     {
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "mode": 0,
-          "value": "label=Vitriolic Sphere (End of Turn),turn=end,damageRoll=5d4,damageType=acid",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "_id": "JyVcH2Ldy51le3ZY",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "origin": null,
       "tint": "#ffffff",
@@ -299,9 +288,7 @@
           "stackable": "noneName",
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "core": {
           "statusId": ""
@@ -312,9 +299,20 @@
       "statuses": [],
       "img": "icons/magic/fire/projectile-fireball-smoke-large-green.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "label=Vitriolic Sphere (End of Turn),turn=end,damageRoll=5d4,damageType=acid",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!Dy9Ye5uVIIDVZfC7.JyVcH2Ldy51le3ZY"
+      "_key": "!items.effects!Dy9Ye5uVIIDVZfC7.JyVcH2Ldy51le3ZY",
+      "start": null
     }
   ],
   "img": "icons/magic/fire/projectile-fireball-smoke-large-green.webp",

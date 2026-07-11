@@ -24,7 +24,7 @@ async function use({workflow}) {
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.jb2aCheck() === 'patreon';
     if (!playAnimation) return;
     //Animation by Eskiemoh
-    let mainSequence = new Sequence()
+    let mainSequence = new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.extras.tmfx.border.circle.inpulse.01.fast')
         .attachTo(workflow.token)
@@ -147,7 +147,7 @@ async function use({workflow}) {
         .play();
 
     for (let target of workflow.targets) {
-        new Sequence()
+        new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('jb2a.toll_the_dead.red.skull_smoke')
             .attachTo(target, {bindRotation: false})

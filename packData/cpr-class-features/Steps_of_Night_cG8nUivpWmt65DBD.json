@@ -223,13 +223,10 @@
       "name": "Steps of Night",
       "origin": "Compendium.world.cpr-class-features.Item.PGY7JPY8vb6Yrq4R",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -254,21 +251,24 @@
       "img": "icons/creatures/birds/corvid-flying-wings-purple.webp",
       "_id": "PpoH1dhDmtoIGZyn",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.fly",
-          "mode": 4,
-          "value": "@attributes.movement.walk",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.fly",
+            "value": "@attributes.movement.walk",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!cG8nUivpWmt65DBD.PpoH1dhDmtoIGZyn"
+      "_key": "!items.effects!cG8nUivpWmt65DBD.PpoH1dhDmtoIGZyn",
+      "start": null
     }
   ],
   "img": "icons/creatures/birds/corvid-flying-wings-purple.webp",

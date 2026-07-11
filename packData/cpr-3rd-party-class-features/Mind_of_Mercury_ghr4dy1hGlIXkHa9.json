@@ -4,28 +4,27 @@
   "effects": [
     {
       "name": "Mind of Mercury",
-      "changes": [
-        {
-          "key": "flags.midi-qol.actions.reactionsMax",
-          "mode": 5,
-          "priority": 20,
-          "value": "2"
-        }
-      ],
       "transfer": true,
       "img": "icons/magic/air/air-wave-gust-blue.webp",
       "_id": "OvAftuBgCH7UEoON",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.actions.reactionsMax",
+            "priority": 20,
+            "value": "2",
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Actor.oGXY1CS6ZXBzNHP0.Item.G5iALssetXhughtL",
@@ -65,7 +64,8 @@
           "rules": "legacy"
         }
       },
-      "_key": "!items.effects!ghr4dy1hGlIXkHa9.OvAftuBgCH7UEoON"
+      "_key": "!items.effects!ghr4dy1hGlIXkHa9.OvAftuBgCH7UEoON",
+      "start": null
     }
   ],
   "system": {

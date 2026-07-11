@@ -152,28 +152,27 @@
   "effects": [
     {
       "name": "Blade Ward",
-      "changes": [
-        {
-          "key": "flags.midi-qol.grants.attack.bonus.all",
-          "mode": 2,
-          "value": "-1d4",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/equipment/shield/buckler-wooden-boss-glowing-blue.webp",
       "_id": "ynXhbNOfYRje4keY",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.attack.bonus.all",
+            "value": "-1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -198,7 +197,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!r1MLGWtfVPTVFBNt.ynXhbNOfYRje4keY"
+      "_key": "!items.effects!r1MLGWtfVPTVFBNt.ynXhbNOfYRje4keY",
+      "start": null
     }
   ],
   "name": "Blade Ward",

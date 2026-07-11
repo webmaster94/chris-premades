@@ -176,25 +176,14 @@
   },
   "effects": [
     {
-      "changes": [
-        {
-          "key": "flags.midi-qol.grants.disadvantage.attack.all",
-          "mode": 0,
-          "value": "['aberration', 'celestial', 'elemental', 'fey', 'fiend', 'undead'].includes(actor.raceOrType)",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "_id": "nVLDeohDoSMoBP5v",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": 600,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 600,
+        "units": "seconds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "origin": null,
       "tint": "#ffffff",
@@ -236,9 +225,20 @@
       "statuses": [],
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.disadvantage.attack.all",
+            "value": "['aberration', 'celestial', 'elemental', 'fey', 'fiend', 'undead'].includes(actor.raceOrType)",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!LAjtSpMEyIDbeOct.nVLDeohDoSMoBP5v"
+      "_key": "!items.effects!LAjtSpMEyIDbeOct.nVLDeohDoSMoBP5v",
+      "start": null
     }
   ],
   "flags": {

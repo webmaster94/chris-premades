@@ -289,34 +289,34 @@
   "effects": [
     {
       "name": "Eldritch Maul",
-      "changes": [
-        {
-          "key": "flags.midi-qol.range.mwak",
-          "mode": 2,
-          "value": "+10",
-          "priority": 20
-        },
-        {
-          "key": "system.bonuses.mwak.damage",
-          "mode": 2,
-          "value": "+1d6[force]",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/creatures/claws/claw-talons-yellow-red.webp",
       "_id": "co1pK03xNYvlDCTx",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.range.mwak",
+            "value": "+10",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.bonuses.mwak.damage",
+            "value": "+1d6[force]",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -357,7 +357,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!hL6qJ1lRORP9pcpx.co1pK03xNYvlDCTx"
+      "_key": "!items.effects!hL6qJ1lRORP9pcpx.co1pK03xNYvlDCTx",
+      "start": null
     }
   ],
   "img": "icons/creatures/claws/claw-talons-yellow-red.webp",

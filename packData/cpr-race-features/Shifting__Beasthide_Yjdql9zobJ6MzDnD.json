@@ -5,22 +5,11 @@
     {
       "name": "Shifted: Beasthide",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "value": "1",
-          "mode": 2,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": 60,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": 60,
+        "units": "seconds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -59,10 +48,21 @@
       "_id": "SU01WOEquHBADObz",
       "img": "icons/creatures/abilities/cougar-pounce-stalk-black.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.ac.bonus",
+            "value": "1",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!Yjdql9zobJ6MzDnD.SU01WOEquHBADObz"
+      "_key": "!items.effects!Yjdql9zobJ6MzDnD.SU01WOEquHBADObz",
+      "start": null
     }
   ],
   "system": {

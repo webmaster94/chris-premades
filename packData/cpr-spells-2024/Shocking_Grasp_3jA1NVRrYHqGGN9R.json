@@ -9,24 +9,23 @@
       "origin": "Compendium.world.cpr-spells-2024.Item.3jA1NVRrYHqGGN9R",
       "_id": "3lpacmqeJEziGdYH",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.gambits-premades.oaSuppression",
-          "mode": 5,
-          "value": "true",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.gambits-premades.oaSuppression",
+            "value": "true",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": 1,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "rounds",
+        "expiry": "targetStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -40,9 +39,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStart"
-          ],
+          "specialDuration": [],
           "enableCondition": "",
           "selfTarget": false,
           "selfTargetAlways": false,
@@ -58,7 +55,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!3jA1NVRrYHqGGN9R.3lpacmqeJEziGdYH"
+      "_key": "!items.effects!3jA1NVRrYHqGGN9R.3lpacmqeJEziGdYH",
+      "start": null
     }
   ],
   "flags": {

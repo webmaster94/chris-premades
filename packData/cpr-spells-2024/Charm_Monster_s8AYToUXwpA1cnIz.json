@@ -163,21 +163,19 @@
   "effects": [
     {
       "name": "Charm Monster",
-      "changes": [],
       "transfer": false,
       "img": "icons/creatures/unholy/demon-winged-cyclops-drooling.webp",
       "_id": "PI97wkEWv9amtbha",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -211,7 +209,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!s8AYToUXwpA1cnIz.PI97wkEWv9amtbha"
+      "_key": "!items.effects!s8AYToUXwpA1cnIz.PI97wkEWv9amtbha",
+      "start": null
     }
   ],
   "name": "Charm Monster",

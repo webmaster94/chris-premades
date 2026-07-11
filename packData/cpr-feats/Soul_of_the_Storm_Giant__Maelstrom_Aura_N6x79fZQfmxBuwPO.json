@@ -363,24 +363,23 @@
       "transfer": false,
       "_id": "GuoYsJBccZfHITXc",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "/2",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.all",
+            "value": "/2",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": 2,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 2,
+        "units": "rounds",
+        "expiry": "targetStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -397,16 +396,15 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStart"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
         }
       },
       "sort": 0,
-      "_key": "!items.effects!N6x79fZQfmxBuwPO.GuoYsJBccZfHITXc"
+      "_key": "!items.effects!N6x79fZQfmxBuwPO.GuoYsJBccZfHITXc",
+      "start": null
     }
   ],
   "img": "icons/magic/lightning/bolt-strike-forked-blue.webp",

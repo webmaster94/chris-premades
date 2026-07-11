@@ -222,13 +222,10 @@
       "name": "Shadow Step",
       "origin": "Compendium.world.cpr-class-features.Item.d4O0CGH4k0dMHLUu",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": 1,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "turns",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -245,7 +242,6 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [
-            "turnEndSource",
             "1Attack"
           ]
         },
@@ -256,27 +252,31 @@
       "img": "icons/magic/control/debuff-energy-hold-pink.webp",
       "_id": "jQ9fKgM3IBlnCdEe",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.attack.mwak",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.attack.msak",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.attack.mwak",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.attack.msak",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!KCj5awEfpn9YvTr0.jQ9fKgM3IBlnCdEe"
+      "_key": "!items.effects!KCj5awEfpn9YvTr0.jQ9fKgM3IBlnCdEe",
+      "start": null
     }
   ],
   "img": "icons/magic/control/debuff-energy-hold-pink.webp",

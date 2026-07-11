@@ -4,28 +4,27 @@
   "effects": [
     {
       "name": "Disengage",
-      "changes": [
-        {
-          "key": "flags.gambits-premades.oaImmunity",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/movement/feet-winged-boots-blue.webp",
       "_id": "rWKs5feD0evtm4dt",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.gambits-premades.oaImmunity",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": 1,
-        "combat": null,
-        "rounds": null,
-        "turns": 1,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "description": "",
       "origin": "Actor.oGXY1CS6ZXBzNHP0.Item.4f6kyrS3Udi1OGn1",
@@ -43,9 +42,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "ActiveAuras": {
           "isAura": false,
@@ -81,38 +78,39 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!VmtbViPm3OFo8kUw.rWKs5feD0evtm4dt"
+      "_key": "!items.effects!VmtbViPm3OFo8kUw.rWKs5feD0evtm4dt",
+      "start": null
     },
     {
       "name": "Dodge",
-      "changes": [
-        {
-          "key": "flags.midi-qol.grants.disadvantage.attack.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.save.dex",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/equipment/shield/buckler-wooden-boss-lightning.webp",
       "_id": "eJqzkCXWP3ZdQQTP",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.disadvantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.save.dex",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "origin": "Actor.oGXY1CS6ZXBzNHP0.Item.4f6kyrS3Udi1OGn1",
@@ -130,9 +128,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "ActiveAuras": {
           "isAura": false,
@@ -160,21 +156,18 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!VmtbViPm3OFo8kUw.eJqzkCXWP3ZdQQTP"
+      "_key": "!items.effects!VmtbViPm3OFo8kUw.eJqzkCXWP3ZdQQTP",
+      "start": null
     },
     {
-      "changes": [],
       "transfer": false,
       "_id": "Fe7u81Zh3UR8ERtJ",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "origin": "Actor.oGXY1CS6ZXBzNHP0.Item.4f6kyrS3Udi1OGn1",
       "tint": "#ffffff",
@@ -195,9 +188,12 @@
       "statuses": [],
       "img": "icons/skills/movement/figure-running-gray.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "sort": 0,
-      "_key": "!items.effects!VmtbViPm3OFo8kUw.Fe7u81Zh3UR8ERtJ"
+      "_key": "!items.effects!VmtbViPm3OFo8kUw.Fe7u81Zh3UR8ERtJ",
+      "start": null
     }
   ],
   "system": {

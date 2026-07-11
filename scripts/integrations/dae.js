@@ -1,6 +1,7 @@
 import {genericUtils} from '../utils.js';
 
 const daeFieldBrowserFields = [];
+let renderItemSheetHookId;
 
 function initFlags() {
     let browserFields = [
@@ -48,8 +49,8 @@ function renderItemSheet(app, [elem], options) {
     if (!headerButton) return;
     let object = app.object;
     if (!object) return;
-    let passiveEffect = !!object.effects.find(i => i.transfer && !i.flags.dnd5e?.type != 'enchantment');
-    let transferEffect = !!object.effects.find(i => !i.transfer && !i.flags.dnd5e?.type != 'enchantment');
+    let passiveEffect = !!object.effects.find(i => i.transfer && i.flags.dnd5e?.type !== 'enchantment');
+    let transferEffect = !!object.effects.find(i => !i.transfer && i.flags.dnd5e?.type !== 'enchantment');
     let enchantmentEffect = !!object.effects.find(i => i.flags.dnd5e?.type === 'enchantment');
     let color;
     if (passiveEffect && !transferEffect && !enchantmentEffect) {
@@ -60,12 +61,21 @@ function renderItemSheet(app, [elem], options) {
         color = 'orchid';
     } else if (passiveEffect && !transferEffect && enchantmentEffect) {
         color = 'orange';
-    } else if (!passiveEffect && !passiveEffect && enchantmentEffect) {
+    } else if (!passiveEffect && !transferEffect && enchantmentEffect) {
         color = 'pink';
     } else if (transferEffect && passiveEffect && enchantmentEffect) {
         color = 'brown';
     } else return;
     headerButton.style.color = color;
+}
+function toggleRenderItemSheet(enabled) {
+    if (enabled) {
+        if (renderItemSheetHookId == null) renderItemSheetHookId = Hooks.on('renderItemSheetV2', renderItemSheet);
+        return;
+    }
+    if (renderItemSheetHookId == null) return;
+    Hooks.off('renderItemSheetV2', renderItemSheetHookId);
+    renderItemSheetHookId = undefined;
 }
 export let dae = {
     initFlags,
@@ -73,5 +83,6 @@ export let dae = {
     addFlags,
     modifySpecials,
     renderItemSheet,
+    toggleRenderItemSheet,
     daeFieldBrowserFields
 };

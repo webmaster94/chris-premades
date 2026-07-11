@@ -9,42 +9,44 @@
       "transfer": false,
       "_id": "YFpkzjlTfiv3F869",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.grants.bonus.damage.msak",
-          "mode": 0,
-          "value": "@prof",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.grants.bonus.damage.mwak",
-          "mode": 0,
-          "value": "@prof",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.grants.bonus.damage.rsak",
-          "mode": 0,
-          "value": "@prof",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.grants.bonus.damage.rwak",
-          "mode": 0,
-          "value": "@prof",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.bonus.damage.msak",
+            "value": "@prof",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.grants.bonus.damage.mwak",
+            "value": "@prof",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.grants.bonus.damage.rsak",
+            "value": "@prof",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.grants.bonus.damage.rwak",
+            "value": "@prof",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -78,7 +80,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!9ao3yxa1UsUmIZB8.YFpkzjlTfiv3F869"
+      "_key": "!items.effects!9ao3yxa1UsUmIZB8.YFpkzjlTfiv3F869",
+      "start": null
     }
   ],
   "system": {

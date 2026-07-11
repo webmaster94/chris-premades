@@ -78,13 +78,10 @@
       "name": "Evasion",
       "origin": "Compendium.world.cpr-class-features.Item.wrJMIAyqHD1YzK8w",
       "duration": {
-        "rounds": null,
-        "startTime": 1404,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 235,
-        "startTurn": 8
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -105,21 +102,24 @@
       "img": "icons/magic/light/beam-red-orange.webp",
       "_id": "bzHUnvkGjSExvEfB",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.superSaver.dex",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.superSaver.dex",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!0Jr1itXw0XXBazgt.bzHUnvkGjSExvEfB"
+      "_key": "!items.effects!0Jr1itXw0XXBazgt.bzHUnvkGjSExvEfB",
+      "start": null
     }
   ],
   "img": "icons/magic/light/beam-red-orange.webp",

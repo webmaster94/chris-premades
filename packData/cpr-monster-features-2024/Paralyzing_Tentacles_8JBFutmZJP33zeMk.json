@@ -173,24 +173,23 @@
       "transfer": false,
       "_id": "e1WsqbVVc1qI9ixv",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=con,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
-          "mode": 0,
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=con,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -230,7 +229,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!8JBFutmZJP33zeMk.e1WsqbVVc1qI9ixv"
+      "_key": "!items.effects!8JBFutmZJP33zeMk.e1WsqbVVc1qI9ixv",
+      "start": null
     }
   ],
   "flags": {

@@ -9,24 +9,23 @@
       "transfer": false,
       "_id": "kIF50ciAuOZn7GG9",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=wis,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
-          "mode": 0,
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=wis,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -88,7 +87,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!MYMzSKW3VzMM2mWs.kIF50ciAuOZn7GG9"
+      "_key": "!items.effects!MYMzSKW3VzMM2mWs.kIF50ciAuOZn7GG9",
+      "start": null
     },
     {
       "name": "Beguiling Magic: Frightened",
@@ -97,24 +97,23 @@
       "transfer": false,
       "_id": "PgxKbV7Wg2O8HDBA",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=wis,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
-          "mode": 0,
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=wis,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -161,7 +160,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!MYMzSKW3VzMM2mWs.PgxKbV7Wg2O8HDBA"
+      "_key": "!items.effects!MYMzSKW3VzMM2mWs.PgxKbV7Wg2O8HDBA",
+      "start": null
     }
   ],
   "system": {

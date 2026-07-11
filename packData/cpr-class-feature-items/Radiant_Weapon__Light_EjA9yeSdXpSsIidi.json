@@ -99,31 +99,14 @@
   },
   "effects": [
     {
-      "changes": [
-        {
-          "key": "ATL.light.dim",
-          "mode": 4,
-          "value": "60",
-          "priority": 20
-        },
-        {
-          "key": "ATL.light.bright",
-          "mode": 4,
-          "value": "30",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "_id": "mAxKMQn8sWjYVUbt",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "origin": "Compendium.world.cpr-class-feature-items.Item.yKNwQR9Q3ZXHxmWy",
       "tint": "#ffffff",
@@ -150,9 +133,27 @@
       "statuses": [],
       "img": "icons/weapons/swords/sword-runed-glowing.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "ATL.light.dim",
+            "value": "60",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "ATL.light.bright",
+            "value": "30",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!EjA9yeSdXpSsIidi.mAxKMQn8sWjYVUbt"
+      "_key": "!items.effects!EjA9yeSdXpSsIidi.mAxKMQn8sWjYVUbt",
+      "start": null
     }
   ],
   "flags": {

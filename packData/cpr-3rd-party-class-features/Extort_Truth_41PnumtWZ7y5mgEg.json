@@ -9,12 +9,15 @@
       "transfer": false,
       "_id": "0luKg1DsMayPcnPh",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -29,7 +32,8 @@
           ]
         }
       },
-      "_key": "!items.effects!41PnumtWZ7y5mgEg.0luKg1DsMayPcnPh"
+      "_key": "!items.effects!41PnumtWZ7y5mgEg.0luKg1DsMayPcnPh",
+      "start": null
     }
   ],
   "system": {

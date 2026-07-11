@@ -29,7 +29,7 @@ async function hit({trigger: {entity: effect}, workflow}) {
     let playAnimation = itemUtils.getConfig(originItem, 'playAnimation');
     if (!playAnimation) return;
     //Animations by: eskiemoh
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.impact.004.blue')
         .atLocation(targetToken)
@@ -65,7 +65,7 @@ async function start({trigger: {entity}}) {
     let token = actorUtils.getFirstToken(entity.parent);
     if (!token) return;
     if (animationUtils.jb2aCheck() !== 'patreon') return;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.ward.rune.dark_purple.01')
         .atLocation(token)
@@ -159,7 +159,7 @@ async function end({trigger: {entity}}) {
     if (!token) return;
     if (animationUtils.jb2aCheck() !== 'patreon') return;
     Sequencer.EffectManager.endEffects({name: 'Armor of Agathys', object: token});
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .attachTo(token)
         .file('jb2a.shield.01.outro_explode.blue')

@@ -940,19 +940,23 @@
       "transfer": false,
       "_id": "bZ33GsuNXgoYWstF",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
       "statuses": [],
       "sort": 0,
       "flags": {},
-      "_key": "!items.effects!9VR4ZAD3BTiJmIDf.bZ33GsuNXgoYWstF"
+      "_key": "!items.effects!9VR4ZAD3BTiJmIDf.bZ33GsuNXgoYWstF",
+      "start": null
     }
   ],
   "folder": "Rs0Cif6QdrjPiVkz",

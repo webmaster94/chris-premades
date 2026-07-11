@@ -237,13 +237,10 @@
       "name": "Channel Divinity: Charm Animals and Plants",
       "origin": "Compendium.world.cpr-class-features.Item.VuO4A56GSkgj7cdN",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -276,14 +273,16 @@
       "img": "icons/magic/nature/wolf-paw-glow-large-purple-teal.webp",
       "_id": "Gx6hKzFMZs47Qa1L",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!ErVzITBhWAdIMWWx.Gx6hKzFMZs47Qa1L"
+      "_key": "!items.effects!ErVzITBhWAdIMWWx.Gx6hKzFMZs47Qa1L",
+      "start": null
     }
   ],
   "img": "icons/magic/nature/wolf-paw-glow-large-purple-teal.webp",

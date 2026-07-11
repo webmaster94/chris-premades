@@ -108,13 +108,10 @@
       "name": "Dragon-Touched Focus (Slumbering)",
       "origin": "Compendium.world.items.Item.kiIiQwzb1Ycg3Hdq",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -135,21 +132,24 @@
       "img": "icons/commodities/flowers/lily-water-pink.webp",
       "_id": "Cvksu2MUTo4lSEtF",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.init.roll.mode",
-          "mode": 4,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.init.roll.mode",
+            "value": "1",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!kiIiQwzb1Ycg3Hdq.Cvksu2MUTo4lSEtF"
+      "_key": "!items.effects!kiIiQwzb1Ycg3Hdq.Cvksu2MUTo4lSEtF",
+      "start": null
     }
   ],
   "img": "icons/commodities/flowers/lily-water-pink.webp",

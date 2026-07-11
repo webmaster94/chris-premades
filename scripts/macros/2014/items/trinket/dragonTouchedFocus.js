@@ -3,7 +3,7 @@ import {itemUtils, workflowUtils} from '../../../../utils.js';
 
 async function damage({workflow}) {
     if (workflow.item.type !== 'spell') return;
-    if (['innate', 'atwill', 'ritual'].includes(workflow.item.preparation?.mode)) return;
+    if (['innate', 'atwill', 'ritual'].includes(workflow.item.system.method)) return;
     let spellLevel = workflowUtils.getCastLevel(workflow) ?? workflow.item.flags?.['chris-premades']?.castData?.castLevel;
     if (!spellLevel) return;
     let matchedDamages = workflowUtils.getDamageTypes(workflow.damageRolls).intersection(new Set(['acid', 'cold', 'fire', 'lightning', 'poison']));
@@ -12,7 +12,7 @@ async function damage({workflow}) {
 }
 async function lateGem({trigger: {entity: item}, workflow}) {
     if (workflow.item.type !== 'spell') return;
-    if (['innate', 'atwill', 'ritual'].includes(workflow.item.preparation?.mode)) return;
+    if (['innate', 'atwill', 'ritual'].includes(workflow.item.system.method)) return;
     if (!workflow.item.system.level) return;
     await Teleport.target(workflow.token, workflow.token, {
         animation: itemUtils.getConfig(item, 'playAnimation') ? 'mistyStep' : 'none',

@@ -53,7 +53,7 @@ async function handleTemplates({workflow}) {
 function animation(workflow, dependent) {
     if (!animationUtils.sequencerCheck() || !['patreon', 'free'].includes(animationUtils.jb2aCheck())) return;
     /* eslint-disable indent */
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect(itemUtils.getConfig(workflow.item, 'animationColor'))
             .atLocation(canvas.scene.regions.get(workflow.template.id)?.object ?? workflow.template.object ?? workflow.template)
             .tieToDocuments(dependent)

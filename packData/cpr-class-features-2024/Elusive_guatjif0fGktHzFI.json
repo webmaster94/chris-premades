@@ -4,28 +4,27 @@
   "effects": [
     {
       "name": "Elusive",
-      "changes": [
-        {
-          "key": "flags.midi-qol.grants.noAdvantage.attack.all",
-          "mode": 0,
-          "value": "!target.statuses.incapacitated",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "img": "icons/creatures/slimes/slime-movement-swirling-blue.webp",
       "_id": "SaU9twsq0lyW0j0u",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.noAdvantage.attack.all",
+            "value": "!target.statuses.incapacitated",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Actor.4F5kQIpxwyb6rykH.Item.8x374CzqHRTddyKE",
@@ -55,7 +54,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!guatjif0fGktHzFI.SaU9twsq0lyW0j0u"
+      "_key": "!items.effects!guatjif0fGktHzFI.SaU9twsq0lyW0j0u",
+      "start": null
     }
   ],
   "system": {

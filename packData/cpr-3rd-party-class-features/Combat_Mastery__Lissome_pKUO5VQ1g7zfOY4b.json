@@ -4,28 +4,27 @@
   "effects": [
     {
       "name": "Combat Mastery: Lissome",
-      "changes": [
-        {
-          "key": "flags.gambits-premades.oaImmunity",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/melee/maneuver-greatsword-yellow.webp",
       "_id": "i3F2ckSOirvM4qZE",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.gambits-premades.oaImmunity",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -66,7 +65,8 @@
           "rules": "legacy"
         }
       },
-      "_key": "!items.effects!pKUO5VQ1g7zfOY4b.i3F2ckSOirvM4qZE"
+      "_key": "!items.effects!pKUO5VQ1g7zfOY4b.i3F2ckSOirvM4qZE",
+      "start": null
     }
   ],
   "system": {

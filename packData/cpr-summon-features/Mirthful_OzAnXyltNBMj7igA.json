@@ -169,18 +169,14 @@
   },
   "effects": [
     {
-      "changes": [],
       "transfer": false,
       "_id": "PjgP9c2N1ghvr0JW",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": 60,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 60,
+        "units": "seconds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "origin": null,
       "tint": "#ffffff",
@@ -213,9 +209,12 @@
       "statuses": [],
       "img": "icons/magic/control/debuff-energy-snare-green.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "sort": 0,
-      "_key": "!items.effects!OzAnXyltNBMj7igA.PjgP9c2N1ghvr0JW"
+      "_key": "!items.effects!OzAnXyltNBMj7igA.PjgP9c2N1ghvr0JW",
+      "start": null
     }
   ],
   "flags": {

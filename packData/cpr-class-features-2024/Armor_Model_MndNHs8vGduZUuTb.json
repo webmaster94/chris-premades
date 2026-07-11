@@ -5,34 +5,11 @@
     {
       "name": "Guardian",
       "statuses": [],
-      "changes": [
-        {
-          "key": "name",
-          "value": "{} [Guardian]",
-          "mode": 5,
-          "priority": 20
-        },
-        {
-          "key": "system.strength",
-          "value": "",
-          "mode": 5,
-          "priority": 20
-        },
-        {
-          "key": "system.properties",
-          "value": "foc",
-          "mode": 2,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -66,41 +43,43 @@
       "origin": null,
       "img": "icons/equipment/chest/breastplate-collared-steel-grey.webp",
       "type": "enchantment",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} [Guardian]",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "system.strength",
+            "value": "",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "system.properties",
+            "value": "foc",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!MndNHs8vGduZUuTb.DaLXdodBZTokks2y"
+      "_key": "!items.effects!MndNHs8vGduZUuTb.DaLXdodBZTokks2y",
+      "start": null
     },
     {
       "name": "Infiltrator",
       "statuses": [],
-      "changes": [
-        {
-          "key": "name",
-          "value": "{} [Infiltrator]",
-          "mode": 5,
-          "priority": 30
-        },
-        {
-          "key": "system.strength",
-          "value": "",
-          "mode": 5,
-          "priority": 20
-        },
-        {
-          "key": "system.properties",
-          "value": "foc",
-          "mode": 2,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -137,41 +116,43 @@
       "origin": null,
       "img": "icons/equipment/chest/breastplate-collared-steel-grey.webp",
       "type": "enchantment",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} [Infiltrator]",
+            "priority": 30,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "system.strength",
+            "value": "",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "system.properties",
+            "value": "foc",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!MndNHs8vGduZUuTb.s1ZDPSXvIpULeSsV"
+      "_key": "!items.effects!MndNHs8vGduZUuTb.s1ZDPSXvIpULeSsV",
+      "start": null
     },
     {
       "name": "Dreadnaught",
       "statuses": [],
-      "changes": [
-        {
-          "key": "name",
-          "value": "{} [Dreadnaught]",
-          "mode": 5,
-          "priority": 20
-        },
-        {
-          "key": "system.strength",
-          "value": "",
-          "mode": 5,
-          "priority": 20
-        },
-        {
-          "key": "system.properties",
-          "value": "foc",
-          "mode": 2,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -205,28 +186,51 @@
       "origin": null,
       "img": "icons/equipment/chest/breastplate-collared-steel-grey.webp",
       "type": "enchantment",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} [Dreadnaught]",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "system.strength",
+            "value": "",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "system.properties",
+            "value": "foc",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!MndNHs8vGduZUuTb.d9U8vFDv9K76eivx"
+      "_key": "!items.effects!MndNHs8vGduZUuTb.d9U8vFDv9K76eivx",
+      "start": null
     },
     {
       "name": "Dreadnaught Armor",
       "origin": "Actor.jFxyd72ph3VeP2u4.Item.RvBWGV10kff0ZuNi",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/chest/breastplate-collared-steel-grey.webp",
       "_id": "jEiWq67Wbdqr2o60",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
@@ -265,25 +269,24 @@
           "rules": "modern"
         }
       },
-      "_key": "!items.effects!MndNHs8vGduZUuTb.jEiWq67Wbdqr2o60"
+      "_key": "!items.effects!MndNHs8vGduZUuTb.jEiWq67Wbdqr2o60",
+      "start": null
     },
     {
       "name": "Guardian Armor",
       "origin": "Actor.jFxyd72ph3VeP2u4.Item.RvBWGV10kff0ZuNi",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/chest/breastplate-cuirass-steel-grey.webp",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
@@ -323,38 +326,39 @@
         }
       },
       "_id": "pf9aFU15q35QGHbl",
-      "_key": "!items.effects!MndNHs8vGduZUuTb.pf9aFU15q35QGHbl"
+      "_key": "!items.effects!MndNHs8vGduZUuTb.pf9aFU15q35QGHbl",
+      "start": null
     },
     {
       "name": "Infiltrator Armor",
       "origin": "Actor.jFxyd72ph3VeP2u4.Item.RvBWGV10kff0ZuNi",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/chest/breastplate-cuirass-steel-blue.webp",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.skill.ste",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "+5",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.skill.ste",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.all",
+            "value": "+5",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
@@ -394,7 +398,8 @@
         }
       },
       "_id": "syQdMRc6TifLwyIJ",
-      "_key": "!items.effects!MndNHs8vGduZUuTb.syQdMRc6TifLwyIJ"
+      "_key": "!items.effects!MndNHs8vGduZUuTb.syQdMRc6TifLwyIJ",
+      "start": null
     }
   ],
   "system": {

@@ -99,13 +99,10 @@
       "name": "Dreadful Strikes",
       "origin": "Compendium.chris-premades.CPRClassFeatures2024.Item.vAcfkUUPvHuvWq31",
       "duration": {
-        "rounds": null,
-        "startTime": 1404,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 235,
-        "startTurn": 2
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -130,45 +127,52 @@
       "img": "icons/creatures/claws/claw-curved-poison-purple.webp",
       "_id": "qJM52MMdfw1EtwIX",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.optional.DreadfulStrikes.damage.rwak",
-          "mode": 5,
-          "value": "@scale.fey-wanderer.dreadful-strikes[psychic]",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.DreadfulStrikes.damage.mwak",
-          "mode": 5,
-          "value": "@scale.fey-wanderer.dreadful-strikes[psychic]",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.DreadfulStrikes.criticalDamage",
-          "mode": 5,
-          "value": "true",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.DreadfulStrikes.label",
-          "mode": 5,
-          "value": "Dreadful Strikes",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.DreadfulStrikes.count",
-          "mode": 5,
-          "value": "turn",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.optional.DreadfulStrikes.damage.rwak",
+            "value": "@scale.fey-wanderer.dreadful-strikes[psychic]",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.DreadfulStrikes.damage.mwak",
+            "value": "@scale.fey-wanderer.dreadful-strikes[psychic]",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.DreadfulStrikes.criticalDamage",
+            "value": "true",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.DreadfulStrikes.label",
+            "value": "Dreadful Strikes",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.DreadfulStrikes.count",
+            "value": "turn",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!vAcfkUUPvHuvWq31.qJM52MMdfw1EtwIX"
+      "_key": "!items.effects!vAcfkUUPvHuvWq31.qJM52MMdfw1EtwIX",
+      "start": null
     }
   ],
   "folder": "HrrCWx81ACzaenJw",

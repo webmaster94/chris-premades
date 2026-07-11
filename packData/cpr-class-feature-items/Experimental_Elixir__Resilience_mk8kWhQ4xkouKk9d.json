@@ -305,13 +305,10 @@
       "name": "Experimental Elixir: Resilience",
       "origin": "Compendium.world.cpr-class-feature-items.Item.9QNNHLEOnbKtgnVs",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -336,21 +333,24 @@
       "img": "icons/tools/laboratory/vial-orange.webp",
       "_id": "s0SC6JhNwUNNMOqr",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "mode": 2,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.ac.bonus",
+            "value": "1",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!mk8kWhQ4xkouKk9d.s0SC6JhNwUNNMOqr"
+      "_key": "!items.effects!mk8kWhQ4xkouKk9d.s0SC6JhNwUNNMOqr",
+      "start": null
     }
   ],
   "flags": {

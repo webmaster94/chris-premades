@@ -5,22 +5,11 @@
     {
       "name": "I Survived to Tell the Tale",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.attributes.movement.walk",
-          "value": "10",
-          "mode": 2,
-          "priority": 9
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": 214770,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -58,10 +47,21 @@
       "_id": "YVqN5aec7fOeY0oz",
       "img": "icons/magic/control/silhouette-hold-beam-blue.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.walk",
+            "value": "10",
+            "priority": 9,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": "Compendium.world.cpr-3rd-party-feats-2024.Item.yvq4wzw6U8PRrhus",
       "sort": 0,
-      "_key": "!items.effects!yvq4wzw6U8PRrhus.YVqN5aec7fOeY0oz"
+      "_key": "!items.effects!yvq4wzw6U8PRrhus.YVqN5aec7fOeY0oz",
+      "start": null
     }
   ],
   "system": {

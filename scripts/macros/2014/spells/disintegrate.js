@@ -9,7 +9,7 @@ async function use({workflow}) {
         if (!playAnimation || animationUtils.jb2aCheck() !== 'patreon' || !animationUtils.aseCheck()) continue;
         let centerPoint = target.getCenterPoint();
         /* eslint-disable indent */
-        let seq = new Sequence()
+        let seq = new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
                 .atLocation(workflow.token)
                 .file('jb2a.magic_signs.circle.02.transmutation.loop.dark_green')

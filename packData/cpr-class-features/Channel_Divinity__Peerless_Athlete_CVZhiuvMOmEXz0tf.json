@@ -218,13 +218,10 @@
       "name": "Channel Divinity: Peerless Athlete",
       "origin": "Compendium.world.cpr-class-features.Item.Mv8RUJYdHfyMGAF4",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -249,33 +246,38 @@
       "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
       "_id": "m2El6Syhcs8YhED5",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.skill.acr",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.skill.ath",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.encumbrance.multipliers.overall",
-          "mode": 1,
-          "value": "2",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.skill.acr",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.skill.ath",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.encumbrance.multipliers.overall",
+            "value": "2",
+            "priority": 20,
+            "type": "multiply",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!CVZhiuvMOmEXz0tf.m2El6Syhcs8YhED5"
+      "_key": "!items.effects!CVZhiuvMOmEXz0tf.m2El6Syhcs8YhED5",
+      "start": null
     }
   ],
   "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",

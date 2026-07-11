@@ -201,28 +201,11 @@
   "effects": [
     {
       "img": "icons/skills/ranged/arrow-flying-white-blue.webp",
-      "changes": [
-        {
-          "key": "flags.dnd5e.sharpShooter",
-          "mode": 0,
-          "value": "1",
-          "priority": 30
-        },
-        {
-          "key": "flags.midi-qol.ignoreNearbyFoes",
-          "mode": 5,
-          "value": "['martialR', 'simpleR'].includes(workflow.item.system.type.value)",
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": 1752,
-        "rounds": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -273,11 +256,29 @@
       "statuses": [],
       "_id": "XNHZUZWx8ulIFnkz",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.dnd5e.sharpShooter",
+            "value": "1",
+            "priority": 30,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.ignoreNearbyFoes",
+            "value": "['martialR', 'simpleR'].includes(workflow.item.system.type.value)",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "origin": "Compendium.chris-premades.CPRFeats2024.Item.03nom9MxLVPjtWvt",
       "sort": 0,
-      "_key": "!items.effects!03nom9MxLVPjtWvt.XNHZUZWx8ulIFnkz"
+      "_key": "!items.effects!03nom9MxLVPjtWvt.XNHZUZWx8ulIFnkz",
+      "start": null
     }
   ],
   "img": "icons/skills/ranged/arrow-flying-white-blue.webp",

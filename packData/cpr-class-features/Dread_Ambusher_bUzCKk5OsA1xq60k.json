@@ -216,13 +216,10 @@
       "name": "Dread Ambusher",
       "origin": "Compendium.world.cpr-class-features.Item.C4BN4HEjL7KG1Vqv",
       "duration": {
-        "rounds": null,
-        "startTime": 1404,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 235,
-        "startTurn": 2
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -243,33 +240,33 @@
       "img": "icons/skills/melee/blade-tips-triple-bent-white.webp",
       "_id": "AsFR96MLzD5fUtCv",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.init.bonus",
-          "mode": 2,
-          "value": "@abilities.wis.mod",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.init.bonus",
+            "value": "@abilities.wis.mod",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!bUzCKk5OsA1xq60k.AsFR96MLzD5fUtCv"
+      "_key": "!items.effects!bUzCKk5OsA1xq60k.AsFR96MLzD5fUtCv",
+      "start": null
     },
     {
       "name": "Dread Ambusher: First Turn Movement",
       "origin": "Compendium.world.cpr-class-features.Item.C4BN4HEjL7KG1Vqv",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -285,9 +282,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEndSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -296,33 +291,33 @@
       "img": "icons/skills/melee/blade-tips-triple-bent-white.webp",
       "_id": "IBxft7zQZw2Hyx1c",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.walk",
-          "mode": 2,
-          "value": "10",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.walk",
+            "value": "10",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!bUzCKk5OsA1xq60k.IBxft7zQZw2Hyx1c"
+      "_key": "!items.effects!bUzCKk5OsA1xq60k.IBxft7zQZw2Hyx1c",
+      "start": null
     },
     {
       "name": "Dread Ambusher: First Turn Damage",
       "origin": "Compendium.world.cpr-class-features.Item.C4BN4HEjL7KG1Vqv",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -343,8 +338,7 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [
-            "1Hit",
-            "turnEndSource"
+            "1Hit"
           ]
         },
         "core": {
@@ -354,27 +348,31 @@
       "img": "icons/skills/melee/blade-tips-triple-bent-white.webp",
       "_id": "NybzyOXod0y2YrlX",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.bonuses.mwak.damage",
-          "mode": 2,
-          "value": "1d8",
-          "priority": 20
-        },
-        {
-          "key": "system.bonuses.rwak.damage",
-          "mode": 2,
-          "value": "1d8",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.mwak.damage",
+            "value": "1d8",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.bonuses.rwak.damage",
+            "value": "1d8",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!bUzCKk5OsA1xq60k.NybzyOXod0y2YrlX"
+      "_key": "!items.effects!bUzCKk5OsA1xq60k.NybzyOXod0y2YrlX",
+      "start": null
     }
   ],
   "img": "icons/skills/melee/blade-tips-triple-bent-white.webp",

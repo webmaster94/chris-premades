@@ -82,13 +82,10 @@
       "name": "Heavy Armor Master",
       "origin": "Actor.kDqmxm3eMOEcv2gD.Item.j5togf4lruBTRp5d",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -109,21 +106,24 @@
       "img": "icons/environment/people/infantry-armored.webp",
       "_id": "N88xnSzt8VDZyr4w",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dm.midi.non-magical-physical",
-          "mode": 2,
-          "value": "dae.eval(attributes.ac.equippedArmor.system.type.value === 'heavy' ? -3 : 0)",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dm.midi.non-magical-physical",
+            "value": "dae.eval(attributes.ac.equippedArmor.system.type.value === 'heavy' ? -3 : 0)",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!vQULODKw7ub3k9GL.N88xnSzt8VDZyr4w"
+      "_key": "!items.effects!vQULODKw7ub3k9GL.N88xnSzt8VDZyr4w",
+      "start": null
     }
   ],
   "img": "icons/environment/people/infantry-armored.webp",

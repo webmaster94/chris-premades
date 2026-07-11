@@ -147,21 +147,19 @@
   "effects": [
     {
       "name": "Knock Out",
-      "changes": [],
       "transfer": false,
       "img": "icons/skills/melee/strike-club-red.webp",
       "_id": "I0SBJrLuNu75PD0V",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -208,7 +206,8 @@
           }
         }
       },
-      "_key": "!items.effects!6qEjC3Gg9ZFj3cFK.I0SBJrLuNu75PD0V"
+      "_key": "!items.effects!6qEjC3Gg9ZFj3cFK.I0SBJrLuNu75PD0V",
+      "start": null
     }
   ],
   "folder": null,

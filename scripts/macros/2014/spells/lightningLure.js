@@ -21,7 +21,7 @@ async function damage({workflow, ditem}) {
         let position = canvas.grid.getTopLeftPoint(dirRay.project((distPer * pullDistance) / dirRay.distance));
         if (!workflow.failedSaves.size) position = targetToken.position;
         if (isNaN(position?.x)) position = targetToken.position;
-        let seq = new Sequence();
+        let seq = new Sequence({moduleName:'chris-premades', softFail:true});
         if (targetToken !== sourceToken) {
             seq = seq
                 .effect()

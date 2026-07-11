@@ -216,13 +216,10 @@
       "name": "Vigilant Blessing",
       "origin": "Compendium.world.cpr-class-features.Item.HxechAPL8VFdwDi4",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": 86400,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 86400,
+        "units": "seconds",
+        "expiry": "targetStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -238,9 +235,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStart"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -265,21 +260,24 @@
       "img": "icons/magic/perception/hand-eye-pink.webp",
       "_id": "yoWXKrtIfTIUu7ft",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.init.roll.mode",
-          "mode": 2,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.init.roll.mode",
+            "value": "1",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!1hiMN9bqH5MLwH1x.yoWXKrtIfTIUu7ft"
+      "_key": "!items.effects!1hiMN9bqH5MLwH1x.yoWXKrtIfTIUu7ft",
+      "start": null
     }
   ],
   "img": "icons/magic/perception/hand-eye-pink.webp",

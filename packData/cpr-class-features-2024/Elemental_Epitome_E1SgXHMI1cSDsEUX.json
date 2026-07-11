@@ -9,24 +9,23 @@
       "transfer": false,
       "_id": "rKbL4hE79zI15cI6",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.chris-premades.destructiveStrideDamaged",
-          "mode": 5,
-          "value": "true",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.chris-premades.destructiveStrideDamaged",
+            "value": "true",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -55,7 +54,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!E1SgXHMI1cSDsEUX.rKbL4hE79zI15cI6"
+      "_key": "!items.effects!E1SgXHMI1cSDsEUX.rKbL4hE79zI15cI6",
+      "start": null
     }
   ],
   "system": {

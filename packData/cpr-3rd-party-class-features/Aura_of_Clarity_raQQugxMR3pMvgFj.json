@@ -5,28 +5,27 @@
   "effects": [
     {
       "name": "Aura of Clarity - Ally",
-      "changes": [
-        {
-          "key": "system.traits.ci.value",
-          "mode": 2,
-          "value": "bleeding",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/magic/perception/orb-crystal-ball-scrying-blue.webp",
       "_id": "qNhoUlGDKksarnps",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.ci.value",
+            "value": "bleeding",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -65,32 +64,32 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!raQQugxMR3pMvgFj.qNhoUlGDKksarnps"
+      "_key": "!items.effects!raQQugxMR3pMvgFj.qNhoUlGDKksarnps",
+      "start": null
     },
     {
       "name": "Aura of Clarity - Enemy",
-      "changes": [
-        {
-          "key": "system.traits.ci.value",
-          "mode": 2,
-          "value": "invisible",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/magic/perception/orb-crystal-ball-scrying-blue.webp",
       "_id": "ciGpAlA3HKB2Ee5O",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.ci.value",
+            "value": "invisible",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -129,7 +128,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!raQQugxMR3pMvgFj.ciGpAlA3HKB2Ee5O"
+      "_key": "!items.effects!raQQugxMR3pMvgFj.ciGpAlA3HKB2Ee5O",
+      "start": null
     }
   ],
   "system": {

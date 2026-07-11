@@ -494,17 +494,15 @@
       "transfer": false,
       "_id": "FZ74mcN9Lz1l0N51",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": 1,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "rounds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -521,9 +519,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -536,7 +532,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!hwQOQMWVyyMYI7pR.FZ74mcN9Lz1l0N51"
+      "_key": "!items.effects!hwQOQMWVyyMYI7pR.FZ74mcN9Lz1l0N51",
+      "start": null
     }
   ],
   "img": "icons/creatures/abilities/dragon-fire-breath-orange.webp",

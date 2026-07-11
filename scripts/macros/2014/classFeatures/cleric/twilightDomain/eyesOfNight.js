@@ -29,7 +29,7 @@ async function use({trigger, workflow}) {
         }
     }
     /* eslint-disable indent */
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(250)
         .effect()
             .file('jb2a.healing_generic.03.burst.bluepurple')
@@ -68,7 +68,7 @@ async function use({trigger, workflow}) {
         .play();
     for (let u = 0; u < targetOrder.length; u++) {
         if (u+1 < targetOrder.length) {
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .wait(500+100*u)
                 .effect()
                     .file('jb2a.energy_beam.normal.yellow.03')

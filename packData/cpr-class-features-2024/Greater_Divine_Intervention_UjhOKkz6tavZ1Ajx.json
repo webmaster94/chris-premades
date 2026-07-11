@@ -5,28 +5,27 @@
   "effects": [
     {
       "name": "Divine Intervention Blocked",
-      "changes": [
-        {
-          "key": "system.uses.recovery",
-          "mode": 5,
-          "value": "[]",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/magic/light/beam-rays-yellow-blue.webp",
       "_id": "Xggw4uJclVKwl03h",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.uses.recovery",
+            "value": "[]",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Actor.yy1I4W4hqhw1yaiM.Item.7Kwiq0li1OfKg1sX",
@@ -70,7 +69,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!UjhOKkz6tavZ1Ajx.Xggw4uJclVKwl03h"
+      "_key": "!items.effects!UjhOKkz6tavZ1Ajx.Xggw4uJclVKwl03h",
+      "start": null
     }
   ],
   "system": {

@@ -2,7 +2,7 @@ import {actorUtils, dialogUtils, tokenUtils, workflowUtils} from '../../../../..
 async function attack({trigger: {entity: item}, workflow}) {
     if (!workflow.token || !workflow.hitTargets.size || !workflow.activity) return;
     if (!workflowUtils.isAttackType(workflow, 'meleeAttack')) return;
-    if (!workflow.attackMode != 'twoHanded') return;
+    if (workflow.attackMode != 'twoHanded') return;
     if (actorUtils.getSize(workflow.actor, false) + 1 < actorUtils.getSize(workflow.targets.first().actor, false)) return;
     let selection = await dialogUtils.confirmUseItem(item);
     if (!selection) return;

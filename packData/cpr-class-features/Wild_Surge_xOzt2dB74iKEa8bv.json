@@ -892,17 +892,15 @@
       "transfer": false,
       "_id": "fAzprZz9S9blPq9k",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": 1,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "rounds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -919,9 +917,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -934,7 +930,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!xOzt2dB74iKEa8bv.fAzprZz9S9blPq9k"
+      "_key": "!items.effects!xOzt2dB74iKEa8bv.fAzprZz9S9blPq9k",
+      "start": null
     }
   ],
   "img": "icons/magic/fire/projectile-wave-arrow.webp",

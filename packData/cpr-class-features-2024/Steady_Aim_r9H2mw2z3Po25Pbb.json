@@ -5,22 +5,11 @@
     {
       "name": "Steady Aim: Bonus",
       "statuses": [],
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.attack.all",
-          "value": "1",
-          "mode": 0,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": 1,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": 1,
+        "units": "turns",
+        "expiry": "turnStart",
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -74,30 +63,30 @@
       "_id": "jHASsgwKNPnYIDFd",
       "img": "icons/skills/ranged/target-bullseye-arrow-green.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!r9H2mw2z3Po25Pbb.jHASsgwKNPnYIDFd"
+      "_key": "!items.effects!r9H2mw2z3Po25Pbb.jHASsgwKNPnYIDFd",
+      "start": null
     },
     {
       "name": "Steady Aim: Speed Reduction",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "0",
-          "priority": 100
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": 1,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": 1,
+        "units": "turns",
+        "expiry": "turnStart",
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -144,10 +133,21 @@
       "_id": "N01wiTCKbCxIdvP1",
       "img": "icons/skills/ranged/target-bullseye-arrow-green.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.all",
+            "value": "0",
+            "priority": 100,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!r9H2mw2z3Po25Pbb.N01wiTCKbCxIdvP1"
+      "_key": "!items.effects!r9H2mw2z3Po25Pbb.N01wiTCKbCxIdvP1",
+      "start": null
     }
   ],
   "system": {

@@ -6,9 +6,9 @@
   "library": "false",
   "socket": true,
   "compatibility": {
-    "minimum": "13",
-    "verified": "13",
-    "maximum": "13"
+    "minimum": "14",
+    "verified": "14.360",
+    "maximum": "14.999"
   },
   "authors": [
     {
@@ -93,7 +93,7 @@
         "id": "midi-qol",
         "type": "module",
         "compatibility": {
-          "minimum": "13.0.48"
+          "minimum": "14.0.5"
         }
       },
       {
@@ -107,14 +107,7 @@
         "id": "dae",
         "type": "module",
         "compatibility": {
-          "minimum": "13.0.17"
-        }
-      },
-      {
-        "id": "times-up",
-        "type": "module",
-        "compatibility": {
-          "minimum": "13.1.2"
+          "minimum": "14.0.0"
         }
       }
     ]

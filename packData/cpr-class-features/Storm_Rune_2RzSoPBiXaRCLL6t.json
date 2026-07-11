@@ -171,13 +171,10 @@
       "name": "Storm Rune",
       "origin": "Compendium.world.cpr-class-features.Item.xdc6g9AkBvM3vkcl",
       "duration": {
-        "rounds": null,
-        "startTime": 1368,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 229,
-        "startTurn": 3
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -198,27 +195,31 @@
       "img": "icons/commodities/treasure/stone-cracked-lightning-blue.webp",
       "_id": "jcvlSgf3o7Bg6kHX",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.skill.arc",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.ci.value",
-          "mode": 2,
-          "value": "surprised",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.skill.arc",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.ci.value",
+            "value": "surprised",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!2RzSoPBiXaRCLL6t.jcvlSgf3o7Bg6kHX"
+      "_key": "!items.effects!2RzSoPBiXaRCLL6t.jcvlSgf3o7Bg6kHX",
+      "start": null
     }
   ],
   "flags": {

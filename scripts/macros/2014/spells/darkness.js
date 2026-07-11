@@ -59,7 +59,7 @@ async function use({workflow}) {
     let xray = true;
     if (playAnimation && animationUtils.jb2aCheck()) {
         if (game.modules.get('walledtemplates')?.active) {
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                 .file('jb2a.darkness.black')
                 .scaleToObject()
@@ -71,7 +71,7 @@ async function use({workflow}) {
                 .attachTo(template)
                 .play();
         } else {
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                 .file('jb2a.darkness.black')
                 .scaleToObject()

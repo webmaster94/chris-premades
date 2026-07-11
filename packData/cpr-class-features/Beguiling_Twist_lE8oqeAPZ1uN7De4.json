@@ -228,13 +228,10 @@
       "name": "Beguiling Twist",
       "origin": "Compendium.world.cpr-class-features.Item.hUIfniTHahcI3ifU",
       "duration": {
-        "rounds": null,
-        "startTime": 1404,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 235,
-        "startTurn": 2
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -255,27 +252,31 @@
       "img": "icons/magic/control/debuff-chains-ropes-purple.webp",
       "_id": "KwtGqbLcd2LCxmJ6",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.chris-premades.CR.charmed",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.chris-premades.CR.frightened",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.chris-premades.CR.charmed",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.chris-premades.CR.frightened",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!lE8oqeAPZ1uN7De4.KwtGqbLcd2LCxmJ6"
+      "_key": "!items.effects!lE8oqeAPZ1uN7De4.KwtGqbLcd2LCxmJ6",
+      "start": null
     }
   ],
   "img": "icons/magic/control/debuff-chains-ropes-purple.webp",

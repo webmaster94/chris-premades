@@ -206,21 +206,19 @@
   "effects": [
     {
       "name": "Caustic Mist",
-      "changes": [],
       "transfer": false,
       "img": "icons/magic/air/fog-gas-smoke-dense-green.webp",
       "_id": "zWGRQMDlrj5VHIIL",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -244,9 +242,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -269,7 +265,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!7HVurkiWzFUNM3AW.zWGRQMDlrj5VHIIL"
+      "_key": "!items.effects!7HVurkiWzFUNM3AW.zWGRQMDlrj5VHIIL",
+      "start": null
     }
   ],
   "flags": {

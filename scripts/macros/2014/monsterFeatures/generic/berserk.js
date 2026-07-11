@@ -21,7 +21,7 @@ async function turnStart({trigger: {entity: item, token}}) {
             };
             let effect = await effectUtils.createEffect(token.actor, effectData, {identifier: 'berserk'});
             /* eslint-disable indent */
-            await new Sequence()
+            await new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                     .file('jb2a.token_border.circle.static.blue.001')
                     .filter('ColorMatrix', animationUtils.colorMatrix('jb2a.token_border.circle.static.blue.001', 'piercing'))

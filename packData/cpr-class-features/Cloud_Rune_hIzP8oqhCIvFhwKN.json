@@ -215,34 +215,34 @@
   "effects": [
     {
       "name": "Cloud Rune",
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.skill.dec",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.skill.slt",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "img": "icons/commodities/treasure/token-runed-fehu-gold.webp",
       "_id": "uyr8pgkTqK7rnl7W",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.skill.dec",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.skill.slt",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": 1368,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": 229,
-        "startTurn": 3
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Compendium.world.cpr-class-features.Item.BWIrZ2oV7G8rsic7",
@@ -263,7 +263,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!hIzP8oqhCIvFhwKN.uyr8pgkTqK7rnl7W"
+      "_key": "!items.effects!hIzP8oqhCIvFhwKN.uyr8pgkTqK7rnl7W",
+      "start": null
     }
   ],
   "img": "icons/commodities/treasure/token-runed-fehu-gold.webp",

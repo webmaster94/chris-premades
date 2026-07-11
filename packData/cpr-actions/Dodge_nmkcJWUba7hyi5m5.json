@@ -156,34 +156,34 @@
   "effects": [
     {
       "name": "Dodge",
-      "changes": [
-        {
-          "key": "flags.midi-qol.grants.disadvantage.attack.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.save.dex",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/equipment/shield/buckler-wooden-boss-lightning.webp",
       "_id": "JE3LiQCm9DMAKjcu",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.disadvantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.save.dex",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -201,9 +201,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "ActiveAuras": {
           "isAura": false,
@@ -223,7 +221,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!nmkcJWUba7hyi5m5.JE3LiQCm9DMAKjcu"
+      "_key": "!items.effects!nmkcJWUba7hyi5m5.JE3LiQCm9DMAKjcu",
+      "start": null
     }
   ],
   "folder": null,

@@ -73,7 +73,7 @@ async function use({workflow}) {
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'summonLesserDemons');
     effectUtils.addDependent(effect, [template]);
     if (!animationUtils.jb2aCheck()) return;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .atLocation(template)
         .origin(template.uuid)

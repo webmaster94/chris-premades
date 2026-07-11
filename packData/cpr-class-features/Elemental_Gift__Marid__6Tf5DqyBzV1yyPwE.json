@@ -77,13 +77,10 @@
       "name": "Elemental Gift (Marid)",
       "origin": "Compendium.world.cpr-class-features.Item.H9wy6uzWz10HbORo",
       "duration": {
-        "rounds": null,
-        "startTime": 1416,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 237,
-        "startTurn": 6
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -104,21 +101,24 @@
       "img": "icons/magic/control/debuff-energy-hold-levitate-yellow.webp",
       "_id": "29aX9RTHLHEc45XC",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "cold",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "cold",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!6Tf5DqyBzV1yyPwE.29aX9RTHLHEc45XC"
+      "_key": "!items.effects!6Tf5DqyBzV1yyPwE.29aX9RTHLHEc45XC",
+      "start": null
     }
   ],
   "img": "icons/magic/control/debuff-energy-hold-levitate-yellow.webp",

@@ -199,34 +199,34 @@
   "effects": [
     {
       "name": "Armor of Safeguarding, Plate",
-      "changes": [
-        {
-          "key": "system.attributes.hp.bonuses.level",
-          "mode": 2,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.hp.bonuses.overall",
-          "mode": 2,
-          "value": "10",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "img": "ddb-images/other/ddb/item/Armor.jpg",
       "_id": "gGKyyCnvfwj6qo7p",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.hp.bonuses.level",
+            "value": "1",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.hp.bonuses.overall",
+            "value": "10",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Item.zZLDctxkIStJ0sfq",
@@ -263,7 +263,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!fGNgXjkMWuxUvlpI.gGKyyCnvfwj6qo7p"
+      "_key": "!items.effects!fGNgXjkMWuxUvlpI.gGKyyCnvfwj6qo7p",
+      "start": null
     }
   ],
   "img": "icons/equipment/chest/breastplate-scale-leather.webp",

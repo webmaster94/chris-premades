@@ -22,7 +22,7 @@ async function use({trigger: {entity: item, token}}) {
             itemUtils.getItemByIdentifier(token.actor, 'digDeep')?.img ?? '' :
             `systems/dnd5e/icons/svg/statuses/exhaustion-${exhaustion}.svg`;
         await genericUtils.update(digging, {flags: {'chris-premades': {exhaustion}}, img});
-    } else if (selection.id === CONFIG.statusEffects.find(s => s.id === 'exhaustion')?._id ?? 'dnd5eexhaustion0') {
+    } else if (selection.statuses?.has('exhaustion')) {
         await genericUtils.update(token.actor, {'system.attributes.exhaustion': exhaustion});
     } else {
         await genericUtils.remove(selection);

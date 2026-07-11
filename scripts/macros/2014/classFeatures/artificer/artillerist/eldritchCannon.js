@@ -182,7 +182,7 @@ async function lateForceBallista({workflow}) {
     await tokenUtils.pushToken(workflow.token, workflow.targets.first(), 5);
 }
 async function fortifiedPosition({workflow}) {
-    if (workflow.targets.size !== 1 || !workflow.item || !constants.attacks.includes(workflow.item.system?.actionType)) return;
+    if (workflow.targets.size !== 1 || !workflow.item || !constants.attacks.includes(workflow.activity?.actionType)) return;
     let targetToken = workflow.targets.first();
     let coverBonus = tokenUtils.checkCover(workflow.token, targetToken, {activity: workflow.activity});
     if (coverBonus >= 2) return;

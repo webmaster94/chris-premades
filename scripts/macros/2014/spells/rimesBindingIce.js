@@ -5,7 +5,7 @@ async function early({workflow}) {
     let template = workflow.template;
     if (!playAnimation || !template) return;
     // Animations by: eskiemoh
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .atLocation(workflow.token)
         .file('jb2a.magic_signs.circle.02.evocation.loop.blue')
@@ -141,7 +141,7 @@ async function end({trigger: {entity: effect}}) {
     await unfreeze(token, 'bindingIce');
 }
 export async function freeze(target, name) {
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .delay(1250)
         .name(name)
@@ -194,7 +194,7 @@ export async function freeze(target, name) {
 }
 export async function unfreeze(token, name) {
     Sequencer.EffectManager.endEffects({name: name, object: token});
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.impact_themed.ice_shard.blue')
         .atLocation(token)

@@ -120,7 +120,7 @@ async function move({workflow}) {
     // End any previous ring visuals for this token (if any)
     let seqName = 'cpr-dust-devil-token-' + token.id;
     Sequencer.EffectManager.endEffects({ name: seqName, object: token.object });
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.smoke.ring.01.white')
         .attachTo(token.object, { bindScale: false })

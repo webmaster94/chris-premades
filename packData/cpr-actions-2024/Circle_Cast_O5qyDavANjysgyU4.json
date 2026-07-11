@@ -377,17 +377,15 @@
       "transfer": false,
       "_id": "2G2I81scNapXEU8z",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -431,7 +429,8 @@
           }
         }
       },
-      "_key": "!items.effects!O5qyDavANjysgyU4.2G2I81scNapXEU8z"
+      "_key": "!items.effects!O5qyDavANjysgyU4.2G2I81scNapXEU8z",
+      "start": null
     },
     {
       "name": "Circle Cast: Spell",
@@ -440,17 +439,15 @@
       "transfer": false,
       "_id": "OiCYaTODTyP4SXRC",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -479,7 +476,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!O5qyDavANjysgyU4.OiCYaTODTyP4SXRC"
+      "_key": "!items.effects!O5qyDavANjysgyU4.OiCYaTODTyP4SXRC",
+      "start": null
     }
   ],
   "folder": null,

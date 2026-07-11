@@ -5,22 +5,11 @@
     {
       "name": "Power of the Wilds",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.attributes.movement.fly",
-          "value": "@attributes.movement.walk",
-          "mode": 4,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -55,10 +44,21 @@
       "img": "icons/creatures/birds/corvid-flying-wings-purple.webp",
       "_id": "SGUFeCEVkl6ul69c",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.fly",
+            "value": "@attributes.movement.walk",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!pdWqnFaIaRYG0DcS.SGUFeCEVkl6ul69c"
+      "_key": "!items.effects!pdWqnFaIaRYG0DcS.SGUFeCEVkl6ul69c",
+      "start": null
     }
   ],
   "system": {

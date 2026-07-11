@@ -205,21 +205,19 @@
   "effects": [
     {
       "name": "Grave Strike (Vampire Form Only)",
-      "changes": [],
       "transfer": false,
       "img": "icons/magic/unholy/hand-claw-fire-blue.webp",
       "_id": "vpbhnm4NMtuFHf4u",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -262,7 +260,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!U0JepyIWflBGcgXL.vpbhnm4NMtuFHf4u"
+      "_key": "!items.effects!U0JepyIWflBGcgXL.vpbhnm4NMtuFHf4u",
+      "start": null
     }
   ],
   "flags": {

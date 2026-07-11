@@ -5,22 +5,11 @@
     {
       "name": "Evasion",
       "statuses": [],
-      "changes": [
-        {
-          "key": "flags.midi-qol.superSaver.dex",
-          "mode": 0,
-          "value": "!target.statuses.incapacitated",
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -59,10 +48,21 @@
       "img": "icons/magic/earth/projectiles-magma-stone-orange.webp",
       "_id": "9L9HT0of5ENcsQyc",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.superSaver.dex",
+            "value": "!target.statuses.incapacitated",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": "Actor.4F5kQIpxwyb6rykH.Item.aNGMaWY4CVuzayMT",
       "sort": 0,
-      "_key": "!items.effects!b1XWThKaCYIYaMVH.9L9HT0of5ENcsQyc"
+      "_key": "!items.effects!b1XWThKaCYIYaMVH.9L9HT0of5ENcsQyc",
+      "start": null
     }
   ],
   "system": {

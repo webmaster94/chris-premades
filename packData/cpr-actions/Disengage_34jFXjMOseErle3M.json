@@ -157,28 +157,27 @@
   "effects": [
     {
       "name": "Disengage",
-      "changes": [
-        {
-          "key": "flags.gambits-premades.oaImmunity",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/movement/feet-winged-boots-blue.webp",
       "_id": "PTVnFkLFaGKQptCu",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.gambits-premades.oaImmunity",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -196,9 +195,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "ActiveAuras": {
           "isAura": false,
@@ -226,7 +223,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!34jFXjMOseErle3M.PTVnFkLFaGKQptCu"
+      "_key": "!items.effects!34jFXjMOseErle3M.PTVnFkLFaGKQptCu",
+      "start": null
     }
   ],
   "flags": {

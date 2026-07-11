@@ -223,13 +223,10 @@
       "name": "Chromatic Warding (Fire)",
       "origin": "Compendium.world.cpr-race-features-old.Item.OxvFBrXBZJq5g3Sa",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -254,21 +251,24 @@
       "img": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
       "_id": "zTyyQx5bVGYAkRvX",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.di.value",
-          "mode": 2,
-          "value": "fire",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.di.value",
+            "value": "fire",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!Is14r0TfCF0AnWF7.zTyyQx5bVGYAkRvX"
+      "_key": "!items.effects!Is14r0TfCF0AnWF7.zTyyQx5bVGYAkRvX",
+      "start": null
     }
   ],
   "img": "icons/creatures/abilities/dragon-fire-breath-orange.webp",

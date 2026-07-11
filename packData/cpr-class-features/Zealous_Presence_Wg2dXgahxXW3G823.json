@@ -236,13 +236,10 @@
       "name": "Zealous Presence",
       "origin": "Compendium.world.cpr-class-features.Item.XCNnLs20hNly5nNN",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": 12,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 12,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -258,9 +255,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -269,27 +264,31 @@
       "img": "icons/creatures/magical/construct-iron-stomping-yellow.webp",
       "_id": "de1IWIpGJb2wOx88",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.attack.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.save.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.save.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!Wg2dXgahxXW3G823.de1IWIpGJb2wOx88"
+      "_key": "!items.effects!Wg2dXgahxXW3G823.de1IWIpGJb2wOx88",
+      "start": null
     }
   ],
   "img": "icons/creatures/magical/construct-iron-stomping-yellow.webp",

@@ -5,22 +5,11 @@
     {
       "name": "Feral Instinct",
       "statuses": [],
-      "changes": [
-        {
-          "key": "flags.dnd5e.initiativeAdv",
-          "value": "1",
-          "mode": 2,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": 678,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -45,10 +34,21 @@
       "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
       "_id": "W4ahieFxNoGDgfnA",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.dnd5e.initiativeAdv",
+            "value": "1",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!U0gHu5I0LMfy8TUi.W4ahieFxNoGDgfnA"
+      "_key": "!items.effects!U0gHu5I0LMfy8TUi.W4ahieFxNoGDgfnA",
+      "start": null
     }
   ],
   "system": {

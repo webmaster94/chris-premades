@@ -483,17 +483,15 @@
       "transfer": false,
       "_id": "29ofcQcO8fMCU883",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -524,15 +522,14 @@
           "dontApply": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStart"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
         }
       },
-      "_key": "!items.effects!QDswIqiFwQPsSO4p.29ofcQcO8fMCU883"
+      "_key": "!items.effects!QDswIqiFwQPsSO4p.29ofcQcO8fMCU883",
+      "start": null
     }
   ],
   "name": "Darkbolt",

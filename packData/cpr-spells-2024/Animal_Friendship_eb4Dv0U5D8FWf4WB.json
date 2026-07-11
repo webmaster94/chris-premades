@@ -168,21 +168,19 @@
   "effects": [
     {
       "name": "Animal Friendship",
-      "changes": [],
       "transfer": false,
       "img": "icons/environment/creatures/frog-spotted-green.webp",
       "_id": "yKnHas7sLimJm3UR",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -216,7 +214,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!eb4Dv0U5D8FWf4WB.yKnHas7sLimJm3UR"
+      "_key": "!items.effects!eb4Dv0U5D8FWf4WB.yKnHas7sLimJm3UR",
+      "start": null
     }
   ],
   "name": "Animal Friendship",

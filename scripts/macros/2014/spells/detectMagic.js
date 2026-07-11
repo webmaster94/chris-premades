@@ -28,7 +28,7 @@ async function start({trigger: {entity: effect}}) {
     let sound = effect.flags['chris-premades']?.detectMagic?.sound;
     let animation = 'jb2a.detect_magic.circle.' + color;
     let opacity = effect.flags['chris-premades']?.detectMagic?.opacity;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .opacity(opacity)
         .file(animation)

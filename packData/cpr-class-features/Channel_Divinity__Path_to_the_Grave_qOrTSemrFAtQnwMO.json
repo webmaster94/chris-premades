@@ -220,13 +220,10 @@
       "name": "Channel Divinity: Path to the Grave",
       "origin": "Compendium.world.cpr-class-features.Item.4bxbwpyAoD8B0bQb",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -243,7 +240,6 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [
-            "turnEndSource",
             "isDamaged"
           ]
         },
@@ -254,21 +250,24 @@
       "img": "icons/environment/settlement/graveyard-tombstone-night.webp",
       "_id": "zB7kkYUtHZ14U6xY",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dv.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dv.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!qOrTSemrFAtQnwMO.zB7kkYUtHZ14U6xY"
+      "_key": "!items.effects!qOrTSemrFAtQnwMO.zB7kkYUtHZ14U6xY",
+      "start": null
     }
   ],
   "img": "icons/environment/settlement/graveyard-tombstone-night.webp",

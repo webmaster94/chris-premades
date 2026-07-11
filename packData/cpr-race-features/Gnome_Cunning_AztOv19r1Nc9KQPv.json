@@ -7,13 +7,10 @@
       "name": "Gnome Cunning",
       "origin": "Compendium.world.cpr-race-features.Item.ESV7UiE58OuSlmw3",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -34,33 +31,38 @@
       "img": "icons/commodities/gems/gem-rough-spiral-teal.webp",
       "_id": "dKCjhdm64vSC9KW1",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.magicResistance.wis",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.magicResistance.cha",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.magicResistance.int",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.magicResistance.wis",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.magicResistance.cha",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.magicResistance.int",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!AztOv19r1Nc9KQPv.dKCjhdm64vSC9KW1"
+      "_key": "!items.effects!AztOv19r1Nc9KQPv.dKCjhdm64vSC9KW1",
+      "start": null
     }
   ],
   "flags": {

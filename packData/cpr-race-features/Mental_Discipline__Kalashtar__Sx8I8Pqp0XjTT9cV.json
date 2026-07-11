@@ -77,13 +77,10 @@
       "name": "Mental Discipline (Kalashtar)",
       "origin": "Compendium.world.cpr-race-features.Item.QaDPr7YTFdwVIVLy",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -104,21 +101,24 @@
       "img": "icons/magic/defensive/shield-barrier-glowing-triangle-teal.webp",
       "_id": "EUUHCSjOIxMcM9Q9",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "psychic",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "psychic",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!Sx8I8Pqp0XjTT9cV.EUUHCSjOIxMcM9Q9"
+      "_key": "!items.effects!Sx8I8Pqp0XjTT9cV.EUUHCSjOIxMcM9Q9",
+      "start": null
     }
   ],
   "img": "icons/magic/defensive/shield-barrier-glowing-triangle-teal.webp",

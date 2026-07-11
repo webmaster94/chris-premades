@@ -93,13 +93,10 @@
       "name": "Dark One's Own Luck",
       "origin": "Compendium.world.cpr-class-features.Item.qDgkaHXic7Zhu3VL",
       "duration": {
-        "rounds": null,
-        "startTime": 1416,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 237,
-        "startTurn": 6
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -120,45 +117,52 @@
       "img": "icons/commodities/gems/gem-rough-square-red.webp",
       "_id": "7C3wK1T9ainJVNK4",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.optional.dool.label",
-          "mode": 0,
-          "value": "Dark One's Own Luck",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.dool.count",
-          "mode": 0,
-          "value": "ItemUses.Dark One's Own Luck",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.dool.save.all",
-          "mode": 0,
-          "value": "+1d10",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.dool.skill.all",
-          "mode": 0,
-          "value": "+1d10",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.dool.check.all",
-          "mode": 0,
-          "value": "+1d10",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.optional.dool.label",
+            "value": "Dark One's Own Luck",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.dool.count",
+            "value": "ItemUses.Dark One's Own Luck",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.dool.save.all",
+            "value": "+1d10",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.dool.skill.all",
+            "value": "+1d10",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.dool.check.all",
+            "value": "+1d10",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!Oey02shLOkLK544M.7C3wK1T9ainJVNK4"
+      "_key": "!items.effects!Oey02shLOkLK544M.7C3wK1T9ainJVNK4",
+      "start": null
     }
   ],
   "img": "icons/commodities/gems/gem-rough-square-red.webp",

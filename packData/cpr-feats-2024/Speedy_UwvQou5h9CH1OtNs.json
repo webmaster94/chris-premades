@@ -44,24 +44,23 @@
       "origin": "Item.hZfwXA6embFhfCWE",
       "_id": "YaNTjPU4wRA8lqEw",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.gambits-premades.oaDisadvantage",
-          "mode": 2,
-          "value": "",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.gambits-premades.oaDisadvantage",
+            "value": "",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -87,7 +86,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!UwvQou5h9CH1OtNs.YaNTjPU4wRA8lqEw"
+      "_key": "!items.effects!UwvQou5h9CH1OtNs.YaNTjPU4wRA8lqEw",
+      "start": null
     }
   ],
   "folder": null,

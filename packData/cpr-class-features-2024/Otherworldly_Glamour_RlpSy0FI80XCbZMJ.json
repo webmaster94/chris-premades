@@ -46,24 +46,23 @@
       "origin": "Compendium.chris-premades.CPRClassFeatures2024.Item.RlpSy0FI80XCbZMJ",
       "_id": "KxOPnPEEJEw22paL",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.abilities.cha.bonuses.check",
-          "mode": 2,
-          "value": "max(1, @abilities.wis.mod)",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.abilities.cha.bonuses.check",
+            "value": "max(1, @abilities.wis.mod)",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -89,7 +88,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!RlpSy0FI80XCbZMJ.KxOPnPEEJEw22paL"
+      "_key": "!items.effects!RlpSy0FI80XCbZMJ.KxOPnPEEJEw22paL",
+      "start": null
     }
   ],
   "flags": {

@@ -4,28 +4,27 @@
   "effects": [
     {
       "name": "Combat Mastery: Unfettered",
-      "changes": [
-        {
-          "key": "flags.midi-qol.ignoreNearbyFoes",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "img": "icons/skills/melee/maneuver-greatsword-yellow.webp",
       "_id": "VADgmY3VuDnHdPQ8",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.ignoreNearbyFoes",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Compendium.world.cpr-3rd-party-class-features.Item.iEwOXWYR74QUVk4V",
@@ -55,7 +54,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!iEwOXWYR74QUVk4V.VADgmY3VuDnHdPQ8"
+      "_key": "!items.effects!iEwOXWYR74QUVk4V.VADgmY3VuDnHdPQ8",
+      "start": null
     }
   ],
   "system": {

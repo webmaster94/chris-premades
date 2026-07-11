@@ -85,13 +85,10 @@
       "name": "Aura of Alacrity",
       "origin": "Compendium.world.cpr-class-features.Item.CPuRjyEXsr2Yg61U",
       "duration": {
-        "rounds": null,
-        "startTime": 1398,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 234,
-        "startTurn": 5
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -112,21 +109,24 @@
       "img": "icons/skills/movement/feet-winged-boots-brown.webp",
       "_id": "H7IopwNphSYhPDyY",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.walk",
-          "mode": 2,
-          "value": "10",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.walk",
+            "value": "10",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!XCw3zPoi3Fu9I6VX.H7IopwNphSYhPDyY"
+      "_key": "!items.effects!XCw3zPoi3Fu9I6VX.H7IopwNphSYhPDyY",
+      "start": null
     }
   ],
   "img": "icons/skills/movement/feet-winged-boots-brown.webp",

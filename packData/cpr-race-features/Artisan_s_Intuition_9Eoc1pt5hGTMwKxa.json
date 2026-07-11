@@ -76,13 +76,10 @@
       "name": "Artisan's Intuition",
       "origin": "Compendium.world.cpr-race-features.Item.PFps4HYyiTrnpVav",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -103,27 +100,31 @@
       "img": "icons/tools/hand/hammer-and-nail.webp",
       "_id": "FuaHgyI3N2qJ3bXz",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.skills.arc.bonuses.check",
-          "mode": 2,
-          "value": "1d4",
-          "priority": 20
-        },
-        {
-          "key": "system.tools.art.bonuses.check",
-          "mode": 2,
-          "value": "1d4",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.skills.arc.bonuses.check",
+            "value": "1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.tools.art.bonuses.check",
+            "value": "1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!9Eoc1pt5hGTMwKxa.FuaHgyI3N2qJ3bXz"
+      "_key": "!items.effects!9Eoc1pt5hGTMwKxa.FuaHgyI3N2qJ3bXz",
+      "start": null
     }
   ],
   "img": "icons/tools/hand/hammer-and-nail.webp",

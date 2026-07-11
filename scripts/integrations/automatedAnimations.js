@@ -10,20 +10,27 @@ let keys = [
     'aaAutorec-aefx'
 ];
 function getAutoRec(name) {
+    if (!game.modules.get('autoanimations')?.active) return;
     return keys.map(i => {
-        return game.settings.get('autoanimations', i).find(j => {
+        if (!game.settings.settings.has('autoanimations.' + i)) return;
+        let entries = game.settings.get('autoanimations', i);
+        if (!Array.isArray(entries)) return;
+        return entries.find(j => {
             return j.label.toLowerCase().includes(name.toLowerCase());
         });
     }).find(k => k);
 }
-function renderItemSheet(app, [elem], options) {
-    let isTidy = app?.classList?.contains?.('tidy5e-sheet');
+function renderItemSheet(app, element, options) {
+    if (!game.modules.get('autoanimations')?.active) return;
+    let elem = element?.[0] ?? element;
+    if (!elem) return;
+    let root = app?.element ?? elem.closest?.('.application, .window-app') ?? elem;
+    let isTidy = root?.classList?.contains?.('tidy5e-sheet') || root?.querySelector?.('.tidy5e-sheet');
     let headerButton;
     if (isTidy) {
-        headerButton = app.element.querySelector('menu.controls-dropdown i.fa-biohazard');
-        if (!headerButton) headerButton = elem.closest('.window-header')?.querySelector('.header-control.fa-biohazard');
+        headerButton = root.querySelector('menu.controls-dropdown i.fa-biohazard');
     } else {
-        headerButton = elem.closest('.window-app').querySelector('a.header-button.aaItemSettings');
+        headerButton = root.querySelector('button.header-control.aaItemSettings, a.header-button.aaItemSettings, .header-control.aaItemSettings');
     }
     if (!headerButton) return;
     let object = app.object;

@@ -150,40 +150,41 @@
   "effects": [
     {
       "name": "Shining Smite",
-      "changes": [
-        {
-          "key": "ATL.light.bright",
-          "mode": 4,
-          "value": "5",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.grants.advantage.attack.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.ci.value",
-          "mode": 2,
-          "value": "invisible",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/melee/strike-sword-dagger-runes-yellow.webp",
       "_id": "k5Jc0E5u4Iba0oWE",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "ATL.light.bright",
+            "value": "5",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.ci.value",
+            "value": "invisible",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -208,7 +209,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!4N3giP0alIZDP5U7.k5Jc0E5u4Iba0oWE"
+      "_key": "!items.effects!4N3giP0alIZDP5U7.k5Jc0E5u4Iba0oWE",
+      "start": null
     }
   ],
   "name": "Shining Smite",

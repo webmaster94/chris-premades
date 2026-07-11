@@ -125,7 +125,7 @@ async function createEffect(entity, effectData, {concentrationItem, parentEntity
         let token = actorUtils.getFirstToken(effects[0].parent);
         if (token) {
             /* eslint-disable indent */
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                     .playIf(animationPath)
                     .file(animationPath)

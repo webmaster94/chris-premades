@@ -93,13 +93,10 @@
       "name": "Astral Spark",
       "origin": "Compendium.world.cpr-race-features-old.Item.5uyLQNAxxeMPP31W",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -120,45 +117,52 @@
       "img": "icons/weapons/ammunition/bullets-cartridge-shell-gray.webp",
       "_id": "0n97jZyBMcQUg1s4",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.optional.AS.label",
-          "mode": 0,
-          "value": "Astral Spark",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.AS.count",
-          "mode": 0,
-          "value": "ItemUses.Astral Spark",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.AS.damage.mwak",
-          "mode": 0,
-          "value": "@prof[force]",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.AS.damage.rwak",
-          "mode": 0,
-          "value": "@prof[force]",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.AS.countAlt",
-          "mode": 0,
-          "value": "each-turn",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.optional.AS.label",
+            "value": "Astral Spark",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.AS.count",
+            "value": "ItemUses.Astral Spark",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.AS.damage.mwak",
+            "value": "@prof[force]",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.AS.damage.rwak",
+            "value": "@prof[force]",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.AS.countAlt",
+            "value": "each-turn",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!2MOeAyWxQIDZRuMC.0n97jZyBMcQUg1s4"
+      "_key": "!items.effects!2MOeAyWxQIDZRuMC.0n97jZyBMcQUg1s4",
+      "start": null
     }
   ],
   "img": "icons/weapons/ammunition/bullets-cartridge-shell-gray.webp",

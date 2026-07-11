@@ -4,28 +4,27 @@
   "effects": [
     {
       "name": "Dazzling Footwork",
-      "changes": [
-        {
-          "key": "system.attributes.ac.calc",
-          "mode": 5,
-          "value": "unarmoredBard",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "img": "icons/magic/control/debuff-energy-snare-blue.webp",
       "_id": "mxDQSAlUqZ7g3Hn1",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.ac.calc",
+            "value": "unarmoredBard",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Actor.yy1I4W4hqhw1yaiM.Item.PjcSDDYnjI7wDnoe",
@@ -46,7 +45,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!YgtXGKPr7Q9EXaFN.mxDQSAlUqZ7g3Hn1"
+      "_key": "!items.effects!YgtXGKPr7Q9EXaFN.mxDQSAlUqZ7g3Hn1",
+      "start": null
     }
   ],
   "system": {

@@ -45,24 +45,23 @@
       "origin": "Compendium.chris-premades.CPRClassFeatures2024.Item.x4poA0bUIJ5BNHsh",
       "_id": "Cz2YmySIKUdgxKXe",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.weaponProf.value",
-          "mode": 2,
-          "value": "mar",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.weaponProf.value",
+            "value": "mar",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -88,7 +87,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!Z5Sd74uVG5P2mEnu.Cz2YmySIKUdgxKXe"
+      "_key": "!items.effects!Z5Sd74uVG5P2mEnu.Cz2YmySIKUdgxKXe",
+      "start": null
     }
   ],
   "flags": {

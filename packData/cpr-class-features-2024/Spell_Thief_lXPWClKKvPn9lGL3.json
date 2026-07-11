@@ -4,21 +4,19 @@
   "effects": [
     {
       "name": "Spell Thief",
-      "changes": [],
       "transfer": false,
       "img": "icons/magic/unholy/silhouette-robe-evil-power.webp",
       "_id": "akHysaktJWTFC2QG",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -48,7 +46,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!lXPWClKKvPn9lGL3.akHysaktJWTFC2QG"
+      "_key": "!items.effects!lXPWClKKvPn9lGL3.akHysaktJWTFC2QG",
+      "start": null
     }
   ],
   "system": {

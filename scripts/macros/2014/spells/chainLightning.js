@@ -19,14 +19,14 @@ async function use({workflow}) {
             let color = itemUtils.getConfig(workflow.item, 'color') ?? 'blue';
             let sequenceObj;
             if (workflow.token !== targetToken) {
-                sequenceObj = new Sequence()
+                sequenceObj = new Sequence({moduleName:'chris-premades', softFail:true})
                     .effect()
                     .atLocation(workflow.token)
                     .stretchTo(targetToken)
                     .file('jb2a.chain_lightning.primary.' + color)
                     .waitUntilFinished(-1250);
             } else {
-                sequenceObj = new Sequence()
+                sequenceObj = new Sequence({moduleName:'chris-premades', softFail:true})
                     .effect()
                     .atLocation(workflow.token)
                     .file('jb2a.static_electricity.01.' + color)

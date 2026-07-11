@@ -2,7 +2,7 @@
 async function defaultAnimation(location, token, updates, iteration) {
     let image = token.texture.src;
     let imageSize = token.width * token.texture.scaleX;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(200)
 
         .effect()
@@ -83,7 +83,7 @@ async function defaultAnimation(location, token, updates, iteration) {
 async function celestial(location, token, updates, iteration) {
     let image = token.texture.src;
     let imageSize = token.width * token.texture.scaleX;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(200)
 
         .effect()
@@ -174,7 +174,7 @@ async function celestial(location, token, updates, iteration) {
 async function fiend(location, token, updates, iteration) {
     let image = token.texture.src;
     let imageSize = token.width * token.texture.scaleX;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(200)
 
         .effect()
@@ -263,7 +263,7 @@ async function fiend(location, token, updates, iteration) {
 }
 async function fire(location, token, updates, iteration) {
     let image = token.texture.src;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(150)
         
         .effect()
@@ -343,7 +343,7 @@ async function fire(location, token, updates, iteration) {
 }
 async function water(location, token, updates, iteration) {
     let image = token.texture.src;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(150)
         
         .effect()
@@ -423,7 +423,7 @@ async function water(location, token, updates, iteration) {
 }
 async function air(location, token, updates, iteration) {
     let image = token.texture.src;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(150)
 
         .effect()
@@ -505,7 +505,7 @@ async function air(location, token, updates, iteration) {
 }
 async function earth(location, token, updates, iteration) {
     let image = token.texture.src;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(150)
 
         .effect()
@@ -585,7 +585,7 @@ async function earth(location, token, updates, iteration) {
         .play();
 }
 async function nature(location, token, updates, iteration) {
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(200)
         
         .effect()
@@ -658,7 +658,7 @@ async function nature(location, token, updates, iteration) {
 }
 async function shadow(location, token, updates, iteration) {
     let image = token.texture.src;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(150)
 
         .effect()
@@ -699,7 +699,7 @@ async function shadow(location, token, updates, iteration) {
 }
 async function smoke(location, token, updates, iteration) {
     let image = token.texture.src;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(150)
 
         .effect()
@@ -741,7 +741,7 @@ async function smoke(location, token, updates, iteration) {
 async function future(location, token, updates, iteration) {
     let image = token.texture.src;
     let imageSize = token.width * token.texture.scaleX;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(150)
 
         .effect()

@@ -156,18 +156,14 @@
   },
   "effects": [
     {
-      "changes": [],
       "transfer": false,
       "_id": "yVJGM0rjZP8RdG7x",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "origin": null,
       "tint": "#ffffff",
@@ -177,9 +173,12 @@
       "statuses": [],
       "img": "icons/skills/targeting/crosshair-pointed-orange.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "sort": 0,
-      "_key": "!items.effects!5JR2KQvXI4u3DGz2.yVJGM0rjZP8RdG7x"
+      "_key": "!items.effects!5JR2KQvXI4u3DGz2.yVJGM0rjZP8RdG7x",
+      "start": null
     }
   ],
   "flags": {

@@ -5,23 +5,12 @@
   "effects": [
     {
       "_id": "kly9vc4k0rk778p0",
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "mode": 5,
-          "value": "turn=start,\ndamageRoll=((@spellLevel)*2)d4,\ndamageType=acid,\nlabel=Caustic Brew Acid",
-          "priority": 20
-        }
-      ],
       "disabled": false,
       "duration": {
-        "seconds": 60,
-        "startTime": null,
-        "rounds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 60,
+        "units": "seconds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "origin": "Actor.0FdtHu6O8bHGonq3.Item.8xKuPWRaWPe82L3Q",
       "transfer": false,
@@ -46,9 +35,20 @@
       "statuses": [],
       "img": "icons/magic/acid/projectile-glowing-bubbles.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=start,\ndamageRoll=((@spellLevel)*2)d4,\ndamageType=acid,\nlabel=Caustic Brew Acid",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!kFUuuwXH2cKOdO0e.kly9vc4k0rk778p0"
+      "_key": "!items.effects!kFUuuwXH2cKOdO0e.kly9vc4k0rk778p0",
+      "start": null
     }
   ],
   "flags": {

@@ -261,28 +261,27 @@
   "effects": [
     {
       "name": "Influence: Friendly",
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.skill.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/social/diplomacy-offering-ritual.webp",
       "_id": "PvgzqSEmYFV9tWNR",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.skill.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -314,31 +313,31 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!2J7LN2LRhCVMLoFs.PvgzqSEmYFV9tWNR"
+      "_key": "!items.effects!2J7LN2LRhCVMLoFs.PvgzqSEmYFV9tWNR",
+      "start": null
     },
     {
       "name": "Influence: Hostile",
-      "changes": [
-        {
-          "key": "flags.midi-qol.disadvantage.skill.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/social/diplomacy-offering-ritual.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.disadvantage.skill.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -371,7 +370,8 @@
         }
       },
       "_id": "EAIEQ2KeedhPNfZH",
-      "_key": "!items.effects!2J7LN2LRhCVMLoFs.EAIEQ2KeedhPNfZH"
+      "_key": "!items.effects!2J7LN2LRhCVMLoFs.EAIEQ2KeedhPNfZH",
+      "start": null
     }
   ],
   "folder": null,

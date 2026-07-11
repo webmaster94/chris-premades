@@ -305,13 +305,10 @@
       "name": "Experimental Elixir: Swiftness",
       "origin": "Compendium.world.cpr-class-feature-items.Item.KIfZBNsyQ38eVszL",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -336,21 +333,24 @@
       "img": "icons/tools/laboratory/vial-orange.webp",
       "_id": "I0zexpyRLH4aYmWv",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.walk",
-          "mode": 2,
-          "value": "10",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.walk",
+            "value": "10",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!jMjlaV10OgFFQNQd.I0zexpyRLH4aYmWv"
+      "_key": "!items.effects!jMjlaV10OgFFQNQd.I0zexpyRLH4aYmWv",
+      "start": null
     }
   ],
   "flags": {

@@ -46,24 +46,23 @@
       "origin": "Compendium.chris-premades.CPRFeats2024.Item.n3smBxro6hctDWNS",
       "_id": "WItcrowVnzXFsDqZ",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "mode": 2,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.ac.bonus",
+            "value": "1",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -98,7 +97,8 @@
           "rules": "modern"
         }
       },
-      "_key": "!items.effects!n3smBxro6hctDWNS.WItcrowVnzXFsDqZ"
+      "_key": "!items.effects!n3smBxro6hctDWNS.WItcrowVnzXFsDqZ",
+      "start": null
     }
   ],
   "flags": {

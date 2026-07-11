@@ -221,13 +221,10 @@
       "name": "Maneuvers: Evasive Footwork",
       "origin": "Compendium.world.cpr-class-features.Item.1RNZzStWrEApafCO",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -252,21 +249,24 @@
       "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
       "_id": "gg56h7BAPvCMEOs1",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "mode": 2,
-          "value": "[[@scale.battle-master.combat-superiority-die]]",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.ac.bonus",
+            "value": "[[@scale.battle-master.combat-superiority-die]]",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!cjDdCQQvG005CpTl.gg56h7BAPvCMEOs1"
+      "_key": "!items.effects!cjDdCQQvG005CpTl.gg56h7BAPvCMEOs1",
+      "start": null
     }
   ],
   "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",

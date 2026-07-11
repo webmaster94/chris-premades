@@ -250,13 +250,10 @@
       "name": "Charm Person",
       "origin": "Compendium.world.cpr-spells.Item.r3gdf8mTPZFU9vuj",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -288,14 +285,16 @@
       "img": "icons/magic/life/heart-shadow-red.webp",
       "_id": "BN7ATIijJEwtWSm7",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!HYOlqkH6CutWw9nF.BN7ATIijJEwtWSm7"
+      "_key": "!items.effects!HYOlqkH6CutWw9nF.BN7ATIijJEwtWSm7",
+      "start": null
     }
   ],
   "img": "icons/magic/life/heart-shadow-red.webp",

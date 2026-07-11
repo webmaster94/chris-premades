@@ -7,13 +7,13 @@ async function rollFinished({trigger, workflow}) {
         genericUtils.notify('CHRISPREMADES.Macros.ActivityOnRest.NoActivity', 'error');
         return;
     }
-    let targets;
+    let targets = new Set();
     if (config.checkHit) {
         targets = workflow.hitTargets;
     }
     if (config.checkSave) {
         if (!targets.size) targets = workflow.failedSaves;
-        else targets.filter(i => workflow.failedSaves.has(i));
+        else targets = targets.filter(i => workflow.failedSaves.has(i));
     }
     if (!targets.size) return;
     await Promise.all(targets.map(async i => {

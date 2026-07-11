@@ -490,18 +490,14 @@
   },
   "effects": [
     {
-      "changes": [],
       "transfer": true,
       "_id": "7RQHs4NEVJykrDik",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "origin": null,
       "tint": "#ffffff",
@@ -539,9 +535,12 @@
       "statuses": [],
       "img": "icons/equipment/wrist/wrap-wide-cloth-white.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "sort": 0,
-      "_key": "!items.effects!4jqo7cPqTyh46i3D.7RQHs4NEVJykrDik"
+      "_key": "!items.effects!4jqo7cPqTyh46i3D.7RQHs4NEVJykrDik",
+      "start": null
     }
   ],
   "img": "icons/equipment/wrist/wrap-wide-cloth-white.webp",

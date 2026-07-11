@@ -9,48 +9,51 @@
       "transfer": false,
       "_id": "BKgXclClBWa3Ovu8",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.burrow",
-          "mode": 3,
-          "value": "0",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.movement.climb",
-          "mode": 3,
-          "value": "0",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.movement.fly",
-          "mode": 3,
-          "value": "0",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.movement.land",
-          "mode": 3,
-          "value": "0",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.movement.swim",
-          "mode": 3,
-          "value": "0",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.burrow",
+            "value": "0",
+            "priority": 20,
+            "type": "downgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.climb",
+            "value": "0",
+            "priority": 20,
+            "type": "downgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.fly",
+            "value": "0",
+            "priority": 20,
+            "type": "downgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.land",
+            "value": "0",
+            "priority": 20,
+            "type": "downgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.swim",
+            "value": "0",
+            "priority": 20,
+            "type": "downgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -74,7 +77,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!18CVh9QkTxcUa2Mq.BKgXclClBWa3Ovu8"
+      "_key": "!items.effects!18CVh9QkTxcUa2Mq.BKgXclClBWa3Ovu8",
+      "start": null
     }
   ],
   "system": {

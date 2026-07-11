@@ -82,13 +82,10 @@
       "name": "Brave",
       "origin": "Compendium.world.cpr-race-features.Item.Vja9EmF85fA4fzk3",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -113,21 +110,24 @@
       "img": "icons/commodities/treasure/brooch-shield-grey.webp",
       "_id": "yHDtlg3pQPab4h6h",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.chris-premades.CR.frightened",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.chris-premades.CR.frightened",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!Vja9EmF85fA4fzk3.yHDtlg3pQPab4h6h"
+      "_key": "!items.effects!Vja9EmF85fA4fzk3.yHDtlg3pQPab4h6h",
+      "start": null
     }
   ],
   "img": "icons/commodities/treasure/brooch-shield-grey.webp",

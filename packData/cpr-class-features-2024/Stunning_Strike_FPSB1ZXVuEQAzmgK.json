@@ -9,17 +9,15 @@
       "transfer": false,
       "_id": "tZJKE6IwinZ84D14",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -47,9 +45,7 @@
           "dontApply": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -67,7 +63,8 @@
           "rules": "modern"
         }
       },
-      "_key": "!items.effects!FPSB1ZXVuEQAzmgK.tZJKE6IwinZ84D14"
+      "_key": "!items.effects!FPSB1ZXVuEQAzmgK.tZJKE6IwinZ84D14",
+      "start": null
     },
     {
       "name": "Stunning Strike: Slowed",
@@ -76,24 +73,23 @@
       "transfer": false,
       "_id": "iEs995mg4UJ0EwB1",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "/2",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.all",
+            "value": "/2",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -116,9 +112,7 @@
           "dontApply": true,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -134,7 +128,8 @@
           "rules": "modern"
         }
       },
-      "_key": "!items.effects!FPSB1ZXVuEQAzmgK.iEs995mg4UJ0EwB1"
+      "_key": "!items.effects!FPSB1ZXVuEQAzmgK.iEs995mg4UJ0EwB1",
+      "start": null
     },
     {
       "name": "Stunning Strike: Advantage",
@@ -143,24 +138,23 @@
       "transfer": false,
       "_id": "IysYbf4HFjW9EbTs",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.grants.advantage.attack.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -184,7 +178,6 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [
-            "turnStartSource",
             "isAttacked"
           ]
         },
@@ -202,7 +195,8 @@
           "rules": "modern"
         }
       },
-      "_key": "!items.effects!FPSB1ZXVuEQAzmgK.IysYbf4HFjW9EbTs"
+      "_key": "!items.effects!FPSB1ZXVuEQAzmgK.IysYbf4HFjW9EbTs",
+      "start": null
     }
   ],
   "system": {

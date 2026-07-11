@@ -7,13 +7,10 @@
       "name": "Hold Person",
       "origin": "Compendium.world.cpr-spells.Item.GK8HKAfBksVeWvkA",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": 60,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 60,
+        "units": "seconds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -38,27 +35,31 @@
       "img": "icons/magic/control/energy-stream-link-large-teal.webp",
       "_id": "bny732YnpMsuDytn",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "mode": 0,
-          "value": "turn=end,label=Hold Person (End of Turn),allowIncapacitated=true,rollType=save,saveAbility=wis,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,saveMagic=true,rollMode=publicroll,",
-          "priority": 20
-        },
-        {
-          "key": "macro.tokenMagic",
-          "mode": 0,
-          "value": "mantle-of-madness",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=end,label=Hold Person (End of Turn),allowIncapacitated=true,rollType=save,saveAbility=wis,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,saveMagic=true,rollMode=publicroll,",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "macro.tokenMagic",
+            "value": "mantle-of-madness",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!hc3jHyU7Cxn4WCkT.bny732YnpMsuDytn"
+      "_key": "!items.effects!hc3jHyU7Cxn4WCkT.bny732YnpMsuDytn",
+      "start": null
     }
   ],
   "flags": {

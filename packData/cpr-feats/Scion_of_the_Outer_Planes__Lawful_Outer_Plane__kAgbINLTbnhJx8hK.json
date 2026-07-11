@@ -76,13 +76,10 @@
       "name": "Scion of the Outer Planes (Lawful Outer Plane)",
       "origin": "Compendium.world.cpr-feats.Item.6c2H3FacvLcyyRMa",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -103,21 +100,24 @@
       "img": "icons/magic/symbols/chevron-elipse-circle-blue.webp",
       "_id": "bTiANzBRLVPjdCqc",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "force",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "force",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!kAgbINLTbnhJx8hK.bTiANzBRLVPjdCqc"
+      "_key": "!items.effects!kAgbINLTbnhJx8hK.bTiANzBRLVPjdCqc",
+      "start": null
     }
   ],
   "img": "icons/magic/symbols/chevron-elipse-circle-blue.webp",

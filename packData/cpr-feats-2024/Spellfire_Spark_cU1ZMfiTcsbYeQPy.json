@@ -9,96 +9,107 @@
       "transfer": false,
       "_id": "iOqrUTikyNhBKD8o",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dm.amount.acid",
-          "mode": 2,
-          "value": "@utilityRollTotal",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dm.amount.bludgeoning",
-          "mode": 2,
-          "value": "@utilityRollTotal",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dm.amount.cold",
-          "mode": 2,
-          "value": "@utilityRollTotal",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dm.amount.fire",
-          "mode": 2,
-          "value": "@utilityRollTotal",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dm.amount.force",
-          "mode": 2,
-          "value": "@utilityRollTotal",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dm.amount.lightning",
-          "mode": 2,
-          "value": "@utilityRollTotal",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dm.amount.necrotic",
-          "mode": 2,
-          "value": "@utilityRollTotal",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dm.amount.piercing",
-          "mode": 2,
-          "value": "@utilityRollTotal",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dm.amount.poison",
-          "mode": 2,
-          "value": "@utilityRollTotal",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dm.amount.psychic",
-          "mode": 2,
-          "value": "@utilityRollTotal",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dm.amount.radiant",
-          "mode": 2,
-          "value": "@utilityRollTotal",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dm.amount.slashing",
-          "mode": 2,
-          "value": "@utilityRollTotal",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dm.amount.thunder",
-          "mode": 2,
-          "value": "@utilityRollTotal",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dm.amount.acid",
+            "value": "@utilityRollTotal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dm.amount.bludgeoning",
+            "value": "@utilityRollTotal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dm.amount.cold",
+            "value": "@utilityRollTotal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dm.amount.fire",
+            "value": "@utilityRollTotal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dm.amount.force",
+            "value": "@utilityRollTotal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dm.amount.lightning",
+            "value": "@utilityRollTotal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dm.amount.necrotic",
+            "value": "@utilityRollTotal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dm.amount.piercing",
+            "value": "@utilityRollTotal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dm.amount.poison",
+            "value": "@utilityRollTotal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dm.amount.psychic",
+            "value": "@utilityRollTotal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dm.amount.radiant",
+            "value": "@utilityRollTotal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dm.amount.slashing",
+            "value": "@utilityRollTotal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dm.amount.thunder",
+            "value": "@utilityRollTotal",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -134,7 +145,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!cU1ZMfiTcsbYeQPy.iOqrUTikyNhBKD8o"
+      "_key": "!items.effects!cU1ZMfiTcsbYeQPy.iOqrUTikyNhBKD8o",
+      "start": null
     }
   ],
   "system": {

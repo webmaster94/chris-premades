@@ -154,11 +154,11 @@ async function combinedAnimation(season, sourceToken, teleToken, targetTokens, f
         saturate = 0;
     }
     // Animations by: eskiemoh
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         //Spring Sequence
         .thenDo(function () {
             if (season === 'spring') {
-                new Sequence()
+                new Sequence({moduleName:'chris-premades', softFail:true})
 
                     .effect()
                     .file('jb2a.markers.light_orb.complete.yellow')
@@ -235,7 +235,7 @@ async function combinedAnimation(season, sourceToken, teleToken, targetTokens, f
         //Winter Sequence
         .thenDo(function () {
             if (season === 'winter' && targetTokens.length) {
-                new Sequence()
+                new Sequence({moduleName:'chris-premades', softFail:true})
 
                     .wait(600)
 
@@ -411,7 +411,7 @@ async function combinedAnimation(season, sourceToken, teleToken, targetTokens, f
         .thenDo(function () {
             if (season === 'autumn') {
                 targetTokens.forEach((atmTarget) => {
-                    new Sequence()
+                    new Sequence({moduleName:'chris-premades', softFail:true})
 
                         .effect()
                         .file('jb2a.misty_step.02.yellow')
@@ -463,7 +463,7 @@ async function combinedAnimation(season, sourceToken, teleToken, targetTokens, f
         .thenDo(function () {
             if (season === 'summer') {
                 targetTokens.forEach((sumTarget) => {
-                    new Sequence()
+                    new Sequence({moduleName:'chris-premades', softFail:true})
 
                         .effect()
                         .delay(200)

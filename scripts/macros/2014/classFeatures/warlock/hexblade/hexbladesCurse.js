@@ -17,7 +17,7 @@ async function damageApplication({trigger: {token}, workflow, ditem}) {
     if (targetId !== token.document.id) return;
     let rawDamage = workflow.actor.system.attributes.prof;
     ditem.rawDamageDetail[0].value += rawDamage;
-    let modifiedDamage = rawDamage * ditem.damageDetail[0].active.multiplier ?? 1;
+    let modifiedDamage = rawDamage * (ditem.damageDetail[0].active.multiplier ?? 1);
     ditem.damageDetail[0].value += modifiedDamage;
     ditem.hpDamage += modifiedDamage;
 }

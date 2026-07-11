@@ -5,34 +5,11 @@
     {
       "name": "Aspect of the Wilds: Owl",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.attributes.senses.darkvision",
-          "mode": 4,
-          "value": "60",
-          "priority": 20
-        },
-        {
-          "key": "ATL.sight.range",
-          "mode": 2,
-          "value": "60",
-          "priority": 5
-        },
-        {
-          "key": "ATL.sight.visionMode",
-          "mode": 0,
-          "value": "darkvision",
-          "priority": 5
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -69,30 +46,44 @@
       "_id": "Bpz3jrM68RVa44c6",
       "img": "icons/creatures/abilities/cougar-pounce-stalk-black.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.senses.darkvision",
+            "value": "60",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "ATL.sight.range",
+            "value": "60",
+            "priority": 5,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "ATL.sight.visionMode",
+            "value": "darkvision",
+            "priority": 5,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!DRVXrFO3c6h1yvhj.Bpz3jrM68RVa44c6"
+      "_key": "!items.effects!DRVXrFO3c6h1yvhj.Bpz3jrM68RVa44c6",
+      "start": null
     },
     {
       "name": "Aspect of the Wilds: Panther",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.attributes.movement.climb",
-          "mode": 4,
-          "value": "@attributes.movement.walk",
-          "priority": 40
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -134,30 +125,30 @@
       "_id": "Qy91nKOF36woVSjO",
       "img": "icons/creatures/abilities/cougar-pounce-stalk-black.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.climb",
+            "value": "@attributes.movement.walk",
+            "priority": 40,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!DRVXrFO3c6h1yvhj.Qy91nKOF36woVSjO"
+      "_key": "!items.effects!DRVXrFO3c6h1yvhj.Qy91nKOF36woVSjO",
+      "start": null
     },
     {
       "name": "Aspect of the Wilds: Salmon",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.attributes.movement.swim",
-          "mode": 4,
-          "value": "@attributes.movement.walk",
-          "priority": 40
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -199,10 +190,21 @@
       "_id": "WGpMwa7L3FumVkSY",
       "img": "icons/creatures/abilities/cougar-pounce-stalk-black.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.swim",
+            "value": "@attributes.movement.walk",
+            "priority": 40,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!DRVXrFO3c6h1yvhj.WGpMwa7L3FumVkSY"
+      "_key": "!items.effects!DRVXrFO3c6h1yvhj.WGpMwa7L3FumVkSY",
+      "start": null
     }
   ],
   "system": {

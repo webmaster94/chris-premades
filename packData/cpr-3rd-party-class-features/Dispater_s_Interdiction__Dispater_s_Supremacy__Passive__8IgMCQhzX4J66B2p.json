@@ -4,28 +4,27 @@
   "effects": [
     {
       "name": "Dispater's Interdiction: Dispater's Supremacy",
-      "changes": [
-        {
-          "key": "flags.midi-qol.grants.criticalThreshold",
-          "mode": 5,
-          "value": "18",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/targeting/crosshair-triple-strike-orange.webp",
       "_id": "FgZXcIgrvc8aEhNr",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.criticalThreshold",
+            "value": "18",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -63,7 +62,8 @@
           "templateEffectActivities": []
         }
       },
-      "_key": "!items.effects!8IgMCQhzX4J66B2p.FgZXcIgrvc8aEhNr"
+      "_key": "!items.effects!8IgMCQhzX4J66B2p.FgZXcIgrvc8aEhNr",
+      "start": null
     }
   ],
   "system": {

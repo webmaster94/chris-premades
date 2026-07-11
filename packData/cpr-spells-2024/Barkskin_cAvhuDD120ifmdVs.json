@@ -152,28 +152,27 @@
   "effects": [
     {
       "name": "Barkskin",
-      "changes": [
-        {
-          "key": "system.attributes.ac.value",
-          "mode": 4,
-          "value": "17",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/commodities/wood/bark-beige.webp",
       "_id": "vZs2z8P9aJWDsrvz",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.ac.value",
+            "value": "17",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -198,7 +197,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!cAvhuDD120ifmdVs.vZs2z8P9aJWDsrvz"
+      "_key": "!items.effects!cAvhuDD120ifmdVs.vZs2z8P9aJWDsrvz",
+      "start": null
     }
   ],
   "name": "Barkskin",

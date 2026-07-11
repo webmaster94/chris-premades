@@ -6,34 +6,11 @@
     {
       "name": "Psychic Defenses",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "psychic",
-          "priority": 1
-        },
-        {
-          "key": "flags.chris-premades.CR.charmed",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.chris-premades.CR.frightened",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -71,10 +48,35 @@
       "img": "icons/magic/water/orb-water-transparent.webp",
       "_id": "D0K6gksJc35E66ej",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "psychic",
+            "priority": 1,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.chris-premades.CR.charmed",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.chris-premades.CR.frightened",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": "Actor.yy1I4W4hqhw1yaiM.Item.HqeTyOQR0kXK8jEE",
       "sort": 0,
-      "_key": "!items.effects!NfSueXlgBXDeCJDf.D0K6gksJc35E66ej"
+      "_key": "!items.effects!NfSueXlgBXDeCJDf.D0K6gksJc35E66ej",
+      "start": null
     }
   ],
   "system": {

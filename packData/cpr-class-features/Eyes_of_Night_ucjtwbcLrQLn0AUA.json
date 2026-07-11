@@ -261,13 +261,10 @@
       "name": "Eyes of Night",
       "origin": "Compendium.world.cpr-class-features.Item.y9oZ8t2C9jr0Ev9m",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -292,45 +289,47 @@
       "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
       "_id": "int4Zc7SY0968Z9P",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.senses.darkvision",
-          "mode": 4,
-          "value": "300",
-          "priority": 20
-        },
-        {
-          "key": "ATL.sight.visionMode",
-          "mode": 0,
-          "value": "darkvision",
-          "priority": 20
-        },
-        {
-          "key": "ATL.sight.range",
-          "mode": 4,
-          "value": "300",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.senses.darkvision",
+            "value": "300",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "ATL.sight.visionMode",
+            "value": "darkvision",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "ATL.sight.range",
+            "value": "300",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!ucjtwbcLrQLn0AUA.int4Zc7SY0968Z9P"
+      "_key": "!items.effects!ucjtwbcLrQLn0AUA.int4Zc7SY0968Z9P",
+      "start": null
     },
     {
       "name": "Eyes of Night - Self",
       "origin": "Actor.kDqmxm3eMOEcv2gD.Item.kQBPxdNb65USHy3T",
       "duration": {
-        "rounds": null,
-        "startTime": 2568,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 215,
-        "startTurn": 2
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -351,33 +350,38 @@
       "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
       "_id": "s0ClVU3MFyd055Cx",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.senses.darkvision",
-          "mode": 4,
-          "value": "300",
-          "priority": 20
-        },
-        {
-          "key": "ATL.sight.visionMode",
-          "mode": 0,
-          "value": "darkvision",
-          "priority": 20
-        },
-        {
-          "key": "ATL.sight.range",
-          "mode": 4,
-          "value": "300",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.senses.darkvision",
+            "value": "300",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "ATL.sight.visionMode",
+            "value": "darkvision",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "ATL.sight.range",
+            "value": "300",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!ucjtwbcLrQLn0AUA.s0ClVU3MFyd055Cx"
+      "_key": "!items.effects!ucjtwbcLrQLn0AUA.s0ClVU3MFyd055Cx",
+      "start": null
     }
   ],
   "img": "icons/magic/perception/silhouette-stealth-shadow.webp",

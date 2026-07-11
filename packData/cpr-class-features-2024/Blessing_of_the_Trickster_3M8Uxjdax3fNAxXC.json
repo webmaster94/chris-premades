@@ -9,24 +9,23 @@
       "transfer": false,
       "_id": "Ns6ZImvsnZkxFelb",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.skill.ste",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.skill.ste",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -58,7 +57,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!3M8Uxjdax3fNAxXC.Ns6ZImvsnZkxFelb"
+      "_key": "!items.effects!3M8Uxjdax3fNAxXC.Ns6ZImvsnZkxFelb",
+      "start": null
     }
   ],
   "system": {

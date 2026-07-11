@@ -401,24 +401,23 @@
       "transfer": false,
       "_id": "GMNbfRmCxQMUgJYc",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "mode": 2,
-          "value": "turn=end, rollType=save, saveAbility=con, saveDC=@attributes.spell.dc, saveRemove=true, saveMagic=false, rollMode=publicroll, allowIncapacitated=true, name=Blinding Smite (End of Turn)",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=end, rollType=save, saveAbility=con, saveDC=@attributes.spell.dc, saveRemove=true, saveMagic=false, rollMode=publicroll, allowIncapacitated=true, name=Blinding Smite (End of Turn)",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -448,7 +447,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!W23eL6uYFFKFICRW.GMNbfRmCxQMUgJYc"
+      "_key": "!items.effects!W23eL6uYFFKFICRW.GMNbfRmCxQMUgJYc",
+      "start": null
     }
   ],
   "folder": null,

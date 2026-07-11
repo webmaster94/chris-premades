@@ -9,24 +9,23 @@
       "transfer": false,
       "_id": "pIjnGiv2ug0ac4MF",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.gambits-premades.oaImmunity",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.gambits-premades.oaImmunity",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -68,7 +67,8 @@
           "templateEffectActivities": []
         }
       },
-      "_key": "!items.effects!dc2gMv9DHDme54e9.pIjnGiv2ug0ac4MF"
+      "_key": "!items.effects!dc2gMv9DHDme54e9.pIjnGiv2ug0ac4MF",
+      "start": null
     }
   ],
   "system": {

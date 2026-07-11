@@ -37,7 +37,7 @@ async function start({trigger: {entity: effect}}) {
     if (!playAnimation || !animationUtils.aseCheck()) return;
     let token = actorUtils.getFirstToken(effect.parent);
     if (!token) return;
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('animated-spell-effects-cartoon.air.puff.03')
         .atLocation(token)
@@ -83,7 +83,7 @@ async function end({trigger: {entity: effect}}) {
     let token = actorUtils.getFirstToken(effect.parent);
     if (!token) return;
     await Sequencer.EffectManager.endEffects({name: 'Fly', object: token});
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .animation()
         .on(token)
         .opacity(1)

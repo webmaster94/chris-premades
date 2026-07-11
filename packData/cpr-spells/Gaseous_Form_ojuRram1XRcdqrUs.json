@@ -5,65 +5,12 @@
   "effects": [
     {
       "_id": "41aqlsmnj4fdh9gm",
-      "changes": [
-        {
-          "key": "system.attributes.movement.walk",
-          "mode": 5,
-          "value": "0",
-          "priority": 25
-        },
-        {
-          "key": "system.attributes.movement.fly",
-          "mode": 5,
-          "value": "10",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.save.str",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.save.dex",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.save.con",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.midi.non-magical",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.movement.swim",
-          "mode": 5,
-          "value": "0",
-          "priority": 25
-        },
-        {
-          "key": "system.attributes.movement.climb",
-          "mode": 5,
-          "value": "0",
-          "priority": 25
-        }
-      ],
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "transfer": false,
       "flags": {
@@ -113,9 +60,69 @@
       "statuses": [],
       "img": "icons/magic/air/fog-gas-smoke-dense-green.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.walk",
+            "value": "0",
+            "priority": 25,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.fly",
+            "value": "10",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.save.str",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.save.dex",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.save.con",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.midi.non-magical",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.swim",
+            "value": "0",
+            "priority": 25,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.climb",
+            "value": "0",
+            "priority": 25,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!ojuRram1XRcdqrUs.41aqlsmnj4fdh9gm"
+      "_key": "!items.effects!ojuRram1XRcdqrUs.41aqlsmnj4fdh9gm",
+      "start": null
     }
   ],
   "flags": {

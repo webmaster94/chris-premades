@@ -4,21 +4,19 @@
   "effects": [
     {
       "name": "Mantle of Majesty",
-      "changes": [],
       "transfer": false,
       "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
       "_id": "wcH8Q6iL5wSdygAd",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -43,7 +41,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!n8WDNU1mE1Pk9rKT.wcH8Q6iL5wSdygAd"
+      "_key": "!items.effects!n8WDNU1mE1Pk9rKT.wcH8Q6iL5wSdygAd",
+      "start": null
     }
   ],
   "system": {

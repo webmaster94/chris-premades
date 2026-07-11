@@ -179,7 +179,7 @@ async function use({workflow}) {
     }
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.jb2aCheck() === 'patreon' && animationUtils.aseCheck();
     let selected = workflow.token;
-    let teleOut = new Sequence()
+    let teleOut = new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.particles.outward.blue.01.05')
         .atLocation(selected)
@@ -229,7 +229,7 @@ async function use({workflow}) {
 
         .thenDo(function() {
             toTeleport.filter(i => i.uuid != selected.document.uuid).forEach(target => {  
-                new Sequence()
+                new Sequence({moduleName:'chris-premades', softFail:true})
                     .animation()
                     .on(target)
                     .delay(2000)
@@ -305,7 +305,7 @@ async function use({workflow}) {
     let maxDim = Math.max(canvas.dimensions.width, canvas.dimensions.height);
     let range = canvas.dimensions.distance * Math.floor(maxDim / canvas.dimensions.size);
     await socket.executeAsGM(sockets.teleport.name, toTeleport.map(i => i.document.uuid), workflow.token.document.uuid, {range, animation: 'none', minimizeSheet: false});
-    let teleIn = new Sequence()
+    let teleIn = new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .copySprite(selected)
         .atLocation(selected)
@@ -356,7 +356,7 @@ async function use({workflow}) {
         
         .thenDo(function() {
             toTeleport.forEach(target => {  
-                new Sequence()
+                new Sequence({moduleName:'chris-premades', softFail:true})
                     .effect()
                     .copySprite(target)
                     .atLocation(target)

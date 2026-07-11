@@ -12,7 +12,7 @@ async function use({workflow}) {
     if (shouldPlayAnimation && animation === 'complex') {
         //Animations by: eskiemoh
         if (color === 'cycle' || color === 'random') await animationUtils.preloadAnimations('jb2a.scorching_ray');
-        await new Sequence()
+        await new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .atLocation(workflow.token)
             .file('jb2a.magic_signs.circle.02.evocation.loop.yellow')
@@ -126,7 +126,7 @@ async function use({workflow}) {
                             x: tokenCenter.x + normalizedDirectionVector.x * magicCircleDistance,
                             y: tokenCenter.y + normalizedDirectionVector.y * magicCircleDistance
                         };
-                        new Sequence()
+                        new Sequence({moduleName:'chris-premades', softFail:true})
                             .wait(150)
                             
                             .effect()

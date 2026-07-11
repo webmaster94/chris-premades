@@ -52,7 +52,7 @@ async function use({workflow}) {
             ];
             color = colors[Math.floor(Math.random() * colors.length)];
         }
-        new Sequence()
+        new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('jb2a.static_electricity.01.' + color)
             .atLocation(workflow.targets.first())

@@ -9,24 +9,23 @@
       "transfer": false,
       "_id": "YkFaQkTJ9HlAgHKc",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "*0",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.all",
+            "value": "*0",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -50,7 +49,6 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [
-            "turnEndSource",
             "isDamaged"
           ]
         },
@@ -66,7 +64,8 @@
           "templateEffectActivities": []
         }
       },
-      "_key": "!items.effects!6zzY9eJ7VfornEDZ.YkFaQkTJ9HlAgHKc"
+      "_key": "!items.effects!6zzY9eJ7VfornEDZ.YkFaQkTJ9HlAgHKc",
+      "start": null
     }
   ],
   "system": {

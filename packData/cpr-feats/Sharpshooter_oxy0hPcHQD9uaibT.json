@@ -208,22 +208,11 @@
   "effects": [
     {
       "img": "icons/skills/ranged/arrow-flying-white-blue.webp",
-      "changes": [
-        {
-          "key": "flags.dnd5e.sharpShooter",
-          "mode": 0,
-          "value": "1",
-          "priority": 30
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": 1488,
-        "rounds": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -269,11 +258,22 @@
       "statuses": [],
       "_id": "XNHZUZWx8ulIFnkz",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.dnd5e.sharpShooter",
+            "value": "1",
+            "priority": 30,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "origin": "Actor.yLACiN6Q02CNit1Z.Item.9rmWZ2WsSJ3ONHn9",
       "sort": 0,
-      "_key": "!items.effects!oxy0hPcHQD9uaibT.XNHZUZWx8ulIFnkz"
+      "_key": "!items.effects!oxy0hPcHQD9uaibT.XNHZUZWx8ulIFnkz",
+      "start": null
     }
   ],
   "img": "icons/skills/ranged/arrow-flying-white-blue.webp",

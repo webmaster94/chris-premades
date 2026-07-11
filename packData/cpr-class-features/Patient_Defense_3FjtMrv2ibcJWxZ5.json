@@ -220,13 +220,10 @@
       "name": "Patient Defense",
       "origin": "Compendium.world.cpr-class-features.Item.YWjg9zu3RYbwX69u",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -242,9 +239,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -253,27 +248,31 @@
       "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
       "_id": "KmvUJEIm0qQgVNeH",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.grants.disadvantage.attack.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.save.dex",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.disadvantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.save.dex",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!3FjtMrv2ibcJWxZ5.KmvUJEIm0qQgVNeH"
+      "_key": "!items.effects!3FjtMrv2ibcJWxZ5.KmvUJEIm0qQgVNeH",
+      "start": null
     }
   ],
   "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",

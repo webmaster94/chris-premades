@@ -4,15 +4,11 @@
   "img": "icons/magic/air/wind-vortex-swirl-purple.webp",
   "effects": [
     {
-      "changes": [],
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -47,9 +43,12 @@
       "statuses": [],
       "img": "icons/magic/air/wind-vortex-swirl-purple.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "sort": 0,
-      "_key": "!items.effects!FAF67dWmHcz0IKRq.TebHwvWJ1nmroHwK"
+      "_key": "!items.effects!FAF67dWmHcz0IKRq.TebHwvWJ1nmroHwK",
+      "start": null
     }
   ],
   "flags": {

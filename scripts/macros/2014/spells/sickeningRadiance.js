@@ -67,7 +67,7 @@ async function startOrEnter({trigger: {entity: template, castData, token}}) {
         effectUtils.addMacro(effectData, 'effect', ['sickeningRadianceSickened']);
         effect = await effectUtils.createEffect(token.actor, effectData, {parentEntity: template, identifier: 'sickeningRadiance'});
     }
-    let maxExhaustion = CONFIG.statusEffects.find(i => i?.id === 'exhaustion')?.levels ?? 6;
+    let maxExhaustion = CONFIG.DND5E.conditionTypes.exhaustion?.levels ?? 6;
     if (exhaustionLevel >= maxExhaustion) return;
     await genericUtils.update(token.actor, {'system.attributes.exhaustion': exhaustionLevel + 1});
 }

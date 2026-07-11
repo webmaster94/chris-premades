@@ -5,22 +5,11 @@
     {
       "name": "Thought Shield",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "value": "psychic",
-          "mode": 2,
-          "priority": 1
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -58,10 +47,21 @@
       "img": "icons/magic/unholy/orb-swirling-teal.webp",
       "_id": "BfngdUGWguKYWj8w",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "psychic",
+            "priority": 1,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": "Compendium.chris-premades.CPRClassFeatures2024.Item.Wlzp5Fyl71ToUdvT",
       "sort": 0,
-      "_key": "!items.effects!Wlzp5Fyl71ToUdvT.BfngdUGWguKYWj8w"
+      "_key": "!items.effects!Wlzp5Fyl71ToUdvT.BfngdUGWguKYWj8w",
+      "start": null
     }
   ],
   "system": {

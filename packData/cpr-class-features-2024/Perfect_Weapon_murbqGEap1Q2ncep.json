@@ -8,36 +8,37 @@
       "origin": "Actor.1ANL4qqWoi2V46iP.Item.6fwmbSk0PBYjRF38",
       "_id": "mIPiTduYpO8QYDgk",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "psychic",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.ci.value",
-          "mode": 2,
-          "value": "charmed",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.ci.value",
-          "mode": 2,
-          "value": "frightened",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "psychic",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.ci.value",
+            "value": "charmed",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.ci.value",
+            "value": "frightened",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -63,7 +64,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!murbqGEap1Q2ncep.mIPiTduYpO8QYDgk"
+      "_key": "!items.effects!murbqGEap1Q2ncep.mIPiTduYpO8QYDgk",
+      "start": null
     }
   ],
   "system": {

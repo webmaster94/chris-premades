@@ -5,7 +5,7 @@ async function use({trigger, workflow}) {
     if (!animationUtils.aseCheck() || animationUtils.jb2aCheck() != 'patreon') return;
     let target = workflow.targets.first();
     /* eslint-disable indent */
-    new Sequence()
+    new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
             .file('jb2a.healing_generic.03.burst.bluepurple')
             .attachTo(target, {offset: {y: -0.45 * target.document.width}, gridUnits: true})

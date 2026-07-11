@@ -223,13 +223,10 @@
       "name": "Forceful Presence",
       "origin": "Compendium.world.cpr-race-features.Item.m5xjNA0Vf2hznX7j",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -257,27 +254,31 @@
       "img": "icons/magic/control/debuff-chains-shackles-movement-blue.webp",
       "_id": "fZVJHeA1zs4TVfyv",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.advantage.skill.per",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.advantage.skill.itm",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.skill.per",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.advantage.skill.itm",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!FIlMpDpgoMqnwKf7.fZVJHeA1zs4TVfyv"
+      "_key": "!items.effects!FIlMpDpgoMqnwKf7.fZVJHeA1zs4TVfyv",
+      "start": null
     }
   ],
   "img": "icons/magic/control/debuff-chains-shackles-movement-blue.webp",

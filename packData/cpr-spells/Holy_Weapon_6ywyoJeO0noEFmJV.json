@@ -443,24 +443,23 @@
       "transfer": false,
       "_id": "MEK7lh3QKgG0Gu59",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "mode": 2,
-          "value": "label=Holy Weapon: Burst (End of Turn),turn=end,saveDC=10,saveAbility=con,savingThrow=@attributes.spell.dc,saveMagic=true,saveRemove=true",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "label=Holy Weapon: Burst (End of Turn),turn=end,saveDC=10,saveAbility=con,savingThrow=@attributes.spell.dc,saveMagic=true,saveRemove=true",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -490,7 +489,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!6ywyoJeO0noEFmJV.MEK7lh3QKgG0Gu59"
+      "_key": "!items.effects!6ywyoJeO0noEFmJV.MEK7lh3QKgG0Gu59",
+      "start": null
     }
   ],
   "flags": {

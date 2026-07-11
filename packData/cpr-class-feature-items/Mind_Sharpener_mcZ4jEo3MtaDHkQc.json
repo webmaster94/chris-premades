@@ -50,48 +50,51 @@
       "origin": "Compendium.chris-premades.CPRClassFeatureItems.Item.mcZ4jEo3MtaDHkQc",
       "_id": "OF6mvSJHa9LmG0Hw",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.optional.mind-sharpener.save.fail.con",
-          "mode": 5,
-          "value": "success",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.mind-sharpener.activation",
-          "mode": 5,
-          "value": "isConcentrationCheck",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.mind-sharpener.count",
-          "mode": 5,
-          "value": "ItemUses.identifier.mind-sharpener",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.mind-sharpener.countAlt",
-          "mode": 5,
-          "value": "reaction",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.mind-sharpener.displayBonusRolls",
-          "mode": 5,
-          "value": "false",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.optional.mind-sharpener.save.fail.con",
+            "value": "success",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.mind-sharpener.activation",
+            "value": "isConcentrationCheck",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.mind-sharpener.count",
+            "value": "ItemUses.identifier.mind-sharpener",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.mind-sharpener.countAlt",
+            "value": "reaction",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.mind-sharpener.displayBonusRolls",
+            "value": "false",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -117,7 +120,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!mcZ4jEo3MtaDHkQc.OF6mvSJHa9LmG0Hw"
+      "_key": "!items.effects!mcZ4jEo3MtaDHkQc.OF6mvSJHa9LmG0Hw",
+      "start": null
     }
   ],
   "folder": null,

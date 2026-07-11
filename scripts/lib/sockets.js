@@ -170,10 +170,11 @@ async function dialog(...options) {
     await genericUtils.remove(message);
     return selection;
 }
-async function rollItem(itemRef, config, options) {
+async function rollItem(itemRef, config = {}, options = {}) {
     let item = await fromUuid(itemRef);
     if (!item) return;
-    return await MidiQOL.completeItemUse(item, config, options);
+    config.midiOptions = genericUtils.mergeObject(config.midiOptions ?? {}, options);
+    return await MidiQOL.completeItemUse(item, config);
 }
 async function createSidebarActor(actorUuid, {folderId} = {}) {
     let compendiumActor = await fromUuid(actorUuid);

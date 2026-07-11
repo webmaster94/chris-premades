@@ -162,21 +162,19 @@
   "effects": [
     {
       "name": "Staggering Smite",
-      "changes": [],
       "transfer": false,
       "img": "icons/weapons/hammers/hammer-double-glowing-yellow.webp",
       "_id": "G7UhVsjX9WYhII6f",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -200,16 +198,15 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEndSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
         }
       },
       "sort": 0,
-      "_key": "!items.effects!pWhk7JxUZQJWJpkk.G7UhVsjX9WYhII6f"
+      "_key": "!items.effects!pWhk7JxUZQJWJpkk.G7UhVsjX9WYhII6f",
+      "start": null
     }
   ],
   "name": "Staggering Smite",

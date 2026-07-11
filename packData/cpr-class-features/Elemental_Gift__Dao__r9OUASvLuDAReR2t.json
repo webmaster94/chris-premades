@@ -77,13 +77,10 @@
       "name": "Elemental Gift (Dao)",
       "origin": "Compendium.world.cpr-class-features.Item.X33rAVsRxnckiaKU",
       "duration": {
-        "rounds": null,
-        "startTime": 1416,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 237,
-        "startTurn": 6
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -104,21 +101,24 @@
       "img": "icons/magic/control/debuff-energy-hold-levitate-yellow.webp",
       "_id": "rHlNfmNqBMRBivFk",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "bludgeoning",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "bludgeoning",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!r9OUASvLuDAReR2t.rHlNfmNqBMRBivFk"
+      "_key": "!items.effects!r9OUASvLuDAReR2t.rHlNfmNqBMRBivFk",
+      "start": null
     }
   ],
   "img": "icons/magic/control/debuff-energy-hold-levitate-yellow.webp",

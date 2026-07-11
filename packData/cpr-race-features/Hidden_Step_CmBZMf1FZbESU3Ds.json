@@ -222,13 +222,10 @@
       "name": "Hidden Step",
       "origin": "Compendium.world.cpr-race-features.Item.Wm5bgGIRype1NZhh",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -244,9 +241,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -268,14 +263,16 @@
       "img": "icons/magic/air/wind-stream-blue-gray.webp",
       "_id": "PrZCrMRZMS7GlSig",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!CmBZMf1FZbESU3Ds.PrZCrMRZMS7GlSig"
+      "_key": "!items.effects!CmBZMf1FZbESU3Ds.PrZCrMRZMS7GlSig",
+      "start": null
     }
   ],
   "img": "icons/magic/air/wind-stream-blue-gray.webp",

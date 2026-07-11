@@ -162,28 +162,27 @@
   "effects": [
     {
       "name": "Nylea's Votary",
-      "changes": [
-        {
-          "key": "flags.chris-premades.CR.poisoned",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "img": "icons/environment/creatures/horses.webp",
       "_id": "BDer315izZFjCtP2",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.chris-premades.CR.poisoned",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Item.IibodNCYaBvMdZFH",
@@ -213,7 +212,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!17m61qJYKX0TB4dY.BDer315izZFjCtP2"
+      "_key": "!items.effects!17m61qJYKX0TB4dY.BDer315izZFjCtP2",
+      "start": null
     }
   ],
   "folder": "vmmhFjJHPdIgg0hD",

@@ -84,13 +84,10 @@
       "name": "Maneuvers: Commanding Presence",
       "origin": "Compendium.world.cpr-class-features.Item.9oX8Yas9rf2ACvAe",
       "duration": {
-        "rounds": null,
-        "startTime": 1368,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 229,
-        "startTurn": 1
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -111,45 +108,52 @@
       "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
       "_id": "sIjtKTjzNUCNEOyk",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.optional.CommandingPresence.label",
-          "mode": 0,
-          "value": "Commanding Presence",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.CommandingPresence.count",
-          "mode": 0,
-          "value": "ItemUses.Superiority Dice",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.CommandingPresence.skill.itm",
-          "mode": 0,
-          "value": "@scale.battle-master.combat-superiority-die",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.CommandingPresence.skill.prf",
-          "mode": 0,
-          "value": "@scale.battle-master.combat-superiority-die",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.CommandingPresence.skill.per",
-          "mode": 0,
-          "value": "@scale.battle-master.combat-superiority-die",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.optional.CommandingPresence.label",
+            "value": "Commanding Presence",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.CommandingPresence.count",
+            "value": "ItemUses.Superiority Dice",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.CommandingPresence.skill.itm",
+            "value": "@scale.battle-master.combat-superiority-die",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.CommandingPresence.skill.prf",
+            "value": "@scale.battle-master.combat-superiority-die",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.CommandingPresence.skill.per",
+            "value": "@scale.battle-master.combat-superiority-die",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!i4M7gAdrYmDfs1wA.sIjtKTjzNUCNEOyk"
+      "_key": "!items.effects!i4M7gAdrYmDfs1wA.sIjtKTjzNUCNEOyk",
+      "start": null
     }
   ],
   "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",

@@ -77,13 +77,10 @@
       "name": "Stalker's Prowess",
       "origin": "Compendium.world.cpr-class-features.Item.9BCXuAmNZxJambn8",
       "duration": {
-        "rounds": null,
-        "startTime": 1476,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 247,
-        "startTurn": 4
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -104,21 +101,24 @@
       "img": "icons/creatures/abilities/cougar-pounce-stalk-black.webp",
       "_id": "SKtLqcorKO5aNMXK",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "+10",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.all",
+            "value": "+10",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!9853lSmH18OrCuYN.SKtLqcorKO5aNMXK"
+      "_key": "!items.effects!9853lSmH18OrCuYN.SKtLqcorKO5aNMXK",
+      "start": null
     }
   ],
   "img": "icons/creatures/abilities/cougar-pounce-stalk-black.webp",

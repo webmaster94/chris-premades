@@ -280,43 +280,14 @@
   },
   "effects": [
     {
-      "changes": [
-        {
-          "key": "system.bonuses.All-Attacks",
-          "mode": 2,
-          "value": "-1d6",
-          "priority": 20
-        },
-        {
-          "key": "system.bonuses.abilities.check",
-          "mode": 2,
-          "value": "-1d6",
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.concentration.bonuses.save",
-          "mode": 2,
-          "value": "-1d6",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.OverTime",
-          "mode": 0,
-          "value": "turn=end,saveAbility=int,saveDC=@item.activities.contents.0.save.dc.value,saveMagic=true,label=Snaptic Static (End of Turn)",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "_id": "Hh7MZaRxbCk1jNHG",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": 60,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 60,
+        "units": "seconds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "origin": null,
       "tint": "#ffffff",
@@ -343,9 +314,41 @@
       "statuses": [],
       "img": "icons/magic/sonic/projectile-sound-rings-wave.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.All-Attacks",
+            "value": "-1d6",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.bonuses.abilities.check",
+            "value": "-1d6",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.concentration.bonuses.save",
+            "value": "-1d6",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=end,saveAbility=int,saveDC=@item.activities.contents.0.save.dc.value,saveMagic=true,label=Snaptic Static (End of Turn)",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!XAgWwMAi1giFHnzX.Hh7MZaRxbCk1jNHG"
+      "_key": "!items.effects!XAgWwMAi1giFHnzX.Hh7MZaRxbCk1jNHG",
+      "start": null
     }
   ],
   "img": "icons/magic/sonic/projectile-sound-rings-wave.webp",

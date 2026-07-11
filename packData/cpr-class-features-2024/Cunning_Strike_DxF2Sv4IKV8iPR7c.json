@@ -9,24 +9,23 @@
       "transfer": false,
       "_id": "9UZZ3ouSUWdI3rJF",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=con,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
-          "mode": 0,
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=con,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -67,7 +66,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!DxF2Sv4IKV8iPR7c.9UZZ3ouSUWdI3rJF"
+      "_key": "!items.effects!DxF2Sv4IKV8iPR7c.9UZZ3ouSUWdI3rJF",
+      "start": null
     },
     {
       "name": "Cunning Strike: Withdraw",
@@ -76,24 +76,23 @@
       "transfer": false,
       "_id": "m59GKZZ40WWoMKfT",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.gambits-premades.oaImmunity",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.gambits-premades.oaImmunity",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -124,7 +123,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!DxF2Sv4IKV8iPR7c.m59GKZZ40WWoMKfT"
+      "_key": "!items.effects!DxF2Sv4IKV8iPR7c.m59GKZZ40WWoMKfT",
+      "start": null
     }
   ],
   "system": {

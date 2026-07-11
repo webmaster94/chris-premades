@@ -42,7 +42,7 @@ async function oneTwoPunch({workflow}) {
     if (!playAnimation) return;
     animationTargets.forEach(target => {
         /* eslint-disable indent */
-        new Sequence()
+        new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
                 .copySprite(workflow.token)
                 .attachTo(workflow.token)

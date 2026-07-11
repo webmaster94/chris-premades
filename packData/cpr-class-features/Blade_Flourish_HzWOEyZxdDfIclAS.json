@@ -416,24 +416,23 @@
       "transfer": false,
       "_id": "Af6EzuqfJi0N11ZV",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.walk",
-          "mode": 2,
-          "value": "10",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.walk",
+            "value": "10",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -457,7 +456,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!HzWOEyZxdDfIclAS.Af6EzuqfJi0N11ZV"
+      "_key": "!items.effects!HzWOEyZxdDfIclAS.Af6EzuqfJi0N11ZV",
+      "start": null
     },
     {
       "name": "Defensive Flourish",
@@ -466,24 +466,23 @@
       "transfer": false,
       "_id": "oEZfMtlWEIV3pBRC",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "mode": 2,
-          "value": "2",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.ac.bonus",
+            "value": "2",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -500,16 +499,15 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
         }
       },
       "sort": 0,
-      "_key": "!items.effects!HzWOEyZxdDfIclAS.oEZfMtlWEIV3pBRC"
+      "_key": "!items.effects!HzWOEyZxdDfIclAS.oEZfMtlWEIV3pBRC",
+      "start": null
     }
   ],
   "img": "icons/skills/melee/maneuver-greatsword-yellow.webp",

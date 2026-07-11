@@ -248,13 +248,10 @@
       "name": "Agent of Order: Stasis Strike",
       "origin": "Compendium.world.cpr-feats-old.Item.GnXZZSXwakKgUcry",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -270,9 +267,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -287,14 +282,16 @@
       "img": "icons/magic/sonic/projectile-shock-wave-blue.webp",
       "_id": "jaG4IicoGlH1Tpzv",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!cKI35pg9W2ZqDNA0.jaG4IicoGlH1Tpzv"
+      "_key": "!items.effects!cKI35pg9W2ZqDNA0.jaG4IicoGlH1Tpzv",
+      "start": null
     }
   ],
   "img": "icons/magic/sonic/projectile-shock-wave-blue.webp",

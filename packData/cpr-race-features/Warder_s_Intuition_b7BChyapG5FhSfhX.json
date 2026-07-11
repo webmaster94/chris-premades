@@ -76,13 +76,10 @@
       "name": "Warder's Intuition",
       "origin": "Compendium.world.cpr-race-features.Item.T1n69diwDa1oV6Nx",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -103,27 +100,31 @@
       "img": "icons/commodities/treasure/token-engraved-pickaxe-pink.webp",
       "_id": "MqslIJtL5kZ3y2En",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.skills.inv.bonuses.check",
-          "mode": 2,
-          "value": "1d4",
-          "priority": 20
-        },
-        {
-          "key": "system.tools.thief.bonuses.check",
-          "mode": 2,
-          "value": "1d4",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.skills.inv.bonuses.check",
+            "value": "1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.tools.thief.bonuses.check",
+            "value": "1d4",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!b7BChyapG5FhSfhX.MqslIJtL5kZ3y2En"
+      "_key": "!items.effects!b7BChyapG5FhSfhX.MqslIJtL5kZ3y2En",
+      "start": null
     }
   ],
   "img": "icons/commodities/treasure/token-engraved-pickaxe-pink.webp",

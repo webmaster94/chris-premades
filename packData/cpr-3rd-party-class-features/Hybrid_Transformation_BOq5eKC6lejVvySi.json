@@ -597,17 +597,15 @@
       "transfer": false,
       "_id": "PMqDkAZucY8IC99h",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -631,7 +629,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!BOq5eKC6lejVvySi.PMqDkAZucY8IC99h"
+      "_key": "!items.effects!BOq5eKC6lejVvySi.PMqDkAZucY8IC99h",
+      "start": null
     }
   ],
   "img": "icons/commodities/claws/claw-bear-brown.webp",

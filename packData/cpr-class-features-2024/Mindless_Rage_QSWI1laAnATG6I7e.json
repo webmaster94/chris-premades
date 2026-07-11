@@ -5,28 +5,11 @@
     {
       "name": "Mindless Rage",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.traits.ci.value",
-          "value": "frighened",
-          "mode": 2,
-          "priority": 20
-        },
-        {
-          "key": "system.traits.ci.value",
-          "value": "charmed",
-          "mode": 2,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -49,10 +32,28 @@
       "img": "icons/magic/fire/flame-burning-eye.webp",
       "_id": "xxZmKfSpUHGG2oIn",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.ci.value",
+            "value": "frighened",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.ci.value",
+            "value": "charmed",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!QSWI1laAnATG6I7e.xxZmKfSpUHGG2oIn"
+      "_key": "!items.effects!QSWI1laAnATG6I7e.xxZmKfSpUHGG2oIn",
+      "start": null
     }
   ],
   "system": {

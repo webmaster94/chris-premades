@@ -83,13 +83,10 @@
       "name": "Maneuvers: Precision Attack",
       "origin": "Compendium.world.cpr-class-features.Item.KZmWxfvlO3vaSa9b",
       "duration": {
-        "rounds": null,
-        "startTime": 1368,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 229,
-        "startTurn": 1
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -110,39 +107,45 @@
       "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
       "_id": "vZAWNv8IrkcveeE4",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.optional.PrecisionAttack.label",
-          "mode": 0,
-          "value": "Precision Attack",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.PrecisionAttack.count",
-          "mode": 0,
-          "value": "ItemUses.Superiority Dice",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.PrecisionAttack.attack.mwak",
-          "mode": 0,
-          "value": "@scale.battle-master.combat-superiority-die",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.PrecisionAttack.attack.rwak",
-          "mode": 0,
-          "value": "@scale.battle-master.combat-superiority-die",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.optional.PrecisionAttack.label",
+            "value": "Precision Attack",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.PrecisionAttack.count",
+            "value": "ItemUses.Superiority Dice",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.PrecisionAttack.attack.mwak",
+            "value": "@scale.battle-master.combat-superiority-die",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.PrecisionAttack.attack.rwak",
+            "value": "@scale.battle-master.combat-superiority-die",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!xpjy4ZaS1aCQJOhR.vZAWNv8IrkcveeE4"
+      "_key": "!items.effects!xpjy4ZaS1aCQJOhR.vZAWNv8IrkcveeE4",
+      "start": null
     }
   ],
   "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",

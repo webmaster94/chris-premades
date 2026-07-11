@@ -6,13 +6,10 @@
       "name": "Devil's Sight",
       "origin": "Compendium.world.cpr-class-features.Item.T5ocL8WMnSneDZ4R",
       "duration": {
-        "rounds": null,
-        "startTime": 1416,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 237,
-        "startTurn": 6
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -33,21 +30,24 @@
       "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
       "_id": "rUEjGG86zp4AAKkz",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.chris-premades.senses.magicalDarkness",
-          "mode": 4,
-          "value": "120",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.chris-premades.senses.magicalDarkness",
+            "value": "120",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!vkQgItvEumCYbSeh.rUEjGG86zp4AAKkz"
+      "_key": "!items.effects!vkQgItvEumCYbSeh.rUEjGG86zp4AAKkz",
+      "start": null
     }
   ],
   "system": {

@@ -195,9 +195,9 @@ export function registerSettings() {
         category: 'integration',
         onChange: value => {
             if (value) {
-                Hooks.on('renderItemSheet', automatedAnimations.renderItemSheet);
+                Hooks.on('renderItemSheetV2', automatedAnimations.renderItemSheet);
             } else {
-                Hooks.off('renderItemSheet', automatedAnimations.renderItemSheet);
+                Hooks.off('renderItemSheetV2', automatedAnimations.renderItemSheet);
             }
         }
     });
@@ -218,13 +218,7 @@ export function registerSettings() {
         type: Boolean,
         default: false,
         category: 'integration',
-        onChange: value => {
-            if (value) {
-                Hooks.on('renderItemSheet', dae.renderItemSheet);
-            } else {
-                Hooks.off('renderItemSheet', dae.renderItemSheet);
-            }
-        }
+        onChange: value => dae.toggleRenderItemSheet(value)
     });
     addSetting({
         key: 'devTools',

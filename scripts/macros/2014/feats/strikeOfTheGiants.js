@@ -44,7 +44,7 @@ async function earlyCloud({trigger: {entity: effect}, workflow}) {
     if (workflow.targets.size !== 1) return;
     let targetToken = workflow.targets.first();
     let originActor = (await effectUtils.getOriginItem(effect))?.actor;
-    if (!originActor?.uuid !== targetToken.actor.uuid) return;
+    if (originActor?.uuid !== targetToken.actor.uuid) return;
     workflow.tracker.disadvantage.add(effect.name, effect.name);
 }
 async function useStone({workflow}) {

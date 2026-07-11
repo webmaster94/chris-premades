@@ -39,7 +39,7 @@ async function early({workflow}) {
         let shape = i.shapes?.at?.(0);
         let position = shape ? {x: shape.x + (shape.width ?? 0) / 2, y: shape.y + (shape.height ?? 0) / 2} : templateUtils.getPosition(i);
         if (playAnimation && animationUtils.jb2aCheck()) {
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                 .file('jb2a.explosion.01.orange')
                 .atLocation(position)

@@ -458,28 +458,27 @@
   "effects": [
     {
       "name": "Forest Guard: Range",
-      "changes": [
-        {
-          "key": "flags.midi-qol.rangeOverride.attack.all",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/environment/wilderness/tree-ash.webp",
       "_id": "PiEWoz51XyhT4fJA",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.rangeOverride.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -519,7 +518,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!YdjhN9yA6zyegRBH.PiEWoz51XyhT4fJA"
+      "_key": "!items.effects!YdjhN9yA6zyegRBH.PiEWoz51XyhT4fJA",
+      "start": null
     }
   ],
   "name": "Forest Guard",

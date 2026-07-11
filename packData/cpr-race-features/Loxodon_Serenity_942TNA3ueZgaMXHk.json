@@ -4,34 +4,34 @@
   "effects": [
     {
       "name": "Loxodon Serenity",
-      "changes": [
-        {
-          "key": "flags.chris-premades.CR.charmed",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "flags.chris-premades.CR.frightened",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "img": "icons/commodities/gems/pearl-purple-smooth.webp",
       "_id": "uksE7apa6FjdxIez",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.chris-premades.CR.charmed",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.chris-premades.CR.frightened",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Actor.4F5kQIpxwyb6rykH.Item.nG3NxVFRCuGIzQhr",
@@ -61,7 +61,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!942TNA3ueZgaMXHk.uksE7apa6FjdxIez"
+      "_key": "!items.effects!942TNA3ueZgaMXHk.uksE7apa6FjdxIez",
+      "start": null
     }
   ],
   "system": {

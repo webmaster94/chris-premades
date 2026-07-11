@@ -64,7 +64,7 @@ async function use({workflow}) {
                 } else {
                     path += colorSelection;
                 }
-                new Sequence()
+                new Sequence({moduleName:'chris-premades', softFail:true})
                     .effect()
                     .file(path)
                     .atLocation(workflow.token)

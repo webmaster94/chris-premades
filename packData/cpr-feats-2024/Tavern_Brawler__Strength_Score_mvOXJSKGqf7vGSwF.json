@@ -42,13 +42,10 @@
       "name": "Tavern Brawler",
       "origin": "Compendium.world.cpr-feats.Item.QbPm4arj70CVCYBo",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -69,21 +66,24 @@
       "img": "icons/consumables/drinks/alcohol-beer-stein-wooden-brown.webp",
       "_id": "uC5qMP91CtPb2EeO",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.dnd5e.tavernBrawlerFeat",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.dnd5e.tavernBrawlerFeat",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!mvOXJSKGqf7vGSwF.uC5qMP91CtPb2EeO"
+      "_key": "!items.effects!mvOXJSKGqf7vGSwF.uC5qMP91CtPb2EeO",
+      "start": null
     }
   ],
   "folder": null,

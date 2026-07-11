@@ -84,13 +84,10 @@
       "name": "Maneuvers: Tactical Assessment",
       "origin": "Compendium.world.cpr-class-features.Item.mdoN2liU3Ziymngd",
       "duration": {
-        "rounds": null,
-        "startTime": 1368,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 229,
-        "startTurn": 1
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -111,45 +108,52 @@
       "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
       "_id": "oSayBrERyiXozFQA",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.optional.TacticalAssessment.label",
-          "mode": 0,
-          "value": "Tactical Assessment",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.TacticalAssessment.count",
-          "mode": 0,
-          "value": "ItemUses.Superiority Dice",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.TacticalAssessment.skill.inv",
-          "mode": 0,
-          "value": "@scale.battle-master.combat-superiority-die",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.TacticalAssessment.skill.his",
-          "mode": 0,
-          "value": "@scale.battle-master.combat-superiority-die",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.TacticalAssessment.skill.ins",
-          "mode": 0,
-          "value": "@scale.battle-master.combat-superiority-die",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.optional.TacticalAssessment.label",
+            "value": "Tactical Assessment",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.TacticalAssessment.count",
+            "value": "ItemUses.Superiority Dice",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.TacticalAssessment.skill.inv",
+            "value": "@scale.battle-master.combat-superiority-die",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.TacticalAssessment.skill.his",
+            "value": "@scale.battle-master.combat-superiority-die",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.TacticalAssessment.skill.ins",
+            "value": "@scale.battle-master.combat-superiority-die",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!0PDjBFiRDQSlCueJ.oSayBrERyiXozFQA"
+      "_key": "!items.effects!0PDjBFiRDQSlCueJ.oSayBrERyiXozFQA",
+      "start": null
     }
   ],
   "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",

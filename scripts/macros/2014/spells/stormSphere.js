@@ -94,7 +94,7 @@ async function late({workflow}) {
     let template = await fromUuid(templateUuid);
     if (!template) return;
     let targetToken = workflow.targets.first();
-    new Sequence().effect().atLocation(templateUtils.getObject(template)).stretchTo(targetToken).file('jb2a.chain_lightning.primary.blue').missed(!workflow.hitTargets.has(targetToken)).play();
+    new Sequence({moduleName:'chris-premades', softFail:true}).effect().atLocation(templateUtils.getObject(template)).stretchTo(targetToken).file('jb2a.chain_lightning.primary.blue').missed(!workflow.hitTargets.has(targetToken)).play();
 }
 export let stormSphere = {
     name: 'Storm Sphere',

@@ -88,13 +88,10 @@
       "name": "Genie's Vessel: Genie's Wrath (Marid)",
       "origin": "Compendium.world.cpr-class-features.Item.UZYD9AOEQWldJKoL",
       "duration": {
-        "rounds": null,
-        "startTime": 1416,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 237,
-        "startTurn": 6
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -115,51 +112,59 @@
       "img": "icons/equipment/neck/necklace-carved-lantern-gold.webp",
       "_id": "7ebkAPiug6kwOmVM",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.optional.geniesWrath.label",
-          "mode": 0,
-          "value": "Genie's Wrath",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.geniesWrath.count",
-          "mode": 0,
-          "value": "turn",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.geniesWrath.damage.msak",
-          "mode": 0,
-          "value": "+@prof[cold]",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.geniesWrath.damage.rsak",
-          "mode": 0,
-          "value": "+@prof[cold]",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.geniesWrath.damage.mwak",
-          "mode": 0,
-          "value": "+@prof[cold]",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.geniesWrath.damage.rwak",
-          "mode": 0,
-          "value": "+@prof[cold]",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.optional.geniesWrath.label",
+            "value": "Genie's Wrath",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.geniesWrath.count",
+            "value": "turn",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.geniesWrath.damage.msak",
+            "value": "+@prof[cold]",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.geniesWrath.damage.rsak",
+            "value": "+@prof[cold]",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.geniesWrath.damage.mwak",
+            "value": "+@prof[cold]",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.geniesWrath.damage.rwak",
+            "value": "+@prof[cold]",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!fYz12VMxCJRwHDR4.7ebkAPiug6kwOmVM"
+      "_key": "!items.effects!fYz12VMxCJRwHDR4.7ebkAPiug6kwOmVM",
+      "start": null
     }
   ],
   "img": "icons/equipment/neck/necklace-carved-lantern-gold.webp",

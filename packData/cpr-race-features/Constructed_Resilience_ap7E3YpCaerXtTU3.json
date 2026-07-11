@@ -77,13 +77,10 @@
       "name": "Constructed Resilience",
       "origin": "Compendium.world.cpr-race-features.Item.yv6sNGrDmMuWINIG",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -104,33 +101,38 @@
       "img": "icons/environment/creatures/golem-stone-purple.webp",
       "_id": "CPSUgvSe7xKCjdXk",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.chris-premades.CR.poisoned",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "poison",
-          "priority": 20
-        },
-        {
-          "key": "system.traits.ci.value",
-          "mode": 2,
-          "value": "diseased",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.chris-premades.CR.poisoned",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.dr.value",
+            "value": "poison",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "system.traits.ci.value",
+            "value": "diseased",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!ap7E3YpCaerXtTU3.CPSUgvSe7xKCjdXk"
+      "_key": "!items.effects!ap7E3YpCaerXtTU3.CPSUgvSe7xKCjdXk",
+      "start": null
     }
   ],
   "img": "icons/environment/creatures/golem-stone-purple.webp",

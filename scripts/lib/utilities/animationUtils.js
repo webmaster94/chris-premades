@@ -34,8 +34,9 @@ function aseCheck() {
     return isActive;
 }
 function simpleAttack(sourceToken, targetToken, animation, {sound, missed} = {missed: false}) {
+    if (!sequencerCheck()) return;
     /* eslint-disable indent */
-    new Sequence()
+    return new Sequence({moduleName: 'chris-premades', softFail: true})
         .effect()
             .atLocation(sourceToken)
             .stretchTo(targetToken)

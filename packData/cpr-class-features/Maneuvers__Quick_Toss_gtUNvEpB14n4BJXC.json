@@ -229,13 +229,10 @@
       "name": "Maneuvers: Quick Toss",
       "origin": "Compendium.world.cpr-class-features.Item.hdPjNlE4B85MYkFl",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": 1,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "turns",
+        "expiry": "turnStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -263,21 +260,24 @@
       "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
       "_id": "UJ2Zaw3AHyq4KbNI",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.bonuses.mwak.damage",
-          "mode": 2,
-          "value": "@scale.battle-master.combat-superiority-die",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.mwak.damage",
+            "value": "@scale.battle-master.combat-superiority-die",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!gtUNvEpB14n4BJXC.UJ2Zaw3AHyq4KbNI"
+      "_key": "!items.effects!gtUNvEpB14n4BJXC.UJ2Zaw3AHyq4KbNI",
+      "start": null
     }
   ],
   "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",

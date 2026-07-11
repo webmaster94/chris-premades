@@ -311,7 +311,7 @@ async function start({trigger: {entity: effect}}, {overrideAnimation = undefined
     if (!token) return;
     switch (animation) {
         case 'default':
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
                 
                 .effect()
                 .file('jb2a.extras.tmfx.outpulse.circle.02.normal')
@@ -388,7 +388,7 @@ async function start({trigger: {entity: effect}}, {overrideAnimation = undefined
                 .play();
             break;
         case 'lightning':
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
 
                 .effect()
                 .file('jb2a.extras.tmfx.outpulse.circle.02.normal')
@@ -462,7 +462,7 @@ async function start({trigger: {entity: effect}}, {overrideAnimation = undefined
                 .play();
             break;
         case 'saiyan':
-            new Sequence()
+            new Sequence({moduleName:'chris-premades', softFail:true})
 
                 .effect()
                 .file('jb2a.extras.tmfx.outpulse.circle.02.normal')
@@ -542,7 +542,7 @@ async function remove({trigger: {entity: effect}}) {
     let token = actorUtils.getFirstToken(effect.parent);
     if (!token) return;
     await Sequencer.EffectManager.endEffects({name: 'Rage', object: token});
-    new Sequence().animation().on(token).opacity(1).play();
+    new Sequence({moduleName:'chris-premades', softFail:true}).animation().on(token).opacity(1).play();
 }
 export let rage = {
     name: 'Rage',

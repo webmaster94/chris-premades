@@ -221,13 +221,10 @@
       "name": "Draconic Cry",
       "origin": "Compendium.world.cpr-race-features.Item.F3QTZy7Y68lXtKHV",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -243,9 +240,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -254,21 +249,24 @@
       "img": "icons/creatures/magical/spirit-fire-yellow.webp",
       "_id": "0C3tRnWS4zjmf2uT",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.grants.advantage.attack.all",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!6hKqquAytvvMrJpg.0C3tRnWS4zjmf2uT"
+      "_key": "!items.effects!6hKqquAytvvMrJpg.0C3tRnWS4zjmf2uT",
+      "start": null
     }
   ],
   "img": "icons/creatures/magical/spirit-fire-yellow.webp",

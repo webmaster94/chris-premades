@@ -156,18 +156,14 @@
   },
   "effects": [
     {
-      "changes": [],
       "transfer": false,
       "_id": "SBBhJECsYwriHQzl",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "origin": null,
       "tint": "#ffffff",
@@ -177,9 +173,12 @@
       "statuses": [],
       "img": "icons/magic/nature/plant-sprout-hand-blue.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "sort": 0,
-      "_key": "!items.effects!J8N8vuDo233lIqwO.SBBhJECsYwriHQzl"
+      "_key": "!items.effects!J8N8vuDo233lIqwO.SBBhJECsYwriHQzl",
+      "start": null
     }
   ],
   "flags": {

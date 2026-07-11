@@ -260,13 +260,10 @@
       "name": "Potion of Vitality",
       "origin": "Compendium.world.cpr-items.Item.lulNxUOt1dl41PzS",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -291,21 +288,24 @@
       "img": "icons/consumables/potions/potion-flask-corled-pink-red.webp",
       "_id": "nEREsYM5mkA1YfSU",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.dae.rest-recovery.force.maximiseHitDieRoll",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.dae.rest-recovery.force.maximiseHitDieRoll",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!CXYWrJ9uSByWWlez.nEREsYM5mkA1YfSU"
+      "_key": "!items.effects!CXYWrJ9uSByWWlez.nEREsYM5mkA1YfSU",
+      "start": null
     }
   ],
   "img": "icons/consumables/potions/potion-flask-corled-pink-red.webp",

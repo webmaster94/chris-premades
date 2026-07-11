@@ -52,7 +52,7 @@ async function use({trigger, workflow}) {
 
         if (cameraZoom) canvas.animatePan({duration: 250, x: workflow.token.center.x, y: workflow.token.center.y, scale: 1.620});
         /* eslint-disable indent */
-        await new Sequence()
+        await new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
                 .file('animated-spell-effects-cartoon.mix.electric ball.01')
                 .atLocation(workflow.token, {offset:{x: 0,y: 0}, gridUnits: true})
@@ -109,7 +109,7 @@ async function use({trigger, workflow}) {
                 for (let u = 0; u < 5; u++) {
                     if (u === 4) {
                         /* eslint-disable indent */
-                        await new Sequence()
+                        await new Sequence({moduleName:'chris-premades', softFail:true})
                             .wait(200 * (u + 1) - 199)
                             .effect()
                                 .file('jb2a.impact.002.pinkpurple')
@@ -157,7 +157,7 @@ async function use({trigger, workflow}) {
                                 .filter('ColorMatrix', {hue: 70})
                             .thenDo(() => {
                                 targets.forEach(target => { 
-                                    new Sequence()
+                                    new Sequence({moduleName:'chris-premades', softFail:true})
                                         .animation()
                                             .on(target)
                                             .opacity(1)
@@ -193,7 +193,7 @@ async function use({trigger, workflow}) {
                     /* eslint-enable indent */
                     } else {
                         /* eslint-disable indent */
-                        new Sequence()
+                        new Sequence({moduleName:'chris-premades', softFail:true})
                             .wait(200 * (u + 1) - 199)
                             .effect()
                                 .file('jb2a.impact.002.pinkpurple')
@@ -244,7 +244,7 @@ async function use({trigger, workflow}) {
                                 .file(sound)
                             .thenDo(() => {
                                 targets.forEach(target => { 
-                                    new Sequence()
+                                    new Sequence({moduleName:'chris-premades', softFail:true})
                                         .effect()
                                             .copySprite(target)
                                             .atLocation(target)
@@ -270,7 +270,7 @@ async function use({trigger, workflow}) {
             }
             if (e === 9) {
                 /* eslint-disable indent */
-                await new Sequence()
+                await new Sequence({moduleName:'chris-premades', softFail:true})
                     .effect()
                         .name('location')
                         .file('animated-spell-effects-cartoon.magic.mind sliver')
@@ -280,7 +280,7 @@ async function use({trigger, workflow}) {
                         .zIndex(4)
                     .thenDo(() => {
                         targets.forEach(target => { 
-                            new Sequence()
+                            new Sequence({moduleName:'chris-premades', softFail:true})
                                 .effect()
                                     .copySprite(target)
                                     .atLocation(target)
@@ -356,7 +356,7 @@ async function use({trigger, workflow}) {
             /* eslint-enable indent */
             } else {
                 /* eslint-disable indent */
-                await new Sequence()
+                await new Sequence({moduleName:'chris-premades', softFail:true})
                     .effect()
                         .file('animated-spell-effects-cartoon.magic.mind sliver')
                         .atLocation(points[e])
@@ -377,7 +377,7 @@ async function use({trigger, workflow}) {
                         .zIndex(4)
                     .thenDo(function(){
                         targets.forEach(target => { 
-                            new Sequence()
+                            new Sequence({moduleName:'chris-premades', softFail:true})
                                 .effect()
                                     .copySprite(target)
                                     .atLocation(target)
@@ -410,7 +410,7 @@ async function use({trigger, workflow}) {
     await Teleport.target([workflow.token], workflow.token, {range: workflow.activity.range.value + 5, animation: 'none'});
     if (!playAnimation) return;
     /* eslint-disable indent */
-    await new Sequence()
+    await new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
             .file('animated-spell-effects-cartoon.air.portal')
             .atLocation(workflow.token)

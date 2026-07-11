@@ -483,13 +483,10 @@
       "name": "Channel Divinity: Nature's Wrath (Str)",
       "origin": "Compendium.world.cpr-class-features.Item.9mfRYZb08LaT1N9c",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -520,33 +517,33 @@
       "img": "icons/magic/nature/root-vine-entangled-humanoid.webp",
       "_id": "DadAFOrwuQzfQghg",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "mode": 0,
-          "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=str,saveDC=@attributes.spell.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=str,saveDC=@attributes.spell.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!njIch8l9HhabFOUY.DadAFOrwuQzfQghg"
+      "_key": "!items.effects!njIch8l9HhabFOUY.DadAFOrwuQzfQghg",
+      "start": null
     },
     {
       "name": "Channel Divinity: Nature's Wrath (Dex)",
       "origin": "Compendium.world.cpr-class-features.Item.9mfRYZb08LaT1N9c",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -576,22 +573,25 @@
       },
       "img": "icons/magic/nature/root-vine-entangled-humanoid.webp",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "mode": 0,
-          "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=dex,saveDC=@attributes.spell.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=dex,saveDC=@attributes.spell.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "_id": "gRGvA2yxdC8ssWu8",
       "sort": 0,
-      "_key": "!items.effects!njIch8l9HhabFOUY.gRGvA2yxdC8ssWu8"
+      "_key": "!items.effects!njIch8l9HhabFOUY.gRGvA2yxdC8ssWu8",
+      "start": null
     }
   ],
   "img": "icons/magic/nature/root-vine-entangled-humanoid.webp",

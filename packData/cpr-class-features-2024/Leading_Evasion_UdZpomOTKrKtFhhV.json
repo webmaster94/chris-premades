@@ -4,28 +4,27 @@
   "effects": [
     {
       "name": "Leading Evasion",
-      "changes": [
-        {
-          "key": "flags.midi-qol.superSaver.dex",
-          "mode": 0,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/movement/feet-winged-boots-glowing-yellow.webp",
       "_id": "P0wSjQQs6koQLFXO",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.superSaver.dex",
+            "value": "1",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -50,32 +49,32 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!UdZpomOTKrKtFhhV.P0wSjQQs6koQLFXO"
+      "_key": "!items.effects!UdZpomOTKrKtFhhV.P0wSjQQs6koQLFXO",
+      "start": null
     },
     {
       "name": "Leading Evasion - Self",
-      "changes": [
-        {
-          "key": "flags.midi-qol.superSaver.dex",
-          "mode": 0,
-          "value": "!statusesSet.has('incapacitated')",
-          "priority": 20
-        }
-      ],
       "transfer": true,
       "img": "icons/skills/movement/feet-winged-boots-glowing-yellow.webp",
       "_id": "BMboKUNm6DbUo9RE",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.superSaver.dex",
+            "value": "!statusesSet.has('incapacitated')",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": "Actor.yy1I4W4hqhw1yaiM.Item.XVpd4B7Yd7WJz65i",
@@ -96,7 +95,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!UdZpomOTKrKtFhhV.BMboKUNm6DbUo9RE"
+      "_key": "!items.effects!UdZpomOTKrKtFhhV.BMboKUNm6DbUo9RE",
+      "start": null
     }
   ],
   "system": {

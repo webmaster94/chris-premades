@@ -4,28 +4,27 @@
   "effects": [
     {
       "name": "Studied Attacks",
-      "changes": [
-        {
-          "key": "flags.midi-qol.grants.advantage.attack.all",
-          "mode": 0,
-          "value": "0",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/sundries/documents/blueprint-axe.webp",
       "_id": "LUi17o9vEg6sF0tE",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.all",
+            "value": "0",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": 2,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 2,
+        "units": "rounds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -49,9 +48,7 @@
           "dontApply": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEndSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -65,7 +62,8 @@
           "templateEffectActivities": []
         }
       },
-      "_key": "!items.effects!Dgvfe2R2ScbjWyK9.LUi17o9vEg6sF0tE"
+      "_key": "!items.effects!Dgvfe2R2ScbjWyK9.LUi17o9vEg6sF0tE",
+      "start": null
     }
   ],
   "system": {

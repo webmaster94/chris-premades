@@ -220,7 +220,7 @@ export async function start({trigger: {entity: effect}}) {
                 scale = 0.5;
                 break;
         }
-        await new Sequence()
+        await new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('jb2a.static_electricity.03.orange')
             .atLocation(token)
@@ -335,7 +335,7 @@ export async function start({trigger: {entity: effect}}) {
                 scale = 0.25;
                 break;
         }
-        await new Sequence()
+        await new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('jb2a.static_electricity.03.orange')
             .atLocation(token)

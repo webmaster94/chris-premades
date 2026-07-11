@@ -305,13 +305,10 @@
       "name": "Experimental Elixir: Flight",
       "origin": "Compendium.world.cpr-class-feature-items.Item.vJRNWXUmw4lFWDrZ",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -336,21 +333,24 @@
       "img": "icons/tools/laboratory/vial-orange.webp",
       "_id": "530hPW3i7wKRRHVF",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.fly",
-          "mode": 4,
-          "value": "10",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.fly",
+            "value": "10",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!gndzIz2uiQVoUlVc.530hPW3i7wKRRHVF"
+      "_key": "!items.effects!gndzIz2uiQVoUlVc.530hPW3i7wKRRHVF",
+      "start": null
     }
   ],
   "flags": {

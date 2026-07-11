@@ -189,22 +189,11 @@
       "img": "icons/magic/fire/flame-burning-hand-purple.webp",
       "name": "Chill Touch",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.traits.di.value",
-          "value": "healing",
-          "mode": 2,
-          "priority": 30
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -213,9 +202,7 @@
         "dae": {
           "transfer": false,
           "stackable": "noneName",
-          "specialDuration": [
-            "turnEndSource"
-          ],
+          "specialDuration": [],
           "enableCondition": "",
           "disableCondition": "",
           "disableIncapacitated": false,
@@ -239,10 +226,21 @@
       "description": "",
       "_id": "NKp1kOBasrrPWtTu",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.di.value",
+            "value": "healing",
+            "priority": 30,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!QDB74gRSJw3eiAth.NKp1kOBasrrPWtTu"
+      "_key": "!items.effects!QDB74gRSJw3eiAth.NKp1kOBasrrPWtTu",
+      "start": null
     }
   ],
   "name": "Chill Touch",

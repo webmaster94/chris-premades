@@ -81,34 +81,11 @@
   },
   "effects": [
     {
-      "changes": [
-        {
-          "key": "flags.midi-qol.optional.Ambush.label",
-          "mode": 0,
-          "value": "Ambush",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.Ambush.count",
-          "mode": 0,
-          "value": "ItemUses.Superiority Dice",
-          "priority": 20
-        },
-        {
-          "key": "flags.midi-qol.optional.Ambush.skill.ste",
-          "mode": 0,
-          "value": "@scale.battle-master.combat-superiority-die",
-          "priority": 20
-        }
-      ],
       "duration": {
-        "turns": null,
-        "startTime": 4104,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "startRound": 229,
-        "startTurn": 1
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -140,9 +117,34 @@
       "statuses": [],
       "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.optional.Ambush.label",
+            "value": "Ambush",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.Ambush.count",
+            "value": "ItemUses.Superiority Dice",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.optional.Ambush.skill.ste",
+            "value": "@scale.battle-master.combat-superiority-die",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "sort": 0,
-      "_key": "!items.effects!FXlu8x29fYok6KKs.WC8OVaoOdggDwAY7"
+      "_key": "!items.effects!FXlu8x29fYok6KKs.WC8OVaoOdggDwAY7",
+      "start": null
     }
   ],
   "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",

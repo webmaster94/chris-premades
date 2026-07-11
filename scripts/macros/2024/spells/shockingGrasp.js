@@ -21,7 +21,7 @@ async function use({workflow}) {
         let currColor = color;
         if (currColor === 'random') currColor = colors[Math.floor(Math.random() * colors.length)];
         //Animations by: eskiemoh
-        new Sequence()
+        new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('jb2a.static_electricity.01.' + currColor)
             .scaleToObject(1.2) 

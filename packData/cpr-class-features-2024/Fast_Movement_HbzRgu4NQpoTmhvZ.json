@@ -5,22 +5,11 @@
     {
       "name": "Fast Movement",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.attributes.movement.walk",
-          "mode": 2,
-          "value": "10",
-          "priority": 10
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": 1356,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": true,
@@ -68,10 +57,21 @@
       "img": "icons/skills/movement/feet-winged-boots-brown.webp",
       "_id": "Yna0C3QoawyfkvBF",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.walk",
+            "value": "10",
+            "priority": 10,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": "Compendium.world.cpr-class-features-2024.Item.HbzRgu4NQpoTmhvZ",
       "sort": 0,
-      "_key": "!items.effects!HbzRgu4NQpoTmhvZ.Yna0C3QoawyfkvBF"
+      "_key": "!items.effects!HbzRgu4NQpoTmhvZ.Yna0C3QoawyfkvBF",
+      "start": null
     }
   ],
   "system": {

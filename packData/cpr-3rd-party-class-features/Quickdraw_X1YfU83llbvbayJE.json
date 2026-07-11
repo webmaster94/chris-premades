@@ -36,13 +36,10 @@
       "name": "Quickdraw",
       "origin": "Compendium.world.cpr-class-features.Item.fHngm3QCuLVBZV3K",
       "duration": {
-        "rounds": null,
-        "startTime": 1476,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 247,
-        "startTurn": 5
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -79,21 +76,24 @@
       "img": "icons/weapons/guns/gun-pistol-flintlock-metal.webp",
       "_id": "rtWuLBgDaRUwDp8j",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.init.bonus",
-          "mode": 2,
-          "value": "@prof",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.init.bonus",
+            "value": "@prof",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!X1YfU83llbvbayJE.rtWuLBgDaRUwDp8j"
+      "_key": "!items.effects!X1YfU83llbvbayJE.rtWuLBgDaRUwDp8j",
+      "start": null
     }
   ],
   "flags": {

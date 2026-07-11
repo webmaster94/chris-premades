@@ -255,13 +255,10 @@
       "name": "Ember of the Fire Giant: Searing Ignition",
       "origin": "Compendium.world.cpr-feats.Item.0QWnoiX3HwezrFtR",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -277,9 +274,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -294,14 +289,16 @@
       "img": "icons/magic/fire/barrier-wall-flame-ring-yellow.webp",
       "_id": "cDlmJR6HkPUIS4Jc",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!gr1I3tg2yO635GSp.cDlmJR6HkPUIS4Jc"
+      "_key": "!items.effects!gr1I3tg2yO635GSp.cDlmJR6HkPUIS4Jc",
+      "start": null
     }
   ],
   "img": "icons/magic/fire/barrier-wall-flame-ring-yellow.webp",

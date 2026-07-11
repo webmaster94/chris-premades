@@ -9,17 +9,15 @@
       "transfer": false,
       "_id": "z94Mi8jDtaniXwK2",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -47,15 +45,14 @@
           "dontApply": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
         }
       },
-      "_key": "!items.effects!GKt1tuFp7iXbQNdO.z94Mi8jDtaniXwK2"
+      "_key": "!items.effects!GKt1tuFp7iXbQNdO.z94Mi8jDtaniXwK2",
+      "start": null
     },
     {
       "name": "Devious Strikes: Knockout",
@@ -64,24 +61,23 @@
       "transfer": false,
       "_id": "77wlc1cjrrmn5n78",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.midi-qol.OverTime",
-          "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=con,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
-          "mode": 0,
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.midi-qol.OverTime",
+            "value": "turn=end,allowIncapacitated=true,rollType=save,saveAbility=con,saveDC=$activity.dc,saveDamage=nodamage,saveRemove=true,rollMode=publicroll,",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -124,7 +120,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!GKt1tuFp7iXbQNdO.77wlc1cjrrmn5n78"
+      "_key": "!items.effects!GKt1tuFp7iXbQNdO.77wlc1cjrrmn5n78",
+      "start": null
     },
     {
       "name": "Devious Strikes: Obscured",
@@ -133,17 +130,15 @@
       "transfer": false,
       "_id": "P9nQrHNzeyynyOwK",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -178,15 +173,14 @@
           "dontApply": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
         }
       },
-      "_key": "!items.effects!GKt1tuFp7iXbQNdO.P9nQrHNzeyynyOwK"
+      "_key": "!items.effects!GKt1tuFp7iXbQNdO.P9nQrHNzeyynyOwK",
+      "start": null
     }
   ],
   "system": {

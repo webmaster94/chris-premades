@@ -6,22 +6,11 @@
     {
       "name": "Aquatic Adaptation",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.attributes.movement.swim",
-          "value": "2 * @attributes.movement.walk",
-          "mode": 4,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -60,36 +49,30 @@
       "_id": "nPNVWkzjmG20WFnQ",
       "img": "icons/magic/control/silhouette-hold-change-blue.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.swim",
+            "value": "2 * @attributes.movement.walk",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!PPc30arCOfDZYCxp.nPNVWkzjmG20WFnQ"
+      "_key": "!items.effects!PPc30arCOfDZYCxp.nPNVWkzjmG20WFnQ",
+      "start": null
     },
     {
       "name": "Glistening Flight",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.attributes.movement.fly",
-          "value": "@attributes.movement.walk",
-          "mode": 4,
-          "priority": 20
-        },
-        {
-          "key": "system.attributes.movement.hover",
-          "value": "true",
-          "mode": 0,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -128,36 +111,37 @@
       "_id": "x1WmVQRlhi067I04",
       "img": "icons/magic/control/silhouette-hold-change-blue.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.fly",
+            "value": "@attributes.movement.walk",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.hover",
+            "value": "true",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!PPc30arCOfDZYCxp.x1WmVQRlhi067I04"
+      "_key": "!items.effects!PPc30arCOfDZYCxp.x1WmVQRlhi067I04",
+      "start": null
     },
     {
       "name": "See the Invisible",
       "statuses": [],
-      "changes": [
-        {
-          "key": "system.attributes.senses.special",
-          "value": ";See Invisibility (60ft)",
-          "mode": 2,
-          "priority": 1
-        },
-        {
-          "key": "ATL.detectionModes.seeInvisibility.range",
-          "value": "60",
-          "mode": 4,
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -196,23 +180,37 @@
       "_id": "dtEqpnPPpogd50nq",
       "img": "icons/magic/control/silhouette-hold-change-blue.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.senses.special",
+            "value": ";See Invisibility (60ft)",
+            "priority": 1,
+            "type": "add",
+            "phase": "initial"
+          },
+          {
+            "key": "ATL.detectionModes.seeInvisibility.range",
+            "value": "60",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!PPc30arCOfDZYCxp.dtEqpnPPpogd50nq"
+      "_key": "!items.effects!PPc30arCOfDZYCxp.dtEqpnPPpogd50nq",
+      "start": null
     },
     {
       "name": "Wormlike Movement",
       "statuses": [],
-      "changes": [],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -251,10 +249,13 @@
       "_id": "NCiWKAuD9jvRPzig",
       "img": "icons/magic/control/silhouette-hold-change-blue.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!PPc30arCOfDZYCxp.NCiWKAuD9jvRPzig"
+      "_key": "!items.effects!PPc30arCOfDZYCxp.NCiWKAuD9jvRPzig",
+      "start": null
     }
   ],
   "system": {

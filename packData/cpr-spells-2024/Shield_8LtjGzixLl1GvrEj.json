@@ -182,28 +182,27 @@
   "effects": [
     {
       "name": "Shield",
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "mode": 2,
-          "value": "5",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
       "_id": "MfjPQk1zohC1kHsa",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.ac.bonus",
+            "value": "5",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetStart",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -221,9 +220,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStart"
-          ]
+          "specialDuration": []
         },
         "chris-premades": {
           "info": {
@@ -240,7 +237,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!8LtjGzixLl1GvrEj.MfjPQk1zohC1kHsa"
+      "_key": "!items.effects!8LtjGzixLl1GvrEj.MfjPQk1zohC1kHsa",
+      "start": null
     }
   ],
   "folder": null,

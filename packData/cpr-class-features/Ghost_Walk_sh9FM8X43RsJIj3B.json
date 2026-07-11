@@ -7,34 +7,11 @@
       "statuses": [
         "ethereal"
       ],
-      "changes": [
-        {
-          "key": "system.attributes.movement.fly",
-          "mode": 4,
-          "value": "10",
-          "priority": 2
-        },
-        {
-          "key": "system.attributes.movement.hover",
-          "mode": 0,
-          "value": "true",
-          "priority": 2
-        },
-        {
-          "key": "flags.midi-qol.grants.disadvantage.attack.all",
-          "mode": 2,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "duration": {
-        "seconds": null,
-        "startTime": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null,
-        "combat": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "tint": "#ffffff",
       "transfer": false,
@@ -74,10 +51,35 @@
       "_id": "uLTzEfjN3hktPd32",
       "img": "icons/magic/air/wind-stream-purple.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.fly",
+            "value": "10",
+            "priority": 2,
+            "type": "upgrade",
+            "phase": "initial"
+          },
+          {
+            "key": "system.attributes.movement.hover",
+            "value": "true",
+            "priority": 2,
+            "type": "custom",
+            "phase": "initial"
+          },
+          {
+            "key": "flags.midi-qol.grants.disadvantage.attack.all",
+            "value": "1",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "origin": null,
       "sort": 0,
-      "_key": "!items.effects!sh9FM8X43RsJIj3B.uLTzEfjN3hktPd32"
+      "_key": "!items.effects!sh9FM8X43RsJIj3B.uLTzEfjN3hktPd32",
+      "start": null
     }
   ],
   "system": {

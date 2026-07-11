@@ -4,21 +4,19 @@
   "effects": [
     {
       "name": "Magical Ambush",
-      "changes": [],
       "transfer": false,
       "img": "icons/creatures/claws/claw-curved-poison-purple.webp",
       "_id": "4L3IObId9eiljf3M",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -61,7 +59,8 @@
           }
         }
       },
-      "_key": "!items.effects!qHKNHEwFZUG7xu3v.4L3IObId9eiljf3M"
+      "_key": "!items.effects!qHKNHEwFZUG7xu3v.4L3IObId9eiljf3M",
+      "start": null
     }
   ],
   "system": {

@@ -9,30 +9,30 @@
       "transfer": false,
       "_id": "zPDyKi5bKOD2esI8",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{} (Pact of the Blade)",
-          "priority": 20
-        },
-        {
-          "key": "system.proficient",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} (Pact of the Blade)",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          },
+          {
+            "key": "system.proficient",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -78,7 +78,8 @@
           }
         }
       },
-      "_key": "!items.effects!GyEPVE16cUlTZLUI.zPDyKi5bKOD2esI8"
+      "_key": "!items.effects!GyEPVE16cUlTZLUI.zPDyKi5bKOD2esI8",
+      "start": null
     },
     {
       "name": "Pact of the Blade: Summoned Weapon",
@@ -87,17 +88,15 @@
       "transfer": false,
       "_id": "abmetmTMaKHOpsuk",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -136,7 +135,8 @@
           "rules": "modern"
         }
       },
-      "_key": "!items.effects!GyEPVE16cUlTZLUI.abmetmTMaKHOpsuk"
+      "_key": "!items.effects!GyEPVE16cUlTZLUI.abmetmTMaKHOpsuk",
+      "start": null
     }
   ],
   "system": {

@@ -77,13 +77,10 @@
       "name": "Fey Ancestry",
       "origin": "Compendium.world.cpr-race-features.Item.5HVUzURFTsmrdn1L",
       "duration": {
-        "rounds": null,
-        "startTime": 1488,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 249,
-        "startTurn": 0
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -104,21 +101,24 @@
       "img": "icons/magic/nature/vines-thorned-curled-glow-teal.webp",
       "_id": "4hsnsfRIujLDodVP",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "flags.chris-premades.CR.charmed",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "flags.chris-premades.CR.charmed",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!lHB61dGn22rD6uML.4hsnsfRIujLDodVP"
+      "_key": "!items.effects!lHB61dGn22rD6uML.4hsnsfRIujLDodVP",
+      "start": null
     }
   ],
   "img": "icons/magic/nature/vines-thorned-curled-glow-teal.webp",

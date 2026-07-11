@@ -642,24 +642,23 @@
       "origin": "Actor.o8MuQHTGRGySM9ng.Item.HA8lK5tyjtnvN2wz",
       "_id": "FmShdBSB0XIQpGbC",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.bonuses.mwak.damage",
-          "mode": 2,
-          "value": "+(@spellLevel)d6[acid]",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.mwak.damage",
+            "value": "+(@spellLevel)d6[acid]",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -917,7 +916,6 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [
-            "turnEndSource",
             "1Hit:mwak"
           ],
           "enableCondition": "",
@@ -942,31 +940,31 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!X2w82BVXGgX92pHS.FmShdBSB0XIQpGbC"
+      "_key": "!items.effects!X2w82BVXGgX92pHS.FmShdBSB0XIQpGbC",
+      "start": null
     },
     {
       "name": "Absorb Elements: Cold Damage",
       "img": "icons/magic/fire/dagger-rune-enchant-flame-strong-blue-yellow.webp",
       "origin": "Actor.o8MuQHTGRGySM9ng.Item.HA8lK5tyjtnvN2wz",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.bonuses.mwak.damage",
-          "mode": 2,
-          "value": "+(@spellLevel)d6[cold]",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.mwak.damage",
+            "value": "+(@spellLevel)d6[cold]",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -1224,7 +1222,6 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [
-            "turnEndSource",
             "1Hit:mwak"
           ],
           "enableCondition": "",
@@ -1242,31 +1239,31 @@
         }
       },
       "_id": "tCiHrWUKfdPm9niX",
-      "_key": "!items.effects!X2w82BVXGgX92pHS.tCiHrWUKfdPm9niX"
+      "_key": "!items.effects!X2w82BVXGgX92pHS.tCiHrWUKfdPm9niX",
+      "start": null
     },
     {
       "name": "Absorb Elements: Fire Damage",
       "img": "icons/magic/fire/dagger-rune-enchant-flame-strong-red.webp",
       "origin": "Actor.o8MuQHTGRGySM9ng.Item.HA8lK5tyjtnvN2wz",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.bonuses.mwak.damage",
-          "mode": 2,
-          "value": "+(@spellLevel)d6[fire]",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.mwak.damage",
+            "value": "+(@spellLevel)d6[fire]",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -1524,7 +1521,6 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [
-            "turnEndSource",
             "1Hit:mwak"
           ],
           "enableCondition": "",
@@ -1550,31 +1546,31 @@
         }
       },
       "_id": "JXKrsIr6JxwVNEUC",
-      "_key": "!items.effects!X2w82BVXGgX92pHS.JXKrsIr6JxwVNEUC"
+      "_key": "!items.effects!X2w82BVXGgX92pHS.JXKrsIr6JxwVNEUC",
+      "start": null
     },
     {
       "name": "Absorb Elements: Thunder Damage",
       "img": "icons/magic/fire/dagger-rune-enchant-flame-strong-purple-pink.webp",
       "origin": "Actor.o8MuQHTGRGySM9ng.Item.HA8lK5tyjtnvN2wz",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.bonuses.mwak.damage",
-          "mode": 2,
-          "value": "+(@spellLevel)d6[thunder]",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.mwak.damage",
+            "value": "+(@spellLevel)d6[thunder]",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -1832,7 +1828,6 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [
-            "turnEndSource",
             "1Hit:mwak"
           ],
           "enableCondition": "",
@@ -1850,7 +1845,8 @@
         }
       },
       "_id": "JUfGfWqfQolFVpws",
-      "_key": "!items.effects!X2w82BVXGgX92pHS.JUfGfWqfQolFVpws"
+      "_key": "!items.effects!X2w82BVXGgX92pHS.JUfGfWqfQolFVpws",
+      "start": null
     },
     {
       "name": "Absorb Elements: Acid Resistance",
@@ -1858,24 +1854,23 @@
       "origin": "Item.EumGolPUB2feozAs",
       "_id": "NPArcFqxKGU16ayx",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "acid",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "acid",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -2132,9 +2127,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ],
+          "specialDuration": [],
           "enableCondition": "",
           "selfTarget": false,
           "selfTargetAlways": false,
@@ -2157,31 +2150,31 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!X2w82BVXGgX92pHS.NPArcFqxKGU16ayx"
+      "_key": "!items.effects!X2w82BVXGgX92pHS.NPArcFqxKGU16ayx",
+      "start": null
     },
     {
       "name": "Absorb Elements: Fire Resistance",
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-red.webp",
       "origin": "Item.EumGolPUB2feozAs",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "fire",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "fire",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -2438,9 +2431,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ],
+          "specialDuration": [],
           "enableCondition": "",
           "selfTarget": false,
           "selfTargetAlways": false,
@@ -2464,31 +2455,31 @@
         }
       },
       "_id": "ogU8CIDSZc5aQY2i",
-      "_key": "!items.effects!X2w82BVXGgX92pHS.ogU8CIDSZc5aQY2i"
+      "_key": "!items.effects!X2w82BVXGgX92pHS.ogU8CIDSZc5aQY2i",
+      "start": null
     },
     {
       "name": "Absorb Elements: Cold Resistance",
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
       "origin": "Item.EumGolPUB2feozAs",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "cold",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "cold",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -2745,9 +2736,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ],
+          "specialDuration": [],
           "enableCondition": "",
           "selfTarget": false,
           "selfTargetAlways": false,
@@ -2771,31 +2760,31 @@
         }
       },
       "_id": "Qbggj1SH69rZjfyH",
-      "_key": "!items.effects!X2w82BVXGgX92pHS.Qbggj1SH69rZjfyH"
+      "_key": "!items.effects!X2w82BVXGgX92pHS.Qbggj1SH69rZjfyH",
+      "start": null
     },
     {
       "name": "Absorb Elements: Lightning Resistance",
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue.webp",
       "origin": "Item.EumGolPUB2feozAs",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "lightning",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "lightning",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -3052,9 +3041,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ],
+          "specialDuration": [],
           "enableCondition": "",
           "selfTarget": false,
           "selfTargetAlways": false,
@@ -3078,31 +3065,31 @@
         }
       },
       "_id": "yCsvmxxxLteBKZTd",
-      "_key": "!items.effects!X2w82BVXGgX92pHS.yCsvmxxxLteBKZTd"
+      "_key": "!items.effects!X2w82BVXGgX92pHS.yCsvmxxxLteBKZTd",
+      "start": null
     },
     {
       "name": "Absorb Elements: Thunder Resistance",
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-magenta.webp",
       "origin": "Item.EumGolPUB2feozAs",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "thunder",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dr.value",
+            "value": "thunder",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -3359,9 +3346,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnStartSource"
-          ],
+          "specialDuration": [],
           "enableCondition": "",
           "selfTarget": false,
           "selfTargetAlways": false,
@@ -3385,31 +3370,31 @@
         }
       },
       "_id": "iKqE83lvddNzuxsR",
-      "_key": "!items.effects!X2w82BVXGgX92pHS.iKqE83lvddNzuxsR"
+      "_key": "!items.effects!X2w82BVXGgX92pHS.iKqE83lvddNzuxsR",
+      "start": null
     },
     {
       "name": "Absorb Elements: Lightning Damage",
       "img": "icons/magic/fire/dagger-rune-enchant-flame-strong-blue.webp",
       "origin": "Actor.o8MuQHTGRGySM9ng.Item.HA8lK5tyjtnvN2wz",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.bonuses.mwak.damage",
-          "mode": 2,
-          "value": "+(@spellLevel)d6[lightning]",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.mwak.damage",
+            "value": "+(@spellLevel)d6[lightning]",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -3667,7 +3652,6 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [
-            "turnEndSource",
             "1Hit:mwak"
           ],
           "enableCondition": "",
@@ -3693,7 +3677,8 @@
         }
       },
       "_id": "61L86HIsWDgPKN3Y",
-      "_key": "!items.effects!X2w82BVXGgX92pHS.61L86HIsWDgPKN3Y"
+      "_key": "!items.effects!X2w82BVXGgX92pHS.61L86HIsWDgPKN3Y",
+      "start": null
     }
   ],
   "folder": null,

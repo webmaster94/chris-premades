@@ -221,13 +221,10 @@
       "name": "Maneuvers: Menacing Attack",
       "origin": "Compendium.world.cpr-class-features.Item.pGl73FehNQ89wb9n",
       "duration": {
-        "rounds": 1,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 1,
+        "units": "rounds",
+        "expiry": "sourceEnd",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -243,9 +240,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEndSource"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -260,14 +255,16 @@
       "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
       "_id": "KGT2porZS5ByZ6mr",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!gXfiuBJADbq7fgxT.KGT2porZS5ByZ6mr"
+      "_key": "!items.effects!gXfiuBJADbq7fgxT.KGT2porZS5ByZ6mr",
+      "start": null
     }
   ],
   "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",

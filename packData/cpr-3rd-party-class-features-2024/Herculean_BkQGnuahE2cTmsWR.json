@@ -44,24 +44,23 @@
       "origin": "Actor.n2iT3wlfO9IxlReq.Item.JqqExzllTnKChHyu",
       "_id": "gHIdF82z2shmReue",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.encumbrance.multipliers.overall",
-          "mode": 4,
-          "value": "2",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.encumbrance.multipliers.overall",
+            "value": "2",
+            "priority": 20,
+            "type": "upgrade",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -87,7 +86,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!BkQGnuahE2cTmsWR.gHIdF82z2shmReue"
+      "_key": "!items.effects!BkQGnuahE2cTmsWR.gHIdF82z2shmReue",
+      "start": null
     }
   ],
   "folder": "DaCCKHmNsmtRhEWW",

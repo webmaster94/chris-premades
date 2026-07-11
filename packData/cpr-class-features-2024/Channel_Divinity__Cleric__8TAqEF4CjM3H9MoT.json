@@ -10,17 +10,15 @@
       "transfer": false,
       "_id": "QrKyuIYVLsuu6loA",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -59,25 +57,24 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!8TAqEF4CjM3H9MoT.QrKyuIYVLsuu6loA"
+      "_key": "!items.effects!8TAqEF4CjM3H9MoT.QrKyuIYVLsuu6loA",
+      "start": null
     },
     {
       "name": "Channel Divinity: Caster",
-      "changes": [],
       "transfer": false,
       "img": "icons/magic/holy/barrier-shield-winged-blue.webp",
       "_id": "MGaDBywjDvinEsJF",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -116,7 +113,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!8TAqEF4CjM3H9MoT.MGaDBywjDvinEsJF"
+      "_key": "!items.effects!8TAqEF4CjM3H9MoT.MGaDBywjDvinEsJF",
+      "start": null
     }
   ],
   "system": {

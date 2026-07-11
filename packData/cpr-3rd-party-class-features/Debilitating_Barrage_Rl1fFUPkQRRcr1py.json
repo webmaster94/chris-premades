@@ -9,24 +9,23 @@
       "transfer": false,
       "_id": "qIfLryufw3kuWylJ",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.dv.value",
-          "mode": 2,
-          "value": "acid",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.dv.value",
+            "value": "acid",
+            "priority": 20,
+            "type": "add",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -72,7 +71,8 @@
           }
         }
       },
-      "_key": "!items.effects!Rl1fFUPkQRRcr1py.qIfLryufw3kuWylJ"
+      "_key": "!items.effects!Rl1fFUPkQRRcr1py.qIfLryufw3kuWylJ",
+      "start": null
     },
     {
       "name": "Debilitating Barrage: Immune",
@@ -81,17 +81,15 @@
       "transfer": false,
       "_id": "g0r0tdrGQV701fOz",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": 86400,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 86400,
+        "units": "seconds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -130,7 +128,8 @@
           "overlay": false
         }
       },
-      "_key": "!items.effects!Rl1fFUPkQRRcr1py.g0r0tdrGQV701fOz"
+      "_key": "!items.effects!Rl1fFUPkQRRcr1py.g0r0tdrGQV701fOz",
+      "start": null
     }
   ],
   "system": {

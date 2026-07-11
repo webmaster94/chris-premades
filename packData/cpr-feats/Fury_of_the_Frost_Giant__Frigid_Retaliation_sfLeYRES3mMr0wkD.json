@@ -256,13 +256,10 @@
       "name": "Fury of the Frost Giant: Frigid Retaliation",
       "origin": "Compendium.world.cpr-feats.Item.sgVA2IplztVxpBnM",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "disabled": false,
       "flags": {
@@ -278,9 +275,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "core": {
           "overlay": false
@@ -289,21 +284,24 @@
       "img": "icons/magic/water/barrier-ice-crystal-wall-jagged.webp",
       "_id": "0oe8b96umreEOr3p",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.attributes.movement.all",
-          "mode": 0,
-          "value": "0",
-          "priority": 20
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.movement.all",
+            "value": "0",
+            "priority": 20,
+            "type": "custom",
+            "phase": "initial"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
       "sort": 0,
-      "_key": "!items.effects!sfLeYRES3mMr0wkD.0oe8b96umreEOr3p"
+      "_key": "!items.effects!sfLeYRES3mMr0wkD.0oe8b96umreEOr3p",
+      "start": null
     }
   ],
   "img": "icons/magic/water/barrier-ice-crystal-wall-jagged.webp",

@@ -3,18 +3,14 @@
   "type": "feat",
   "effects": [
     {
-      "changes": [],
       "transfer": false,
       "_id": "QT2eqYQOJ2r1DeIa",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "origin": "Actor.4F5kQIpxwyb6rykH.Item.OxPxyGXAB4zCNIgm",
       "tint": "#ffffff",
@@ -32,34 +28,36 @@
       "statuses": [],
       "img": "icons/skills/movement/figure-running-gray.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "sort": 0,
-      "_key": "!items.effects!5uu7pH7ELPwqZXNZ.QT2eqYQOJ2r1DeIa"
+      "_key": "!items.effects!5uu7pH7ELPwqZXNZ.QT2eqYQOJ2r1DeIa",
+      "start": null
     },
     {
       "name": "Disengage",
-      "changes": [
-        {
-          "key": "flags.gambits-premades.oaImmunity",
-          "mode": 5,
-          "value": "1",
-          "priority": 20
-        }
-      ],
       "transfer": false,
       "img": "icons/skills/movement/feet-winged-boots-blue.webp",
       "_id": "E1mdPa6cascbVBLU",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "flags.gambits-premades.oaImmunity",
+            "value": "1",
+            "priority": 20,
+            "type": "override",
+            "phase": "initial"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": "targetEnd",
+        "expired": false
       },
       "description": "",
       "origin": "Actor.4F5kQIpxwyb6rykH.Item.OxPxyGXAB4zCNIgm",
@@ -77,9 +75,7 @@
           "showIcon": false,
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [
-            "turnEnd"
-          ]
+          "specialDuration": []
         },
         "ActiveAuras": {
           "isAura": false,
@@ -112,7 +108,8 @@
         }
       },
       "sort": 0,
-      "_key": "!items.effects!5uu7pH7ELPwqZXNZ.E1mdPa6cascbVBLU"
+      "_key": "!items.effects!5uu7pH7ELPwqZXNZ.E1mdPa6cascbVBLU",
+      "start": null
     },
     {
       "name": "Hidden",
@@ -121,17 +118,15 @@
       "transfer": false,
       "_id": "5n15qN1BqK51Aure",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -186,7 +181,8 @@
           }
         }
       },
-      "_key": "!items.effects!5uu7pH7ELPwqZXNZ.5n15qN1BqK51Aure"
+      "_key": "!items.effects!5uu7pH7ELPwqZXNZ.5n15qN1BqK51Aure",
+      "start": null
     }
   ],
   "system": {
