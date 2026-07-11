@@ -4,6 +4,16 @@ A collection of automated items including spells, class features, monster featur
 
 Find detailed information in [our wiki](https://github.com/chrisk123999/chris-premades/wiki).
 
+## Manual Installation (Foundry V14 Fork)
+
+In Foundry VTT, open **Add-on Modules**, choose **Install Module**, paste the manifest URL below into **Manifest URL**, and select **Install**:
+
+```text
+https://github.com/webmaster94/chris-premades/releases/latest/download/module.json
+```
+
+This fork keeps the same module ID as the upstream package, so it replaces an existing Chris' Premades installation rather than installing alongside it.
+
 ![cpr-logo](https://raw.githubusercontent.com/chrisk123999/chris-premades/refs/heads/master/images/cpr-logo.png) 
   
 ### Authors:

@@ -4,6 +4,9 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -42,7 +45,7 @@ jobs:
       uses: restackio/update-json-file-action@2.1
       with:
         file: 'module.json'
-        fields: "{\"version\": \"${{env.VERSION}}\", \"download\": \"${{env.FOUNDRY_DOWNLOAD}}\"}"
+        fields: "{\"version\": \"${{env.VERSION}}\", \"manifest\": \"${{env.FOUNDRY_MANIFEST}}\", \"download\": \"${{env.FOUNDRY_DOWNLOAD}}\"}"
 
     # create a zip file with all files required by the module to add to the release
     - run: zip -r ./module.zip module.json dist packs styles templates LICENSE lang images CHANGELOG.md
@@ -60,10 +63,11 @@ jobs:
         tag: ${{ github.event.release.tag_name }}
         body: ${{ github.event.release.body }}
     - name: FoundryVTT AutoPublish
+      if: ${{ github.repository_owner == 'chrisk123999' }}
       uses: fjogeleit/http-request-action@v2
       continue-on-error: true
       with:
         url: 'https://foundryvtt.com/_api/packages/release_version/'
         method: 'POST'
         customHeaders: '{"Content-Type": "application/json", "Authorization" : "${{ secrets.FOUNDRY_KEY }}"}'
-        data: '{"dry_run": false, "id" : "chris-premades", "release": {"version" :  "${{env.VERSION}}", "manifest": "${{env.FOUNDRY_MANIFEST}}", "notes" : "https://github.com/chrisk123999/chris-premades/blob/master/CHANGELOG.md", "compatibility" : {"minimum": "14", "verified": "14.360", "maximum": "14.999"} } }'
+        data: '{"dry_run": false, "id" : "chris-premades", "release": {"version" :  "${{env.VERSION}}", "manifest": "${{env.FOUNDRY_MANIFEST}}", "notes" : "https://github.com/${{github.repository}}/blob/release-v14/CHANGELOG.md", "compatibility" : {"minimum": "14", "verified": "14.360", "maximum": "14.999"} } }'
