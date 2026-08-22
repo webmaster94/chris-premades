@@ -1,3 +1,7 @@
+# 2.0.3 - Foundry V14
+## Bug Fixes:
+- Player saving throws no longer fail when the returned roll data has no token reference.
+
 # 1.5.37 Release:
 ## Update Notes:
 - This is not a V14 update. An update for V14 is still a work in progress.
