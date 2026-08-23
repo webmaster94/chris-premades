@@ -1,6 +1,6 @@
 # 2.0.4 - Foundry V14
 ## Bug Fixes:
-- Native Transform activities now use a guarded GM operation when a player successfully targets an actor they do not own.
+- Player-owned Transform activities now ask the active GM to perform the transformation when the target actor is not player-owned. CPR verifies the activity, source, target, user, permissions, and request age before running it.
 
 # 2.0.3 - Foundry V14
 ## Bug Fixes:
