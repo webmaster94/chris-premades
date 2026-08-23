@@ -1,4 +1,4 @@
-import {activityUtils, genericUtils} from '../utils.js';
+import {activityUtils, actorUtils, genericUtils} from '../utils.js';
 function flagAllRiders(item, updates) {
     let cprRiders = genericUtils.getProperty(updates, 'flags.chris-premades.hiddenActivities');
     cprRiders ??= genericUtils.getProperty(item, 'flags.chris-premades.hiddenActivities') ?? [];
@@ -107,8 +107,24 @@ function patchCanUse() {
         libWrapper.register('chris-premades', 'dnd5e.documents.activity.' + i + 'Activity.prototype.canUse', canUsePatch, 'MIXED');
     }
 }
+async function transformIntoPatch(wrapped, source, settings, options = {}) {
+    if (game.user.isGM || this.isOwner) return wrapped(source, settings, options);
+    let result = await actorUtils.polymorphFromActivity(this, source, options);
+    if (!result.handled) return wrapped(source, settings, options);
+    return result.tokens;
+}
+function patchTransformInto() {
+    genericUtils.log('dev', 'Transform Activity GM Delegation Patched!');
+    libWrapper.register(
+        'chris-premades',
+        'CONFIG.Actor.documentClass.prototype.transformInto',
+        transformIntoPatch,
+        'WRAPPER'
+    );
+}
 export let activities = {
     flagAllRiders,
     cssTweak,
-    patchCanUse
+    patchCanUse,
+    patchTransformInto
 };

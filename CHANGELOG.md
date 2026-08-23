@@ -1,3 +1,7 @@
+# 2.0.4 - Foundry V14
+## Bug Fixes:
+- Native Transform activities now use a guarded GM operation when a player successfully targets an actor they do not own.
+
 # 2.0.3 - Foundry V14
 ## Bug Fixes:
 - Player saving throws no longer fail when the returned roll data has no token reference.

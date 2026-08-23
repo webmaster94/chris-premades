@@ -103,6 +103,7 @@ Hooks.once('ready', () => {
     skillCheck.patch();
     abilityCheck.patch();
     activities.patchCanUse();
+    activities.patchTransformInto();
     toolCheck.patch();
     if (utils.genericUtils.getCPRSetting('groupSummonsWithOwner')) initiative.patch(true);
     rollResolver.patch(true);

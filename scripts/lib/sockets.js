@@ -3,6 +3,7 @@ import {CPRMultipleRollResolver} from '../applications/rollResolverMultiple.js';
 import {actorUtils, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../utils.js';
 import {Summons} from './summons.js';
 import {Teleport} from './teleport.js';
+import {authorizeTransformRequest} from './transformAuthorization.js';
 function normalizeEffectData(effectData) {
     if (!effectData) return;
     let duration = effectData.duration;
@@ -226,7 +227,38 @@ async function polymorph(origActorUuid, newActorUuid, options, renderSheet=true)
     if (!origActor || !newActor) return;
     // eslint-disable-next-line no-undef
     let tokens = await origActor.transformInto(newActor, new dnd5e.dataModels.settings.TransformationSetting(options), {renderSheet});
-    return tokens.map(i => i.uuid);
+    return (Array.isArray(tokens) ? tokens : [tokens]).filter(i => i).map(i => i.uuid);
+}
+async function polymorphFromActivity(messageId, origActorUuid) {
+    let userId = this?.socketdata?.userId;
+    let user = game.users.get(userId);
+    let message = game.messages.get(messageId);
+    let activityUuid = message?.flags?.dnd5e?.activity?.uuid;
+    let activity = activityUuid ? await fromUuid(activityUuid) : undefined;
+    let sourceUuid = message?.getFlag('dnd5e', 'transform.uuid');
+    let origActor = await fromUuid(origActorUuid);
+    let sourceActor = sourceUuid ? await fromUuid(sourceUuid) : undefined;
+    let authorization = authorizeTransformRequest({
+        activityOwner: activity?.item?.actor?.testUserPermission(user, 'OWNER') ?? false,
+        activityType: activity?.type,
+        activityUuid: activity?.uuid,
+        allowPolymorphing: game.settings.get('dnd5e', 'allowPolymorphing'),
+        messageActivityUuid: activityUuid,
+        messageAuthorId: message?.author?.id,
+        messageSourceUuid: sourceUuid,
+        messageTargetUuids: message?.flags?.dnd5e?.targets?.map(i => i.uuid) ?? [],
+        messageTimestamp: message?.timestamp,
+        now: Date.now(),
+        requestedSourceUuid: sourceActor?.uuid,
+        requestedTargetUuid: origActor?.uuid,
+        userCanCreateActors: user?.can('ACTOR_CREATE') ?? false,
+        userId
+    });
+    if (!authorization.ok || !origActor || !sourceActor || !activity?.settings) {
+        throw new Error(`Rejected Transform activity request: ${authorization.reason || 'documents'}`);
+    }
+    let tokens = await origActor.transformInto(sourceActor, activity.settings, {renderSheet: false});
+    return (Array.isArray(tokens) ? tokens : [tokens]).filter(i => i).map(i => i.uuid);
 }
 async function remoteRoll(rollJSON) {
     let roll = await Roll.fromData(rollJSON).evaluate();
@@ -308,6 +340,7 @@ export let sockets = {
     setBonusActionUsed,
     removeBonusActionUsed,
     polymorph,
+    polymorphFromActivity,
     remoteRoll,
     remoteDamageRolls,
     syntheticItemDataRoll,
