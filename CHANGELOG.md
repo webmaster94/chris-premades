@@ -1,6 +1,6 @@
-# 2.0.5 - D&D 6.0.6 - Unreleased
+# 2.0.5 - D&D 6.0.x
 ## Update Notes:
-- Requires D&D 6.0.6 and Foundry VTT 14.367. The supported D&D range is now 6.0.x.
+- Requires D&D 6.0.0 or later in the 6.0.x series and Foundry VTT 14.367. The compatibility target is D&D 6.0.6; D&D 6.0.5 is also allowed.
 - Activity effects are resolved asynchronously, including compendium effects and condition checks.
 - API change: callers of `activityUtils.getConditions` must now await its returned promise.
 - Saving throws and player Transform requests read the new chat-message system data. Transform authorization uses the actor UUID in the new target descriptors. Legacy messages remain supported.
