@@ -1,3 +1,17 @@
+# 2.0.5 - D&D 6.0.6 - Unreleased
+## Update Notes:
+- Requires D&D 6.0.6 and Foundry VTT 14.367. The supported D&D range is now 6.0.x.
+- Activity effects are resolved asynchronously, including compendium effects and condition checks.
+- API change: callers of `activityUtils.getConditions` must now await its returned promise.
+- Saving throws and player Transform requests read the new chat-message system data. Transform authorization uses the actor UUID in the new target descriptors. Legacy messages remain supported.
+- Check, save, skill, and tool roll messages store their originating message in `system.origin`.
+- Armor-class effects add to `ac.calcs` and `ac.formulas`. Animate Objects creates summons with the new AC source fields.
+
+## Compatibility Review:
+- Reviewed the [D&D 6.0 breaking changes](https://github.com/foundryvtt/dnd5e/releases/tag/release-6.0.0) and patch notes through [6.0.6](https://github.com/foundryvtt/dnd5e/releases/tag/release-6.0.6). The patches add fixes and improvements without further announced API breaks.
+- The remaining listed changes cover sense configuration objects, percentage bloodied thresholds, actor preparation, sheet mode changes, chat-card overrides, and death-save hooks. CPR does not use the affected APIs. Its custom chat buttons use CPR's own markup.
+- Validation is static only. This update has not been tested in a running Foundry world.
+
 # 2.0.4 - Foundry V14
 ## Bug Fixes:
 - Player-owned Transform activities now ask the active GM to perform the transformation when the target actor is not player-owned. CPR verifies the activity, source, target, user, permissions, and request age before running it.

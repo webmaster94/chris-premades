@@ -2,7 +2,7 @@ import {activityUtils, combatUtils, dialogUtils, effectUtils, genericUtils, item
 async function use({workflow}) {
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'formOfDreadFear', {strict: true});
     if (!feature) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;

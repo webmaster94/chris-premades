@@ -4,7 +4,7 @@ async function bat({trigger, workflow}) {
     if (batEffect) return;
     let mistEffect = effectUtils.getEffectByIdentifier(workflow.actor, 'vampireMistEffect');
     if (mistEffect) await genericUtils.remove(mistEffect);
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;
@@ -37,7 +37,7 @@ async function mist({trigger, workflow}) {
     if (mistEffect) return;
     let batEffect = effectUtils.getEffectByIdentifier(workflow.actor, 'vampireBatEffect');
     if (batEffect) await genericUtils.remove(batEffect);
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;

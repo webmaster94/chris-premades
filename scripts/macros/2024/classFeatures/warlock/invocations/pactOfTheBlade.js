@@ -5,7 +5,7 @@ async function bond({trigger, workflow}) {
     if (!validWeapons.length) return;
     let selection = await dialogUtils.selectDocumentDialog(workflow.item.name, 'CHRISPREMADES.Macros.PactOfTheBlade.SelectBond', validWeapons, {sortAlphabetical: true});
     if (!selection) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;
@@ -25,7 +25,7 @@ async function conjure({trigger, workflow}) {
     if (!documents.length) return;
     let selection = await dialogUtils.selectDocumentDialog(workflow.item.name, 'CHRISPREMADES.Macros.PactOfTheBlade.Conjure', documents, {sortAlphabetical: true});
     if (!selection) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let summonedWeaponEffect = effectUtils.getEffectByIdentifier(workflow.actor, 'pactOfTheBladeSummonedWeapon');
     if (summonedWeaponEffect) await genericUtils.remove(summonedWeaponEffect);

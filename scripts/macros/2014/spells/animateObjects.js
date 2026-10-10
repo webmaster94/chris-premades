@@ -61,7 +61,7 @@ async function use({workflow}) {
         genericUtils.setProperty(update, 'actor.system.traits.size', d.id);
         let data = getDataForSize(d.id);
         genericUtils.setProperty(update, 'actor.system.attributes.hp', {value: data.hp, max: data.hp});
-        genericUtils.setProperty(update, 'actor.system.attributes.ac', {calc: 'custom', formula: data.ac});
+        genericUtils.setProperty(update, 'actor.system.attributes.ac', {calcs: [], formulas: [{formula: String(data.ac)}]});
         genericUtils.setProperty(update, 'actor.system.abilities.str.value', data.str);
         genericUtils.setProperty(update, 'actor.system.abilities.dex.value', data.dex);
         let attack = foundry.utils.duplicate(attackData);

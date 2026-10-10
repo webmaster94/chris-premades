@@ -3,7 +3,7 @@ import {CPRMultipleRollResolver} from '../applications/rollResolverMultiple.js';
 import {actorUtils, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../utils.js';
 import {Summons} from './summons.js';
 import {Teleport} from './teleport.js';
-import {authorizeTransformRequest} from './transformAuthorization.js';
+import {authorizeTransformRequest, getTransformMessageData} from './transformAuthorization.js';
 function normalizeEffectData(effectData) {
     if (!effectData) return;
     let duration = effectData.duration;
@@ -233,9 +233,10 @@ async function polymorphFromActivity(messageId, origActorUuid) {
     let userId = this?.socketdata?.userId;
     let user = game.users.get(userId);
     let message = game.messages.get(messageId);
-    let activityUuid = message?.flags?.dnd5e?.activity?.uuid;
+    let messageData = message ? getTransformMessageData(message) : {};
+    let activityUuid = messageData.activityUuid;
     let activity = activityUuid ? await fromUuid(activityUuid) : undefined;
-    let sourceUuid = message?.getFlag('dnd5e', 'transform.uuid');
+    let sourceUuid = messageData.sourceUuid;
     let origActor = await fromUuid(origActorUuid);
     let sourceActor = sourceUuid ? await fromUuid(sourceUuid) : undefined;
     let authorization = authorizeTransformRequest({
@@ -246,7 +247,7 @@ async function polymorphFromActivity(messageId, origActorUuid) {
         messageActivityUuid: activityUuid,
         messageAuthorId: message?.author?.id,
         messageSourceUuid: sourceUuid,
-        messageTargetUuids: message?.flags?.dnd5e?.targets?.map(i => i.uuid) ?? [],
+        messageTargetUuids: messageData.targetUuids ?? [],
         messageTimestamp: message?.timestamp,
         now: Date.now(),
         requestedSourceUuid: sourceActor?.uuid,

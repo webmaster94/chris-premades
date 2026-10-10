@@ -4,8 +4,9 @@ async function use({workflow}) {
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
     let targets = workflow.hitTargets;
+    let effectUuids = (await workflow.activity.getApplicableEffects() ?? []).map(effect => effect.uuid);
     await Promise.all(targets.map(async i => {
-        let effect = actorUtils?.getEffects(i.actor)?.find(j => workflow.activity?.effects?.map(k => k?.effect?.uuid).includes(j?.origin));
+        let effect = actorUtils?.getEffects(i.actor)?.find(j => effectUuids.includes(j?.origin));
         if (!effect) return;
         let currentMacroList = genericUtils.getProperty(effect, 'flags.chris-premades.macros.effect') ?? [];
         await genericUtils.setFlag(effect, 'chris-premades', 'macros.effect', currentMacroList.concat(['activityOnEffectExpiry']));

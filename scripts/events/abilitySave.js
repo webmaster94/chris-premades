@@ -234,7 +234,8 @@ async function rollSave(wrapped, config, dialog = {}, message = {}) {
     let activityUuid;
     let activity;
     if (config.midiOptions?.saveItemUuid) {
-        activityUuid = game.messages.contents.toReversed().find(i => i.flags.dnd5e?.item?.uuid === config.midiOptions.saveItemUuid)?.flags.dnd5e.activity.uuid;
+        let sourceMessage = game.messages.contents.toReversed().find(i => (i.system?.item?.uuid ?? i.flags.dnd5e?.item?.uuid) === config.midiOptions.saveItemUuid);
+        activityUuid = sourceMessage?.system?.activity?.uuid ?? sourceMessage?.flags.dnd5e?.activity?.uuid;
         if (activityUuid) genericUtils.setProperty(config, 'chris-premades.activityUuid', activityUuid);
     }
     let options = {};
@@ -338,7 +339,7 @@ async function rollSave(wrapped, config, dialog = {}, message = {}) {
     if (message.create !== false) {
         messageData ??= {};
         let messageId = event?.target.closest('[data-message-id]')?.dataset.messageId;
-        if (messageId) genericUtils.mergeObject(messageData, {'flags.dnd5e.originatingMessage': messageId});
+        if (messageId) genericUtils.mergeObject(messageData, {'system.origin': messageId});
         genericUtils.mergeObject(messageData, {flags: options.flags ?? {} });
         genericUtils.setProperty(messageData, 'flags.midi-qol.lmrtfy.requestId', options.flags?.lmrtfy?.data?.requestId);
         messageData.template = 'modules/midi-qol/templates/roll-base.html';

@@ -92,14 +92,14 @@ function duplicateActivity(activity) {
     newActivity.prepareFinalData();
     return newActivity;
 }
-function getConditions(activity) {
+async function getConditions(activity) {
     let conditions = new Set();
-    activity.effects.forEach(i => {
-        if (!i.effect) return;
-        let effectConditions = effectUtils.getConditions(i.effect);
+    let effects = await activity.getApplicableEffects() ?? [];
+    effects.forEach(effect => {
+        let effectConditions = effectUtils.getConditions(effect);
         effectConditions.forEach(j => conditions.add(j));
     });
-    if (activity._otherActivity) conditions = conditions.union(getConditions(activity._otherActivity));
+    if (activity._otherActivity) conditions = conditions.union(await getConditions(activity._otherActivity));
     return conditions;
 }
 function getMod(activity) {

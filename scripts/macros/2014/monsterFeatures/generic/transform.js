@@ -16,7 +16,7 @@ async function use({trigger, workflow}) {
         tokenImgPriority = config?.profileTwoTokenImgPriority;
         items = config?.profileTwoItems;
     } else return;
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;
@@ -44,7 +44,7 @@ async function use({trigger, workflow}) {
 async function early({trigger, workflow}) {
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'transform');
     if (!(config.profileOneActivities.includes(workflow.activity.id) || config.profileTwoActivities.includes(workflow.activity.id))) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     if (sourceEffect.flags.dae?.dontApply) return;
     await genericUtils.setFlag(sourceEffect, 'dae', 'dontApply', true);

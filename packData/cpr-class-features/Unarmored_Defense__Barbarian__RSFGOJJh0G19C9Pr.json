@@ -111,10 +111,10 @@
       "system": {
         "changes": [
           {
-            "key": "system.attributes.ac.calc",
+            "key": "system.attributes.ac.calcs",
             "value": "unarmoredBarb",
             "priority": 20,
-            "type": "override",
+            "type": "add",
             "phase": "initial"
           }
         ]

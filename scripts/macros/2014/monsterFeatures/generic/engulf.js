@@ -4,7 +4,7 @@ async function use({trigger, workflow}) {
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
     if (!workflow.hitTargets.size) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;
@@ -41,7 +41,7 @@ async function early({trigger, workflow}) {
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'engulf');
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     if (sourceEffect.flags.dae?.dontApply) return;
     await genericUtils.setFlag(sourceEffect, 'dae', 'dontApply', true);

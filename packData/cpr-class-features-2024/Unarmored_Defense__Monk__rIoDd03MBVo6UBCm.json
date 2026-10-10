@@ -60,10 +60,10 @@
       "system": {
         "changes": [
           {
-            "key": "system.attributes.ac.calc",
+            "key": "system.attributes.ac.calcs",
             "value": "unarmoredMonk",
             "priority": 15,
-            "type": "override",
+            "type": "add",
             "phase": "initial"
           }
         ]

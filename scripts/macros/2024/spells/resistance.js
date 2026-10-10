@@ -64,7 +64,7 @@ async function use({trigger, workflow}) {
     let damageTypes = itemUtils.getConfig(workflow.item, 'damageTypes');
     let damageType = await dialogUtils.selectDamageType(damageTypes, workflow.item.name, 'CHRISPREMADES.Generic.SelectDamageType');
     if (!damageType) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;

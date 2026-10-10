@@ -402,7 +402,7 @@ async function shapeChange(token, {callback} = {}) {
 }
 async function shapechange({trigger, workflow}) {
     if (!itemUtils.getEquipmentState(workflow.item)) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;

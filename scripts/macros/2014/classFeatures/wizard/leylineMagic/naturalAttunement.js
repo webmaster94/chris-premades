@@ -69,7 +69,7 @@ async function use({trigger, workflow}) {
         return data;
     }))).filter(i => i);
     if (!spellDatas.length) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'naturalAttunementEffect');
     if (effect) await genericUtils.remove(effect);

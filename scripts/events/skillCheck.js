@@ -328,7 +328,7 @@ async function rollSkill(wrapped, config, dialog = {}, message = {}) {
     if (message.create !== false) {
         messageData ??= {};
         let messageId = event?.target.closest('[data-message-id]')?.dataset.messageId;
-        if (messageId) genericUtils.mergeObject(messageData, {'flags.dnd5e.originatingMessage': messageId});
+        if (messageId) genericUtils.mergeObject(messageData, {'system.origin': messageId});
         let messageMode = returnData.options?.rollMode ?? rollMode;
         if (messageMode) messageMode = Roll._mapLegacyRollMode(messageMode) ?? messageMode;
         await returnData.toMessage(messageData, {messageMode});

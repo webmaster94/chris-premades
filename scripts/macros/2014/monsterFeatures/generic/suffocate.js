@@ -5,8 +5,9 @@ async function use({trigger: {entity}, workflow}) {
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'suffocate');
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
+    let effectUuids = (await workflow.activity.getApplicableEffects() ?? []).map(effect => effect.uuid);
     await Promise.all(workflow.targets.map(async i => {
-        let effect = actorUtils.getEffects(i.actor).find(j => workflow.activity.effects.map(i => i.effect.uuid).includes(j.origin));
+        let effect = actorUtils.getEffects(i.actor).find(j => effectUuids.includes(j.origin));
         if (!effect) return;
         await suffocation.utilFunctions.apply(i.actor, entity, {parentEffect: effect, startsOutOfAir: config.startsOutOfAir});
     }));

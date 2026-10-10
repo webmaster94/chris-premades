@@ -2,7 +2,7 @@ import {activityUtils, actorUtils, combatUtils, dialogUtils, effectUtils, generi
 async function use({trigger, workflow}) {
     let identifier = activityUtils.getIdentifier(workflow.activity);
     if (!identifier) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.duration = itemUtils.convertDuration(workflow.activity);

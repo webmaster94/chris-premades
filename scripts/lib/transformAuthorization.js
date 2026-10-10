@@ -1,5 +1,19 @@
 const MAX_TRANSFORM_MESSAGE_AGE = 30 * 60 * 1000;
 
+function getTransformMessageData(message) {
+    let activity = message.system?.activity ?? message.flags?.dnd5e?.activity;
+    let targets = message.system?.targets ?? message.flags?.dnd5e?.targets ?? [];
+    return {
+        activityType: activity?.type,
+        activityUuid: activity?.uuid,
+        authorId: message.author?.id,
+        id: message.id,
+        sourceUuid: message.getFlag('dnd5e', 'transform.uuid'),
+        targetUuids: targets.map(target => target.actor ?? target.uuid).filter(uuid => uuid),
+        timestamp: message.timestamp
+    };
+}
+
 function authorizeTransformRequest(request) {
     if (!request.allowPolymorphing) return {ok: false, reason: 'setting'};
     if (!request.userCanCreateActors) return {ok: false, reason: 'actor-create'};
@@ -26,4 +40,4 @@ function findTransformMessage(messages, {now, sourceActorUuid, targetActorUuid, 
     });
 }
 
-export {authorizeTransformRequest, findTransformMessage, MAX_TRANSFORM_MESSAGE_AGE};
+export {authorizeTransformRequest, findTransformMessage, getTransformMessageData, MAX_TRANSFORM_MESSAGE_AGE};

@@ -5,10 +5,11 @@ async function rollFinished({trigger, workflow}) {
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
     let targets = workflow.failedSaves;
     if (!targets.size) return;
+    let effectUuids = (await workflow.activity.getApplicableEffects() ?? []).map(effect => effect.uuid);
     await Promise.all(targets.map(async i => {
         let effect = actorUtils.getEffects(i.actor).find(j => {
             if (j.duration?.expired || j.disabled) return false;
-            return !j?.origin ? false : workflow.activity.effects.map(k => k.effect.uuid).includes(j.origin) ? true : fromUuidSync(j.origin)?.flags?.dnd5e?.itemUuid === workflow.activity.uuid;
+            return !j?.origin ? false : effectUuids.includes(j.origin) ? true : fromUuidSync(j.origin)?.flags?.dnd5e?.itemUuid === workflow.activity.uuid;
         });
         if (!effect) return;
         let currentMacroList = genericUtils.getProperty(effect, 'flags.chris-premades.macros.midi.actor') ?? [];
@@ -25,7 +26,15 @@ async function targetRollFinished({trigger: {entity, token}, workflow}) {
     if (!sourceItem) return;
     let config = itemUtils.getGenericFeatureConfig(sourceItem, 'rerollSaveOnDamage');
     if (config.excludeSource && workflow.token.document.uuid === sourceItem.actor.token.uuid) return; 
-    let sourceActivity = sourceItem.system.activities.find(i => i.effects.some(j => j.effect.uuid === entity.origin)) ?? fromUuidSync(fromUuidSync(entity.origin)?.flags?.dnd5e?.itemUuid);
+    let sourceActivity;
+    for (let activity of sourceItem.system.activities) {
+        let effects = await Promise.all(activity.effects.map(profile => profile.getEffect()));
+        if (effects.some(effect => effect?.uuid === entity.origin)) {
+            sourceActivity = activity;
+            break;
+        }
+    }
+    sourceActivity ??= fromUuidSync(fromUuidSync(entity.origin)?.flags?.dnd5e?.itemUuid);
     if (!sourceActivity) return;
     let activityData = sourceActivity.toObject();
     delete activityData._id;

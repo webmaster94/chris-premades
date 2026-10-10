@@ -3,14 +3,14 @@ async function early({trigger, workflow}) {
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'timeTrigger');
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect ?? workflow.activity._otherActivity?.effects?.[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect() ?? await workflow.activity._otherActivity?.effects?.[0]?.getEffect();
     if (!sourceEffect) return;
     if (sourceEffect.flags.dae?.dontApply) return;
     await genericUtils.setFlag(sourceEffect, 'dae', 'dontApply', true);
 }
 async function use({trigger, workflow}) {
     if (!workflow.hitTargets.size) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect ?? workflow.activity._otherActivity?.effects?.[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect() ?? await workflow.activity._otherActivity?.effects?.[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;

@@ -47,17 +47,17 @@
       "system": {
         "changes": [
           {
-            "key": "system.attributes.ac.formula",
+            "key": "system.attributes.ac.formulas",
             "value": "12 + @abilities.con.mod",
             "priority": 15,
-            "type": "override",
+            "type": "add",
             "phase": "initial"
           },
           {
-            "key": "system.attributes.ac.calc",
+            "key": "system.attributes.ac.calcs",
             "value": "custom",
             "priority": 20,
-            "type": "override",
+            "type": "add",
             "phase": "initial"
           }
         ]

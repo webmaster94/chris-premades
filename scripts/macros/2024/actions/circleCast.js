@@ -30,7 +30,7 @@ async function startRitual({trigger, workflow}) {
     let schoolColor = itemUtils.getConfig(workflow.item, school + 'Color');
     let ritualAnimation = 'jb2a.magic_signs.circle.02.' + schoolAnimations[school];
     let strandColor = itemUtils.getConfig(workflow.item, 'strandColor');
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;
@@ -209,7 +209,7 @@ async function completeRitual({trigger, workflow}) {
         }
     }
     delete itemData._id;
-    let sourceEffect = workflow.activity.effects?.[0]?.effect;
+    let sourceEffect = await workflow.activity.effects?.[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;

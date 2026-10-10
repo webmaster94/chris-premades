@@ -12,7 +12,7 @@ async function attack({trigger: {entity: item}, workflow}) {
 async function use({trigger, workflow}) {
     let damageType = await dialogUtils.selectDamageType(Object.keys(CONFIG.DND5E.damageTypes).filter(i => !['none', 'midi-none'].includes(i)), workflow.item.name, 'CHRISPREMADES.Generic.SelectDamageType');
     if (!damageType) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;
@@ -25,7 +25,7 @@ async function use({trigger, workflow}) {
         effectData.system.changes[0].value = damageType;
     }
     genericUtils.setProperty(effectData, 'flags.chris-premades.debilitatingBarrage.damageType', damageType);
-    let immuneEffect = workflow.activity.effects[1]?.effect;
+    let immuneEffect = await workflow.activity.effects[1]?.getEffect();
     if (!immuneEffect) return;
     let immuneEffectData = genericUtils.duplicate(immuneEffect.toObject());
     effectData.origin = immuneEffect.uuid;

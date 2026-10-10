@@ -6,8 +6,8 @@
   "library": "false",
   "socket": true,
   "compatibility": {
-    "minimum": "14",
-    "verified": "14.364",
+    "minimum": "14.367",
+    "verified": "14.367",
     "maximum": "14.999"
   },
   "authors": [
@@ -82,9 +82,9 @@
         "id": "dnd5e",
         "type": "system",
         "compatibility": {
-          "minimum": "5.2.5",
-          "verified": "5.3.3",
-          "maximum": "5.9.9"
+          "minimum": "6.0.6",
+          "verified": "6.0.6",
+          "maximum": "6.0.99"
         }
       }
     ],

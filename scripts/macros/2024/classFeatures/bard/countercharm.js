@@ -9,7 +9,7 @@ async function selfSave({trigger: {entity: item, config, actor, roll, token}}) {
     if (!activityUuid) return;
     let activity = await fromUuid(activityUuid);
     if (!activity) return;
-    let conditions = activityUtils.getConditions(activity);
+    let conditions = await activityUtils.getConditions(activity);
     if (!conditions.size) return;
     let validConditions = itemUtils.getConfig(item, 'conditions');
     if (!conditions.find(i => validConditions.includes(i))) return;
@@ -30,7 +30,7 @@ async function save({trigger: {config, sourceActor, roll}}) {
     if (!activityUuid) return;
     let activity = await fromUuid(activityUuid);
     if (!activity) return;
-    let conditions = activityUtils.getConditions(activity);
+    let conditions = await activityUtils.getConditions(activity);
     if (!conditions.size) return;
     let token = actorUtils.getFirstToken(sourceActor);
     if (!token) return;

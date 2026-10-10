@@ -324,7 +324,7 @@ async function rollCheck(wrapped, config, dialog = {}, message = {}) {
     if (message.create !== false) {
         messageData ??= {};
         let messageId = event?.target.closest('[data-message-id]')?.dataset.messageId;
-        if (messageId) genericUtils.mergeObject(messageData, {'flags.dnd5e.originatingMessage': messageId});
+        if (messageId) genericUtils.mergeObject(messageData, {'system.origin': messageId});
         genericUtils.mergeObject(messageData, {flags: options.flags ?? {} });
         genericUtils.setProperty(messageData, 'flags.midi-qol.lmrtfy.requestId', options.flags?.lmrtfy?.data?.requestId);
         messageData.template = 'modules/midi-qol/templates/roll-base.html';

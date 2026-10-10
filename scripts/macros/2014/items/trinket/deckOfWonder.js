@@ -42,7 +42,7 @@ async function use({trigger, workflow}) {
     }
 }
 async function beginning({trigger, workflow}) {
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.system.changes[0].value = workflow.utilityRolls[0].total;
@@ -65,7 +65,7 @@ async function chancellor({trigger, workflow}) {
 async function chaos({trigger, workflow}) {
     let type = await dialogUtils.selectDamageType(['acid', 'cold', 'fire', 'lightning', 'thunder'], workflow.activity.name, 'CHRISPREMADES.Generic.SelectDamageType', {userId: socketUtils.gmID()});
     if (!type) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.system.changes[0].value = type;
@@ -104,7 +104,7 @@ async function end({trigger, workflow}) {
     if (!damage) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'deckOfWonderEndEffect');
     if (effect) await genericUtils.remove(effect);
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let tempMaxReduction = Math.max((workflow.actor.system.attributes.hp.tempmax ?? 0) - damage, 10 - workflow.actor.system.attributes.hp.max);
     let delta = tempMaxReduction - (workflow.actor.system.attributes.hp.tempmax ?? 0);
@@ -116,7 +116,7 @@ async function end({trigger, workflow}) {
     await effectUtils.createEffect(workflow.actor, effectData);
 }
 async function isolation({trigger, workflow}) {
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.duration = {value: workflow.utilityRolls[0].total * 60, units: 'seconds'};
@@ -193,7 +193,7 @@ async function mischief({trigger, workflow}) {
 async function order({trigger, workflow}) {
     let type = await dialogUtils.selectDamageType(['force', 'necrotic', 'poison', 'psychic', 'radiant'], workflow.activity.name, 'CHRISPREMADES.Generic.SelectDamageType', {userId: socketUtils.gmID()});
     if (!type) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.system.changes[0].value = type;
@@ -227,7 +227,7 @@ async function vulture({trigger, workflow}) {
     if (!items.length) return;
     let selection = await dialogUtils.selectDocumentDialog(workflow.item.name, 'CHRISPREMADES.Macros.DeckOfWonder.Vulture.Select', items, {sortAlphabetical: true, userId: socketUtils.gmID()});
     if (!selection) return;
-    let sourceEffect = workflow.activity.effects[1]?.effect;
+    let sourceEffect = await workflow.activity.effects[1]?.getEffect();
     if (!sourceEffect) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'deckOfWonderVultureEffect');
     if (!effect) return;

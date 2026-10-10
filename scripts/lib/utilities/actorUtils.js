@@ -1,7 +1,7 @@
 import {socket, sockets} from '../sockets.js';
 import {dialogUtils, effectUtils, genericUtils, socketUtils} from '../../utils.js';
 import {ActorMedkit} from '../../applications/medkit-actor.js';
-import {findTransformMessage} from '../transformAuthorization.js';
+import {findTransformMessage, getTransformMessageData} from '../transformAuthorization.js';
 function getEffects(actor, {includeItemEffects = false} = {}) {
     let effects = Array.from(actor.allApplicableEffects());
     if (!includeItemEffects) return effects;
@@ -203,14 +203,7 @@ async function polymorph(origActor, newActor, options, renderSheet=true) {
     }
 }
 async function polymorphFromActivity(origActor, newActor, options = {}) {
-    let messages = game.messages.contents.map(message => ({
-        activityType: message.flags?.dnd5e?.activity?.type,
-        authorId: message.author?.id,
-        id: message.id,
-        sourceUuid: message.getFlag('dnd5e', 'transform.uuid'),
-        targetUuids: message.flags?.dnd5e?.targets?.map(i => i.uuid) ?? [],
-        timestamp: message.timestamp
-    }));
+    let messages = game.messages.contents.map(getTransformMessageData);
     let message = findTransformMessage(messages, {
         now: Date.now(),
         sourceActorUuid: newActor.uuid,

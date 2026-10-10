@@ -5,7 +5,7 @@ async function use({trigger, workflow}) {
         await genericUtils.remove(effect);
         return;
     }
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;
@@ -20,7 +20,7 @@ async function turnStart({trigger: {entity: effect, target}}) {
     if (!activity) return;
     let workflow = await workflowUtils.syntheticActivityRoll(activity, [target]);
     if (workflow.failedSaves.size) return;
-    let sourceEffect = workflow.activity.effects[1]?.effect;
+    let sourceEffect = await workflow.activity.effects[1]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;

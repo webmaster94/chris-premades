@@ -9,7 +9,7 @@ async function use({trigger, workflow}) {
     if (levels >= 5) identifiers.push(...['dash', 'hide']);
     let activities = identifiers.map(identifier => activityUtils.getActivityByIdentifier(workflow.item, identifier, {strict: true})).filter(i => i);
     if (activities.length < 2) return;
-    let sourceEffect = workflow.activity.effects[0]?.effect;
+    let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;
