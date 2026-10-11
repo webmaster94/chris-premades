@@ -6,8 +6,8 @@
   "library": "false",
   "socket": true,
   "compatibility": {
-    "minimum": "14.367",
-    "verified": "14.367",
+    "minimum": "14.368",
+    "verified": "14.369",
     "maximum": "14.999"
   },
   "authors": [
@@ -93,7 +93,7 @@
         "id": "midi-qol",
         "type": "module",
         "compatibility": {
-          "minimum": "14.0.5"
+          "minimum": "14.6.0"
         }
       },
       {
@@ -107,7 +107,7 @@
         "id": "dae",
         "type": "module",
         "compatibility": {
-          "minimum": "14.0.0"
+          "minimum": "14.6.0"
         }
       }
     ]

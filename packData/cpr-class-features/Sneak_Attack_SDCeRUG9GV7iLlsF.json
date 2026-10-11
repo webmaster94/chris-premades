@@ -42,17 +42,8 @@
           "override": false
         },
         "consumption": {
-          "targets": [
-            {
-              "type": "itemUses",
-              "value": "1"
-            }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
+          "spellSlot": false,
+          "targets": []
         },
         "description": {
           "chatFlavor": ""
@@ -71,23 +62,11 @@
           "override": false
         },
         "target": {
-          "template": {
-            "count": "",
-            "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": "ft"
-          },
           "affects": {
-            "count": "",
-            "type": "self",
-            "choice": false,
-            "special": ""
+            "type": "creature",
+            "count": "1"
           },
-          "prompt": true,
-          "override": false
+          "prompt": false
         },
         "uses": {
           "spent": 0,
@@ -151,7 +130,7 @@
           "postRemoveConditionText": ""
         },
         "otherActivityId": "none",
-        "name": "",
+        "name": "Manual Damage",
         "img": "",
         "appliedEffects": []
       }
@@ -398,6 +377,9 @@
       "macros": {
         "midi": {
           "actor": [
+            "sneakAttack"
+          ],
+          "item": [
             "sneakAttack"
           ]
         }

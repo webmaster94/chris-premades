@@ -19,6 +19,10 @@ function getItemMacroData(item) {
 function collectItemMacros(item, pass, activityIdentifier) {
     let macroList = [];
     macroList.push(...getItemMacroData(item));
+    // Older rider items only bound actor hooks. Direct item use must still reach the fallback.
+    for (let identifier of getActorMacroData(item)) {
+        if (['divineSmite', 'sneakAttack'].includes(identifier) && !macroList.includes(identifier)) macroList.push(identifier);
+    }
     if (!macroList.length) return [];
     return macroList.map(i => custom.getMacro(i, genericUtils.getRules(item))).filter(j => j).filter(k => k.midi?.item?.find(l => l.pass === pass)).flatMap(m => m.midi.item).filter(n => n.pass === pass && (!n.activities?.length || n.activities.includes(activityIdentifier)));
 }
@@ -226,7 +230,7 @@ async function preTargeting({activity, token, config, dialog, message}) {
                 result = await custom.executeScript({script: trigger.macro, trigger, activity, token, actor: token.actor, config, dialog, message});
             } else {
                 genericUtils.log('dev', 'Executing Midi Macro: ' + trigger.macroName + ' from ' + trigger.name + ' with a priority of ' + trigger.priority);
-                result = await trigger.macro({trigger, activity, token, actor: token.actor, config, dialog, message});
+                result = await trigger.macro({trigger, activity, token, actor: token?.actor ?? activity.actor, config, dialog, message});
             }
         } catch (error) {
             console.error(error);

@@ -1,3 +1,19 @@
+# 2.0.6 - Divine Smite and Sneak Attack
+## Bug Fixes:
+- Bound damage, completion, and pre-use handling to the events emitted by Midi-QOL 14.6. Old fork-specific damage hooks could leave both features untriggered.
+- Sneak Attack now accepts NPCs without class use counters and prefers their configured damage to CR-based estimates. It reads D&D 6's completed attack advantage mode and checks the actual hit target.
+- Missing Sneak Attack damage no longer spends a use. Repeated hooks, concurrent manual prompts, and repeated uses on the same combat turn are guarded.
+- NPC Smite features with their own damage and limited uses are supported. The 2024 spell no longer depends on a resource-only utility workflow completing before damage can be added. Granted free casts and ordinary slots are handled separately.
+
+## Manual Fallback:
+- Use Divine Smite or Sneak Attack directly from its feature item to roll only the extra damage against one target. The fallback supports existing CPR bindings and unlinked NPC tokens, preserves configured critical rules, and refunds Smite resources if the extra damage workflow aborts.
+- See the [trigger conditions and fallback guide](docs/attack-riders.md) for setup, expected skips, and limits on duplicate detection.
+
+## Compatibility and Validation:
+- Requires Foundry 14.368+, D&D 6.0.x, Midi-QOL 14.6.0+, and DAE 14.6.0+. Midi-QOL 14.0.x cannot run D&D 6 workflows.
+- Local runtime checks used Foundry 14.369, D&D 6.0.6, Midi-QOL 14.6.0, and DAE 14.6.0. Verified NPC automatic Sneak Attack, duplicate prevention, unlinked NPC manual damage and slot consumption, 2024 automatic Smite, and manual critical damage under the configured RAW critical policy.
+- Regression tests, changed-file lint, syntax/JSON checks, compendium rebuilds, and webpack build passed.
+
 # 2.0.5 - D&D 6.0.x
 ## Update Notes:
 - Requires D&D 6.0.0 or later in the 6.0.x series and Foundry VTT 14.367. The compatibility target is D&D 6.0.6; D&D 6.0.5 is also allowed.

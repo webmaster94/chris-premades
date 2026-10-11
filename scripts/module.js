@@ -42,6 +42,7 @@ import {toolCheck} from './events/toolCheck.js';
 import {acc} from './integrations/acc.js';
 import {quickConditions} from './extensions/quickConditions.js';
 import {setupConstants} from './lib/constants.js';
+import {attackRiders} from './lib/attackRiders.js';
 Hooks.once('socketlib.ready', registerSockets);
 Hooks.once('init', () => {
     // v14: suppress known deprecation noise from intentional shim usage (template previews via the
@@ -73,6 +74,7 @@ Hooks.once('ready', () => {
     effectEvents.ready();
     troubleshooter.startup();
     registerHooks();
+    attackRiders.ready().catch(error => console.error('CPR rider activity setup failed', error));
     ddbi.ready();
     dae.injectFlags();
     setupConstants();

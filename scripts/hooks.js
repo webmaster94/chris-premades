@@ -58,15 +58,15 @@ export function registerHooks() {
 
     // Midi events
     Hooks.on('midi-qol.preTargeting', midiEvents.preTargeting);
-    Hooks.on('midi-qol.premades.postNoAction', midiEvents.preItemRoll);
+    Hooks.on('midi-qol.premades.preItemRollV2', ({workflow}) => midiEvents.preItemRoll(workflow));
     Hooks.on('midi-qol.premades.postPreambleComplete', midiEvents.preambleComplete);
     Hooks.on('midi-qol.premades.postWaitForAttackRoll', midiEvents.postAttackRoll);
     Hooks.on('midi-qol.premades.postAttackRollComplete', midiEvents.attackRollComplete);
-    Hooks.on('midi-qol.premades.preDamageRollComplete', midiEvents.damageRollComplete);
+    Hooks.on('midi-qol.DamageRollComplete', midiEvents.damageRollComplete);
     Hooks.on('midi-qol.premades.preUtilityRollComplete', midiEvents.utilityRollComplete);
     Hooks.on('midi-qol.premades.postSavesComplete', midiEvents.savesComplete);
     Hooks.on('midi-qol.preTargetDamageApplication', midiEvents.preTargetDamageApplication);
-    Hooks.on('midi-qol.premades.postRollFinished', midiEvents.rollFinished);
+    Hooks.on('midi-qol.RollComplete', midiEvents.rollFinished);
     Hooks.on('midi-qol.premades.preAttackRollConfig', midiEvents.preAttackRollConfig);
 
     // DAE Field Browser

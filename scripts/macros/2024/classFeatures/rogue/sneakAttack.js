@@ -1,14 +1,21 @@
 import {activityUtils, actorUtils, animationUtils, combatUtils, dialogUtils, effectUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../utils.js';
 import {animation} from '../../../2014/classFeatures/rogue/sneakAttack.js';
-async function damage({trigger: {entity: item}, workflow}) {
+import {attackRiders} from '../../../../lib/attackRiders.js';
+async function damage(args) {
+    await attackRiders.run(args.workflow, 'sneakAttack', () => applyDamage(args));
+}
+async function manual(args) {
+    return await attackRiders.manual(args, 'sneakAttack', {modern: true});
+}
+async function applyDamage({trigger: {entity: item}, workflow}) {
     if (workflow.hitTargets.size != 1 || !workflow.item || !workflow.activity) return;
     let identifier = genericUtils.getIdentifier(workflow.item);
-    if (!(workflowUtils.getActionType(workflow) === 'rwak' || workflow.item.system.properties.has('fin') || identifier === 'psychicBlades')) return;
-    if (!item.system.uses.value) return;
+    if (!(workflowUtils.getActionType(workflow) === 'rwak' || workflow.item.system.properties?.has('fin') || identifier === 'psychicBlades')) return;
+    if (!attackRiders.available(item, workflow, 'sneakAttack')) return;
     let doSneak = false;
-    let rollType = (workflow.advantage && workflow.disadvantage) ? 'normal' : (workflow.advantage && !workflow.disadvantage) ? 'advantage' : (!workflow.advantage && workflow.disadvantage) ? 'disadvantage' : 'normal';
+    let rollType = attackRiders.rollType(workflow);
     if (rollType === 'advantage') doSneak = true;
-    let targetToken = workflow.targets.first();
+    let targetToken = attackRiders.hitTarget(workflow);
     if (!doSneak && rollType != 'disadvantage') {
         let nearbyTokens = tokenUtils.findNearby(targetToken, 5, 'enemy', {includeIncapacitated: false}).filter(i => i.id != workflow.token.id);
         if (nearbyTokens.length) doSneak = true;
@@ -19,17 +26,16 @@ async function damage({trigger: {entity: item}, workflow}) {
         let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Macros.SneakAttack.Use', {name: item.name}));
         if (!selection) return;
     }
-    if (combatUtils.inCombat()) {
-        await genericUtils.update(item, {'system.uses.spent': item.system.uses.spent + 1});
-        if (game.combat.round === 1 && itemUtils.getItemByIdentifier(workflow.actor, 'deathStrike')) genericUtils.setProperty(workflow, 'chris-premades.deathStrike', true);
-    }
     let bonusDamageFormula = itemUtils.getConfig(item, 'formula');
     if (!bonusDamageFormula) {
         if (workflow.actor.type === 'character') {
             let classIdentifier = itemUtils.getConfig(item, 'classIdentifier');
             let scaleIdentifier = itemUtils.getConfig(item, 'scaleIdentifier');
-            let scale = workflow.actor.system.scale[classIdentifier]?.[scaleIdentifier];
-            if (!scale) return;
+            let scale = workflow.actor.system.scale?.[classIdentifier]?.[scaleIdentifier];
+            if (!scale) {
+                genericUtils.notify('CHRISPREMADES.Macros.SneakAttack.Scale', 'warn');
+                return;
+            }
             let number = scale.number;
             let cunningStrike = itemUtils.getItemByIdentifier(workflow.actor, 'cunningStrike');
             let improvedCunningStrike = itemUtils.getItemByIdentifier(workflow.actor, 'improvedCunningStrike');
@@ -59,7 +65,7 @@ async function damage({trigger: {entity: item}, workflow}) {
                         if (['poison', 'envenomPoison'].includes(identifier) && !workflow.actor.items.find(j => j.system.identifier === 'poisoners-kit')) return;
                         if (identifier === 'envenomPoisonOvertime') return;
                         if (identifier === 'poison' && envenomWeapons) return;
-                        if (identifier === 'trip' && actorUtils.getSize(workflow.targets.first().actor) > 3) return;
+                        if (identifier === 'trip' && actorUtils.getSize(targetToken.actor) > 3) return;
                         if (used.includes(identifier)) return;
                         return activity;
                     });
@@ -81,19 +87,26 @@ async function damage({trigger: {entity: item}, workflow}) {
             }
             if (number) bonusDamageFormula = number + 'd' + scale.faces;
         } else if (workflow.actor.type === 'npc') {
-            let number = Math.ceil(workflow.actor.system.details.cr / 2);
-            bonusDamageFormula = number + 'd6';
+            bonusDamageFormula = attackRiders.sneakFormula(item, workflow.actor, {modern: true});
         }
     }
     if (combatUtils.inCombat()) {
         let assassinate = itemUtils.getItemByIdentifier(workflow.actor, 'assassinate');
         if (assassinate && game.combat.round === 1) {
             let classIdentifier = itemUtils.getConfig(item, 'classIdentifier');
-            bonusDamageFormula += ' + ' + workflow.actor.classes[classIdentifier].system.levels;
+            let levels = workflow.actor.classes?.[classIdentifier]?.system.levels;
+            if (levels) bonusDamageFormula += ' + ' + levels;
         }
     }
+    if (!bonusDamageFormula && workflow.actor.type === 'npc') {
+        genericUtils.notify('CHRISPREMADES.Macros.SneakAttack.Scale', 'warn');
+        return;
+    }
     if (bonusDamageFormula) await workflowUtils.bonusDamage(workflow, bonusDamageFormula, {damageType: workflow.defaultDamageType});
-    await workflowUtils.syntheticItemRoll(item, Array.from(workflow.targets), {consumeResources: combatUtils.inCombat(), consumeUsage: combatUtils.inCombat()});
+    await attackRiders.applied(workflow, 'sneakAttack');
+    await attackRiders.spendUse(item);
+    if (combatUtils.inCombat() && game.combat.round === 1 && itemUtils.getItemByIdentifier(workflow.actor, 'deathStrike')) genericUtils.setProperty(workflow, 'chris-premades.deathStrike', true);
+    await item.displayCard();
     let rendMind = itemUtils.getItemByIdentifier(workflow.actor, 'rendMind');
     if (rendMind && identifier === 'psychicBlades') {
         let psionicPower = itemUtils.getItemByIdentifier(workflow.actor, 'psionicPower');
@@ -125,13 +138,14 @@ async function onHit({trigger, workflow}) {
     if (!rendMind) return;
     let activity = activityUtils.getActivityByIdentifier(rendMind, 'use', {strict: true});
     if (!activity) return;
-    await workflowUtils.syntheticActivityRoll(activity, [workflow.targets.first()], {consumeResources: true, consumeUsage: true});
+    await workflowUtils.syntheticActivityRoll(activity, [attackRiders.hitTarget(workflow)], {consumeResources: true, consumeUsage: true});
 }
 export let sneakAttack = {
     name: 'Sneak Attack',
     version: '1.3.32',
     rules: 'modern',
     midi: {
+        item: [{pass: 'preTargeting', macro: manual, priority: 50}],
         actor: [
             {
                 pass: 'damageRollComplete',

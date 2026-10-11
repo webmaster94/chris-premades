@@ -27,7 +27,27 @@
       "items": [],
       "repeatable": false
     },
-    "activities": {},
+    "activities": {
+      "cprManualRider00": {
+        "_id": "cprManualRider00",
+        "type": "utility",
+        "name": "Manual Damage",
+        "activation": {
+          "type": "special"
+        },
+        "consumption": {
+          "spellSlot": false,
+          "targets": []
+        },
+        "target": {
+          "affects": {
+            "type": "creature",
+            "count": "1"
+          },
+          "prompt": false
+        }
+      }
+    },
     "identifier": "divine-smite",
     "enchant": {},
     "advancement": [],
@@ -84,6 +104,9 @@
       "macros": {
         "midi": {
           "actor": [
+            "divineSmite"
+          ],
+          "item": [
             "divineSmite"
           ]
         }

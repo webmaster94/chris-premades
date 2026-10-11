@@ -9,15 +9,12 @@
         "_id": "ZOEn7y9k9XVxnw6o",
         "sort": 0,
         "activation": {
-          "type": "action",
+          "type": "special",
           "override": false,
           "condition": ""
         },
         "consumption": {
-          "scaling": {
-            "allowed": false
-          },
-          "spellSlot": true,
+          "spellSlot": false,
           "targets": []
         },
         "description": {
@@ -35,17 +32,11 @@
           "special": ""
         },
         "target": {
-          "template": {
-            "contiguous": false,
-            "units": "ft",
-            "type": ""
-          },
           "affects": {
-            "choice": false,
-            "type": ""
+            "type": "creature",
+            "count": "1"
           },
-          "override": false,
-          "prompt": true
+          "prompt": false
         },
         "uses": {
           "spent": 0,
@@ -107,7 +98,7 @@
           "postRemoveConditionText": ""
         },
         "otherActivityId": "none",
-        "name": ""
+        "name": "Manual Damage"
       }
     },
     "uses": {
@@ -212,6 +203,9 @@
       "macros": {
         "midi": {
           "actor": [
+            "sneakAttack"
+          ],
+          "item": [
             "sneakAttack"
           ]
         }

@@ -1,4 +1,5 @@
 import {activityUtils, animationUtils, combatUtils, dialogUtils, effectUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../utils.js';
+import {attackRiders} from '../../../../lib/attackRiders.js';
 export async function animation(target, token, attackType) {
     //Animations by: eskiemoh
     let hitSeq = new Sequence({moduleName:'chris-premades', softFail:true})
@@ -145,16 +146,22 @@ export async function animation(target, token, attackType) {
             return;
     }
 }
-async function damage({trigger: {entity: item}, workflow}) {
+async function damage(args) {
+    await attackRiders.run(args.workflow, 'sneakAttack', () => applyDamage(args));
+}
+async function manual(args) {
+    return await attackRiders.manual(args, 'sneakAttack');
+}
+async function applyDamage({trigger: {entity: item}, workflow}) {
     if (workflow.hitTargets.size != 1 || !workflow.item) return;
     let weaponIdentifier = genericUtils.getIdentifier(workflow.item);
-    if (!(workflowUtils.getActionType(workflow) === 'rwak' || workflow.item.system.properties.has('fin') || weaponIdentifier === 'psychicBlades')) return;
-    if (!itemUtils.canUse(item)) return;
+    if (!(workflowUtils.getActionType(workflow) === 'rwak' || workflow.item.system.properties?.has('fin') || weaponIdentifier === 'psychicBlades')) return;
+    if (!attackRiders.available(item, workflow, 'sneakAttack')) return;
     let doSneak = false;
     let displayRakish = false;
-    let rollType = (workflow.advantage && workflow.disadvantage) ? 'normal' : (workflow.advantage && !workflow.disadvantage) ? 'advantage' : (!workflow.advantage && workflow.disadvantage) ? 'disadvantage' : 'normal';
+    let rollType = attackRiders.rollType(workflow);
     if (rollType === 'advantage') doSneak = true;
-    let targetToken = workflow.targets.first();
+    let targetToken = attackRiders.hitTarget(workflow);
     if (!doSneak && rollType != 'disadvantage') {
         let nearbyTokens = tokenUtils.findNearby(targetToken, 5, 'enemy', {includeIncapacitated: false}).filter(i => i.id != workflow.token.id);
         if (nearbyTokens.length) doSneak = true;
@@ -185,7 +192,7 @@ async function damage({trigger: {entity: item}, workflow}) {
     let rendMind = itemUtils.getItemByIdentifier(workflow.actor, 'rendMind');
     let psionicEnergy = itemUtils.getItemByIdentifier(workflow.actor, 'psionicEnergy');
     if (weaponIdentifier === 'psychicBlades' && rendMind && psionicEnergy) await genericUtils.setFlag(workflow.item, 'chris-premades', 'rendMind.prompt', true);
-    let bonusDamageFormula = itemUtils.getConfig(item, 'formula');
+    let bonusDamageFormula = attackRiders.sneakFormula(item, workflow.actor);
     if (!bonusDamageFormula || bonusDamageFormula === '') {
         let dice = getSneakDice();
         if (!dice) return;
@@ -194,7 +201,9 @@ async function damage({trigger: {entity: item}, workflow}) {
     let eyeFeature = itemUtils.getItemByIdentifier(workflow.actor, 'eyeForWeakness');
     if (iTarget && eyeFeature) bonusDamageFormula += ' + 3d6';
     await workflowUtils.bonusDamage(workflow, bonusDamageFormula, {damageType: workflow.defaultDamageType});
-    await workflowUtils.syntheticItemRoll(item, Array.from(workflow.targets), {consumeResources: combatUtils.inCombat(), consumeUsage: combatUtils.inCombat()});
+    await attackRiders.applied(workflow, 'sneakAttack');
+    await attackRiders.spendUse(item);
+    await item.displayCard();
     if (displayRakish) await workflowUtils.completeItemUse(rakishAudacity);
     if (iTarget) {
         let feature = itemUtils.getItemByIdentifier(workflow.actor, 'insightfulFighting');
@@ -213,14 +222,15 @@ async function damage({trigger: {entity: item}, workflow}) {
     function getSneakDice() {
         if (workflow.actor.type === 'character') {
             let scale = workflow.actor.system.scale?.rogue?.['sneak-attack'];
-            if (scale) return scale;
+            if (scale) return {number: scale.number, faces: scale.faces};
             else {
                 genericUtils.notify('CHRISPREMADES.Macros.SneakAttack.Scale', 'warn');
                 return;
             }
         } else if (workflow.actor.type === 'npc') {
-            let number = Math.ceil(workflow.actor.system.details.cr / 2);
-            return { number, faces: 6 };
+            let formula = attackRiders.sneakFormula(item, workflow.actor);
+            let match = formula?.match(/^(\d+)d(\d+)$/);
+            if (match) return {number: Number(match[1]), faces: Number(match[2])};
         }
     }
     async function doWailsFromTheGrave() {
@@ -231,7 +241,7 @@ async function damage({trigger: {entity: item}, workflow}) {
         let tokenUses = tokensOfTheDeparted?.system.uses.value;
         if (!wailUses && !tokenUses) return;
         let wailFormula;
-        let formula = itemUtils.getConfig(item, 'formula');
+        let formula = attackRiders.sneakFormula(item, workflow.actor);
         if (formula) {
             let roll = new CONFIG.Dice.DamageRoll(formula, workflow.actor.getRollData());
             roll.dice.forEach(d => d.number = Math.ceil(d.number * 0.5));
@@ -281,6 +291,7 @@ export let sneakAttack = {
     name: 'Sneak Attack',
     version: '1.3.109',
     midi: {
+        item: [{pass: 'preTargeting', macro: manual, priority: 50}],
         actor: [
             {
                 pass: 'damageRollComplete',

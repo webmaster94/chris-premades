@@ -2414,8 +2414,18 @@
                 "Prone": "Sleet Storm: Prone"
             },
             "SneakAttack": {
-                "Scale": "The actor is missing a sneak attack scale value!",
+                "Scale": "Sneak Attack has no damage formula. Set Formula in the CPR item configuration, or give the NPC feature a Damage activity.",
                 "Use": "Use {name}?"
+            },
+            "AttackRider": {
+                "ManualDamage": "Manual Damage",
+                "UseSpellSlot": "Use A Spell Slot",
+                "ManualConfirm": "Roll only the extra {name} damage against {target}? Confirm that the triggering hit meets this feature's rules and that its extra damage has not already been included.",
+                "SelectTarget": "Select one target for the extra damage, or use the feature within two minutes of a recorded hit.",
+                "AlreadyUsed": "This feature has already been applied to that hit or used this turn, or has no uses remaining.",
+                "BonusAction": "Divine Smite requires an available bonus action on your turn.",
+                "Critical": "Was the triggering hit a critical hit?",
+                "NoSmiteResource": "No spell slot or configured NPC Smite damage is available. Give the NPC spell slots or configure its Smite Damage activity."
             },
             "SongOfDefense": {
                 "Bladesong": "You must be Bladesinging to use this feature!",

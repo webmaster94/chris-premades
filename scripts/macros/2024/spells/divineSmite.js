@@ -1,7 +1,26 @@
 import {activityUtils, actorUtils, combatUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
-async function hit({trigger, workflow}) {
-    if (!workflow.hitTargets.size || workflowUtils.getActionType(workflow) != 'mwak' || actorUtils.hasUsedBonusAction(workflow.actor)) return;
-    if (combatUtils.inCombat()) if (combatUtils.getCurrentCombatantToken() != workflow.token) return;
+import {attackRiders} from '../../../lib/attackRiders.js';
+async function hit(args) {
+    await attackRiders.run(args.workflow, 'divineSmite', () => applyDamage(args));
+}
+async function manual(args) {
+    return await attackRiders.manual(args, 'divineSmite', {modern: true});
+}
+async function applyDamage({trigger, workflow}) {
+    if (!workflow.hitTargets.size || workflowUtils.getActionType(workflow) != 'mwak') return;
+    let feature = trigger.entity;
+    if (workflow.actor.type === 'npc' && feature.type === 'feat' && genericUtils.getIdentifier(feature) === 'divineSmite' && attackRiders.itemDamage(feature)) {
+        if (!attackRiders.available(feature, workflow, 'divineSmite')) return;
+        let selection = await dialogUtils.confirm(feature.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: feature.name}));
+        if (!selection) return;
+        await workflowUtils.bonusDamage(workflow, attackRiders.itemDamage(feature), {damageType: itemUtils.getConfig(feature, 'damageType')});
+        await attackRiders.applied(workflow, 'divineSmite');
+        await attackRiders.spendUse(feature, {inCombatOnly: false});
+        await feature.displayCard();
+        return;
+    }
+    if (actorUtils.hasUsedBonusAction(workflow.actor)) return;
+    if (!attackRiders.ownTurn(workflow.token)) return;
     let identifiers = [
         'divineSmite',
         'searingSmite',
@@ -13,12 +32,36 @@ async function hit({trigger, workflow}) {
         'banishingSmite',
         'wiltingSmite'
     ];
-    let spells = actorUtils.getCastableSpells(workflow.actor).filter(i => identifiers.includes(genericUtils.getIdentifier(i))).sort((a, b) => a.system.level - b.system.level);
+    let spells = actorUtils.getCastableSpells(workflow.actor).filter(i => identifiers.includes(genericUtils.getIdentifier(i)));
+    // A granted free cast can remain available without slots, and slots remain usable after the free cast is spent.
+    for (let item of workflow.actor.items) {
+        if (item.type !== 'spell' || genericUtils.getIdentifier(item) !== 'divineSmite' || spells.includes(item)) continue;
+        if (!attackRiders.hasUses(item) || (item.system.method === 'spell' && !item.system.prepared)) continue;
+        if (attackRiders.linkedSmite(item) || (['spell', 'pact'].includes(item.system.method) && attackRiders.spellSlots(workflow.actor).some(([, slot]) => slot.level >= item.system.level))) spells.push(item);
+    }
+    spells.sort((a, b) => a.system.level - b.system.level);
     if (!spells.length) return;
     let selection = await dialogUtils.selectDocumentDialog(workflow.item.name, 'CHRISPREMADES.Macros.DivineSmite.Context', spells, {addNoneDocument: true});
     if (!selection) return;
     let identifier = genericUtils.getIdentifier(selection);
-    let target = workflow.targets.first();
+    let target = attackRiders.hitTarget(workflow);
+    if (identifier === 'divineSmite') {
+        let smite = await attackRiders.smiteFormula(selection, workflow.actor, target, {modern: true});
+        if (!smite) return;
+        let formula = smite.formula;
+        if (workflow.actor.system.bonuses?.spell?.all?.damage) formula += ' + @bonuses.spell.all.damage';
+        let refund = await attackRiders.consumeSmite(selection, workflow.actor, smite);
+        try {
+            await workflowUtils.bonusDamage(workflow, formula, {damageType: itemUtils.getConfig(selection, 'damageType')});
+        } catch (error) {
+            await refund();
+            throw error;
+        }
+        await attackRiders.applied(workflow, 'divineSmite');
+        await actorUtils.setBonusActionUsed(workflow.actor);
+        await selection.displayCard();
+        return;
+    }
     let diceSize;
     let formula = '';
     let spellWorkflow;
@@ -41,7 +84,7 @@ async function hit({trigger, workflow}) {
         }
         if (total != max) return;
         spellWorkflow = await workflowUtils.completeItemUse(selection, undefined, {targetUuids: [target.document.uuid]});
-        if (!spellWorkflow) return;
+        if (!spellWorkflow || spellWorkflow.aborted) return;
         for (let i of hitDieSelection) {
             if (!i.amount) continue;
             if (i.document.type === 'class') {
@@ -53,8 +96,8 @@ async function hit({trigger, workflow}) {
     } else {
         diceSize = itemUtils.getConfig(selection, 'diceSize');
     }
-    if (!spellWorkflow) spellWorkflow = await workflowUtils.completeItemUse(selection, undefined, {targetUuids: [target.document.uuid]});
-    if (!spellWorkflow) return;
+    if (!spellWorkflow) spellWorkflow = await workflowUtils.completeItemUse(selection, undefined, {targetUuids: [target.document.uuid], cprRiderCard: true});
+    if (!spellWorkflow || spellWorkflow.aborted) return;
     let damageType = itemUtils.getConfig(selection, 'damageType');
     let diceNumber = itemUtils.getConfig(selection, 'baseDiceNumber');
     if (identifier === 'divineSmite') {
@@ -79,8 +122,9 @@ async function hit({trigger, workflow}) {
         await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'banishingSmiteEffect', animate: false});
     }
     if (!formula) formula = ((workflowUtils.getCastLevel(spellWorkflow) - spellWorkflow.castData.baseLevel) + diceNumber) + diceSize;
-    if (workflow.actor.system.bonuses.spell?.all?.damage) formula += ' + @bonuses.spell.all.damage';
+    if (workflow.actor.system.bonuses?.spell?.all?.damage) formula += ' + @bonuses.spell.all.damage';
     await workflowUtils.bonusDamage(workflow, formula, {damageType});
+    await attackRiders.applied(workflow, 'divineSmite');
 }
 async function complete({trigger, workflow}) {
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'banishingSmiteEffect');
@@ -92,16 +136,18 @@ async function complete({trigger, workflow}) {
     if (!item) return;
     let requiredHP = itemUtils.getConfig(item, 'hp');
     await genericUtils.remove(effect);
-    if (workflow.targets.first().actor.system.attributes.hp.value > requiredHP) return;
+    let target = attackRiders.hitTarget(workflow);
+    if (!target || target.actor.system.attributes.hp.value > requiredHP) return;
     let activity = activityUtils.getActivityByIdentifier(item, 'banish', {strict: true});
     if (!activity) return;
-    await workflowUtils.syntheticActivityRoll(activity, [workflow.targets.first()]);
+    await workflowUtils.syntheticActivityRoll(activity, [target]);
 }
 export let divineSmite = {
     name: 'Divine Smite',
     version: '1.1.14',
     rules: 'modern',
     midi: {
+        item: [{pass: 'preTargeting', macro: manual, priority: 50}],
         actor: [
             {
                 pass: 'damageRollComplete',
