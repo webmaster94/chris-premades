@@ -5,7 +5,7 @@ async function use({trigger, workflow}) {
     let animation = 'crimsonMist';
     if (animationUtils.jb2aCheck() === 'free') animation = 'mistyStep';
     if (!itemUtils.getConfig(workflow.item, 'playAnimation')) animation = 'none';
-    await Teleport.target([workflow.token], workflow.token, {range: 60, animation});
+    await Teleport.target([workflow.token], workflow.token, {title: workflow.item.name, range: 60, animation});
 }
 async function added({trigger: {entity: item}}) {
     await itemUtils.multiCorrectActivityItemConsumption(item, ['use'], {

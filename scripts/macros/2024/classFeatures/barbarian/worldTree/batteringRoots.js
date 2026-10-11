@@ -1,4 +1,4 @@
-import {constants, dialogUtils, itemUtils} from '../../../../../utils.js';
+import {constants, dialogUtils, genericUtils, itemUtils} from '../../../../../utils.js';
 import {pushMastery, toppleMastery} from '../../../mechanics/masteries.js';
 async function turnStart({trigger: {entity: item}}) {
     let weaponProperties = itemUtils.getConfig(item, 'weaponProperties');
@@ -12,7 +12,7 @@ async function turnStart({trigger: {entity: item}}) {
         system: {changes: [
             {
                 key: 'system.range.reach',
-                type: 'add',
+                type: 'override',
                 value: range,
                 priority: 20
             }
@@ -20,7 +20,9 @@ async function turnStart({trigger: {entity: item}}) {
         duration: {value: 1, units: 'turns'}, start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0}
     };
     await Promise.all(validWeapons.map(async weapon => {
-        await itemUtils.enchantItem(weapon, effectData);
+        const data = genericUtils.duplicate(effectData);
+        data.system.changes[0].value = (weapon.system.range.reach || 5) + range;
+        await itemUtils.enchantItem(weapon, data);
     }));
 }
 async function attack({trigger: {entity: item}, workflow}) {

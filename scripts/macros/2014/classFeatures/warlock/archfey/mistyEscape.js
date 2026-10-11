@@ -28,7 +28,7 @@ async function use({workflow}) {
         }
     };
     let animation = itemUtils.getConfig(workflow.item, 'playAnimation') ? 'mistyStep' : 'none';
-    await Teleport.target([workflow.token], workflow.token, {range: 60, animation});
+    await Teleport.target([workflow.token], workflow.token, {title: workflow.item.name, range: 60, animation});
     await effectUtils.createEffect(workflow.actor, effectData);
 }
 export let mistyEscape = {

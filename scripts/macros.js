@@ -23,6 +23,8 @@ export {escape} from './macros/2014/monsterFeatures/generic/escape.js';
 export {failedByAmount} from './macros/2014/monsterFeatures/generic/failedByAmount.js';
 export {gaze} from './macros/2014/monsterFeatures/generic/gaze.js';
 export {genericRegeneration} from './macros/2014/monsterFeatures/generic/regeneration.js';
+export {regeneration} from './macros/2014/monsterFeatures/regeneration.js';
+export {robeOfUsefulItemsPatch} from './macros/2014/items/clothing/robeOfUsefulItems.js';
 export {genericTeleport} from './macros/2014/monsterFeatures/generic/teleport.js';
 export {keenSenses} from './macros/2014/monsterFeatures/generic/keenSenses.js';
 export {lifesteal} from './macros/2014/monsterFeatures/generic/lifesteal.js';

@@ -1,47 +1,85 @@
 import {Crosshairs} from './crosshairs.js';
 import {animationUtils, effectUtils, genericUtils} from '../utils.js';
 import {crosshairUtils} from './utilities/crosshairUtils.js';
+import {teleportPrompt} from './teleportPrompt.js';
 export class Teleport {
     constructor(tokens, controllingToken, options) {
         this.tokens = Array.isArray(tokens) ? tokens : [tokens];
         this.controllingToken = controllingToken ?? this.tokens[0];
         this.tokenTexture = this.tokens[0].document.texture.src;
-        this.options = options;
+        this.options = options ?? {};
         this.updates = options?.updates ?? {};
     }
     static async group(tokens, controllingToken, options = {animation: 'none', isSynchronous: true, crosshairsConfig: {}, callbacks: {}, range: 100, updates: {}, minimizeSheet: true, centerpoint: null}) {
         genericUtils.setProperty(options, 'isGroup', true);
         let teleport = new Teleport(tokens, controllingToken, options);
         teleport.tokenTexture = controllingToken.document.texture.src;
-        await teleport.go(teleport.crosshairsConfig, options.minimizeSheet);
+        return await teleport.go(teleport.crosshairsConfig, options.minimizeSheet);
     }
     static async target(target, controllingToken, options = {animation: 'none', crosshairsConfig: {}, callbacks: {}, range: 100, updates: {}, minimizeSheet: true, centerpoint: null}) {
         let teleport = new Teleport(target, controllingToken, options);
-        await teleport.go(teleport.crosshairsConfigTarget, options.minimizeSheet);
+        return await teleport.go(teleport.crosshairsConfigTarget, options.minimizeSheet);
     }
     async go(crosshairsConfig, minimizeSheet = true) {
-        if (this.controllingToken.actor?.sheet?.rendered && minimizeSheet) this.controllingToken.actor.sheet.minimize();
+        const sheet = this.controllingToken.actor?.sheet;
+        const restoreSheet = sheet?.rendered && minimizeSheet;
+        if (restoreSheet) await sheet.minimize();
+        let prompt, crosshair, cancelled = false;
+        if (globalThis.document) {
+            prompt = teleportPrompt(
+                this.options.title ?? genericUtils.translate('CHRISPREMADES.Teleport.Title'),
+                genericUtils.format('CHRISPREMADES.Teleport.Destination', {name: this.tokens.map(token => token.name ?? token.document.name).join(', ')}),
+                () => {
+                    cancelled = true;
+                    if (crosshair?.inFlight) {
+                        crosshair.cancelled = true;
+                        crosshair.inFlight = false;
+                        crosshair.clearHandlers?.();
+                        crosshair._clearHandlers?.();
+                    }
+                    prompt.close();
+                }
+            );
+        }
+        const callbacks = this.options.callbacks ?? {};
         let aimOptions = {
             token: this.controllingToken,
             maxRange: this.options.range,
             crosshairsConfig,
             drawBoundries: true,
-            customCallbacks: this.options?.callbacks,
+            customCallbacks: {...callbacks, show: async preview => {
+                crosshair = preview;
+                if (cancelled) {
+                    preview.cancelled = true;
+                    preview.inFlight = false;
+                    preview.clearHandlers?.();
+                    preview._clearHandlers?.();
+                    return;
+                }
+                await callbacks.show?.(preview);
+            }},
             validityFunctions: this.options?.validityFunctions
         };
         if (this.options.centerpoint) aimOptions.centerpoint = this.options.centerpoint;
-        this.template = await crosshairUtils.aimCrosshair(aimOptions);
-        if (!this.template.cancelled) {
-            this.options?.isGroup ? await this._moveGroup() : await this._move();
+        try {
+            this.template = await crosshairUtils.aimCrosshair(aimOptions);
+            if (this.template && !this.template.cancelled && !cancelled && this.template.valid !== false) {
+                this.options.isGroup ? await this._moveGroup() : await this._move();
+            } else if (this.template?.valid === false && !this.template.cancelled) {
+                genericUtils.notify('CHRISPREMADES.Teleport.Invalid', 'warn');
+            }
+            return this.template;
+        } finally {
+            await prompt?.close();
+            if (restoreSheet) await sheet.maximize();
         }
-        if (this.controllingToken.actor?.sheet?.rendered && minimizeSheet) this.controllingToken.actor.sheet.maximize();
     }
     async _move() {
         let tok = this.tokens[0];
         let position = {
             rotation: this.template.direction,
-            x: this.coords.selected.x,
-            y: this.coords.selected.y
+            x: this.template.x - tok.w / 2,
+            y: this.template.y - tok.h / 2
         };
         if (tok.actor) {
             let grappled = effectUtils.getEffectByStatusID(tok.actor, 'grappled');
@@ -60,7 +98,7 @@ export class Teleport {
         }
     }
     async _nonSync() {
-        this.tokens.forEach(async tok => {
+        await Promise.all(this.tokens.map(async tok => {
             if (tok.actor) {
                 let grappled = effectUtils.getEffectByStatusID(tok.actor, 'grappled');
                 if (grappled) await genericUtils.remove(grappled);
@@ -70,7 +108,7 @@ export class Teleport {
             let update = genericUtils.collapseObjects(this.updates, position, {_id: tok.id});
             await genericUtils.updateEmbeddedDocuments(canvas.scene, 'Token', [update], {isPaste: true});
             await animationUtils.teleportEffects[this.options?.animation ?? 'default'].post(tok.document, position);
-        });
+        }));
     }
     async _sync() {
         let positions = this.tokens.map(tok => this.getCoords(tok));

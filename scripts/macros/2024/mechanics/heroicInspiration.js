@@ -1,12 +1,14 @@
 import {dialogUtils, genericUtils, rollUtils} from '../../../utils.js';
 async function attack(workflow) {
     if (!workflow.attackRoll || !workflow.actor.system.attributes.inspiration) return;
-    let selection = await dialogUtils.selectDie([workflow.attackRoll], 'CHRISPREMADES.HeroicInspiration.Name', genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: genericUtils.translate('CHRISPREMADES.HeroicInspiration.Name')}), {buttons: 'yesNo'});
+    let selection = await dialogUtils.selectDie([workflow.attackRoll], 'CHRISPREMADES.HeroicInspiration.Name', genericUtils.format('CHRISPREMADES.Dialog.UseAttack', {itemName: genericUtils.translate('CHRISPREMADES.HeroicInspiration.Name'), attackTotal: workflow.attackRoll.total}), {buttons: 'yesNo'});
     if (!selection) return;
     let positions = selection[0].split('-').map(i => Number(i));
     let mode = ((workflow.activity.midiProperties?.rollMode ?? 'default') === 'default') ? game.settings.get('core', 'messageMode') : workflow.activity.midiProperties?.rollMode;
-    let roll = await rollUtils.rollDice('1d' + workflow.attackRoll.terms[positions[1]].faces, {chatMessage: true, mode, flavor: genericUtils.translate('CHRISPREMADES.HeroicInspiration.Name')});
+    let label = genericUtils.translate('CHRISPREMADES.HeroicInspiration.Name');
+    let roll = await rollUtils.rollDice('1d' + workflow.attackRoll.terms[positions[1]].faces, {chatMessage: true, mode, flavor: label});
     let newRoll = rollUtils.updateDieResult(workflow.attackRoll, positions[1], positions[2], roll.roll.total);
+    if (workflow.tracker.fumble.isActive && !newRoll.isFumble) workflow.tracker.fumble.suppress('inspiration', label);
     await workflow.setAttackRoll(newRoll);
     await genericUtils.update(workflow.actor, {'system.attributes.inspiration': false});
 }

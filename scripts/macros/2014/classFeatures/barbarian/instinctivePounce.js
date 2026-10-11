@@ -84,7 +84,7 @@ async function use({workflow}) {
 }
 export let instinctivePounce = {
     name: 'Instinctive Pounce',
-    version: '1.5.26',
+    version: '1.5.49',
     midi: {
         item: [
             {

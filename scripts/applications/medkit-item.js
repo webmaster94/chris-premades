@@ -96,6 +96,7 @@ export class ItemMedkit extends HandlebarsApplicationMixin(ApplicationV2) {
         return this.windowTitle;
     }
     static async item(item) {
+        if (globalThis.cat?.applications?.ItemMedkit) return new cat.applications.ItemMedkit({document: item}).render(true);
         let medkit = new ItemMedkit(item);
         await medkit.readyData();
         medkit.render(true);

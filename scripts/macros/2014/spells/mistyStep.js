@@ -11,9 +11,9 @@ async function use({workflow}) {
             if (selection) secondaryTarget = selection[0];
         }
     }
-    await Teleport.target([workflow.token], workflow.token, {range: itemUtils.getConfig(workflow.item, 'range'), animation: animation});
+    await Teleport.target([workflow.token], workflow.token, {title: workflow.item.name, range: itemUtils.getConfig(workflow.item, 'range'), animation: animation});
     if (!secondaryTarget) return;
-    await Teleport.target([secondaryTarget], workflow.token, {range: 5, animation: animation});
+    await Teleport.target([secondaryTarget], workflow.token, {title: workflow.item.name, range: 5, animation: animation});
 }
 export let mistyStep = {
     name: 'Misty Step',

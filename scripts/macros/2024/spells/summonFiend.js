@@ -155,7 +155,7 @@ async function remove({trigger}) {
 async function late({workflow}) {
     let selection = await dialogUtils.confirm(workflow.item.name, 'CHRISPREMADES.Macros.SummonFiend.UseTeleportation');
     if (!selection) return;
-    await Teleport.target([workflow.token], workflow.token, {range: 30, animation: 'mistyStep'});
+    await Teleport.target([workflow.token], workflow.token, {title: workflow.item.name, range: 30, animation: 'mistyStep'});
 }
 export let summonFiend = {
     name: 'Summon Fiend',

@@ -407,7 +407,7 @@ async function use({trigger, workflow}) {
     if (activity) {
         for (let token of workflow.targets) await workflowUtils.syntheticActivityRoll(activity, [token]);
     }
-    await Teleport.target([workflow.token], workflow.token, {range: workflow.activity.range.value + 5, animation: 'none'});
+    await Teleport.target([workflow.token], workflow.token, {title: workflow.item.name, range: workflow.activity.range.value + 5, animation: 'none'});
     if (!playAnimation) return;
     /* eslint-disable indent */
     await new Sequence({moduleName:'chris-premades', softFail:true})

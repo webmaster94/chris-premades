@@ -47,7 +47,7 @@ function isSpellFeature(item) {
 function getConfig(item, key) {
     if (key === 'playAnimation' && (!genericUtils.getCPRSetting('enableAnimations') || !animationUtils.sequencerCheck())) return false;
     if (key === 'animation'     && (!genericUtils.getCPRSetting('enableAnimations') || !animationUtils.sequencerCheck())) return 'none';
-    let flagValue = item.flags['chris-premades']?.config?.[key];
+    let flagValue = Object.hasOwn(item.flags.cat?.config ?? {}, key) ? item.flags.cat.config[key] : item.flags['chris-premades']?.config?.[key];
     if (flagValue !== undefined) return flagValue;
     let identifier = genericUtils.getIdentifier(item);
     if (!identifier) return;
@@ -55,7 +55,7 @@ function getConfig(item, key) {
     return value === '' ? false : value;
 }
 async function setConfig(item, key, value) {
-    return await genericUtils.setFlag(item, 'chris-premades', 'config.' + key, value);
+    return await genericUtils.setFlag(item, 'cat', 'config.' + key, value);
 }
 function getItemByIdentifier(actor, identifier) {
     return actor.items.find(i => genericUtils.getIdentifier(i) === identifier);
@@ -70,9 +70,11 @@ function getAllItemsByIdentifier(actor, identifier) {
     return actor.items.filter(i => genericUtils.getIdentifier(i) === identifier);
 }
 function getVersion(item) {
+    if (item?.flags.cat?.automation?.version) return item.flags.cat.automation.version;
     return item?.flags['chris-premades']?.info?.version ?? item?._stats?.modifiedTime;
 }
 function getSource(item) {
+    if (item?.flags.cat?.automation?.source) return item.flags.cat.automation.source;
     return item?.flags['chris-premades']?.info?.source;
 }
 // -1: None applied
@@ -198,6 +200,7 @@ function getSavedCastData(item) {
     return item.flags['chris-premades']?.castData;
 }
 function getGenericFeatureConfig(item, key) {
+    if (Object.hasOwn(item.flags.cat?.genericConfig?.['chris-premades'] ?? {}, key)) return item.flags.cat.genericConfig['chris-premades'][key];
     return item.flags['chris-premades']?.config?.generic?.[key];
 }
 function getItemByGenericFeature(actor, key) {

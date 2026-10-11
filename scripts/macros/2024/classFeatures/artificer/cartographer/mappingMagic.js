@@ -12,11 +12,11 @@ async function portalJumpTargeting({trigger: {entity: item}, actor, token}) {
 async function portalJump({workflow}) {
     let target = workflow.targets.first();
     if (!target) return;
-    await Teleport.target(workflow.token, workflow.token, {range: 5, centerpoint: target.center});
+    await Teleport.target(workflow.token, workflow.token, {title: workflow.item.name, range: 5, centerpoint: target.center});
 }
 async function portalJumpSelf({workflow}) {
     if (workflow.actor.system.attributes.movement.speed <= 0) return;
-    await Teleport.target(workflow.token, workflow.token, {range: 10});
+    await Teleport.target(workflow.token, workflow.token, {title: workflow.item.name, range: 10});
 }
 export let mappingMagic = {
     name: 'Mapping Magic',

@@ -90,7 +90,7 @@ async function use({workflow}) {
     });
 }
 async function late({workflow}) {
-    await Teleport.target([workflow.token], workflow.token, {range: 30, animation: 'mistyStep'});
+    await Teleport.target([workflow.token], workflow.token, {title: workflow.item.name, range: 30, animation: 'mistyStep'});
     let fumingItem = itemUtils.getItemByIdentifier(workflow.actor, 'summonFeyFuming');
     let mirthfulItem = itemUtils.getItemByIdentifier(workflow.actor, 'summonFeyMirthful');
     let tricksyItem = itemUtils.getItemByIdentifier(workflow.actor, 'summonFeyTricksy');

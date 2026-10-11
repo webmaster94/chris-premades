@@ -23,7 +23,7 @@ async function use({trigger, workflow}) {
         hidden: true,
         delta: {ownership: workflow.token.actor.ownership}
     }, {parent: canvas.scene});
-    await Teleport.target([workflow.token], workflow.token, {range: workflow.activity.range.value, animation});
+    await Teleport.target([workflow.token], workflow.token, {title: workflow.item.name, range: workflow.activity.range.value, animation});
     await Promise.all(workflow.failedSaves.map(token => {
         tokenUtils.pushToken(tempToken.object, token, Math.min(0, 5 - tokenUtils.getDistance(tempToken.object, token)));
     }));

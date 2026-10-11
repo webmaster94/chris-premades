@@ -109,6 +109,15 @@
         "compatibility": {
           "minimum": "14.6.0"
         }
+      },
+      {
+        "id": "cat",
+        "type": "module",
+        "manifest": "https://github.com/chrisk123999/covens-automation-toolkit/releases/latest/download/module.json",
+        "compatibility": {
+          "minimum": "0.1.1",
+          "verified": "0.1.1"
+        }
       }
     ]
   },

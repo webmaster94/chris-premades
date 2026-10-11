@@ -11,9 +11,9 @@ async function use({workflow}) {
             if (selection) otherToTeleport = selection[0];
         }
     }
-    await Teleport.target(workflow.token, workflow.token, {range: 30, animation});
+    await Teleport.target(workflow.token, workflow.token, {title: workflow.item.name, range: 30, animation});
     if (!otherToTeleport) return;
-    await Teleport.target(otherToTeleport, workflow.token, {range: 10, animation});
+    await Teleport.target(otherToTeleport, workflow.token, {title: workflow.item.name, range: 10, animation});
 }
 export let moonlightStep = {
     name: 'Moonlight Step',

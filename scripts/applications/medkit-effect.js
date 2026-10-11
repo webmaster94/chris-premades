@@ -58,6 +58,7 @@ export class EffectMedkit extends HandlebarsApplicationMixin(ApplicationV2) {
         }
     };
     static async effect(effect) {
+        if (globalThis.cat?.applications?.EffectMedkit) return new cat.applications.EffectMedkit({document: effect}).render(true);
         let context = await EffectMedkit.createContext(effect);
         new EffectMedkit(context, effect).render(true);
     }

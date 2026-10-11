@@ -1,5 +1,7 @@
 # Readme
 
+The V14 fork requires CAT 0.1.1+, D&D 6.0.x, Midi-QOL 14.6.0+, and DAE 14.6.0+. Existing item configuration migrates automatically for the active GM. See [CAT migration and verification](docs/cat-migration.md).
+
 A collection of automated items including spells, class features, monster features, etc., mechanics to make those possible, and quality-of-life based extensions for a high-automation Midi-QOL based D&D5e environment. Compendiums included in this module do not include item's descriptions. While this module has several module dependencies by different authors, do not pester tposney, Wasp, or any other module authors with bugs or issues related to this module. Bug reports and large module implementation requests may be made on the GitHub. Faster support and feature requests can be accessed on the [Discord server](https://discord.gg/BumxBcQDrT).
 
 Find detailed information in [our wiki](https://github.com/chrisk123999/chris-premades/wiki).

@@ -58,6 +58,7 @@ export class ActorMedkit extends HandlebarsApplicationMixin(ApplicationV2) {
         }
     };
     static async actor(actor) {
+        if (globalThis.cat?.applications?.ActorMedkit) return new cat.applications.ActorMedkit({document: actor}).render(true);
         let medkit = new ActorMedkit(actor);
         await medkit.readyData();
         await medkit.render(true);

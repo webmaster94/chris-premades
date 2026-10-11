@@ -12,7 +12,7 @@ async function early({workflow}) {
     }
     await workflowUtils.updateTargets(workflow, Array.from(workflow.targets.filter(i => !toTeleport.includes(i))));
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.jb2aCheck();
-    await Teleport.group(toTeleport, workflow.token, {range: 90, animation: playAnimation ? 'thunderStep' : 'none'});
+    await Teleport.group(toTeleport, workflow.token, {title: workflow.item.name, range: 90, animation: playAnimation ? 'thunderStep' : 'none'});
 }
 export let thunderStep = {
     name: 'Thunder Step',

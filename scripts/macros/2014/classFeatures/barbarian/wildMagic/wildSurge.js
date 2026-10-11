@@ -245,7 +245,7 @@ async function use({workflow}) {
     }
 }
 async function teleport({workflow}) {
-    await Teleport.target([workflow.token], workflow.token, {range: 30, animation: 'mistyStep'});
+    await Teleport.target([workflow.token], workflow.token, {title: workflow.item.name, range: 30, animation: 'mistyStep'});
 }
 async function intangibleSpirit({workflow}) {
     let sourceActor = await compendiumUtils.getActorFromCompendium(constants.packs.summons, 'CPR - Intangible Spirit', {translate: 'CHRISPREMADES.Macros.WildSurge.IntangibleSpirit'});

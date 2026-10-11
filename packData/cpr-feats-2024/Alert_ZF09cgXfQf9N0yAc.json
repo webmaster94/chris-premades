@@ -10,7 +10,7 @@
         "_id": "4YaI74Pli1yTtABL",
         "sort": 0,
         "activation": {
-          "type": "",
+          "type": "encounter",
           "value": null,
           "override": false,
           "condition": ""
@@ -220,7 +220,7 @@
     "chris-premades": {
       "info": {
         "identifier": "alert",
-        "version": "1.2.41",
+        "version": "1.5.42",
         "source": "chris-premades",
         "rules": "modern"
       },

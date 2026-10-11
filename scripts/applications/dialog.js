@@ -2,6 +2,7 @@ import {genericUtils} from '../utils.js';
 let {ApplicationV2, HandlebarsApplicationMixin} = foundry.applications.api;
 export class DialogApp extends HandlebarsApplicationMixin(ApplicationV2) {
     constructor(options) {
+        if (globalThis.cat?.applications?.DialogApp) return new cat.applications.DialogApp(options);
         let title, content, inputs, buttons, config;
         if (options?.length) {
             [title, content, inputs, buttons, config] = options;
@@ -77,6 +78,7 @@ export class DialogApp extends HandlebarsApplicationMixin(ApplicationV2) {
      * ] 
      */
     static async dialog(...options) {
+        if (globalThis.cat?.applications?.DialogApp) return await cat.applications.DialogApp.dialog(...options);
         return new Promise((resolve) => {
             const dialog = new DialogApp(options);
             dialog.addEventListener('close', () => {

@@ -83,10 +83,10 @@
       },
       "movement": {
         "burrow": null,
-        "climb": null,
+        "climb": "15",
         "fly": null,
         "swim": null,
-        "walk": 30,
+        "walk": "15",
         "units": "ft",
         "hover": false
       },

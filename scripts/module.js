@@ -43,6 +43,7 @@ import {acc} from './integrations/acc.js';
 import {quickConditions} from './extensions/quickConditions.js';
 import {setupConstants} from './lib/constants.js';
 import {attackRiders} from './lib/attackRiders.js';
+import {catIntegration} from './integrations/cat.js';
 Hooks.once('socketlib.ready', registerSockets);
 Hooks.once('init', () => {
     // v14: suppress known deprecation noise from intentional shim usage (template previews via the
@@ -50,6 +51,7 @@ Hooks.once('init', () => {
     CONFIG.compatibility.excludePatterns.push(/MeasuredTemplate/, /MeasuredTemplateDocument/, /Scene#templates/, /core\.gridTemplates/, /core\.coneTemplateType/);
     Hooks.on('dae.modifySpecials', dae.modifySpecials);
     registerSettings();
+    catIntegration.init();
     if (utils.genericUtils.getCPRSetting('useLocalCompendiums')) utils.constants.setUseLocalCompendium(true);
     registerMenus();
     customTypes.init();
@@ -136,6 +138,7 @@ globalThis['chrisPremades'] = {
         acc
     },
     customMacros: custom.getCustomMacroList,
+    cat: catIntegration,
     doBackup: backup.doBackup,
     EmbeddedMacros
 };

@@ -61,6 +61,7 @@ export class ActivityMedkit extends HandlebarsApplicationMixin(ApplicationV2) {
         this._activeTab = tab;
     }
     static async activity(activity) {
+        if (globalThis.cat?.applications?.ActivityMedkit) return new cat.applications.ActivityMedkit({document: activity}).render(true);
         let context = await ActivityMedkit.createContext(activity);
         new ActivityMedkit(context, activity).render(true);
     }

@@ -90,7 +90,7 @@ async function teleport({workflow}) {
     }
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.jb2aCheck() === 'patreon';
     let remainingTargets = tokenUtils.findNearby(workflow.token, 5, null, {includeIncapacitated: true}).filter(i => !toTeleport.includes(i));
-    await Teleport.group(toTeleport, workflow.token, {range: 15, animation: playAnimation ? 'thunderStep' : 'none'});
+    await Teleport.group(toTeleport, workflow.token, {title: workflow.item.name, range: 15, animation: playAnimation ? 'thunderStep' : 'none'});
     await workflowUtils.syntheticItemRoll(feature, remainingTargets);
 }
 export let summonWildfireSpirit = {

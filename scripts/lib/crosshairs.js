@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-undef
 export class Crosshairs extends foundry.canvas.placeables.MeasuredTemplate {
     constructor(config, callbacks = {}) {
+        if (globalThis.cat?.lib?.Crosshairs) return new cat.lib.Crosshairs({...config, anchorTopLeft: false}, callbacks);
         const templateData = {
             t: config.shape ?? 'circle',
             author: game.user.id,
@@ -66,6 +67,7 @@ export class Crosshairs extends foundry.canvas.placeables.MeasuredTemplate {
      * Outwards facing function of the Crosshairs class, will do the constructing itself.
      */
     static async showCrosshairs(config = {}, callbacks = {}) {
+        if (globalThis.cat?.lib?.Crosshairs) return await cat.lib.Crosshairs.showCrosshairs({...config, anchorTopLeft: false}, callbacks);
         config = foundry.utils.mergeObject(config, Crosshairs.defaultCrosshairsConfig(), {overwrite: false});
         let controlled = [];
         if (config.rememberControlled) {
@@ -129,9 +131,11 @@ export class Crosshairs extends foundry.canvas.placeables.MeasuredTemplate {
     }
     // Returns the active crosshairs object based on tag given
     static getCrosshair(tag) {
+        if (globalThis.cat?.lib?.Crosshairs) return cat.lib.Crosshairs.getCrosshair(tag);
         return canvas.templates.preview.children.find(child => child.tag === tag);
     }
     static getSnappedPosition({x,y}, resolution){
+        if (globalThis.cat?.lib?.Crosshairs) return cat.lib.Crosshairs.getSnappedPosition({x, y}, resolution);
         const offset = resolution < 0 ? canvas.grid.size/2 : 0;
         const snapped = canvas.grid.getSnappedPoint({x: x - offset, y: y - offset}, {mode: CONST.GRID_SNAPPING_MODES.CENTER, resolution: resolution});
         return {x: snapped.x + offset, y: snapped.y + offset};

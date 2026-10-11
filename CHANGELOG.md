@@ -1,3 +1,23 @@
+# 2.1.0 - CAT integration
+## Configuration and migration
+- Requires CAT 0.1.1+. CPR's existing automation catalog and configuration are available in CAT; shared dialogs use CAT's renderer.
+- Existing item settings migrate automatically on the active GM, including unlinked NPCs and off-scene tokens. Explicit CAT choices are preserved, original settings are retained, and migration can be retried. See [migration details](docs/cat-migration.md).
+- Existing automation functions and public APIs are retained without registering duplicate CAT event handlers.
+- Avoids the Foundry 14.369 compendium-index crash caused by requesting both a field and its parent.
+
+## Teleport placement
+- Uses CAT's region crosshairs and a contrasting destination ring independent of animation assets. Placement has a compact prompt above the hotbar.
+- Out-of-range positions cannot be confirmed. Clicks use their actual position; cancellation and errors clean up the picker and restore the actor sheet.
+- Corrects placement of a target with different dimensions and awaits asynchronous group movement.
+
+## Automation fixes
+- Ports useful upstream fixes through 1.5.49 while retaining the V14 changes, including Flash of Genius, Blessed Strikes, Command, Overchannel, Martial Arts, maneuver dice, multi-attack spells, Alert, Cleave, and Heroic Inspiration.
+- Updates Instinctive Pounce's activation, Alert's encounter activity, True Strike's components, Vortex Warp's friendly-save handling, and Eldritch Cannon's movement.
+- Exports the shared Patch and Regeneration helpers for their shipped 2024 items. Adds a catalog binding regression check.
+
+## Verification
+- Local checks used Foundry 14.369, D&D 6.0.6, CAT 0.1.1, Midi-QOL 14.6.0, and DAE 14.6.0. Configuration migration and editing, reaction prompts, teleport selection, and NPC rider damage were checked. Individual automations were not all played through.
+
 # 2.0.6 - Divine Smite and Sneak Attack
 ## Bug Fixes:
 - Bound damage, completion, and pre-use handling to the events emitted by Midi-QOL 14.6. Old fork-specific damage hooks could leave both features untriggered.

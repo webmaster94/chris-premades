@@ -10,7 +10,7 @@ async function use({workflow}) {
         anim = 'mistyStep';
         if (animation === 'complex' && animationUtils.jb2aCheck() === 'patreon') anim = 'farStep';
     }
-    await Teleport.target([workflow.token], workflow.token, {range: 60, animation: anim});
+    await Teleport.target([workflow.token], workflow.token, {title: workflow.item.name, range: 60, animation: anim});
     if (anim === 'farStep') {
         new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
@@ -71,7 +71,7 @@ async function late({workflow}) {
         anim = 'mistyStep';
         if (animation === 'complex' && animationUtils.jb2aCheck() === 'patreon') anim = 'farStep';
     }
-    await Teleport.target([workflow.token], workflow.token, {range: 60, animation: anim});
+    await Teleport.target([workflow.token], workflow.token, {title: workflow.item.name, range: 60, animation: anim});
 }
 async function end({trigger: {entity: effect}}) {
     let removeAnim = effect.flags['chris-premades'].farStep.hasPersistent;

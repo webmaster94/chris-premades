@@ -3,25 +3,30 @@ async function attack({trigger: {entity: item}, workflow}) {
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     let validateWeaponType = itemUtils.getConfig(item, 'validateWeaponType');
     if (validateWeaponType) {
-        let isNatural = workflow.item.system.type.value === 'natural';
+        let type = workflow.item.system.type.value;
+        if (['simpleR', 'martialR'].includes(type)) return;
+        if (type === 'martialM' && !workflow.item.system.properties.has('lgt')) return;
+        let isNatural = type === 'natural';
         let isUnarmed = constants.unarmedAttacks.includes(genericUtils.getIdentifier(workflow.item));
         if (!isUnarmed && isNatural) return;
-        if (['martialM', 'martialR'].includes(workflow.item.system.type.value) && !workflow.item.system.properties.has('lgt')) return;
     }
     let classIdentifier = itemUtils.getConfig(item, 'classIdentifier');
     let scaleIdentifier = itemUtils.getConfig(item, 'scaleIdentifier');
     let scale = workflow.actor.system.scale[classIdentifier]?.[scaleIdentifier];
     if (!scale) return;
-    let baseMaxDamage = rollUtils.rollDiceSync(workflow.item.system.damage.base.formula, {entity: workflow.item, options: {maximize: true}});
+    let baseActivity = workflow.item.system.activities.get(workflow.activity.id);
+    let baseData = baseActivity._processDamagePart(baseActivity.damage.parts[0], {attackMode: workflow.attackMode, workflow}, baseActivity.getRollData());
+    let baseFormula = baseData.parts.filter(p => !['@mod', '@magicalBonus', '@ammoBonus'].includes(p)).join(' + ');
+    let baseMaxDamage = rollUtils.rollDiceSync(baseFormula, {entity: workflow.item, options: {maximize: true}});
     let scaleMaxDamage = rollUtils.rollDiceSync(scale.formula, {options: {maximize: true}});
     let itemData = genericUtils.duplicate(workflow.item.toObject());
-    if (baseMaxDamage.total <= scaleMaxDamage.total) {
-        let activityData = activityUtils.withChangedDamage(workflow.activity, {number: scale.number, denomination: scale.faces});
+    if (baseMaxDamage.total < scaleMaxDamage.total) {
+        let activityData = activityUtils.withChangedDamage(workflow.activity, {number: scale.number ?? 1, denomination: scale.faces});
         itemData.system.activities[workflow.activity.id] = activityData;
     }
     if (workflowUtils.isAttackType(workflow, 'meleeAttack')) {
         let defaultType = workflow.activity.attack.ability ?? 'str';
-        let abilities = [...workflow.item.system.availableAbilities, defaultType, 'dex'];
+        let abilities = [...(workflow.item.system.availableAbilities ?? []), defaultType, 'dex'];
         itemData.system.activities[workflow.activity.id].attack.ability = actorUtils.getBestAbility(workflow.actor, abilities);
     }
     workflow.item = await itemUtils.syntheticItem(itemData, workflow.actor);

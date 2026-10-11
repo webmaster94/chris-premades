@@ -28,7 +28,7 @@ async function numberDialog(title, content, input = {label: 'Label', name: 'iden
     if (userId && userId != game.user.id) {
         result = await socket.executeAsUser(sockets.dialog.name, userId, title, content, inputs, buttons);
     } else result = await DialogApp.dialog(title, content, inputs, buttons);
-    return result[input.name];
+    return result?.[input.name];
 }
 async function selectDialog(title, content, input = {label: 'Label', name: 'identifier', options: {}}, {buttons = 'okCancel', userId = game.user.id}={}) {
     if (!input.options) input.options = {};

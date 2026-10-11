@@ -60,7 +60,7 @@ async function teleport({workflow}) {
     let summonToken = canvas?.scene?.tokens.get(effect.flags['chris-premades']?.summons?.ids[effect.name][0]);
     if (!summonToken) return;
     let animation = animationUtils.sequencerCheck() && animationUtils.jb2aCheck() !== false ? 'mistyStep' : 'none';
-    await Teleport.target([summonToken.object], workflow.token, {range: 30, animation, centerpoint: summonToken.object.center});
+    await Teleport.target([summonToken.object], workflow.token, {title: workflow.item.name, range: 30, animation, centerpoint: summonToken.object.center});
     await attackHelper(workflow.token, summonToken, workflow.item, effect.flags['chris-premades'].castData.castLevel);
 }
 async function attackHelper(sourceToken, summonToken, sourceItem, spellLevel) {
