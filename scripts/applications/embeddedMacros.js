@@ -1032,14 +1032,14 @@ export class EmbeddedMacros extends HandlebarsApplicationMixin(ApplicationV2) {
         let invalid = false;
         for (let currMacro of this.context.macros) {
             if (validator.validate(currMacro.macro)) {
-                let invalidText = genericUtils.format('CHRISPREMADES.Medkit.EmbeddedMacros.Invalid', {
+                let invalidText = genericUtils.format('CHRISPREMADES.EmbeddedMacros.Invalid', {
                     fieldName: 'macro',
                     macroName: currMacro.name
                 });
                 genericUtils.notify(invalidText, 'error');
                 invalid = true;
             } else if (!currMacro.type) {
-                let invalidText = genericUtils.format('CHRISPREMADES.Medkit.EmbeddedMacros.Invalid', {
+                let invalidText = genericUtils.format('CHRISPREMADES.EmbeddedMacros.Invalid', {
                     fieldName: 'type',
                     macroName: currMacro.name
                 });

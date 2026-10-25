@@ -1,0 +1,35 @@
+import {actorUtils, DamageBonus, dialogUtils, itemUtils, workflowUtils} from '../../../../../proxy.mjs';
+function validate({rollTotal, bonus, workflow, otherBonuses}) {
+    const valid = otherBonuses.find(otherBonus => otherBonus.identifier === 'sneak-attack')?.active;
+    if (!valid) bonus.validateHints.push({label: _loc('CHRISPREMADES.Macros.Modern.StealBlood.Validate')});
+    return valid;
+}
+async function use({workflow, bonus, otherBonuses}) {
+    const isBloodied = actorUtils.isBloodied(workflow.actor);
+    let selection;
+    if (isBloodied) {
+        const activities = bonus.document.system.activities;
+        selection = await dialogUtils.selectDocumentDialog(bonus.document.name, '', activities);
+    } else {
+        selection = itemUtils.getActivityByIdentifier(bonus.document, 'restore');
+    }
+    if (!selection) return;
+    await workflowUtils.completeActivityUse(selection, [workflow.token.document]);
+}
+async function bonus({workflow, document}) {
+    const canSneak = workflowUtils.getWorkflowProperty(workflow, 'canSneak');
+    if (!canSneak) return;
+    return new DamageBonus(document, {action: 'special'}).withValidation(validate).withOnUse(use);
+}
+export const stealBlood = {
+    name: 'Steal Blood',
+    version: '2.0.2',
+    rules: '2024',
+    roll: [
+        {
+            pass: 'actorOptionalBonusDamage',
+            macro: bonus,
+            priority: 255
+        }
+    ]
+};

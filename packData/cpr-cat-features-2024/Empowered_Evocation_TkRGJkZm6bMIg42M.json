@@ -1,0 +1,83 @@
+{
+  "name": "Empowered Evocation",
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "revision": 1,
+      "rules": "2024",
+      "book": "PHB 2024",
+      "page": "",
+      "license": ""
+    },
+    "uses": {
+      "max": "",
+      "spent": 0,
+      "recovery": []
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "prerequisites": {
+      "level": 10,
+      "items": [],
+      "repeatable": false
+    },
+    "activities": {},
+    "identifier": "empowered-evocation",
+    "enchant": {},
+    "advancement": {},
+    "crewed": false
+  },
+  "flags": {
+    "cat": {
+      "automation": {
+        "version": "2.0.3",
+        "source": "chris-premades"
+      },
+      "macros": {
+        "roll": [
+          {
+            "source": "chris-premades-native",
+            "identifier": "damageBonusToOneRoll",
+            "rules": "all"
+          }
+        ]
+      },
+      "genericConfig": {
+        "chris-premades-native": {
+          "damageBonusToOneRoll": {
+            "attackType": "",
+            "bonus": "@abilities.int.mod",
+            "damageType": [],
+            "healingType": [],
+            "identifiers": [],
+            "itemType": [],
+            "rollActivity": "",
+            "rollItem": true,
+            "spellSchool": [
+              "evo"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "effects": [],
+  "img": "icons/magic/fire/explosion-mushroom-nuke-orange.webp",
+  "folder": "iuhl7BPBelyJKbji",
+  "_id": "TkRGJkZm6bMIg42M",
+  "_stats": {
+    "coreVersion": "14.369",
+    "systemId": "dnd5e",
+    "systemVersion": "6.0.6"
+  },
+  "_key": "!items!TkRGJkZm6bMIg42M"
+}

@@ -1,0 +1,65 @@
+{
+  "name": "Gravity Well",
+  "type": "feat",
+  "effects": [],
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "recovery": []
+    },
+    "advancement": [],
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "identifier": "gravity-well",
+    "source": {
+      "book": "EGtW",
+      "page": "",
+      "license": "",
+      "custom": "Wizard : Graviturgy Magic",
+      "rules": "2014",
+      "revision": 1
+    },
+    "crewed": false,
+    "enchant": {},
+    "prerequisites": {
+      "items": [],
+      "level": 3,
+      "repeatable": false
+    },
+    "properties": [],
+    "requirements": "",
+    "type": {
+      "value": "class",
+      "subtype": ""
+    }
+  },
+  "flags": {
+    "cat": {
+      "macros": {
+        "roll": [
+          {
+            "source": "chris-premades-native",
+            "rules": "2014",
+            "identifier": "gravity-well"
+          }
+        ]
+      },
+      "automation": {
+        "source": "chris-premades",
+        "version": "2.1.0"
+      }
+    }
+  },
+  "img": "icons/magic/unholy/orb-beam-pink.webp",
+  "folder": "jKrhZq22E49LdIVg",
+  "_id": "BxkRbsMVtOhBgw0h",
+  "_stats": {
+    "coreVersion": "14.369",
+    "systemId": "dnd5e",
+    "systemVersion": "6.0.6"
+  },
+  "_key": "!items!BxkRbsMVtOhBgw0h"
+}

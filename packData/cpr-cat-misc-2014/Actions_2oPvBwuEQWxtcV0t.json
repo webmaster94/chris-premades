@@ -1,0 +1,16 @@
+{
+  "type": "Item",
+  "folder": null,
+  "name": "Actions",
+  "color": null,
+  "sorting": "a",
+  "_id": "2oPvBwuEQWxtcV0t",
+  "description": "",
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dnd5e",
+    "systemVersion": "5.3.3"
+  },
+  "_key": "!folders!2oPvBwuEQWxtcV0t"
+}

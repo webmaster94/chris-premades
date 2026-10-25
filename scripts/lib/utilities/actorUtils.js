@@ -1,6 +1,6 @@
 import {socket, sockets} from '../sockets.js';
 import {dialogUtils, effectUtils, genericUtils, socketUtils} from '../../utils.js';
-import {ActorMedkit} from '../../applications/medkit-actor.js';
+import {catAuthority} from '../../integrations/catAuthority.js';
 import {findTransformMessage, getTransformMessageData} from '../transformAuthorization.js';
 function getEffects(actor, {includeItemEffects = false} = {}) {
     let effects = Array.from(actor.allApplicableEffects());
@@ -40,7 +40,7 @@ async function removeFavorites(actor, entities) {
     if (hasPermission) {
         for (let entity of entities) {
             const entityType = entity.documentName;
-            
+
             if (entityType === 'Item') {
                 await actor.system.removeFavorite(foundry.utils.buildRelativeUuid(entity, entity.actor));
             } else if (entityType === 'Activity') {
@@ -217,8 +217,7 @@ async function polymorphFromActivity(origActor, newActor, options = {}) {
     return {handled: true, tokens};
 }
 async function updateAll(actor) {
-    let summary = await ActorMedkit.actorUpdateAll(actor);
-    return summary;
+    return await catAuthority.updateActor(actor);
 }
 function getEquivalentSpellSlotName(actor, level, {canCast = false} = {}) {
     if (!canCast) {

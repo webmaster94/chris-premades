@@ -241,8 +241,6 @@ async function preTargeting({activity, token, config, dialog, message}) {
 async function preItemRoll(workflow) {
     let stop = await requirements.ruleCheck(workflow);
     if (stop) return false;
-    stop = await requirements.versionCheck(workflow);
-    if (stop) return false;
     stop = await requirements.automationCheck(workflow);
     if (stop) return false;
     if (workflow.item) {

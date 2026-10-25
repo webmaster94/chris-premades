@@ -78,27 +78,6 @@ function isNewerVersion(v1, v0) {
 function randomID(value) {
     return foundry.utils.randomID(value);
 }
-function checkMedkitPermission(permission, userId) {
-    let settingKey = undefined;
-    switch (permission) {
-        case 'update': settingKey = 'permissionsUpdateItem';
-            break;
-        case 'automate': settingKey = 'permissionsAutomateItem';
-            break;
-        case 'configure': settingKey = 'permissionsConfigureItem';
-            break;
-        case 'homebrew': settingKey = 'permissionsConfigureHomebrew';
-            break;
-        default:
-            return undefined;
-    }
-    let user = game.users.get(userId);
-    let userRole = user.role;
-    let neededRole = getCPRSetting(settingKey);
-    if (!neededRole) return undefined;
-    if (userRole >= neededRole) return true;
-    else return false;
-}
 function notify(message, type = 'info', {localize = true, permanent = false} = {}) {
     ui.notifications[type](message, {localize: localize, permanent: permanent});
 }
@@ -244,7 +223,6 @@ export let genericUtils = {
     decimalToFraction,
     isNewerVersion,
     randomID,
-    checkMedkitPermission,
     notify,
     setCPRSetting,
     createUpdateSetting,

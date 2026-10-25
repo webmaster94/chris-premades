@@ -64,8 +64,8 @@ async function turnEnd({trigger: {entity: effect, token}}) {
                     priority: 20
                 },
                 {
-                    key: 'flags.midi-qol.min.ability.save.all',
-                    value: 100,
+                    key: 'flags.midi-qol.success.ability.save.all',
+                    value: true,
                     type: 'override',
                     priority: 20
                 },

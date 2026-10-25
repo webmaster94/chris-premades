@@ -1,8 +1,6 @@
 import {actorUtils, effectUtils, genericUtils, socketUtils, compendiumUtils, animationUtils, activityUtils} from '../../utils.js';
-import {gambitPremades} from '../../integrations/gambitsPremades.js';
-import {miscPremades} from '../../integrations/miscPremades.js';
 import {custom} from '../../events/custom.js';
-import {ItemMedkit} from '../../applications/medkit-item.js';
+import {catAuthority} from '../../integrations/catAuthority.js';
 import {requirements} from '../../extensions/requirements.js';
 function getSaveDC(item) {
     if (item.hasSave) return item.system.activities.getByType('save')[0].save.dc.value;
@@ -70,60 +68,14 @@ function getAllItemsByIdentifier(actor, identifier) {
     return actor.items.filter(i => genericUtils.getIdentifier(i) === identifier);
 }
 function getVersion(item) {
-    if (item?.flags.cat?.automation?.version) return item.flags.cat.automation.version;
-    return item?.flags['chris-premades']?.info?.version ?? item?._stats?.modifiedTime;
+    return catAuthority.version(item);
 }
 function getSource(item) {
-    if (item?.flags.cat?.automation?.source) return item.flags.cat.automation.source;
-    return item?.flags['chris-premades']?.info?.source;
+    return catAuthority.source(item);
 }
-// -1: None applied
-// 0: Out of Date
-// 1: Up to Date
-// 2: Generic
+// Returns CAT's automationStatus value.
 async function isUpToDate(item) {
-    let version = getVersion(item);
-    let source = getSource(item);
-    if (!version || !source) return (item.flags['chris-premades']?.config?.generic ? 2 : -1);
-    let sourceVersion;
-    let type = item.actor?.type ?? 'character';
-    if (type != 'character' && type != 'npc') return;
-    let monster;
-    if (type === 'npc') monster = item.actor.prototypeToken.name;
-    switch (source) {
-        case 'gambits-premades':
-            if (type === 'character' || item.type === 'spell') {
-                sourceVersion = gambitPremades.gambitItems.find(i => i.name === item.name)?.version;
-            } else {
-                sourceVersion = gambitPremades.gambitMonsters.find(i => i.name === item.name && i.monster === monster)?.version;
-            }
-            break;
-        case 'midi-item-showcase-community':
-            if (type === 'character' || item.type === 'spell') {
-                sourceVersion = miscPremades.miscItems.find(i => (i.name === item.name || i.aliases?.includes(item.name)))?.version;
-            } else {
-                sourceVersion = miscPremades.miscMonsters.find(i => (i.name === item.name || i.aliases?.includes(item.name)) && i.monster === monster)?.version;
-            }
-            break;
-        case 'automated-crafted-creations':
-        case 'chris-premades': {
-            let identifier = genericUtils.getIdentifier(item);
-            let rules = genericUtils.getRules(item);
-            let macro = custom.getMacro(identifier, rules);
-            sourceVersion = macro?.version;
-            let savedRules = item.flags['chris-premades']?.info?.rules ?? 'legacy';
-            if (savedRules && (rules != savedRules)) return 0;
-            break;
-        }
-        default: {
-            let sourceObj = await compendiumUtils.getItemFromCompendium(source, item.name, {ignoreNotFound: true, object: true});
-            sourceVersion = getVersion(sourceObj);
-            break;
-        }
-    }
-    if (!sourceVersion) return -1;
-    let compare = genericUtils.isNewerVersion(sourceVersion, version);
-    return compare ? 0 : 1;
+    return catAuthority.status(item);
 }
 async function syntheticItem(itemData, actor) {
     let item = new CONFIG.Item.documentClass(itemData, {parent: actor});
@@ -215,7 +167,7 @@ function isWeaponProficient(item) {
     return false;
 }
 async function itemUpdate(item) {
-    return await ItemMedkit.itemUpdate(item);
+    return await catAuthority.update(item);
 }
 async function setHiddenActivities(item, activityIdentifiers, replace = true) {
     let existingHidden = replace ? [] : item.flags?.['chris-premades']?.hiddenActivities ?? [];

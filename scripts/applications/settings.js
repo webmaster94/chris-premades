@@ -2,16 +2,13 @@ import {backup} from '../extensions/backup.js';
 import {conditions} from '../extensions/conditions.js';
 import {sidebar} from '../extensions/sidebar.js';
 import {genericUtils} from '../utils.js';
-import {AdditionalCompendiums} from './additionalCompendiums.js';
 import {DialogApp} from './dialog.js';
-import {tours} from './tour.js';
 import {troubleshooter} from './troubleshooter.js';
 import {rollResolver} from '../extensions/rollResolver.js';
 import {spellList} from '../extensions/spellList.js';
 import {bg3} from '../macros/2014/homebrew/bg3WeaponActions.js';
 let settingCategories = {};
 let buttonLabels = {
-    additionalCompendiums: 'CHRISPREMADES.Generic.Configure',
     statusEffectIcons: 'CHRISPREMADES.Generic.Configure',
     backupCompendium: 'CHRISPREMADES.Generic.Select',
     hiddenCompendiums: 'CHRISPREMADES.Generic.Select',
@@ -136,7 +133,6 @@ async function selectCompendium(settingKey, type) {
 }
 export async function settingButton(id) {
     switch(id) {
-        case 'additionalCompendiums': new AdditionalCompendiums().render(true); break;
         case 'statusEffectIcons': await conditions.configureStatusEffectIcons(); break;
         case 'backupCompendium': await backup.selectCompendium(); break;
         case 'hiddenCompendiums': await sidebar.selectHiddenCompendiums(); break;
@@ -146,12 +142,6 @@ export async function settingButton(id) {
         case 'monsterCompendium': await selectCompendium('monsterCompendium', 'Actor'); break;
         case 'spellCompendium': await selectCompendium('spellCompendium', 'Item'); break;
         case 'macroCompendium': await selectCompendium('macroCompendium', 'Macro'); break;
-        case 'tour': {
-            [...foundry.applications.instances.values()].find(i => i.id === 'chris-troubleshoot-settings')?.close();
-            game.settings.sheet.close();
-            tours.guidedTour();
-            break;
-        }
         case 'manualRollsUsers': await rollResolver.manualRollsUsersDialog(); break;
         case 'classSpellList': await spellList.selectJournal('classSpellList'); break;
         case 'itemCompendium': await selectCompendium('itemCompendium', 'Item'); break;
@@ -184,14 +174,6 @@ export class SettingsHelp extends getSettingsClass(null) {
         let context = await super._prepareContext(options);
         return genericUtils.mergeObject(context, {
             settings: [
-                {
-                    name: genericUtils.translate('CHRISPREMADES.Tour.TourFeatures'),
-                    id: 'tour',
-                    value: {},
-                    isButton: true,
-                    hint: genericUtils.translate('CHRISPREMADES.Tour.Hint'),
-                    label: genericUtils.translate('CHRISPREMADES.Generic.Go')
-                },
                 {
                     name: genericUtils.translate('CHRISPREMADES.Troubleshooter.Open'),
                     id: 'trouble',

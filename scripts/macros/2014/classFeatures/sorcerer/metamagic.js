@@ -46,7 +46,10 @@ async function earlyCareful({trigger: {entity: effect}, workflow}) {
     if (!originItem) return;
     let allowEnemies = itemUtils.getConfig(originItem, 'allowEnemies');
     if (!allowEnemies) targets = targets.filter(i => i.document.disposition === workflow.token.document.disposition);
+    let preselected = targets.reduce((obj, target) => (obj[target.id] = obj.count++ < max, obj), {count: 0});
     let selection = await dialogUtils.selectTargetDialog(effect.name, genericUtils.format('CHRISPREMADES.Macros.Metamagic.CarefulWhich', {max}), targets, {
+        skipDeadAndUnconscious: false,
+        preselected,
         type: 'multiple',
         maxAmount: max
     });
@@ -114,7 +117,7 @@ async function useDistant({workflow}) {
         options: {
             configureDialog: (shouldConsumeSlot || shouldConsumeUsage) ? true : null
         }, config: {
-            consumeSpellSlot: shouldConsumeSlot ? true : null, 
+            consumeSpellSlot: shouldConsumeSlot ? true : null,
             consumeUsage: shouldConsumeUsage ? true : null
         }
     });
@@ -156,7 +159,7 @@ async function damageEmpowered({trigger: {entity: item}, workflow}) {
             label: i.expression + (i.flavor ? '[' + i.flavor + ']: ' : ': ') + i.results.join(', '),
             name: i.roll + '-' + i.term,
             options: {
-                minAmount: 0, 
+                minAmount: 0,
                 maxAmount: Math.min(max, i.results.length)
             }
         })),
@@ -235,7 +238,7 @@ async function useExtended({workflow}) {
         options: {
             configureDialog: (shouldConsumeSlot || shouldConsumeUsage) ? true : null
         }, config: {
-            consumeSpellSlot: shouldConsumeSlot ? true : null, 
+            consumeSpellSlot: shouldConsumeSlot ? true : null,
             consumeUsage: shouldConsumeUsage ? true : null
         }
     });
@@ -338,7 +341,7 @@ async function useQuickened({workflow}) {
         options: {
             configureDialog: (shouldConsumeSlot || shouldConsumeUsage) ? true : null
         }, config: {
-            consumeSpellSlot: shouldConsumeSlot ? true : null, 
+            consumeSpellSlot: shouldConsumeSlot ? true : null,
             consumeUsage: shouldConsumeUsage ? true : null
         }
     });
@@ -381,7 +384,7 @@ async function useSubtle({workflow}) {
         options: {
             configureDialog: (shouldConsumeSlot || shouldConsumeUsage) ? true : null
         }, config: {
-            consumeSpellSlot: shouldConsumeSlot ? true : null, 
+            consumeSpellSlot: shouldConsumeSlot ? true : null,
             consumeUsage: shouldConsumeUsage ? true : null
         }
     });
@@ -457,9 +460,9 @@ async function useTwinned({workflow}) {
         genericUtils.notify('CHRISPREMADES.Macros.Metamagic.NotEnough', 'info');
         return;
     }
-    let validSpells = actorUtils.getCastableSpells(workflow.actor).filter(i => 
+    let validSpells = actorUtils.getCastableSpells(workflow.actor).filter(i =>
         (exceptions.includes(genericUtils.getIdentifier(i)) ||
-        (i.system.target.affects.count === 1 && !i.system.target.template.count)) && 
+        (i.system.target.affects.count === 1 && !i.system.target.template.count)) &&
         i.system.level <= sorcPoints.system.uses.value &&
         i.system.source.rules === '2014');
     if (!validSpells.length) {
@@ -482,7 +485,7 @@ async function useTwinned({workflow}) {
         options: {
             configureDialog: (shouldConsumeSlot || shouldConsumeUsage) ? true : null
         }, config: {
-            consumeSpellSlot: shouldConsumeSlot ? true : null, 
+            consumeSpellSlot: shouldConsumeSlot ? true : null,
             consumeUsage: shouldConsumeUsage ? true : null
         }
     });

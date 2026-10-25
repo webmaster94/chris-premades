@@ -1,0 +1,65 @@
+{
+  "name": "Brutal Critical",
+  "type": "feat",
+  "effects": [],
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "recovery": []
+    },
+    "advancement": {},
+    "description": {
+      "value": "",
+      "chat": ""
+    },
+    "identifier": "brutal-critical",
+    "source": {
+      "book": "PHB",
+      "page": "",
+      "license": "",
+      "custom": "",
+      "rules": "2014",
+      "revision": 1
+    },
+    "crewed": false,
+    "enchant": {},
+    "prerequisites": {
+      "items": [],
+      "level": 9,
+      "repeatable": false
+    },
+    "properties": [],
+    "requirements": "",
+    "type": {
+      "value": "class",
+      "subtype": ""
+    }
+  },
+  "flags": {
+    "cat": {
+      "automation": {
+        "source": "chris-premades",
+        "version": "2.0.2"
+      },
+      "macros": {
+        "roll": [
+          {
+            "source": "chris-premades-native",
+            "rules": "2014",
+            "identifier": "brutal-critical"
+          }
+        ]
+      }
+    }
+  },
+  "img": "icons/skills/melee/strike-axe-blood-red.webp",
+  "folder": "oHVJeSGqBDErtjs9",
+  "_id": "LI209kLfpBxk6Gcc",
+  "_stats": {
+    "coreVersion": "14.369",
+    "systemId": "dnd5e",
+    "systemVersion": "6.0.6"
+  },
+  "_key": "!items!LI209kLfpBxk6Gcc"
+}

@@ -29,9 +29,9 @@ async function use({workflow}) {
         origin: workflow.item.uuid
     };
     let effect = await effectUtils.createEffect(workflow.actor, effectData, {
-        identifier: 'guardianArmor', 
+        identifier: 'guardianArmor',
         vae: [
-            {type: 'use', name: featureData.name, identifier: 'guardianArmor', activityIdentifier: 'defensiveField'}, 
+            {type: 'use', name: featureData.name, identifier: 'guardianArmor', activityIdentifier: 'defensiveField'},
             {type: 'use', name: featureData.name, identifier: 'thunderGauntlets'}
         ],
         unhideActivities: {
@@ -111,7 +111,7 @@ export let guardianArmor = {
     }
 };
 export let guardianArmorThunderGauntlets = {
-    // Note: intentionally different from actual name. Don't want the medkit to light up for a feature item
+    // Keep the generated feature distinct from the parent armor automation.
     name: 'Arcane Armor: Thunder Gauntlets',
     version: guardianArmor.version,
     midi: {

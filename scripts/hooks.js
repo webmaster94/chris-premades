@@ -7,7 +7,7 @@ import {midiEvents} from './events/midi.js';
 import {movementEvents} from './events/movement.js';
 import {templateEvents} from './events/template.js';
 import {dae} from './integrations/dae.js';
-import {appendHeaderControl, renderEffectConfig, renderCompendium, renderActivitySheet, copyUuid} from './extensions/titlebar.js';
+import {renderCompendium, copyUuid} from './extensions/titlebar.js';
 import {effectUtils, genericUtils} from './utils.js';
 import {chat} from './extensions/chat.js';
 import {sidebar} from './extensions/sidebar.js';
@@ -25,7 +25,6 @@ import {item} from './applications/item.js';
 import {activities} from './extensions/activities.js';
 import {itemEvent} from './events/item.js';
 import {template} from './extensions/template.js';
-import {tidy5e} from './integrations/tidy5e.js';
 import {combat} from './extensions/combat.js';
 import {concentration} from './extensions/concentration.js';
 import {time} from './events/time.js';
@@ -74,21 +73,14 @@ export function registerHooks() {
 
     // Header buttons
     if (genericUtils.getCPRSetting('addCompendiumButton')) Hooks.on('renderCompendium', renderCompendium);
-    Hooks.on('renderActivitySheet', renderActivitySheet);
-    Hooks.on('renderDAEActiveEffectConfig', renderEffectConfig);
-    Hooks.on('getHeaderControlsItemSheet5e', appendHeaderControl);
-    Hooks.on('getHeaderControlsActorSheetV2', appendHeaderControl);
-    Hooks.on('getHeaderControlsActiveEffectConfig', appendHeaderControl);
-    Hooks.on('getHeaderControlsMeasuredTemplateConfig', appendHeaderControl);
-    Hooks.on('getHeaderControlsRegionConfig', appendHeaderControl);
 
     // Overtime DC helper
     Hooks.on('preCreateActiveEffect', effects.activityDC);
-    
+
     // No-animation hooks
     Hooks.on('preCreateActiveEffect', effects.noAnimation);
     Hooks.on('preDeleteActiveEffect', effects.noAnimation);
-    
+
     // Wire up chat card buttons
     Hooks.on('createChatMessage', chat.createChatMessage);
 
@@ -118,16 +110,16 @@ export function registerHooks() {
     // Colorize headers (TODO: None of this will probably be functional currently, will have to be moved around)
     dae.toggleRenderItemSheet(genericUtils.getCPRSetting('colorizeDAE'));
     if (genericUtils.getCPRSetting('colorizeAutomatedAnimations')) Hooks.on('renderItemSheetV2', automatedAnimations.renderItemSheet);
-    
+
     // Auto-populate effect descriptions
     if (genericUtils.getCPRSetting('effectDescriptions') !== 'disabled') Hooks.on('preCreateActiveEffect', effects.preCreateActiveEffect);
-    
+
     // Apply midi flags to conditions, display nested statuses
     if (genericUtils.getCPRSetting('applyConditionChanges') || genericUtils.getCPRSetting('displayNestedConditions')) Hooks.on('preCreateActiveEffect', conditions.preCreateActiveEffect);
-    
+
     // VAE button integration
     if (genericUtils.getCPRSetting('vaeButtons')) Hooks.on('visual-active-effects.createEffectButtons', vae.createEffectButtons);
-    
+
     // Initiative matching
     if (genericUtils.getCPRSetting('updateSummonInitiative')) Hooks.on('dnd5e.rollInitiative', initiative.updateSummonInitiative);
     if (genericUtils.getCPRSetting('updateCompanionInitiative')) Hooks.on('dnd5e.rollInitiative', initiative.updateCompanionInitiative);
@@ -137,7 +129,7 @@ export function registerHooks() {
         Hooks.on('preUpdateActor', combat.legendaryActionsTrack);
         Hooks.on('preUpdateCombat', combat.legendaryActionsPrompt);
     }
-    
+
     // Various events
     Hooks.on('preUpdateItem', activities.flagAllRiders);
     Hooks.on('preUpdateItem', equipment.addOrUpdate);
@@ -201,9 +193,6 @@ export function registerHooks() {
         Hooks.on('updateItem', itemEvent.updated);
         Hooks.on('updateWorldTime', time.updateWorldTime);
 
-        // Scene & Compendium medkit
-        Hooks.on('getHeaderControlsSceneConfig', appendHeaderControl);
-        Hooks.on('getHeaderControlsCompendium', appendHeaderControl);
 
         // CPR special duration
         Hooks.on('updateActor', effects.specialDurationHitPoints);
@@ -225,9 +214,6 @@ export function registerHooks() {
     }
 
     // Tidy5e Integration
-    Hooks.once('tidy5e-sheet.ready', tidy5e.headerControls);
-    Hooks.on('renderTidy5eItemSheetClassic', tidy5e.renderTidyItemSheet);
-    Hooks.on('renderTidy5eItemSheetQuadrone', tidy5e.renderTidyItemSheet);
 
     // DDBI Integration
     Hooks.on('ddb-importer.characterProcessDataComplete', itemEvent.actorMunch);

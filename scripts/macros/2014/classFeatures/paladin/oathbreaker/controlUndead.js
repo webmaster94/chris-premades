@@ -18,8 +18,8 @@ async function early({workflow}) {
         system: {
             changes: [
                 {
-                    key: 'flags.midi-qol.min.ability.save.all',
-                    value: 99,
+                    key: 'flags.midi-qol.success.ability.save.all',
+                    value: true,
                     type: 'override',
                     priority: 120
                 }

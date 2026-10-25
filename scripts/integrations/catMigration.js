@@ -25,6 +25,14 @@ export function buildCatMigration(document, {source = SOURCE, version, identifie
     return updates;
 }
 
+export function legacySetupBinding(flags) {
+    if (!flags?.['chris-premades']?.macros?.item?.length) return;
+    if (flags.cat?.automation?.source && flags.cat.automation.source !== 'chris-premades') return;
+    const bindings = flags.cat?.macros?.item ?? [];
+    if (bindings.some(binding => binding.source === 'chris-premades' && binding.identifier === 'legacy-item-setup')) return;
+    return [...bindings, {source: 'chris-premades', identifier: 'legacy-item-setup', rules: 'all'}];
+}
+
 export function getMigrationDocuments({items = [], actors = [], scenes = []} = {}) {
     const documents = new Map();
     const add = document => {

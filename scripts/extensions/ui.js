@@ -217,21 +217,6 @@ function compactMode(value) {
                 padding: 0.5rem;
             }
 
-            /* Compact medkit tabs */
-            .cpr-medkit-tabs {
-                gap: 0.25rem;
-                padding: 0.25rem;
-            }
-
-            .cpr-medkit-tabs .item {
-                padding: 0.25rem 0.5rem;
-            }
-
-            /* Reduce medkit content padding */
-            .cpr-medkit-tab {
-                padding: 0.5rem;
-            }
-
             /* Compact multi-select rows */
             .cpr-multi-select-row {
                 gap: 0.25rem;

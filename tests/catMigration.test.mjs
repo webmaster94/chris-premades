@@ -9,6 +9,18 @@ await module.link(() => {throw new Error('Migration must not import Foundry');})
 await module.evaluate();
 const {buildCatMigration, getMigrationDocuments, toCatConfig, indexFieldsWithoutOverlaps} = module.namespace;
 
+test('legacy setup callbacks acquire one CAT binding without replacing existing CAT callbacks', () => {
+    const flags = {'chris-premades': {macros: {item: ['testFeature']}}, cat: {macros: {item: [{source: 'other', identifier: 'other', rules: 'all'}]}}};
+    const binding = module.namespace.legacySetupBinding(flags);
+    assert.equal(binding.length, 2);
+    assert.equal(binding[1].identifier, 'legacy-item-setup');
+    flags.cat.macros.item = binding;
+    assert.equal(module.namespace.legacySetupBinding(flags), undefined);
+    flags.cat.automation = {source: 'gambits-premades'};
+    flags.cat.macros.item = [];
+    assert.equal(module.namespace.legacySetupBinding(flags), undefined);
+});
+
 test('migration preserves false, zero, empty strings, arrays and nested item settings', () => {
     const config = {playAnimation: false, range: 0, formula: '', targets: ['ally'], summons: {count: 2}};
     const item = {flags: {'chris-premades': {info: {source: 'chris-premades', version: '1.2.28'}, config}}};

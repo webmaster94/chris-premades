@@ -1,3 +1,11 @@
+# 2.2.0 - CAT owns automation updates
+- Removes CPR's Medkit windows, status colors, version warnings, update checker, tours, and separate automation-source preferences. CAT alone selects, applies, updates, and reports automation versions. Public item-update helpers delegate to CAT.
+- Existing saved settings migrate without overwriting CAT choices. CAT updates retain older CPR setup callbacks so linked activities, resource consumption, and class scales still initialize.
+- Includes useful CPR fixes through upstream 1.5.51, including automatic-success saves, Careful Spell selection, Heroic Inspiration cancellation, Banishing Smite, Deck of Wonder, Fall, Primal Strike, Wrath of the Storm, and Frigid Retaliation.
+- Adds 114 item definitions from upstream's CAT-native 2.1.3 catalog where this fork lacked the same item and ruleset, including Ice Knife, Slow, Magic Weapon, Circle of Power, wall spells, Find Steed 2024, Hail of Thorns 2024, Lightning Arrow 2024, and additional class features and equipment. Existing fork automations and compendium UUIDs are retained. Native helpers have a separate namespace to avoid executing legacy helpers twice. See [content inventory](docs/upstream-content.json).
+- Requires Foundry 14.369+, D&D 6.0.x, CAT 0.1.3+, Midi-QOL 14.6.4+, and DAE 14.6.3+.
+- Verification includes regression tests, syntax/JSON checks, all compendium builds, webpack, and isolated Foundry checks of CAT version authority, configuration retention, legacy setup callbacks, NPC Sneak Attack critical damage, GPS configuration, and native CAT bindings. This is not a playthrough of every automation.
+
 # 2.1.0 - CAT integration
 ## Configuration and migration
 - Requires CAT 0.1.1+. CPR's existing automation catalog and configuration are available in CAT; shared dialogs use CAT's renderer.

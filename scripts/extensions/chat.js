@@ -1,5 +1,4 @@
-import {ItemMedkit} from '../applications/medkit-item.js';
-import {tours} from '../applications/tour.js';
+import {catAuthority} from '../integrations/catAuthority.js';
 import {troubleshooter} from '../applications/troubleshooter.js';
 import {genericUtils} from '../utils.js';
 async function createChatMessage(message, options, userId) {
@@ -16,14 +15,9 @@ async function createChatMessage(message, options, userId) {
                 button.addEventListener('click', async () => {
                     let item = await fromUuid(buttonData.data.itemUuid);
                     if (!item) return;
-                    await ItemMedkit.item(item);
+                    await catAuthority.open(item);
                     await message.delete();
                 });
-                break;
-            }
-            case 'tour': {
-                let button = element.querySelector('[type="button"]');
-                if (button) button.addEventListener('click', tours.guidedTour);
                 break;
             }
             case 'settings': {
@@ -42,11 +36,11 @@ async function createChatMessage(message, options, userId) {
                 if (button) button.addEventListener('click', () => {
                     troubleshooter.ignoreModuleIssues(message);
                 });
-                break; 
+                break;
             }
         }
     });
-    
+
 }
 export let chat = {
     createChatMessage

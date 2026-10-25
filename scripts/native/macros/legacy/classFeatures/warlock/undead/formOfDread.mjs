@@ -1,0 +1,56 @@
+import {actorUtils, automationUtils, combatUtils, dialogUtils, documentUtils, effectUtils, itemUtils, Logging, workflowUtils} from '../../../../../proxy.mjs';
+async function use({document, workflow}) {
+    if (workflow.activity.identifier !== 'form-of-dread') return;
+    const sourceEffect = documentUtils.getEffectByIdentifier(document, 'formOfDreadActive');
+    if (!sourceEffect) return Logging.addMacroWarning('CPR', 'form-of-dread', 'Form of Dread effect missing from item.', {notify: 'warn'});
+    const effectData = documentUtils.getEffectData(workflow.activity, sourceEffect.id, {
+        activityUuid: workflow.activity.uuid
+    });
+    effectUtils.pushImageChanges(effectData, document);
+    const createEffect = async () => await effectUtils.createEffects(workflow.actor, [effectData]);
+    const {animation, options} = automationUtils.getResolvedAnimation(document, 'animation');
+    if (!animation) return await createEffect();
+    await animation.macros.transform(workflow.token.document, {...options, callback: createEffect});
+}
+async function late({workflow}) {
+    if (workflow.hitTargets.size !== 1 || !workflowUtils.isAttackType(workflow, 'attack')) return;
+    if (!combatUtils.isOwnTurn(workflow.token.document)) return;
+    const originItem = actorUtils.getItemByIdentifier(workflow.actor, 'form-of-dread');
+    const activity = itemUtils.getActivityByIdentifier(originItem, 'form-of-dread-fear');
+    if (!activity?.canUse) return;
+    if (!activity.uses.value) return Logging.addMacroWarning('CPR', 'form-of-dread', 'Fear already used this turn.');
+    const selection = await dialogUtils.confirm(activity.name, _loc('CHRISPREMADES.Macros.Legacy.FormOfDread.Use'));
+    if (!selection) return;
+    await workflowUtils.completeActivityUse(activity, workflow.hitTargets);
+}
+export const formOfDread = {
+    name: 'Form of Dread',
+    version: '2.0.0',
+    rules: '2014',
+    roll: [
+        {pass: 'itemRollFinished', macro: use, priority: 50}
+    ],
+    get config() {
+        return {
+            ...effectUtils.getImageConfig(),
+            animation: {
+                default: {
+                    source: 'chris-premades-native',
+                    identifier: 'shapeChange'
+                },
+                type: 'selectAnimation',
+                inputs: ['token', 'options'],
+                label: 'CHRISPREMADES.Config.Animation',
+                category: 'visuals'
+            }
+        };
+    }
+};
+export const formOfDreadActive = {
+    name: 'Form of Dread: Active',
+    version: '2.0.0',
+    rules: '2014',
+    roll: [
+        {pass: 'actorRollFinished', macro: late, priority: 50}
+    ]
+};

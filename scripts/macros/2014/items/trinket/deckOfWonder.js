@@ -218,7 +218,7 @@ async function student({trigger, workflow}) {
             let selection = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Generic.SelectAProficency', [[CONFIG.DND5E.abilities.int.label, 'int'], [CONFIG.DND5E.abilities.cha.label, 'cha']]);
             if (!selection) selection = 'int';
             let key = 'system.abilities.' + selection + '.proficient';
-            await genericUtils.update(workflow.actor, {[key]: 1}); 
+            await genericUtils.update(workflow.actor, {[key]: 1});
         }
     }
 }
@@ -256,7 +256,7 @@ async function vultureEnd({trigger: {entity: effect}}) {
 }
 export let deckOfWonder = {
     name: 'Deck of Wonder',
-    version: '1.5.5',
+    version: '1.5.51',
     rules: 'legacy',
     midi: {
         item: [
@@ -417,7 +417,7 @@ export let deckOfWonderJusticeEffect = {
             macro: justiceRoll,
             priority: 50
         },
-        
+
         {
             pass: 'preEvaluation',
             macro: justiceRollSelf,

@@ -1,0 +1,703 @@
+{
+  "upstream": "2.1.3",
+  "added": [
+    {
+      "name": "Archery",
+      "rules": "2014",
+      "identifier": "fighting-style-archery",
+      "file": "packData/cpr-cat-features-2014/Archery_hW5fW8za9waAD0kR.json"
+    },
+    {
+      "name": "Beast Spells",
+      "rules": "2014",
+      "identifier": "beast-spells",
+      "file": "packData/cpr-cat-features-2014/Beast_Spells_HD6zyVxDN6c3JeAK.json"
+    },
+    {
+      "name": "Brutal Critical",
+      "rules": "2014",
+      "identifier": "brutal-critical",
+      "file": "packData/cpr-cat-features-2014/Brutal_Critical_LI209kLfpBxk6Gcc.json"
+    },
+    {
+      "name": "Countercharm",
+      "rules": "2014",
+      "identifier": "countercharm",
+      "file": "packData/cpr-cat-features-2014/Countercharm_B32H5gk6Gkpb04Y6.json"
+    },
+    {
+      "name": "Dedicated Weapon",
+      "rules": "2014",
+      "identifier": "dedicated-weapon",
+      "file": "packData/cpr-cat-features-2014/Dedicated_Weapon_pBoWGtyjado7ZL7T.json"
+    },
+    {
+      "name": "Defense",
+      "rules": "2014",
+      "identifier": "fighting-style-defense",
+      "file": "packData/cpr-cat-features-2014/Defense_TGbvmUe8h0FX0Rky.json"
+    },
+    {
+      "name": "Destroy Undead",
+      "rules": "2014",
+      "identifier": "destroy-undead",
+      "file": "packData/cpr-cat-features-2014/Destroy_Undead_Lz1xcppxkHcoIvl0.json"
+    },
+    {
+      "name": "Diamond Soul",
+      "rules": "2014",
+      "identifier": "diamond-soul",
+      "file": "packData/cpr-cat-features-2014/Diamond_Soul_i0mtHqGkAqj7rA5t.json"
+    },
+    {
+      "name": "Dueling",
+      "rules": "2014",
+      "identifier": "fighting-style-dueling",
+      "file": "packData/cpr-cat-features-2014/Dueling_cFSb1a8y3CWSVuBp.json"
+    },
+    {
+      "name": "Empty Body",
+      "rules": "2014",
+      "identifier": "empty-body",
+      "file": "packData/cpr-cat-features-2014/Empty_Body_MJ7HKQ3bmXimVZPj.json"
+    },
+    {
+      "name": "Exceptional Training",
+      "rules": "2014",
+      "identifier": "exceptional-training",
+      "file": "packData/cpr-cat-features-2014/Exceptional_Training_7EHy6iJuSwo0nyIU.json"
+    },
+    {
+      "name": "Fast Movement",
+      "rules": "2014",
+      "identifier": "fast-movement",
+      "file": "packData/cpr-cat-features-2014/Fast_Movement_eoIfH5V3vVL4l3O5.json"
+    },
+    {
+      "name": "Feral Instinct",
+      "rules": "2014",
+      "identifier": "feral-instinct",
+      "file": "packData/cpr-cat-features-2014/Feral_Instinct_7wOcFdoTiDKYLuvS.json"
+    },
+    {
+      "name": "Flash of Genius",
+      "rules": "2014",
+      "identifier": "flash-of-genius",
+      "file": "packData/cpr-cat-features-2014/Flash_of_Genius_99gChmPKp8qKsQcz.json"
+    },
+    {
+      "name": "Font of Inspiration",
+      "rules": "2014",
+      "identifier": "font-of-inspiration",
+      "file": "packData/cpr-cat-features-2014/Font_of_Inspiration_4Y6fq4StQQNROpuB.json"
+    },
+    {
+      "name": "Font of Magic",
+      "rules": "2014",
+      "identifier": "font-of-magic",
+      "file": "packData/cpr-cat-features-2014/Font_of_Magic_dpzoeQz5ouVziXyo.json"
+    },
+    {
+      "name": "Gravity Well",
+      "rules": "2014",
+      "identifier": "gravity-well",
+      "file": "packData/cpr-cat-features-2014/Gravity_Well_BxkRbsMVtOhBgw0h.json"
+    },
+    {
+      "name": "Great Weapon Fighting",
+      "rules": "2014",
+      "identifier": "fighting-style-great-weapon-fighting",
+      "file": "packData/cpr-cat-features-2014/Great_Weapon_Fighting_GdBcBcGPes10nJ6v.json"
+    },
+    {
+      "name": "Indomitable",
+      "rules": "2014",
+      "identifier": "indomitable",
+      "file": "packData/cpr-cat-features-2014/Indomitable_bhwA6r0k7wE7Z8BE.json"
+    },
+    {
+      "name": "Indomitable Might",
+      "rules": "2014",
+      "identifier": "indomitable-might",
+      "file": "packData/cpr-cat-features-2014/Indomitable_Might_SWbZzbBPGR11X7yI.json"
+    },
+    {
+      "name": "Infusion: Arcane Propulsion Armor",
+      "rules": "2014",
+      "identifier": "infusion-arcane-propulsion-armor",
+      "file": "packData/cpr-cat-features-2014/Infusion__Arcane_Propulsion_Armor_ux3CrEPCtjdLx6Yb.json"
+    },
+    {
+      "name": "Infusion: Armor of Magical Strength",
+      "rules": "2014",
+      "identifier": "infusion-armor-of-magical-strength",
+      "file": "packData/cpr-cat-features-2014/Infusion__Armor_of_Magical_Strength_fYxEtmQjqEZMaw3T.json"
+    },
+    {
+      "name": "Infusion: Boots of the Winding Path",
+      "rules": "2014",
+      "identifier": "infusion-boots-of-the-winding-path",
+      "file": "packData/cpr-cat-features-2014/Infusion__Boots_of_the_Winding_Path_p4lKyPgKqUNbCV1z.json"
+    },
+    {
+      "name": "Infusion: Enhanced Arcane Focus",
+      "rules": "2014",
+      "identifier": "infusion-enhanced-arcane-focus",
+      "file": "packData/cpr-cat-features-2014/Infusion__Enhanced_Arcane_Focus_L9GcuVfE6XLhYDHf.json"
+    },
+    {
+      "name": "Infusion: Enhanced Defense",
+      "rules": "2014",
+      "identifier": "infusion-enhanced-defense",
+      "file": "packData/cpr-cat-features-2014/Infusion__Enhanced_Defense_aJkGSnUIncHT9Gp3.json"
+    },
+    {
+      "name": "Infusion: Enhanced Weapon",
+      "rules": "2014",
+      "identifier": "infusion-enhanced-weapon",
+      "file": "packData/cpr-cat-features-2014/Infusion__Enhanced_Weapon_di2iciKuN3WAdzS0.json"
+    },
+    {
+      "name": "Infusion: Helm of Awareness",
+      "rules": "2014",
+      "identifier": "infusion-helm-of-awareness",
+      "file": "packData/cpr-cat-features-2014/Infusion__Helm_of_Awareness_ezJn6LsdYRR7rLor.json"
+    },
+    {
+      "name": "Infusion: Homunculus Servant",
+      "rules": "2014",
+      "identifier": "infusion-homunculus-servant",
+      "file": "packData/cpr-cat-features-2014/Infusion__Homunculus_Servant_K1BQuVN54FGD803Q.json"
+    },
+    {
+      "name": "Infusion: Mind Sharpener",
+      "rules": "2014",
+      "identifier": "infusion-mind-sharpener",
+      "file": "packData/cpr-cat-features-2014/Infusion__Mind_Sharpener_BjExUUZmXbA8vIO5.json"
+    },
+    {
+      "name": "Infusion: Radiant Weapon",
+      "rules": "2014",
+      "identifier": "infusion-radiant-weapon",
+      "file": "packData/cpr-cat-features-2014/Infusion__Radiant_Weapon_Lyb2qYSi928HMuwo.json"
+    },
+    {
+      "name": "Infusion: Repeating Shot",
+      "rules": "2014",
+      "identifier": "infusion-repeating-shot",
+      "file": "packData/cpr-cat-features-2014/Infusion__Repeating_Shot_08TGuSf1OVCGmZ47.json"
+    },
+    {
+      "name": "Infusion: Repulsion Shield",
+      "rules": "2014",
+      "identifier": "infusion-repulsion-shield",
+      "file": "packData/cpr-cat-features-2014/Infusion__Repulsion_Shield_LmSP70pELKq2vN0T.json"
+    },
+    {
+      "name": "Infusion: Resistant Armor",
+      "rules": "2014",
+      "identifier": "infusion-resistant-armor",
+      "file": "packData/cpr-cat-features-2014/Infusion__Resistant_Armor_zeV3nzhfVrOl7AbB.json"
+    },
+    {
+      "name": "Infusion: Returning Weapon",
+      "rules": "2014",
+      "identifier": "infusion-returning-weapon",
+      "file": "packData/cpr-cat-features-2014/Infusion__Returning_Weapon_YrleHMOe9CdYmLCR.json"
+    },
+    {
+      "name": "Infusion: Spell-Refueling Ring",
+      "rules": "2014",
+      "identifier": "infusion-spell-refueling-ring",
+      "file": "packData/cpr-cat-features-2014/Infusion__Spell_Refueling_Ring_HBSqUDLvmtKum50M.json"
+    },
+    {
+      "name": "Interception",
+      "rules": "2014",
+      "identifier": "fighting-style-interception",
+      "file": "packData/cpr-cat-features-2014/Interception_m8uEwCJ3VKiYf6S7.json"
+    },
+    {
+      "name": "Perfect Self",
+      "rules": "2014",
+      "identifier": "perfect-self",
+      "file": "packData/cpr-cat-features-2014/Perfect_Self_66vHW915TsHxyUoN.json"
+    },
+    {
+      "name": "Protection",
+      "rules": "2014",
+      "identifier": "fighting-style-protection",
+      "file": "packData/cpr-cat-features-2014/Protection_pmpmtloDSa2AJLhi.json"
+    },
+    {
+      "name": "Reckless Attack",
+      "rules": "2014",
+      "identifier": "reckless-attack",
+      "file": "packData/cpr-cat-features-2014/Reckless_Attack_ulioXsH7u8KY1tp6.json"
+    },
+    {
+      "name": "Relentless Rage",
+      "rules": "2014",
+      "identifier": "relentless-rage",
+      "file": "packData/cpr-cat-features-2014/Relentless_Rage_GqZmOlHljaOY8L9w.json"
+    },
+    {
+      "name": "Second Wind",
+      "rules": "2014",
+      "identifier": "second-wind",
+      "file": "packData/cpr-cat-features-2014/Second_Wind_otbQCrkne6FBgGiA.json"
+    },
+    {
+      "name": "Slam",
+      "rules": "2014",
+      "identifier": "animate-objects-slam",
+      "file": "packData/cpr-cat-features-2014/Slam_C8zL1jZIrxRHR3sU.json"
+    },
+    {
+      "name": "Soul of Artifice",
+      "rules": "2014",
+      "identifier": "soul-of-artifice",
+      "file": "packData/cpr-cat-features-2014/Soul_of_Artifice_MVHOJ3U8NA8fldB5.json"
+    },
+    {
+      "name": "Spell-Storing Item",
+      "rules": "2014",
+      "identifier": "spell-storing-item",
+      "file": "packData/cpr-cat-features-2014/Spell_Storing_Item_HiJM10T6gl2Bcj6q.json"
+    },
+    {
+      "name": "Steady Aim",
+      "rules": "2014",
+      "identifier": "steady-aim",
+      "file": "packData/cpr-cat-features-2014/Steady_Aim_sTdyAm2014Rg8xQz.json"
+    },
+    {
+      "name": "Superior Inspiration",
+      "rules": "2014",
+      "identifier": "superior-inspiration",
+      "file": "packData/cpr-cat-features-2014/Superior_Inspiration_pVU4RQJqqqIbINii.json"
+    },
+    {
+      "name": "The Right Tool for the Job",
+      "rules": "2014",
+      "identifier": "the-right-tool-for-the-job",
+      "file": "packData/cpr-cat-features-2014/The_Right_Tool_for_the_Job_G9xVn3kpP15wTl14.json"
+    },
+    {
+      "name": "Thrown Weapon Fighting",
+      "rules": "2014",
+      "identifier": "fighting-style-thrown-weapon-fighting",
+      "file": "packData/cpr-cat-features-2014/Thrown_Weapon_Fighting_mQ6DVvMKmnF7VPB0.json"
+    },
+    {
+      "name": "Unarmored Defense",
+      "rules": "2014",
+      "identifier": "unarmored-defense",
+      "file": "packData/cpr-cat-features-2014/Unarmored_Defense_Ct0WUgh22UZFzJbf.json"
+    },
+    {
+      "name": "Unarmored Defense",
+      "rules": "2014",
+      "identifier": "unarmored-defense",
+      "file": "packData/cpr-cat-features-2014/Unarmored_Defense_UXtf7mu9my8rhJeW.json"
+    },
+    {
+      "name": "Unarmored Movement",
+      "rules": "2014",
+      "identifier": "unarmored-movement",
+      "file": "packData/cpr-cat-features-2014/Unarmored_Movement_b3VMznzL4ztJU8BU.json"
+    },
+    {
+      "name": "Wild Companion",
+      "rules": "2014",
+      "identifier": "wild-companion",
+      "file": "packData/cpr-cat-features-2014/Wild_Companion_OVq4wxuRTdXowfNo.json"
+    },
+    {
+      "name": "Empowered Evocation",
+      "rules": "2024",
+      "identifier": "empowered-evocation",
+      "file": "packData/cpr-cat-features-2024/Empowered_Evocation_TkRGJkZm6bMIg42M.json"
+    },
+    {
+      "name": "Ethereal Fade",
+      "rules": "2024",
+      "identifier": "ethereal-fade",
+      "file": "packData/cpr-cat-features-2024/Ethereal_Fade_9Vq2mXfsB4gvbHoC.json"
+    },
+    {
+      "name": "Extreme Resilience",
+      "rules": "2024",
+      "identifier": "extreme-resilience",
+      "file": "packData/cpr-cat-features-2024/Extreme_Resilience_HYCJsLsKPvl2jIxq.json"
+    },
+    {
+      "name": "First Strike",
+      "rules": "2024",
+      "identifier": "first-strike",
+      "file": "packData/cpr-cat-features-2024/First_Strike_62I3K9Vh0Qld23HQ.json"
+    },
+    {
+      "name": "Full-Blooded",
+      "rules": "2024",
+      "identifier": "full-blooded",
+      "file": "packData/cpr-cat-features-2024/Full_Blooded_9yT8GBETSmIghvoh.json"
+    },
+    {
+      "name": "Hand of Death",
+      "rules": "2024",
+      "identifier": "hand-of-death",
+      "file": "packData/cpr-cat-features-2024/Hand_of_Death_k3vnzDWKHM4CkHZX.json"
+    },
+    {
+      "name": "Improved Potent Spellcasting",
+      "rules": "2024",
+      "identifier": "improved-elemental-fury",
+      "file": "packData/cpr-cat-features-2024/Improved_Potent_Spellcasting_hW58GWMBKWhu9Lwp.json"
+    },
+    {
+      "name": "Indomitable",
+      "rules": "2024",
+      "identifier": "indomitable",
+      "file": "packData/cpr-cat-features-2024/Indomitable_sIrrrlV7gTOFp7UK.json"
+    },
+    {
+      "name": "Magical Cunning",
+      "rules": "2024",
+      "identifier": "magical-cunning",
+      "file": "packData/cpr-cat-features-2024/Magical_Cunning_mC4nQxZv8TbRLd6s.json"
+    },
+    {
+      "name": "Out of Phase",
+      "rules": "2024",
+      "identifier": "out-of-phase",
+      "file": "packData/cpr-cat-features-2024/Out_of_Phase_piJuIYyHMSJl81gu.json"
+    },
+    {
+      "name": "Power Nap",
+      "rules": "2024",
+      "identifier": "power-nap",
+      "file": "packData/cpr-cat-features-2024/Power_Nap_xJgudF3jl97oltVe.json"
+    },
+    {
+      "name": "Restorative Rest",
+      "rules": "2024",
+      "identifier": "restorative-rest",
+      "file": "packData/cpr-cat-features-2024/Restorative_Rest_7AL2V6Csm87O9fqD.json"
+    },
+    {
+      "name": "Soul of Artifice",
+      "rules": "2024",
+      "identifier": "soul-of-artifice",
+      "file": "packData/cpr-cat-features-2024/Soul_of_Artifice_I5bce8uu655QHdTY.json"
+    },
+    {
+      "name": "Spell-Storing Item",
+      "rules": "2024",
+      "identifier": "spell-storing-item",
+      "file": "packData/cpr-cat-features-2024/Spell_Storing_Item_JqlJuXc74Hfses6A.json"
+    },
+    {
+      "name": "Stolen Power",
+      "rules": "2024",
+      "identifier": "stolen-power",
+      "file": "packData/cpr-cat-features-2024/Stolen_Power_OFzYYQfKzymgZHXd.json"
+    },
+    {
+      "name": "Tactical Shift",
+      "rules": "2024",
+      "identifier": "tactical-shift",
+      "file": "packData/cpr-cat-features-2024/Tactical_Shift_inwbPlUMWPSEPFx8.json"
+    },
+    {
+      "name": "Words of Creation",
+      "rules": "2024",
+      "identifier": "words-of-creation",
+      "file": "packData/cpr-cat-features-2024/Words_of_Creation_VMdig7YJyIH7yUyE.json"
+    },
+    {
+      "name": "Bound",
+      "rules": "2024",
+      "identifier": "bound",
+      "file": "packData/cpr-cat-monster-features-2024/Bound_qpwNbOR6OaWcsUFK.json"
+    },
+    {
+      "name": "Circle of Power",
+      "rules": "2014",
+      "identifier": "circle-of-power",
+      "file": "packData/cpr-cat-spells-2014/Circle_of_Power_sgVzYX6tMN3PkHaz.json"
+    },
+    {
+      "name": "Ice Knife",
+      "rules": "2014",
+      "identifier": "ice-knife",
+      "file": "packData/cpr-cat-spells-2014/Ice_Knife_IyGQPGJyQjUF1vGR.json"
+    },
+    {
+      "name": "Magic Weapon",
+      "rules": "2014",
+      "identifier": "magic-weapon",
+      "file": "packData/cpr-cat-spells-2014/Magic_Weapon_MagicWeapon2014a.json"
+    },
+    {
+      "name": "Prismatic Wall",
+      "rules": "2014",
+      "identifier": "prismatic-wall",
+      "file": "packData/cpr-cat-spells-2014/Prismatic_Wall_prismWallSpel014.json"
+    },
+    {
+      "name": "Slow",
+      "rules": "2014",
+      "identifier": "slow",
+      "file": "packData/cpr-cat-spells-2014/Slow_yqUDoxk4x0NWG5Bz.json"
+    },
+    {
+      "name": "Switcheroo",
+      "rules": "2014",
+      "identifier": "switcheroo",
+      "file": "packData/cpr-cat-spells-2014/Switcheroo_swItcheRoo2014aa.json"
+    },
+    {
+      "name": "Wall of Death",
+      "rules": "2014",
+      "identifier": "wall-of-death",
+      "file": "packData/cpr-cat-spells-2014/Wall_of_Death_wallDeathSpel014.json"
+    },
+    {
+      "name": "Wall of Force",
+      "rules": "2014",
+      "identifier": "wall-of-force",
+      "file": "packData/cpr-cat-spells-2014/Wall_of_Force_wallForceSpel014.json"
+    },
+    {
+      "name": "Wall of Gloom",
+      "rules": "2014",
+      "identifier": "wall-of-gloom",
+      "file": "packData/cpr-cat-spells-2014/Wall_of_Gloom_wallGloomSpel014.json"
+    },
+    {
+      "name": "Wall of Ice",
+      "rules": "2014",
+      "identifier": "wall-of-ice",
+      "file": "packData/cpr-cat-spells-2014/Wall_of_Ice_wallIceSpell0140.json"
+    },
+    {
+      "name": "Wall of Light",
+      "rules": "2014",
+      "identifier": "wall-of-light",
+      "file": "packData/cpr-cat-spells-2014/Wall_of_Light_wallLightSpel014.json"
+    },
+    {
+      "name": "Wall of Sand",
+      "rules": "2014",
+      "identifier": "wall-of-sand",
+      "file": "packData/cpr-cat-spells-2014/Wall_of_Sand_wallSandSpell014.json"
+    },
+    {
+      "name": "Wall of Snow",
+      "rules": "2014",
+      "identifier": "wall-of-snow",
+      "file": "packData/cpr-cat-spells-2014/Wall_of_Snow_wallSnowSpell014.json"
+    },
+    {
+      "name": "Wall of Stone",
+      "rules": "2014",
+      "identifier": "wall-of-stone",
+      "file": "packData/cpr-cat-spells-2014/Wall_of_Stone_wallStoneSpel014.json"
+    },
+    {
+      "name": "Wall of Thorns",
+      "rules": "2014",
+      "identifier": "wall-of-thorns",
+      "file": "packData/cpr-cat-spells-2014/Wall_of_Thorns_wallThornSpel014.json"
+    },
+    {
+      "name": "Wall of Water",
+      "rules": "2014",
+      "identifier": "wall-of-water",
+      "file": "packData/cpr-cat-spells-2014/Wall_of_Water_wallWaterSpel014.json"
+    },
+    {
+      "name": "Wind Wall",
+      "rules": "2014",
+      "identifier": "wind-wall",
+      "file": "packData/cpr-cat-spells-2014/Wind_Wall_3YC9vTm95Tn3G8j8.json"
+    },
+    {
+      "name": "Circle of Power",
+      "rules": "2024",
+      "identifier": "circle-of-power",
+      "file": "packData/cpr-cat-spells-2024/Circle_of_Power_1RqjxyETHaORu74g.json"
+    },
+    {
+      "name": "Conjure Elemental",
+      "rules": "2024",
+      "identifier": "conjure-elemental",
+      "file": "packData/cpr-cat-spells-2024/Conjure_Elemental_phbsplConjureEle.json"
+    },
+    {
+      "name": "Crimson Lash",
+      "rules": "2024",
+      "identifier": "crimson-lash",
+      "file": "packData/cpr-cat-spells-2024/Crimson_Lash_mU9ixDzFwghdEjK1.json"
+    },
+    {
+      "name": "Detect Thoughts",
+      "rules": "2024",
+      "identifier": "detect-thoughts",
+      "file": "packData/cpr-cat-spells-2024/Detect_Thoughts_SqEZFs2l9ieIt8Oj.json"
+    },
+    {
+      "name": "Find Steed",
+      "rules": "2024",
+      "identifier": "find-steed",
+      "file": "packData/cpr-cat-spells-2024/Find_Steed_tJ97ImbEEQ5yim3D.json"
+    },
+    {
+      "name": "Hail of Thorns",
+      "rules": "2024",
+      "identifier": "hail-of-thorns",
+      "file": "packData/cpr-cat-spells-2024/Hail_of_Thorns_NaRpk5mRWUr2koZy.json"
+    },
+    {
+      "name": "Ice Knife",
+      "rules": "2024",
+      "identifier": "ice-knife",
+      "file": "packData/cpr-cat-spells-2024/Ice_Knife_xL6w1WJkAfnagVl4.json"
+    },
+    {
+      "name": "Lightning Arrow",
+      "rules": "2024",
+      "identifier": "lightning-arrow",
+      "file": "packData/cpr-cat-spells-2024/Lightning_Arrow_lightningArrw024.json"
+    },
+    {
+      "name": "Magic Weapon",
+      "rules": "2024",
+      "identifier": "magic-weapon",
+      "file": "packData/cpr-cat-spells-2024/Magic_Weapon_MagicWeapon2024a.json"
+    },
+    {
+      "name": "Prismatic Wall",
+      "rules": "2024",
+      "identifier": "prismatic-wall",
+      "file": "packData/cpr-cat-spells-2024/Prismatic_Wall_prismWallSpel024.json"
+    },
+    {
+      "name": "Ray of Enfeeblement",
+      "rules": "2024",
+      "identifier": "ray-of-enfeeblement",
+      "file": "packData/cpr-cat-spells-2024/Ray_of_Enfeeblement_Op4z7Gk0bF85gYLJ.json"
+    },
+    {
+      "name": "Slow",
+      "rules": "2024",
+      "identifier": "slow",
+      "file": "packData/cpr-cat-spells-2024/Slow_phbsplSlow000000.json"
+    },
+    {
+      "name": "Wall of Force",
+      "rules": "2024",
+      "identifier": "wall-of-force",
+      "file": "packData/cpr-cat-spells-2024/Wall_of_Force_wallForceSpel024.json"
+    },
+    {
+      "name": "Wall of Ice",
+      "rules": "2024",
+      "identifier": "wall-of-ice",
+      "file": "packData/cpr-cat-spells-2024/Wall_of_Ice_wallIceSpell0240.json"
+    },
+    {
+      "name": "Wall of Stone",
+      "rules": "2024",
+      "identifier": "wall-of-stone",
+      "file": "packData/cpr-cat-spells-2024/Wall_of_Stone_wallStoneSpel024.json"
+    },
+    {
+      "name": "Wall of Thorns",
+      "rules": "2024",
+      "identifier": "wall-of-thorns",
+      "file": "packData/cpr-cat-spells-2024/Wall_of_Thorns_wallThornSpel024.json"
+    },
+    {
+      "name": "Wind Wall",
+      "rules": "2024",
+      "identifier": "wind-wall",
+      "file": "packData/cpr-cat-spells-2024/Wind_Wall_M3m5bfKJks6Qn9HZ.json"
+    },
+    {
+      "name": "Arcane Grimoire +1",
+      "rules": "2014",
+      "identifier": "arcane-grimoire-1",
+      "file": "packData/cpr-cat-equipment-2014/Arcane_Grimoire__1_b0EiP6nhdzlLkCcz.json"
+    },
+    {
+      "name": "Arcane Grimoire +2",
+      "rules": "2014",
+      "identifier": "arcane-grimoire-2",
+      "file": "packData/cpr-cat-equipment-2014/Arcane_Grimoire__2_YubJpNthhDyFImJR.json"
+    },
+    {
+      "name": "Arcane Grimoire +3",
+      "rules": "2014",
+      "identifier": "arcane-grimoire-3",
+      "file": "packData/cpr-cat-equipment-2014/Arcane_Grimoire__3_EfapTKklCXeTTHqG.json"
+    },
+    {
+      "name": "Mind Sharpener",
+      "rules": "2014",
+      "identifier": "mind-sharpener",
+      "file": "packData/cpr-cat-equipment-2014/Mind_Sharpener_zOU0RnhuyOs2wYk0.json"
+    },
+    {
+      "name": "Repulsion Shield",
+      "rules": "2014",
+      "identifier": "repulsion-shield",
+      "file": "packData/cpr-cat-equipment-2014/Repulsion_Shield_mCjDBbamYNO7Kj4s.json"
+    },
+    {
+      "name": "Boots of the Winding Path",
+      "rules": "2024",
+      "identifier": "boots-of-the-winding-path",
+      "file": "packData/cpr-cat-equipment-2024/Boots_of_the_Winding_Path_7zmYBDc2bGX2dali.json"
+    },
+    {
+      "name": "Helm of Awareness",
+      "rules": "2024",
+      "identifier": "helm-of-awareness",
+      "file": "packData/cpr-cat-equipment-2024/Helm_of_Awareness_lVh27pph35nW7Ptq.json"
+    },
+    {
+      "name": "Mind Sharpener",
+      "rules": "2024",
+      "identifier": "mind-sharpener",
+      "file": "packData/cpr-cat-equipment-2024/Mind_Sharpener_zN5c9zlUMMTtV27a.json"
+    },
+    {
+      "name": "Repulsion Shield",
+      "rules": "2024",
+      "identifier": "repulsion-shield",
+      "file": "packData/cpr-cat-equipment-2024/Repulsion_Shield_682OLPomaSJHkGcL.json"
+    },
+    {
+      "name": "Spell-Refueling Ring",
+      "rules": "2024",
+      "identifier": "spell-refueling-ring",
+      "file": "packData/cpr-cat-equipment-2024/Spell_Refueling_Ring_fNOtb0krvdTJzdlQ.json"
+    }
+  ],
+  "supportPacks": [
+    "CATSummons2014",
+    "CATSummons2024",
+    "CATFeatures2014",
+    "CATFeatures2024",
+    "CATMonsterFeatures2024",
+    "CATSpells2014",
+    "CATSpells2024",
+    "CATEquipment2014",
+    "CATEquipment2024",
+    "CATMisc2014",
+    "CATMisc2024",
+    "CATAutomationItems"
+  ]
+}

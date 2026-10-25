@@ -20,8 +20,8 @@ async function used({trigger: {entity: item}, workflow}) {
             duration: {value: 1, units: 'turns'}, start: {round: game.combat?.round ?? 0, turn: game.combat?.turn ?? 0},
             system: {changes: [
                 {
-                    key: 'flags.midi-qol.min.ability.save.all',
-                    value: 99,
+                    key: 'flags.midi-qol.success.ability.save.all',
+                    value: true,
                     type: 'override',
                     priority: 120
                 }

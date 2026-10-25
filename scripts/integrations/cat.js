@@ -1,11 +1,15 @@
 import {custom} from '../events/custom.js';
-import {buildCatMigration, getMigrationDocuments, toCatConfig, indexFieldsWithoutOverlaps} from './catMigration.js';
+import {buildCatMigration, getMigrationDocuments, toCatConfig, indexFieldsWithoutOverlaps, legacySetupBinding} from './catMigration.js';
+import {itemEvent} from '../events/item.js';
+import {registerNativeContent, nativeDescriptor} from './nativeContent.js';
 
 const SOURCE = 'chris-premades';
 const metadata = new Map();
 let migrationPromise;
 
 function descriptor(document) {
+    const native = nativeDescriptor(document);
+    if (native) return native;
     const info = document.flags?.[SOURCE]?.info;
     const rules = document.system?.source?.rules === '2024' ? 'modern' : 'legacy';
     const macro = info?.identifier ? custom.getMacro(info.identifier, rules) : undefined;
@@ -15,6 +19,8 @@ function descriptor(document) {
 export async function migrateDocument(document) {
     if (!document || document.pack && document.compendium?.locked) return false;
     const updates = buildCatMigration(document);
+    const binding = legacySetupBinding(document.flags);
+    if (binding) updates['flags.cat.macros.item'] = binding;
     if (!Object.keys(updates).length) return false;
     await document.update(updates, {cprCatMigration: true});
     return true;
@@ -59,7 +65,9 @@ export async function migrate({compendiums = true} = {}) {
 // CAT owns configuration; the existing CPR functions retain their event bindings.
 // Do not register those bindings in CAT too: that would execute each automation twice.
 export async function ready() {
-    if (!globalThis.cat?.api) throw new Error('CPR requires Coven\'s Automation Toolkit 0.1.1 or newer.');
+    if (!globalThis.cat?.api) throw new Error('CPR requires Coven\'s Automation Toolkit 0.1.3 or newer.');
+    cat.api.registerSourceName('chris-premades-native', 'CPR CAT helpers');
+    await registerNativeContent();
     if (game.users.activeGM?.id === game.user.id) {
         const queueKey = Symbol.for('cpr.gps.catSourceSettings');
         const task = (globalThis[queueKey] ?? Promise.resolve()).then(async () => {
@@ -72,14 +80,20 @@ export async function ready() {
     const ignoredPackIds = [];
     for (const pack of game.packs) {
         if (pack.metadata.packageName !== SOURCE || pack.documentName !== 'Item') continue;
-        if (pack.collection.endsWith('.CPREmbeddedMacroSampleItems') || pack.collection.endsWith('.CPRMiscellaneous')) {
+        if (pack.collection.endsWith('.CPREmbeddedMacroSampleItems') || pack.collection.endsWith('.CPRMiscellaneous') || pack.collection.endsWith('.CATAutomationItems') || /\.CAT(?:Misc|Summons)/.test(pack.collection)) {
             ignoredPackIds.push(pack.collection);
             continue;
         }
-        const index = await pack.getIndex({fields: ['system.identifier', 'system.source', 'flags.chris-premades', 'type']});
+        const index = await pack.getIndex({fields: ['system.identifier', 'system.source', 'system.sourceItem', 'flags.chris-premades', 'flags.cat', 'type']});
         for (const entry of index) metadata.set(entry.uuid, descriptor(entry));
     }
     cat.api.registerSourceName(SOURCE, game.modules.get(SOURCE).title);
+    cat.api.registerFnMacro({source: SOURCE, identifier: 'legacy-item-setup', rules: 'all', item: [{
+        pass: 'medkit', priority: 50, macro: async ({document}) => {
+            await itemEvent.executeMacroPass(document, 'itemMedkit');
+            await itemEvent.executeMacroPass(document, 'actorMedkit');
+        }
+    }]});
     await cat.api.registerAutomationModule(SOURCE, {ignoredPackIds, infoFetcherCallback: (document) => metadata.get(document.uuid) ?? descriptor(document)});
     for (const [identifier, macro] of Object.entries(globalThis.chrisPremades.legacyMacros)) {
         if (!macro.isGenericFeature) continue;
@@ -101,7 +115,12 @@ export function init() {
     }
     game.settings.register(SOURCE, 'catMigrationVersion', {scope: 'world', config: false, type: Number, default: 0});
     // Imported items acquire CAT metadata without waiting for the next startup.
-    Hooks.on('preCreateItem', document => document.updateSource(buildCatMigration(document)));
+    Hooks.on('preCreateItem', document => {
+        const updates = buildCatMigration(document);
+        const binding = legacySetupBinding(document.flags);
+        if (binding) updates['flags.cat.macros.item'] = binding;
+        document.updateSource(updates);
+    });
     Hooks.on('preUpdateItem', syncConfig);
     Hooks.on('preUpdateActiveEffect', syncConfig);
     Hooks.once('catReady', () => ready().catch(error => console.error('CPR CAT integration failed', error)));
@@ -110,6 +129,9 @@ export function init() {
 export function syncConfig(document, changes, options = {}) {
     if (options.cprCatMigration) return;
     const expanded = foundry.utils.expandObject(changes);
+    const flags = expanded.flags ?? document.flags;
+    const binding = legacySetupBinding(flags);
+    if (binding) changes['flags.cat.macros.item'] = binding;
     const config = expanded.flags?.cat?.config;
     if (config && document.flags[SOURCE]) {
         for (const [key, value] of Object.entries(config)) changes['flags.chris-premades.config.' + key] = value;

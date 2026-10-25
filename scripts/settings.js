@@ -5,8 +5,6 @@ import {conditions} from './extensions/conditions.js';
 import {effects} from './extensions/effects.js';
 import {tokens} from './extensions/tokens.js';
 import {dae} from './integrations/dae.js';
-import {gambitPremades} from './integrations/gambitsPremades.js';
-import {miscPremades} from './integrations/miscPremades.js';
 import {vae} from './integrations/vae.js';
 import {constants, genericUtils} from './utils.js';
 import {effectInterface} from './applications/effectInterface.js';
@@ -83,16 +81,6 @@ export function registerSettings() {
         onChange: value => constants.setUseLocalCompendium(value)
     });
     addSetting({
-        key: 'additionalCompendiums',
-        type: Object,
-        default: {
-            'chris-premades': 1,
-            'gambits-premades': 2,
-            'midi-item-showcase-community': 3
-        },
-        category: 'compendium'
-    });
-    addSetting({
         key: 'monsterCompendium',
         type: String,
         default: 'world.ddb-' + game.world.id + '-ddb-monsters',
@@ -139,54 +127,6 @@ export function registerSettings() {
         type: Boolean,
         default: true,
         category: 'mechanics'
-    });
-    addSetting({
-        key: 'permissionsUpdateItem',
-        type: Number,
-        default: 4,
-        category: 'general',
-        choices: {
-            1: 'CHRISPREMADES.Settings.Permissions.1',
-            2: 'CHRISPREMADES.Settings.Permissions.2',
-            3: 'CHRISPREMADES.Settings.Permissions.3',
-            4: 'CHRISPREMADES.Settings.Permissions.4'
-        }
-    });
-    addSetting({
-        key: 'permissionsAutomateItem',
-        type: Number,
-        default: 4,
-        category: 'general',
-        choices: {
-            1: 'CHRISPREMADES.Settings.Permissions.1',
-            2: 'CHRISPREMADES.Settings.Permissions.2',
-            3: 'CHRISPREMADES.Settings.Permissions.3',
-            4: 'CHRISPREMADES.Settings.Permissions.4'
-        }
-    });
-    addSetting({
-        key: 'permissionsConfigureItem',
-        type: Number,
-        default: 1,
-        category: 'general',
-        choices: {
-            1: 'CHRISPREMADES.Settings.Permissions.1',
-            2: 'CHRISPREMADES.Settings.Permissions.2',
-            3: 'CHRISPREMADES.Settings.Permissions.3',
-            4: 'CHRISPREMADES.Settings.Permissions.4'
-        }
-    });
-    addSetting({
-        key: 'permissionsConfigureHomebrew',
-        type: Number,
-        default: 4,
-        category: 'general',
-        choices: {
-            1: 'CHRISPREMADES.Settings.Permissions.1',
-            2: 'CHRISPREMADES.Settings.Permissions.2',
-            3: 'CHRISPREMADES.Settings.Permissions.3',
-            4: 'CHRISPREMADES.Settings.Permissions.4'
-        }
     });
     addSetting({
         key: 'colorizeAutomatedAnimations',
@@ -447,36 +387,6 @@ export function registerSettings() {
         category: 'interface'
     });
     addSetting({
-        key: 'gambitPremades',
-        type: Number,
-        default: 1,
-        category: 'integration',
-        choices: {
-            1: 'CHRISPREMADES.Settings.gambitPremades.1',
-            2: 'CHRISPREMADES.Settings.gambitPremades.2',
-            3: 'CHRISPREMADES.Settings.gambitPremades.3',
-            4: 'CHRISPREMADES.Settings.gambitPremades.4'
-        },
-        onChange: value => {
-            if (game.modules.get('gambits-premades')?.active) gambitPremades.init(value);
-        }
-    });
-    addSetting({
-        key: 'miscPremades',
-        type: Number,
-        default: 1,
-        category: 'integration',
-        choices: {
-            1: 'CHRISPREMADES.Settings.miscPremades.1',
-            2: 'CHRISPREMADES.Settings.miscPremades.2',
-            3: 'CHRISPREMADES.Settings.miscPremades.3',
-            4: 'CHRISPREMADES.Settings.miscPremades.4'
-        },
-        onChange: value => {
-            if (game.modules.get('midi-item-showcase-community')?.active) miscPremades.init(value);
-        }
-    });
-    addSetting({
         key: 'epicRolls',
         type: Boolean,
         default: false,
@@ -487,18 +397,6 @@ export function registerSettings() {
         type: Boolean,
         default: false,
         category: 'mechanics'
-    });
-    addSetting({
-        key: 'lastUpdateCheck',
-        type: Number,
-        default: 0,
-        category: 'development'
-    });
-    addSetting({
-        key: 'checkForUpdates',
-        type: Boolean,
-        default: true,
-        category: 'general'
     });
     addSetting({
         key: 'displayNestedConditions',
@@ -557,12 +455,6 @@ export function registerSettings() {
         type: Boolean,
         default: false,
         category: 'integration'
-    });
-    addSetting({
-        key: 'seenTour',
-        type: Boolean,
-        default: false,
-        category: 'development'
     });
     addSetting({
         key: 'classSpellList',

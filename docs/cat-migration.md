@@ -1,8 +1,8 @@
 # CAT integration
 
-CPR 2.1.0 requires Coven's Automation Toolkit 0.1.1, Foundry 14.368 or later, D&D 6.0.x, Midi-QOL 14.6.0, and DAE 14.6.0.
+CPR 2.2.0 requires Coven's Automation Toolkit 0.1.3, Foundry 14.369 or later, D&D 6.0.x, Midi-QOL 14.6.4, and DAE 14.6.3.
 
-CAT lists CPR's existing compendiums and renders their configuration and shared dialogs. The existing CPR functions and event bindings remain in use. They are not registered a second time as CAT event handlers. The public `chrisPremades` API remains available to world macros.
+CAT is the sole automation catalog, updater, and version authority. CPR's separate Medkit applications, update warnings, and source preferences have been removed. CAT lists CPR's existing compendiums and the additional native content, and renders their configuration and shared dialogs. The existing CPR functions and event bindings remain in use. Legacy workflow bindings are not registered a second time as CAT event handlers. Only their item setup callbacks bridge to CAT updates. New upstream content uses native CAT callbacks under `chris-premades-native`, which prevents collisions with legacy generic helpers. The public `chrisPremades` API remains available to world macros.
 
 The active GM migrates world items, actor items, embedded effects and activities, and unlinked tokens on every scene. The first migration also visits unlocked world Item and Actor compendiums. Locked compendiums remain read-only; imported items are migrated when created. Run `await chrisPremades.cat.migrate()` to retry a migration or include compendiums again. The result lists changed documents, failures, and locked packs. Failures are logged with document UUIDs and retried on the next startup.
 
@@ -12,4 +12,4 @@ CAT configuration panels retain source preferences already set by the GM. On fir
 
 Teleport placement uses CAT's region crosshairs with a separate contrasting destination ring. The range boundary is on the canvas controls layer. A small prompt sits above the hotbar. Clicking confirms the clicked position, including without a prior mouse move; an invalid destination remains open and turns red. Escape or the cancel control closes the picker. These markers work with spell animations disabled.
 
-Validation used Foundry 14.369, D&D 6.0.6, CAT 0.1.1, Midi-QOL 14.6.0, and DAE 14.6.0. Checks cover saved settings, CAT configuration edits on an unlinked NPC, GPS reaction form results and pause controls, teleport selection and cancellation, Dimension Door moving two tokens, and automatic NPC Sneak Attack without duplicate damage. The regression suite also checks every shipped CPR item macro binding. These checks do not play through every individual spell or class feature.
+Current verification used Foundry 14.369, D&D 6.0.6, CAT 0.1.3, Midi-QOL 14.6.4, and DAE 14.6.3. Checks cover CAT version authority despite conflicting legacy flags, retained configuration, setup callbacks after CAT updates, NPC Sneak Attack critical damage, Ice Knife attack and area explosion, GPS dialog form selections, and teleport marker cleanup. Both source and bundled builds were loaded in isolated worlds. Earlier teleport and rider regressions remain in the suite. Native CAT bindings and compendium references are audited. These checks do not play through every individual spell or class feature.
