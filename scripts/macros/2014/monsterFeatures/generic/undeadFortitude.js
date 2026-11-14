@@ -43,13 +43,13 @@ async function apply({trigger, workflow, ditem}) {
         featureData.system.activities = activityData;
         featureWorkflow = await workflowUtils.syntheticItemDataRoll(featureData, targetActor, [trigger.token]);
     }
-    if (featureWorkflow.failedSaves.size === 1) return;
+    if (featureWorkflow.failedSaves.count === 1) return;
     workflowUtils.setDamageItemDamage(ditem, ditem.oldHP - 1);
 }
 export let undeadFortitude = {
     name: 'Undead Fortitude',
     translation: 'CHRISPREMADES.Macros.UndeadFortitude.Name',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         actor: [
             {

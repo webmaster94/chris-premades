@@ -33,14 +33,14 @@ async function use({trigger, workflow}) {
         if (color === 'random') selectedColor = colors[Math.floor(Math.random() * colors.length)];
         let animation = 'jb2a.eldritch_blast.' + selectedColor;
         for (let i = 0; i < (detail.value); i++) {
-            animationUtils.simpleAttack(workflow.token, attackWorkflow.targets.first(), animation, {sound: sound, missed: !attackWorkflow.hitTargets.has(attackWorkflow.targets.first())});
+            animationUtils.simpleAttack(workflow.token, attackWorkflow.targets.tokens[0], animation, {sound: sound, missed: !attackWorkflow.hitTargets.has(attackWorkflow.targets.tokens[0])});
             if (detail.value > 1 && i != detail.value) await genericUtils.sleep(1000);
         }
     }
 }
 export let darkBolt = {
     name: 'Darkbolt',
-    version: '2.3.0',
+    version: '2.3.1',
     rules: 'legacy',
     midi: {
         item: [

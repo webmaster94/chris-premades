@@ -78,14 +78,14 @@ async function attackHelper(sourceToken, summonToken, sourceItem, spellLevel) {
     }
     if (!target) return;
     let attackWorkflow = await workflowUtils.syntheticActivityRoll(attackFeature, [target], {atLevel: spellLevel});
-    if (!attackWorkflow.hitTargets.size) return;
+    if (!attackWorkflow.hitTargets.count) return;
 }
 async function early({dialog}) {
     dialog.configure = false;
 }
 export let conjureFey = {
     name: 'Conjure Fey',
-    version: '1.3.84',
+    version: '2.3.1',
     rules: 'modern',
     midi: {
         item: [

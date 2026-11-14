@@ -1,3 +1,10 @@
+# 2.3.1 - Midi QOL Enhanced integration
+- Completes the token collection update for returned sub-workflows, including save-result counts and actor-only target lookups.
+- Accepts document-mode damage hooks and preserves the exact target actor. Removing targets keeps other off-canvas documents.
+- Uses Midi's correctly cased checkGMstatus option for remote rolls.
+- Targets Midi QOL Enhanced 14.6.12.1, which supports D&D 6.1. See docs/midi-14.6.12.1-integration.md for the audit and two findings to return to the Midi maintainer.
+- Bounded regressions cover an off-canvas damage callback and a returned failed-save collection. Existing regression, syntax, catalog and build checks pass. No in-game playthrough was performed.
+
 # 2.3.0 - D&D 6.1 and upstream automations
 - Targets D&D 6.1.0. Fixes rider flag deletion without losing effect riders or restoring removed activities.
 - Imports CPR's CAT-native 2.1.8 fixes and adds 143 previously missing item definitions, for 257 native catalog entries plus required payloads. Covers additional high-level spells, bard and barbarian subclasses, magic items, firearms, and third-party weapon masteries. Existing fork automations and UUIDs remain available.

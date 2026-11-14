@@ -98,7 +98,7 @@ async function onHit({trigger: {token, entity: effect}, workflow}) {
     if (!feature) return;
     let activityData = activityUtils.withChangedDamage(feature, appliedDamage.toString());
     let targetWorkflow = await workflowUtils.syntheticActivityDataRoll(activityData, originItem, originItem.actor, [bond.object]);
-    if (targetWorkflow.targets.first().actor.system.attributes.hp.value != 0) return;
+    if (targetWorkflow.targets.documents[0].actor.system.attributes.hp.value != 0) return;
     await genericUtils.remove(effect);
 }
 async function movedTarget({trigger}) {
@@ -134,7 +134,7 @@ async function early({dialog}) {
 }
 export let wardingBond = {
     name: 'Warding Bond',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         item: [
             {

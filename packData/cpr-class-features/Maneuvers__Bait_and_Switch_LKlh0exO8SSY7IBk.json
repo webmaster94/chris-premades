@@ -196,7 +196,7 @@
     "chris-premades": {
       "info": {
         "name": "Maneuvers: Bait and Switch",
-        "version": "2.3.0",
+        "version": "2.3.1",
         "identifier": "maneuversBaitAndSwitch",
         "source": "chris-premades"
       },

@@ -37,7 +37,7 @@ async function targeted({trigger: {entity: effect}, workflow}) {
     let feature = activityUtils.getActivityByIdentifier(originItem, 'sanctuarySave', {strict: true});
     if (!feature) return;
     let saveWorkflow = await workflowUtils.syntheticActivityRoll(feature, [workflow.token]);
-    if (!saveWorkflow.failedSaves.size) return;
+    if (!saveWorkflow.failedSaves.count) return;
     let playAnimation = itemUtils.getConfig(originItem, 'playAnimation');
     if (playAnimation && animationUtils.jb2aCheck()) {
         new Sequence({moduleName:'chris-premades', softFail:true}).effect().atLocation(targetToken).scaleToObject(1.25).fadeIn(500).fadeOut(500).playbackRate(2).file('jb2a.energy_field.02.above.blue').play();
@@ -51,7 +51,7 @@ async function targeted({trigger: {entity: effect}, workflow}) {
 
 export let sanctuary = {
     name: 'Sanctuary',
-    version: '2.3.0',
+    version: '2.3.1',
     hasAnimation: true,
     midi: {
         item: [

@@ -132,7 +132,7 @@ async function targetMoved({trigger: {entity: effect}, options}) {
     let originItem = await effectUtils.getOriginItem(effect);
     if (!originItem) return;
     let spellWorkflow = await workflowUtils.syntheticActivityRoll(feature, [token]);
-    if (!spellWorkflow.failedSaves.size) {
+    if (!spellWorkflow.failedSaves.count) {
         await combatUtils.setTurnCheck(effect, 'compelledDuel');
         return;
     }
@@ -171,7 +171,7 @@ async function targetMoved({trigger: {entity: effect}, options}) {
 }
 export let compelledDuel = {
     name: 'Compelled Duel',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         item: [
             {

@@ -30,7 +30,7 @@ async function damage({trigger: {entity: effect}, workflow}) {
     let feature = activityUtils.getActivityByIdentifier(await effectUtils.getOriginItem(effect), 'wrathfulSmiteFrighten', {strict: true});
     if (!feature) return;
     let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, [workflow.hitTargets.tokens[0]]);
-    let targetEffect = featureWorkflow.failedSaves.first()?.actor?.appliedEffects?.find(currEffect => currEffect.origin === featureWorkflow.item.uuid);
+    let targetEffect = featureWorkflow.failedSaves.documents[0]?.actor?.appliedEffects?.find(currEffect => currEffect.origin === featureWorkflow.item.uuid);
     if (!targetEffect) {
         await genericUtils.remove(effect);
         return;
@@ -44,7 +44,7 @@ async function damage({trigger: {entity: effect}, workflow}) {
 }
 export let wrathfulSmite = {
     name: 'Wrathful Smite',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         item: [
             {

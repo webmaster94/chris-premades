@@ -9,7 +9,7 @@ async function late({workflow}) {
     if (!feature) return;
     let activityData = activityUtils.withChangedDamage(feature, {number: 3, denomination: 6}, ['poison']);
     let featureWorkflow = await workflowUtils.syntheticActivityDataRoll(activityData, workflow.item, workflow.actor, [targetToken]);
-    if (!featureWorkflow.failedSaves.size) return;
+    if (!featureWorkflow.failedSaves.count) return;
     let effectData = {
         name: workflow.item.name,
         img: workflow.item.img,
@@ -36,7 +36,7 @@ async function turnStart({trigger: {entity: effect, token}}) {
     let numDice = effect.flags['chris-premades'].potionOfPoison.numDice;
     let activityData = activityUtils.withChangedDamage(feature, {number: numDice, denomination: 6}, ['poison']);
     let featureWorkflow = await workflowUtils.syntheticActivityDataRoll(activityData, originItem, originItem.actor, [token]);
-    if (featureWorkflow.failedSaves.size) return;
+    if (featureWorkflow.failedSaves.count) return;
     if (numDice === 1) {
         await genericUtils.remove(effect);
         return;
@@ -45,7 +45,7 @@ async function turnStart({trigger: {entity: effect, token}}) {
 }
 export let potionOfPoison = {
     name: 'Potion of Poison',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         item: [
             {

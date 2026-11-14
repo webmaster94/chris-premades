@@ -370,7 +370,7 @@
     "chris-premades": {
       "info": {
         "name": "Scorching Ray",
-        "version": "2.3.0",
+        "version": "2.3.1",
         "hasAnimation": true,
         "identifier": "scorchingRay",
         "source": "chris-premades"

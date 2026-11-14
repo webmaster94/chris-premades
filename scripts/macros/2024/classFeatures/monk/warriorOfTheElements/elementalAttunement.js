@@ -137,7 +137,7 @@ async function late({trigger: {entity: effect}, workflow}) {
     let distance = await dialogUtils.buttonDialog(item.name, 'CHRISPREMADES.Macros.Crusher.Move', buttons);
     if (!distance || distance === '0') return;
     let save = await workflowUtils.syntheticActivityRoll(activity, workflow.hitTargets.tokens);
-    if (!save?.failedSaves.size) return;
+    if (!save?.failedSaves.count) return;
     await tokenUtils.pushToken(workflow.token, target, distance);
 }
 async function added({trigger: {entity: item}}) {
@@ -145,7 +145,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let elementalAttunement = {
     name: 'Elemental Attunement',
-    version: '2.3.0',
+    version: '2.3.1',
     rules: 'modern',
     hasAnimation: true,
     midi: {

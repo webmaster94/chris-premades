@@ -698,7 +698,7 @@
     "chris-premades": {
       "info": {
         "name": "Fey Step",
-        "version": "2.3.0",
+        "version": "2.3.1",
         "identifier": "eladrinFeyStep",
         "source": "chris-premades",
         "hasAnimation": true

@@ -363,7 +363,7 @@
     "chris-premades": {
       "info": {
         "identifier": "disarmingShot",
-        "version": "2.3.0",
+        "version": "2.3.1",
         "source": "chris-premades"
       },
       "hiddenActivities": [

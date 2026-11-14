@@ -41,14 +41,14 @@ async function longJump({trigger, workflow}) {
         let activity = activityUtils.getActivityByIdentifier(workflow.item, 'lowObstacle');
         if (!activity) return;
         let lowObstacle = await workflowUtils.syntheticActivityRoll(activity, [workflow.token]);
-        if (lowObstacle.failedSaves.size) playAnimation = false;
+        if (lowObstacle.failedSaves.count) playAnimation = false;
     }
     let addProne = false;
     if (selection.difficultTerrain) {
         let activity = activityUtils.getActivityByIdentifier(workflow.item, 'difficultTerrain');
         if (!activity) return;
         let difficultTerrain = await workflowUtils.syntheticActivityRoll(activity, [workflow.token]);
-        if (difficultTerrain.failedSaves.size) addProne = true;
+        if (difficultTerrain.failedSaves.count) addProne = true;
     }
     if (playAnimation) {
         let position = await crosshairUtils.aimCrosshair({
@@ -115,7 +115,7 @@ async function longJump({trigger, workflow}) {
 }
 export let jump = {
     name: 'Jump',
-    version: '2.3.0',
+    version: '2.3.1',
     rules: 'modern',
     midi: {
         item: [

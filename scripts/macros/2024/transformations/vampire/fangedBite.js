@@ -6,7 +6,7 @@ async function damage({trigger, workflow}) {
     let activity = activityUtils.getActivityByIdentifier(workflow.item, 'blood', {strict: true});
     if (!activity) return;
     let targetWorkflow = await workflowUtils.syntheticActivityRoll(activity, Array.from(workflow.hitTargets.tokens));
-    if (!targetWorkflow.failedSaves.size) return;
+    if (!targetWorkflow.failedSaves.count) return;
     await workflowUtils.bonusDamage(workflow, itemUtils.getConfig(workflow.item, 'formula'), {ignoreCrit: true, damageType: itemUtils.getConfig(workflow.item, 'damageType')});
     genericUtils.setProperty(workflow, 'chris-premades.fangedBiteFailed', true);
 }
@@ -31,7 +31,7 @@ async function early({trigger, workflow}) {
 }
 export let vampireFangedBite = {
     name: 'Stage 1 Boon: Fanged Bite',
-    version: '2.3.0',
+    version: '2.3.1',
     rules: 'modern',
     midi: {
         item: [

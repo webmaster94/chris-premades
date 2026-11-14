@@ -7,7 +7,7 @@ async function use({workflow}) {
     let useClairvoyant = clairvoyant ? activityUtils.getActivityByIdentifier(clairvoyant, 'use', {strict: true}) : false;
     if (useClairvoyant && clairvoyant?.system.uses.value && await dialogUtils.confirmUseItem(clairvoyant)) {
         let featureRoll = await workflowUtils.syntheticActivityRoll(useClairvoyant, [target], {consumeUsage: true, consumeResources: true});
-        failedSave = featureRoll?.failedSaves.size > 0;
+        failedSave = featureRoll?.failedSaves.count > 0;
     }
     let effectData = {
         name: workflow.item.name,
@@ -46,7 +46,7 @@ async function use({workflow}) {
 }
 export let awakenedMind = {
     name: 'Awakened Mind',
-    version: '2.3.0',
+    version: '2.3.1',
     rules: 'modern',
     midi: {
         item: [

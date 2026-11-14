@@ -9,7 +9,7 @@ async function targeted({trigger, workflow}) {
         let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name}), {userId: socketUtils.firstOwner(token.document, true)});
         if (!selection) continue;
         let targetWorkflow = await workflowUtils.syntheticItemRoll(item, [workflow.token], {userId: socketUtils.firstOwner(token.document, true), consumeResources: true, consumeUsage: true});
-        if (!targetWorkflow.failedSaves.size) continue;
+        if (!targetWorkflow.failedSaves.count) continue;
         removeTargets.push(token);
         if (!workflow.item.system.level) continue;
         if (!actorUtils.hasSpellSlots(token.actor, workflow.item.system.level)) continue;
@@ -57,7 +57,7 @@ async function targeted({trigger, workflow}) {
 }
 export let spellThief = {
     name: 'Spell Thief',
-    version: '2.3.0',
+    version: '2.3.1',
     rules: 'modern',
     midi: {
         actor: [

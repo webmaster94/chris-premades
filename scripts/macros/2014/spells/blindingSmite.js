@@ -30,7 +30,7 @@ async function damage({trigger: {entity: effect}, workflow}) {
     let feature = activityUtils.getActivityByIdentifier(await effectUtils.getOriginItem(effect), 'blindingSmiteBlind', {strict: true});
     if (!feature) return;
     let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, [workflow.hitTargets.tokens[0]]);
-    let targetEffect = featureWorkflow.failedSaves.first()?.actor?.appliedEffects?.find(currEffect => currEffect.origin === featureWorkflow._id);
+    let targetEffect = featureWorkflow.failedSaves.documents[0]?.actor?.appliedEffects?.find(currEffect => currEffect.origin === featureWorkflow._id);
     if (!targetEffect) {
         await genericUtils.remove(effect);
         return;
@@ -44,7 +44,7 @@ async function damage({trigger: {entity: effect}, workflow}) {
 }
 export let blindingSmite = {
     name: 'Blinding Smite',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         item: [
             {

@@ -154,12 +154,13 @@ function getTokensInTemplate(template) {
 }
 function getTemplatesInToken(token) {
     let templates = new Set();
-    let scene = token?.document?.parent;
+    const document = token?.documentName === 'Token' ? token : token?.document;
+    let scene = document?.parent;
     if (!scene) return templates;
-    let pointsToTest = tokenUtils.getTokenCenterPoints(token.document);
+    let pointsToTest = tokenUtils.getTokenCenterPoints(document);
     for (let region of scene.regions) {
         if (!genericUtils.isTemplateRegion(region)) continue;
-        if (!tokenInElevationBand(region, token.document)) continue;
+        if (!tokenInElevationBand(region, document)) continue;
         if (pointsToTest.some(i => regionContainsPoint(region, i))) templates.add(region);
     }
     return templates;

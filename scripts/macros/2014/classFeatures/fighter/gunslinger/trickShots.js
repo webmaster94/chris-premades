@@ -29,8 +29,8 @@ async function lateDisarming({trigger: {entity: effect}, workflow}) {
 }
 async function lateForceful({trigger: {entity: effect}, workflow}) {
     let saveWorkflow = await lateHelper(workflow, effect, 'forcefulShotSave');
-    if (!saveWorkflow?.failedSaves?.size) return;
-    await tokenUtils.pushToken(workflow.token, saveWorkflow.failedSaves.first(), 15);
+    if (!saveWorkflow?.failedSaves?.count) return;
+    await tokenUtils.pushToken(workflow.token, saveWorkflow.failedSaves.tokens[0], 15);
 }
 async function usePiercing({workflow}) {
     let adeptMarksman = itemUtils.getItemByIdentifier(workflow.actor, 'adeptMarksman');
@@ -68,7 +68,7 @@ async function usePiercing({workflow}) {
     await genericUtils.update(adeptMarksman, {'system.uses.spent': adeptMarksman.system.uses.spent + 1});
     let itemToUse = weapon.clone({'flags.chris-premades.config.misfire': Number(weapon.flags['chris-premades'].config.misfire) + 1, 'flags.chris-premades.firearm.piercing': true}, {keepId: true});
     let firstWorkflow = await workflowUtils.syntheticItemRoll(itemToUse, [firstTarget]);
-    if (!firstWorkflow.hitTargets.size) return;
+    if (!firstWorkflow.hitTargets.count) return;
     let effectData = {
         name: workflow.item.name,
         img: workflow.item.img,
@@ -103,7 +103,7 @@ async function lateWinging({trigger: {entity: effect}, workflow}) {
 }
 export let bullyingShot = {
     name: 'Bullying Shot',
-    version: '2.3.0',
+    version: '2.3.1',
     skill: [
         {
             pass: 'situational',
@@ -114,7 +114,7 @@ export let bullyingShot = {
 };
 export let dazingShot = {
     name: 'Dazing Shot',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         actor: [
             {
@@ -127,11 +127,11 @@ export let dazingShot = {
 };
 export let deadeyeShot = {
     name: 'Deadeye Shot',
-    version: '2.3.0'
+    version: '2.3.1'
 };
 export let disarmingShot = {
     name: 'Disarming Shot',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         actor: [
             {
@@ -144,7 +144,7 @@ export let disarmingShot = {
 };
 export let forcefulShot = {
     name: 'Forceful Shot',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         actor: [
             {
@@ -157,7 +157,7 @@ export let forcefulShot = {
 };
 export let piercingShotTrickshot = {
     name: 'Piercing Shot',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         item: [
             {
@@ -170,11 +170,11 @@ export let piercingShotTrickshot = {
 };
 export let violentShot = {
     name: 'Violent Shot',
-    version: '2.3.0'
+    version: '2.3.1'
 };
 export let wingingShot = {
     name: 'Winging Shot',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         actor: [
             {

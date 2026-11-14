@@ -73,7 +73,7 @@ async function dialog(workflow, targetToken, effect) {
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'heatMetalHeld', {strict: true});
     if (!feature) return;
     let heatMetalWorkflow = await workflowUtils.syntheticActivityRoll(feature, [targetToken]);
-    if (heatMetalWorkflow.failedSaves.size && !selection) {
+    if (heatMetalWorkflow.failedSaves.count && !selection) {
         // Opted not to drop, but failed save (so dropped anyway)
         await ChatMessage.implementation.create({
             speaker: ChatMessage.implementation.getSpeaker({token: targetToken}),
@@ -115,7 +115,7 @@ async function early({dialog}) {
 }
 export let heatMetal = {
     name: 'Heat Metal',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         item: [
             {

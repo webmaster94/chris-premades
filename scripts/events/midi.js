@@ -108,7 +108,8 @@ function collectAllMacros({activity, item, token, actor}, pass) {
                 token: token
             });
         });
-        token.document.regions.forEach(i => {
+        const tokenDocument = token.documentName === 'Token' ? token : token.document;
+        tokenDocument.regions.forEach(i => {
             // v14: template-backed regions are handled by the template loop above
             if (genericUtils.isTemplateRegion(i)) return;
             let macroList = collectActorMacros(i, pass).concat(macroUtils.getEmbeddedMacros(i, 'midi.actor', {pass}));
@@ -129,6 +130,12 @@ function collectAllMacros({activity, item, token, actor}, pass) {
     return triggers;
 }
 function getSortedTriggers({activity, item, token, actor, sourceToken, targetToken}, pass) {
+    // Midi's target hooks return TokenDocuments in document mode.
+    // Use its existing placeable when drawn and retain the document for actor-only macros off-canvas.
+    if (token?.documentName === 'Token') {
+        actor ??= token.actor;
+        token = token.object ?? token;
+    }
     let allTriggers = collectAllMacros({activity, item, token, actor, sourceToken, targetToken}, pass);
     let names = new Set(allTriggers.map(i => i.name));
     allTriggers = Object.fromEntries(names.map(i => [i, allTriggers.filter(j => j.name === i)]));
@@ -440,12 +447,14 @@ async function postAttackRoll(workflow) {
     if (genericUtils.getCPRSetting('heroicInspiration')) await heroicInspiration.attack(workflow);
 }
 async function preTargetDamageApplication(token, {workflow, ditem}) {
-    genericUtils.log('dev', 'Executing Midi Macro Pass: applyDamage for ' + token.document.name);
-    let targetTriggers = getSortedTriggers({token, actor: token.actor}, 'targetApplyDamage');
+    const document = token.documentName === 'Token' ? token : token.document;
+    const targetToken = document.object ?? (token.documentName === 'Token' ? undefined : token);
+    genericUtils.log('dev', 'Executing Midi Macro Pass: applyDamage for ' + document.name);
+    let targetTriggers = getSortedTriggers({token: targetToken ?? document, actor: document.actor}, 'targetApplyDamage');
     let selfTriggers = getSortedTriggers({item: workflow.item, token: workflow.token, actor: workflow.actor, activity: workflow.activity}, 'applyDamage');
     let sceneTriggers = [];
-    token.document.parent.tokens.filter(i => i.uuid != token.document.uuid && i.actor).forEach(j => {
-        sceneTriggers.push(...getSortedTriggers({token: j.object, actor: j.actor, sourceToken: workflow.token, targetToken: token}, 'sceneApplyDamage'));
+    document.parent.tokens.filter(i => i.uuid != document.uuid && i.actor && i.object && targetToken).forEach(j => {
+        sceneTriggers.push(...getSortedTriggers({token: j.object, actor: j.actor, sourceToken: workflow.token, targetToken}, 'sceneApplyDamage'));
     });
     let sortedSceneTriggers = [];
     let names = new Set();

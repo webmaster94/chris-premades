@@ -32,7 +32,7 @@ async function use({workflow}) {
     genericUtils.setProperty(weaponData, 'flags.chris-premades.bladeCantrip', workflow.item.name);
     let attackWorkflow = await workflowUtils.syntheticItemDataRoll(weaponData, workflow.actor, [workflow.targets.tokens[0]]);
     if (!attackWorkflow) return;
-    if (!attackWorkflow.hitTargets.size) return;
+    if (!attackWorkflow.hitTargets.count) return;
     let nearbyTargets = tokenUtils.findNearby(workflow.targets.tokens[0], 5, 'ally');
     if (!nearbyTargets.length) return;
     let target = nearbyTargets[0];
@@ -47,7 +47,7 @@ async function use({workflow}) {
 }
 export let greenFlameBlade = {
     name: 'Green-Flame Blade',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         item: [
             {

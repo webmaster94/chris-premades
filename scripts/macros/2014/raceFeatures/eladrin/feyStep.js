@@ -33,7 +33,7 @@ async function use({workflow}) {
                         nearbyTargets = nearbyTargets[0];
                     }
                     let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, nearbyTargets);
-                    if (!featureWorkflow.failedSaves.size) return;
+                    if (!featureWorkflow.failedSaves.count) return;
                     let effectData = {
                         name: genericUtils.translate('CHRISPREMADES.Macros.FeyStep.Charmed'),
                         img: feature.img,
@@ -78,7 +78,7 @@ async function use({workflow}) {
                         range: 30
                     });
                 }
-                if (!featureWorkflow?.failedSaves.size) return;
+                if (!featureWorkflow?.failedSaves.count) return;
                 let effectData = {
                     name: genericUtils.translate('CHRISPREMADES.Macros.FeyStep.Frightened'),
                     img: feature.img,
@@ -302,7 +302,7 @@ async function combinedAnimation(season, sourceToken, teleToken, targetTokens, f
                 }
                 targetTokens = nearbyTargets ?? [];
                 let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, nearbyTargets);
-                if (!featureWorkflow.failedSaves.size) return;
+                if (!featureWorkflow.failedSaves.count) return;
                 let effectData = {
                     name: genericUtils.translate('CHRISPREMADES.Macros.FeyStep.Charmed'),
                     img: feature.img,
@@ -492,7 +492,7 @@ async function combinedAnimation(season, sourceToken, teleToken, targetTokens, f
 }
 export let eladrinFeyStep = {
     name: 'Fey Step',
-    version: '2.3.0',
+    version: '2.3.1',
     hasAnimation: true,
     midi: {
         item: [

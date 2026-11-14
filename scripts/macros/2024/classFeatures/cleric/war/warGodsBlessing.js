@@ -34,7 +34,7 @@ async function use({trigger, workflow}) {
         let selectionWorkflow = await workflowUtils.syntheticItemDataRoll(selectionData, workflow.actor, workflow.targets.count ? Array.from(workflow.targets.tokens) : [workflow.token]);
         let sourceEffect = selection.effects.contents?.[0];
         if (!sourceEffect) return;
-        let targetEffect = actorUtils.getEffects(selectionWorkflow.targets.first().actor).find(effect => effect.name === sourceEffect.name);
+        let targetEffect = actorUtils.getEffects(selectionWorkflow.targets.documents[0].actor).find(effect => effect.name === sourceEffect.name);
         if (!targetEffect) return;
         await effectUtils.createEffect(workflow.actor, effectData, {parentEntity: targetEffect, interdependent: true, rules: 'modern', identifier: 'shieldOfFaithWarGodsBlessing', macros: [
             {
@@ -87,7 +87,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let warGodsBlessing = {
     name: 'War God\'s Blessing',
-    version: '2.3.0',
+    version: '2.3.1',
     rules: 'modern',
     midi: {
         item: [

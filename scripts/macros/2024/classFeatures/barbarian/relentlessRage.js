@@ -7,7 +7,7 @@ async function apply({trigger: {entity: item, token}, workflow, ditem}) {
     if (!activity) return;
     let activityWorkflow = await workflowUtils.syntheticActivityRoll(activity, [token]);
     await genericUtils.update(item, {['system.activities.' + activity.id + '.save.dc.formula']: Number(activity.save.dc.formula) + 5});
-    if (activityWorkflow.failedSaves.size) return;
+    if (activityWorkflow.failedSaves.count) return;
     let classIdentifier = itemUtils.getConfig(item, 'classIdentifier');
     let classItem = token.actor.classes[classIdentifier];
     if (!classItem) return;
@@ -26,7 +26,7 @@ async function rest({trigger: {entity: item}}) {
 }
 export let relentlessRage = {
     name: 'Relentless Rage',
-    version: '2.3.0',
+    version: '2.3.1',
     rules: 'modern',
     midi: {
         actor: [

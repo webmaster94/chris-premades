@@ -35,7 +35,7 @@ async function completeActivityUse(activity, config = {}, dialog = {}, message =
     if (!config.midiOptions?.asUser && !socketUtils.hasPermission(activity.actor, game.userId)) {
         if (!config.midiOptions) config.midiOptions = {};
         config.midiOptions.asUser = socketUtils.firstOwner(activity.actor, true);
-        config.midiOptions.checkGMStatus = true;
+        config.midiOptions.checkGMstatus = true;
         config.midiOptions.workflowData = true;
         fixSets = true;
     } else if (config.midiOptions?.asUser && config.midiOptions?.asUser !== game.userId) {
@@ -54,7 +54,7 @@ async function completeItemUse(item, config = {}, options = {}) {
     let fixSets = false;
     if (!options.asUser && !socketUtils.hasPermission(item.actor, game.userId)) {
         options.asUser = socketUtils.firstOwner(item.actor, true);
-        options.checkGMStatus = true;
+        options.checkGMstatus = true;
         options.workflowData = true;
         fixSets = true;
     } else if (options.asUser && options.asUser !== game.userId) {
@@ -297,9 +297,8 @@ async function updateTargets(workflow, targets, {userId} = {}) {
     await genericUtils.updateTargets(targets, userId);
 }
 async function removeTargets(workflow, tokens, {userId} = {}) {
-    let targets = Array.from(workflow.targets.tokens).filter(token => !tokens.includes(token));
-    workflow.targets = new MidiQOL.TokenDocumentSet(targets);
-    await genericUtils.updateTargets(targets, userId);
+    workflow.targets = workflow.targets.difference(new MidiQOL.TokenDocumentSet(tokens));
+    await genericUtils.updateTargets(workflow.targets.documents, userId);
 }
 function getActionType(workflow) {
     return workflow.activity.getActionType(workflow.attackMode);

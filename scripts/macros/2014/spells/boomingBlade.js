@@ -60,7 +60,7 @@ async function use({workflow}) {
             .play();
     }
 
-    if (!attackWorkflow.hitTargets.size) return;
+    if (!attackWorkflow.hitTargets.count) return;
     let effectData = {
         name: workflow.item.name,
         img: workflow.item.img,
@@ -85,7 +85,7 @@ async function use({workflow}) {
             }
         }
     };
-    let effect = effectUtils.getEffectByIdentifier(attackWorkflow.targets.first().actor, 'boomingBlade');
+    let effect = effectUtils.getEffectByIdentifier(attackWorkflow.targets.tokens[0].actor, 'boomingBlade');
     if (effect) {
         if (effect.flags['chris-premades'].boomingBlade.diceNumber > diceNumber) return;
         await genericUtils.remove(effect);
@@ -106,7 +106,7 @@ async function moved({trigger: {entity: effect}, options}) {
 }
 export let boomingBlade = {
     name: 'Booming Blade',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         item: [
             {

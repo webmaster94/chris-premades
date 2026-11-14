@@ -44,14 +44,14 @@ async function enterOrStart({trigger: {entity: template, castData, token}}) {
     let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'sleetStormProne', {strict: true});
     if (!feature) return;
     let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, [token]);
-    if (!featureWorkflow.failedSaves.size) return;
+    if (!featureWorkflow.failedSaves.count) return;
     let concentrationEffect = effectUtils.getConcentrationEffect(token.actor);
     // TODO: is there a better way to respect auto-conc-removal settings?
     if (concentrationEffect) await genericUtils.remove(concentrationEffect);
 }
 export let sleetStorm = {
     name: 'Sleet Storm',
-    version: '1.2.34',
+    version: '2.3.1',
     rules: 'modern',
     midi: {
         item: [

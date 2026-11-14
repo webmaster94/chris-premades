@@ -205,7 +205,7 @@
     "chris-premades": {
       "info": {
         "name": "Maneuvers: Goading Attack",
-        "version": "2.3.0",
+        "version": "2.3.1",
         "identifier": "maneuversGoadingAttack",
         "source": "chris-premades"
       },

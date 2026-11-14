@@ -105,7 +105,7 @@ async function use({workflow}) {
 async function turnStartStone({trigger: {entity: item, token, target}}) {
     if (!tokenUtils.canSee(token, target)) return;
     let attackWorkflow = await workflowUtils.syntheticItemRoll(item, [target]);
-    if (!attackWorkflow.failedSaves.size) return;
+    if (!attackWorkflow.failedSaves.count) return;
 }
 async function turnStartMetal({trigger: {entity: item, token, target}}) {
     if (!await actorUtils.hasConditionBy(token.actor, target.actor, 'grappled')) return;
@@ -113,7 +113,7 @@ async function turnStartMetal({trigger: {entity: item, token, target}}) {
 }
 export let summonConstruct = {
     name: 'Summon Construct',
-    version: '2.3.0',
+    version: '2.3.1',
     rules: 'modern',
     hasAnimation: true,
     midi: {

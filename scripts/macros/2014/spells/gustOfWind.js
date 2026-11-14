@@ -80,7 +80,7 @@ async function startTurn({trigger: {entity: template, castData, token}}) {
     let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'gustOfWindPush', {strict: true});
     if (!feature) return;
     let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, [token]);
-    if (!featureWorkflow.failedSaves.size) return;
+    if (!featureWorkflow.failedSaves.count) return;
     let gustAngle = templateUtils.getAngle(template);
     let ray = foundry.canvas.geometry.Ray.fromAngle(token.center.x, token.center.y, gustAngle, canvas.dimensions.size);
     await tokenUtils.moveTokenAlongRay(token, ray, 15);
@@ -90,7 +90,7 @@ async function early({dialog}) {
 }
 export let gustOfWind = {
     name: 'Gust of Wind',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         item: [
             {

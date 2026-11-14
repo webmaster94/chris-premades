@@ -94,10 +94,10 @@ async function endTurn({trigger: {entity: template, castData, token}}) {
 }
 async function pushHelper(feature, targets, template) {
     let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, Array.from(targets));
-    if (!featureWorkflow.failedSaves.size) return;
+    if (!featureWorkflow.failedSaves.count) return;
     let gustAngle = templateUtils.getAngle(template);
     let ray = foundry.canvas.geometry.Ray.fromAngle(0, 0, gustAngle, canvas.dimensions.size);
-    return Promise.all(featureWorkflow.failedSaves.map(async token => {
+    return Promise.all(featureWorkflow.failedSaves.tokens.map(async token => {
         return tokenUtils.moveTokenAlongRay(token, ray, 15);
     }));
 }
@@ -106,7 +106,7 @@ async function early({dialog}) {
 }
 export let gustOfWind = {
     name: 'Gust of Wind',
-    version: '2.3.0',
+    version: '2.3.1',
     rules: 'modern',
     midi: {
         item: [

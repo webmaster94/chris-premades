@@ -491,7 +491,7 @@
     "chris-premades": {
       "info": {
         "identifier": "conjureFey",
-        "version": "2.3.0",
+        "version": "2.3.1",
         "source": "chris-premades",
         "rules": "modern"
       },

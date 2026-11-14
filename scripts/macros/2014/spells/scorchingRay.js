@@ -102,7 +102,7 @@ async function use({workflow}) {
                         } else {
                             path += color;
                         }
-                        animationUtils.simpleAttack(workflow.token, targetToken, path, {sound, missed: !featureWorkflow.hitTargets.size});
+                        animationUtils.simpleAttack(workflow.token, targetToken, path, {sound, missed: !featureWorkflow.hitTargets.count});
                     } else if (animation === 'complex') {
                         let path = 'jb2a.scorching_ray.{{num}}.';
                         if (color === 'random') {
@@ -147,7 +147,7 @@ async function use({workflow}) {
                             })
                             .randomizeMirrorY()
                             .zIndex(1)
-                            .missed(!featureWorkflow.hitTargets.size)
+                            .missed(!featureWorkflow.hitTargets.count)
 
                             .sound()
                             .playIf(sound)
@@ -188,7 +188,7 @@ async function use({workflow}) {
 }
 export let scorchingRay = {
     name: 'Scorching Ray',
-    version: '2.3.0',
+    version: '2.3.1',
     hasAnimation: true,
     midi: {
         item: [

@@ -8,7 +8,7 @@ async function attacked({trigger: {entity: effect}, workflow}) {
     let activity = activityUtils.getActivityByIdentifier(item, 'save', {strict: true});
     if (!activity?.uses?.value) return;
     let result = await workflowUtils.syntheticActivityRoll(activity, [workflow.token], {consumeResources: true});
-    if (!result.failedSaves.size) return;
+    if (!result.failedSaves.count) return;
     workflow.keepActivityCard = true;
     workflow.aborted = true;
 }
@@ -30,7 +30,7 @@ async function use({trigger, workflow}) {
 }
 export let unbreakableMajesty = {
     name: 'Unbreakable Majesty',
-    version: '2.3.0',
+    version: '2.3.1',
     rules: 'modern',
     midi: {
         item: [

@@ -42,7 +42,7 @@ async function used({trigger: {entity: item}, workflow}) {
         await effectUtils.createEffect(workflow.targets.tokens[0].actor, effectData);
     }
     let targetWorkflow = await workflowUtils.syntheticItemRoll(item, Array.from(workflow.targets.tokens), {consumeResources: true, consumeUsage: true});
-    if (targetWorkflow.failedSaves.size) {
+    if (targetWorkflow.failedSaves.count) {
         await tokenUtils.pushToken(workflow.token, workflow.targets.tokens[0], 10);
     } else {
         await tokenUtils.pushToken(workflow.targets.tokens[0], workflow.token, 10);
@@ -50,7 +50,7 @@ async function used({trigger: {entity: item}, workflow}) {
 }
 export let forceGauntlet = {
     name: 'Force Gauntlet',
-    version: '2.3.0',
+    version: '2.3.1',
     rules: 'modern',
     midi: {
         actor: [

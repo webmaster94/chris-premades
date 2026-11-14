@@ -231,7 +231,7 @@
         "identifier": "forceGauntlet",
         "rules": "modern",
         "source": "chris-premades",
-        "version": "2.3.0"
+        "version": "2.3.1"
       },
       "macros": {
         "midi": {

@@ -105,12 +105,12 @@ async function use({workflow}) {
 async function turnStart({trigger: {entity: item, token, target}}) {
     if (!tokenUtils.canSee(token, target)) return;
     let attackWorkflow = await workflowUtils.syntheticItemRoll(item, [target]);
-    if (!attackWorkflow.failedSaves.size) return;
+    if (!attackWorkflow.failedSaves.count) return;
     actorUtils.setReactionUsed(target.actor);
 }
 export let summonConstruct = {
     name: 'Summon Construct',
-    version: '2.3.0',
+    version: '2.3.1',
     hasAnimation: true,
     midi: {
         item: [

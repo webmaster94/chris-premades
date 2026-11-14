@@ -29,7 +29,7 @@ async function startOrEnter({trigger: {entity: template, castData, token}}) {
     let feature = activityUtils.getActivityByIdentifier(templateUtils.getOriginItemSync(template), 'sickeningRadianceDamage', {strict: true});
     if (!feature) return;
     let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, [token]);
-    if (!featureWorkflow.failedSaves.size) return;
+    if (!featureWorkflow.failedSaves.count) return;
     let exhaustionLevel = template.flags['chris-premades'].sickeningRadiance?.[token.id]?.exhaustionLevel;
     if (exhaustionLevel === undefined) {
         let originalLevel = token.actor.system.attributes.exhaustion ?? 0;
@@ -79,7 +79,7 @@ async function end({trigger: {entity: effect}}) {
 }
 export let sickeningRadiance = {
     name: 'Sickening Radiance',
-    version: '1.2.28',
+    version: '2.3.1',
     midi: {
         item: [
             {

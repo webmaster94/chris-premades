@@ -193,7 +193,7 @@
     "chris-premades": {
       "info": {
         "name": "Maneuvers: Parry",
-        "version": "2.3.0",
+        "version": "2.3.1",
         "identifier": "maneuversParry",
         "source": "chris-premades"
       },

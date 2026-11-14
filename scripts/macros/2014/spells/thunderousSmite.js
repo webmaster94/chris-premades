@@ -22,7 +22,7 @@ async function damage({trigger: {entity: effect}, workflow}) {
     let feature = activityUtils.getActivityByIdentifier(originItem, 'thunderousSmitePush', {strict: true});
     if (!feature) return;
     let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, [workflow.hitTargets.tokens[0]]);
-    if (featureWorkflow.failedSaves.size) {
+    if (featureWorkflow.failedSaves.count) {
         let targetToken = workflow.targets.tokens[0];
         await tokenUtils.pushToken(workflow.token, targetToken, 10);
     }
@@ -30,7 +30,7 @@ async function damage({trigger: {entity: effect}, workflow}) {
 }
 export let thunderousSmite = {
     name: 'Thunderous Smite',
-    version: '2.3.0',
+    version: '2.3.1',
     midi: {
         item: [
             {
