@@ -1,3 +1,7 @@
+# 2.3.3 - Foundry 14 compatibility
+- Sets Foundry 14 as the minimum and retains 14.370 as the verified version.
+- Metadata-only update; automation behavior and dependency requirements are unchanged.
+
 # 2.3.2 - Foundry 14.370
 - Updates the Foundry compatibility target to 14.370 and retains 14.369 as the minimum supported build.
 - Metadata-only release. Automation behavior and dependency requirements are unchanged.
