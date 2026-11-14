@@ -366,7 +366,7 @@
     "chris-premades": {
       "info": {
         "name": "Lightning Arrow",
-        "version": "1.2.28",
+        "version": "2.3.0",
         "hasAnimation": true,
         "identifier": "lightningArrow",
         "source": "chris-premades"

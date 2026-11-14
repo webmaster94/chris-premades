@@ -1120,7 +1120,7 @@
         "rules": "legacy",
         "source": "chris-premades",
         "hasAnimation": true,
-        "version": "1.4.15"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

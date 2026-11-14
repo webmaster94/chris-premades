@@ -1,6 +1,6 @@
 import {activityUtils, animationUtils, constants, dialogUtils, genericUtils, itemUtils, rollUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 async function damage({trigger, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let damageTypes = itemUtils.getConfig(workflow.item, 'damageTypes');
     if (!damageTypes.length) return;
     let damageType = workflow.item.flags['chris-premades']?.chromaticOrb?.damageType ?? await dialogUtils.selectDamageType(damageTypes, workflow.item.name, 'CHRISPREMADES.Generic.SelectDamageType');
@@ -17,14 +17,14 @@ async function use({trigger, workflow}) {
         await new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .atLocation(lastTarget.object)
-            .stretchTo(workflow.targets.first())
+            .stretchTo(workflow.targets.tokens[0])
             .file(anim)
-            .missed(!workflow.hitTargets.size)
+            .missed(!workflow.hitTargets.count)
             .filter('ColorMatrix', animationUtils.colorMatrix(anim, workflow.damageRolls?.[0]?.options?.type ?? 'none'))
             .waitUntilFinished()
             .play();
     }
-    if (!workflow.damageRolls || !workflow.hitTargets.size) return;
+    if (!workflow.damageRolls || !workflow.hitTargets.count) return;
     let alwaysBounce = itemUtils.getConfig(workflow.item, 'alwaysBounce');
     let canBounce =  !alwaysBounce ? rollUtils.hasDuplicateDie([workflow.damageRolls[0]]) : true;
     if (!canBounce) return;
@@ -35,7 +35,7 @@ async function use({trigger, workflow}) {
     bouncesLeft--;
     let ignoredTargetUuids = workflow.item.flags['chris-premades']?.chromaticOrb?.ignoredTargetUuids ?? [];
     let range = itemUtils.getConfig(workflow.item, 'range');
-    let nearbyTargets = tokenUtils.findNearby(workflow.targets.first(), range, 'ally', {includeIncapacitated: true}).filter(i => !ignoredTargetUuids.includes(i.document.uuid));
+    let nearbyTargets = tokenUtils.findNearby(workflow.targets.tokens[0], range, 'ally', {includeIncapacitated: true}).filter(i => !ignoredTargetUuids.includes(i.document.uuid));
     if (!nearbyTargets.length) return;
     let nextTarget = nearbyTargets[0];
     if (nearbyTargets.length > 1) {
@@ -45,14 +45,14 @@ async function use({trigger, workflow}) {
         } else return;
     }
     let perTargetDamageType = itemUtils.getConfig(workflow.item, 'perTargetDamageType');
-    ignoredTargetUuids.push(workflow.targets.first().document.uuid);
+    ignoredTargetUuids.push(workflow.targets.tokens[0].document.uuid);
     workflow.item = workflow.item.clone({
         'flags.chris-premades.chromaticOrb': {
             ignoredTargetUuids,
             damageType: perTargetDamageType ? undefined : workflow.damageRolls[0].options.type,
             bouncesLeft,
             castLevel,
-            lastTargetUuid: workflow.targets.first().document.uuid
+            lastTargetUuid: workflow.targets.tokens[0].document.uuid
         }
     }, {keepId: true});
     let activity = activityUtils.getActivityByIdentifier(workflow.item, 'chromaticOrbBounce', {strict: true});
@@ -61,7 +61,7 @@ async function use({trigger, workflow}) {
 }
 export let chromaticOrb = {
     name: 'Chromatic Orb',
-    version: '1.2.28',
+    version: '2.3.0',
     rules: 'modern',
     hasAnimation: true,
     midi: {

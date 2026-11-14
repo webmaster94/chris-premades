@@ -2,7 +2,7 @@ import {constants, dialogUtils, effectUtils, genericUtils, itemUtils, workflowUt
 import { hex as hexLegacy } from '../../../legacyMacros.js';
 async function use({trigger, workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (!workflow.targets.size) {
+    if (!workflow.targets.count) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
@@ -61,7 +61,7 @@ async function use({trigger, workflow}) {
         flags: {
             'chris-premades': {
                 hex: {
-                    targets: Array.from(workflow.targets).map(i => i.document.uuid),
+                    targets: Array.from(workflow.targets.tokens).map(i => i.document.uuid),
                     damageType: itemUtils.getConfig(workflow.item, 'damageType'),
                     formula: itemUtils.getConfig(workflow.item, 'formula'),
                     ability: selection
@@ -76,12 +76,12 @@ async function use({trigger, workflow}) {
         return;
     }
     let casterEffect = await effectUtils.createEffect(workflow.actor, casterEffectData, {
-        concentrationItem: workflow.item, 
-        identifier: 'hex', 
+        concentrationItem: workflow.item,
+        identifier: 'hex',
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'hex', 
+            identifier: 'hex',
             activityIdentifier: 'hexMove'
         }],
         unhideActivities: {
@@ -90,14 +90,14 @@ async function use({trigger, workflow}) {
             favorite: true
         }
     });
-    for (let i of workflow.targets) {
+    for (let i of workflow.targets.tokens) {
         if (i.actor) await effectUtils.createEffect(i.actor, targetEffectData, {parentEntity: casterEffect, identifier: 'hexed'});
     }
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {'duration.value': seconds, 'duration.units': 'seconds'});
 }
 export let hex = {
     name: 'Hex',
-    version: '1.2.29',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

@@ -11,7 +11,7 @@ async function damageApplication({trigger: {entity: item}, workflow, ditem}) {
 }
 export let undeadResilience = {
     name: 'Stage 2 Boon: Undead Resilience',
-    version: '1.5.4',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

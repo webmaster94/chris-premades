@@ -59,7 +59,7 @@ async function late({workflow}) {
 }
 export let bigbysBeneficentBracelet = {
     name: 'Bigby\'s Beneficent Bracelet',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

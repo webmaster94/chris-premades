@@ -2,6 +2,6 @@ import {telekineticShove as telekineticShoveLegacy} from '../../../legacyMacros.
 export let telekineticShove = {
     ...telekineticShoveLegacy,
     aliases: ['Telekinetic'],
-    version: '1.2.36',
+    version: '2.3.0',
     rules: 'modern'
 };

@@ -1,6 +1,6 @@
 import {activityUtils, compendiumUtils, constants, dialogUtils, effectUtils, errors, genericUtils, itemUtils, socketUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let targetEffectData = {
         name: workflow.item.name,
         img: workflow.item.img,
@@ -49,7 +49,7 @@ async function use({trigger, workflow}) {
         flags: {
             'chris-premades': {
                 wardingBond: {
-                    bondUuids: Array.from(workflow.targets).map(i => i.document.uuid),
+                    bondUuids: Array.from(workflow.targets.tokens).map(i => i.document.uuid),
                     maxDistance: itemUtils.getConfig(workflow.item, 'maxDistance')
                 },
                 macros: {
@@ -61,14 +61,14 @@ async function use({trigger, workflow}) {
     let effect = await effectUtils.createEffect(workflow.actor, casterEffectData, {
         identifier: 'wardingBondSource'
     });
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         await effectUtils.createEffect(token.actor, targetEffectData, {identifier: 'wardingBondTarget', parentEntity: effect, interdependent: true});
     }));
 }
 // Note: Most logic is just in the legacy Warding Bond
 export let wardingBond = {
     name: 'Warding Bond',
-    version: '1.2.29',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

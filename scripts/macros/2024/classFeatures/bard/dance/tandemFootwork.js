@@ -2,7 +2,7 @@ import {activityUtils, effectUtils, genericUtils, itemUtils, rollUtils, workflow
 import {bardicInspiration} from '../bardicInspiration.js';
 async function early({trigger, workflow}) {
     if (!workflow.token) return;
-    await workflowUtils.updateTargets(Array.from(workflow.targets).concat(workflow.token));
+    await workflowUtils.updateTargets(Array.from(workflow.targets.tokens).concat(workflow.token));
 }
 async function use({trigger, workflow}) {
     let classIdentifier = itemUtils.getConfig(workflow.item, 'classIdentifier');
@@ -14,7 +14,7 @@ async function use({trigger, workflow}) {
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.duration = itemUtils.convertDuration(workflow.activity);
     effectData.system.changes[0].value = roll.roll.total;
-    await Promise.all(workflow.targets.map(async token => await effectUtils.createEffect(token.actor, effectData)));
+    await Promise.all(workflow.targets.tokens.map(async token => await effectUtils.createEffect(token.actor, effectData)));
 }
 async function added({trigger: {entity: item}}) {
     await itemUtils.correctActivityItemConsumption(item, ['use'], 'bardicInspiration');
@@ -35,7 +35,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let tandemFootwork = {
     name: 'Tandem Footwork',
-    version: '1.3.8',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

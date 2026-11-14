@@ -209,7 +209,7 @@
     "chris-premades": {
       "info": {
         "name": "Patient Defense",
-        "version": "1.5.1",
+        "version": "2.3.0",
         "identifier": "patientDefense",
         "source": "chris-premades"
       }

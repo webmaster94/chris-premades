@@ -228,7 +228,7 @@
         "identifier": "nyleasVotary",
         "rules": "legacy",
         "source": "chris-premades",
-        "version": "1.4.14"
+        "version": "2.3.0"
       },
       "castActivities": [
         {

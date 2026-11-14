@@ -47,7 +47,7 @@ async function use({workflow}) {
 }
 export let imbueCard = {
     name: 'Cartomancer: Hidden Ace - Imbue Card',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

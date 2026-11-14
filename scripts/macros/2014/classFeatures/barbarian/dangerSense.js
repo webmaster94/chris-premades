@@ -9,7 +9,7 @@ async function save({trigger}) {
 }
 export let dangerSense = {
     name: 'Danger Sense',
-    version: '1.1.0',
+    version: '2.3.0',
     save: [
         {
             pass: 'context',

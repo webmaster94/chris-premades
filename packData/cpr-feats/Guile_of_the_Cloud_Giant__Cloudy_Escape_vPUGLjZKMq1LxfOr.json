@@ -212,7 +212,7 @@
     "chris-premades": {
       "info": {
         "name": "Guile of the Cloud Giant: Cloudy Escape",
-        "version": "1.1.0",
+        "version": "2.3.0",
         "identifier": "cloudyEscape",
         "source": "chris-premades",
         "hasAnimation": true

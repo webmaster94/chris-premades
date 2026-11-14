@@ -2,11 +2,11 @@ import {dialogUtils, effectUtils, genericUtils, itemUtils} from '../../../utils.
 
 async function use({workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (!workflow.targets.size) {
+    if (!workflow.targets.count) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
-    for (let targetToken of workflow.targets) {
+    for (let targetToken of workflow.targets.tokens) {
         let targetActor = targetToken.actor;
         let input = {
             label: 'DND5E.Skill',
@@ -39,7 +39,7 @@ async function use({workflow}) {
 }
 export let skillEmpowerment = {
     name: 'Skill Empowerment',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

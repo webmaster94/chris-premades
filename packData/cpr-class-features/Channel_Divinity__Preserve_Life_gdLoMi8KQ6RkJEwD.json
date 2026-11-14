@@ -204,7 +204,7 @@
     "chris-premades": {
       "info": {
         "name": "Channel Divinity: Preserve Life",
-        "version": "1.1.0",
+        "version": "2.3.0",
         "hasAnimation": true,
         "identifier": "preserveLife",
         "source": "chris-premades"

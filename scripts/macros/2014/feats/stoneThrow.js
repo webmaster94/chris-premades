@@ -1,4 +1,4 @@
 export let stoneThrow = {
     name: 'Keenness of the Stone Giant: Stone Throw',
-    version: '1.1.10'
+    version: '2.3.0'
 };

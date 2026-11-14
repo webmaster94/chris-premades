@@ -2,8 +2,8 @@ import {dialogUtils, genericUtils, itemUtils, rollUtils, workflowUtils} from '..
 
 async function attack({trigger: {entity: item}, workflow}) {
     if (!item.system.uses.value) return;
-    if (!workflow.targets.size|| workflow.isFumble) return;
-    if (itemUtils.getConfig(item, 'promptFailOnly') && workflow.targets.first().actor.system.attributes.ac.value <= workflow.attackTotal) return;
+    if (!workflow.targets.count|| workflow.isFumble) return;
+    if (itemUtils.getConfig(item, 'promptFailOnly') && workflow.targets.tokens[0].actor.system.attributes.ac.value <= workflow.attackTotal) return;
     let rollActivity = itemUtils.getActivity(item, 'utility');
     let formula = rollActivity?.roll.formula || '1d4';
     let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Dialog.UseAttack', {itemName: item.name + ' (' + formula + ')', attackTotal: workflow.attackTotal}));
@@ -28,7 +28,7 @@ async function saveCheckSkill({trigger: {roll, entity: item}}) {
 }
 export let builtForSuccess = {
     name: 'Built for Success',
-    version: '1.5.16',
+    version: '2.3.0',
     midi: {
         actor: [
             {

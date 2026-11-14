@@ -1,6 +1,6 @@
 import {combatUtils, constants, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size || !workflow.damageRoll) return;
+    if (!workflow.hitTargets.count || !workflow.damageRoll) return;
     let itemType = workflow.item.type;
     if (!(itemType === 'weapon' || (itemType === 'spell' && workflowUtils.getCastLevel(workflow) === 0))) return;
     if (item.flags['chris-premades']?.blessedStrikes?.used) return;
@@ -16,7 +16,7 @@ async function clearUsed({trigger: {entity: item}}) {
 }
 export let blessedStrikes = {
     name: 'Blessed Strikes',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

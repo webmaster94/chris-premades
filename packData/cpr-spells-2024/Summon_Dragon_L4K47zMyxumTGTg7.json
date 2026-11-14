@@ -220,7 +220,7 @@
     "chris-premades": {
       "info": {
         "name": "Summon Draconic Spirit",
-        "version": "1.2.32",
+        "version": "2.3.0",
         "identifier": "summonDragon",
         "source": "chris-premades",
         "hasAnimation": true,

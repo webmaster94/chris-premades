@@ -1,5 +1,5 @@
 export let dream = {
     name: 'Dream',
-    version: '1.3.160',
+    version: '2.3.0',
     rules: 'modern'
 };

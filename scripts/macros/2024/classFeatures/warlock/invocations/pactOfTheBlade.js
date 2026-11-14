@@ -74,7 +74,7 @@ async function damage({trigger, workflow}) {
 }
 export let pactOfTheBlade = {
     name: 'Eldritch Invocations: Pact of the Blade',
-    version: '1.3.148',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

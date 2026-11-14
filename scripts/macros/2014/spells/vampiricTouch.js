@@ -22,13 +22,13 @@ async function use({trigger, workflow}) {
         }
     };
     await effectUtils.createEffect(workflow.actor, effectData, {
-        concentrationItem: workflow.item, 
-        identifier: 'vampiricTouch', 
-        strictlyInterdependent: true, 
+        concentrationItem: workflow.item,
+        identifier: 'vampiricTouch',
+        strictlyInterdependent: true,
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'vampiricTouch', 
+            identifier: 'vampiricTouch',
             activityIdentifier: 'vampiricTouchAttack'
         }],
         unhideActivities: {
@@ -43,8 +43,8 @@ async function use({trigger, workflow}) {
     }
 }
 async function late({workflow}) {
-    if (workflow.hitTargets.size != 1) return;
-    let damage = workflowUtils.getTotalDamageOfType(workflow.damageDetail, workflow.targets.first().actor, workflow.item.system.damage.parts[0][1]);
+    if (workflow.hitTargets.count != 1) return;
+    let damage = workflowUtils.getTotalDamageOfType(workflow.damageDetail, workflow.targets.tokens[0].actor, workflow.item.system.damage.parts[0][1]);
     if (!damage) return;
     let healingModifier = workflow.item.flags['chris-premades']?.vampiricTouch?.healingModifier ?? 0.5;
     let healing = Math.floor(damage * healingModifier);
@@ -59,7 +59,7 @@ async function early({actor, config, dialog}) {
 }
 export let vampiricTouch = {
     name: 'Vampiric Touch',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

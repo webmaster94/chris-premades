@@ -1,6 +1,6 @@
 export let channelDivinity = {
     name: 'Channel Divinity',
-    version: '1.5.2',
+    version: '2.3.0',
     config: [
         {
             value: 'classIdentifier',

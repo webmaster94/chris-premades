@@ -517,7 +517,7 @@
         "identifier": "formOfDread",
         "source": "chris-premades",
         "rules": "legacy",
-        "version": "1.4.4"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

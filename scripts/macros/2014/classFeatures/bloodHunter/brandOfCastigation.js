@@ -1,6 +1,6 @@
 import {activityUtils, actorUtils, compendiumUtils, constants, dialogUtils, effectUtils, errors, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../utils.js';
 async function late({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (workflow.item.type !== 'weapon') return;
     if (!item.system.uses.value) return;
     let enchant = Array.from(workflow.item.allApplicableEffects()).find(i => genericUtils.getIdentifier(i) === 'crimsonRite');
@@ -34,10 +34,10 @@ async function late({trigger: {entity: item}, workflow}) {
         }
     };
     effectData.name = genericUtils.translate('CHRISPREMADES.Macros.BrandOfCastigation.Branded');
-    await effectUtils.createEffect(workflow.targets.first().actor, effectData, {identifier: 'brandOfCastigation', parentEntity: effect, strictlyInterdependent: true});
+    await effectUtils.createEffect(workflow.targets.tokens[0].actor, effectData, {identifier: 'brandOfCastigation', parentEntity: effect, strictlyInterdependent: true});
 }
 async function hit({trigger: {entity: effect}, workflow}) {
-    if (!workflow.damageRolls.length || !workflow.hitTargets.size) return;
+    if (!workflow.damageRolls.length || !workflow.hitTargets.count) return;
     let effects = effectUtils.getAllEffectsByIdentifier(workflow.actor, 'brandOfCastigation');
     if (!effects.length) return;
     if (!effects.filter(i => i.origin === effect.origin).length) return;
@@ -48,7 +48,7 @@ async function hit({trigger: {entity: effect}, workflow}) {
     await workflowUtils.syntheticActivityRoll(feature, [workflow.token]);
 }
 async function hitNear({trigger: {entity: effect}, workflow}) {
-    if (!workflow.damageRolls.length || !workflow.hitTargets.size) return;
+    if (!workflow.damageRolls.length || !workflow.hitTargets.count) return;
     let effects = effectUtils.getAllEffectsByIdentifier(workflow.actor, 'brandOfCastigation');
     if (!effects.length) return;
     if (!effects.filter(i => i.origin === effect.origin).length) return;
@@ -64,7 +64,7 @@ async function hitNear({trigger: {entity: effect}, workflow}) {
 }
 export let brandOfCastigation = {
     name: 'Brand of Castigation',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

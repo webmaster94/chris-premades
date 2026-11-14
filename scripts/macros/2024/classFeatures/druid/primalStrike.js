@@ -1,6 +1,6 @@
 import {combatUtils, constants, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (workflow.activity.type !== 'attack') return;
     // Natural weapon attacks, monster features
     if (workflow.item.type !== 'weapon' && workflow.item.system.type?.value !== 'monster') return;
@@ -16,7 +16,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let elementalFuryPrimalStrike = {
     name: 'Elemental Fury: Primal Strike',
-    version: '1.3.83',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [
@@ -54,6 +54,13 @@ export let elementalFuryPrimalStrike = {
             homebrew: true
         }
     ],
+    ddbi: {
+        correctedItems: {
+            'Elemental Fury: Primal Strike': {
+                system: {uses: {max: '1', spent: 0, recovery: [{period: 'turnStart', type: 'recoverAll'}]}}
+            }
+        }
+    },
     scales: [
         {
             classIdentifier: 'classIdentifier',

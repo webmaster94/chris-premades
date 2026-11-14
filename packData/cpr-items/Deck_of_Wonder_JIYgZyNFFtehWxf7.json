@@ -4136,7 +4136,7 @@
         "identifier": "deckOfWonder",
         "rules": "legacy",
         "source": "chris-premades",
-        "version": "1.5.5"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

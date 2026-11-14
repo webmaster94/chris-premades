@@ -60,7 +60,7 @@ async function late({trigger: {entity: item, token}, workflow}) {
             maxRange: Math.floor(targetToken.actor.system.attributes.movement.walk / 2),
             drawBoundries: true,
             centerpoint: targetToken.center,
-            trackDistance: true, 
+            trackDistance: true,
             crosshairsConfig: {
                 size: canvas.grid.distance * targetToken.document.width / 2,
                 icon: targetToken.document.texture.src,
@@ -94,7 +94,7 @@ async function late({trigger: {entity: item, token}, workflow}) {
 }
 export let curseOfTheFallenPuppet = {
     name: 'Blood Curse of the Fallen Puppet',
-    version: '1.3.10',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -169,7 +169,7 @@
         "identifier": "warPriest",
         "source": "chris-premades",
         "rules": "modern",
-        "version": "1.3.27"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

@@ -4,11 +4,11 @@ async function attack({trigger, workflow}) {
 }
 async function use({trigger, workflow}) {
     let item = itemUtils.getItemByIdentifier(workflow.actor, 'improvedWardingFlare');
-    if (item) await workflowUtils.syntheticItemRoll(item, Array.from(workflow.targets), {consumeResources: true, consumeUsage: true, userId: socketUtils.firstOwner(item.actor)});
+    if (item) await workflowUtils.syntheticItemRoll(item, Array.from(workflow.targets.tokens), {consumeResources: true, consumeUsage: true, userId: socketUtils.firstOwner(item.actor)});
 }
 export let wardingFlare = {
     name: 'Warding Flare',
-    version: '1.3.10',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

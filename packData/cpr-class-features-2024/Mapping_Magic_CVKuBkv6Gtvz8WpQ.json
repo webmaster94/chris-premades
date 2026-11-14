@@ -446,7 +446,7 @@
       },
       "info": {
         "identifier": "mappingMagic",
-        "version": "1.5.16",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern"
       },

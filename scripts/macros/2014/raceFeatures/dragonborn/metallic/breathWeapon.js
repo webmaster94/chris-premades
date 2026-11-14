@@ -10,21 +10,21 @@ async function use({workflow}) {
     ]);
     if (!selection) return;
     if (selection === 'enervating') {
-        await workflowUtils.syntheticActivityRoll(enervatingFeature, Array.from(workflow.targets));
+        await workflowUtils.syntheticActivityRoll(enervatingFeature, Array.from(workflow.targets.tokens));
     } else {
-        await workflowUtils.syntheticActivityRoll(repulsionFeature, Array.from(workflow.targets));
+        await workflowUtils.syntheticActivityRoll(repulsionFeature, Array.from(workflow.targets.tokens));
     }
 }
 async function proneOnFailMacro({workflow}) {
-    if (!workflow.failedSaves.size) return;
-    await Promise.all(workflow.failedSaves.map(async i => {
+    if (!workflow.failedSaves.count) return;
+    await Promise.all(workflow.failedSaves.tokens.map(async i => {
         await tokenUtils.pushToken(workflow.token, i, 20);
     }));
     await proneOnFail.midi.item[0].macro({workflow});
 }
 export let metallicBreathWeapon = {
     name: 'Metallic Breath Weapon',
-    version: '1.2.18',
+    version: '2.3.0',
     midi: {
         item: [
             {

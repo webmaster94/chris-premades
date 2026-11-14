@@ -1,6 +1,6 @@
 import {eldritchBlast as eldritchBlastLegacy} from '../../../legacyMacros.js';
 export let eldritchBlast = {
     ...eldritchBlastLegacy,
-    version: '1.2.28',
+    version: '2.3.0',
     rules: 'modern'
 };

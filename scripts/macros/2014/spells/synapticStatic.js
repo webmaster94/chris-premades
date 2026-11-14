@@ -1,14 +1,14 @@
 import {workflowUtils} from '../../../utils.js';
 async function early({workflow}) {
-    if (!workflow.targets.size) return;
-    await workflowUtils.updateTargets(workflow, workflow.targets.filter(i => i.actor.system.abilities.int.value > 2));
+    if (!workflow.targets.count) return;
+    await workflowUtils.updateTargets(workflow, new Set(workflow.targets.tokens).filter(i => i.actor.system.abilities.int.value > 2));
 }
 async function use({workflow}) {
     await workflowUtils.handleInstantTemplate(workflow);
 }
 export let synapticStatic = {
     name: 'Synaptic Static',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

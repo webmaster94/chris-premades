@@ -6,8 +6,8 @@ const pendingManual = new Set();
 const MAX_AGE = 2 * 60 * 1000;
 
 function hitTarget(workflow) {
-    if (workflow.hitTargets?.size !== 1) return;
-    return workflow.hitTargets.values().next().value;
+    if (workflow.hitTargets.count !== 1) return;
+    return workflow.hitTargets.tokens[0];
 }
 
 function rollType(workflow) {

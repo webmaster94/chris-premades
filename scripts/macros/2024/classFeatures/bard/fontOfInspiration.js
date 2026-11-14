@@ -20,7 +20,7 @@ async function added({trigger: {entity: item, actor}}) {
 }
 export let fontOfInspiration = {
     name: 'Font of Inspiration',
-    version: '1.1.30',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {

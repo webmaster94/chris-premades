@@ -99,7 +99,7 @@ async function early({workflow}) {
 
             .play();
     }
-    Array.from(workflow.targets).forEach(target => {
+    Array.from(workflow.targets.tokens).forEach(target => {
         new Sequence({moduleName:'chris-premades', softFail:true})
             .wait(1150)
 
@@ -128,7 +128,7 @@ async function early({workflow}) {
 
 export let iceStorm = {
     name: 'Ice Storm',
-    version: '1.1.10',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

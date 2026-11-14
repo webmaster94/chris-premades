@@ -1,7 +1,7 @@
 import {activityUtils, compendiumUtils, constants, dialogUtils, effectUtils, errors, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
 async function use({workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (!workflow.targets.size) {
+    if (!workflow.targets.count) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
@@ -54,7 +54,7 @@ async function use({workflow}) {
         flags: {
             'chris-premades': {
                 huntersMark: {
-                    targets: Array.from(workflow.targets).map(i => i.document.uuid),
+                    targets: Array.from(workflow.targets.tokens).map(i => i.document.uuid),
                     formula: itemUtils.getConfig(workflow.item, 'formula')
                 }
             }
@@ -62,14 +62,14 @@ async function use({workflow}) {
     };
     effectUtils.addMacro(casterEffectData, 'midi.actor', ['huntersMarkSource']);
     let casterEffect = await effectUtils.createEffect(workflow.actor, casterEffectData, {
-        concentrationItem: workflow.item, 
-        strictlyInterdependent: true, 
+        concentrationItem: workflow.item,
+        strictlyInterdependent: true,
         vae: [{
-            type: 'use', 
-            name: feature.name, 
+            type: 'use',
+            name: feature.name,
             identifier: 'huntersMark',
             activityIdentifier: 'huntersMarkMove'
-        }], 
+        }],
         identifier: 'huntersMark',
         unhideActivities: {
             itemUuid: workflow.item.uuid,
@@ -77,13 +77,13 @@ async function use({workflow}) {
             favorite: true
         }
     });
-    for (let i of workflow.targets) {
+    for (let i of workflow.targets.tokens) {
         if (i.actor) await effectUtils.createEffect(i.actor, targetEffectData, {parentEntity: casterEffect, identifier: 'huntersMarkMarked'});
     }
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {'duration.value': seconds, 'duration.units': 'seconds'});
 }
 async function move({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'huntersMark');
     if (!effect) return;
     let targetUuids = effect.flags['chris-premades'].huntersMark.targets;
@@ -103,7 +103,7 @@ async function move({workflow}) {
         if (effect) await genericUtils.remove(effect);
     }
     targetUuids = targetUuids.filter(i => i !== selection?.document.uuid);
-    targetUuids.push(workflow.targets.first().document.uuid);
+    targetUuids.push(workflow.targets.tokens[0].document.uuid);
     await genericUtils.setFlag(effect, 'chris-premades', 'huntersMark.targets', targetUuids);
     let seconds = effectUtils.getRemainingDurationSeconds(effect);
     let effectData = {
@@ -118,15 +118,15 @@ async function move({workflow}) {
             time: game.time?.worldTime ?? 0
         }
     };
-    await effectUtils.createEffect(workflow.targets.first().actor, effectData, {parentEntity: effect, identifier: 'huntersMarkMarked'});
+    await effectUtils.createEffect(workflow.targets.tokens[0].actor, effectData, {parentEntity: effect, identifier: 'huntersMarkMarked'});
 }
 async function damage({workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'huntersMark');
     if (!effect) return;
     let {targets: validTargetUuids, formula} = effect.flags['chris-premades'].huntersMark;
-    if (!validTargetUuids.includes(workflow.hitTargets.first().document.uuid)) return;
+    if (!validTargetUuids.includes(workflow.hitTargets.tokens[0].document.uuid)) return;
     let damageType = workflow.defaultDamageType;
     await workflowUtils.bonusDamage(workflow, formula, {damageType});
 }
@@ -135,7 +135,7 @@ async function early({dialog}) {
 }
 export let huntersMark = {
     name: 'Hunter\'s Mark',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

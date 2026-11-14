@@ -45,7 +45,7 @@ async function moved({trigger: {token}}) {
     await Promise.all(sceneTokens.map(async i => await checkBonus(i, true, true)));
 }
 async function use({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     let effectData = {
         name: workflow.item.name,
@@ -80,7 +80,7 @@ async function use({workflow}) {
         genericUtils.setProperty(effectData, 'flags.chris-premades.emboldeningBond.protectiveBondPromptDamaged', promptTargetInstead);
     }
     if (playAnimation) genericUtils.setProperty(effectData, 'flags.chris-premades.emboldeningBond.playAnimation', true);
-    for (let target of workflow.targets) {
+    for (let target of workflow.targets.tokens) {
         await effectUtils.createEffect(target.actor, effectData, {identifier: 'emboldeningBond'});
     }
 }
@@ -94,7 +94,7 @@ async function targetApplyDamaged({trigger: {entity: effect}, workflow, ditem}) 
     let promptTarget = bondFlag.protectiveBondPromptDamaged;
     let playAnimation = bondFlag.playAnimation && animationUtils.jb2aCheck();
     let distance = expansive ?? 30;
-    let targetToken = workflow.targets.find(i => i.actor === effect.parent);
+    let targetToken = workflow.targets.tokens.find(i => i.actor === effect.parent);
     if (!targetToken) return;
     let nearbyTargets = tokenUtils.findNearby(targetToken, distance, 'ally').filter(i => effectUtils.getEffectByIdentifier(i.actor, 'emboldeningBond') && !actorUtils.hasUsedReaction(i.actor));
     if (!nearbyTargets.length) return;
@@ -148,7 +148,7 @@ async function doTeleport(ditem, token, target, attacker, expansive, playAnimati
     genericUtils.setProperty(featureData, 'flags.chris-premades.protectiveBond', true);
     await socket.executeAsUser(sockets.teleport.name, socketUtils.firstOwner(token.document, true), [token.document.uuid], token.document.uuid, {
         range: 5,
-        centerpoint: target.center, 
+        centerpoint: target.center,
         animation: playAnimation ? 'mistyStep' : 'none',
         crosshairsConfig: {
             size: canvas.grid.distance * token.document.width / 2,
@@ -162,7 +162,7 @@ async function doTeleport(ditem, token, target, attacker, expansive, playAnimati
     return true;
 }
 async function attack({trigger: {entity: effect}, workflow}) {
-    if (workflow.targets.size !== 1 || workflow.isFumble) return;
+    if (workflow.targets.count !== 1 || workflow.isFumble) return;
     if (!combatUtils.perTurnCheck(effect, 'emboldeningBond')) return;
     if (!effect.flags['chris-premades'].emboldeningBond.inRange) return;
     let selection = await dialogUtils.confirm(effect.name, genericUtils.format('CHRISPREMADES.Dialog.UseAttackDetail', {itemName: effect.name, bonusFormula: '1d4', attackTotal: workflow.attackTotal}));
@@ -180,7 +180,7 @@ async function bonus({trigger: {roll, entity: effect}}) {
 }
 export let emboldeningBond = {
     name: 'Emboldening Bond',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

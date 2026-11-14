@@ -1,6 +1,6 @@
 export let pseudodragonSting = {
     name: 'Sting',
-    version: '1.3.150',
+    version: '2.3.0',
     rules: 'modern',
     monsters: [
         'Pseudodragon'

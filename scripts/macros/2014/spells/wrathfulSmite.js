@@ -20,7 +20,7 @@ async function use({workflow}) {
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
 }
 async function damage({trigger: {entity: effect}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (workflowUtils.getActionType(workflow) !== 'mwak') return;
     if (effect.flags['chris-premades'].wrathfulSmite.used) return;
     await genericUtils.setFlag(effect, 'chris-premades', 'wrathfulSmite.used', true);
@@ -29,7 +29,7 @@ async function damage({trigger: {entity: effect}, workflow}) {
     await workflowUtils.bonusDamage(workflow, formula, {damageType: damageType});
     let feature = activityUtils.getActivityByIdentifier(await effectUtils.getOriginItem(effect), 'wrathfulSmiteFrighten', {strict: true});
     if (!feature) return;
-    let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, [workflow.hitTargets.first()]);
+    let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, [workflow.hitTargets.tokens[0]]);
     let targetEffect = featureWorkflow.failedSaves.first()?.actor?.appliedEffects?.find(currEffect => currEffect.origin === featureWorkflow.item.uuid);
     if (!targetEffect) {
         await genericUtils.remove(effect);
@@ -44,7 +44,7 @@ async function damage({trigger: {entity: effect}, workflow}) {
 }
 export let wrathfulSmite = {
     name: 'Wrathful Smite',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

@@ -27,7 +27,7 @@ async function save({trigger: {roll, entity: item, token}}) {
 }
 export let bloodPrice = {
     name: 'Blood Price',
-    version: '1.3.69',
+    version: '2.3.0',
     rules: 'legacy',
     save: [
         {

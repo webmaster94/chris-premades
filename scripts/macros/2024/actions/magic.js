@@ -15,7 +15,7 @@ async function magicItem({trigger, workflow}) {
 }
 export let magic = {
     name: 'Magic',
-    version: '1.3.115',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

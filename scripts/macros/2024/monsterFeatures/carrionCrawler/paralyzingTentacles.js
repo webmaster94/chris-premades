@@ -1,6 +1,6 @@
 export let carrionCrawlerParalyzingTentacles = {
     name: 'Paralyzing Tentacles',
-    version: '1.3.150',
+    version: '2.3.0',
     rules: 'modern',
     monsters: [
         'Carrion Crawler'

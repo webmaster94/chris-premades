@@ -524,7 +524,7 @@
     "chris-premades": {
       "info": {
         "name": "Summon Elemental",
-        "version": "1.2.32",
+        "version": "2.3.0",
         "identifier": "summonElemental",
         "source": "chris-premades",
         "hasAnimation": true,

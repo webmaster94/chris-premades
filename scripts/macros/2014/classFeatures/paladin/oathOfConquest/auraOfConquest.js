@@ -7,7 +7,7 @@ async function create({trigger: {entity: item, target, identifier}}) {
     let frightened = effectUtils.getEffectByStatusID(target.actor, 'frightened');
     if (!frightened) return;
     let validKeys = ['macro.CE', 'macro.CUB', 'macro.StatusEffect', 'StatusEffect'];
-    let frightenedOfActor = actorUtils.getEffects(target.actor).find(async i => 
+    let frightenedOfActor = actorUtils.getEffects(target.actor).find(async i =>
         (
             i.statuses.has('frightened') || // Status Effect dropdown on details page
             i.flags['chris-premades']?.conditions?.includes('frightened') || // CPR effect medkit
@@ -63,7 +63,7 @@ async function turnStart({trigger: {entity: effect, token}}) {
 }
 export let auraOfConquest = {
     name: 'Aura of Conquest',
-    version: '1.1.0',
+    version: '2.3.0',
     aura: [
         {
             pass: 'create',
@@ -94,7 +94,7 @@ export let auraOfConquest = {
 };
 export let auraOfConquestAura = {
     name: 'Aura of Conquest: Aura',
-    version: '0.12.28',
+    version: '2.3.0',
     combat: [
         {
             pass: 'turnStart',

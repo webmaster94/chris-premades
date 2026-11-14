@@ -19,19 +19,19 @@ async function use({workflow}) {
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
 }
 async function damage({trigger: {entity: effect}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (workflowUtils.getActionType(workflow) !== 'mwak') return;
     let damageType = effect.flags['chris-premades'].staggeringSmite.damageType;
     let formula = '4d6';
     await workflowUtils.bonusDamage(workflow, formula, {damageType: damageType});
     let feature = activityUtils.getActivityByIdentifier(await effectUtils.getOriginItem(effect), 'staggeringSmiteStagger', {strict: true});
     if (!feature) return;
-    await workflowUtils.syntheticActivityRoll(feature, [workflow.hitTargets.first()]);
+    await workflowUtils.syntheticActivityRoll(feature, [workflow.hitTargets.tokens[0]]);
     await genericUtils.remove(effect);
 }
 export let staggeringSmite = {
     name: 'Staggering Smite',
-    version: '1.5.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

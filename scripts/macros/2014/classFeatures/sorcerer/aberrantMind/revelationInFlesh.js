@@ -24,7 +24,7 @@ async function use({trigger, workflow}) {
 }
 export let revelationInFlesh = {
     name: 'Revelation in Flesh',
-    version: '1.2.17',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

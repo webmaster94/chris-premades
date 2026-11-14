@@ -13,8 +13,8 @@ async function attack({trigger: {entity: item}, workflow}) {
     if (!workflow.activity) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     if (!item.system.uses.value) return;
-    if (workflow.targets.size !== 1) return;
-    if (workflow.targets.first().actor.system.attributes.ac.value <= workflow.attackTotal) return;
+    if (workflow.targets.count !== 1) return;
+    if (workflow.targets.tokens[0].actor.system.attributes.ac.value <= workflow.attackTotal) return;
     let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Dialog.Missed', {attackTotal: workflow.attackTotal, itemName: item.name}));
     if (!selection) return;
     await workflowUtils.syntheticItemRoll(item, [], {consumeUsage: true, consumeResources: true});
@@ -23,7 +23,7 @@ async function attack({trigger: {entity: item}, workflow}) {
 }
 export let strokeOfLuck = {
     name: 'Stroke of Luck',
-    version: '1.3.37',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

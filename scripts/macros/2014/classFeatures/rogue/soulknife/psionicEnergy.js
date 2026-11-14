@@ -13,7 +13,7 @@ async function added({trigger: {entity: item}}) {
 export let psionicEnergy = {
     name: 'Psionic Power: Psionic Energy',
     aliases: ['Psionic Power'],
-    version: '1.3.57',
+    version: '2.3.0',
     item: [
         {
             pass: 'created',

@@ -26,7 +26,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let fisticuffs = {
     name: 'Fisticuffs',
-    version: '1.4.25',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [
@@ -118,7 +118,7 @@ export let fisticuffs = {
                 value: {},
                 title: 'Fisticuffs'
             }
-        } 
+        }
     ],
     ddbi: {
         restrictedItems: {

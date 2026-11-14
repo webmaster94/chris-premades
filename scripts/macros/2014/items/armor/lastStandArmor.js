@@ -1,8 +1,8 @@
 import {actorUtils, constants, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../../utils.js';
 async function early({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let validTypes = itemUtils.getConfig(workflow.item, 'creatureTypes');
-    let validTargets = workflow.targets.filter(token => {
+    let validTargets = new Set(workflow.targets.tokens).filter(token => {
         if (!token.actor) return;
         let type = actorUtils.typeOrRace(token.actor);
         if (validTypes.includes(type)) return true;
@@ -62,14 +62,14 @@ async function use({trigger, workflow}) {
             }
         }
     };
-    for (let token of workflow.failedSaves) {
+    for (let token of workflow.failedSaves.tokens) {
         if (hideToken) await genericUtils.update(token.document, {hidden: true});
         await effectUtils.createEffect(token.actor, effectData);
     }
 }
 export let lastStandArmorBR = {
     name: 'Last Stand Armor, Breastplate',
-    version: '1.2.32',
+    version: '2.3.0',
     midi: {
         item: [
             {

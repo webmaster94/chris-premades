@@ -1,13 +1,13 @@
 import {actorUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function attack({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size || !itemUtils.canUse(item)) return;
+    if (!workflow.hitTargets.count || !itemUtils.canUse(item)) return;
     let isUnarmed = constants.unarmedAttacks.includes(genericUtils.getIdentifier(workflow.item));
     if (!isUnarmed) return;
-    let immuneEffect = effectUtils.getEffectByIdentifier(workflow.hitTargets.first().actor, 'debilitatingBarrageImmune');
+    let immuneEffect = effectUtils.getEffectByIdentifier(workflow.hitTargets.tokens[0].actor, 'debilitatingBarrageImmune');
     if (immuneEffect) return;
     let selection = await dialogUtils.confirmUseItem(item);
     if (!selection) return;
-    await workflowUtils.syntheticItemRoll(item, [workflow.hitTargets.first()], {consumeResources: true, consumeUsage: true});
+    await workflowUtils.syntheticItemRoll(item, [workflow.hitTargets.tokens[0]], {consumeResources: true, consumeUsage: true});
 }
 async function use({trigger, workflow}) {
     let damageType = await dialogUtils.selectDamageType(Object.keys(CONFIG.DND5E.damageTypes).filter(i => !['none', 'midi-none'].includes(i)), workflow.item.name, 'CHRISPREMADES.Generic.SelectDamageType');
@@ -17,8 +17,8 @@ async function use({trigger, workflow}) {
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;
     effectData.duration = itemUtils.convertDuration(workflow.activity);
-    if (actorUtils.checkTrait(workflow.targets.first().actor, 'di', damageType)) return;
-    if (actorUtils.checkTrait(workflow.targets.first().actor, 'dr', damageType)) {
+    if (actorUtils.checkTrait(workflow.targets.tokens[0].actor, 'di', damageType)) return;
+    if (actorUtils.checkTrait(workflow.targets.tokens[0].actor, 'dr', damageType)) {
         effectData.system.changes[0].key = 'system.traits.dr.value';
         effectData.system.changes[0].value = '-' + damageType;
     } else {
@@ -29,13 +29,13 @@ async function use({trigger, workflow}) {
     if (!immuneEffect) return;
     let immuneEffectData = genericUtils.duplicate(immuneEffect.toObject());
     effectData.origin = immuneEffect.uuid;
-    await effectUtils.createEffect(workflow.hitTargets.first().actor, effectData);
-    await effectUtils.createEffect(workflow.hitTargets.first().actor, immuneEffectData);
+    await effectUtils.createEffect(workflow.hitTargets.tokens[0].actor, effectData);
+    await effectUtils.createEffect(workflow.hitTargets.tokens[0].actor, immuneEffectData);
 }
 async function hit({trigger, workflow}) {
-    if (!workflow.hitTargets.size || !workflow.damageRolls) return;
+    if (!workflow.hitTargets.count || !workflow.damageRolls) return;
     let damageTypes = workflowUtils.getDamageTypes(workflow.damageRolls);
-    await Promise.all(workflow.hitTargets.map(async token => {
+    await Promise.all(workflow.hitTargets.tokens.map(async token => {
         let effect = effectUtils.getEffectByIdentifier(token.actor, 'debilitatingBarrageEffect');
         if (!effect) return;
         let damageType = effect.flags['chris-premades']?.debilitatingBarrage?.damageType;
@@ -52,7 +52,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let debilitatingBarrage = {
     name: 'Debilitating Barrage',
-    version: '1.4.8',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

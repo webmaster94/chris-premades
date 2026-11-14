@@ -15,7 +15,7 @@ async function hit({trigger: {entity: item}, workflow}) {
     if (validateWeaponType && !['simpleM', 'improv'].includes(workflow.item.system.type.value)) return;
     let haymaker = effectUtils.getEffectByIdentifier(workflow.actor, 'haymaker');
     if (!haymaker) return;
-    if (workflow.hitTargets.size) {
+    if (workflow.hitTargets.count) {
         let moxie = itemUtils.getItemByIdentifier(workflow.actor, 'moxie');
         if (moxie) await genericUtils.update(moxie, {'system.uses.spent': moxie.system.uses.spent - 1});
         await Promise.all(workflow.damageRolls.map(async (roll, i, rolls) => rolls[i] = await roll.reroll({maximize: true})));
@@ -32,7 +32,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let haymaker = {
     name: 'Haymaker',
-    version: '1.4.27',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [
@@ -72,7 +72,7 @@ export let haymaker = {
             macro: added,
             priority: 55
         }
-    ],   
+    ],
     config: [
         {
             value: 'validateWeaponType',

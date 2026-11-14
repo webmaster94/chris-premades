@@ -106,7 +106,7 @@ async function doubleDamage({trigger: {entity: item}, workflow}) {
 export let enlarge = {
     name: 'Enlarge',
     translation: 'CHRISPREMADES.Macros.Enlarge.Name',
-    version: '1.1.16',
+    version: '2.3.0',
     midi: {
         item: [
             {

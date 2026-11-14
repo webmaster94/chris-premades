@@ -1,13 +1,13 @@
 import {constants, itemUtils, tokenUtils} from '../../../utils.js';
 import {divineSmite} from './divineSmite.js';
 async function use({trigger, workflow}) {
-    if (!workflow.failedSaves.size || !workflow.token) return;
+    if (!workflow.failedSaves.count || !workflow.token) return;
     let distance = itemUtils.getConfig(workflow.item, 'distance');
-    await Promise.all(workflow.failedSaves.map(async token => await tokenUtils.pushToken(workflow.token, token, distance)));
+    await Promise.all(workflow.failedSaves.tokens.map(async token => await tokenUtils.pushToken(workflow.token, token, distance)));
 }
 export let thunderousSmite = {
     name: 'Thunderous Smite',
-    version: '1.1.14',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: divineSmite.midi.actor,

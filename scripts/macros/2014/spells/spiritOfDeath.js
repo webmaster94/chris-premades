@@ -66,7 +66,7 @@ async function use({workflow}) {
     });
 }
 async function attack({workflow}) {
-    if (workflow.targets.size !== 1 || workflow.advantage) return;
+    if (workflow.targets.count !== 1 || workflow.advantage) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'spiritOfDeathHauntCreature');
     if (!effect) {
         workflow.aborted = true;
@@ -74,7 +74,7 @@ async function attack({workflow}) {
         return;
     }
     let {targets: validTargetUuids} = effect.flags['chris-premades'].spiritOfDeathHauntCreature;
-    if (!validTargetUuids.includes(workflow.targets.first().document.uuid)) {
+    if (!validTargetUuids.includes(workflow.targets.tokens[0].document.uuid)) {
         workflow.aborted = true;
         genericUtils.notify('CHRISPREMADES.Macros.SpiritOfDeath.InvalidTarget', 'info');
         return;
@@ -104,14 +104,14 @@ async function late({workflow}) {
         flags: {
             'chris-premades': {
                 spiritOfDeathHauntCreature: {
-                    targets: Array.from(workflow.targets).map(i => i.document.uuid)
+                    targets: Array.from(workflow.targets.tokens).map(i => i.document.uuid)
                 }
             }
         }
     };
     effectUtils.addMacro(casterEffectData, 'combat', ['spiritOfDeathHauntCreatureHaunt']);
     let casterEffect = await effectUtils.createEffect(workflow.actor, casterEffectData, {concentrationItem: workflow.item, strictlyInterdependent: true, identifier: 'spiritOfDeathHauntCreature'});
-    await Promise.all(workflow.targets.map(async target => {
+    await Promise.all(workflow.targets.tokens.map(async target => {
         if (target.actor) await effectUtils.createEffect(target.actor, targetEffectData, {strictlyInterdependent: true, parentEntity: casterEffect, identifier: 'spiritOfDeathHauntCreatureHaunted'});
     }));
 }
@@ -124,7 +124,7 @@ async function turnStart({trigger: {entity: effect, token, target}}) {
 }
 export let spiritOfDeath = {
     name: 'Spirit of Death',
-    version: '1.1.1',
+    version: '2.3.0',
     midi: {
         item: [
             {

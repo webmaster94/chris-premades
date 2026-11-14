@@ -4,7 +4,7 @@ async function rest({trigger: {entity: item}}) {
 }
 export let aspectOfTheWilds = {
     name: 'Aspect of the Wilds',
-    version: '1.1.23',
+    version: '2.3.0',
     rules: 'modern',
     rest: [
         {

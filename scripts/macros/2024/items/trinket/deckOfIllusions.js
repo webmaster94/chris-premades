@@ -128,7 +128,7 @@ async function use({trigger, workflow}) {
 }
 export let deckOfIllusions = {
     name: 'Deck of Illusions',
-    version: '1.3.118',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

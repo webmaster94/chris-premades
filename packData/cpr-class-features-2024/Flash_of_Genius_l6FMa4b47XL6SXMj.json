@@ -185,7 +185,7 @@
     "chris-premades": {
       "info": {
         "identifier": "flashOfGenius",
-        "version": "1.5.17",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern"
       },

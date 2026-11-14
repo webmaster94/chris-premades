@@ -4,7 +4,7 @@ async function damage({trigger: {targetToken}, workflow, ditem}) {
 }
 export let youDieOnMyCommand = {
     name: 'You Die on My Command!',
-    version: '1.3.78',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         actor: [

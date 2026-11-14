@@ -2,15 +2,15 @@ import {Teleport} from '../../../../../lib/teleport.js';
 import {animationUtils, crosshairUtils, itemUtils} from '../../../../../utils.js';
 
 async function use({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.jb2aCheck();
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     let position = await crosshairUtils.aimCrosshair({
-        token: workflow.token, 
-        maxRange: 5, 
-        centerpoint: targetToken.center, 
-        drawBoundries: true, 
-        trackDistance: true, 
+        token: workflow.token,
+        maxRange: 5,
+        centerpoint: targetToken.center,
+        drawBoundries: true,
+        trackDistance: true,
         fudgeDistance: targetToken.document.width * canvas.dimensions.distance / 2,
         crosshairsConfig: {
             size: canvas.grid.distance * workflow.token.document.width / 2,
@@ -25,7 +25,7 @@ async function use({workflow}) {
 }
 export let relentlessHex = {
     name: 'Eldritch Invocations: Relentless Hex',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

@@ -49,13 +49,13 @@ async function setup({trigger, workflow}) {
             case 'ladder': itemData = await compendiumUtils.getItemFromCompendium(constants.featurePacks.itemFeatures, 'Wooden Ladder', {object: true}); break;
             case 'ridingHorse': itemData = await compendiumUtils.getItemFromCompendium(itemCompendium, 'Riding Horse', {object: true}); break;
             case 'pit': itemData = await compendiumUtils.getItemFromCompendium(constants.featurePacks.itemFeatures, 'Open Pit', {object: true}); break;
-            case 'healingPotions': 
+            case 'healingPotions':
                 itemData = await compendiumUtils.getItemFromCompendium(itemCompendium, 'Potion of Healing', {object: true});
                 itemData.system.quantity = 4;
                 break;
             case 'rowBoat': itemData = await compendiumUtils.getItemFromCompendium(constants.featurePacks.itemFeatures, 'Rowboat', {object: true}); break;
             case 'spellScroll': itemData = await compendiumUtils.getItemFromCompendium(constants.featurePacks.itemFeatures, 'Spell Scroll', {object: true}); break;
-            case 'mastiffs': 
+            case 'mastiffs':
                 itemData = await compendiumUtils.getItemFromCompendium(itemCompendium, 'Mastiff', {object: true});
                 itemData.system.quantity = 2;
                 break;
@@ -114,7 +114,7 @@ async function updated({trigger: {entity, item, updates}}) {
 }
 export let robeOfUsefulItems = {
     name: 'Robe of Useful Items',
-    version: '1.3.88',
+    version: '2.3.0',
     rules: 'legacy',
     item: [
         {

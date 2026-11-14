@@ -1,6 +1,6 @@
 import {animationUtils, combatUtils, constants, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1 || workflow.isFumble || workflow.item.type !== 'weapon') return;
+    if (workflow.hitTargets.count !== 1 || workflow.isFumble || workflow.item.type !== 'weapon') return;
     let classLevels = workflow.actor.classes.cleric?.system?.levels;
     let subclassIdentifier = workflow.actor.classes.cleric?.subclass?.identifier;
     if (!classLevels || !subclassIdentifier) return;
@@ -48,7 +48,7 @@ async function damage({trigger: {entity: item}, workflow}) {
     let playAnimation = itemUtils.getConfig(item, 'playAnimation');
     if (!animationUtils.aseCheck() || animationUtils.jb2aCheck() != 'patreon') playAnimation = false;
     if (!playAnimation) return;
-    let target = workflow.targets.first();
+    let target = workflow.targets.tokens[0];
     if (workflowUtils.isAttackType(workflow, 'rangedAttack')) {
         let distance = {
             x: (workflow.token.center.x - target.center.x),
@@ -71,7 +71,7 @@ async function damage({trigger: {entity: item}, workflow}) {
                 {x:0, y:-0.35},
                 {x:-0, y:0.35},
                 {x:0, y:-0.2}
-            ];    
+            ];
         } else {
             randomOffset = [
                 {x:-0.2, y:0},
@@ -127,7 +127,7 @@ async function damage({trigger: {entity: item}, workflow}) {
                 .randomizeMirrorY()
                 .filter('ColorMatrix', {brightness: 0})
                 .zIndex(0.1)
-            .play();     
+            .play();
     } else {
         let offset = [
             {x: 0.3 * workflow.token.document.width, y: -0.85 * workflow.token.document.width},
@@ -204,12 +204,12 @@ async function damage({trigger: {entity: item}, workflow}) {
                 .zIndex(1)
                 .wait(250)
             .play();
-        /* eslint-enable indent */   
+        /* eslint-enable indent */
     }
 }
 export let divineStrike = {
     name: 'Divine Strike',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimaton: true,
     midi: {
         actor: [

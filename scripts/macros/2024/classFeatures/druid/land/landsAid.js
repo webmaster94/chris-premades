@@ -15,11 +15,11 @@ async function use({workflow}) {
     await workflowUtils.syntheticActivityRoll(feature, [selection]);
 }
 async function early({workflow}) {
-    let friendlyTargets = workflow.targets.filter(i => i.document.disposition === workflow.token.document.disposition);
-    workflow.targets = workflow.targets.filter(i => !friendlyTargets.has(i));
+    let friendlyTargets = new Set(workflow.targets.tokens).filter(i => i.document.disposition === workflow.token.document.disposition);
+    workflow.targets = new MidiQOL.TokenDocumentSet(workflow.targets.tokens.filter(i => !friendlyTargets.has(i)));
     workflow['chris-premades'] ??= {};
     workflow['chris-premades'].friendlyTargets = friendlyTargets;
-    genericUtils.updateTargets(workflow.targets);
+    genericUtils.updateTargets(workflow.targets.documents);
 }
 async function added({trigger: {entity: item}}) {
     await itemUtils.correctActivityItemConsumption(item, ['landsAid'], 'wildShape');
@@ -47,7 +47,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let landsAid = {
     name: 'Land\'s Aid',
-    version: '1.3.83',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

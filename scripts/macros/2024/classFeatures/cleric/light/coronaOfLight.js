@@ -2,7 +2,7 @@ import {constants, effectUtils, itemUtils, tokenUtils, workflowUtils} from '../.
 async function damage({trigger, workflow}) {
     if (!workflow.activity.hasSave || workflow.item.type != 'spell') return;
     let damageTypes = workflowUtils.getDamageTypes(workflow.damageRolls);
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         let validTokens = tokenUtils.findNearby(token, 60, 'any', {includeToken: true}).filter(i => effectUtils.getEffectByIdentifier(i.actor, 'coronaOfLightEffect'));
         await Promise.all(validTokens.map(async vToken => {
             let effect = effectUtils.getEffectByIdentifier(vToken.actor, 'coronaOfLightEffect');
@@ -17,7 +17,7 @@ async function damage({trigger, workflow}) {
 }
 export let coronaOfLight = {
     name: 'Corona of Light',
-    version: '1.3.9',
+    version: '2.3.0',
     rules: 'modern',
     config: [
         {

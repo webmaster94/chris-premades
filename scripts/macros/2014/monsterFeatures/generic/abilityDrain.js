@@ -1,14 +1,14 @@
 import {constants, effectUtils, genericUtils, itemUtils} from '../../../../utils.js';
 async function use({workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
-    let targetToken = workflow.hitTargets.first();
+    if (workflow.hitTargets.count !== 1) return;
+    let targetToken = workflow.hitTargets.tokens[0];
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'abilityDrain');
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
     let ability = config.ability;
     let formula = config.formula;
     let checkSave = config.checkSave;
-    if (checkSave && !workflow.failedSaves.size) return;
+    if (checkSave && !workflow.failedSaves.count) return;
     let drainRoll = await new Roll(formula).evaluate();
     drainRoll.toMessage({
         flavor: workflow.item.name,
@@ -59,7 +59,7 @@ async function use({workflow}) {
 export let abilityDrain = {
     name: 'Ability Drain',
     translation: 'CHRISPREMADES.Macros.AbilityDrain.Name',
-    version: '0.12.83',
+    version: '2.3.0',
     midi: {
         item: [
             {

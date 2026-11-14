@@ -216,7 +216,7 @@
     "chris-premades": {
       "info": {
         "name": "Fly",
-        "version": "1.1.0",
+        "version": "2.3.0",
         "hasAnimation": true,
         "identifier": "fly",
         "source": "chris-premades"

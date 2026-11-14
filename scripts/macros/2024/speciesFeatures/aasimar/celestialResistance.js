@@ -1,5 +1,5 @@
 export let celestialResistance = {
     name: 'Celestial Resistance',
-    version: '1.3.146',
+    version: '2.3.0',
     rules: 'modern'
 };

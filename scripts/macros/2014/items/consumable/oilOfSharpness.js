@@ -1,7 +1,7 @@
 import {dialogUtils, genericUtils, itemUtils} from '../../../../utils.js';
 
 async function use({workflow}) {
-    let actor = workflow.targets.first()?.actor ?? workflow.actor;
+    let actor = workflow.targets.tokens[0]?.actor ?? workflow.actor;
     let weapons = actor.items.filter(i => i.type === 'weapon' && i.system.equipped && ['piercing', 'slashing'].some(j => i.system.damage.base.types.has(j)));
     if (!weapons.length) {
         genericUtils.notify('CHRISPREMADES.Macros.HexWarrior.NoWeapons', 'info');
@@ -43,7 +43,7 @@ async function use({workflow}) {
 }
 export let oilOfSharpness = {
     name: 'Oil of Sharpness',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

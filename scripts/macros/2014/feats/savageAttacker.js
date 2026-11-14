@@ -1,6 +1,6 @@
 import {combatUtils, dialogUtils, genericUtils, rollUtils, workflowUtils} from '../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1 || item.system.uses.value == 0 || !workflowUtils.isAttackType(workflow, 'meleeWeaponAttack')) return;
+    if (workflow.hitTargets.count !== 1 || item.system.uses.value == 0 || !workflowUtils.isAttackType(workflow, 'meleeWeaponAttack')) return;
     let numWeaponDamageRolls = workflow.activity.damage.parts.length;
     let damageTotal = 0;
     let damageAverage = 0;
@@ -48,7 +48,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let savageAttacker = {
     name: 'Savage Attacker',
-    version: '1.5.10',
+    version: '2.3.0',
     midi: {
         actor: [
             {
@@ -71,7 +71,7 @@ export let savageAttacker = {
                             }
                         ]
                     }
-                }   
+                }
             }
         }
     }

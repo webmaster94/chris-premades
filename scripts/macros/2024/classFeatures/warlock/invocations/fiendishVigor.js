@@ -1,5 +1,5 @@
 export let fiendishVigor = {
     name: 'Eldritch Invocations: Fiendish Vigor',
-    version: '1.3.156',
+    version: '2.3.0',
     rules: 'modern'
 };

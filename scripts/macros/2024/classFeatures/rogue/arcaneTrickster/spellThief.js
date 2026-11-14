@@ -1,8 +1,8 @@
 import {activityUtils, actorUtils, dialogUtils, effectUtils, genericUtils, itemUtils, socketUtils, workflowUtils} from '../../../../../utils.js';
 async function targeted({trigger, workflow}) {
-    if (!workflow.targets.size || workflow.item.type != 'spell') return;
+    if (!workflow.targets.count || workflow.item.type != 'spell') return;
     let removeTargets = [];
-    for (let token of workflow.targets) {
+    for (let token of workflow.targets.tokens) {
         let item = itemUtils.getItemByIdentifier(token.actor, 'spellThief');
         if (!item?.system?.uses?.value) continue;
         if (actorUtils.hasUsedReaction(token.actor)) continue;
@@ -57,7 +57,7 @@ async function targeted({trigger, workflow}) {
 }
 export let spellThief = {
     name: 'Spell Thief',
-    version: '1.3.53',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

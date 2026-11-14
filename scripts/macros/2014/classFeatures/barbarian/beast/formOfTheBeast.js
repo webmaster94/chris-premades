@@ -1,6 +1,6 @@
 import {combatUtils, workflowUtils} from '../../../../../utils.js';
 async function use({workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!Math.floor(workflow.damageList[0].damageDetail.reduce((acc, i) => acc + i.value, 0))) return;
     if (!combatUtils.perTurnCheck(workflow.item, 'formOfTheBeastBite', true, workflow.token.id)) return;
     let maxHP = workflow.actor.system.attributes.hp.max;
@@ -11,7 +11,7 @@ async function use({workflow}) {
 }
 export let formOfTheBeast = {
     name: 'Form of the Beast',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

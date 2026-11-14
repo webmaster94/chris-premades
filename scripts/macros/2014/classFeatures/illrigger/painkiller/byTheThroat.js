@@ -8,7 +8,7 @@ async function added({trigger: {entity: item}}) {
 export let byTheThroat = {
     name: 'Dispater\'s Interdiction: By the Throat',
     aliases: ['By the Throat'],
-    version: '1.3.78',
+    version: '2.3.0',
     rules: 'legacy',
     item: [
         {

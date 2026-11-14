@@ -11,7 +11,7 @@ async function change({trigger: {item}}) {
 }
 export let fairyFlight = {
     name: 'Flight',
-    version: '1.3.105',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {

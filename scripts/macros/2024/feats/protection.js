@@ -1,8 +1,8 @@
 import {actorUtils, dialogUtils, effectUtils, genericUtils, itemUtils, socketUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 async function early({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     if (effectUtils.getEffectByIdentifier(targetToken.actor, 'protectionProtected')) return;
     let nearbyTokens = tokenUtils.findNearby(targetToken, 5, 'ally').filter(t => {
         if (workflow.token.document.disposition === t.document.disposition) return;
@@ -103,7 +103,7 @@ async function moved({trigger: {token, entity: effect}, options}) {
 }
 export let protection = {
     name: 'Protection',
-    version: '1.2.36',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

@@ -15,7 +15,7 @@ async function turnStart({trigger: {entity: effect}}) {
 }
 export let command = {
     name: 'Command',
-    version: '1.1.38',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

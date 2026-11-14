@@ -11,7 +11,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let wildResurgence = {
     name: 'Wild Resurgence',
-    version: '1.3.83',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

@@ -587,6 +587,33 @@
                   "rules": "all"
                 }
               ]
+            },
+            "genericConfig": {
+              "chris-premades-native": {
+                "pushOnFail": {
+                  "distance": "5",
+                  "choose": false,
+                  "stopAdjacent": false,
+                  "maxSize": "",
+                  "animation": {
+                    "source": "chris-premades-native",
+                    "identifier": "castTouch"
+                  }
+                }
+              }
+            },
+            "animationGenericConfig": {
+              "chris-premades": {
+                "pushOnFail": {
+                  "chris-premades": {
+                    "castTouch": {
+                      "style": "strike",
+                      "cast": false,
+                      "detailed": false
+                    }
+                  }
+                }
+              }
             }
           }
         },
@@ -815,7 +842,7 @@
     "cat": {
       "automation": {
         "source": "chris-premades",
-        "version": "2.0.4"
+        "version": "2.1.5"
       },
       "macros": {
         "roll": [
@@ -823,8 +850,23 @@
             "source": "chris-premades-native",
             "rules": "2024",
             "identifier": "unarmed-strike"
+          },
+          {
+            "source": "chris-premades-native",
+            "rules": "all",
+            "identifier": "weaponAnimation"
           }
         ]
+      },
+      "genericConfig": {
+        "chris-premades-native": {
+          "weaponAnimation": {
+            "animation": {
+              "source": "chris-premades-native",
+              "identifier": "weaponAttack"
+            }
+          }
+        }
       }
     }
   },

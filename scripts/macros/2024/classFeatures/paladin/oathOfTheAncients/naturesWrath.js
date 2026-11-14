@@ -4,7 +4,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let naturesWrath = {
     name: 'Nature\'s Wrath',
-    version: '1.5.28',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {

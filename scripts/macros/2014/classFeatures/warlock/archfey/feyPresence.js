@@ -1,7 +1,7 @@
 import {actorUtils, dialogUtils, effectUtils} from '../../../../../utils.js';
 
 async function use({workflow}) {
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let selection = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.BeguilingTwist.Select', [
         ['DND5E.ConCharmed', 'charmed'],
         ['DND5E.ConFrightened', 'frightened']
@@ -29,13 +29,13 @@ async function use({workflow}) {
             }
         }
     };
-    for (let target of workflow.failedSaves) {
+    for (let target of workflow.failedSaves.tokens) {
         if (!actorUtils.checkTrait(target.actor, 'ci', selection)) await effectUtils.createEffect(target.actor, effectData);
     }
 }
 export let feyPresence = {
     name: 'Fey Presence',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

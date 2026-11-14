@@ -607,7 +607,7 @@
         "identifier": "darkBolt",
         "rules": "legacy",
         "source": "chris-premades",
-        "version": "1.4.9",
+        "version": "2.3.0",
         "hasAnimation": true
       },
       "macros": {

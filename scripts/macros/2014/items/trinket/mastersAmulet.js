@@ -1,7 +1,7 @@
 import {activityUtils, actorUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (workflow.targets.size != 1) return;
-    let targetActor = workflow.targets.first().actor;
+    if (workflow.targets.count != 1) return;
+    let targetActor = workflow.targets.tokens[0].actor;
     if (!targetActor) return;
     let bound = itemUtils.getItemByIdentifier(targetActor, 'shieldGuardianBound');
     if (!bound) {
@@ -37,7 +37,7 @@ async function damageApplication({trigger, workflow, ditem}) {
 }
 export let mastersAmulet = {
     name: 'Master\'s Amulet',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

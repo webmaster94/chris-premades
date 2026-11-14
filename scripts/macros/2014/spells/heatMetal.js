@@ -1,11 +1,11 @@
 import {activityUtils, actorUtils, compendiumUtils, constants, dialogUtils, effectUtils, errors, genericUtils, itemUtils, socketUtils, workflowUtils} from '../../../utils.js';
 async function use({workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (workflow.targets.size !== 1) {
+    if (workflow.targets.count !== 1) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     let targetUuid = targetToken.document.uuid;
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'heatMetalPulse', {strict: true});
     let damageFeature = activityUtils.getActivityByIdentifier(workflow.item, 'heatMetalDamage', {strict: true});
@@ -29,12 +29,12 @@ async function use({workflow}) {
         }
     };
     let effect = await effectUtils.createEffect(workflow.actor, casterEffectData, {
-        concentrationItem: workflow.item, 
-        strictlyInterdependent: true, 
-        identifier: 'heatMetal', 
+        concentrationItem: workflow.item,
+        strictlyInterdependent: true,
+        identifier: 'heatMetal',
         vae: [{
-            type: 'use', 
-            name: feature.name, 
+            type: 'use',
+            name: feature.name,
             identifier: 'heatMetal',
             activityIdentifier: 'heatMetalPulse'
         }],
@@ -115,7 +115,7 @@ async function early({dialog}) {
 }
 export let heatMetal = {
     name: 'Heat Metal',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

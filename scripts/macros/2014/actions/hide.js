@@ -59,7 +59,7 @@ async function removed({trigger: {entity: effect}}) {
 }
 export let hide = {
     name: 'Hide',
-    version: '1.3.63',
+    version: '2.3.0',
     midi: {
         item: [
             {

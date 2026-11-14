@@ -8,7 +8,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let armorOfSafeguardingP = {
     name: 'Armor of Safeguarding, Plate',
-    version: '1.3.94',
+    version: '2.3.0',
     item: [
         {
             pass: 'created',

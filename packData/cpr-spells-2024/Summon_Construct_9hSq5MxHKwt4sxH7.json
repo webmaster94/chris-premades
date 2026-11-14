@@ -422,7 +422,7 @@
     "chris-premades": {
       "info": {
         "name": "Summon Construct",
-        "version": "12.32",
+        "version": "2.3.0",
         "identifier": "summonConstruct",
         "source": "chris-premades",
         "hasAnimation": true,

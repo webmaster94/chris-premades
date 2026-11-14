@@ -9,7 +9,7 @@ async function early({trigger, workflow}) {
     await genericUtils.setFlag(sourceEffect, 'dae', 'dontApply', true);
 }
 async function use({trigger, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let sourceEffect = await workflow.activity.effects[0]?.getEffect() ?? await workflow.activity._otherActivity?.effects?.[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
@@ -30,7 +30,7 @@ async function use({trigger, workflow}) {
         timeFormat: config.timeFormat,
         time: config.time
     });
-    for (let token of workflow.hitTargets) {
+    for (let token of workflow.hitTargets.tokens) {
         let effect = actorUtils.getEffects(token.actor).find(i => i.origin === sourceEffect.uuid);
         if (effect) continue;
         if (config.checkSaves && !workflow.failedSaves.has(token)) continue;
@@ -57,7 +57,7 @@ async function timeUpdated({trigger: {entity: effect, worldTime, token}}) {
 export let timeTrigger = {
     name: 'Time Trigger',
     translation: 'CHRISPREMADES.Macros.TimeTrigger.Name',
-    version: '1.5.2',
+    version: '2.3.0',
     midi: {
         item: [
             {

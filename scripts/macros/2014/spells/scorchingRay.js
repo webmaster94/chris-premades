@@ -67,8 +67,8 @@ async function use({workflow}) {
     start: while (maxRays > 0) {
         let nearbyTargets;
         let selection;
-        if (firstRun && workflow.targets.size) {
-            nearbyTargets = Array.from(workflow.targets);
+        if (firstRun && workflow.targets.count) {
+            nearbyTargets = Array.from(workflow.targets.tokens);
             firstRun = false;
         } else {
             nearbyTargets = tokenUtils.findNearby(workflow.token, workflow.item.system.range.value, 'enemy');
@@ -132,7 +132,7 @@ async function use({workflow}) {
                         };
                         new Sequence({moduleName:'chris-premades', softFail:true})
                             .wait(150)
-                            
+
                             .effect()
                             .file(path)
                             .atLocation(magicCircle)
@@ -152,7 +152,7 @@ async function use({workflow}) {
                             .sound()
                             .playIf(sound)
                             .file(sound)
-                            
+
                             .effect()
                             .delay(200)
                             .copySprite(targetToken)
@@ -164,7 +164,7 @@ async function use({workflow}) {
                             .duration(1800)
                             .opacity(0.25)
                             .tint('#fb8b23')
-                            
+
                             .effect()
                             .delay(200,500)
                             .file(particle)
@@ -188,7 +188,7 @@ async function use({workflow}) {
 }
 export let scorchingRay = {
     name: 'Scorching Ray',
-    version: '1.2.35',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

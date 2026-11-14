@@ -1,7 +1,7 @@
 import {Summons} from '../../../../../lib/summons.js';
 import {animationUtils, compendiumUtils, constants, effectUtils, genericUtils, itemUtils, tokenUtils} from '../../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let monsterName = itemUtils.getConfig(workflow.item, 'monsterName');
     let monsterCompendium = genericUtils.getCPRSetting('monsterCompendium');
     let monster = await compendiumUtils.getActorFromCompendium(monsterCompendium, monsterName, {ignoreNotFound: true}) ?? game.actors.getName(monsterName);
@@ -53,16 +53,16 @@ async function use({trigger, workflow}) {
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;
-    await effectUtils.createEffect(workflow.targets.first().actor, effectData, {parentEntity: spawnEffect, interdependent: true});
+    await effectUtils.createEffect(workflow.targets.tokens[0].actor, effectData, {parentEntity: spawnEffect, interdependent: true});
 }
 async function early({trigger: {entity: item}, workflow}) {
     let houndEffect = effectUtils.getEffectByIdentifier(workflow.actor, 'houndOfIllOmen');
     if (!houndEffect) return;
     if (workflow.item.type != 'spell') return;
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let hound = workflow.token.document.parent.tokens.get(houndEffect.flags['chris-premades'].summons.ids[item.name][0]);
     if (!hound) return;
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         let effect = effectUtils.getEffectByIdentifier(token.actor, 'houndOfIllOmenTarget');
         if (!effect) return;
         let distance = tokenUtils.getDistance(token, hound.object);
@@ -99,7 +99,7 @@ async function early({trigger: {entity: item}, workflow}) {
 }
 export let houndOfIllOmen = {
     name: 'Hound of Ill Omen',
-    version: '1.4.19',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

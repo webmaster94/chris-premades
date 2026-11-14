@@ -5,7 +5,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let uncannyMetabolism = {
     name: 'Uncanny Metabolism',
-    version: '1.3.138',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {
@@ -81,6 +81,6 @@ export let uncannyMetabolism = {
                 title: 'Martial Arts'
             }
         }
-        
+
     ]
 };

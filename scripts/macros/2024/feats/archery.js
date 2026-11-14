@@ -1,14 +1,14 @@
 import {constants, itemUtils, workflowUtils} from '../../../utils.js';
 
 async function attack({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size || !constants.rangedWeaponTypes.includes(workflow.item.system.type?.value)) return;
+    if (!workflow.targets.count || !constants.rangedWeaponTypes.includes(workflow.item.system.type?.value)) return;
     let bonus = itemUtils.getConfig(item, 'bonus');
     await workflowUtils.bonusAttack(workflow, bonus);
 }
 
 export let archery = {
     name: 'Archery',
-    version: '1.2.36',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

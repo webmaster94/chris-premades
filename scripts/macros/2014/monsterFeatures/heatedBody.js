@@ -1,7 +1,7 @@
 import {actorUtils, constants, tokenUtils, workflowUtils} from '../../../utils.js';
 
 async function hit({trigger: {entity: feature}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let targetToken = actorUtils.getFirstToken(feature.parent);
     if (!targetToken) return;
     let distance = tokenUtils.getDistance(workflow.token, targetToken);
@@ -12,7 +12,7 @@ async function hit({trigger: {entity: feature}, workflow}) {
 }
 export let heatedBody = {
     name: 'Heated Body',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

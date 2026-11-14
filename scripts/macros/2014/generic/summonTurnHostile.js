@@ -38,7 +38,7 @@ async function remove({trigger: {entity: effect}}) {
 }
 export let summonTurnHostile = {
     name: 'Summon: Turn Hostile',
-    version: '0.12.12',
+    version: '2.3.0',
     effect: [
         {
             pass: 'deleted',

@@ -51,7 +51,7 @@ async function restore({trigger: {entity: item}}) {
 }
 export let digDeep = {
     name: 'Dig Deep',
-    version: '1.4.29',
+    version: '2.3.0',
     rules: 'modern',
     hasAnimation: true,
     midi: {
@@ -67,7 +67,7 @@ export let digDeep = {
                 macro: preChecks,
                 priority: 50,
                 activities: ['restore']
-            }, 
+            },
             {
                 pass: 'preambleComplete',
                 macro: restore,

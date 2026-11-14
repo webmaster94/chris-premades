@@ -3,8 +3,8 @@ async function rollFinished({trigger, workflow}) {
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'rerollSaveOnDamage');
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
-    let targets = workflow.failedSaves;
-    if (!targets.size) return;
+    let targets = workflow.failedSaves.tokens;
+    if (!targets.length) return;
     let effectUuids = (await workflow.activity.getApplicableEffects() ?? []).map(effect => effect.uuid);
     await Promise.all(targets.map(async i => {
         let effect = actorUtils.getEffects(i.actor).find(j => {
@@ -25,7 +25,7 @@ async function targetRollFinished({trigger: {entity, token}, workflow}) {
     let sourceItem = await effectUtils.getOriginItem(entity);
     if (!sourceItem) return;
     let config = itemUtils.getGenericFeatureConfig(sourceItem, 'rerollSaveOnDamage');
-    if (config.excludeSource && workflow.token.document.uuid === sourceItem.actor.token.uuid) return; 
+    if (config.excludeSource && workflow.token.document.uuid === sourceItem.actor.token.uuid) return;
     let sourceActivity;
     for (let activity of sourceItem.system.activities) {
         let effects = await Promise.all(activity.effects.map(profile => profile.getEffect()));
@@ -60,7 +60,7 @@ async function targetRollFinished({trigger: {entity, token}, workflow}) {
 export let rerollSaveOnDamage = {
     name: 'Reroll Save On Damage',
     translation: 'CHRISPREMADES.Macros.RerollSaveOnDamage.Name',
-    version: '1.3.30',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -94,7 +94,7 @@ export let rerollSaveOnDamage = {
 };
 export let rerollSaveOnDamageActor = {
     name: 'Reroll Save On Damage Actor',
-    version: '1.3.30',
+    version: '2.3.0',
     midi: {
         actor: [
             {

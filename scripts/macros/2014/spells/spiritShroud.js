@@ -29,9 +29,9 @@ async function use({workflow}) {
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
 }
 async function damage({workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
-    if (tokenUtils.getDistance(workflow.token, workflow.hitTargets.first()) > 10) return;
+    if (tokenUtils.getDistance(workflow.token, workflow.hitTargets.tokens[0]) > 10) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'spiritShroud');
     if (!effect) return;
     let diceNum = Math.floor((effect.flags['chris-premades'].spiritShroud.castLevel - 3) / 2) + 1;
@@ -59,7 +59,7 @@ async function damage({workflow}) {
             }
         }
     };
-    for (let target of workflow.hitTargets) {
+    for (let target of workflow.hitTargets.tokens) {
         if (effectUtils.getEffectByIdentifier(target.actor, 'spiritShroudHit')) continue;
         await effectUtils.createEffect(target.actor, effectData, {identifier: 'spiritShroudHit'});
     }
@@ -100,7 +100,7 @@ async function everyTurn({trigger: {entity: effect, token, target}}) {
 }
 export let spiritShroud = {
     name: 'Spirit Shroud',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

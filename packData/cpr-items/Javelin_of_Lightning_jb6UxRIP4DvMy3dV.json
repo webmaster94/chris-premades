@@ -428,7 +428,7 @@
     "chris-premades": {
       "info": {
         "name": "Javelin of Lightning",
-        "version": "1.1.10",
+        "version": "2.3.0",
         "identifier": "javelinOfLightning",
         "source": "chris-premades",
         "hasAnimation": true

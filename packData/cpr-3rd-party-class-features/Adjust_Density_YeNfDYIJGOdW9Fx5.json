@@ -455,7 +455,7 @@
         "identifier": "adjustDensity",
         "rules": "legacy",
         "source": "chris-premades",
-        "version": "1.5.31"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

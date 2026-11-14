@@ -1,5 +1,5 @@
 export let psychicDefenses = {
     name: 'Psychic Defenses',
-    version: '1.2.17',
+    version: '2.3.0',
     rules: 'legacy'
 };

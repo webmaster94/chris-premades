@@ -10,9 +10,9 @@ async function use ({workflow}) {
     new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
         .file('jb2a.energy_strands.in.yellow.01.0')
-        .atLocation(sourceToken) 
+        .atLocation(sourceToken)
         .anchor({x:0.15})
-        .scaleToObject(1.1) 
+        .scaleToObject(1.1)
         .rotateTowards(template, {cacheLocation: true})
         .zIndex(1)
 
@@ -45,9 +45,9 @@ async function use ({workflow}) {
 
         .effect()
         .file('jb2a.impact.010.orange')
-        .atLocation(sourceToken) 
+        .atLocation(sourceToken)
         .anchor({x:0.15})
-        .scaleToObject(1.1) 
+        .scaleToObject(1.1)
         .rotateTowards(template, {cacheLocation: true})
         .zIndex(3)
 
@@ -60,7 +60,7 @@ async function use ({workflow}) {
 }
 export let burningHands = {
     name: 'Burning Hands',
-    version: '1.1.10',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

@@ -44,7 +44,7 @@ async function use({trigger, workflow}) {
 }
 export let genericActions = {
     name: 'Generic Actions',
-    version: '1.3.115',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

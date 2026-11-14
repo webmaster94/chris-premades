@@ -2,7 +2,7 @@ import {actorUtils, constants, effectUtils, genericUtils, itemUtils} from '../..
 import {upcastTargets} from '../../generic/upcastTargets.js';
 async function use({trigger, workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (!workflow.failedSaves.size) {
+    if (!workflow.failedSaves.count) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
@@ -57,7 +57,7 @@ async function use({trigger, workflow}) {
             }
         }
     };
-    await Promise.all(workflow.failedSaves.map(async token => {
+    await Promise.all(workflow.failedSaves.tokens.map(async token => {
         await effectUtils.createEffect(token.actor, effectData, {
             concentrationItem: workflow.item,
             identifier: 'banishmentBanished',
@@ -78,7 +78,7 @@ async function remove({trigger}) {
 }
 export let banishment = {
     name: 'Banishment',
-    version: '1.1.15',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

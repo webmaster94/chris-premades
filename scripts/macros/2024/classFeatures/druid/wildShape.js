@@ -86,7 +86,7 @@ async function use({workflow}) {
         {
             key: 'flags.midi-qol.optional.LunarForm.activation',
             type: 'override',
-            value: 'workflow.hitTargets.size > 0 && ["natural", "monster"].includes(item.type?.value)',
+            value: 'workflow.hitTargets.count > 0 && ["natural", "monster"].includes(item.type?.value)',
             priority: 20
         },
         {
@@ -144,7 +144,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let wildShape = {
     name: 'Wild Shape',
-    version: '1.3.123',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

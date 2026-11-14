@@ -561,7 +561,7 @@
     },
     "chris-premades": {
       "info": {
-        "version": "1.2.40",
+        "version": "2.3.0",
         "hasAnimation": true,
         "identifier": "fireShield",
         "source": "chris-premades",

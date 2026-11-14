@@ -1,16 +1,16 @@
 import {activityUtils, genericUtils, workflowUtils} from '../../../../../utils.js';
 
 async function use({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'balmOfPeaceHeal', {strict: true});
     if (!feature) return;
-    for (let target of workflow.targets) {
+    for (let target of workflow.targets.tokens) {
         await workflowUtils.syntheticActivityRoll(feature, [target]);
     }
 }
 export let balmOfPeace = {
     name: 'Channel Divinity: Balm of Peace',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

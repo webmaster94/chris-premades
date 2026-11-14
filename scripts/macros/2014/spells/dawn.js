@@ -41,12 +41,12 @@ async function use({workflow}) {
         }
     };
     await effectUtils.createEffect(workflow.actor, effectData, {
-        concentrationItem: workflow.item, 
-        strictlyInterdependent: true, 
+        concentrationItem: workflow.item,
+        strictlyInterdependent: true,
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'dawn', 
+            identifier: 'dawn',
             activityIdentifier: 'dawnMove'
         }],
         identifier: 'dawn',
@@ -77,7 +77,7 @@ async function early({dialog}) {
 }
 export let dawn = {
     name: 'Dawn',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

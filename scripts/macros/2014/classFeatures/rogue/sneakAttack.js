@@ -19,7 +19,7 @@ export async function animation(target, token, attackType) {
         .atLocation(target)
         .fadeIn(100)
         .fadeOut(400)
-        .scaleIn(0, 500, {ease: 'easeOutCubic'}) 
+        .scaleIn(0, 500, {ease: 'easeOutCubic'})
         .scaleToObject(1.65 * target.document.texture.scaleX)
         .duration(800)
         .opacity(1)
@@ -153,7 +153,7 @@ async function manual(args) {
     return await attackRiders.manual(args, 'sneakAttack');
 }
 async function applyDamage({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size != 1 || !workflow.item) return;
+    if (workflow.hitTargets.count != 1 || !workflow.item) return;
     let weaponIdentifier = genericUtils.getIdentifier(workflow.item);
     if (!(workflowUtils.getActionType(workflow) === 'rwak' || workflow.item.system.properties?.has('fin') || weaponIdentifier === 'psychicBlades')) return;
     if (!attackRiders.available(item, workflow, 'sneakAttack')) return;
@@ -250,14 +250,14 @@ async function applyDamage({trigger: {entity: item}, workflow}) {
             let dice = getSneakDice();
             if (!dice) return;
             dice.number = Math.ceil(dice.number * 0.5);
-            wailFormula = dice.number + 'd' + dice.faces; 
+            wailFormula = dice.number + 'd' + dice.faces;
         }
         let targets = tokenUtils.findNearby(targetToken, 30, 'ally').filter(t => tokenUtils.canSee(workflow.token, t));
         if (!targets?.length) return;
         let selection = await dialogUtils.selectTargetDialog(
-            wailsFromTheGrave.name, 
+            wailsFromTheGrave.name,
             genericUtils.format('CHRISPREMADES.Dialog.UseWeaponDamageExtra', {itemName: wailsFromTheGrave.name, bonusFormula: wailFormula})
-            + '<br>' + genericUtils.translate('CHRISPREMADES.Generic.Target'), 
+            + '<br>' + genericUtils.translate('CHRISPREMADES.Generic.Target'),
             targets
         );
         if (!selection) return;
@@ -270,12 +270,12 @@ async function applyDamage({trigger: {entity: item}, workflow}) {
             tokenActivity = activityUtils.getActivityByIdentifier(tokensOfTheDeparted, 'useWail', {strict: true});
             if (wailUses)
                 spendToken = await dialogUtils.confirm(
-                    tokensOfTheDeparted.name, 
+                    tokensOfTheDeparted.name,
                     genericUtils.format('CHRISPREMADES.Macros.TokensOfTheDeparted.Spend', i18nData)
                 );
             else {
                 spendToken = await dialogUtils.confirm(
-                    tokensOfTheDeparted.name, 
+                    tokensOfTheDeparted.name,
                     genericUtils.format('CHRISPREMADES.Macros.TokensOfTheDeparted.MustSpend', i18nData),
                     {buttons: 'okCancel'}
                 );
@@ -289,7 +289,7 @@ async function applyDamage({trigger: {entity: item}, workflow}) {
 }
 export let sneakAttack = {
     name: 'Sneak Attack',
-    version: '1.3.109',
+    version: '2.3.0',
     midi: {
         item: [{pass: 'preTargeting', macro: manual, priority: 50}],
         actor: [

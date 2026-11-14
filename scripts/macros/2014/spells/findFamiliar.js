@@ -129,7 +129,7 @@ async function use({workflow}) {
     }
     let animation = itemUtils.getConfig(workflow.item, creatureType + 'Animation') ?? 'none';
     await Summons.spawn(sourceActor, updates, workflow.item, workflow.token, {
-        range: 10, 
+        range: 10,
         animation,
         additionalVaeButtons,
         unhideActivities
@@ -153,7 +153,7 @@ async function use({workflow}) {
         }
     };
     await effectUtils.createEffect(workflow.actor, effectData, {
-        parentEntity: casterEffect, 
+        parentEntity: casterEffect,
         identifier: 'findFamiliarPocketDimension'
     });
 }
@@ -298,8 +298,8 @@ async function pocketDimension({workflow}) {
             updates.actor.effects = effectsToKeep;
         }
         let spawnedTokens = await Summons.spawn(sourceActor, updates, findFamiliarItem, workflow.token, {
-            duration: 864000, 
-            range: 30, 
+            duration: 864000,
+            range: 30,
             animation: pocketFlags.animation
         });
         if (!spawnedTokens?.length) return;
@@ -372,7 +372,7 @@ async function veryEarly({dialog}) {
 }
 export let findFamiliar = {
     name: 'Find Familiar',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

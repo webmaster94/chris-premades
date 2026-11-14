@@ -229,7 +229,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let twilightSanctuary = {
     name: 'Channel Divinity: Twilight Sanctuary',
-    version: '1.3.55',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

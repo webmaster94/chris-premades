@@ -433,7 +433,7 @@
         "identifier": "goblinWarriorNimbleEscape",
         "rules": "modern",
         "source": "chris-premades",
-        "version": "1.3.130"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

@@ -1,6 +1,6 @@
 import {activityUtils, compendiumUtils, constants, dialogUtils, effectUtils, errors, genericUtils, itemUtils, socketUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let targetEffectData = {
         name: workflow.item.name,
         img: workflow.item.img,
@@ -49,7 +49,7 @@ async function use({trigger, workflow}) {
         flags: {
             'chris-premades': {
                 wardingBond: {
-                    bondUuids: Array.from(workflow.targets).map(i => i.document.uuid),
+                    bondUuids: Array.from(workflow.targets.tokens).map(i => i.document.uuid),
                     maxDistance: itemUtils.getConfig(workflow.item, 'maxDistance')
                 },
                 macros: {
@@ -61,11 +61,11 @@ async function use({trigger, workflow}) {
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'wardingBondDismiss', {strict: true});
     if (!feature) return;
     let effect = await effectUtils.createEffect(workflow.actor, casterEffectData, {
-        identifier: 'wardingBondSource', 
+        identifier: 'wardingBondSource',
         vae: [{
-            type: 'use', 
-            name: feature.name, 
-            identifier: 'wardingBond', 
+            type: 'use',
+            name: feature.name,
+            identifier: 'wardingBond',
             activityIdentifier: 'wardingBondDismiss'
         }],
         unhideActivities: {
@@ -74,7 +74,7 @@ async function use({trigger, workflow}) {
             favorite: true
         }
     });
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         await effectUtils.createEffect(token.actor, targetEffectData, {identifier: 'wardingBondTarget', parentEntity: effect, interdependent: true});
     }));
 }
@@ -84,7 +84,7 @@ async function dismiss({workflow}) {
     await genericUtils.remove(effect);
 }
 async function onHit({trigger: {token, entity: effect}, workflow}) {
-    if (workflow.hitTargets.size === 0 || !workflow.damageList) return;
+    if (workflow.hitTargets.count === 0 || !workflow.damageList) return;
     let bondUuid = effect.flags['chris-premades']?.wardingBond?.bondUuid;
     if (!bondUuid) return;
     let bond = await fromUuid(bondUuid);
@@ -134,7 +134,7 @@ async function early({dialog}) {
 }
 export let wardingBond = {
     name: 'Warding Bond',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

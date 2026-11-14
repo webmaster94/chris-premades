@@ -20,7 +20,7 @@ async function added({trigger: {entity: item, actor}}) {
 }
 export let archdruid = {
     name: 'Archdruid',
-    version: '1.3.83',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {

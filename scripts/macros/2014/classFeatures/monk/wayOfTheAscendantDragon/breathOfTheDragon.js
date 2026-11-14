@@ -125,14 +125,14 @@ async function early({workflow}) {
             case 'cold':
                 if (jb2a !== 'patreon') return;
                 file += 'fire.line.blue';
-                break;  
+                break;
         }
     }
     new Sequence({moduleName:'chris-premades', softFail:true}).effect().file(file).atLocation(templateUtils.getPosition(template)).stretchTo(canvas.scene.regions.get(template.id)?.object ?? template.object ?? template).play();
 }
 export let breathOfTheDragon = {
     name: 'Breath of the Dragon',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

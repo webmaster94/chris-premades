@@ -39,7 +39,7 @@ async function use({workflow}) {
 export let shiftWildhunt = {
     name: 'Shifting: Wildhunt',
     aliases: 'Shift: Wildhunt',
-    version: '1.3.57',
+    version: '2.3.0',
     midi: {
         item: [
             {

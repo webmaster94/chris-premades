@@ -1,8 +1,8 @@
 import {dialogUtils, genericUtils, itemUtils, rollUtils, workflowUtils} from '../../../../../utils.js';
 import {bardicInspiration} from '../bardicInspiration.js';
 async function attackEarly({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size || workflow.isFumble || !workflowUtils.isAttackType(workflow, 'attack')) return;
-    if (workflow.targets.first().actor.system.attributes.ac.value <= workflow.attackTotal) return;
+    if (!workflow.targets.count || workflow.isFumble || !workflowUtils.isAttackType(workflow, 'attack')) return;
+    if (workflow.targets.tokens[0].actor.system.attributes.ac.value <= workflow.attackTotal) return;
     let bardicInspiration = itemUtils.getItemByIdentifier(workflow.actor, 'bardicInspiration');
     if (!bardicInspiration?.system?.uses?.value) return;
     let classIdentifier = itemUtils.getConfig(item, 'classIdentifier') ?? 'bard';
@@ -16,7 +16,7 @@ async function attackEarly({trigger: {entity: item}, workflow}) {
     await workflowUtils.syntheticItemRoll(item, []);
 }
 async function attackLate({trigger, workflow}) {
-    if (!workflow?.['chris-premades']?.peerlessSkill || !workflow.hitTargets.size || !workflowUtils.isAttackType(workflow, 'attack')) return;
+    if (!workflow?.['chris-premades']?.peerlessSkill || !workflow.hitTargets.count || !workflowUtils.isAttackType(workflow, 'attack')) return;
     let bardicInspiration = itemUtils.getItemByIdentifier(workflow.actor, 'bardicInspiration');
     if (!bardicInspiration) return;
     await genericUtils.update(bardicInspiration, {'system.uses.spent': bardicInspiration.system.uses.spent + 1});
@@ -63,7 +63,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let peerlessSkill = {
     name: 'Peerless Skill',
-    version: '1.3.57',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

@@ -1,6 +1,6 @@
 import {workflowUtils} from '../../../utils.js';
 async function damage({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let damageFormula = (workflowUtils.getCastLevel(workflow) + 1) + 'd8[necrotic]';
     let damageRoll = await new CONFIG.Dice.DamageRoll(damageFormula, {}, {type: 'necrotic'}).evaluate();
     damageRoll.toMessage({
@@ -14,7 +14,7 @@ async function damage({workflow}) {
 }
 export let lifeTransference = {
     name: 'Life Transference',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

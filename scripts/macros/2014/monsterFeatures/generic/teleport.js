@@ -12,7 +12,7 @@ async function late({workflow}) {
 export let genericTeleport = {
     name: 'Generic Teleport',
     translation: 'CHRISPREMADES.Macros.GenericTeleport.Name',
-    version: '1.0.51',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -48,8 +48,8 @@ export let genericTeleport = {
             type: 'select',
             default: 'default',
             options: Object.entries(teleportEffects).map(([key, value]) => ({
-                value: key, 
-                label: value.name, 
+                value: key,
+                label: value.name,
                 requiredModules: value.requiredModules ?? []
             }))
         }

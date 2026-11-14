@@ -1,10 +1,12 @@
 import {actorUtils, automationUtils, constants, dialogUtils, documentUtils, Logging, workflowUtils} from '../../proxy.mjs';
 async function use({document, workflow}) {
     const config = automationUtils.getGenericConfigValues(document, 'chris-premades-native', 'specialItemUse', configKeys);
+    const attackTypes = automationUtils.getConfigValue(document.item, 'attackTypes');
     const validActivity = activity => activity.canUse && !activity.flags.cat?.hidden
         && (!config.activityIdentifier || activity.identifier === config.activityIdentifier)
         && (!config.activationTypes.length || config.activationTypes.includes(activity.activation.type))
-        && !config.excludeActivityTypes.includes(activity.type);
+        && !config.excludeActivityTypes.includes(activity.type)
+        && (!attackTypes?.length || attackTypes.includes(activity.attack?.type?.value));
     const items = config.identifiers.length ? actorUtils.getItemByIdentifiers(workflow.actor, config.identifiers, {multiple: true}) : workflow.actor.items.filter(item => config.itemTypes.includes(item.type));
     const candidates = items.filter(item => item !== document.item && (!config.equippedOnly || item.system.equipped) && item.system.activities?.some(validActivity));
     if (!candidates.length) return Logging.addMacroWarning('CPR', documentUtils.getIdentifier(document.item), 'No valid item to use.');
@@ -13,13 +15,14 @@ async function use({document, workflow}) {
     const activities = item.system.activities.filter(validActivity);
     const activity = activities.length === 1 ? activities[0] : await dialogUtils.selectDocumentDialog(document.item.name, 'CHRISPREMADES.Macros.Generic.SpecialItemUse.SelectActivity', activities);
     if (!activity) return;
-    const targets = Array.from(workflow.targets).map(token => token.document ?? token);
+    const targets = workflow.targets.documents;
     await workflowUtils.specialItemUse(item, targets, document.item, {activity, consumeUsage: config.consumeUsage, consumeResources: config.consumeResources});
 }
 /**
  * Uses an activity from another of the user's items once the roll finishes.
  * Bound on an activity. Fires on `activityRollFinished`.
  * The item and activity are prompted for when more than one qualifies.
+ * An `attackTypes` config on the item limits it to attack activities of those attack types.
  *
  * Config:
  * - `identifiers`: items this feature can use. When set, item types are ignored.
@@ -33,7 +36,7 @@ async function use({document, workflow}) {
  */
 export const specialItemUse = {
     rules: 'all',
-    version: '2.0.0',
+    version: '2.1.8',
     category: 'utility',
     generic: true,
     documents: ['activity'],

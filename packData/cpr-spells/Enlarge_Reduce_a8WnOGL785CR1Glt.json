@@ -233,7 +233,7 @@
       },
       "info": {
         "name": "Enlarge/Reduce",
-        "version": "1.1.0",
+        "version": "2.3.0",
         "mutation": {
           "target": "Enlarge/Reduce"
         },

@@ -1,13 +1,13 @@
 import {dialogUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 
 async function early({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size || workflow.item.type !== 'spell' || workflow.item.system.level === 0 || !workflow.activity.hasDamage) return;
+    if (!workflow.targets.count || workflow.item.type !== 'spell' || workflow.item.system.level === 0 || !workflow.activity.hasDamage) return;
     let damageParts = workflow.activity.damage.parts;
     if (!damageParts.some(i => ['lightning', 'thunder'].some(j => i.custom?.formula?.includes(j) || i.types.has(j)))) return;
     await workflowUtils.completeItemUse(item, {}, {configureDialog: false});
 }
 async function damage({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let damageType = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Dialog.DamageType', [
         ['DND5E.DAMAGE.Type.Lightning', 'lightning'],
         ['DND5E.DAMAGE.Type.Thunder', 'thunder']
@@ -17,7 +17,7 @@ async function damage({workflow}) {
 }
 export let heartOfTheStorm = {
     name: 'Heart of the Storm',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

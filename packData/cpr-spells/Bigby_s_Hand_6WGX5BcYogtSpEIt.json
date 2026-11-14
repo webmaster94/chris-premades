@@ -328,7 +328,7 @@
     "chris-premades": {
       "info": {
         "name": "Bigby's Hand",
-        "version": "1.2.28",
+        "version": "2.3.0",
         "identifier": "bigbysHand",
         "source": "chris-premades",
         "hasAnimation": true

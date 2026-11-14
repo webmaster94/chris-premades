@@ -1,5 +1,5 @@
 export let oneWithShadows = {
     name: 'Eldritch Invocations: One with Shadows',
-    version: '1.4.4',
+    version: '2.3.0',
     rules: 'modern'
 };

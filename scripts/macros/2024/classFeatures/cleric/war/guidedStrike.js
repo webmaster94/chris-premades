@@ -1,17 +1,17 @@
 import {activityUtils, constants, dialogUtils, genericUtils, itemUtils, thirdPartyUtils, workflowUtils} from '../../../../../utils.js';
 async function attack({trigger, workflow}) {
-    if (!workflow.activity || workflow.isFumble || !workflow.targets.size) return;
+    if (!workflow.activity || workflow.isFumble || !workflow.targets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
-    if (workflow.targets.first().actor.system.attributes.ac.value <= workflow.attackTotal) return;
+    if (workflow.targets.tokens[0].actor.system.attributes.ac.value <= workflow.attackTotal) return;
     let feature = await thirdPartyUtils.attacked(workflow, 'guidedStrike', 'use', {distance: 30, attacker: true, dispositionType: 'enemy', dialogType: 'attackRoll'});
     if (!feature) return;
     let attackBonus = itemUtils.getConfig(feature, 'attackBonus');
     await workflowUtils.bonusAttack(workflow, String(attackBonus));
 }
 async function selfAttack({trigger: {entity: item}, workflow}) {
-    if (!workflow.activity || workflow.isFumble || !workflow.targets.size) return;
+    if (!workflow.activity || workflow.isFumble || !workflow.targets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
-    if (workflow.targets.first().actor.system.attributes.ac.value <= workflow.attackTotal) return;
+    if (workflow.targets.tokens[0].actor.system.attributes.ac.value <= workflow.attackTotal) return;
     let activity = activityUtils.getActivityByIdentifier(item, 'selfUse', {strict: true});
     if (!activity) return;
     if (!activityUtils.canUse(activity)) return;
@@ -26,7 +26,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let guidedStrike = {
     name: 'Guided Strike',
-    version: '1.3.128',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [
@@ -38,7 +38,7 @@ export let guidedStrike = {
             {
                 pass: 'postAttackRoll',
                 macro: selfAttack,
-                priority: 200 
+                priority: 200
             }
         ]
     },
@@ -66,7 +66,7 @@ export let guidedStrike = {
             type: 'number',
             default: 10,
             category: 'homebrew',
-            homebrew: true     
+            homebrew: true
         }
     ]
 };

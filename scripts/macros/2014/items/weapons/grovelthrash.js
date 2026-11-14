@@ -6,7 +6,7 @@ async function skill({trigger: {entity: item, skillId}}) {
     return {label: 'CHRISPREMADES.Macros.Grovelthrash.Insight', type: 'advantage'};
 }
 async function damage({workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (genericUtils.getIdentifier(workflow.item) === 'grovelthrash2') {
         if (workflow.actor.system.attributes.hp.value < workflow.actor.system.attributes.hp.max / 2) {
             await workflowUtils.bonusDamage(workflow, '2d6[bludgeoning]', {damageType: 'bludgeoning'});
@@ -42,7 +42,7 @@ async function damageApplication({trigger: {entity: item, token}, workflow, dite
 }
 export let grovelthrash = {
     name: 'Grovelthrash',
-    version: '1.3.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

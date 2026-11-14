@@ -1,12 +1,12 @@
 import {constants} from '../../../../../proxy.mjs';
 export const stalkersFlurry = {
     name: 'Stalker\'s Flurry',
-    version: '2.0.0',
+    version: '2.1.4',
     rules: '2024',
     config: {
         formula: {
             default: '2d8',
-            type: 'text',
+            type: 'formula',
             label: 'CHRISPREMADES.Config.Formula',
             category: 'homebrew'
         },

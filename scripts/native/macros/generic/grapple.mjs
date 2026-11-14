@@ -4,11 +4,12 @@ async function doGrapple({document: activity, token, workflow}) {
     const data = {
         rules: documentUtils.getRules(activity.item),
         checkSize: config.checkSize,
-        contest: !config.auto
+        contest: !config.auto,
+        conditions: config.conditions
     };
     if (config.useActivityInfo) data.activity = activity;
     if (config.dc) data.flatDC = (await rollUtils.rollDice(config.dc, {document: activity}))?.total;
-    for (const {document: target} of workflow.targets) {
+    for (const target of workflow.targets.documents) {
         if (target.actor) await tokenUtils.grapple(token, target, data);
     }
     if (config.replaceActivity) {
@@ -17,13 +18,9 @@ async function doGrapple({document: activity, token, workflow}) {
         return true;
     }
 }
-async function addConditions({document: activity, data}) {
-    const conditions = automationUtils.getGenericConfigValue(activity, 'chris-premades-native', 'grapple', 'conditions');
-    if (conditions.length) data.targetEffectData.flags.cat.conditions.push(...conditions);
-}
 /**
  * Attempts to grapple each target before the activity rolls.
- * Bound on an activity. Fires on `activityPreItemRoll` and `actorPreGrapple`.
+ * Bound on an activity. Fires on `activityPreItemRoll`.
  *
  * Config:
  * - `auto`: apply the grapple without rolling dice.
@@ -35,7 +32,7 @@ async function addConditions({document: activity, data}) {
  */
 export const grapple = {
     rules: 'all',
-    version: '2.0.3',
+    version: '2.1.4',
     category: 'utility',
     generic: true,
     documents: ['activity'],
@@ -43,13 +40,6 @@ export const grapple = {
         {
             pass: 'activityPreItemRoll',
             macro: doGrapple,
-            priority: 50
-        }
-    ],
-    grapple: [
-        {
-            pass: 'actorPreGrapple',
-            macro: addConditions,
             priority: 50
         }
     ],
@@ -69,7 +59,7 @@ export const grapple = {
         },
         dc: {
             default: '',
-            type: 'text',
+            type: 'formula',
             category: 'behavior',
             label: 'CHRISPREMADES.Config.FlatDC',
             hint: 'CHRISPREMADES.Macros.Generic.Grapple.FlatDCHint'

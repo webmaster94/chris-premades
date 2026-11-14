@@ -124,7 +124,7 @@ function rehideActivities(effect) {
 }
 async function specialDuration(workflow) {
     if (!workflow.token) return;
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         if (!token.actor) return;
         await Promise.all(actorUtils.getEffects(token.actor, {includeItemEffects: true}).map(async effect => {
             let specialDurations = effect.flags['chris-premades']?.specialDuration;
@@ -138,7 +138,7 @@ async function specialDuration(workflow) {
                     case 'damagedByEnemy':
                         if (workflow.token.document.disposition != token.document.disposition && workflow.hitTargets.has(token) && workflow.damageRolls?.length) remove = true; break outerLoop;
                     case 'hitByAnotherCreature':
-                        if (!workflow.hitTargets.size) break;
+                        if (!workflow.hitTargets.count) break;
                     // eslint-disable-next-line no-fallthrough
                     case 'attackedByAnotherCreature': {
                         if (!workflow.activity) return;
@@ -150,7 +150,7 @@ async function specialDuration(workflow) {
                         break outerLoop;
                     }
                     case 'hitBySource':
-                        if (!workflow.hitTargets.size) break;
+                        if (!workflow.hitTargets.count) break;
                     // eslint-disable-next-line no-fallthrough
                     case 'attackedBySource': {
                         if (!workflow.activity) return;
@@ -180,7 +180,7 @@ async function specialDuration(workflow) {
                 case 'forceSave': {
                     if (!workflow.activity) return;
                     if (!workflow.activity.hasSave) return;
-                    if (workflow.targets.size === 1 && workflow.targets.has(workflow.token)) return;
+                    if (workflow.targets.count === 1 && workflow.targets.has(workflow.token)) return;
                     remove = true;
                     break outerLoop;
                 }
@@ -202,7 +202,7 @@ async function specialDurationConditions(effect) {
         if (!specialDurations.length) return;
         if (effect.statuses.some(k => specialDurations.includes(k))) await genericUtils.remove(eff);
     }));
-    
+
 }
 async function specialDurationRemovedConditions(effect) {
     let statusEffectIds = CONFIG.statusEffects.map(i => i.id);

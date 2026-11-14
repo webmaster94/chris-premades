@@ -255,7 +255,7 @@
     "chris-premades": {
       "info": {
         "identifier": "thornWhip",
-        "version": "1.2.22",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern"
       },

@@ -1,7 +1,7 @@
 import {constants} from '../../../../utils.js';
 export let foeSlayer = {
     name: 'Foe Slayer',
-    version: '1.3.78',
+    version: '2.3.0',
     rules: 'modern',
     config: [
         {

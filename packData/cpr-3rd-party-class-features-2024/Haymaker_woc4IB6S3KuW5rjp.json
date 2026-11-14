@@ -179,7 +179,7 @@
       "info": {
         "identifier": "haymaker",
         "rules": "modern",
-        "version": "1.4.27",
+        "version": "2.3.0",
         "source": "chris-premades"
       },
       "macros": {

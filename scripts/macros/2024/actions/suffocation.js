@@ -1,7 +1,7 @@
 import {actorUtils, effectUtils, genericUtils} from '../../../utils.js';
 async function use({trigger: {entity}, workflow}) {
     let effectUuids = (await workflow.activity.getApplicableEffects() ?? []).map(effect => effect.uuid);
-    await Promise.all(workflow.targets.map(async i => {
+    await Promise.all(workflow.targets.tokens.map(async i => {
         let effect = actorUtils.getEffects(i.actor).find(j => effectUuids.includes(j.origin));
         await apply(workflow.actor, entity, effect ? {parentEffect: effect} : {});
     }));

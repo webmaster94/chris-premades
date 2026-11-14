@@ -18,14 +18,14 @@ async function use({trigger, workflow}) {
             }
         }
     }
-    if (combatUtils.inCombat()) if (workflow.targets.size) await Promise.all(workflow.targets.map(async token => await actorUtils.setReactionUsed(token.actor)));
+    if (combatUtils.inCombat()) if (workflow.targets.count) await Promise.all(workflow.targets.tokens.map(async token => await actorUtils.setReactionUsed(token.actor)));
 }
 async function added({trigger: {entity: item}}) {
     await itemUtils.correctActivityItemConsumption(item, ['use'], 'bardicInspiration');
 }
 export let inspiringMovement = {
     name: 'Inspiring Movement',
-    version: '1.3.10',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

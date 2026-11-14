@@ -7,7 +7,7 @@ async function use({trigger, workflow}) {
 }
 export let perfectFocus = {
     name: 'Perfect Focus',
-    version: '1.3.162',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

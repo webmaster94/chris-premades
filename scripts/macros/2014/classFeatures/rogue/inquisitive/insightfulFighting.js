@@ -1,7 +1,7 @@
 import {effectUtils, genericUtils, rollUtils} from '../../../../../utils.js';
 async function use({workflow}) {
-    if (workflow.targets.size !== 1) return;
-    let targetToken = workflow.targets.first();
+    if (workflow.targets.count !== 1) return;
+    let targetToken = workflow.targets.tokens[0];
     if (effectUtils.getEffectByStatusID(targetToken.actor, 'incapacitated')) return;
     let result = await rollUtils.contestedRoll({
         sourceToken: workflow.token,
@@ -37,7 +37,7 @@ async function use({workflow}) {
 }
 export let insightfulFighting ={
     name: 'Insightful Fighting',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

@@ -5,7 +5,7 @@ async function save(token, template) {
     let feature = activityUtils.getActivityByIdentifier(originItem, 'zoneOfTruthSave', {strict: true});
     if (!feature) return;
     let workflow = await workflowUtils.syntheticActivityRoll(feature, [token]);
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let startTime = template.flags['chris-premades'].zoneOfTruth.startTime;
     let worldTime = game.time.worldTime;
     let duration = template.flags['chris-premades'].zoneOfTruth.duration;
@@ -58,7 +58,7 @@ async function use({trigger, workflow}) {
 }
 export let zoneOfTruth = {
     name: 'Zone of Truth',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

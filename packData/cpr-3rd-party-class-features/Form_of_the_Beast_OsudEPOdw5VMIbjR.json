@@ -990,7 +990,7 @@
         "identifier": "formOfTheBeastWarlock",
         "rules": "legacy",
         "source": "chris-premades",
-        "version": "1.4.12",
+        "version": "2.3.0",
         "hasAnimation": true
       },
       "macros": {

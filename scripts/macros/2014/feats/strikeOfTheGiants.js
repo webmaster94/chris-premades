@@ -1,6 +1,6 @@
 import {combatUtils, dialogUtils, effectUtils, genericUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1 || workflowUtils.getActionType(workflow) !== 'mwak') return;
+    if (workflow.hitTargets.count !== 1 || workflowUtils.getActionType(workflow) !== 'mwak') return;
     if (!item.system.uses.value) return;
     if (!combatUtils.perTurnCheck(item, 'strikeOfTheGiants')) return;
     let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name}));
@@ -35,26 +35,26 @@ async function damage({trigger: {entity: item}, workflow}) {
     }
     if (!bonusFormula) return;
     await workflowUtils.bonusDamage(workflow, bonusFormula, {damageType: bonusType});
-    await workflowUtils.syntheticItemRoll(item, [workflow.hitTargets.first()], {consumeResources: true, consumeUsage: true});
+    await workflowUtils.syntheticItemRoll(item, [workflow.hitTargets.tokens[0]], {consumeResources: true, consumeUsage: true});
 }
 async function combatEnd({trigger: {entity: item}}) {
     await combatUtils.setTurnCheck(item, 'strikeOfTheGiants', true);
 }
 async function earlyCloud({trigger: {entity: effect}, workflow}) {
-    if (workflow.targets.size !== 1) return;
-    let targetToken = workflow.targets.first();
+    if (workflow.targets.count !== 1) return;
+    let targetToken = workflow.targets.tokens[0];
     let originActor = (await effectUtils.getOriginItem(effect))?.actor;
     if (originActor?.uuid !== targetToken.actor.uuid) return;
     workflow.tracker.disadvantage.add(effect.name, effect.name);
 }
 async function useStone({workflow}) {
-    if (!workflow.failedSaves.size) return;
-    let targetToken = workflow.targets.first();
+    if (!workflow.failedSaves.count) return;
+    let targetToken = workflow.targets.tokens[0];
     await tokenUtils.pushToken(workflow.token, targetToken, 10);
 }
 export let strikeOfTheGiants = {
     name: 'Strike of the Giants',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

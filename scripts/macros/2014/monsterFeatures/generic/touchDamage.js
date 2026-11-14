@@ -10,7 +10,7 @@ async function hit({trigger:{entity: item, token}, workflow}) {
 export let touchDamage = {
     name: 'Touch Damage',
     translation: 'CHRISPREMADES.Macros.TouchDamage.Name',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

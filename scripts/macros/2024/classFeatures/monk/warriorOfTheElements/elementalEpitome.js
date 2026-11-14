@@ -24,7 +24,7 @@ export async function chooseResistance(item, context='CHRISPREMADES.Macros.Infus
     return choice || prevChoice;
 }
 async function empoweredStrikes({trigger: {entity: effect}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!constants.unarmedAttacks.includes(genericUtils.getIdentifier(workflow.item))) return;
     if (activityUtils.getIdentifier(workflow.activity) !== 'punch') return;
     let feature = itemUtils.getItemByIdentifier(workflow.actor, 'elementalEpitome');
@@ -98,7 +98,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let elementalEpitome = {
     name: 'Elemental Epitome',
-    version: '1.5.22',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

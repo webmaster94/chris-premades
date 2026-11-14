@@ -22,7 +22,7 @@ async function use({workflow}) {
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
 }
 async function damage({trigger: {entity: effect}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (workflowUtils.getActionType(workflow) !== 'mwak') return;
     if (effect.flags['chris-premades'].searingSmite.used) return;
     await genericUtils.setFlag(effect, 'chris-premades', 'searingSmite.used', true);
@@ -43,11 +43,11 @@ async function damage({trigger: {entity: effect}, workflow}) {
             }
         ]}
     };
-    await effectUtils.createEffect(workflow.hitTargets.first().actor, effectData, {parentEntity: effect, strictlyInterdependent: true});
+    await effectUtils.createEffect(workflow.hitTargets.tokens[0].actor, effectData, {parentEntity: effect, strictlyInterdependent: true});
 }
 export let searingSmite = {
     name: 'Searing Smite',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

@@ -1,21 +1,21 @@
 import {activityUtils, animationUtils, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function early({trigger, workflow}) {
-    let targets = workflow.targets.filter(i => i.actor.system.attributes.hp.value < Math.floor(i.actor.system.attributes.hp.max / 2));
+    let targets = new Set(workflow.targets.tokens).filter(i => i.actor.system.attributes.hp.value < Math.floor(i.actor.system.attributes.hp.max / 2));
     if (workflow.actor.system.attributes.hp.value < Math.floor(workflow.actor.system.attributes.hp.max / 2)) targets.add(workflow.token);
     await workflowUtils.updateTargets(workflow, Array.from(targets));
 }
 async function use({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let classIdentifier = itemUtils.getConfig(item, 'classIdentifier');
     let classItem = workflow.actor.classes[classIdentifier];
     if (!classItem) return;
     let classLevels = classItem.system.levels;
     let maxAmount = classLevels * 5;
     let maxes = {};
-    Array.from(workflow.targets).forEach(token => {
+    Array.from(workflow.targets.tokens).forEach(token => {
         genericUtils.setProperty(maxes, token.id, Math.min((Math.floor(token.actor.system.attributes.hp.max / 2) - token.actor.system.attributes.hp.value), maxAmount));
     });
-    let selection = await dialogUtils.selectTargetDialog(workflow.item.name, genericUtils.format('CHRISPREMADES.Macros.PreserveLife.Select', {maxAmount}), workflow.targets, {
+    let selection = await dialogUtils.selectTargetDialog(workflow.item.name, genericUtils.format('CHRISPREMADES.Macros.PreserveLife.Select', {maxAmount}), workflow.targets.tokens, {
         type: 'selectAmount',
         maxAmount,
         skipDeadAndUnconscious: false,
@@ -36,7 +36,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let preserveLife = {
     name: 'Preserve Life',
-    version: '1.3.67',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

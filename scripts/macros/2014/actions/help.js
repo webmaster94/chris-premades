@@ -1,7 +1,7 @@
 import {combatUtils, effectUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
-    let targetToken = workflow.targets.first();
+    if (!workflow.targets.count) return;
+    let targetToken = workflow.targets.tokens[0];
     let effectData;
     if (targetToken.document.disposition === workflow.token.document.disposition) {
         effectData = {
@@ -58,7 +58,7 @@ async function use({trigger, workflow}) {
 }
 export let help = {
     name: 'Help',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

@@ -39,8 +39,8 @@ async function use({workflow}) {
         initiativeType: 'none',
         customIdentifier: 'dancingSword',
         additionalVaeButtons: [{
-            type: 'use', 
-            name: feature.name, 
+            type: 'use',
+            name: feature.name,
             identifier: genericUtils.getIdentifier(workflow.item),
             activityIdentifier: 'dancingSwordAttack'
         }],
@@ -99,7 +99,7 @@ async function early({activity, actor}) {
 }
 export let dancingSword = {
     name: 'Dancing Sword',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

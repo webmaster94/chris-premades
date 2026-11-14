@@ -5,7 +5,7 @@ async function early({trigger, workflow}) {
 async function attack({trigger, workflow}) {
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     let jb2a = animationUtils.jb2aCheck();
-    if (!playAnimation || !workflow.token || !workflow.targets.size || !jb2a) return;
+    if (!playAnimation || !workflow.token || !workflow.targets.count || !jb2a) return;
     let animation = 'jb2a.arrow.poison.';
     let color = jb2a === 'patreon' ? itemUtils.getConfig(workflow.item, 'color') : 'green';
     if (color === 'random') {
@@ -13,18 +13,18 @@ async function attack({trigger, workflow}) {
         color = colors[Math.floor((Math.random() * colors.length))];
     }
     let sound = itemUtils.getConfig(workflow.item, 'sound');
-    workflow.targets.forEach(i => {
+    workflow.targets.tokens.forEach(i => {
         animationUtils.simpleAttack(workflow.token, i, animation + color, {sound: sound, missed: !workflow.hitTargets.has(i)});
     });
 }
 async function damage({trigger, workflow}) {
-    if (workflow.hitTargets.size) return;
-    let missedTargets = workflow.targets.filter(i => !workflow.hitTargets.has(i));
+    if (workflow.hitTargets.count) return;
+    let missedTargets = new Set(workflow.targets.tokens).filter(i => !workflow.hitTargets.has(i));
     workflowUtils.applyDamage(missedTargets, Math.floor(workflow.damageRoll.total / 2), workflow.defaultDamageType);
 }
 export let acidArrow = {
     name: 'Melf\'s Acid Arrow',
-    version: '1.1.10',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

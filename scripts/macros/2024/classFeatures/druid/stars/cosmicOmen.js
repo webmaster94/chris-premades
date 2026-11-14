@@ -30,7 +30,7 @@ async function use({workflow}) {
     });
 }
 async function manual({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     if (workflow.workflowOptions['chris-premades']?.notManual) return;
     let bonus = workflow.utilityRoll.total;
     let changesKeys = [
@@ -58,7 +58,7 @@ async function manual({workflow}) {
             priority: 20
         }))}
     };
-    await effectUtils.createEffect(workflow.targets.first().actor, effectData);
+    await effectUtils.createEffect(workflow.targets.tokens[0].actor, effectData);
 }
 async function getWealWoeBonus(effect, item, token, targetToken) {
     let isWeal = genericUtils.getIdentifier(effect) === 'cosmicOmenWeal';
@@ -112,7 +112,7 @@ async function check({trigger: {sourceActor, roll, entity: effect}}) {
 }
 export let cosmicOmen = {
     name: 'Cosmic Omen',
-    version: '1.3.83',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

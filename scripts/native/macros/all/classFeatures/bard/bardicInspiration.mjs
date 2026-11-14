@@ -1,9 +1,9 @@
 import {automationUtils, D20Bonus, documentUtils, effectUtils, genericUtils, Logging} from '../../../../proxy.mjs';
 async function grantInspiration({workflow}) {
-    if (workflow.targets.size !== 1) return Logging.addMacroWarning('CPR', 'bardic-inspiration', 'Select exactly one target.');
+    if (workflow.targets.count !== 1) return Logging.addMacroWarning('CPR', 'bardic-inspiration', 'Select exactly one target.');
     const sourceEffect = workflow.item.effects.contents[0];
     if (!sourceEffect) return Logging.addMacroWarning('CPR', 'bardic-inspiration', 'Inspiration effect missing from item.', {notify: 'warn'});
-    const target = workflow.targets.first().document;
+    const target = workflow.targets.documents[0];
     const rules = documentUtils.getRules(workflow.item);
     const formula = Roll.replaceFormulaData(automationUtils.getConfigValue(workflow.item, 'bonus'), workflow.activity.getRollData());
     const effectData = documentUtils.getEffectData(workflow.activity, sourceEffect.id, {rules});
@@ -27,11 +27,12 @@ async function useInspiration({document: effect}) {
     const phase = rules === '2024' ? 'postResult' : rules === '2014' ? 'preResult' : ['preResult', 'postResult'];
     const formula = effect.flags['chris-premades']?.bardicInspiration;
     if (!formula) return Logging.addMacroWarning('CPR', 'bardicInspirationEffect', 'Bardic Inspiration die formula not found.', {notify: 'warn'});
-    return new D20Bonus(effect, {action: 'special', actor: effect.parent, formula, phase}).withOnUse(postUseInspiration);
+    return new D20Bonus(effect, {action: 'special', actor: effect.actor, formula, phase}).withOnUse(postUseInspiration);
 }
-async function postUseInspiration({bonus}) {
+async function postUseInspiration({bonus, workflow}) {
     await automationUtils.calledEvent('useBardicInspiration', bonus.actor, {canOverlap: true, data: {
-        bonus: bonus.roll,
+        bonus, workflow,
+        roll: bonus.roll,
         sourceActor: bonus.activity.actor,
         targetActor: bonus.targetActor
     }});
@@ -39,9 +40,9 @@ async function postUseInspiration({bonus}) {
 }
 export const bardicInspiration = {
     name: 'Bardic Inspiration',
-    version: '2.0.3',
+    version: '2.1.7',
     rules: 'all',
-    notes: 'Use the "actorPreCreateBardicInspiration" called event (async) to modify the bardic inspiration effect.\n\tData available: activity, effectData, rules, sourceActor, sourceToken, targetActor, targetToken.\nUse "actorCreatedBardicInspiration" (async) to respond when inspiration is granted.\n\tData available: activity, effect, rules, sourceActor, sourceToken, targetActor, targetToken.\nUse "actorUseBardicInspiration" to respond when inspiration is used.\n\tData available: bonus, sourceActor, targetActor.',
+    notes: 'Use the "actorPreCreateBardicInspiration" called event (async) to modify the bardic inspiration effect.\n\tData available: activity, effectData, rules, sourceActor, sourceToken, targetActor, targetToken.\nUse "actorCreatedBardicInspiration" (async) to respond when inspiration is granted.\n\tData available: activity, effect, rules, sourceActor, sourceToken, targetActor, targetToken.\nUse "actorUseBardicInspiration" to respond when inspiration is used.\n\tData available: bonus, roll, sourceActor, targetActor, workflow.',
     use: postUseInspiration,
     roll: [
         {
@@ -53,7 +54,7 @@ export const bardicInspiration = {
     config: {
         bonus: {
             default: '@scale.bard.inspiration',
-            type: 'text',
+            type: 'formula',
             label: 'CHRISPREMADES.Config.Formula',
             category: 'behavior'
         },
@@ -89,6 +90,11 @@ export const bardicInspiration = {
         }
     ]
 };
+const d20 = [{
+    pass: 'actorOptionalBonus',
+    macro: useInspiration,
+    priority: 300
+}];
 export const bardicInspirationEffect = {
     name: bardicInspiration.name,
     version: bardicInspiration.version,
@@ -100,32 +106,8 @@ export const bardicInspirationEffect = {
             priority: 300
         }
     ],
-    check: [
-        {
-            pass: 'actorOptionalBonus',
-            macro: useInspiration,
-            priority: 300
-        }
-    ],
-    save: [
-        {
-            pass: 'actorOptionalBonus',
-            macro: useInspiration,
-            priority: 300
-        }
-    ],
-    skill: [
-        {
-            pass: 'actorOptionalBonus',
-            macro: useInspiration,
-            priority: 300
-        }
-    ],
-    tool: [
-        {
-            pass: 'actorOptionalBonus',
-            macro: useInspiration,
-            priority: 300
-        }
-    ]
+    check: d20,
+    save: d20,
+    skill: d20,
+    tool: d20
 };

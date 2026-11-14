@@ -29,14 +29,14 @@ async function use({workflow}) {
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'danseMacabreCommandUndead', {strict: true});
     if (!feature) return;
     await Summons.spawn(sourceActors, updates, workflow.item, workflow.token, {
-        duration: 3600, 
-        range: 10, 
-        animation, 
-        initiativeType: 'group', 
+        duration: 3600,
+        range: 10,
+        animation,
+        initiativeType: 'group',
         additionalVaeButtons: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'danseMacabre', 
+            identifier: 'danseMacabre',
             activityIdentifier: 'danseMacabreCommandUndead'
         }],
         unhideActivities: {
@@ -51,7 +51,7 @@ async function early({dialog}) {
 }
 export let danseMacabre = {
     name: 'Danse Macabre',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

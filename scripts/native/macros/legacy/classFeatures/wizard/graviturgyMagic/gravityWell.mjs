@@ -1,18 +1,18 @@
-import {automationUtils, crosshairUtils, dialogUtils, tokenUtils, workflowUtils} from '../../../../../proxy.mjs';
+import {automationUtils, crosshairUtils, dialogUtils, distanceUtils, tokenUtils, workflowUtils} from '../../../../../proxy.mjs';
 async function cast({document: item, workflow}) {
-    if (!workflow.targets.size || !(workflow.item.type === 'spell' || workflow.item.system.type?.value === 'spellFeature')) return;
+    if (!workflow.targets.count || !(workflow.item.type === 'spell' || workflow.item.system.type?.value === 'spellFeature')) return;
     const moveDistance = automationUtils.getConfigValue(item, 'moveDistance') ?? 5;
     const allowAllTargets = automationUtils.getConfigValue(item, 'allowAllTargets');
     const validTargets = [];
     if (workflowUtils.isAttackType(workflow, 'spellAttack')) {
-        if (!workflow.hitTargets.size) return;
-        validTargets.push(...workflow.hitTargets);
+        if (!workflow.hitTargets.count) return;
+        validTargets.push(...workflow.hitTargets.tokens);
     } else if (workflow.activity?.hasSave) {
-        validTargets.push(...workflow.failedSaves);
+        validTargets.push(...workflow.failedSaves.tokens);
     } else if (allowAllTargets) {
-        validTargets.push(...workflow.targets);
+        validTargets.push(...workflow.targets.tokens);
     } else {
-        validTargets.push(...workflow.targets.filter(token => token.document.disposition === workflow.token.document.disposition));
+        validTargets.push(...workflow.targets.tokens.filter(token => token.document.disposition === workflow.tokenDocument.disposition));
     }
     if (!validTargets.length) return;
     let token;
@@ -25,23 +25,13 @@ async function cast({document: item, workflow}) {
         token = selection?.result;
     }
     if (!token) return;
-    const actualHalf = token.width / 2;
-    const widthAdjust = canvas.grid.distance * Math.floor(actualHalf);
-    let fudgeDistance = 0;
-    if (widthAdjust !== actualHalf * canvas.grid.distance) fudgeDistance = 2.5;
-    fudgeDistance += widthAdjust;
     const position = await crosshairUtils.aimCrosshair({
         token,
         centerpoint: token.object.center,
         maxRange: moveDistance,
-        fudgeDistance,
+        fudgeDistance: distanceUtils.fromGridSpaces(canvas.scene, token.width / 2),
         drawBoundries: true,
-        trackDistance: true,
-        crosshairsConfig: {
-            size: canvas.grid.distance * token.width / 2,
-            icon: token.texture.src,
-            resolution: (token.width % 2) ? 1 : -1
-        }
+        trackDistance: true
     });
     if (!position || position.cancelled) return;
     await tokenUtils.displaceToken(token, {destination: position, sourceToken: workflow.token.document, range: moveDistance});

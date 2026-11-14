@@ -14,7 +14,7 @@ async function use({trigger, workflow}) {
 }
 export let steadyAim = {
     name: 'Steady Aim',
-    version: '1.3.77',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

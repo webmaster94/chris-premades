@@ -256,7 +256,7 @@
     "chris-premades": {
       "info": {
         "name": "Frost Fingers",
-        "version": "1.1.10",
+        "version": "2.3.0",
         "hasAnimation": true,
         "identifier": "frostFingers",
         "source": "chris-premades"

@@ -1,6 +1,6 @@
 import {activityUtils, actorUtils, constants, dialogUtils, genericUtils, itemUtils, socketUtils, tokenUtils, workflowUtils} from '../../../../utils.js';
-async function chargePreCheck({trigger: {entity: item}, actor, config, token}) {   
-    let highestAvailableSlot = Object.values(actor.system.spells)?.reduce((max, slot) => Math.max(max, !!slot.value * (slot.level ?? 0)), 0); 
+async function chargePreCheck({trigger: {entity: item}, actor, config, token}) {
+    let highestAvailableSlot = Object.values(actor.system.spells)?.reduce((max, slot) => Math.max(max, !!slot.value * (slot.level ?? 0)), 0);
     if (!highestAvailableSlot) {
         genericUtils.notify('CHRISPREMADES.Macros.SongOfDefense.NoSpellSlots', 'warn');
         return true;
@@ -34,7 +34,7 @@ async function drain({trigger: {entity: item}, actor, token}) {
         if (rarity === 'artifact') rarity = i.flags['chris-premades']?.originalRarity ?? rarity;
         return (obj[i.uuid] = {
             rarity,
-            spellSlot: itemUtils.getConfig(item, `drain-${rarity}`) || -1 
+            spellSlot: itemUtils.getConfig(item, `drain-${rarity}`) || -1
         }, obj);
     }, {});
     let getLabel = i => {
@@ -55,12 +55,12 @@ async function drain({trigger: {entity: item}, actor, token}) {
         {userId: socketUtils.gmID()}
     )) return true;
     await genericUtils.update(actor, {
-        [`system.spells.${slot}.value`]: actor.system.spells[slot].value + 1 
+        [`system.spells.${slot}.value`]: actor.system.spells[slot].value + 1
     });
     let createdEffect = await fromUuid(selection.flags.dnd5e?.dependentOn);
     await genericUtils.remove(createdEffect ?? selection);
 }
-async function transmute({trigger: {entity: item}, actor, token}) {    
+async function transmute({trigger: {entity: item}, actor, token}) {
     let feature = itemUtils.getItemByIdentifier(actor, 'replicateMagicItem');
     if (!feature) return true;
     let activity = activityUtils.getActivityByIdentifier(feature, 'createItem', {strict: true});
@@ -112,7 +112,7 @@ async function specialLabelDialog(title, content, items, getLabel) {
 }
 export let magicItemTinker = {
     name: 'Magic Item Tinker',
-    version: '1.5.17',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

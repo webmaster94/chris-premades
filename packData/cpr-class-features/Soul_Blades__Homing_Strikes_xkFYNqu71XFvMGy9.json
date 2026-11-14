@@ -209,7 +209,7 @@
         "name": "Soul Blades: Homing Strikes",
         "identifier": "homingStrikes",
         "source": "chris-premades",
-        "version": "1.3.57"
+        "version": "2.3.0"
       },
       "macros": {
         "item": [

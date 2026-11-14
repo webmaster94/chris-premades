@@ -3,13 +3,13 @@ async function use({trigger, workflow}) {
     if (!workflow.token) return;
     let distance = Number(itemUtils.getConfig(workflow.item, 'distance'));
     if (isNaN(distance)) return;
-    await Promise.all(workflow.failedSaves.map(async token => {
+    await Promise.all(workflow.failedSaves.tokens.map(async token => {
         await tokenUtils.pushToken(workflow.token, token, 10);
     }));
 }
 export let minotaurCharge = {
     name: 'Charge',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

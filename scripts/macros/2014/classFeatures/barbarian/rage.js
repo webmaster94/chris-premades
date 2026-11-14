@@ -251,7 +251,7 @@ async function use({workflow}) {
         });
     }
     let effect = await effectUtils.createEffect(workflow.actor, effectData, {
-        identifier: 'rage', 
+        identifier: 'rage',
         vae: vaeInput,
         unhideActivities
     });
@@ -275,8 +275,8 @@ async function attack({workflow}) {
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'rage');
     if (!effect) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
-    if (!workflow.targets.size) return;
-    if (workflow.targets.first().document.disposition === workflow.token.document.disposition) return;
+    if (!workflow.targets.count) return;
+    if (workflow.targets.tokens[0].document.disposition === workflow.token.document.disposition) return;
     await combatUtils.setTurnCheck(effect, 'rage');
 }
 async function damageApplication({workflow, ditem}) {
@@ -312,13 +312,13 @@ async function start({trigger: {entity: effect}}, {overrideAnimation = undefined
     switch (animation) {
         case 'default':
             new Sequence({moduleName:'chris-premades', softFail:true})
-                
+
                 .effect()
                 .file('jb2a.extras.tmfx.outpulse.circle.02.normal')
                 .atLocation(token)
                 .size(4, {gridUnits: true})
                 .opacity(0.25)
-                
+
                 .effect()
                 .file('jb2a.impact.ground_crack.orange.02')
                 .atLocation(token)
@@ -326,7 +326,7 @@ async function start({trigger: {entity: effect}}, {overrideAnimation = undefined
                 .filter('ColorMatrix', {hue: -15,saturate: 1})
                 .size(3.5, {gridUnits: true})
                 .zIndex(1)
-                
+
                 .effect()
                 .file('jb2a.impact.ground_crack.still_frame.02')
                 .atLocation(token)
@@ -337,7 +337,7 @@ async function start({trigger: {entity: effect}}, {overrideAnimation = undefined
                 .zIndex(0)
                 .duration(8000)
                 .fadeOut(3000)
-                
+
                 .effect()
                 .file('jb2a.wind_stream.white')
                 .atLocation(token, {offset: {y:-0.05}, gridUnits: true})
@@ -349,7 +349,7 @@ async function start({trigger: {entity: effect}}, {overrideAnimation = undefined
                 .loopProperty('sprite', 'position.y', {from: -5, to: 5, duration: 50, pingPong: true})
                 .duration(8000)
                 .fadeOut(3000)
-                
+
                 .effect()
                 .file('jb2a.particles.outward.orange.01.03')
                 .atLocation(token)
@@ -360,7 +360,7 @@ async function start({trigger: {entity: effect}}, {overrideAnimation = undefined
                 .loopProperty('sprite', 'position.x', {from: -5, to: 5, duration: 50, pingPong: true})
                 .animateProperty('sprite', 'position.y', {from: 0, to: -100, duration: 6000, pingPong: true, delay: 2000})
                 .duration(8000)
-                
+
                 .effect()
                 .file('jb2a.wind_stream.white')
                 .atLocation(token)
@@ -373,7 +373,7 @@ async function start({trigger: {entity: effect}}, {overrideAnimation = undefined
                 .tint('#FF0000')
                 .persist()
                 .private()
-                
+
                 .effect()
                 .file('jb2a.token_border.circle.static.orange.012')
                 .atLocation(token)
@@ -546,7 +546,7 @@ async function remove({trigger: {entity: effect}}) {
 }
 export let rage = {
     name: 'Rage',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

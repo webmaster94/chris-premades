@@ -1,6 +1,6 @@
 import {upcastTargets} from '../../generic/upcastTargets.js';
 export let gaseousForm = {
-    version: '1.5.1',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

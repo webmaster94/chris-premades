@@ -1,10 +1,10 @@
 import {constants, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function early({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let ability = itemUtils.getConfig(workflow.item, 'ability');
     let maxTargets = Math.max(1, workflow.actor.system.abilities[ability].mod);
-    if (workflow.targets.size <= maxTargets) return;
-    let oldTargets = Array.from(workflow.targets);
+    if (workflow.targets.count <= maxTargets) return;
+    let oldTargets = Array.from(workflow.targets.tokens);
     let newTargets;
     let selection = await dialogUtils.selectTargetDialog(workflow.item.name, genericUtils.format('CHRISPREMADES.Macros.UpcastTargets.Select', {maxTargets}), oldTargets, {type: 'multiple', maxAmount: maxTargets, skipDeadAndUnconscious: false});
     if (!selection) {
@@ -19,7 +19,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let groupRecovery = {
     name: 'Group Recovery',
-    version: '1.3.164',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

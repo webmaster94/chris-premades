@@ -102,7 +102,7 @@ async function use({workflow}) {
     await effectUtils.createEffect(workflow.actor, effectData);
 }
 async function damage({workflow}) {
-    if (workflow.hitTargets.size !== 1 || !workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
+    if (workflow.hitTargets.count !== 1 || !workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     let isFin = workflow.item.system.properties.has('fin');
     if (isFin) {
         if (workflow.actor.system.abilities.str.value < workflow.actor.system.abilities.dex.value) return;
@@ -115,7 +115,7 @@ async function damage({workflow}) {
 export let reduce = {
     name: 'Reduce',
     translation: 'CHRISPREMADES.Macros.Reduce.Name',
-    version: '1.1.16',
+    version: '2.3.0',
     midi: {
         item: [
             {

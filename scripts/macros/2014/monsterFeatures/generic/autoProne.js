@@ -1,20 +1,20 @@
 import {actorUtils, effectUtils, itemUtils} from '../../../../utils.js';
 async function use({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let config = itemUtils.getGenericFeatureConfig(item, 'autoProne');
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
-    for (let token of workflow.hitTargets) {
+    for (let token of workflow.hitTargets.tokens) {
         if (config.checkSaves && !workflow.failedSaves.has(token)) continue;
         let sizeLimit = Number(config.sizeLimit);
-        if (sizeLimit != -1 && actorUtils.getSize(token.actor) > sizeLimit) continue; 
+        if (sizeLimit != -1 && actorUtils.getSize(token.actor) > sizeLimit) continue;
         await effectUtils.applyConditions(token.actor, ['prone']);
     }
 }
 export let autoProne = {
     name: 'Auto Prone',
     translation: 'CHRISPREMADES.Macros.AutoProne.Name',
-    version: '1.3.132',
+    version: '2.3.0',
     midi: {
         item: [
             {

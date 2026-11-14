@@ -12,7 +12,7 @@ async function save({trigger: {config, roll, actor, entity: item}}) {
 }
 export let disciplinedSurvivor = {
     name: 'Disciplined Survivor',
-    version: '1.3.162',
+    version: '2.3.0',
     rules: 'modern',
     save: [
         {

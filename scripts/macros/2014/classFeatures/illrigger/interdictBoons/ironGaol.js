@@ -1,9 +1,9 @@
 import {actorUtils, dialogUtils, effectUtils, genericUtils, itemUtils, socketUtils, workflowUtils} from '../../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let native = false;
-    if (workflow.failedSaves.first().actor.type === 'npc') {
-        if (actorUtils.getLevelOrCR(workflow.failedSaves.first().actor) <= 4) native = true;
+    if (workflow.failedSaves.tokens[0].actor.type === 'npc') {
+        if (actorUtils.getLevelOrCR(workflow.failedSaves.tokens[0].actor) <= 4) native = true;
     }
     if (!native) native = await dialogUtils.confirm(workflow.item.name, 'CHRISPREMADES.Macros.IronGaol', {userId: socketUtils.gmID(), buttons: 'yesNo'});
     let sourceEffect = workflow.item.effects.contents?.[0];
@@ -61,7 +61,7 @@ async function use({trigger, workflow}) {
         genericUtils.setProperty(effectData, 'flags.dae.showIcon', true);
         delete effectData.duration;
     }
-    await Promise.all(workflow.failedSaves.map(async token => {
+    await Promise.all(workflow.failedSaves.tokens.map(async token => {
         await effectUtils.createEffect(token.actor, effectData);
     }));
 }
@@ -74,7 +74,7 @@ async function added({trigger: {entity: item}}) {
 export let interdictBoonIronGaol = {
     name: 'Interdict Boons: Iron Gaol',
     aliases: ['Iron Gaol'],
-    version: '1.3.76',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

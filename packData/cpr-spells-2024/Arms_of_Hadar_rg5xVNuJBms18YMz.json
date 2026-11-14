@@ -207,7 +207,7 @@
     "chris-premades": {
       "info": {
         "identifier": "armsOfHadar",
-        "version": "1.1.12",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern"
       },

@@ -26,7 +26,7 @@ async function death({trigger: {entity: effect, token}}) {
 }
 export let infernalMajesty = {
     name: 'Infernal Majesty',
-    version: '1.3.70',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

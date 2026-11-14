@@ -47,11 +47,11 @@ async function use({workflow}) {
     }
     effectUtils.addMacro(effectData, 'midi.actor', ['celestialRevelation']);
     await effectUtils.createEffect(workflow.actor, effectData, {
-        identifier: 'celestialRevelation', 
+        identifier: 'celestialRevelation',
         vae: [{
-            type: 'use', 
-            name: feature.name, 
-            identifier, 
+            type: 'use',
+            name: feature.name,
+            identifier,
             activityIdentifier: 'celestialRevelationEnd'
         }],
         unhideActivities: {
@@ -66,7 +66,7 @@ async function end({workflow}) {
     if (effect) await genericUtils.remove(effect);
 }
 async function damage({trigger: {entity: effect}, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     if (!combatUtils.perTurnCheck(effect, 'celestialRevelation', true, workflow.token.id)) return;
     let use = await dialogUtils.confirm(effect.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: effect.name}));
@@ -77,11 +77,11 @@ async function damage({trigger: {entity: effect}, workflow}) {
     await workflowUtils.bonusDamage(workflow, damageFormula, {damageType});
 }
 async function applyDamage({trigger: {entity: effect}, workflow}) {
-    if (workflow.hitTargets.size < 2) return;
+    if (workflow.hitTargets.count < 2) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     if (!combatUtils.perTurnCheck(effect, 'celestialRevelation', true, workflow.token.id)) return;
     if (workflow.celestialRevelationChoseNo) return;
-    let targetToken = await dialogUtils.selectTargetDialog(effect.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: effect.name}), Array.from(workflow.hitTargets));
+    let targetToken = await dialogUtils.selectTargetDialog(effect.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: effect.name}), Array.from(workflow.hitTargets.tokens));
     workflow.celestialRevelationChoseNo = true;
     if (!targetToken) return;
     await combatUtils.setTurnCheck(effect, 'celestialRevelation');
@@ -113,7 +113,7 @@ async function turnEnd({trigger: {entity: effect, token}}) {
 }
 export let aasimarNecroticShroud = {
     name: 'Celestial Revelation (Necrotic Shroud)',
-    version: '1.1.0',
+    version: '2.3.0',
     config: [
         {
             value: 'damageType',
@@ -128,7 +128,7 @@ export let aasimarNecroticShroud = {
 };
 export let aasimarRadiantConsumption = {
     name: 'Celestial Revelation (Radiant Consumption)',
-    version: '1.2.21',
+    version: '2.3.0',
     combat: [
         {
             pass: 'turnEnd',
@@ -150,7 +150,7 @@ export let aasimarRadiantConsumption = {
 };
 export let aasimarRadiantSoul = {
     name: 'Celestial Revelation (Radiant Soul)',
-    version: '1.1.0',
+    version: '2.3.0',
     config: [
         {
             value: 'damageType',
@@ -165,7 +165,7 @@ export let aasimarRadiantSoul = {
 };
 export let celestialRevelation = {
     name: 'Celestial Revelation',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

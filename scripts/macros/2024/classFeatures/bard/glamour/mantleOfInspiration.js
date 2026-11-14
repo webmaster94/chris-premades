@@ -2,17 +2,17 @@ import {actorUtils, combatUtils, dialogUtils, genericUtils, itemUtils, socketUti
 import {bardicInspiration} from '../bardicInspiration.js';
 async function early({trigger, workflow}) {
     let maxTargets = Math.max(1, workflow.actor.system.abilities.cha.mod);
-    if (workflow.targets.size <= maxTargets) return;
-    let selection = await dialogUtils.selectTargetDialog(workflow.item.name, genericUtils.format('CHRISPREMADES.Macros.MantleOfInspiration.Targets', {maxTargets}), Array.from(workflow.targets), {type: 'multiple', maxAmount: maxTargets, skipDeadAndUnconscious: false});
+    if (workflow.targets.count <= maxTargets) return;
+    let selection = await dialogUtils.selectTargetDialog(workflow.item.name, genericUtils.format('CHRISPREMADES.Macros.MantleOfInspiration.Targets', {maxTargets}), Array.from(workflow.targets.tokens), {type: 'multiple', maxAmount: maxTargets, skipDeadAndUnconscious: false});
     if (!selection) {
-        selection = Array.from(workflow.targets).slice(0, maxTargets);
+        selection = Array.from(workflow.targets.tokens).slice(0, maxTargets);
     } else {
         selection = selection[0];
     }
     await workflowUtils.updateTargets(workflow, selection);
 }
 async function use({trigger, workflow}) {
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         if (actorUtils.hasUsedReaction(token.actor)) return;
         let selection = await dialogUtils.confirm(workflow.item.name, 'CHRISPREMADES.Macros.MantleOfInspiration.Reaction', {userId: socketUtils.firstOwner(token.actor, true)});
         if (!selection) return;
@@ -32,7 +32,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let mantleOfInspiration = {
     name: 'Mantle of Inspiration',
-    version: '1.1.40',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

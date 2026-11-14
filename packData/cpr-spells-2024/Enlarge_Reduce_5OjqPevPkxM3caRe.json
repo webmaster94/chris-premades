@@ -233,7 +233,7 @@
         "animation": true
       },
       "info": {
-        "version": "1.2.22",
+        "version": "2.3.0",
         "hasAnimation": true,
         "identifier": "enlargeReduce",
         "source": "chris-premades",

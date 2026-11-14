@@ -1,7 +1,7 @@
 import {activityUtils, actorUtils, dialogUtils, effectUtils, genericUtils, itemUtils, templateUtils, workflowUtils} from '../../../utils.js';
 async function startRitual({trigger, workflow}) {
     if (!workflow.token) return;
-    let effect = effectUtils.getEffectByIdentifier(workflow.targets.first().actor, 'circleCastEffect');
+    let effect = effectUtils.getEffectByIdentifier(workflow.targets.tokens[0].actor, 'circleCastEffect');
     if (effect) await genericUtils.remove(effect);
     let spells = actorUtils.getCastableSpells(workflow.actor).filter(i => i.system.level);
     if (!spells.length) return;
@@ -88,8 +88,8 @@ async function startRitual({trigger, workflow}) {
         .play();
 }
 async function joinRitual({trigger, workflow}) {
-    if (!workflow.targets.size) return;
-    let effect = effectUtils.getEffectByIdentifier(workflow.targets.first().actor, 'circleCastEffect');
+    if (!workflow.targets.count) return;
+    let effect = effectUtils.getEffectByIdentifier(workflow.targets.tokens[0].actor, 'circleCastEffect');
     if (!effect) return;
     let participants = effect.flags['chris-premades'].circleCast.participants;
     if (participants?.includes(workflow.token.document.uuid)) return;
@@ -131,7 +131,7 @@ async function joinRitual({trigger, workflow}) {
         .fadeIn(500)
         .atLocation(workflow.token)
         .attachTo(workflow.token)
-        .stretchTo(workflow.targets.first(), {attachTo: true})
+        .stretchTo(workflow.targets.tokens[0], {attachTo: true})
         .belowTokens()
         .persist()
         .fadeOut(500)
@@ -144,8 +144,8 @@ async function joinRitual({trigger, workflow}) {
         .effect()
         .file('jb2a.energy_strands.overlay.' + strandColor + '.01')
         .fadeIn(1000)
-        .atLocation(workflow.targets.first())
-        .attachTo(workflow.targets.first())
+        .atLocation(workflow.targets.tokens[0])
+        .attachTo(workflow.targets.tokens[0])
         .startTimePerc(Math.random())
         .persist()
         .tieToDocuments([effect])
@@ -316,9 +316,9 @@ async function safeguard({trigger, workflow}) {
     await effectUtils.addDependent(workflow.template, templates);
 }
 async function safeguardTarget({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let tokensToRemove = [];
-    workflow.targets.forEach(token => {
+    workflow.targets.tokens.forEach(token => {
         let found = templateUtils.getTemplatesInToken(token).find(i => i.flags['chris-premades']?.circleCast?.origin === workflow.item.uuid);
         if (found) tokensToRemove.push(token);
     });
@@ -327,7 +327,7 @@ async function safeguardTarget({trigger, workflow}) {
 }
 export let circleCast = {
     name: 'Circle Cast',
-    version: '1.3.118',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

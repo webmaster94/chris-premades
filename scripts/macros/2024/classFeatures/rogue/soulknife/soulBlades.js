@@ -17,7 +17,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let soulBlades = {
     name: 'Soul Blades',
-    version: '1.3.58',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

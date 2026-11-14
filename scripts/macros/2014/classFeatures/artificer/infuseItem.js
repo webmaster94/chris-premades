@@ -4,7 +4,7 @@ import {actorUtils, compendiumUtils, constants, dialogUtils, effectUtils, errors
 
 async function use({workflow}) {
     let knownInfusions = itemUtils.getConfig(workflow.item, 'knownInfusions');
-    let target = workflow.targets.first()?.actor ?? workflow.actor;
+    let target = workflow.targets.tokens[0]?.actor ?? workflow.actor;
     let classLevel = workflow.actor.classes?.artificer?.system?.levels;
     if (!classLevel) return;
     if (!knownInfusions?.length) {
@@ -19,7 +19,7 @@ async function use({workflow}) {
     let existingInfusionUuids = workflow.item.flags['chris-premades']?.infusions ?? {};
     let willBeReplacing = existingInfusionUuids[selection];
     if (willBeReplacing) maxItems += 1;
-    let deadHomunculusServant = 
+    let deadHomunculusServant =
         !effectUtils.getEffectByIdentifier(workflow.actor, 'infuseItem') &&
         existingInfusionUuids.homunculusServant;
     if (deadHomunculusServant) {
@@ -197,7 +197,7 @@ async function use({workflow}) {
             await itemUtils.createItems(target, [featureData], {favorite: true, parentEntity: enchantEffect});
             break;
         }
-        case 'bootsOfTheWindingPath': {            
+        case 'bootsOfTheWindingPath': {
             let itemData = await compendiumUtils.getItemFromCompendium(constants.featurePacks.classFeatureItems, 'Boots of the Winding Path', {object: true, getDescription: true, translate: 'CHRISPREMADES.Macros.InfuseItem.BootsOfTheWindingPath', identifier: 'infuseItemBootsWinding'});
             if (!itemData) return;
             [selectedItem] = await itemUtils.createItems(target, [itemData], {favorite: true});
@@ -346,7 +346,7 @@ async function use({workflow}) {
             await itemUtils.enchantItem(selectedItem, enchantData, {identifier: selection});
             break;
         }
-        case 'helmOfAwareness': {            
+        case 'helmOfAwareness': {
             let itemData = await compendiumUtils.getItemFromCompendium(constants.featurePacks.classFeatureItems, 'Helm of Awareness', {object: true, getDescription: true, translate: 'CHRISPREMADES.Macros.InfuseItem.HelmOfAwareness', identifier: selection});
             if (!itemData) return;
             [selectedItem] = await itemUtils.createItems(target, [itemData]);
@@ -764,8 +764,8 @@ async function bootsWindingLate({workflow}) {
     });
 }
 async function repulsionShieldLate({workflow}) {
-    if (workflow.targets.size !== 1) return;
-    await tokenUtils.pushToken(workflow.token, workflow.targets.first(), 15);
+    if (workflow.targets.count !== 1) return;
+    await tokenUtils.pushToken(workflow.token, workflow.targets.tokens[0], 15);
 }
 async function spellRingLate({workflow}) {
     let {value: pact, max: pactMax, level: pactLevel} = workflow.actor.system.spells.pact;
@@ -918,7 +918,7 @@ async function homunculusEarly({workflow}) {
 }
 export let infuseItem = {
     name: 'Infuse Item',
-    version: '1.0.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

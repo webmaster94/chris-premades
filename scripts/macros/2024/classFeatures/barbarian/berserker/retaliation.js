@@ -1,6 +1,6 @@
 import {activityUtils, constants, dialogUtils, genericUtils, workflowUtils} from '../../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let weapons = workflow.actor.items.filter(i => i.type === 'weapon' && i.system.equipped && constants.meleeWeaponTypes.includes(i.system.type?.value));
     if (!weapons.length) {
         genericUtils.notify('CHRISPREMADES.Macros.BoomingBlade.NoWeapons', 'warn');
@@ -17,11 +17,11 @@ async function use({trigger, workflow}) {
     let attackId = selectedWeapon.system.activities.getByType('attack')?.[0]?.id;
     if (!attackId) return;
     weaponData.system.activities[attackId].activation.type = 'special';
-    await workflowUtils.syntheticItemDataRoll(weaponData, workflow.actor, [workflow.targets.first()]);
+    await workflowUtils.syntheticItemDataRoll(weaponData, workflow.actor, [workflow.targets.tokens[0]]);
 }
 export let retaliation = {
     name: 'Retaliation',
-    version: '1.3.10',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

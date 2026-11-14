@@ -320,7 +320,7 @@
     "chris-premades": {
       "info": {
         "name": "Steel Defender",
-        "version": "1.1.0",
+        "version": "2.3.0",
         "identifier": "steelDefender",
         "source": "chris-premades",
         "hasAnimation": true

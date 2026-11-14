@@ -156,7 +156,7 @@ async function turnStart({trigger: {entity: effect, token}}) {
     await workflowUtils.syntheticActivityRoll(features[selection - 1]);
 }
 async function late({trigger: {entity: effect}, workflow}) {
-    if (workflow.item.type !== 'spell' || !workflow.targets.size || !workflow.item.system.level) return;
+    if (workflow.item.type !== 'spell' || !workflow.targets.count || !workflow.item.system.level) return;
     if (!workflow.damageItem?.damageDetail?.some(i => i.type === 'healing')) return;
     let chaliceFeature = activityUtils.getActivityByIdentifier(await effectUtils.getOriginItem(effect), 'healingChalice', {strict: true});
     if (!chaliceFeature) return;
@@ -189,7 +189,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let starryForm = {
     name: 'Starry Form',
-    version: '1.3.55',
+    version: '2.3.0',
     midi: {
         item: [
             {

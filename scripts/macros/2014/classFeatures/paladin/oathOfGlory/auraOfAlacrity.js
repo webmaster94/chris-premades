@@ -43,7 +43,7 @@ async function turnStart({trigger: {entity: item, token, target}}) {
 }
 export let auraOfAlacrity = {
     name: 'Aura of Alacrity',
-    version: '1.1.0',
+    version: '2.3.0',
     combat: [
         {
             pass: 'turnStartNear',

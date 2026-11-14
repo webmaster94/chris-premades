@@ -52,11 +52,11 @@ async function longJump({trigger, workflow}) {
     }
     if (playAnimation) {
         let position = await crosshairUtils.aimCrosshair({
-            token: workflow.token, 
-            maxRange: workflow.utilityRolls[0].total, 
-            centerpoint: workflow.token.center, 
-            drawBoundries: true, 
-            trackDistance: true, 
+            token: workflow.token,
+            maxRange: workflow.utilityRolls[0].total,
+            centerpoint: workflow.token.center,
+            drawBoundries: true,
+            trackDistance: true,
             fudgeDistance: workflow.token.document.width * canvas.dimensions.distance / 2,
             crosshairsConfig: {
                 size: workflow.token.document.parent.grid.distance * workflow.token.document.width / 2,
@@ -77,7 +77,7 @@ async function longJump({trigger, workflow}) {
                 .belowTokens()
             .effect()
                 .copySprite(workflow.token)
-                .atLocation(workflow.token)   
+                .atLocation(workflow.token)
                 .opacity(1)
                 .duration(1000)
                 .anchor({ x: 0.5, y: 1 })
@@ -86,7 +86,7 @@ async function longJump({trigger, workflow}) {
                 .zIndex(2)
             .effect()
                 .copySprite(workflow.token)
-                .atLocation(workflow.token)   
+                .atLocation(workflow.token)
                 .opacity(0.5)
                 .scale(0.9)
                 .belowTokens()
@@ -115,7 +115,7 @@ async function longJump({trigger, workflow}) {
 }
 export let jump = {
     name: 'Jump',
-    version: '1.4.29',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

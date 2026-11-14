@@ -1,7 +1,7 @@
 import {activityUtils, actorUtils, workflowUtils} from '../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.hitTargets.size) return;
-    let validTargets = workflow.hitTargets.filter(token => {
+    if (!workflow.hitTargets.count) return;
+    let validTargets = new Set(workflow.hitTargets.tokens).filter(token => {
         let type = actorUtils.typeOrRace(token.actor);
         if (type === 'undead') return false;
         let species = token.actor.system.details?.type?.subtype ?? actorUtils.raceOrType(token.actor);
@@ -14,7 +14,7 @@ async function use({trigger, workflow}) {
 }
 export let ghoulClaw = {
     name: 'Claw',
-    version: '1.3.149',
+    version: '2.3.0',
     rules: 'modern',
     monsters: [
         'Ghoul'

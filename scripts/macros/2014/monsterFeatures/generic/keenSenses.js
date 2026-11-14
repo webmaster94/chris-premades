@@ -15,7 +15,7 @@ async function skill({trigger}) {
 export let keenSenses = {
     name: 'Keen Senses',
     translation: 'CHRISPREMADES.Macros.KeenSenses.Name',
-    version: '0.12.0',
+    version: '2.3.0',
     skill: [
         {
             pass: 'context',

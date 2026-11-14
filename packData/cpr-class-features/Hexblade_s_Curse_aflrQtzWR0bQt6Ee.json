@@ -327,7 +327,7 @@
     "chris-premades": {
       "info": {
         "name": "Hexblade's Curse",
-        "version": "1.1.0",
+        "version": "2.3.0",
         "identifier": "hexbladesCurse",
         "source": "chris-premades"
       },

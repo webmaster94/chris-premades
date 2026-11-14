@@ -11,7 +11,7 @@ async function veryEarly({activity, dialog, actor, config}) {
 }
 export let intimidatingPresence ={
     name: 'Intimidating Presence',
-    version: '1.1.23',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

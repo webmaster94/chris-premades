@@ -2,11 +2,11 @@ import {actorUtils, dialogUtils, effectUtils, genericUtils, itemUtils, socketUti
 import {upcastTargets} from '../../generic/upcastTargets.js';
 async function use({workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (!workflow.failedSaves.size) {
+    if (!workflow.failedSaves.count) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
-    let selection = await dialogUtils.selectTargetDialog(workflow.item.name, 'CHRISPREMADES.Macros.Banishment.PlaneSelect', workflow.failedSaves, {type: 'multiple', skipDeadAndUnconscious: false, userId: socketUtils.gmID(), maxAmount: workflow.failedSaves.size});
+    let selection = await dialogUtils.selectTargetDialog(workflow.item.name, 'CHRISPREMADES.Macros.Banishment.PlaneSelect', workflow.failedSaves.tokens, {type: 'multiple', skipDeadAndUnconscious: false, userId: socketUtils.gmID(), maxAmount: workflow.failedSaves.count});
     if (!selection) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
@@ -62,7 +62,7 @@ export async function banishmentHelper(workflow, otherPlanarTokens = []) {
         }
     };
     effectUtils.addMacro(effectData, 'effect', ['banishmentBanished']);
-    for (let token of workflow.failedSaves) {
+    for (let token of workflow.failedSaves.tokens) {
         let trueEffectData;
         if (otherPlanarTokens.includes(token)) {
             trueEffectData = effectData;
@@ -85,7 +85,7 @@ async function remove({trigger: {entity}}) {
 }
 export let banishment = {
     name: 'Banishment',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

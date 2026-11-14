@@ -184,7 +184,7 @@
     "chris-premades": {
       "info": {
         "identifier": "firearmRepair",
-        "version": "0.12.86",
+        "version": "2.3.0",
         "source": "chris-premades"
       },
       "macros": {

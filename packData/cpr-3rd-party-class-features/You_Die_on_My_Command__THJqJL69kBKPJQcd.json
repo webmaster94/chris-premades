@@ -164,7 +164,7 @@
         "identifier": "youDieOnMyCommand",
         "rules": "legacy",
         "source": "chris-premades",
-        "version": "1.3.78"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

@@ -21,7 +21,7 @@ async function use({workflow}) {
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
 }
 async function damage({workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'brandingSmite');
     if (!effect) return;
@@ -58,11 +58,11 @@ async function damage({workflow}) {
             ]
         }
     };
-    await effectUtils.createEffect(workflow.hitTargets.first().actor, effectData, {parentEntity: effect, strictlyInterdependent: true});
+    await effectUtils.createEffect(workflow.hitTargets.tokens[0].actor, effectData, {parentEntity: effect, strictlyInterdependent: true});
 }
 export let brandingSmite = {
     name: 'Branding Smite',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

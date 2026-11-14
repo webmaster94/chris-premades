@@ -386,7 +386,7 @@
         "identifier": "summerWinds",
         "rules": "modern",
         "source": "chris-premades",
-        "version": "1.5.18"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

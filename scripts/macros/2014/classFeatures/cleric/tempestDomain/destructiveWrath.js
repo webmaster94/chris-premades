@@ -27,7 +27,7 @@ async function damage({trigger: {entity: effect}, workflow}) {
 }
 export let destructiveWrath = {
     name: 'Channel Divinity: Destructive Wrath',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

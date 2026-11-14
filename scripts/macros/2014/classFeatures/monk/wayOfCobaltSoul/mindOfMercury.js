@@ -41,7 +41,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let mindOfMercury = {
     name: 'Mind of Mercury',
-    version: '1.3.165',
+    version: '2.3.0',
     rules: 'legacy',
     effect: [
         {

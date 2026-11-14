@@ -2,7 +2,7 @@ import { starryForm as starryFormLegacy, starryFormActive as starryFormActiveLeg
 export let starryForm = {
     ...starryFormLegacy,
     name: 'Starry Form',
-    version: '1.3.83',
+    version: '2.3.0',
     rules: 'modern'
 };
 export let starryFormActive = {

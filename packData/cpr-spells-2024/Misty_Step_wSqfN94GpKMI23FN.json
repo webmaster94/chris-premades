@@ -212,7 +212,7 @@
     },
     "chris-premades": {
       "info": {
-        "version": "1.2.22",
+        "version": "2.3.0",
         "identifier": "mistyStep",
         "source": "chris-premades",
         "hasAnimation": true,

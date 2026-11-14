@@ -181,7 +181,8 @@
     },
     "chris-premades": {
       "info": {
-        "hasAnimation": false
+        "hasAnimation": false,
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

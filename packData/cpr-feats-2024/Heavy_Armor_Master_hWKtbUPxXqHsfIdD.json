@@ -75,7 +75,7 @@
     "chris-premades": {
       "info": {
         "name": "Heavy Armor Master",
-        "version": "1.2.36",
+        "version": "2.3.0",
         "identifier": "heavyArmorMaster",
         "source": "chris-premades",
         "rules": "modern"

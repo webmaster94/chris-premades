@@ -1,7 +1,7 @@
 import {itemUtils, rollUtils, workflowUtils} from '../../../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
     if (!workflow['chris-premades']?.deathStrike) return;
-    let deathStrikeWorkflow = await workflowUtils.syntheticItemRoll(item, [workflow.targets.first()]);
+    let deathStrikeWorkflow = await workflowUtils.syntheticItemRoll(item, [workflow.targets.tokens[0]]);
     if (!deathStrikeWorkflow.failedSaves.size) return;
     let multiplier = itemUtils.getConfig(item, 'multiplier');
     workflow.damageRolls = await Promise.all(workflow.damageRolls.map(async roll => {
@@ -11,7 +11,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let deathStrike = {
     name: 'Death Strike',
-    version: '1.3.56',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

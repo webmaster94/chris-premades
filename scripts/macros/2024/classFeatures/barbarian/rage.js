@@ -257,16 +257,16 @@ async function attack({trigger, workflow}) {
     if (!combatUtils.inCombat() || !workflow.token) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'rage');
     if (!effect) return;
-    if (!workflowUtils.isAttackType(workflow, 'attack') || !workflow.targets.size) return;
-    if (workflow.targets.first().document.disposition === workflow.token.document.disposition) return;
+    if (!workflowUtils.isAttackType(workflow, 'attack') || !workflow.targets.count) return;
+    if (workflow.targets.tokens[0].document.disposition === workflow.token.document.disposition) return;
     await combatUtils.setTurnCheck(effect, 'rage');
 }
 async function save({trigger, workflow}) {
     if (!combatUtils.inCombat() || !workflow.token) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'rage');
     if (!effect) return;
-    if (workflow.activity.actionType != 'save' || !workflow.targets.size) return;
-    if (workflow.targets.first().document.disposition === workflow.token.document.disposition) return;
+    if (workflow.activity.actionType != 'save' || !workflow.targets.count) return;
+    if (workflow.targets.tokens[0].document.disposition === workflow.token.document.disposition) return;
     await combatUtils.setTurnCheck(effect, 'rage');
 }
 async function turnEnd({trigger: {entity: effect, token}}) {
@@ -302,7 +302,7 @@ async function combatEnd({trigger: {entity: effect}}) {
     await combatUtils.setTurnCheck(effect, 'rage', true);
 }
 async function damage({trigger: {entity: effect}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     if (workflow.activity.ability != 'str') return;
     let formula = effect.flags['chris-premades']?.rage?.formula;
@@ -311,7 +311,7 @@ async function damage({trigger: {entity: effect}, workflow}) {
 }
 export let rage = {
     name: 'Rage',
-    version: '1.5.10',
+    version: '2.3.0',
     rules: 'modern',
     hasAnimation: true,
     midi: {
@@ -466,7 +466,7 @@ export let rage = {
                 icon: null
             }
         }
-        
+
     ]
 };
 export let rageRaging = {

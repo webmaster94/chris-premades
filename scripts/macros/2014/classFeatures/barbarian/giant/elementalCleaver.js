@@ -122,12 +122,12 @@ async function infuseWeapon(workflow, selectedWeapon) {
         }
     };
     let effect = await effectUtils.createEffect(workflow.actor, effectData, {
-        parentEntity: rageEffect, 
-        identifier: 'elementalCleaver', 
+        parentEntity: rageEffect,
+        identifier: 'elementalCleaver',
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'elementalCleaver', 
+            identifier: 'elementalCleaver',
             activityIdentifier: 'elementalCleaverChange'
         }]
     });
@@ -136,7 +136,7 @@ async function infuseWeapon(workflow, selectedWeapon) {
 }
 export let elementalCleaver = {
     name: 'Elemental Cleaver',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

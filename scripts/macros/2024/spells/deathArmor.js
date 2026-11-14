@@ -1,6 +1,6 @@
 import {activityUtils, combatUtils, effectUtils, itemUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 async function cast({workflow}) {
-    let target = workflow.targets.first()?.actor;
+    let target = workflow.targets.tokens[0]?.actor;
     if (!target) return;
     let effectData = {
         name: workflow.item.name,
@@ -20,10 +20,10 @@ async function cast({workflow}) {
     await effectUtils.createEffect(target, effectData, {identifier: 'deathArmorEffect', rules: 'modern'});
 }
 async function hit({trigger: {entity: effect}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'meleeAttack')) return;
     if (!combatUtils.perTurnCheck(effect, 'deathArmor')) return;
-    if (tokenUtils.getDistance(workflow.token, workflow.targets.first()) > 5) return;
+    if (tokenUtils.getDistance(workflow.token, workflow.targets.tokens[0]) > 5) return;
     let spell = await effectUtils.getOriginItem(effect);
     let damage = activityUtils.getActivityByIdentifier(spell, 'damage', {strict: true});
     if (!damage) return;
@@ -32,7 +32,7 @@ async function hit({trigger: {entity: effect}, workflow}) {
 }
 export let deathArmor = {
     name: 'Death Armor',
-    version: '1.5.26',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

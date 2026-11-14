@@ -2,6 +2,6 @@ import { burningHands as burningHandsLegacy } from '../../../legacyMacros.js';
 export let burningHands = {
     ...burningHandsLegacy,
     name: 'Burning Hands',
-    version: '1.2.40',
+    version: '2.3.0',
     rules: 'modern'
 };

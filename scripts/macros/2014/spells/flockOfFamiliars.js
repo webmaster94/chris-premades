@@ -152,8 +152,8 @@ async function use({workflow}) {
     }
     let animation = itemUtils.getConfig(workflow.item, creatureType + 'Animation') ?? 'none';
     await Summons.spawn(sourceActors, updates, workflow.item, workflow.token, {
-        duration: 864000, 
-        range: 10, 
+        duration: 864000,
+        range: 10,
         animation,
         additionalVaeButtons,
         unhideActivities
@@ -222,7 +222,7 @@ async function early({workflow}) {
         workflow.aborted = true;
         return;
     }
-    if (!workflow.targets.size) {
+    if (!workflow.targets.count) {
         workflow.aborted = true;
         return;
     }
@@ -231,14 +231,14 @@ async function early({workflow}) {
     let familiarTokens = new Set(effect.flags['chris-premades'].summons.ids[effect.name].map(i => canvas.scene.tokens.get(i)));
     if (!familiarTokens?.size) return;
     for (let i of familiarTokens) {
-        if (tokenUtils.getDistance(workflow.targets.first(), i) > 5) familiarTokens.delete(i);
+        if (tokenUtils.getDistance(workflow.targets.tokens[0], i) > 5) familiarTokens.delete(i);
     }
     if (!familiarTokens.size) return;
     await actorUtils.setReactionUsed(familiarTokens.first().actor);
 }
 export let flockOfFamiliars = {
     name: 'Flock of Familiars',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

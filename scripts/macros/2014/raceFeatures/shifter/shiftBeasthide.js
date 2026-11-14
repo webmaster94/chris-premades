@@ -14,7 +14,7 @@ async function use({trigger, workflow}) {
 }
 export let shiftBeasthide = {
     name: 'Shifting: Beasthide',
-    version: '1.3.110',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

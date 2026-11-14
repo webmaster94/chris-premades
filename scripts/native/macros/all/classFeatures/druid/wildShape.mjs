@@ -1,9 +1,13 @@
 import {default as cpr} from '../../../../constants.mjs';
 import {actorUtils, applications, automationUtils, compendiumUtils, constants, dialogUtils, documentUtils, effectUtils, genericUtils, itemUtils, Logging, rollUtils, uiUtils, workflowUtils} from '../../../../proxy.mjs';
+function getClassItem(item) {
+    const classIdentifier = automationUtils.getConfigValue(item, 'classIdentifier') ?? wildShape.config.classIdentifier.default;
+    return item.actor.classes[classIdentifier] ?? itemUtils.getAdvancementSourceItem(item);
+}
 async function getConfigs(item) {
     const identifier = documentUtils.getIdentifier(item);
-    const config = automationUtils.getConfigValues(item, Object.keys(wildShape.config));
-    const classItem = item.actor.classes[config.classIdentifier] ?? itemUtils.getAdvancementSourceItem(item);
+    const config = Object.fromEntries(Object.entries(wildShape.config).map(([key, {default: value}]) => [key, automationUtils.getConfigValue(item, key) ?? value]));
+    const classItem = getClassItem(item);
     const forms = (await rollUtils.rollDice(config.forms, {document: item})).total;
     const cr = (await rollUtils.rollDice(config.cr, {document: item})).total;
     const packs = config.packs.map(p => p.split(':')[1]).filter(Boolean);
@@ -52,9 +56,9 @@ async function learnForm({identifier, workflow}) {
 }
 async function preWildShape({actor, config, document: activity, token}) {
     if (config.midiOptions['chris-premades']?.wildShape) return;
-    if (!activity.item.system.uses.value) return;
+    if (activity.item.system.uses.max && !activity.item.system.uses.value) return;
     const options = await getConfigs(activity.item);
-    if (!options) return;
+    if (!options) return true;
     const rules = documentUtils.getRules(activity.item);
     const forms = (await Promise.all(activity.profiles.map(async p => ({actor: await fromUuid(p.uuid), id: p._id})))).filter(Boolean);
     const additional = await automationUtils.calledEvent('wildShapeForms', actor, {canOverlap: true, multiResult: true, data: {
@@ -137,7 +141,7 @@ async function preWildShape({actor, config, document: activity, token}) {
     const usedAdditional = additionalMap.get(choices.shape);
     const rollOptions = {
         config: {transform: {profile: choices.shape}},
-        options: {'chris-premades': {wildShape: true, wildShapeItems: keepItems}}
+        options: {'chris-premades': {wildShape: true, wildShapeItems: keepItems.map(item => item.uuid)}}
     };
     if (usedAdditional) {
         for (const source of usedAdditional) {
@@ -161,15 +165,18 @@ async function postWildShape({identifier, workflow}) {
     const effectID = workflow.item.effects.contents[0]?.id;
     if (!effectID) return Logging.addMacroWarning('CPR', identifier, 'Wild Shape effect missing from item.', {notify: 'warn'});
     const effectData = documentUtils.getEffectData(workflow.activity, effectID);
-    const keepItems = workflow.workflowOptions['chris-premades']?.wildShapeItems ?? [];
+    const keepItems = (workflow.workflowOptions['chris-premades']?.wildShapeItems ?? []).map(uuid => fromUuidSync(uuid, {strict: false})).filter(Boolean);
     const revertFeature = await compendiumUtils.getDocumentByIdentifier(cpr.packs.misc.automationItems, 'wild-shape-revert', {
         translate: 'CHRISPREMADES.Macros.All.WildShape.Revert',
         object: true
     });
     if (!revertFeature) return Logging.addMacroWarning('CPR', identifier, 'Wild Shape Revert item not found.', {notify: 'warn'});
     const rules = documentUtils.getRules(workflow.item);
+    const classItem = getClassItem(workflow.item);
     await automationUtils.calledEvent('wildShape', workflow.actor, {canOverlap: true, data: {
         actor: workflow.actor,
+        classIdentifier: classItem?.identifier,
+        classLevel: classItem?.system.levels ?? 0,
         effectData,
         keepItems,
         newActor,
@@ -194,10 +201,17 @@ async function calledRevert(actor, overflowDamage) {
 }
 async function wildShapeExpire({document: effect, overflowDamage}) {
     const wildShaped = effect.parent;
-    const original = game.actors.get(effect.parent.flags.dnd5e?.originalActor);
+    const transformOptions = wildShaped.flags.dnd5e?.transformOptions;
+    const syncSlots = !transformOptions?.keep?.includes('spells') && !transformOptions?.spellLists?.length;
+    const slots = Object.entries(wildShaped.system.spells ?? {}).filter(([, slot]) => slot.max);
+    const items = wildShaped.items.contents;
+    const conditions = wildShaped.effects.filter(eff => effectUtils.getConditions(eff).size);
+    const reverted = await wildShaped.revertOriginalForm();
+    const original = reverted instanceof TokenDocument.implementation ? reverted.actor : reverted;
+    if (!original) return;
     const updates = [];
     const itemUpdates = [];
-    for (const item of wildShaped.items) {
+    for (const item of items) {
         const originalItem = original.items.get(item.id);
         if (!originalItem) continue;
         const data = {};
@@ -214,31 +228,27 @@ async function wildShapeExpire({document: effect, overflowDamage}) {
         if (!genericUtils.isEmpty(data)) itemUpdates.push({_id: item.id, ...data});
     }
     if (itemUpdates.length) updates.push({action: 'update', documentName: 'Item', parent: original, updates: itemUpdates});
-    const conditionAdd = [];
-    for (const eff of wildShaped.effects) {
-        if (!effectUtils.getConditions(eff).size) continue;
-        if (original.effects.get(eff.id)) continue;
-        conditionAdd.push(eff.toObject());
-    }
-    const conditionRemove = [];
-    for (const eff of original.effects) {
-        if (!effectUtils.getConditions(eff).size) continue;
-        if (wildShaped.effects.get(eff.id)) continue;
-        conditionRemove.push(eff.id);
-    }
+    const conditionAdd = conditions.filter(eff => !original.effects.get(eff.id)).map(eff => eff.toObject());
+    const conditionRemove = original.effects.filter(eff => effectUtils.getConditions(eff).size && !conditions.some(c => c.id === eff.id)).map(eff => eff.id);
     if (conditionAdd.length) updates.push({action: 'create', documentName: 'ActiveEffect', parent: original, data: conditionAdd, keepId: true});
     if (conditionRemove.length) updates.push({action: 'delete', documentName: 'ActiveEffect', parent: original, ids: conditionRemove});
-    await wildShaped.revertOriginalForm();
     if (updates.length) await documentUtils.modifyBatch(updates);
+    const slotUpdates = {};
+    if (syncSlots) {
+        for (const [key, slot] of slots) {
+            if (original.system.spells[key]?.value !== slot.value) slotUpdates[`system.spells.${key}.value`] = slot.value;
+        }
+    }
+    if (!genericUtils.isEmpty(slotUpdates)) await documentUtils.update(original, slotUpdates);
     if (!overflowDamage) return;
     const token = actorUtils.getFirstToken(original);
     await workflowUtils.applyDamage([token], overflowDamage, 'none');
 }
 export const wildShape = {
     name: 'Wild Shape',
-    version: '2.0.4',
+    version: '2.1.7',
     rules: 'all',
-    notes: 'Use the "actorWildShape" called event (async) to modify the wild shape active effect and worn items.\n\tData available: actor, newActor, keepItems, effectData, rules.\nUse the "actorWildShapeForms" called event (async) to provide additional actor documents as choices. Return {actor, source}, where source is the granting item and will be rolled if the actor is used.\n\tData available: activity, actor, canFly, canSwim, cr, creatureTypes, packs, rules.',
+    notes: 'Use the "actorWildShape" called event (async) to modify the wild shape active effect and worn items.\n\tData available: actor, classIdentifier, classLevel, newActor, keepItems, effectData, rules.\nUse the "actorWildShapeForms" called event (async) to provide additional actor documents as choices. Return {actor, source}, where source is the granting item and will be rolled if the actor is used.\n\tData available: activity, actor, canFly, canSwim, cr, creatureTypes, packs, rules.',
     revert: calledRevert,
     roll: [
         {
@@ -261,13 +271,13 @@ export const wildShape = {
         },
         forms: {
             default: '@scale.druid.known-forms',
-            type: 'text',
+            type: 'formula',
             label: 'CHRISPREMADES.Macros.All.WildShape.KnownForms',
             category: 'behavior'
         },
         cr: {
             default: '@scale.druid.challenge-rating',
-            type: 'text',
+            type: 'formula',
             label: 'CHRISPREMADES.Macros.All.WildShape.MaxCR',
             category: 'behavior'
         },

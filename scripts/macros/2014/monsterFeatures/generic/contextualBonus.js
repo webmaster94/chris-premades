@@ -44,7 +44,7 @@ async function skillBonus({trigger: {entity: item, roll, skillId}}) {
 export let contextualBonus = {
     name: 'Contextual Bonus',
     translation: 'CHRISPREMADES.Macros.ContextualBonus.Name',
-    version: '0.12.84',
+    version: '2.3.0',
     save: [
         {
             pass: 'context',

@@ -1,6 +1,6 @@
 import {dialogUtils, effectUtils, genericUtils, workflowUtils} from '../../../../../utils.js';
 async function rest({trigger: {entity: item}, actor}) {
-    let { proficiencyLevels, skills, tools } = CONFIG.DND5E; 
+    let { proficiencyLevels, skills, tools } = CONFIG.DND5E;
     let profs = actor.system.skills;
     let skillChoices = Object.keys(skills).map(s => ({
         name: skills[s].label + (profs[s]?.value > 0 ? ` [${proficiencyLevels[profs[s]?.value]}]` : ''),
@@ -16,8 +16,8 @@ async function rest({trigger: {entity: item}, actor}) {
         let index = await pack.getIndex({fields: ['system.type.baseItem', 'system.description.value']});
         profs = actor.system.tools;
         toolChoices = index.filter(i => i.type === 'tool').map(t => {
-            let id = t.system.type.baseItem || 
-                Object.keys(tools).find(a => tools[a].id === t.uuid) || 
+            let id = t.system.type.baseItem ||
+                Object.keys(tools).find(a => tools[a].id === t.uuid) ||
                 genericUtils.format('CHRISPREMADES.Macros.WhispersOfTheDead.UnknownTool', {name: t.name});
             return {
                 name: t.name + (profs[id]?.value > 0 ? ` [${proficiencyLevels[profs[id]?.value]}]` : ''),
@@ -28,9 +28,9 @@ async function rest({trigger: {entity: item}, actor}) {
         });
     }
     let selection = await dialogUtils.selectDocumentDialog(
-        item.name, 
-        'CHRISPREMADES.Macros.WhispersOfTheDead.Prompt', 
-        [...skillChoices, ...toolChoices], 
+        item.name,
+        'CHRISPREMADES.Macros.WhispersOfTheDead.Prompt',
+        [...skillChoices, ...toolChoices],
         {sortAlphabetical: true, displayReference: true, displayTooltips: true}
     );
     if (!selection) return;
@@ -54,7 +54,7 @@ async function rest({trigger: {entity: item}, actor}) {
 }
 export let whispersOfTheDead = {
     name: 'Whispers of the Dead',
-    version: '1.5.15',
+    version: '2.3.0',
     rest: [
         {
             pass: 'short',

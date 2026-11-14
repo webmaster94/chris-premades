@@ -62,13 +62,13 @@ async function use({workflow}) {
     };
     // TODO: Need to disable autoanims here? If so should we do for others?
     let effect = await effectUtils.createEffect(workflow.actor, effectData, {
-        concentrationItem: workflow.item, 
-        strictlyInterdependent: true, 
-        identifier: 'investitureOfFlame', 
+        concentrationItem: workflow.item,
+        strictlyInterdependent: true,
+        identifier: 'investitureOfFlame',
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'investitureOfFlame', 
+            identifier: 'investitureOfFlame',
             activityIdentifier: 'investitureOfFlameFire'
         }],
         unhideActivities: {
@@ -112,7 +112,7 @@ async function early({dialog}) {
 }
 export let investitureOfFlame = {
     name: 'Investiture of Flame',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

@@ -25,7 +25,7 @@ async function early({trigger:workflow}) {
     let sourceActor = workflow.actor;
     let sourceEffect = effectUtils.getEffectByIdentifier(sourceActor, 'shadowOfMoil');
     let sourceSenses = sourceActor.system.attributes.senses.ranges ?? {};
-    for (let targetToken of workflow.targets) {
+    for (let targetToken of workflow.targets.tokens) {
         let targetActor = targetToken.actor;
         let targetEffect = effectUtils.getEffectByIdentifier(targetActor, 'shadowOfMoil');
         if (!sourceEffect && !targetEffect) continue;
@@ -50,7 +50,7 @@ async function early({trigger:workflow}) {
     }
 }
 async function onHit({trigger, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     let distance = tokenUtils.getDistance(workflow.token, trigger.token);
     if (distance > 10) return;
@@ -62,7 +62,7 @@ async function onHit({trigger, workflow}) {
 }
 export let shadowOfMoil = {
     name: 'Shadow of Moil',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

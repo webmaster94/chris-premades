@@ -69,7 +69,7 @@
         "identifier": "robeOfUsefulItems",
         "rules": "legacy",
         "source": "chris-premades",
-        "version": "1.3.88"
+        "version": "2.3.0"
       },
       "macros": {
         "item": [

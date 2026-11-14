@@ -63,7 +63,7 @@ async function use({workflow}) {
     if (effect.flags['chris-premades']?.enlargeReduce) await enlargeReduceStart({trigger: {entity: effect}});
 }
 async function damage({trigger: {entity: effect}, workflow}) {
-    if (!workflow.hitTargets.size || !workflow.activity.damage?.parts.length) return;
+    if (!workflow.hitTargets.count || !workflow.activity.damage?.parts.length) return;
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     if (combatUtils.inCombat()) {
         if (!combatUtils.perTurnCheck(effect, 'giantsMight', true, workflow.token.id)) return;
@@ -83,7 +83,7 @@ async function endCombat({trigger: {entity: effect}}) {
 }
 export let giantsMight = {
     name: 'Giant\'s Might',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

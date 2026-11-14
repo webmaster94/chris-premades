@@ -1,16 +1,16 @@
 import {activityUtils, actorUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils, socketUtils, tokenUtils, workflowUtils} from '../../../../../utils.js';
 async function damage({workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'hexbladesCurse');
     if (!effect) return;
     let targetId = effect.flags['chris-premades'].hexbladesCurse.target;
-    let targetToken = workflow.hitTargets.first();
+    let targetToken = workflow.hitTargets.tokens[0];
     if (targetId !== targetToken.document.id) return;
     let damageType = workflow.defaultDamageType;
     await workflowUtils.bonusDamage(workflow, '@prof', {damageType});
 }
 async function damageApplication({trigger: {token}, workflow, ditem}) {
-    if (workflow.hitTargets.size === 1) return;
+    if (workflow.hitTargets.count === 1) return;
     let sourceEffect = effectUtils.getEffectByIdentifier(workflow.actor, 'hexbladesCurse');
     if (!sourceEffect) return;
     let targetId = sourceEffect.flags['chris-premades'].hexbladesCurse.target;
@@ -22,11 +22,11 @@ async function damageApplication({trigger: {token}, workflow, ditem}) {
     ditem.hpDamage += modifiedDamage;
 }
 async function early({workflow}) {
-    if (workflow.targets.size !== 1 || !workflowUtils.isAttackType(workflow, 'attack')) return;
+    if (workflow.targets.count !== 1 || !workflowUtils.isAttackType(workflow, 'attack')) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'hexbladesCurse');
     if (!effect) return;
     let targetId = effect.flags['chris-premades'].hexbladesCurse.target;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     if (targetId !== targetToken.document.id) return;
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.GenericEffects.CriticalThreshold'),
@@ -57,7 +57,7 @@ async function early({workflow}) {
     await effectUtils.createEffect(targetToken.actor, effectData);
 }
 async function use({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let sourceEffectData = {
         name: workflow.item.name,
         img: workflow.item.img,
@@ -73,12 +73,12 @@ async function use({workflow}) {
     };
     let targetEffectData = genericUtils.duplicate(sourceEffectData);
     targetEffectData.name += ': ' + genericUtils.translate('DND5E.Target');
-    genericUtils.setProperty(sourceEffectData, 'flags.chris-premades.hexbladesCurse.target', workflow.targets.first().document.id);
+    genericUtils.setProperty(sourceEffectData, 'flags.chris-premades.hexbladesCurse.target', workflow.targets.tokens[0].document.id);
     effectUtils.addMacro(sourceEffectData, 'midi.actor', ['hexbladesCurseSource']);
     effectUtils.addMacro(targetEffectData, 'midi.actor', ['hexbladesCurseTarget']);
     effectUtils.addMacro(targetEffectData, 'effect', ['hexbladesCurseTarget']);
     let effect = await effectUtils.createEffect(workflow.actor, sourceEffectData, {identifier: 'hexbladesCurse'});
-    await effectUtils.createEffect(workflow.targets.first().actor, targetEffectData, {parentEntity: effect, identifier: 'hexbladesCurseTarget'});
+    await effectUtils.createEffect(workflow.targets.tokens[0].actor, targetEffectData, {parentEntity: effect, identifier: 'hexbladesCurseTarget'});
 }
 async function remove({trigger: {entity: effect}}) {
     if (effect.parent?.system.attributes.hp.value) return;
@@ -132,7 +132,7 @@ async function remove({trigger: {entity: effect}}) {
 }
 export let hexbladesCurse = {
     name: 'Hexblade\'s Curse',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

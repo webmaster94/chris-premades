@@ -17,7 +17,7 @@ async function use({workflow}) {
 }
 export let moonlightStep = {
     name: 'Moonlight Step',
-    version: '1.3.83',
+    version: '2.3.0',
     rules: 'modern',
     hasAnimation: true,
     midi: {

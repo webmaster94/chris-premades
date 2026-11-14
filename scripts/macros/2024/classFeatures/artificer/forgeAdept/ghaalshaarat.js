@@ -60,7 +60,7 @@ async function imbueWeapon ({trigger: {entity: item}, workflow}) {
             }
         ]}
     };
-    let enchant = await itemUtils.enchantItem(selection, enchantmentData, {parentEntity: item, identifier: 'ghaalShaaratEnchantment'});    
+    let enchant = await itemUtils.enchantItem(selection, enchantmentData, {parentEntity: item, identifier: 'ghaalShaaratEnchantment'});
     let effectData = {
         name: item.name,
         img: item.img,
@@ -106,7 +106,7 @@ async function upgradeBonus({trigger: {entity: item}}) {
 }
 export let ghaalShaarat = {
     name: 'Ghaal\'Shaarat',
-    version: '1.5.21',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [
@@ -117,7 +117,7 @@ export let ghaalShaarat = {
             }
         ]
     },
-    config: [        
+    config: [
         {
             value: 'requireTools',
             label: 'CHRISPREMADES.Macros.GhaalShaarat.RequireTools',

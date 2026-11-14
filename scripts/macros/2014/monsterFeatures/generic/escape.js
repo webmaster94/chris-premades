@@ -1,8 +1,8 @@
 import {actorUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../utils.js';
 async function use({workflow}) {
-    if (!workflow.token || workflow.hitTargets.size != 1) return;
-    if (workflow.activity.hasSave && !workflow.failedSaves.sizes) return;
-    let targetToken = workflow.targets.first();
+    if (!workflow.token || workflow.hitTargets.count != 1) return;
+    if (workflow.activity.hasSave && !workflow.failedSaves.count) return;
+    let targetToken = workflow.targets.tokens[0];
     let sourceToken = workflow.token;
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'escape');
     let activities = config.activities;
@@ -10,7 +10,7 @@ async function use({workflow}) {
     if (config.maxSize && config.maxSize != 'none' && !actorUtils.compareSize(targetToken, config.maxSize, '<=')) return;
     let triggerActivities = config.triggerActivities.map(i => workflow.item.system.activities.find(j => j.id === i));
     for (let i of triggerActivities) {
-        await workflowUtils.syntheticActivityRoll(i, [workflow.hitTargets.first()]);
+        await workflowUtils.syntheticActivityRoll(i, [workflow.hitTargets.tokens[0]]);
     }
     let itemEffects = (workflow.item.effects.map(i => i.uuid));
     let sourceEffect = actorUtils.getEffects(sourceToken.actor)?.find(i => itemEffects.includes(i.origin));
@@ -28,7 +28,7 @@ function actorSizes() {
 export let escape = {
     name: 'Escape',
     translation: 'CHRISPREMADES.Macros.Escape.Name',
-    version: '1.3.38',
+    version: '2.3.0',
     midi: {
         item: [
             {

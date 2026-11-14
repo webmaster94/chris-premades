@@ -30,7 +30,7 @@ async function swap({workflow}) {
     if (echo && workflow.token) await tokenUtils.swapTokens(workflow.token.document, echo);
 }
 export async function attackFromEcho({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     const echo = await pickEcho(workflow);
     if (!echo) return;
     const weapons = workflow.actor.items.filter(item => item.hasAttack && (item.type !== 'weapon' || item.system.equipped));
@@ -48,7 +48,7 @@ export async function attackFromEcho({workflow}) {
     };
     const effects = (await effectUtils.createEffects(workflow.actor, [effectData])) ?? [];
     try {
-        await workflowUtils.syntheticItemRoll(weapon, Array.from(workflow.targets));
+        await workflowUtils.syntheticItemRoll(weapon, workflow.targets.documents);
     } finally {
         await Promise.all(effects.map(effect => documentUtils.deleteDocument(effect)));
     }
@@ -65,7 +65,7 @@ async function use({workflow}) {
 }
 async function turnEnd({document, token}) {
     const range = actorUtils.getEffectByIdentifier(document.actor, 'echoAvatar') ? 1000 : 30;
-    const far = summonUtils.getSummonsBySource(document).filter(echo => echo.token && tokenUtils.getDistance(token, echo.token) > range);
+    const far = summonUtils.getSummonsBySource(document).filter(echo => echo.token && !tokenUtils.isWithinDistance(token, echo.token, range));
     for (const echo of far) {
         if (await dialogUtils.confirm(document.name, _loc(translations + 'Far', {actorName: token.name}), {userId: queryUtils.gmID()})) await summonUtils.deleteSummon(echo);
     }

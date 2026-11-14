@@ -1,6 +1,6 @@
 import {combatUtils, dialogUtils, effectUtils, genericUtils, rollUtils, workflowUtils} from '../../../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     if (!item.system.uses.value) return;
     if (!combatUtils.isOwnTurn(workflow.token)) return;
@@ -16,7 +16,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let graveTouched = {
     name: 'Grave Touched',
-    version: '1.4.23',
+    version: '2.3.0',
     midi: {
         actor: [
             {

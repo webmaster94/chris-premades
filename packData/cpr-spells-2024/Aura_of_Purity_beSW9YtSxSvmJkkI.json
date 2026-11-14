@@ -178,7 +178,7 @@
     "chris-premades": {
       "info": {
         "identifier": "auraOfPurity",
-        "version": "1.1.12",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern"
       },

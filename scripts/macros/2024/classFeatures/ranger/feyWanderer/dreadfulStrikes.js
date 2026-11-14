@@ -1,6 +1,6 @@
 import {dreadfulStrikes as dreadfulStrikesLegacy} from '../../../../../legacyMacros.js';
 export let dreadfulStrikes = {
     ...dreadfulStrikesLegacy,
-    version: '1.5.4',
+    version: '2.3.0',
     rules: 'modern'
 };

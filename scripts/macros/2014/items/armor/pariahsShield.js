@@ -13,7 +13,7 @@ async function moved({trigger}) {
     }));
 }
 async function damage({trigger, workflow, ditem}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (['healing', 'temphp'].includes(workflow.defaultDamageType)) return;
     let sourceToken = workflow.token;
     let targetToken = trigger.targetToken;
@@ -44,7 +44,7 @@ async function damage({trigger, workflow, ditem}) {
 }
 export let pariahsShield = {
     name: 'Pariah\'s Shield',
-    version: '1.3.10',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -1,5 +1,5 @@
 export let versatileTrickster = {
     name: 'Versatile Trickster',
-    version: '1.3.53',
+    version: '2.3.0',
     rules: 'modern'
 };

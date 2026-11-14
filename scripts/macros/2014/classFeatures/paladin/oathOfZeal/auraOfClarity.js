@@ -41,7 +41,7 @@ async function enemy({trigger: {entity: item, target, identifier}}) {
 }
 export let auraOfClarity = {
     name: 'Aura of Clarity',
-    version: '1.2.32',
+    version: '2.3.0',
     aura: [
         {
             pass: 'create',

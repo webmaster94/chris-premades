@@ -1,8 +1,8 @@
 import {actorUtils, dialogUtils, genericUtils, itemUtils, tokenUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let checkSize = itemUtils.getConfig(workflow.item, 'checkSize');
-    for (let target of workflow.hitTargets) {
+    for (let target of workflow.hitTargets.tokens) {
         if (actorUtils.getSize(target.actor) > 3 && checkSize) break;
         let options = [
             [genericUtils.format('CHRISPREMADES.Distance.DistanceFeet', {distance: 0}), 0]
@@ -18,7 +18,7 @@ async function use({trigger, workflow}) {
 }
 export let thornWhip = {
     name: 'Thorn Whip',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

@@ -1,6 +1,6 @@
 import {activityUtils, actorUtils, animationUtils, compendiumUtils, constants, dialogUtils, errors, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let level = actorUtils.getLevelOrCR(workflow.actor);
     let bolts = 1 + Math.floor((level + 1) * (1/6)); //Todo: Make this work with twinned spell somehow.
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'eldritchBlastBeam', {strict: true});
@@ -8,13 +8,13 @@ async function use({trigger, workflow}) {
     let boltsLeft = bolts;
     while (boltsLeft) {
         let selection, skip;
-        if (workflow.targets.size > 1) {
-            let choice = await dialogUtils.selectTargetDialog(workflow.item.name, 'CHRISPREMADES.Macros.EldritchBlast.Target', Array.from(workflow.targets), {type: 'selectAmount', skipDeadAndUnconscious: true, coverToken: workflow.token, maxAmount: boltsLeft});
+        if (workflow.targets.count > 1) {
+            let choice = await dialogUtils.selectTargetDialog(workflow.item.name, 'CHRISPREMADES.Macros.EldritchBlast.Target', Array.from(workflow.targets.tokens), {type: 'selectAmount', skipDeadAndUnconscious: true, coverToken: workflow.token, maxAmount: boltsLeft});
             if (!choice) return;
             [selection, skip] = choice;
             if (!selection) return;
         } else {
-            selection = [{document: workflow.targets.first(), value: 1}];
+            selection = [{document: workflow.targets.tokens[0], value: 1}];
         }
         for (let i of selection) {
             for (let j = 0; j < i.value; j++) {
@@ -37,7 +37,7 @@ async function beam({trigger, workflow}) {
     }
     if (!color) return;
     let animation = 'jb2a.eldritch_blast.' + color;
-    animationUtils.simpleAttack(workflow.token, workflow.targets.first(), animation, {sound: sound, missed: !workflow.hitTargets.has(workflow.targets.first())});
+    animationUtils.simpleAttack(workflow.token, workflow.targets.tokens[0], animation, {sound: sound, missed: !workflow.hitTargets.has(workflow.targets.tokens[0])});
 }
 async function damage({trigger, workflow}) {
     let agonizingBlast = itemUtils.getItemByIdentifier(workflow.actor, 'agonizingBlast');
@@ -47,7 +47,7 @@ async function damage({trigger, workflow}) {
 }
 export let eldritchBlast = {
     name: 'Eldritch Blast',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

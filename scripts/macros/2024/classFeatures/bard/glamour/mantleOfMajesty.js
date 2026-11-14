@@ -34,13 +34,13 @@ async function use({trigger, workflow}) {
         avatarImgPriority: itemUtils.getConfig(workflow.item, 'avatarImgPriority'),
         tokenImgPriority: itemUtils.getConfig(workflow.item, 'tokenImgPriority')
     });
-    await workflowUtils.syntheticItemDataRoll(spellData, workflow.actor, Array.from(workflow.targets));
+    await workflowUtils.syntheticItemDataRoll(spellData, workflow.actor, Array.from(workflow.targets.tokens));
     spellData.system.activation.type = 'bonus';
     await itemUtils.createItems(workflow.actor, [spellData], {favorite: true, parentEntity: effect, section: workflow.item.name});
 }
 async function commandEarly({trigger, workflow}) {
-    if (!workflow.targets.size) return;
-    await Promise.all(workflow.targets.map(async token => {
+    if (!workflow.targets.count) return;
+    await Promise.all(workflow.targets.tokens.map(async token => {
         if (!(await actorUtils.hasConditionBy(workflow.actor, token.actor, 'charmed'))) return;
         await effectUtils.createEffect(token.actor, constants.autoFailSaveEffectData, {animate: false});
     }));
@@ -56,7 +56,7 @@ async function veryEarly({activity, dialog, actor, config}) {
 }
 export let mantleOfMajesty = {
     name: 'Mantle of Majesty',
-    version: '1.1.43',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

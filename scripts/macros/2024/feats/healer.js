@@ -1,11 +1,11 @@
 import {activityUtils, dialogUtils, genericUtils, itemUtils, rollUtils, socketUtils} from '../../../utils.js';
 
 async function early({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let healerActor = workflow.actor;
     let healersKit = itemUtils.getItemByIdentifier(healerActor, 'healersKit');
     if (!healersKit?.system.uses.value) return;
-    let targetActor = workflow.targets.first().actor;
+    let targetActor = workflow.targets.tokens[0].actor;
     let ownerId = socketUtils.firstOwner(targetActor, true);
     let classSelection = await dialogUtils.selectHitDie(targetActor, workflow.item.name, 'CHRISPREMADES.Macros.Healer.SelectHitDie', {userId: ownerId, max: 1});
     if (!classSelection) return;
@@ -51,7 +51,7 @@ async function healing({trigger: {entity: item}, workflow}) {
 
 export let healer = {
     name: 'Healer',
-    version: '1.2.36',
+    version: '2.3.0',
     midi: {
         item: [
             {

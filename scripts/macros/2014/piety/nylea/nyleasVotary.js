@@ -1,5 +1,5 @@
 export let nyleasVotary = {
     name: 'Nylea\'s Votary',
-    version: '1.4.14',
+    version: '2.3.0',
     rules: 'legacy'
 };

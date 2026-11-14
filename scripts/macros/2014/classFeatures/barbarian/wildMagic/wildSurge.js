@@ -71,10 +71,10 @@ async function use({workflow}) {
             feature = activityUtils.getActivityByIdentifier(workflow.item, 'teleport', {strict: true});
             if (!feature) return;
             await effectUtils.createEffect(workflow.actor, effectData, {
-                parentEntity: rageEffect, 
-                identifier: 'wildSurge', 
+                parentEntity: rageEffect,
+                identifier: 'wildSurge',
                 vae: [{
-                    type: 'use', 
+                    type: 'use',
                     name: feature.name,
                     identifier: 'wildSurge',
                     activityIdentifier: 'teleport'
@@ -93,11 +93,11 @@ async function use({workflow}) {
             feature = activityUtils.getActivityByIdentifier(workflow.item, 'intangibleSpirit', {strict: true});
             if (!feature) return;
             await effectUtils.createEffect(workflow.actor, effectData, {
-                parentEntity: rageEffect, 
-                identifier: 'wildSurge', 
+                parentEntity: rageEffect,
+                identifier: 'wildSurge',
                 vae: [{
-                    type: 'use', 
-                    name: feature.name, 
+                    type: 'use',
+                    name: feature.name,
                     identifier: 'wildSurge',
                     activityIdentifier: 'intangibleSpirit'
                 }],
@@ -213,10 +213,10 @@ async function use({workflow}) {
             feature = activityUtils.getActivityByIdentifier(workflow.item, 'boltOfLight', {strict: true});
             if (!feature) return;
             effect = await effectUtils.createEffect(workflow.actor, effectData, {
-                parentEntity: rageEffect, 
-                identifier: 'wildSurge', 
+                parentEntity: rageEffect,
+                identifier: 'wildSurge',
                 vae: [{
-                    type: 'use', 
+                    type: 'use',
                     name: feature.name,
                     identifier: 'wildSurge',
                     activityIdentifier: 'boltOfLight'
@@ -297,7 +297,7 @@ async function intangibleSpiritExplode({trigger: {entity: effect, token}}) {
     await genericUtils.remove(effect);
 }
 async function retribution({trigger: {entity: effect}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     let feature = activityUtils.getActivityByIdentifier(await effectUtils.getOriginItem(effect), 'retribution', {strict: true});
     if (!feature) return;
@@ -344,7 +344,7 @@ async function protectiveLights({trigger: {entity: effect, target, identifier}})
 }
 export let wildSurge = {
     name: 'Wild Surge',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

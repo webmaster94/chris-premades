@@ -1,6 +1,6 @@
 import {automationUtils, documentUtils} from '../../../../../proxy.mjs';
 async function formula({actor, document, data: {workflow}}) {
-    const targetActor = workflow.hitTargets.first()?.actor;
+    const targetActor = workflow.hitTargets.documents[0]?.actor;
     if (!targetActor) return;
     if (!documentUtils.getEffectByIdentifier(targetActor, 'insightfulFightingTarget', {sourceActor: actor})) return;
     return automationUtils.getConfigValue(document, 'formula');
@@ -19,7 +19,7 @@ export const eyeForWeakness = {
     config: {
         formula: {
             default: '3d6',
-            type: 'text',
+            type: 'formula',
             label: 'CHRISPREMADES.Config.Formula',
             category: 'behavior',
             hint: ''

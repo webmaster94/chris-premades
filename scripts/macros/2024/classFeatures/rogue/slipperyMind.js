@@ -1,5 +1,5 @@
 export let slipperyMind = {
     name: 'Slippery Mind',
-    version: '1.3.36',
+    version: '2.3.0',
     rules: 'modern'
 };

@@ -20,7 +20,7 @@ async function early({trigger: {entity: item}, workflow}) {
 }
 export let insigniaOfClaws = {
     name: 'Insignia of Claws',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

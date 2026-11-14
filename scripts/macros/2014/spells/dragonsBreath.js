@@ -3,7 +3,7 @@ import {compendiumUtils, constants, dialogUtils, effectUtils, errors, genericUti
 // TODO: Refactor this if https://github.com/foundryvtt/dnd5e/issues/4706 gets implemented
 async function use({workflow}) {
     let concentrationEffect = await effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (!workflow.targets.size) {
+    if (!workflow.targets.count) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
@@ -37,7 +37,7 @@ async function use({workflow}) {
         origin: workflow.item.uuid,
         duration: itemUtils.convertDuration(workflow.item)
     };
-    for (let target of workflow.targets) {
+    for (let target of workflow.targets.tokens) {
         let effect = await effectUtils.createEffect(target.actor, effectData, {concentrationItem: workflow.item, interdependent: true, vae: [{type: 'use', name: featureData.name, identifier: 'dragonBreath'}], identifier: 'dragonsBreath'});
         await itemUtils.createItems(target.actor, [featureData], {favorite: true, parentEntity: effect, section: genericUtils.translate('CHRISPREMADES.Section.SpellFeatures')});
     }
@@ -45,7 +45,7 @@ async function use({workflow}) {
 }
 export let dragonsBreath = {
     name: 'Dragon\'s Breath',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

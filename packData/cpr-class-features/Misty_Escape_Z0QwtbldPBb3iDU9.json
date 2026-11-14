@@ -209,7 +209,7 @@
     "chris-premades": {
       "info": {
         "name": "Misty Escape",
-        "version": "1.2.28",
+        "version": "2.3.0",
         "identifier": "mistyEscape",
         "source": "chris-premades",
         "hasAnimation": true

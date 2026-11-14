@@ -8,7 +8,7 @@ async function use({workflow}) {
 }
 export let unstableBacklash = {
     name: 'Unstable Backlash',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

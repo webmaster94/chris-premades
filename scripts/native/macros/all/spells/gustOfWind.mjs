@@ -1,4 +1,4 @@
-import {automationUtils, effectUtils, genericUtils, itemUtils, Logging, regionUtils, tokenUtils, workflowUtils} from '../../../proxy.mjs';
+import {automationUtils, effectUtils, itemUtils, Logging, regionUtils, tokenUtils, workflowUtils} from '../../../proxy.mjs';
 function getRegion(item, scene) {
     const activity = itemUtils.getActivityByIdentifier(item, 'gust-of-wind');
     if (!activity || !scene) return;
@@ -6,21 +6,20 @@ function getRegion(item, scene) {
 }
 async function early({workflow}) {
     if (workflow.activity.identifier !== 'gust-of-wind-push' || !workflow.token) return;
-    const self = Array.from(workflow.targets).filter(token => token === workflow.token);
-    if (!self.length) return;
-    if (self.length === workflow.targets.size) {
+    if (!workflow.targets.has(workflow.token)) return;
+    if (workflow.targets.count === 1) {
         Logging.addMacroWarning('CPR', 'gust-of-wind', 'CHRISPREMADES.Macros.All.GustOfWind.SkipCaster');
         return true;
     }
-    await workflowUtils.removeTargets(workflow, self);
+    await workflowUtils.removeTargets(workflow, [workflow.tokenDocument]);
 }
 async function push(item, workflow, region) {
-    const tokens = Array.from(workflow.failedSaves).filter(token => token !== workflow.token && token.actor);
+    const tokens = workflow.failedSaves.tokens.filter(token => token !== workflow.token && token.actor);
     if (!tokens.length) return;
     const shape = region?.shapes[0];
     if (!shape) return Logging.addMacroWarning('CPR', 'gust-of-wind', 'CHRISPREMADES.Macros.All.GustOfWind.NoRegion');
     const ray = foundry.canvas.geometry.Ray.fromAngle(0, 0, Math.toRadians(shape.rotation), 1);
-    const distance = genericUtils.convertDistance(region.parent, Number(automationUtils.getConfigValue(item, 'distance')));
+    const distance = Number(automationUtils.getConfigValue(item, 'distance'));
     if (!distance) return;
     await Promise.all(tokens.map(token => tokenUtils.slideToken(token.document, {ray, distance})));
 }
@@ -39,7 +38,7 @@ async function use({document, workflow}) {
         return;
     }
     if (identifier !== 'gust-of-wind-push') return;
-    await push(document, workflow, getRegion(document, workflow.targets.first()?.document.parent));
+    await push(document, workflow, getRegion(document, workflow.targets.documents[0]?.parent));
 }
 export const gustOfWind = {
     name: 'Gust of Wind',

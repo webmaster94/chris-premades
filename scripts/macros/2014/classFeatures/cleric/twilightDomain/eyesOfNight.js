@@ -1,9 +1,9 @@
 import {animationUtils, itemUtils, tokenUtils} from '../../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     if (!itemUtils.getConfig(workflow.item, 'playAnimation')) return;
     if (!animationUtils.aseCheck() || animationUtils.jb2aCheck() != 'patreon') return;
-    let targets = Array.from(workflow.targets).sort((a, b) => tokenUtils.getDistance(workflow.token, a) - tokenUtils.getDistance(workflow.token, b));
+    let targets = Array.from(workflow.targets.tokens).sort((a, b) => tokenUtils.getDistance(workflow.token, a) - tokenUtils.getDistance(workflow.token, b));
     let targetOrder = [workflow.token];
     let targetOffsetX = [0];
     let targetOffsetY = [0];
@@ -115,7 +115,7 @@ async function use({trigger, workflow}) {
 }
 export let eyesOfNight = {
     name: 'Eyes of Night',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

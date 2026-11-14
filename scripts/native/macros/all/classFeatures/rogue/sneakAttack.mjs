@@ -1,21 +1,25 @@
-import {actorUtils, animationUtils, automationUtils, DamageBonus, documentUtils, Logging, tokenUtils, workflowUtils} from '../../../../proxy.mjs';
+import {actorUtils, automationUtils, DamageBonus, documentUtils, itemUtils, Logging, tokenUtils, workflowUtils} from '../../../../proxy.mjs';
 import {addRiders, getTaggedRiders} from '../../../generic/attackRider.mjs';
 async function bonus({workflow, document}) {
     if (!workflow.item || !workflow.activity) return;
-    if (!workflow.hitTargets.size) return;
-    if (workflow.hitTargets.size > 1) return Logging.addMacroWarning('CPR', 'sneak-attack', 'Attack must hit exactly one target.');
+    if (!workflow.hitTargets.count) return;
+    if (workflow.hitTargets.count > 1) return Logging.addMacroWarning('CPR', 'sneak-attack', 'Attack must hit exactly one target.');
     const additionalIdentifiers = await automationUtils.calledEvent('sneakAttackAdditionalIdentifiers', workflow.actor, {multiResult: true, canOverlap: true, data: {workflow}});
     const identifier = documentUtils.getIdentifier(workflow.item);
     if (!(workflowUtils.getActionType(workflow) === 'rwak' || workflow.item.system.properties.has('fin') || additionalIdentifiers.includes(identifier))) return Logging.addMacroWarning('CPR', 'sneak-attack', 'Weapon must be finesse or ranged.');
     if (!document.system.uses.value) return Logging.addMacroWarning('CPR', 'sneak-attack', 'Already used this turn.');
+    let reasons = [];
     let doSneak = workflow.advantage && !workflow.disadvantage;
-    if (!doSneak && (workflow.advantage || !workflow.disadvantage)) {
-        const targetToken = workflow.targets.first().document;
-        doSneak = tokenUtils.findNearby(targetToken, 5, {disposition: 'enemy', includeIncapacitated: false}).some(token => token !== workflow.token.document);
+    if (workflow.disadvantage) reasons.push('dis');
+    if (!workflow.advantage) reasons.push('no adv');
+    if (!doSneak && !workflow.disadvantage) {
+        const targetToken = workflow.targets.tokens[0]?.document;
+        if (targetToken) doSneak = tokenUtils.findNearby(targetToken, 5, {disposition: 'enemy', includeIncapacitated: false}).some(token => token !== workflow.token.document);
+        if (!doSneak) reasons.push('no nearby ally');
     }
     doSneak ||= await automationUtils.calledEvent('sneakAttackDoSneak', workflow.actor, {data: {workflow}});
     if (!doSneak) {
-        Logging.addMacroWarning('CPR', 'sneak-attack', 'Attack does not qualify for Sneak Attack.');
+        Logging.addMacroWarning('CPR', 'sneak-attack', `Attack does not qualify for Sneak Attack (${reasons.join(', ')}.`);
         return;
     }
     workflowUtils.setWorkflowProperty(workflow, 'canSneak', true);
@@ -47,7 +51,7 @@ async function bonus({workflow, document}) {
     return bonus.withInputs([['comboboxMulti', inputs]]);
 }
 async function missed({workflow, document}) {
-    if (!workflow.item || !workflowUtils.isAttackType(workflow, 'attack') || workflow.hitTargets.size || !document.system.uses.value) return;
+    if (!workflow.item || !workflowUtils.isAttackType(workflow, 'attack') || workflow.hitTargets.count || !document.system.uses.value) return;
     Logging.addMacroWarning('CPR', 'sneak-attack', 'Attack missed.');
 }
 function riderInput(name, label, riders, selected) {
@@ -64,12 +68,12 @@ function riderInput(name, label, riders, selected) {
 }
 async function use({workflow, bonus}) {
     const inCombat = workflow.token.document.inCombat;
-    await workflowUtils.completeItemUse(bonus.document, Array.from(workflow.targets, token => token.document ?? token), {fast: true, consumeResources: inCombat, consumeUsage: inCombat});
-    const animationSetting = automationUtils.getConfigValue(bonus.document, 'animation');
-    const animation = animationUtils.getAnimation(animationSetting);
-    const targetToken = workflow.targets.first().document;
-    if (animation) {
-        const attackType = workflow.rangeDetails.range > 5 ? 'ranged' : workflow.defaultDamageType;
+    await workflowUtils.completeItemUse(bonus.document, workflow.targets.documents, {fast: true, consumeResources: inCombat, consumeUsage: inCombat});
+    const {animation} = automationUtils.getResolvedAnimation(bonus.document, 'animation');
+    const targetToken = workflow.targets.documents[0];
+    if (animation && targetToken.object) {
+        const ranged = workflowUtils.isAttackType(workflow, 'rangedAttack') || !tokenUtils.isWithinDistance(workflow.token.document, targetToken, itemUtils.getRange(workflow.item).reach || 5);
+        const attackType = ranged ? 'ranged' : workflow.defaultDamageType;
         await animation.macros.attack(workflow.token.document, targetToken, attackType);
     }
     await automationUtils.calledEvent('sneakAttackUsed', workflow.actor, {data: {workflow, targetToken}});
@@ -101,7 +105,7 @@ function validate({bonus, strikes = []}) {
 }
 export const sneakAttack = {
     name: 'Sneak Attack',
-    version: '2.1.0',
+    version: '2.1.5',
     rules: 'all',
     roll: [
         {
@@ -125,7 +129,7 @@ export const sneakAttack = {
         },
         formula: {
             default: '@scale.rogue.sneak-attack',
-            type: 'text',
+            type: 'formula',
             label: 'CHRISPREMADES.Config.Formula',
             category: 'behavior',
             hint: ''

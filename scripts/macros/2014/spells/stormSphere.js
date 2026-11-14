@@ -42,13 +42,13 @@ async function use({workflow}) {
         }
     };
     await effectUtils.createEffect(workflow.actor, effectData, {
-        concentrationItem: workflow.item, 
-        strictlyInterdependent: true, 
-        identifier: 'stormSphere', 
+        concentrationItem: workflow.item,
+        strictlyInterdependent: true,
+        identifier: 'stormSphere',
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'stormSphere', 
+            identifier: 'stormSphere',
             activityIdentifier: 'stormSphereBolt'
         }],
         unhideActivities: {
@@ -77,7 +77,7 @@ async function veryEarly({actor, config, dialog}) {
 async function early({workflow}) {
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'stormSphere');
     if (!effect) return true;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     if (!targetToken) return;
     let {templateUuid} = effect.flags['chris-premades'].stormSphere;
     let template = await fromUuid(templateUuid);
@@ -93,12 +93,12 @@ async function late({workflow}) {
     if (!playAnimation || !animationUtils.jb2aCheck()) return;
     let template = await fromUuid(templateUuid);
     if (!template) return;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     new Sequence({moduleName:'chris-premades', softFail:true}).effect().atLocation(templateUtils.getObject(template)).stretchTo(targetToken).file('jb2a.chain_lightning.primary.blue').missed(!workflow.hitTargets.has(targetToken)).play();
 }
 export let stormSphere = {
     name: 'Storm Sphere',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

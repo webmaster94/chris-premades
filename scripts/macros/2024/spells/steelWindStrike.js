@@ -1,7 +1,7 @@
 import {Teleport} from '../../../lib/teleport.js';
 import {activityUtils, actorUtils, animationUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.token || !workflow.targets.size) return;
+    if (!workflow.token || !workflow.targets.count) return;
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     if (!animationUtils.aseCheck() || animationUtils.jb2aCheck() != 'patreon') playAnimation = false;
     let sound = itemUtils.getConfig(workflow.item, 'sound');
@@ -17,12 +17,12 @@ async function use({trigger, workflow}) {
         ];
         await animationUtils.preloadAnimations(animations);
         let aoe = 6;
-        workflow.targets.forEach(token => {
+        workflow.targets.tokens.forEach(token => {
             let distance = tokenUtils.getDistance(workflow.token, token, {wallsBlock: false, checkCover: false}) + 5;
             if ((distance / 2) > aoe) aoe = distance / 2;
         });
         let cameraZoom = itemUtils.getConfig(workflow.item, 'cameraZoom');
-        let targets = Array.from(workflow.targets).filter(i => i != workflow.token);
+        let targets = Array.from(workflow.targets.tokens).filter(i => i != workflow.token);
         let centerX = workflow.token.center.x;
         let centerY = workflow.token.center.y;
         let radius = (aoe / 2) * workflow.token.document.parent.grid.size;
@@ -156,7 +156,7 @@ async function use({trigger, workflow}) {
                                 .stretchTo(workflow.token)
                                 .filter('ColorMatrix', {hue: 70})
                             .thenDo(() => {
-                                targets.forEach(target => { 
+                                targets.forEach(target => {
                                     new Sequence({moduleName:'chris-premades', softFail:true})
                                         .animation()
                                             .on(target)
@@ -177,7 +177,7 @@ async function use({trigger, workflow}) {
                                             .scaleToObject(1)
                                             .zIndex(0)
                                         .play();
-                                });        
+                                });
                             })
                             .wait(150)
                             .effect()
@@ -243,7 +243,7 @@ async function use({trigger, workflow}) {
                                 .playIf(sound)
                                 .file(sound)
                             .thenDo(() => {
-                                targets.forEach(target => { 
+                                targets.forEach(target => {
                                     new Sequence({moduleName:'chris-premades', softFail:true})
                                         .effect()
                                             .copySprite(target)
@@ -261,7 +261,7 @@ async function use({trigger, workflow}) {
                                             .filter('ColorMatrix', {saturate: -0.4})
                                             .zIndex(0)
                                         .play();
-                                });        
+                                });
                             })
                             .play();
                         /* eslint-enable indent */
@@ -279,7 +279,7 @@ async function use({trigger, workflow}) {
                         .filter('ColorMatrix', {hue: 70})
                         .zIndex(4)
                     .thenDo(() => {
-                        targets.forEach(target => { 
+                        targets.forEach(target => {
                             new Sequence({moduleName:'chris-premades', softFail:true})
                                 .effect()
                                     .copySprite(target)
@@ -331,13 +331,13 @@ async function use({trigger, workflow}) {
                                     .on(target)
                                     .rotate(90)
                                     .opacity(1)
-                                    .wait(1500) 
+                                    .wait(1500)
                                 .animation()
                                     .on(target)
                                     .rotate(0)
                                     .opacity(1)
                                 .play();
-                        });        
+                        });
                     })
                     .wait(400)
                     .effect()
@@ -376,7 +376,7 @@ async function use({trigger, workflow}) {
                         .playIf(Math.random() < 0.5)
                         .zIndex(4)
                     .thenDo(function(){
-                        targets.forEach(target => { 
+                        targets.forEach(target => {
                             new Sequence({moduleName:'chris-premades', softFail:true})
                                 .effect()
                                     .copySprite(target)
@@ -395,7 +395,7 @@ async function use({trigger, workflow}) {
                                     .playIf(Math.random() < 0.5)
                                     .zIndex(0)
                                 .play();
-                        });        
+                        });
                     })
                     .wait(50)
                     .play();
@@ -405,7 +405,7 @@ async function use({trigger, workflow}) {
     }
     let activity = activityUtils.getActivityByIdentifier(workflow.item, 'attack', {strict: true});
     if (activity) {
-        for (let token of workflow.targets) await workflowUtils.syntheticActivityRoll(activity, [token]);
+        for (let token of workflow.targets.tokens) await workflowUtils.syntheticActivityRoll(activity, [token]);
     }
     await Teleport.target([workflow.token], workflow.token, {title: workflow.item.name, range: workflow.activity.range.value + 5, animation: 'none'});
     if (!playAnimation) return;
@@ -427,7 +427,7 @@ async function use({trigger, workflow}) {
 }
 export let steelWindStrike = {
     name: 'Steel Wind Strike',
-    version: '1.4.41',
+    version: '2.3.0',
     rules: 'modern',
     hasAnimation: true,
     midi: {

@@ -9,7 +9,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let wildCompanion = {
     name: 'Wild Companion',
-    version: '1.3.83',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {

@@ -404,7 +404,7 @@
     "chris-premades": {
       "info": {
         "name": "Chain Lightning",
-        "version": "1.2.34",
+        "version": "2.3.0",
         "hasAnimation": true,
         "identifier": "chainLightning",
         "source": "chris-premades",

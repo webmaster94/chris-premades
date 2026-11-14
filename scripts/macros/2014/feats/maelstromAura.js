@@ -49,7 +49,7 @@ async function turnStart({trigger: {entity: effect, token, target}}) {
 }
 export let maelstromAura = {
     name: 'Soul of the Storm Giant: Maelstrom Aura',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

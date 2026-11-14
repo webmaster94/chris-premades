@@ -197,7 +197,7 @@
         "identifier": "shrapnelExplosion",
         "rules": "legacy",
         "source": "chris-premades",
-        "version": "1.3.72"
+        "version": "2.3.0"
       }
     }
   },

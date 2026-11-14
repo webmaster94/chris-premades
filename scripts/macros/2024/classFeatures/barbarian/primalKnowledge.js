@@ -16,7 +16,7 @@ async function skill({trigger: {entity: item, skillId, config, actor}}) {
 }
 export let primalKnowledge = {
     name: 'Primal Knowledge',
-    version: '1.1.21',
+    version: '2.3.0',
     rules: 'modern',
     skill: [
         {

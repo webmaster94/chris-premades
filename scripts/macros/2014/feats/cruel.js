@@ -2,17 +2,17 @@ import {activityUtils, combatUtils, dialogUtils, genericUtils, itemUtils, rollUt
 async function damage({trigger: {entity: item}, workflow}) {
     let activity = activityUtils.getActivityByIdentifier(item, 'damage', {strict: true});
     if (!activity) return;
-    if (!workflow.hitTargets.size || !workflow.damageRolls || !item.system.uses.value || !activity.uses.value || workflow.defaultDamageType === 'healing' || workflow.defaultDamageType === 'temphp') return;
+    if (!workflow.hitTargets.count || !workflow.damageRolls || !item.system.uses.value || !activity.uses.value || workflow.defaultDamageType === 'healing' || workflow.defaultDamageType === 'temphp') return;
     let formula = itemUtils.getConfig(item, 'formula');
     let canCrit = itemUtils.getConfig(item, 'canCrit');
     let used = false;
-    if (workflow.targets.size === 1) {
+    if (workflow.targets.count === 1) {
         let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name + ': ' + activity.name}));
         if (!selection) return;
         await workflowUtils.bonusDamage(workflow, formula, {ignoreCrit: !canCrit});
         used = true;
     } else {
-        let result = await dialogUtils.selectTargetDialog(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name + ': ' + activity.name}), workflow.targets, {skipDeadAndUnconscious: false});
+        let result = await dialogUtils.selectTargetDialog(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name + ': ' + activity.name}), workflow.targets.tokens, {skipDeadAndUnconscious: false});
         if (!result) return;
         let damageRoll = await new CONFIG.Dice.DamageRoll(formula, {}, {type: workflow.defaultDamageType}).evaluate();
         damageRoll.toMessage({
@@ -24,7 +24,7 @@ async function damage({trigger: {entity: item}, workflow}) {
         used = true;
     }
     if (!used) return;
-    await workflowUtils.syntheticActivityRoll(activity, [workflow.targets.first()]);
+    await workflowUtils.syntheticActivityRoll(activity, [workflow.targets.tokens[0]]);
     await genericUtils.update(item, {'system.uses.spent': item.system.uses.spent + 1});
     if (!combatUtils.inCombat()) return;
     let damage = activityUtils.getActivityByIdentifier(item, 'damage', {strict: true});
@@ -80,7 +80,7 @@ async function check({trigger: {entity: item, roll, actor, options, skillId}}) {
 }
 export let cruel = {
     name: 'Cruel',
-    version: '1.5.23',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         actor: [

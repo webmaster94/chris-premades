@@ -8,7 +8,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let feyReinforcements  = {
     name: 'Fey Reinforcements',
-    version: '1.3.99',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {

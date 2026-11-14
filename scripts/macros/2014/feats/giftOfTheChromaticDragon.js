@@ -1,7 +1,7 @@
 import {dialogUtils, effectUtils, genericUtils, itemUtils} from '../../../utils.js';
 
 async function useInfusion({workflow}) {
-    let targetToken = workflow.targets.first() ?? workflow.token;
+    let targetToken = workflow.targets.tokens[0] ?? workflow.token;
     let weapons = targetToken.actor.items.filter(i => i.type === 'weapon' && i.system.equipped);
     if (!weapons.length) {
         genericUtils.notify('CHRISPREMADES.Macros.HexWarrior.NoWeapons', 'info');
@@ -87,7 +87,7 @@ async function useResistance({workflow}) {
 }
 export let chromaticInfusion = {
     name: 'Gift of the Chromatic Dragon: Chromatic Infusion',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -100,7 +100,7 @@ export let chromaticInfusion = {
 };
 export let reactiveResistance = {
     name: 'Gift of the Chromatic Dragon: Reactive Resistance',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

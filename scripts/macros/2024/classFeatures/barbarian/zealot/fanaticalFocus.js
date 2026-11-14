@@ -22,7 +22,7 @@ async function save({trigger: {config, roll, actor, entity: item}}) {
 }
 export let fanaticalFocus = {
     name: 'Fanatical Focus',
-    version: '1.1.28',
+    version: '2.3.0',
     rules: 'modern',
     save: [
         {

@@ -107,7 +107,7 @@ async function use({workflow}) {
         range: 90,
         animation,
         initiativeType: 'follows',
-        additionalSummonVaeButtons: 
+        additionalSummonVaeButtons:
             updates.actor.items
                 .filter(i => !['magicResistance', 'summonFiendDeathThroes', 'devilsSight'].includes(i.flags['chris-premades'].info.identifier))
                 .map(i => {return {type: 'use', name: i.name, identifier: i.flags['chris-premades'].info.identifier};})
@@ -159,7 +159,7 @@ async function late({workflow}) {
 }
 export let summonFiend = {
     name: 'Summon Fiend',
-    version: '1.2.32',
+    version: '2.3.0',
     rules: 'modern',
     hasAnimation: true,
     midi: {

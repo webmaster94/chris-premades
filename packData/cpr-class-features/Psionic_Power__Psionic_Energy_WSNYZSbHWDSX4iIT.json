@@ -224,7 +224,7 @@
         "name": "Psionic Power: Psionic Energy",
         "identifier": "psionicEnergy",
         "source": "chris-premades",
-        "version": "1.3.57"
+        "version": "2.3.0"
       },
       "macros": {
         "item": [

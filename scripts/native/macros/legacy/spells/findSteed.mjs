@@ -1,4 +1,4 @@
-import {automationUtils, compendiumUtils, constants, dialogUtils, documentUtils, effectUtils, folderUtils, Logging, summonUtils, tokenUtils, workflowUtils} from '../../../proxy.mjs';
+import {activityUtils, automationUtils, compendiumUtils, constants, dialogUtils, documentUtils, effectUtils, folderUtils, Logging, summonUtils, tokenUtils, workflowUtils} from '../../../proxy.mjs';
 const srdSteeds = {
     'find-steed': ['warhorse', 'pony', 'camel', 'elk', 'mastiff'],
     'find-greater-steed': ['griffon', 'pegasus', 'dire-wolf', 'rhinoceros', 'saber-toothed-tiger']
@@ -60,21 +60,21 @@ async function summon({workflow}) {
     });
     const [effect] = await effectUtils.createEffects(workflow.actor, [effectData]);
     if (effect) await documentUtils.makeDependent(steed.actor, [effect]);
-    await steed.place(workflow.activity.range.value, {token: workflow.token.document});
+    await steed.place(activityUtils.getRange(workflow.activity), {token: workflow.token.document});
 }
 async function dismiss({workflow}) {
     await Promise.all(summonUtils.getSummonsBySource(workflow.item).map(steed => summonUtils.deleteSummon(steed)));
 }
 async function shareSpell({document, workflow}) {
     if (workflow.item.type !== 'spell') return;
-    if (workflow.targets.size !== 1 || workflow.targets.first().id !== workflow.token?.id) return;
+    if (workflow.targets.count !== 1 || workflow.targets.documents[0].id !== workflow.token?.id) return;
     const originActivity = await effectUtils.getOriginActivity(document);
     if (!originActivity) return;
     const steedToken = summonUtils.getSummonsBySource(originActivity.item).find(steed => steed.token)?.token;
     if (!steedToken) return;
-    if (tokenUtils.getDistance(workflow.token.document, steedToken) > 5) return;
+    if (!tokenUtils.isWithinDistance(workflow.token.document, steedToken, 5)) return;
     const selection = await dialogUtils.confirm(originActivity.item.name, 'CHRISPREMADES.Macros.Legacy.FindSteed.Target');
-    if (selection) await workflowUtils.updateTargets(workflow, [workflow.token, steedToken.object]);
+    if (selection) await workflowUtils.updateTargets(workflow, [workflow.tokenDocument, steedToken]);
 }
 const config = {
     name: {
@@ -96,7 +96,7 @@ const config = {
         label: 'CHRISPREMADES.Macros.Legacy.FindSteed.CreatureType',
         hint: 'CHRISPREMADES.Macros.Legacy.FindSteed.CreatureTypeHint',
         category: 'summons',
-        get options() { return [{value: '', label: _loc('CHRISPREMADES.Macros.Legacy.FindSteed.Ask')}, ...constants.spiritTypeOptions]; }
+        get options() { return [{value: '', label: 'CHRISPREMADES.Macros.Legacy.FindSteed.Ask'}, ...constants.spiritTypeOptions]; }
     },
     celestialAnimation: {
         default: {source: 'chris-premades-native', identifier: 'celestialSummon'},
@@ -122,7 +122,7 @@ const config = {
 };
 export const findSteed = {
     name: 'Find Steed',
-    version: '2.0.4',
+    version: '2.1.4',
     rules: '2014',
     roll: [
         {

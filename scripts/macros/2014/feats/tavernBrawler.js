@@ -1,30 +1,30 @@
 import {actorUtils, compendiumUtils, constants, dialogUtils, effectUtils, errors, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
 
 async function late({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (workflowUtils.getActionType(workflow) !== 'mwak') return;
     if (workflow.item.system.type !== 'improv' && !constants.unarmedAttacks.includes(genericUtils.getIdentifier(workflow.item))) return;
     if (actorUtils.hasUsedBonusAction(workflow.actor)) return;
     let grapplingEffects = effectUtils.getAllEffectsByIdentifier(workflow.actor, 'grappling');
-    if (grapplingEffects.find(i => i.flags['chris-premades'].grapple.tokenId === workflow.targets.first()?.id)) return;
+    if (grapplingEffects.find(i => i.flags['chris-premades'].grapple.tokenId === workflow.targets.tokens[0]?.id)) return;
     let selection = await dialogUtils.confirm(item.name, 'CHRISPREMADES.Macros.TavernBrawler.Use');
     if (!selection) return;
     let feature = itemUtils.getItemByIdentifier(workflow.actor, 'grapple');
     if (feature) {
-        await workflowUtils.syntheticItemRoll(feature, [workflow.targets.first()]);
+        await workflowUtils.syntheticItemRoll(feature, [workflow.targets.tokens[0]]);
     } else {
         let featureData = await compendiumUtils.getItemFromCompendium(constants.packs.actions, 'Grapple', {object: true, getDescription: true, translate: 'CHRISPREMADES.Macros.Actions.Grapple'});
         if (!featureData) {
             errors.missingPackItem();
             return;
         }
-        await workflowUtils.syntheticItemDataRoll(featureData, workflow.actor, [workflow.targets.first()]);
+        await workflowUtils.syntheticItemDataRoll(featureData, workflow.actor, [workflow.targets.tokens[0]]);
     }
     await actorUtils.setBonusActionUsed(workflow.actor);
 }
 export let tavernBrawler = {
     name: 'Tavern Brawler',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {
@@ -49,7 +49,7 @@ export let tavernBrawler = {
 };
 export let tavernBrawlerUnarmedStrike = {
     name: 'Unarmed Strike (Tavern Brawler)',
-    version: '1.1.10',
+    version: '2.3.0',
     ddbi: {
         restrictedItems: {
             'Unarmed Strike 3': {

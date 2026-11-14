@@ -1,15 +1,10 @@
 import {activityUtils, actorUtils, genericUtils} from '../utils.js';
+import {mergeRiderFlags} from '../lib/riderFlags.js';
 function flagAllRiders(item, updates) {
-    let cprRiders = genericUtils.getProperty(updates, 'flags.chris-premades.hiddenActivities');
-    cprRiders ??= genericUtils.getProperty(item, 'flags.chris-premades.hiddenActivities') ?? [];
-    cprRiders = cprRiders.map(i => activityUtils.getActivityByIdentifier(item, i)?.id).filter(i => i);
-    // let currRiders = genericUtils.getProperty(item, 'flags.dnd5e.riders.activity') ?? [];
-    let newRiders = genericUtils.getProperty(updates, 'flags.dnd5e.riders.activity') ?? [];
-    let uniqueRiders = new Set([...newRiders, ...cprRiders]);
-    genericUtils.setProperty(updates, 'flags.dnd5e.riders.activity', Array.from(uniqueRiders));
-    if (uniqueRiders.size) {
-        if ('-=riders' in (updates.flags?.dnd5e ?? {})) delete updates.flags.dnd5e['-=riders'];
-    }
+    const expanded = foundry.utils.expandObject(updates);
+    mergeRiderFlags(item, expanded, identifier => activityUtils.getActivityByIdentifier(item, identifier));
+    for (const key of Object.keys(updates)) if (key.startsWith('flags.')) delete updates[key];
+    if (expanded.flags) updates.flags = expanded.flags;
 }
 function cssTweak(value) {
     if (value) {
@@ -21,7 +16,7 @@ function cssTweak(value) {
             grid-template-rows: 100px 1fr;
             grid-template-columns: 1fr;
             min-width: 900px;
-            
+
             .sheet-tabs {
                 display: none !important;
             }

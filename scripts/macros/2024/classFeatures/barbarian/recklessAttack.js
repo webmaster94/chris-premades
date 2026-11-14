@@ -1,5 +1,5 @@
 export let recklessAttack = {
     name: 'Reckless Attack',
-    version: '1.1.21',
+    version: '2.3.0',
     rules: 'modern'
 };

@@ -1,6 +1,6 @@
 import {constants, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size || workflow.attackMode === 'twoHanded' || !constants.meleeWeaponTypes.includes(workflow.item.system.type?.value)) return;
+    if (!workflow.hitTargets.count || workflow.attackMode === 'twoHanded' || !constants.meleeWeaponTypes.includes(workflow.item.system.type?.value)) return;
     let actor = workflow.actor;
     let items = actor.items.filter(i => i.system.equipped && i.type === 'weapon' && !constants.unarmedAttacks.includes(genericUtils.getIdentifier(i)));
     if (items.length > 1) return;
@@ -9,7 +9,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let dueling = {
     name: 'Dueling',
-    version: '1.2.36',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

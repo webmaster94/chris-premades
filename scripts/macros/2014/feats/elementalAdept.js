@@ -22,7 +22,7 @@ async function damage({trigger: {entity: item}, workflow}) {
         return await rollUtils.damageRoll(newFormula, workflow.activity, roll.options);
     }));
     await workflow.setDamageRolls(damageRolls);
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let mode = itemUtils.getConfig(item, 'mode');
     switch (mode) {
         case 'none': return;
@@ -125,7 +125,7 @@ async function damage({trigger: {entity: item}, workflow}) {
             break;
         }
         case 'downgradeImmunity': {
-            await Promise.all(workflow.targets.map(async token => {
+            await Promise.all(workflow.targets.tokens.map(async token => {
                 let downgrades = Array.from(token.actor.system.traits.di.value);
                 let effectData = {
                     name: item.name,
@@ -162,7 +162,7 @@ async function damage({trigger: {entity: item}, workflow}) {
             break;
         }
         case 'downgradeResistanceImmunity': {
-            await Promise.all(workflow.targets.map(async token => {
+            await Promise.all(workflow.targets.tokens.map(async token => {
                 let downgradeImmunity = Array.from(token.actor.system.traits.di.value);
                 let downgradeResistance = Array.from(token.actor.system.traits.dr.value).filter(i => !downgradeImmunity.includes(i));
                 let effectData = {
@@ -206,10 +206,10 @@ async function damage({trigger: {entity: item}, workflow}) {
     }
 }
 async function done({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let effectIds = effectUtils.getAllEffectsByIdentifier(workflow.actor, 'elementalAdeptEffect').map(i => i.id);
     if (effectIds.length) await genericUtils.deleteEmbeddedDocuments(workflow.actor, 'ActiveEffect', effectIds);
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         let effectIds = effectUtils.getAllEffectsByIdentifier(token.actor, 'elementalAdeptEffect').map(i => i.id);
         if (effectIds.length) await genericUtils.deleteEmbeddedDocuments(token.actor, 'ActiveEffect', effectIds);
     }));
@@ -254,7 +254,7 @@ let spellOnly = {
 };
 export let elementalAdeptA = {
     name: 'Elemental Adept (Acid)',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

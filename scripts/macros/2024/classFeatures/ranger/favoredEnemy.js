@@ -9,7 +9,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let favoredEnemy = {
     name: 'Favored Enemy',
-    version: '1.3.78',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {
@@ -44,7 +44,7 @@ export let favoredEnemy = {
             default: 'favored-enemy',
             category: 'homebrew',
             homebrew: true
-        } 
+        }
     ],
     scales: [
         {

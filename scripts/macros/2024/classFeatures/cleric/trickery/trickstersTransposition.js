@@ -26,7 +26,7 @@ async function use({trigger, workflow}) {
 }
 export let trickstersTransposition = {
     name: 'Trickster\'s Transposition',
-    version: '1.3.20',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

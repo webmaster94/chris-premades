@@ -107,15 +107,15 @@ async function use({workflow}) {
         genericUtils.setProperty(updates.token, 'texture.src', tokenImg);
     }
     let effect = await effectUtils.createEffect(workflow.actor, effectData, {
-        identifier: 'hybridTransformation', 
+        identifier: 'hybridTransformation',
         vae: [{
-            type: 'use', 
-            name: weaponData.name, 
+            type: 'use',
+            name: weaponData.name,
             identifier: 'predatoryStrike'
         }, {
-            type: 'use', 
+            type: 'use',
             name: revertFeature.name,
-            identifier: 'hybridTransformation', 
+            identifier: 'hybridTransformation',
             activityIdentifier: 'hybridTransformationRevert'
         }],
         unhideActivities: {
@@ -137,9 +137,9 @@ async function revert({workflow}) {
     if (effect) await genericUtils.remove(effect);
 }
 async function earlyBrand({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'brandOfCastigationSource');
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     let effects = effectUtils.getAllEffectsByIdentifier(targetToken.actor, 'brandOfCastigation');
     if (!effects.length) return;
     if (!effects.filter(i => i.origin === effect.origin).length) return;
@@ -235,7 +235,7 @@ async function end({trigger: {entity: effect}}) {
 }
 export let hybridTransformation = {
     name: 'Hybrid Transformation',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

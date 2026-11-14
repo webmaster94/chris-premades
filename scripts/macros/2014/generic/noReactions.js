@@ -4,7 +4,7 @@ async function turnStart({trigger: {token}}) {
 }
 export let noReactions = {
     name: 'No Reactions',
-    version: '0.12.37',
+    version: '2.3.0',
     combat: [
         {
             pass: 'turnStart',

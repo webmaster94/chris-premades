@@ -213,7 +213,7 @@
         "identifier": "felineForm",
         "rules": "modern",
         "source": "chris-premades",
-        "version": "1.4.17"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

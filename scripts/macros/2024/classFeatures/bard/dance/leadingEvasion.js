@@ -1,6 +1,6 @@
 import {activityUtils, effectUtils, genericUtils, itemUtils, tokenUtils} from '../../../../../utils.js';
 async function early({trigger: {entity: item}, workflow}) {
-    if (!workflow.token || !workflow.targets.size || !activityUtils.hasSave(workflow.activity)) return;
+    if (!workflow.token || !workflow.targets.count || !activityUtils.hasSave(workflow.activity)) return;
     if (!workflow.activity.save.ability.has('dex')) return;
     let sourceEffect = item.effects.contents?.[0];
     if (!sourceEffect) return;
@@ -8,7 +8,7 @@ async function early({trigger: {entity: item}, workflow}) {
     effectData.duration = {value: 1, units: 'seconds'};
     effectData.start = {time: game.time?.worldTime ?? 0};
     let used = false;
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         if (itemUtils.getItemByIdentifier(token.actor, 'leadingEvasion')) return;
         let valid = tokenUtils.findNearby(token, 5, 'ally').find(i => itemUtils.getItemByIdentifier(i.actor, 'leadingEvasion') && !i.actor.statuses.has('incapacitated') && workflow.targets.has(i));
         if (!valid) return;
@@ -18,16 +18,16 @@ async function early({trigger: {entity: item}, workflow}) {
     if (used) await item.displayCard();
 }
 async function late({trigger, workflow}) {
-    if (!workflow.token || !workflow.targets.size || !activityUtils.hasSave(workflow.activity)) return;
+    if (!workflow.token || !workflow.targets.count || !activityUtils.hasSave(workflow.activity)) return;
     if (!workflow.activity.save.ability.has('dex')) return;
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         let effect = effectUtils.getEffectByIdentifier(token.actor, 'leadingEvasionEffect');
         if (effect) await genericUtils.remove(effect);
     }));
 }
 export let leadingEvasion = {
     name: 'Leading Evasion',
-    version: '1.1.38',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

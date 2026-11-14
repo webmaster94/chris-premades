@@ -330,7 +330,7 @@
         "identifier": "steadyAim",
         "source": "chris-premades",
         "rules": "modern",
-        "version": "1.3.77"
+        "version": "2.3.0"
       },
       "macros": {
         "movement": [

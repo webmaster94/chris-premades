@@ -4,7 +4,7 @@ async function removeTemplateFunc({trigger: {entity: effect}}) {
 }
 export let removeTemplate = {
     name: 'Remove Template',
-    version: '0.12.0',
+    version: '2.3.0',
     combat: [
         {
             pass: 'everyTurn',

@@ -214,7 +214,7 @@
         "identifier": "maskOfMonstrousForms",
         "rules": "modern",
         "source": "chris-premades",
-        "version": "1.4.12"
+        "version": "2.3.0"
       },
       "macros": {
         "item": [

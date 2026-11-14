@@ -227,13 +227,13 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                         {
                             key: 'flags.midi-qol.grants.advantage.attack.all',
                             type: 'custom',
-                            value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.first()) <= 5',
+                            value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.tokens[0]) <= 5',
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.grants.disadvantage.attack.all',
                             type: 'custom',
-                            value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.first()) > 5',
+                            value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.tokens[0]) > 5',
                             priority: 20
                         },
                         {
@@ -279,7 +279,7 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                     effect.updateSource({
                         ['flags.chris-premades']: {
                             rules: 'modern',
-                            ['macros.midi.actor']: ['grappled'] 
+                            ['macros.midi.actor']: ['grappled']
                         }
                     });
                     return;
@@ -339,25 +339,25 @@ async function preCreateActiveEffect(effect, updates, options, userId) {
                         {
                             key: 'flags.midi-qol.grants.critical.mwak',
                             type: 'custom',
-                            value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.first()) <= 5',
+                            value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.tokens[0]) <= 5',
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.grants.critical.rwak',
                             type: 'custom',
-                            value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.first()) <= 5',
+                            value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.tokens[0]) <= 5',
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.grants.critical.msak',
                             type: 'custom',
-                            value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.first()) <= 5',
+                            value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.tokens[0]) <= 5',
                             priority: 20
                         },
                         {
                             key: 'flags.midi-qol.grants.critical.rsak',
                             type: 'custom',
-                            value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.first()) <= 5',
+                            value: 'computeDistance(workflow.rangeDetails?.attackingToken ?? workflow.token, workflow.targets.tokens[0]) <= 5',
                             priority: 20
                         }
                     );

@@ -1,6 +1,6 @@
 import {activityUtils, animationUtils, compendiumUtils, constants, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
 async function use({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let effectData = {
         name: workflow.item.name,
         img: workflow.item.img,
@@ -8,27 +8,27 @@ async function use({workflow}) {
         duration: itemUtils.convertDuration(workflow.item)
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['sanctuarySafe']);
-    for (let target of workflow.targets) {
+    for (let target of workflow.targets.tokens) {
         await effectUtils.createEffect(target.actor, effectData, {identifier: 'sanctuarySafe'});
     }
 }
 async function attack({workflow}) {
     if (activityUtils.getIdentifier(workflow.activity) === 'sanctuarySave') return;
-    if (workflow.targets.size === 1 && workflow.targets.first().actor.id == workflow.actor.id) return;
+    if (workflow.targets.count === 1 && workflow.targets.tokens[0].actor.id == workflow.actor.id) return;
     let remove = false;
     remove ||= workflow.damageRoll && !(workflow.defaultDamageType === 'healing' || workflow.defaultDamageType === 'temphp');
     remove ||= workflowUtils.isAttackType(workflow, 'attack');
-    remove ||= workflow.item.type === 'spell' && workflow.targets.find(i => i.document.disposition !== workflow.token.document.disposition);
+    remove ||= workflow.item.type === 'spell' && workflow.targets.tokens.find(i => i.document.disposition !== workflow.token.document.disposition);
     if (!remove) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'sanctuarySafe');
     if (effect) await genericUtils.remove(effect);
 }
 async function targeted({trigger: {entity: effect}, workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let invalidTypes = Object.keys(CONFIG.DND5E.areaTargetTypes);
     if (invalidTypes.includes(workflow.item.system.target?.type)) return;
     if (workflow.item.system.type?.value === 'spellFeature') return;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     if (targetToken.document.disposition === workflow.token.document.disposition) return;
     if (workflow.item.type === 'spell') {
         if (workflowUtils.isSustainedRoll(workflow)) return;
@@ -51,7 +51,7 @@ async function targeted({trigger: {entity: effect}, workflow}) {
 
 export let sanctuary = {
     name: 'Sanctuary',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

@@ -111,9 +111,9 @@ async function use({workflow}) {
         initiativeType: 'follows',
         additionalSummonVaeButtons: itemsToAdd.slice(2).map(i => ({type: 'use', name: i.name, identifier: i.flags['chris-premades'].info.identifier})),
         additionalVaeButtons: [{
-            type: 'use', 
+            type: 'use',
             name: commandFeature.name,
-            identifier: 'summonDrakeCompanion', 
+            identifier: 'summonDrakeCompanion',
             activityIdentifier: 'summonDrakeCompanionCommand'
         }],
         unhideActivities: {
@@ -151,7 +151,7 @@ async function postAttack({trigger: {entity: effect, token}, workflow}) {
     let feature = activityUtils.getActivityByIdentifier(await effectUtils.getOriginItem(effect), 'reflexiveResistance', {strict: true});
     if (!feature) return;
     if (!feature.uses.value) return;
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (actorUtils.hasUsedReaction(token.actor)) return;
     let summonId = effect.flags['chris-premades'].summons.ids[effect.name][0];
     let summonToken = token.scene.tokens.get(summonId)?.object;
@@ -209,7 +209,7 @@ async function postAttack({trigger: {entity: effect, token}, workflow}) {
     await genericUtils.update(feature, {'uses.spent': feature.uses.spent + 1});
 }
 async function postDamage({trigger: {entity: item, token}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     if (workflow.token.document.disposition * token.document.disposition < 0) return;
     if (actorUtils.hasUsedReaction(token.actor)) return;
@@ -224,7 +224,7 @@ async function postDamage({trigger: {entity: item, token}, workflow}) {
 }
 export let summonDrakeCompanion = {
     name: 'Drake Companion: Summon',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

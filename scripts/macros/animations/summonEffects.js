@@ -265,7 +265,7 @@ async function fire(location, token, updates, iteration) {
     let image = token.texture.src;
     new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(150)
-        
+
         .effect()
         .file('jb2a.impact.fire.01.orange')
         .atLocation(token, {offset: {y: 0}, gridUnits: true})
@@ -273,9 +273,9 @@ async function fire(location, token, updates, iteration) {
         .fadeOut(1000, {ease: 'easeInExpo'})
         .attachTo(token, {bindAlpha: false})
         .zIndex(5)
-        
+
         .wait(100)
-        
+
         .effect()
         .file('jb2a.ground_cracks.orange.02')
         .atLocation(token)
@@ -287,7 +287,7 @@ async function fire(location, token, updates, iteration) {
         .belowTokens()
         .scaleToObject(1.5)
         .zIndex(0.2)
-        
+
         .effect()
         .file('jb2a.particles.outward.orange.01.03')
         .atLocation(token)
@@ -299,7 +299,7 @@ async function fire(location, token, updates, iteration) {
         .randomRotation()
         .scaleToObject(2)
         .duration(10000)
-        
+
         .effect()
         .file('jb2a.magic_signs.circle.02.conjuration.loop.yellow')
         .atLocation(token)
@@ -312,7 +312,7 @@ async function fire(location, token, updates, iteration) {
         .filter('ColorMatrix', {saturate: -1, brightness: 2})
         .filter('Blur', {blurX: 5, blurY: 10})
         .zIndex(0.1)
-        
+
         .effect()
         .file('jb2a.magic_signs.circle.02.conjuration.loop.yellow')
         .atLocation(token)
@@ -322,7 +322,7 @@ async function fire(location, token, updates, iteration) {
         .scaleToObject(1.25)
         .fadeOut(5000, {ease: 'easeOutQuint'})
         .duration(10000)
-        
+
         .effect()
         .file(image)
         .atLocation(token)
@@ -334,18 +334,18 @@ async function fire(location, token, updates, iteration) {
         .duration(1200)
         .attachTo(token, {bindAlpha: false})
         .waitUntilFinished(-800)
-        
+
         .animation()
         .on(token)
         .fadeIn(250)
-        
+
         .play();
 }
 async function water(location, token, updates, iteration) {
     let image = token.texture.src;
     new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(150)
-        
+
         .effect()
         .file('jb2a.impact.water.02.blue')
         .atLocation(token, {offset: {y: 0}, gridUnits: true})
@@ -353,9 +353,9 @@ async function water(location, token, updates, iteration) {
         .fadeOut(1500, {ease: 'easeOutExpo'})
         .attachTo(token, {bindAlpha: false})
         .zIndex(5)
-        
+
         .wait(100)
-        
+
         .effect()
         .file('jb2a.water_splash.circle.01.blue')
         .atLocation(token)
@@ -367,7 +367,7 @@ async function water(location, token, updates, iteration) {
         .belowTokens()
         .scaleToObject(1.5)
         .zIndex(0.2)
-        
+
         .effect()
         .file('jb2a.particles.outward.blue.01.03')
         .atLocation(token)
@@ -379,7 +379,7 @@ async function water(location, token, updates, iteration) {
         .randomRotation()
         .scaleToObject(2)
         .duration(10000)
-        
+
         .effect()
         .file('jb2a.magic_signs.circle.02.conjuration.loop.blue')
         .atLocation(token)
@@ -392,7 +392,7 @@ async function water(location, token, updates, iteration) {
         .filter('ColorMatrix', {saturate: -1, brightness: 2})
         .filter('Blur', {blurX: 5, blurY: 10})
         .zIndex(0.1)
-        
+
         .effect()
         .file('jb2a.magic_signs.circle.02.conjuration.loop.blue')
         .atLocation(token)
@@ -402,7 +402,7 @@ async function water(location, token, updates, iteration) {
         .scaleToObject(1.25)
         .fadeOut(5000, {ease: 'easeOutQuint'})
         .duration(10000)
-        
+
         .effect()
         .file(image)
         .atLocation(token)
@@ -414,11 +414,11 @@ async function water(location, token, updates, iteration) {
         .duration(1200)
         .attachTo(token, {bindAlpha: false})
         .waitUntilFinished(-800)
-        
+
         .animation()
         .on(token)
         .fadeIn(250)
-        
+
         .play();
 }
 async function air(location, token, updates, iteration) {
@@ -587,7 +587,7 @@ async function earth(location, token, updates, iteration) {
 async function nature(location, token, updates, iteration) {
     new Sequence({moduleName:'chris-premades', softFail:true})
         .wait(200)
-        
+
         .effect()
         .file('jb2a.swirling_leaves.complete.01.green.0')
         .atLocation(token)
@@ -596,9 +596,9 @@ async function nature(location, token, updates, iteration) {
         .endTime(4500)
         .fadeOut(750, {ease: 'easeOutQuint'})
         .zIndex(6)
-        
+
         .wait(1000)
-        
+
         .effect()
         .file('jb2a.sacred_flame.target.green')
         .atLocation(token)
@@ -608,7 +608,7 @@ async function nature(location, token, updates, iteration) {
         .fadeOut(500)
         .zIndex(5)
         .waitUntilFinished(-1000)
-        
+
         .effect()
         .file('jb2a.plant_growth.04.ring.4x4.complete.greenwhite')
         .atLocation(token)
@@ -617,9 +617,9 @@ async function nature(location, token, updates, iteration) {
         .randomRotation()
         .scaleToObject(1.5)
         .zIndex(1.1)
-        
+
         .wait(200)
-        
+
         .effect()
         .file('jb2a.magic_signs.circle.02.conjuration.loop.green')
         .atLocation(token)
@@ -632,7 +632,7 @@ async function nature(location, token, updates, iteration) {
         .filter('ColorMatrix', {saturate: -1, brightness: 2})
         .filter('Blur', {blurX: 5, blurY: 10})
         .zIndex(0.1)
-        
+
         .effect()
         .file('jb2a.magic_signs.circle.02.conjuration.loop.green')
         .atLocation(token)
@@ -641,19 +641,19 @@ async function nature(location, token, updates, iteration) {
         .scaleToObject(1.25)
         .fadeOut(5000, {ease: 'easeOutQuint'})
         .duration(10000)
-        
+
         .effect()
         .file('jb2a.swirling_leaves.outburst.01.greenorange')
         .atLocation(token)
         .opacity(1)
         .scaleToObject(2)
         .zIndex(1)
-        
+
         .animation()
         .delay(300)
         .on(token)
         .fadeIn(500)
-        
+
         .play();
 }
 async function shadow(location, token, updates, iteration) {
@@ -768,7 +768,7 @@ async function future(location, token, updates, iteration) {
         .zIndex(0.1)
 
         .wait(1000)
-        
+
         .effect()
         .atLocation(token, {offset: {x: -0.25 * imageSize, y: -0.25 * imageSize}, randomOffset: 0.5, gridUnits: true})
         .shape('rectangle', {

@@ -10,13 +10,13 @@ async function early({workflow}) {
             toTeleport.push(selection[0]);
         }
     }
-    await workflowUtils.updateTargets(workflow, Array.from(workflow.targets.filter(i => !toTeleport.includes(i))));
+    await workflowUtils.updateTargets(workflow, Array.from(new Set(workflow.targets.tokens).filter(i => !toTeleport.includes(i))));
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.jb2aCheck();
     await Teleport.group(toTeleport, workflow.token, {title: workflow.item.name, range: 90, animation: playAnimation ? 'thunderStep' : 'none'});
 }
 export let thunderStep = {
     name: 'Thunder Step',
-    version: '1.1.10',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

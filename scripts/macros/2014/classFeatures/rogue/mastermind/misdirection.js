@@ -1,9 +1,9 @@
 import {actorUtils, dialogUtils, genericUtils, socketUtils, tokenUtils, workflowUtils} from '../../../../../utils.js';
 async function attacked({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     if (actorUtils.hasUsedReaction(item.actor)) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
-    let nearby = tokenUtils.findNearby(workflow.targets.first(), 5, 'all', {includeIncapacitated: true});
+    let nearby = tokenUtils.findNearby(workflow.targets.tokens[0], 5, 'all', {includeIncapacitated: true});
     if (!nearby.length) return;
     let selection = await dialogUtils.selectTargetDialog(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name}), nearby, {skipDeadAndUnconscious: false, userId: socketUtils.firstOwner(item.actor, true)});
     if (!selection) return;
@@ -12,7 +12,7 @@ async function attacked({trigger: {entity: item}, workflow}) {
 }
 export let misdirection = {
     name: 'Misdirection',
-    version: '1.3.135',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         actor: [

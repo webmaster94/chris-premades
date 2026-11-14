@@ -227,7 +227,7 @@
     "chris-premades": {
       "info": {
         "name": "Potion of Maximum Power",
-        "version": "1.1.0",
+        "version": "2.3.0",
         "identifier": "potionOfMaximumPower",
         "source": "chris-premades"
       },

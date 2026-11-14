@@ -16,7 +16,7 @@ async function preAttack({document: activity, identifier, workflow}) {
     if (!choices?.length) return Logging.addMacroWarning('CPR', 'brutal-strike', 'No Brutal Strike options found.');
     const config = automationUtils.getConfigValues(activity.item, ['count', 'damage']);
     config.count = (await rollUtils.rollDice(config.count, {document: activity.item})).total;
-    const options = {addNoneDocument: true, checkbox: true, max: config.count};
+    const options = {addNoneDocument: true, checkbox: true, displayTooltips: true, max: config.count};
     const choice = await dialogUtils.selectDocumentDialog(activity.item.name, _loc('CHRISPREMADES.Macros.Modern.BrutalStrike.Use', {item: activity.item.name}), choices, options);
     if (!choice) return;
     const chosen = [];
@@ -26,25 +26,28 @@ async function preAttack({document: activity, identifier, workflow}) {
     }
     else chosen.push(choice);
     await workflowUtils.completeActivityUse(activity);
-    workflowUtils.setWorkflowProperty(workflow, 'brutalStrikesActivities', chosen);
+    workflowUtils.setWorkflowProperty(workflow, 'brutalStrikesActivities', chosen.map(a => a.uuid));
     workflowUtils.setWorkflowProperty(workflow, 'brutalStrikesDamage', config.damage);
     workflow.tracker.advantage.suppress(identifier, activity.item.name);
 }
 async function damage({document: activity, workflow}) {
     const formula = workflowUtils.getWorkflowProperty(workflow, 'brutalStrikesDamage');
-    if (!formula || !workflow.hitTargets.size) return;
+    if (!formula || !workflow.hitTargets.count) return;
     return new DamageBonus(activity, {formula, optional: false});
 }
 async function doStrike({workflow}) {
-    const activities = workflowUtils.getWorkflowProperty(workflow, 'brutalStrikesActivities');
-    if (!activities?.length || !workflow.hitTargets.size) return;
-    const targets = Array.from(workflow.hitTargets.map(i => i.document));
-    for (const activity of activities) await workflowUtils.completeActivityUse(activity, targets);
+    const activityUuids = workflowUtils.getWorkflowProperty(workflow, 'brutalStrikesActivities');
+    if (!activityUuids?.length || !workflow.hitTargets.count) return;
+    const targets = workflow.hitTargets.documents;
+    for (const activityUuid of activityUuids) {
+        const activity = await fromUuid(activityUuid);
+        if (activity) await workflowUtils.completeActivityUse(activity, targets);
+    }
 }
 async function forcefulBlowPush({document: activity, workflow}) {
     const distanceFormula = automationUtils.getConfigValue(activity.item, 'push');
     const distance = (await rollUtils.rollDice(distanceFormula, {document: activity})).total;
-    for (const token of workflow.targets)
+    for (const token of workflow.targets.tokens)
         await tokenUtils.slideToken(token.document, {sourceToken: workflow.token.document, distance});
 }
 export const brutalStrike = {
@@ -78,19 +81,19 @@ export const brutalStrike = {
         },
         count: {
             default: '@scale.barbarian.brutal-strike-count',
-            type: 'text',
+            type: 'formula',
             label: 'CHRISPREMADES.Macros.Modern.BrutalStrike.Choice',
             category: 'behavior'
         },
         damage: {
             default: '@scale.barbarian.brutal-strike',
-            type: 'text',
+            type: 'formula',
             label: 'CHRISPREMADES.Config.DamageBonus',
             category: 'behavior'
         },
         push: {
             default: '15',
-            type: 'text',
+            type: 'formula',
             label: 'CHRISPREMADES.Config.Distance',
             category: 'behavior'
         }

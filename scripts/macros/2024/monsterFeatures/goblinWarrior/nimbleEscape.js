@@ -2,7 +2,7 @@ import {disengage} from '../../actions/disengage.js';
 import {hide} from '../../actions/hide.js';
 export let goblinWarriorNimbleEscape = {
     name: 'Nimble Escape',
-    version: '1.3.130',
+    version: '2.3.0',
     rules: 'modern',
     monsters: [
         'Goblin Warrior',

@@ -7,7 +7,7 @@ async function damage({trigger: {entity: item}, workflow}) {
     if (!matchingTypes.length) return;
     let damageType;
     if (matchingTypes.length > 1) {
-        damageType = await dialogUtils.buttonDialog(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name}), 
+        damageType = await dialogUtils.buttonDialog(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name}),
             matchingTypes.map(i => [CONFIG.DND5E.damageTypes[i].label, i])
         );
     }
@@ -16,7 +16,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let alchemicalSavant = {
     name: 'Alchemical Savant',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -5,7 +5,7 @@ async function turnStart({trigger: {entity: item}}) {
 }
 export let dreadAmbusher = {
     name: 'Dread Ambusher',
-    version: '1.3.20',
+    version: '2.3.0',
     combat: [
         {
             pass: 'turnStart',

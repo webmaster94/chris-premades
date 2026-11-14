@@ -1,10 +1,10 @@
 import {activityUtils, actorUtils, dialogUtils, effectUtils, genericUtils, itemUtils, rollUtils, socketUtils, tokenUtils, workflowUtils} from '../../../../utils.js';
 async function damaged({trigger, workflow}) {
-    if (!workflow.targets.size || !workflow.damageRolls.length) return;
+    if (!workflow.targets.count || !workflow.damageRolls.length) return;
     let identifer = genericUtils.getIdentifier(workflow.item);
     if (identifer === 'balefulInterdict') return;
     let effectCounts = [];
-    for (let token of workflow.hitTargets) {
+    for (let token of workflow.hitTargets.tokens) {
         let effects = effectUtils.getAllEffectsByIdentifier(token.actor, 'balefulInterdictEffect').filter(i => !i.duration?.expired && !i.disabled);
         if (!effects.length) continue;
         for (let effect of effects) {
@@ -64,17 +64,17 @@ async function damaged({trigger, workflow}) {
 async function distance({trigger, workflow}) {
     let combatMasteryUnfettered = itemUtils.getItemByIdentifier(workflow.actor, 'combatMasteryUnfettered');
     let maxDistance = combatMasteryUnfettered ? 60 : 30;
-    if (tokenUtils.getDistance(workflow.token, workflow.targets.first()) <= maxDistance) return;
+    if (tokenUtils.getDistance(workflow.token, workflow.targets.tokens[0]) <= maxDistance) return;
     workflow.aborted = true;
     genericUtils.notify('CHRISPREMADES.Macros.BalefulInterdict.Move.TooFar', 'info', {localize: true});
 }
 async function attack({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size || !item.system.uses.value || !workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
+    if (!workflow.hitTargets.count || !item.system.uses.value || !workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     let selection = await dialogUtils.confirm(item.name, 'CHRISPREMADES.Macros.BalefulInterdict.PlaceSeal');
     if (!selection) return;
     let activity = activityUtils.getActivityByIdentifier(item, 'placeSeal', {strict: true});
     if (!activity) return;
-    await workflowUtils.specialItemUse(item, [workflow.targets.first()], workflow.item, {activity, consumeResources: true, consumeUsage: true});
+    await workflowUtils.specialItemUse(item, [workflow.targets.tokens[0]], workflow.item, {activity, consumeResources: true, consumeUsage: true});
 }
 async function added({trigger: {entity: item}}) {
     let classIdentifier = itemUtils.getConfig(item, 'classIdentifier');
@@ -94,7 +94,7 @@ async function added({trigger: {entity: item}}) {
     await itemUtils.fixScales(item);
 }
 async function move({trigger, workflow}) {
-    if (!workflow.token || !workflow.targets.size) return;
+    if (!workflow.token || !workflow.targets.count) return;
     let validTokens = workflow.token.document.parent.tokens.filter(token => {
         if (!token.actor) return;
         let effect = effectUtils.getAllEffectsByIdentifier(token.actor, 'balefulInterdictEffect').find(effect => {
@@ -118,7 +118,7 @@ async function move({trigger, workflow}) {
     } else {
         targetToken = validTokens[0];
     }
-    let distance = tokenUtils.getDistance(targetToken, workflow.targets.first());
+    let distance = tokenUtils.getDistance(targetToken, workflow.targets.tokens[0]);
     if (distance > 30) {
         genericUtils.notify('CHRISPREMADES.Macros.BalefulInterdict.Move.TooFar', 'info', {localize: true});
         return;
@@ -136,7 +136,7 @@ async function move({trigger, workflow}) {
         return effectData;
     });
     await genericUtils.deleteEmbeddedDocuments(targetToken.actor, 'ActiveEffect', effects.map(effect => effect.id));
-    await genericUtils.createEmbeddedDocuments(workflow.targets.first().actor, 'ActiveEffect', effectDatas);
+    await genericUtils.createEmbeddedDocuments(workflow.targets.tokens[0].actor, 'ActiveEffect', effectDatas);
     let interdictBoons = itemUtils.getItemByIdentifier(workflow.actor, 'interdictBoons');
     if (!interdictBoons) return;
     let acheronsChain = itemUtils.getItemByIdentifier(workflow.actor, 'interdictBoonAcheronsChain');
@@ -145,16 +145,16 @@ async function move({trigger, workflow}) {
     let flashOfBrimstone = itemUtils.getItemByIdentifier(workflow.actor, 'interdictBoonFlashOfBrimstone');
     let byTheThroat = itemUtils.getItemByIdentifier(workflow.actor, 'byTheThroat');
     if (byTheThroat) {
-        if (actorUtils.getSize(workflow.targets.first().actor) > (actorUtils.getSize(workflow.actor) + 1)) byTheThroat = undefined;
+        if (actorUtils.getSize(workflow.targets.tokens[0].actor) > (actorUtils.getSize(workflow.actor) + 1)) byTheThroat = undefined;
     }
     let documents = [acheronsChain, dissOnslaught, soulsDoom, flashOfBrimstone, byTheThroat].filter(i => i).filter(i => itemUtils.canUse(i));
     if (!documents.length) return;
     let selection = await dialogUtils.selectDocumentDialog('CHRISPREMADES.Macros.InterdictBoons.Name', genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: genericUtils.translate('CHRISPREMADES.Macros.InterdictBoons.Name')}), documents, {sortAlphabetical: true});
     if (!selection) return;
-    await workflowUtils.syntheticItemRoll(selection, [workflow.targets.first()], {consumeResources: true, consumeUsage: true});
+    await workflowUtils.syntheticItemRoll(selection, [workflow.targets.tokens[0]], {consumeResources: true, consumeUsage: true});
 }
 async function burnSpecial({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let interdictBoons = itemUtils.getItemByIdentifier(workflow.actor, 'interdictBoons');
     if (!interdictBoons) return;
     let interdictBoonBedevil = itemUtils.getItemByIdentifier(workflow.actor, 'interdictBoonBedevil');
@@ -176,7 +176,7 @@ async function burnSpecial({trigger, workflow}) {
     if (!selection) return;
     let selectionIdentifier = genericUtils.getIdentifier(selection);
     if (selectionIdentifier === 'interdictBoonUnleashHell') {
-        let nearbyAllies = tokenUtils.findNearby(workflow.targets.first(), 5, 'ally', {includeIncapacitated: true});
+        let nearbyAllies = tokenUtils.findNearby(workflow.targets.tokens[0], 5, 'ally', {includeIncapacitated: true});
         let activity = activityUtils.getActivityByIdentifier(selection, 'use', {strict: true});
         if (!activity) return;
         let activityData = genericUtils.duplicate(activity.toObject());
@@ -184,7 +184,7 @@ async function burnSpecial({trigger, workflow}) {
         activityData.damage.parts[0].types = [workflow.defaultDamageType];
         await workflowUtils.syntheticActivityDataRoll(activityData, selection, workflow.actor, nearbyAllies, {consumeResources: true, consumeUsage: true});
     } else {
-        await workflowUtils.syntheticItemRoll(selection, [workflow.targets.first()], {consumeResources: true, consumeUsage: true});
+        await workflowUtils.syntheticItemRoll(selection, [workflow.targets.tokens[0]], {consumeResources: true, consumeUsage: true});
     }
 }
 async function placeSealBonus({trigger, workflow}) {
@@ -198,7 +198,7 @@ async function placeSealBonus({trigger, workflow}) {
         let soulsDoom = itemUtils.getItemByIdentifier(workflow.actor, 'interdictBoonSoulsDoom');
         let byTheThroat = itemUtils.getItemByIdentifier(workflow.actor, 'byTheThroat');
         if (byTheThroat) {
-            if (actorUtils.getSize(workflow.targets.first().actor) > (actorUtils.getSize(workflow.actor) + 1)) byTheThroat = undefined;
+            if (actorUtils.getSize(workflow.targets.tokens[0].actor) > (actorUtils.getSize(workflow.actor) + 1)) byTheThroat = undefined;
         }
         documents = [acheronsChain, dissOnslaught, flashOfBrimstone, soulsDoom, byTheThroat].filter(i => i).filter(i => itemUtils.canUse(i));
     } else {
@@ -208,7 +208,7 @@ async function placeSealBonus({trigger, workflow}) {
     if (!documents.length) return;
     let selection = await dialogUtils.selectDocumentDialog('CHRISPREMADES.Macros.InterdictBoons.Name', genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: genericUtils.translate('CHRISPREMADES.Macros.InterdictBoons.Name')}), documents, {sortAlphabetical: true});
     if (!selection) return;
-    await workflowUtils.syntheticItemRoll(selection, [workflow.targets.first()], {consumeResources: true, consumeUsage: true});
+    await workflowUtils.syntheticItemRoll(selection, [workflow.targets.tokens[0]], {consumeResources: true, consumeUsage: true});
 }
 async function burnEarly({trigger, workflow}) {
     let superiorInterdict = itemUtils.getItemByIdentifier(workflow.actor, 'superiorInterdict');
@@ -222,7 +222,7 @@ async function burnEarly({trigger, workflow}) {
 }
 export let balefulInterdict = {
     name: 'Baleful Interdict',
-    version: '1.3.65',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

@@ -44,7 +44,7 @@ async function longRest({trigger: {entity: item}}) {
 }
 export let arcaneWard = {
     name: 'Arcane Ward',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

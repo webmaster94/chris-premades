@@ -1,7 +1,7 @@
 import {combatUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../../utils.js';
 
 async function use({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let effectData = {
         name: workflow.item.name,
         img: workflow.item.img,
@@ -11,10 +11,10 @@ async function use({workflow}) {
     effectUtils.addMacro(effectData, 'midi.actor', ['favoredFoeActive']);
     let effect = await effectUtils.createEffect(workflow.actor, effectData, {concentrationItem: workflow.item, interdependent: true, identifier: 'favoredFoe'});
     delete effectData.flags;
-    await effectUtils.createEffect(workflow.targets.first().actor, effectData, {parentEntity: effect, identifier: 'favoredFoe', strictlyInterdependent: true});
+    await effectUtils.createEffect(workflow.targets.tokens[0].actor, effectData, {parentEntity: effect, identifier: 'favoredFoe', strictlyInterdependent: true});
 }
 async function damage({workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'favoredFoe');
     let originItem = itemUtils.getItemByIdentifier(workflow.actor, 'favoredFoe');
@@ -23,7 +23,7 @@ async function damage({workflow}) {
     if (!classLevel) return;
     let numFaces = 4 + 2 * Math.floor((classLevel + 2) / 8);
     let bonusDamageFormula = '1d' + numFaces;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     if (!effect) {
         if (!originItem.system.uses.value) return;
         let selection = await dialogUtils.confirm(originItem.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: originItem.name}));
@@ -41,7 +41,7 @@ async function damage({workflow}) {
 }
 export let favoredFoe = {
     name: 'Favored Foe',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

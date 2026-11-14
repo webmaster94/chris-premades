@@ -203,7 +203,7 @@
     "chris-premades": {
       "info": {
         "identifier": "elementalBurst",
-        "version": "1.5.22",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern"
       },

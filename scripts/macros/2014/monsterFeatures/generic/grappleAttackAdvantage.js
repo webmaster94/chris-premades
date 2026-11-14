@@ -1,27 +1,27 @@
 import {itemUtils, tokenUtils, workflowUtils} from '../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'grappleAttackAdvantage');
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
-    let advantage = workflow.targets.find(token => tokenUtils.isGrappledBy(token, workflow.token));
+    let advantage = workflow.targets.tokens.find(token => tokenUtils.isGrappledBy(token, workflow.token));
     if (!advantage) return;
     workflow.tracker.advantage.add(workflow.item.name, workflow.item.name);
 }
 async function damage({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'grappleAttackAdvantage');
     if (!config.bonusDamage) return;
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
-    let doBonus = workflow.targets.find(token => tokenUtils.isGrappledBy(token, workflow.token));
+    let doBonus = workflow.targets.tokens.find(token => tokenUtils.isGrappledBy(token, workflow.token));
     if (!doBonus) return;
     await workflowUtils.bonusDamage(workflow, config.bonusDamage);
 }
 export let grappleAttackAdvantage = {
     name: 'Grapple Attack Advantage',
     translation: 'CHRISPREMADES.Macros.ArappleAttackAdvantage.Name',
-    version: '1.3.134',
+    version: '2.3.0',
     midi: {
         item: [
             {

@@ -3,7 +3,7 @@ async function use({dialog}) {
 }
 export let noConfiguration = {
     name: 'No Configuration',
-    version: '1.1.2',
+    version: '2.3.0',
     midi: {
         item: [
             {

@@ -182,7 +182,7 @@
         "identifier": "arcaneRecovery",
         "source": "chris-premades",
         "rules": "modern",
-        "version": "1.5.30"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

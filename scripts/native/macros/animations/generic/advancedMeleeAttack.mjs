@@ -1,4 +1,5 @@
-import {animationUtils} from '../../../proxy.mjs';
+import {animationUtils, distanceUtils, itemUtils} from '../../../proxy.mjs';
+import {pickFile} from './spellParts.mjs';
 const groupedWeapons = {
     'melee_attack.01': ['butterflysword', 'chakram', 'magic_sword', 'shortsword', 'sickle'],
     'melee_attack.02': ['battleaxe', 'bone', 'hammer', 'handaxe', 'mace', 'warhammer', 'wrench', 'pan'],
@@ -13,6 +14,7 @@ const trailColors = {
     '03': ['blueyellow', 'orangered', 'pinkpurple'],
     '04': ['blue', 'dark_purple', 'dark_red']
 };
+const freeWeapons = ['butterflysword', 'chakram.01', 'magic_sword.yellow', 'shortsword', 'sickle', 'battleaxe', 'bone', 'hammer', 'handaxe', 'mace', 'warhammer', 'wrench', 'greatbone', 'greataxe', 'greatclub', 'greatsword', 'khybersword', 'magical_greatsword.orange', 'falchion', 'katana', 'scimitar', 'scythe', 'shield.01'];
 const trailColorMap = {
     none: 'None',
     blueyellow: 'BlueYellow',
@@ -32,6 +34,15 @@ const magic_sword = ['yellow', 'dark_green', 'dark_purple', 'blue', 'orange'];
 const magical_greatsword = ['orange', 'dark_green', 'dark_purple', 'blue'];
 const weaponMap = Object.create(null);
 Object.entries(groupedWeapons).forEach(([groupName, weapons]) => weapons.forEach(w => weaponMap[w] = groupName));
+function weaponOptions() {
+    const options = animationUtils.buildColorOptions(configWeaponMap, {
+        freeColors: freeWeapons,
+        requirements: ['jb2a_patreon'],
+        labelPrefix: 'CHRISPREMADES.Config.Weapons.'
+    });
+    for (const key in options) options[key].label = itemUtils.getBaseWeaponLabel(key) ?? options[key].label;
+    return options;
+}
 function getGroup(name) {
     return weaponMap[name];
 }
@@ -56,10 +67,12 @@ Object.entries(groupedWeapons).forEach(([groupName, weapons]) => {
         }
     });
 });
-async function attack(sourceToken, targetTokens, {soundMelee, soundRanged, enableSwitchDistance, enableReturn, enableBlood, enableShake, weapon, trailColor, impact, impactScale = 1.5, soundDelay, switchDistance, attackDelay}) {
-    const weaponParts = weapon.split('.');
-    const baseWeapon = weaponParts[0];
-    let weaponOption = weaponParts[1];
+async function attack(sourceToken, targetTokens, {soundMelee, soundRanged, enableSwitchDistance, enableReturn, enableBlood, enableShake, weapon = 'shortsword', trailColor, impact, impactScale = 1.5, soundDelay, switchDistance, attackDelay}) {
+    let [baseWeapon, weaponOption] = weapon.split('.');
+    if (!getGroup(baseWeapon)) {
+        baseWeapon = 'shortsword';
+        weaponOption = undefined;
+    }
     if (weaponOption === 'random') {
         if (baseWeapon === 'magic_sword') {
             weaponOption = magic_sword[Math.floor(Math.random() * magic_sword.length)];
@@ -80,12 +93,20 @@ async function attack(sourceToken, targetTokens, {soundMelee, soundRanged, enabl
     } else {
         dbPath = dbPath + '.01';
     }
+    if (!Sequencer.Database.entryExists(dbPath)) {
+        const basePath = 'jb2a.' + weaponGroup + '.' + baseWeapon;
+        dbPath = pickFile(basePath + '.01', basePath + '.yellow.01', basePath + '.01.orange', 'jb2a.melee_attack.01.shortsword.01');
+    }
     const entries = Sequencer.Database.getEntry(dbPath);
     const entriesLength = entries.length;
     let enableTrail = trailColor !== 'none';
     let calculatedTrailColor = trailColor;
     let calculatedTrail = '01';
-    if (enableTrail) {
+    const patreon = animationUtils.jb2aCheck() === 'patreon';
+    if (!patreon && trailColors['04'].includes(calculatedTrailColor)) calculatedTrailColor = 'random';
+    if (enableTrail && !patreon) {
+        if (calculatedTrailColor === 'random') calculatedTrailColor = trailColors['01'][Math.floor(Math.random() * trailColors['01'].length)];
+    } else if (enableTrail) {
         let availableTrails = [];
         if (calculatedTrailColor && calculatedTrailColor !== 'random') {
             for (let t in trailColors) {
@@ -130,6 +151,7 @@ async function attack(sourceToken, targetTokens, {soundMelee, soundRanged, enabl
         } else {
             enableReturn = false;
         }
+        if (enableReturn && !Sequencer.Database.entryExists(calculatedReturnFile)) enableReturn = false;
     }
     let calculatedThrowFile;
     if (baseWeapon === 'bone') {
@@ -155,6 +177,8 @@ async function attack(sourceToken, targetTokens, {soundMelee, soundRanged, enabl
     } else {
         calculatedThrowFile = 'jb2a.dagger.throw.01.white';
     }
+    calculatedThrowFile = pickFile(calculatedThrowFile, 'jb2a.dagger.throw.01.white');
+    const bloodFile = pickFile('jb2a.liquid.splash_side.red', 'jb2a.liquid.splash_side02.red');
     const gridSize = sourceToken.parent.grid.size;
     async function meleeAttack(targetToken, randMelee, randTrail, impact, isMirrored, targetScale) {
         const amplitude = Sequencer.Helpers.random_float_between(0.0, 0.2);
@@ -200,7 +224,7 @@ async function attack(sourceToken, targetTokens, {soundMelee, soundRanged, enabl
                 .zIndex(12)
                 .playIf(impact)
             .effect()   // Blood
-                .file('jb2a.liquid.splash_side.red')
+                .file(bloodFile)
                 .atLocation(targetToken)
                 .rotateTowards(sourceToken)
                 .randomRotation()
@@ -266,13 +290,13 @@ async function attack(sourceToken, targetTokens, {soundMelee, soundRanged, enabl
                 .zIndex(12)
                 .playIf(impact)
             .effect()
-                .file(calculatedReturnFile)
+                .file(calculatedReturnFile ?? calculatedThrowFile)
                 .atLocation(sourceToken)
                 .stretchTo(targetToken)
                 .zIndex(10)
                 .playIf(enableReturn)
             .effect()   //Blood
-                .file('jb2a.liquid.splash_side.red')
+                .file(bloodFile)
                 .atLocation(targetToken)
                 .rotateTowards(sourceToken)
                 .randomRotation()
@@ -297,7 +321,7 @@ async function attack(sourceToken, targetTokens, {soundMelee, soundRanged, enabl
                     gridUnits: true,
                     ease: easeOption
                 })
-                .scale({ x: targetScale.x, y: targetScale.y })
+                .scale({x: targetScale.x, y: targetScale.y})
                 .duration(interval * 9)
                 .playIf(enableShake)
                 .zIndex(1)
@@ -310,12 +334,14 @@ async function attack(sourceToken, targetTokens, {soundMelee, soundRanged, enabl
         /* eslint-enable indent */
     }
     for (let targetToken of targetTokens) {
+        if (!targetToken.object) continue;
         const targetScale = {x: targetToken.texture.scaleX, y: targetToken.texture.scaleY};
         const rand = Math.floor(Math.random() * entriesLength);
         let randMelee = dbPath + '.' + rand;
         const randTrail = enableTrail ? 'jb2a.' + weaponGroup + '.trail.' + calculatedTrail + '.' + calculatedTrailColor + '.' + rand : 'jb2a.antilife_shell.blue_no_circle';
         const isMirrored = Math.random() < 0.5;
-        const targetBounds = targetToken.object.bounds.pad(gridSize * (switchDistance / 5 - 1 + 0.5), gridSize * (switchDistance / 5 - 1 + 0.5));
+        const switchCells = Math.max(1, Math.round(distanceUtils.toGridSpaces(targetToken.parent, switchDistance))) - 0.5;
+        const targetBounds = targetToken.object.bounds.pad(gridSize * switchCells, gridSize * switchCells);
         const sourceBounds = sourceToken.object.bounds;
         const withinSwitchDistance = targetBounds.intersects(sourceBounds);
         if (withinSwitchDistance || !enableSwitchDistance) {
@@ -333,7 +359,7 @@ export const advancedMeleeAttack = {
         attack
     },
     inputs: ['sourceToken', 'targetTokens', 'options'],
-    requirements: ['jb2a_patreon'],
+    requirements: ['JB2A_DnD5e'],
     category: 'generic',
     get config() {
         return {
@@ -342,9 +368,7 @@ export const advancedMeleeAttack = {
                 type: 'select',
                 label: 'CHRISPREMADES.Config.Weapon',
                 hint: 'CHRISPREMADES.Animations.AdvancedMeleeAttack.WeaponHint',
-                options: animationUtils.buildColorOptions(configWeaponMap, {
-                    labelPrefix: 'CHRISPREMADES.Config.Weapons.'
-                })
+                options: weaponOptions()
             },
             trailColor: {
                 default: 'none',
@@ -352,7 +376,8 @@ export const advancedMeleeAttack = {
                 label: 'CHRISPREMADES.Animations.AdvancedMeleeAttack.TrailColor',
                 hint: 'CHRISPREMADES.Animations.AdvancedMeleeAttack.TrailColorHint',
                 options: animationUtils.buildColorOptions(trailColorMap, {
-                    freeColors: ['none'],
+                    freeColors: ['none', ...trailColors['01']],
+                    requirements: ['jb2a_patreon'],
                     labelPrefix: 'CHRISPREMADES.Config.Colors.',
                     random: true
                 })

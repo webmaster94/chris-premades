@@ -1,5 +1,5 @@
 async function damage({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     let {value: hp, max} = workflow.actor.system.attributes.hp;
     if (hp > Math.floor(max / 2)) return;
     let damageFormula = workflow.activity.damage.parts[0].formula;
@@ -15,7 +15,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 export let swarmDamage = {
     name: 'Swarm Damage',
     translation: 'CHRISPREMADES.Macros.SwarmDamage.Name',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

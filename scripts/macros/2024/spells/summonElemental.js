@@ -111,7 +111,7 @@ async function use({workflow}) {
 }
 export let summonElemental = {
     name: 'Summon Elemental',
-    version: '1.2.32',
+    version: '2.3.0',
     rules: 'modern',
     hasAnimation: true,
     midi: {

@@ -21,7 +21,7 @@ async function skill({trigger: {entity: item, skillId, config, actor}}) {
 }
 export let forestSage = {
     name: 'Forest Sage',
-    version: '1.3.116',
+    version: '2.3.0',
     rules: 'legacy',
     skill: [
         {

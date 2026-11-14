@@ -184,7 +184,7 @@
     "chris-premades": {
       "info": {
         "identifier": "animateObjects",
-        "version": "1.5.35",
+        "version": "2.3.0",
         "source": "chris-premades"
       },
       "macros": {

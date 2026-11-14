@@ -2,23 +2,23 @@ import {CompendiumBrowser} from '../../../../applications/compendiumBrowser.js';
 import {constants, effectUtils, genericUtils, itemUtils} from '../../../../utils.js';
 let itemIDs = [
     'ball-bearings', 'basket', 'bedroll', 'bell', 'blanket', 'block-and-tackle', 'bottle-glass', 'bucket',
-    'caltrops', 'candle', 
-    'flask', 
-    'grappling-hook', 
-    'hunting-trap', 
-    'jug', 
-    'lamp', 
-    'manacles', 
-    'net', 
-    'oil', 
-    'paper', 'parchment', 'pouch', 
-    'rope', 
-    'sack', 'shovel', 'spikes-iron', 'iron-spike', 'string', 
-    'tinderbox', 'torch', 
+    'caltrops', 'candle',
+    'flask',
+    'grappling-hook',
+    'hunting-trap',
+    'jug',
+    'lamp',
+    'manacles',
+    'net',
+    'oil',
+    'paper', 'parchment', 'pouch',
+    'rope',
+    'sack', 'shovel', 'spikes-iron', 'iron-spike', 'string',
+    'tinderbox', 'torch',
     'vial'
 ];
 async function use({trigger: {entity: item}, workflow}) {
-    if (!item.system.uses.value) return;    
+    if (!item.system.uses.value) return;
     if (itemUtils.getConfig(item, 'requireTools') && !workflow.actor.items.some(i => i.system.type?.baseItem === 'tinker')) {
         genericUtils.notify(genericUtils.format('CHRISPREMADES.Macros.TinkersMagic.NeedTools', {itemName: item.name}), 'warn');
         return;
@@ -55,7 +55,7 @@ async function use({trigger: {entity: item}, workflow}) {
 }
 export let tinkersMagic = {
     name: 'Tinker\'s Magic',
-    version: '1.5.17',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

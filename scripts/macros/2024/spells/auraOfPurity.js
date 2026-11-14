@@ -25,7 +25,7 @@ async function create({trigger: {entity: effect, target, identifier}}) {
                 value: 'poison',
                 priority: 20
             },
-            ...conditionResistances.map(condition => { 
+            ...conditionResistances.map(condition => {
                 return {
                     key: 'flags.chris-premades.CR.' + condition,
                     type: 'override',
@@ -54,7 +54,7 @@ async function create({trigger: {entity: effect, target, identifier}}) {
 }
 export let auraOfPurity = {
     name: 'Aura of Purity',
-    version: '1.1.12',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

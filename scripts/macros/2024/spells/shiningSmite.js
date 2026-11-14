@@ -2,7 +2,7 @@ import {constants} from '../../../utils.js';
 import {divineSmite} from './divineSmite.js';
 export let shiningSmite = {
     name: 'Shining Smite',
-    version: '1.1.14',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: divineSmite.midi.actor

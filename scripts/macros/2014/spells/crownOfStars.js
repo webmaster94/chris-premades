@@ -68,7 +68,7 @@ async function attackAnimation({trigger, workflow}) {
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     if (!playAnimation) return;
     let jb2a = animationUtils.jb2aCheck();
-    if (!playAnimation || !workflow.token || !workflow.targets.size || !jb2a) return;
+    if (!playAnimation || !workflow.token || !workflow.targets.count || !jb2a) return;
     let animation = 'jb2a.ranged.03.instant.01.';
     let color = jb2a === 'patreon' ? itemUtils.getConfig(workflow.item, 'color') : 'bluegreen';
     if (color === 'random') {
@@ -76,13 +76,13 @@ async function attackAnimation({trigger, workflow}) {
         color = colors[Math.floor((Math.random() * colors.length))];
     }
     let sound = itemUtils.getConfig(workflow.item, 'sound');
-    workflow.targets.forEach(i => {
+    workflow.targets.tokens.forEach(i => {
         animationUtils.simpleAttack(workflow.token, i, animation + color, {sound: sound, missed: !workflow.hitTargets.has(i)});
     });
 }
 export let crownOfStars = {
     name: 'Crown of Stars',
-    version: '1.3.43',
+    version: '2.3.0',
     rules: 'legacy',
     hasAnimation: true,
     midi: {

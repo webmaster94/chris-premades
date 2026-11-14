@@ -249,7 +249,7 @@
         "identifier": "interdictBoonHellsight",
         "rules": "legacy",
         "source": "chris-premades",
-        "version": "1.7.76"
+        "version": "2.3.0"
       },
       "macros": {
         "item": [

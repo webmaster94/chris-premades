@@ -401,7 +401,7 @@
         "identifier": "spellfireFlare",
         "rules": "modern",
         "source": "chris-premades",
-        "version": "1.3.167",
+        "version": "2.3.0",
         "hasAnimation": true
       },
       "macros": {

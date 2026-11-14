@@ -1,6 +1,6 @@
 import {dialogUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let weapons = workflow.actor.items.filter(i => i.type === 'weapon' && i.system.equipped);
     if (!weapons.length) return;
     let selection = weapons[0];
@@ -8,11 +8,11 @@ async function use({trigger, workflow}) {
         selection = await dialogUtils.selectDocumentDialog(workflow.item.name, 'CHRISPREMADES.Macros.Attack.SelectWeapon', weapons);
         if (!selection) return;
     }
-    await workflowUtils.syntheticItemRoll(selection, Array.from(workflow.targets), {consumeResources: true, consumeUsage: true});
+    await workflowUtils.syntheticItemRoll(selection, Array.from(workflow.targets.tokens), {consumeResources: true, consumeUsage: true});
 }
 export let attack = {
     name: 'Attack',
-    version: '1.3.115',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

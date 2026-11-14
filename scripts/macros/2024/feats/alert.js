@@ -12,7 +12,7 @@ async function use({workflow}) {
     let tokenCombatant = game.combat.getCombatantByToken(self.id);
     if (!tokenCombatant || tokenCombatant.initiative === null) return;
     let targetCombatant;
-    for(let t of workflow.targets) {
+    for(let t of workflow.targets.tokens) {
         if (!validToken(t.document, self)) continue;
         let combatant = game.combat.getCombatantByToken(t.id);
         if (!combatant || combatant.initiative === null) continue;
@@ -39,7 +39,7 @@ async function use({workflow}) {
 }
 export let alert = {
     name: 'Alert',
-    version: '1.5.42',
+    version: '2.3.0',
     midi: {
         item: [
             {

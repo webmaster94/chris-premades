@@ -1,5 +1,5 @@
 export let improvedBrutalStrike = {
     name: 'Improved Brutal Strike',
-    version: '1.1.22',
+    version: '2.3.0',
     rules: 'modern'
 };

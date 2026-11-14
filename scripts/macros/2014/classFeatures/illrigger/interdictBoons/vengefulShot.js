@@ -1,6 +1,6 @@
 import {dialogUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.token || !workflow.targets.size) return;
+    if (!workflow.token || !workflow.targets.count) return;
     let weapons = workflow.actor.items.filter(i => i.type === 'weapon' && i.system.equipped);
     if (!weapons.length) return;
     let selection;
@@ -10,7 +10,7 @@ async function use({trigger, workflow}) {
         selection = await dialogUtils.selectDocumentDialog(workflow.item.name, 'CHRISPREMADES.Generic.SelectAWeapon', weapons, {sortAlphabetical: true});
         if (!selection) return;
     }
-    await workflowUtils.specialItemUse(selection, Array.from(workflow.targets), workflow.item, {consumeResources: true, consumeUsage: true});
+    await workflowUtils.specialItemUse(selection, Array.from(workflow.targets.tokens), workflow.item, {consumeResources: true, consumeUsage: true});
 }
 async function added({trigger: {entity: item}}) {
     await itemUtils.multiCorrectActivityItemConsumption(item, ['use'], {
@@ -21,7 +21,7 @@ async function added({trigger: {entity: item}}) {
 export let interdictBoonVengefulShot = {
     name: 'Interdict Boons: Vengeful Shot',
     aliases: ['Vengeful Shot'],
-    version: '1.7.77',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

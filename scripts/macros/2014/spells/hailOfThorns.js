@@ -17,19 +17,19 @@ async function use({workflow}) {
     await effectUtils.createEffect(workflow.actor, effectData, {concentrationItem: workflow.item, identifier: 'hailOfThornsBurst'});
 }
 async function late({trigger: {entity: effect}, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'rangedWeaponAttack')) return;
     let activity = await activityUtils.getActivityByIdentifier(await effectUtils.getOriginItem(effect), 'hailOfThornsBurst', {strict: true});
     if (!activity) return;
     let castLevel = Math.min(effect.flags['chris-premades'].hailOfThorns.castLevel, 6);
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     let allTargets = tokenUtils.findNearby(targetToken, 5).concat(targetToken);
     await workflowUtils.syntheticActivityRoll(activity, allTargets, {atLevel: castLevel});
     await genericUtils.remove(effect);
 }
 export let hailOfThorns = {
     name: 'Hail of Thorns',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

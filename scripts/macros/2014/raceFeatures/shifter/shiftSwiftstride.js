@@ -25,7 +25,7 @@ async function use({trigger, workflow}) {
 }
 export let shiftSwiftstride = {
     name: 'Shifting: Swiftstride',
-    version: '1.1.42',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

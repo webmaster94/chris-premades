@@ -3,7 +3,7 @@ async function early({trigger, workflow}) {
     let sourceEffect = itemUtils.getEffectByIdentifier(workflow.item, 'envenomWeaponsEffect');
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
-    let effects = await Promise.all(workflow.targets.map(async token => {
+    let effects = await Promise.all(workflow.targets.tokens.map(async token => {
         return await effectUtils.createEffect(token.actor, effectData, {animate: false});
     }));
     genericUtils.setProperty(workflow, 'chris-premades.envenomWeapons.effectUuids', effects.map(i => i.uuid));
@@ -23,12 +23,12 @@ async function turnEnd({trigger: {entity: effect, token}}) {
     let itemData = genericUtils.duplicate(item.toObject());
     itemData.system.activities[item.system.activities.contents[0].id].effectConditionText = 'false';
     let workflow = await workflowUtils.syntheticItemDataRoll(itemData, item.actor, [token]);
-    if (workflow.failedSaves.size) return;
+    if (workflow.failedSaves.count) return;
     await genericUtils.remove(effect);
 }
 export let envenomWeapons = {
     name: 'Envenom Weapons',
-    version: '1.3.54',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

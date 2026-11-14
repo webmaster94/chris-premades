@@ -5,7 +5,7 @@ async function turnStart({trigger: {entity: item}}) {
 }
 async function damage({trigger: {entity: item}, workflow}) {
     if (!item.system.uses.value) return;
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     if (!combatUtils.perTurnCheck(item, 'dreadAmbusher', false, workflow.token.id)) return;
     let selection = await dialogUtils.confirmUseItem(item);
@@ -35,7 +35,7 @@ async function late({workflow}) {
     };
     let selection = await dialogUtils.selectDialog(workflow.item.name, genericUtils.format('CHRISPREMADES.Macros.StalkersFlurry.Use', {item: stalkersFlurry.name}), input);
     if (selection === 'suddenStrike') {
-        let target = workflow.hitTargets.first();
+        let target = workflow.hitTargets.tokens[0];
         let targetNearbyAllies = tokenUtils.findNearby(target, 5, 'ally');
         let nearbyTargets = tokenUtils.findNearby(workflow.token, workflow.rangeDetails.range, 'enemy').filter(i => i != target && targetNearbyAllies.includes(i));
         if (!nearbyTargets.length) return;
@@ -48,13 +48,13 @@ async function late({workflow}) {
         let massFear = activityUtils.getActivityByIdentifier(stalkersFlurry, 'stalkersFlurryMassFear');
         if (!massFear) return;
         let range = itemUtils.getConfig(stalkersFlurry, 'range');
-        let targets = tokenUtils.findNearby(workflow.targets.first(), range, null, {includeToken: true}).filter(i => itemUtils.getConfig(stalkersFlurry, 'includeSelf') || i.actor !== workflow.actor);
+        let targets = tokenUtils.findNearby(workflow.targets.tokens[0], range, null, {includeToken: true}).filter(i => itemUtils.getConfig(stalkersFlurry, 'includeSelf') || i.actor !== workflow.actor);
         await workflowUtils.syntheticActivityRoll(massFear, targets);
     }
 }
 export let dreadAmbusher = {
     name: 'Dread Ambusher',
-    version: '1.3.107',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

@@ -1,7 +1,7 @@
 import {activityUtils, actorUtils, dialogUtils, genericUtils, itemUtils, rollUtils, socketUtils, tokenUtils, workflowUtils} from '../../../../../utils.js';
 import {bardicInspiration} from '../bardicInspiration.js';
 async function damage({trigger, workflow}) {
-    if (!workflow.hitTargets.size || !workflow.damageRolls || !workflow.item || workflow.defaultDamageType === 'midi-none') return;
+    if (!workflow.hitTargets.count || !workflow.damageRolls || !workflow.item || workflow.defaultDamageType === 'midi-none') return;
     let damageTypes = workflowUtils.getDamageTypes(workflow.damageRolls);
     if (['healing', 'temphp'].find(i => damageTypes.has(i))) return;
     let nearbyTokens = tokenUtils.findNearby(workflow.token, 60, 'enemy').filter(token => {
@@ -53,8 +53,8 @@ async function check({trigger: {sourceActor, roll, config, skillId}}) {
     }
 }
 async function attack({trigger, workflow}) {
-    if (!workflow.targets.size || !workflow.item || !workflowUtils.isAttackType(workflow, 'attack') || workflow.isFumble || workflow.isCritical) return;
-    if (workflow.targets.first().actor.system.attributes.ac.value > workflow.attackTotal) return;
+    if (!workflow.targets.count || !workflow.item || !workflowUtils.isAttackType(workflow, 'attack') || workflow.isFumble || workflow.isCritical) return;
+    if (workflow.targets.tokens[0].actor.system.attributes.ac.value > workflow.attackTotal) return;
     if (genericUtils.getIdentifier(workflow.item) === 'cuttingWords') return;
     let nearbyTokens = tokenUtils.findNearby(workflow.token, 60, 'enemy').filter(token => {
         if (actorUtils.hasUsedReaction(token.actor)) return;
@@ -92,7 +92,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let cuttingWords = {
     name: 'Cutting Words',
-    version: '1.3.10',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

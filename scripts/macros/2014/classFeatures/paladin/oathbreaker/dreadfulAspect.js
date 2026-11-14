@@ -16,7 +16,7 @@ async function use({workflow}) {
         }
     };
     effectUtils.addMacro(effectData, 'combat', ['dreadfulAspectFrightened']);
-    for (let target of workflow.failedSaves) {
+    for (let target of workflow.failedSaves.tokens) {
         let effect = effectUtils.getEffectByIdentifier(target.actor, 'dreadfulAspectFrightened');
         if (effect) await genericUtils.remove(effect);
         await effectUtils.createEffect(target.actor, effectData, {identifier: 'dreadfulAspectFrightened'});
@@ -146,7 +146,7 @@ async function use({workflow}) {
         .waitUntilFinished()
         .play();
 
-    for (let target of workflow.targets) {
+    for (let target of workflow.targets.tokens) {
         new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('jb2a.toll_the_dead.red.skull_smoke')
@@ -154,7 +154,7 @@ async function use({workflow}) {
             .scaleToObject(1.65, {considerTokenScale: true})
             .filter('ColorMatrix', {saturate: 0.25, hue: -2})
             .zIndex(1)
-    
+
             .effect()
             .from(target)
             .attachTo(target, {bindRotation: false})
@@ -166,7 +166,7 @@ async function use({workflow}) {
             .duration(5000)
             .opacity(0.65)
             .zIndex(0.1)
-    
+
             .effect()
             .file('jb2a.particles.outward.red.01.03')
             .attachTo(target, {offset: {y: 0.1}, gridUnits: true, bindRotation: false})
@@ -179,7 +179,7 @@ async function use({workflow}) {
             .animateProperty('sprite', 'position.y', {from: 0, to: -0.6, duration: 1000, gridUnits: true})
             .filter('ColorMatrix', {saturate: 1, hue: 20})
             .zIndex(0.3)
-    
+
             .play();
     }
 }
@@ -191,12 +191,12 @@ async function turnEnd({trigger: {entity: effect, token}}) {
     let feature = activityUtils.getActivityByIdentifier(await effectUtils.getOriginItem(effect), 'dreadfulAspectEnd', {strict: true});
     if (!feature) return;
     let workflow = await workflowUtils.syntheticActivityRoll(feature, [token]);
-    if (workflow.failedSaves.size) return;
+    if (workflow.failedSaves.count) return;
     await genericUtils.remove(effect);
 }
 export let dreadfulAspect = {
     name: 'Channel Divinity: Dreadful Aspect',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

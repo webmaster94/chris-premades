@@ -3,7 +3,7 @@ async function use({trigger, workflow}) {
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'engulf');
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let sourceEffect = await workflow.activity.effects[0]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
@@ -14,7 +14,7 @@ async function use({trigger, workflow}) {
     let max = Number(config.max);
     let uuids = workflow.token.document.flags['chris-premades']?.engulf?.uuids ?? [];
     if (max && uuids.length >= max) return;
-    for (let token of workflow.hitTargets) {
+    for (let token of workflow.hitTargets.tokens) {
         if (max && uuids.length >= max) break;
         let effect = actorUtils.getEffects(token.actor).find(i => i.origin === sourceEffect.uuid);
         if (effect) continue;
@@ -59,7 +59,7 @@ async function removed({trigger: {entity: effect, token}}) {
 export let engulf = {
     name: 'Engulf',
     translation: 'CHRISPREMADES.Macros.Engulf.Name',
-    version: '1.4.13',
+    version: '2.3.0',
     midi: {
         item: [
             {

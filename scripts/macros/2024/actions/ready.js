@@ -1,5 +1,5 @@
 export let ready = {
     name: 'Ready',
-    version: '1.3.115',
+    version: '2.3.0',
     rules: 'modern'
 };

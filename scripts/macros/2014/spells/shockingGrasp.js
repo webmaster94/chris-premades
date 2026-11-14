@@ -1,7 +1,7 @@
 import {actorUtils, animationUtils, itemUtils} from '../../../utils.js';
 
 async function use({workflow}) {
-    for (let target of workflow.hitTargets) {
+    for (let target of workflow.hitTargets.tokens) {
         actorUtils.setReactionUsed(target.actor);
     }
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
@@ -19,20 +19,20 @@ async function use({workflow}) {
         'red',
         'yellow'
     ];
-    for (let targetToken of workflow.targets) {
+    for (let targetToken of workflow.targets.tokens) {
         let currColor = color;
         if (currColor === 'random') currColor = colors[Math.floor(Math.random() * colors.length)];
         //Animations by: eskiemoh
         new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('jb2a.static_electricity.01.' + currColor)
-            .scaleToObject(1.2) 
+            .scaleToObject(1.2)
             .atLocation(targetToken)
             .waitUntilFinished(-1000)
 
             .effect()
             .file('jb2a.impact.011.' + currColor)
-            .scaleToObject(1.9) 
+            .scaleToObject(1.9)
             .atLocation(targetToken)
 
             .play();
@@ -40,7 +40,7 @@ async function use({workflow}) {
 }
 export let shockingGrasp = {
     name: 'Shocking Grasp',
-    version: '1.1.10',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

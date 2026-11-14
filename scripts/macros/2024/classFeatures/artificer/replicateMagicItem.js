@@ -2,7 +2,7 @@ import {CompendiumBrowser} from '../../../../applications/compendiumBrowser.js';
 import {activityUtils, compendiumUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../../utils.js';
 async function selectPlans({trigger: {entity: item}, workflow}) {
     let classIdentifier = itemUtils.getConfig(item, 'classIdentifier');
-    let scaleIdentifierPlan = itemUtils.getConfig(item, 'scaleIdentifierPlan');    
+    let scaleIdentifierPlan = itemUtils.getConfig(item, 'scaleIdentifierPlan');
     let maxPlans = workflow.actor.system.scale[classIdentifier]?.[scaleIdentifierPlan]?.value;
     if (!maxPlans) return;
     let existing = itemUtils.getAllItemsByIdentifier(workflow.actor, 'magicItemPlan').filter(i => i.flags['chris-premades']?.artificerPlanTemplateUuid);
@@ -64,7 +64,7 @@ async function createItem({trigger: {entity: item}, workflow}) {
         return;
     }
     let classIdentifier = itemUtils.getConfig(item, 'classIdentifier');
-    let scaleIdentifierItem = itemUtils.getConfig(item, 'scaleIdentifierItem');    
+    let scaleIdentifierItem = itemUtils.getConfig(item, 'scaleIdentifierItem');
     let maxItems = workflow.actor.system.scale[classIdentifier]?.[scaleIdentifierItem]?.value;
     if (!maxItems) return;
     let existing = effectUtils.getAllEffectsByIdentifier(workflow.actor, 'createdItemPlan');
@@ -86,7 +86,7 @@ async function createItem({trigger: {entity: item}, workflow}) {
     genericUtils.setProperty(data.flags, 'chris-premades.originalRarity', data.system.rarity ?? '');
     genericUtils.setProperty(data.flags, 'chris-premades.artificerMagicItem', selected.uuid);
     if (itemUtils.getConfig(item, 'makeArtifact')) data.system.rarity = 'artifact';
-    let itemHolder = await fromUuid(workflow.workflowOptions['chris-premades']?.artificerItemHolder) ?? workflow.targets.first()?.actor ?? workflow.actor;
+    let itemHolder = await fromUuid(workflow.workflowOptions['chris-premades']?.artificerItemHolder) ?? workflow.targets.tokens[0]?.actor ?? workflow.actor;
     let createdItem = await itemUtils.createItems(itemHolder, [data]);
     if (!createdItem?.length) return;
     createdItem = createdItem[0];
@@ -149,7 +149,7 @@ async function rollFeature(actor, activityID, item) {
 }
 export let replicateMagicItem = {
     name: 'Replicate Magic Item',
-    version: '1.5.17',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [
@@ -192,7 +192,7 @@ export let replicateMagicItem = {
             default: true,
             category: 'homebrew',
             homebrew: true
-        },        
+        },
         {
             value: 'makeArtifact',
             label: 'CHRISPREMADES.Macros.ReplicateMagicItem.MakeArtifact',
@@ -277,7 +277,7 @@ export let replicateMagicItem = {
                 value: {},
                 title: 'Magic Item Plans'
             }
-        } 
+        }
     ]
 };
 export let magicItemPlan = {

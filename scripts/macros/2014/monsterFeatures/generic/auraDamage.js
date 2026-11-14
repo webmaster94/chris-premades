@@ -21,7 +21,7 @@ async function damage({trigger: {entity: item, token, target}}) {
 export let auraDamageEnd = {
     name: 'Damaging Aura',
     translation: 'CHRISPREMADES.Macros.AuraDamage.Name',
-    version: '1.0.50',
+    version: '2.3.0',
     combat: [
         {
             pass: 'turnStartNear',

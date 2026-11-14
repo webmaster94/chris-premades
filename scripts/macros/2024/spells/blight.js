@@ -1,6 +1,6 @@
 import {actorUtils, constants, effectUtils} from '../../../utils.js';
 async function early({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let effectData = {
         name: 'Auto Fail',
         img: constants.tempConditionIcon,
@@ -22,13 +22,13 @@ async function early({trigger, workflow}) {
         },
         origin: workflow.item.uuid
     };
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         if (actorUtils.typeOrRace(token.actor) === 'plant') await effectUtils.createEffect(token.actor, effectData, {animate: false});
     }));
 }
 export let blight = {
     name: 'Blight',
-    version: '1.1.17',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

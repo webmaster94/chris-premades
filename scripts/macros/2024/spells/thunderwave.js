@@ -1,6 +1,6 @@
 import {thunderwave as thunderwaveLegacy} from '../../../legacyMacros.js';
 export let thunderwave = {
     ...thunderwaveLegacy,
-    version: '1.2.22',
+    version: '2.3.0',
     rules: 'modern'
 };

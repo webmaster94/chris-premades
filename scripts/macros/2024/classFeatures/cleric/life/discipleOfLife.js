@@ -1,7 +1,7 @@
 import {itemUtils, workflowUtils} from '../../../../../utils.js';
 async function heal({trigger: {entity: item}, workflow}) {
     let validTypes = ['spell', 'pact'];
-    if (!workflow.targets.size || !workflow.item || !workflow.damageRolls) return;
+    if (!workflow.targets.count || !workflow.item || !workflow.damageRolls) return;
     if (!(workflow.item.type === 'spell' || workflow.item.system.type?.value === 'spellFeature')) return;
     if (workflow.item.type === 'spell') if (!validTypes.includes(workflow.item.system.method)) return;
     let castData = workflow.castData ?? itemUtils.getSavedCastData(workflow.item);
@@ -13,7 +13,7 @@ async function heal({trigger: {entity: item}, workflow}) {
 }
 export let discipleOfLife = {
     name: 'Disciple of Life',
-    version: '1.2.13',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

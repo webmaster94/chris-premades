@@ -50,11 +50,11 @@ async function use({workflow}) {
     effectUtils.addMacro(effectData, 'midi.actor', ['fireShieldShielded']);
     effectUtils.addMacro(effectData, 'effect', ['fireShieldShielded']);
     await effectUtils.createEffect(workflow.actor, effectData, {
-        identifier: 'fireShield', 
+        identifier: 'fireShield',
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'fireShield', 
+            identifier: 'fireShield',
             activityIdentifier: 'fireShieldDismiss'
         }],
         unhideActivities: {
@@ -69,7 +69,7 @@ async function dismiss({workflow}) {
     if (effect) await genericUtils.remove(effect);
 }
 async function hit({trigger: {entity: effect}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let targetToken = actorUtils.getFirstToken(effect.parent);
     if (!targetToken) return;
     let distance = tokenUtils.getDistance(workflow.token, targetToken);
@@ -182,7 +182,7 @@ async function early({dialog}) {
 }
 export let fireShield = {
     name: 'Fire Shield',
-    version: '1.2.40',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

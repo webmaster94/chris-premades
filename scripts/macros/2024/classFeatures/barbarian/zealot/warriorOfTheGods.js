@@ -12,7 +12,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let warriorOfTheGods = {
     name: 'Warrior of the Gods',
-    version: '1.3.57',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {

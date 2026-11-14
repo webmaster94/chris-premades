@@ -1,5 +1,5 @@
 export let acidSplash = {
     name: 'Acid Splash',
-    version: '1.1.7',
+    version: '2.3.0',
     rules: 'modern'
 };

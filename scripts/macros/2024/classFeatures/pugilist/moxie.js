@@ -8,8 +8,8 @@ async function oneTwoPunch({workflow}) {
     if (animationUtils.jb2aCheck() != 'patreon') playAnimation = false;
     let target;
     let nearby;
-    if (workflow.targets.size) {
-        target = workflow.targets.first();
+    if (workflow.targets.count) {
+        target = workflow.targets.tokens[0];
     } else {
         nearby = tokenUtils.findNearby(workflow.token, 5, 'enemy', {includeIncapacitated: true});
         if (!nearby.length) return;
@@ -86,14 +86,14 @@ async function oneTwoPunch({workflow}) {
         /* eslint-enable indent */
     });
 }
-async function stickAndMove({workflow}) {    
+async function stickAndMove({workflow}) {
     if (!itemUtils.getConfig(workflow.item, 'promptForTargets')) return;
     let unarmedStrike = itemUtils.getItemByIdentifier(workflow.actor, 'pugilistUnarmedStrike') ?? itemUtils.getItemByIdentifier(workflow.actor, 'unarmedStrike');
     if (!unarmedStrike) return;
     let target;
     let nearby;
-    if (workflow.targets.size) {
-        target = workflow.targets.first();
+    if (workflow.targets.count) {
+        target = workflow.targets.tokens[0];
     } else {
         nearby = tokenUtils.findNearby(workflow.token, 5, 'enemy', {includeIncapacitated: true});
         if (nearby.length === 1) {
@@ -127,7 +127,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let moxie = {
     name: 'Moxie',
-    version: '1.4.25',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [
@@ -279,7 +279,7 @@ export let moxie = {
                 value: {},
                 title: 'Moxie Points'
             }
-        } 
+        }
     ],
     hasAnimation: true
 };

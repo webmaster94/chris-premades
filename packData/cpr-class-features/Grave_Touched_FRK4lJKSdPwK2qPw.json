@@ -85,7 +85,7 @@
         "name": "Grave Touched",
         "identifier": "graveTouched",
         "source": "chris-premades",
-        "version": "1.4.23"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

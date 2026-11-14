@@ -1,5 +1,5 @@
 export let otherworldlyGlamour = {
     name: 'Otherworldly Glamour',
-    version: '1.3.99',
+    version: '2.3.0',
     rules: 'modern'
 };

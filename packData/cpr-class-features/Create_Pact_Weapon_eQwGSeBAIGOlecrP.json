@@ -304,7 +304,7 @@
     "chris-premades": {
       "info": {
         "name": "Create Pact Weapon",
-        "version": "1.1.0",
+        "version": "2.3.0",
         "identifier": "createPactWeapon",
         "source": "chris-premades"
       },

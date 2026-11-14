@@ -178,12 +178,12 @@ async function use({workflow}) {
         range: 10,
         animation,
         initiativeType: 'follows',
-        additionalSummonVaeButtons: 
+        additionalSummonVaeButtons:
             updates.actor.items
                 .filter(i => identifiersToVae.includes(i.flags['chris-premades'].info.identifier))
                 .map(i => ({type: 'use', name: i.name, identifier: i.flags['chris-premades'].info.identifier})),
         additionalVaeButtons: [{
-            type: 'use', 
+            type: 'use',
             name: commandFeature.name,
             identifier: 'primalCompanion',
             activityIdentifier: 'primalCompanionCommand'
@@ -199,12 +199,12 @@ async function damage({workflow}) {
     let ownerActor = await fromUuid(workflow.actor.flags['chris-premades'].summons.control.actor);
     let bestialFury = itemUtils.getItemByIdentifier(ownerActor, 'bestialFury');
     if (!bestialFury) return;
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     let effect = effectUtils.getEffectByIdentifier(ownerActor, 'huntersMark');
     if (!effect) return;
     let {targets: validTargetUuids, formula, damageType} = effect.flags['chris-premades'].huntersMark;
-    if (!validTargetUuids.includes(workflow.hitTargets.first().document.uuid)) return;
+    if (!validTargetUuids.includes(workflow.hitTargets.tokens[0].document.uuid)) return;
     let item = workflow.item;
     if (!combatUtils.perTurnCheck(item, 'bestialFury', false, workflow.token.id)) return;
     await workflowUtils.bonusDamage(workflow, formula, {damageType});
@@ -212,7 +212,7 @@ async function damage({workflow}) {
 }
 export let primalCompanion = {
     name: 'Primal Companion',
-    version: '1.3.79',
+    version: '2.3.0',
     rules: 'modern',
     hasAnimation: true,
     midi: {

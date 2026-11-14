@@ -47,7 +47,7 @@ async function use({trigger, workflow}) {
 }
 export let forkedTongue = {
     name: 'Forked Tongue',
-    version: '1.3.65',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

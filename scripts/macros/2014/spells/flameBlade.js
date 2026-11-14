@@ -39,14 +39,14 @@ async function use({workflow}) {
         concentrationItem: workflow.item,
         identifier: 'flameBlade',
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature1.name,
             identifier: 'flameBlade',
             activityIdentifier: 'flameBladeScimitar'
         }, {
-            type: 'use', 
+            type: 'use',
             name: feature2.name,
-            identifier: 'flameBlade', 
+            identifier: 'flameBlade',
             activityIdentifier: 'flameBladeEvoke'
         }],
         unhideActivities: {
@@ -66,7 +66,7 @@ async function early({actor, config, dialog}) {
 }
 export let flameBlade = {
     name: 'Flame Blade',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

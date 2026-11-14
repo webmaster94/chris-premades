@@ -1,8 +1,8 @@
 import {activityUtils, actorUtils, genericUtils, workflowUtils} from '../../../utils.js';
 async function early({trigger, workflow}) {
-    let undead = workflow.targets.filter(token => actorUtils.raceOrType(token.actor) === 'undead' && token.document.disposition != workflow.token.document.disposition);
+    let undead = new Set(workflow.targets.tokens).filter(token => actorUtils.raceOrType(token.actor) === 'undead' && token.document.disposition != workflow.token.document.disposition);
     console.log(undead);
-    let allies = workflow.targets.filter(token => token.document.disposition === workflow.token.document.disposition);
+    let allies = new Set(workflow.targets.tokens).filter(token => token.document.disposition === workflow.token.document.disposition);
     await workflowUtils.updateTargets(workflow, allies);
     if (!undead.size) return;
     genericUtils.setProperty(workflow, 'chris-premades.summerWinds', Array.from(undead));
@@ -16,7 +16,7 @@ async function late({trigger, workflow}) {
 }
 export let summerWinds = {
     name: 'Summer Winds',
-    version: '1.5.18',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

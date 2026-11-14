@@ -1,6 +1,6 @@
 import {activityUtils, actorUtils, animationUtils, compendiumUtils, constants, dialogUtils, effectUtils, errors, genericUtils, itemUtils, socketUtils, workflowUtils} from '../../../utils.js';
 async function use({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let weapons = workflow.actor.items.filter(i => i.type === 'weapon' && i.system.equipped && constants.meleeWeaponTypes.includes(i.system.type?.value));
     if (!weapons.length) {
         genericUtils.notify('CHRISPREMADES.Macros.BoomingBlade.NoWeapons', 'warn');
@@ -29,7 +29,7 @@ async function use({workflow}) {
         }
     }
     genericUtils.setProperty(weaponData, 'flags.chris-premades.bladeCantrip', workflow.item.name);
-    let attackWorkflow = await workflowUtils.syntheticItemDataRoll(weaponData, workflow.actor, [workflow.targets.first()]);
+    let attackWorkflow = await workflowUtils.syntheticItemDataRoll(weaponData, workflow.actor, [workflow.targets.tokens[0]]);
     if (!attackWorkflow) return;
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     let color = itemUtils.getConfig(workflow.item, 'color');
@@ -55,7 +55,7 @@ async function use({workflow}) {
         new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('jb2a.static_electricity.01.' + color)
-            .atLocation(workflow.targets.first())
+            .atLocation(workflow.targets.tokens[0])
             .scaleToObject(1.5)
             .play();
     }
@@ -91,7 +91,7 @@ async function use({workflow}) {
         await genericUtils.remove(effect);
     }
     effectUtils.addMacro(effectData, 'movement', ['boomingBladeMoved']);
-    await effectUtils.createEffect(workflow.targets.first().actor, effectData, {identifier: 'boomingBlade'});
+    await effectUtils.createEffect(workflow.targets.tokens[0].actor, effectData, {identifier: 'boomingBlade'});
 }
 async function moved({trigger: {entity: effect}, options}) {
     if (genericUtils.getProperty(options, 'chris-premades.movement.teleport')) return;
@@ -106,7 +106,7 @@ async function moved({trigger: {entity: effect}, options}) {
 }
 export let boomingBlade = {
     name: 'Booming Blade',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

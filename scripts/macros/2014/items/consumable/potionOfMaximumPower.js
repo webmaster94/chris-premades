@@ -1,7 +1,7 @@
 import {effectUtils, genericUtils, itemUtils} from '../../../../utils.js';
 
 async function use({workflow}) {
-    let actor = workflow.targets.first()?.actor ?? workflow.actor;
+    let actor = workflow.targets.tokens[0]?.actor ?? workflow.actor;
     let effectData = {
         name: workflow.item.name,
         img: workflow.item.img,
@@ -24,7 +24,7 @@ async function damage({trigger: {entity: effect}, workflow}) {
 }
 export let potionOfMaximumPower = {
     name: 'Potion of Maximum Power',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

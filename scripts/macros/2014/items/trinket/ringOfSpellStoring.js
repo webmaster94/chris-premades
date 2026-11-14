@@ -177,7 +177,7 @@ async function veryEarly({activity, token, config, dialog, message}) {
 }
 export let ringOfSpellStoring = {
     name: 'Ring of Spell Storing (0/5)',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

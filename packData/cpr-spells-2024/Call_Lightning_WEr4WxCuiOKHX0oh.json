@@ -376,7 +376,7 @@
     "chris-premades": {
       "info": {
         "name": "Call Lightning",
-        "version": "1.5.36",
+        "version": "2.3.0",
         "mutation": {
           "self": "Storm Bolt"
         },

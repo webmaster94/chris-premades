@@ -6,7 +6,7 @@ async function use({trigger}) {
 }
 export let useOnDeath = {
     name: 'Use on Death',
-    version: '1.0.11',
+    version: '2.3.0',
     death: [
         {
             pass: 'dead',

@@ -180,7 +180,7 @@
     "chris-premades": {
       "info": {
         "identifier": "sentinelAtDeathsDoor",
-        "version": "1.2.32",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "legacy"
       },

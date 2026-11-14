@@ -1,14 +1,14 @@
 import {activityUtils, crosshairUtils, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function cast({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size || !(workflow.item.type === 'spell' || itemUtils.isSpellFeature(workflow.item))) return;
+    if (!workflow.targets.count || !(workflow.item.type === 'spell' || itemUtils.isSpellFeature(workflow.item))) return;
     let validTargets = [];
     if (workflowUtils.isAttackType(workflow, 'spellAttack')) {
-        if (!workflow.hitTargets.size) return;
-        validTargets.push(workflow.hitTargets.first());
+        if (!workflow.hitTargets.count) return;
+        validTargets.push(workflow.hitTargets.tokens[0]);
     } else if (activityUtils.hasSave(workflow.activity)) {
-        validTargets.push(...workflow.failedSaves);
+        validTargets.push(...workflow.failedSaves.tokens);
     } else {
-        validTargets.push(...workflow.targets.filter(token => token.document.disposition === workflow.token.document.disposition));
+        validTargets.push(...new Set(workflow.targets.tokens).filter(token => token.document.disposition === workflow.token.document.disposition));
     }
     if (!validTargets.length) return;
     let used = false;
@@ -43,7 +43,7 @@ async function cast({trigger: {entity: item}, workflow}) {
 }
 export let gravityWell = {
     name: 'Gravity Well',
-    version: '1.5.31',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         actor: [

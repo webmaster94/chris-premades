@@ -1,6 +1,6 @@
 export let combatMasteryBravado = {
     name: 'Combat Mastery: Bravado',
     aliases: ['Bravado'],
-    version: '1.3.66',
+    version: '2.3.0',
     rules: 'legacy'
 };

@@ -4,7 +4,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let grandStrategist = {
     name: 'Invoke Hell: Grand Strategist',
-    version: '1.3.78',
+    version: '2.3.0',
     rules: 'legacy',
     item: [
         {

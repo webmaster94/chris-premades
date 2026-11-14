@@ -429,7 +429,7 @@
         "identifier": "ghoulClaw",
         "rules": "modern",
         "source": "chris-premades",
-        "version": "1.3.149"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

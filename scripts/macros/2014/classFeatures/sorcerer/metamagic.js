@@ -39,9 +39,9 @@ async function useCareful({workflow}) {
     if (effect) await genericUtils.remove(effect);
 }
 async function earlyCareful({trigger: {entity: effect}, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let max = Math.max(1, workflow.actor.system.abilities.cha.mod ?? 0);
-    let targets = Array.from(workflow.targets);
+    let targets = Array.from(workflow.targets.tokens);
     let originItem = await effectUtils.getOriginItem(effect);
     if (!originItem) return;
     let allowEnemies = itemUtils.getConfig(originItem, 'allowEnemies');
@@ -113,7 +113,7 @@ async function useDistant({workflow}) {
     let newItem = selection.clone(itemUpdate, {keepId: true});
     let shouldConsumeSlot = newItem.system.level && !['atwill', 'innate', 'ritual'].includes(newItem.system.method);
     let shouldConsumeUsage = newItem.system.hasLimitedUses;
-    workflowUtils.syntheticItemRoll(newItem, Array.from(workflow.targets), {
+    workflowUtils.syntheticItemRoll(newItem, Array.from(workflow.targets.tokens), {
         options: {
             configureDialog: (shouldConsumeSlot || shouldConsumeUsage) ? true : null
         }, config: {
@@ -123,7 +123,7 @@ async function useDistant({workflow}) {
     });
 }
 async function damageEmpowered({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size || workflow.item.type !== 'spell') return;
+    if (!workflow.hitTargets.count || workflow.item.type !== 'spell') return;
     let sorcPoints = itemUtils.getItemByIdentifier(workflow.actor, 'sorceryPoints');
     if (!sorcPoints?.system.uses.value) return;
     let max = workflow.actor.system.abilities.cha.mod;
@@ -234,7 +234,7 @@ async function useExtended({workflow}) {
     }, {keepId: true});
     let shouldConsumeSlot = newItem.system.level && !['atwill', 'innate', 'ritual'].includes(newItem.system.method);
     let shouldConsumeUsage = newItem.system.hasLimitedUses;
-    workflowUtils.syntheticItemRoll(newItem, Array.from(workflow.targets), {
+    workflowUtils.syntheticItemRoll(newItem, Array.from(workflow.targets.tokens), {
         options: {
             configureDialog: (shouldConsumeSlot || shouldConsumeUsage) ? true : null
         }, config: {
@@ -281,8 +281,8 @@ async function useHeightened({workflow}) {
     if (effect) await genericUtils.remove(effect);
 }
 async function earlyHeightened({trigger: {entity: effect}, workflow}) {
-    if (!workflow.targets.size) return;
-    let targets = Array.from(workflow.targets);
+    if (!workflow.targets.count) return;
+    let targets = Array.from(workflow.targets.tokens);
     targets = targets.filter(i => i.document.disposition !== workflow.token.document.disposition);
     let selection = await dialogUtils.selectTargetDialog(effect.name, genericUtils.format('CHRISPREMADES.Macros.Metamagic.HeightenedWhich'), targets);
     if (!selection?.length) return;
@@ -337,7 +337,7 @@ async function useQuickened({workflow}) {
     let newItem = selection.clone({'system.activation.type': 'bonus'}, {keepId: true});
     let shouldConsumeSlot = newItem.system.level && !['atwill', 'innate', 'ritual'].includes(newItem.system.method);
     let shouldConsumeUsage = newItem.system.hasLimitedUses;
-    workflowUtils.syntheticItemRoll(newItem, Array.from(workflow.targets), {
+    workflowUtils.syntheticItemRoll(newItem, Array.from(workflow.targets.tokens), {
         options: {
             configureDialog: (shouldConsumeSlot || shouldConsumeUsage) ? true : null
         }, config: {
@@ -347,11 +347,11 @@ async function useQuickened({workflow}) {
     });
 }
 async function attackSeeking({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size || workflow.item.type !== 'spell') return;
+    if (!workflow.targets.count || workflow.item.type !== 'spell') return;
     let sorcPoints = itemUtils.getItemByIdentifier(workflow.actor, 'sorceryPoints');
     if (!sorcPoints || sorcPoints.system.uses.value < 2) return;
     let attackTotal = workflow.attackTotal;
-    if (Array.from(workflow.targets).every(i => i.actor?.system.attributes.ac.value <= attackTotal)) return;
+    if (Array.from(workflow.targets.tokens).every(i => i.actor?.system.attributes.ac.value <= attackTotal)) return;
     let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Dialog.Missed', {attackTotal, itemName: item.name + '(2 ' + sorcPoints.name + ')'}));
     if (!selection) return;
     await genericUtils.update(sorcPoints, {'system.uses.spent': sorcPoints.system.uses.spent + 2});
@@ -380,7 +380,7 @@ async function useSubtle({workflow}) {
     let newItem = selection.clone({'system.properties': Array.from(selection.system.properties.difference(new Set(['vocal', 'verbal', 'somatic'])))}, {keepId: true});
     let shouldConsumeSlot = newItem.system.level && !['atwill', 'innate', 'ritual'].includes(newItem.system.method);
     let shouldConsumeUsage = newItem.system.hasLimitedUses;
-    workflowUtils.syntheticItemRoll(newItem, Array.from(workflow.targets), {
+    workflowUtils.syntheticItemRoll(newItem, Array.from(workflow.targets.tokens), {
         options: {
             configureDialog: (shouldConsumeSlot || shouldConsumeUsage) ? true : null
         }, config: {
@@ -481,7 +481,7 @@ async function useTwinned({workflow}) {
     let newItem = selection.clone({'system.target.affects.count': 2, 'flags.chris-premades.macros.midi.item': existingMacro}, {keepId: true});
     let shouldConsumeSlot = newItem.system.level && !['atwill', 'innate', 'ritual'].includes(newItem.system.method);
     let shouldConsumeUsage = newItem.system.hasLimitedUses;
-    await workflowUtils.syntheticItemRoll(newItem, Array.from(workflow.targets), {
+    await workflowUtils.syntheticItemRoll(newItem, Array.from(workflow.targets.tokens), {
         options: {
             configureDialog: (shouldConsumeSlot || shouldConsumeUsage) ? true : null
         }, config: {
@@ -526,7 +526,7 @@ async function earlyTwinned({workflow}) {
 }
 export let carefulSpell = {
     name: 'Metamagic: Careful Spell',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -573,7 +573,7 @@ export let carefulSpell = {
 };
 export let distantSpell = {
     name: 'Metamagic: Distant Spell',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -604,7 +604,7 @@ export let distantSpell = {
 };
 export let empoweredSpell = {
     name: 'Metamagic: Empowered Spell',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {
@@ -635,7 +635,7 @@ export let empoweredSpell = {
 };
 export let extendedSpell = {
     name: 'Metamagic: Extended Spell',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -666,7 +666,7 @@ export let extendedSpell = {
 };
 export let heightenedSpell = {
     name: 'Metamagic: Heightened Spell',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -704,7 +704,7 @@ export let heightenedSpell = {
 };
 export let quickenedSpell = {
     name: 'Metamagic: Quickened Spell',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -735,7 +735,7 @@ export let quickenedSpell = {
 };
 export let seekingSpell = {
     name: 'Metamagic: Seeking Spell',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {
@@ -766,7 +766,7 @@ export let seekingSpell = {
 };
 export let subtleSpell = {
     name: 'Metamagic: Subtle Spell',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -797,7 +797,7 @@ export let subtleSpell = {
 };
 export let transmutedSpell = {
     name: 'Metamagic: Transmuted Spell',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -828,7 +828,7 @@ export let transmutedSpell = {
 };
 export let twinnedSpell = {
     name: 'Metamagic: Twinned Spell',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

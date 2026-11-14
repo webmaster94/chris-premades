@@ -10,8 +10,8 @@ async function saveCheckSkill({trigger: {config, roll, entity: effect}}) {
     return await rollUtils.addToRoll(roll, formula);
 }
 async function attack({trigger: {entity: effect}, workflow}) {
-    if (!workflow.targets.size|| workflow.isFumble) return;
-    if (workflow.targets.first().actor.system.attributes.ac.value <= workflow.attackTotal) return;
+    if (!workflow.targets.count|| workflow.isFumble) return;
+    if (workflow.targets.tokens[0].actor.system.attributes.ac.value <= workflow.attackTotal) return;
     let formula = effect.flags['chris-premades']?.bardicInspiration?.formula;
     if (!formula) return;
     let selection = await dialogUtils.confirm(effect.name, genericUtils.format('CHRISPREMADES.Dialog.UseAttack', {itemName: effect.name + ' (' + formula + ')', attackTotal: workflow.attackTotal}));
@@ -20,7 +20,7 @@ async function attack({trigger: {entity: effect}, workflow}) {
     await workflowUtils.bonusAttack(workflow, formula);
 }
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let classIdentifier = itemUtils.getConfig(workflow.item, 'classIdentifier') ?? 'bard';
     let scaleIdentifier = itemUtils.getConfig(workflow.item, 'scaleIdentifier') ?? 'inspiration';
     let scale = workflow.actor.system.scale[classIdentifier]?.[scaleIdentifier];
@@ -47,7 +47,7 @@ async function use({trigger, workflow}) {
         await combatInspiration.displayCard();
     }
     genericUtils.setProperty(effectData, 'flags.chris-premades.bardicInspiration.formula', scale.formula);
-    await Promise.all(workflow.targets.map(async token => await effectUtils.createEffect(token.actor, effectData)));
+    await Promise.all(workflow.targets.tokens.map(async token => await effectUtils.createEffect(token.actor, effectData)));
     let dazzlingFootwork = itemUtils.getItemByIdentifier(workflow.actor, 'dazzlingFootwork');
     if (dazzlingFootwork && workflow.token && !actorUtils.getEquippedArmor(workflow.actor) && !actorUtils.getEquippedShield(workflow.actor)) {
         let unarmedStrike = itemUtils.getItemByIdentifier(workflow.actor, 'unarmedStrike');
@@ -80,7 +80,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let bardicInspiration = {
     name: 'Bardic Inspiration',
-    version: '1.3.57',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

@@ -3,10 +3,10 @@ async function use({trigger, workflow}) {
     if (!workflow.token) return;
     let reverseCover = workflow.targets.has(workflow.token);
     let targets;
-    if (!workflow.targets.size || (workflow.targets.size === 1 && workflow.targets.has(workflow.token))) {
+    if (!workflow.targets.count || (workflow.targets.count === 1 && workflow.targets.has(workflow.token))) {
         targets = workflow.token.document.parent.tokens.map(i => i.object).filter(j => tokenUtils.canSense(workflow.token, j) && j.document.uuid != workflow.token.document.uuid);
     } else {
-        targets = Array.from(workflow.targets);
+        targets = Array.from(workflow.targets.tokens);
     }
     let text = reverseCover ? 'CHRISPREMADES.Macros.CheckCover.YourCover' : 'CHRISPREMADES.Macros.CheckCover.TargetCover';
     let selection = await dialogUtils.selectTargetDialog(workflow.item.name, text, targets, {type: 'multiple', maxAmount: targets.length, skipDeadAndUnconscious: false, coverToken: workflow.token, reverseCover: reverseCover, displayDistance: true});
@@ -15,7 +15,7 @@ async function use({trigger, workflow}) {
 }
 export let checkCover = {
     name: 'Check Cover',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

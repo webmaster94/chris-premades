@@ -235,7 +235,7 @@
     "cat": {
       "automation": {
         "source": "chris-premades",
-        "version": "2.1.3"
+        "version": "2.1.9"
       },
       "macros": {
         "roll": [
@@ -247,7 +247,7 @@
           {
             "source": "chris-premades-native",
             "rules": "all",
-            "identifier": "areaAnimation"
+            "identifier": "spellAnimation"
           }
         ]
       },
@@ -256,8 +256,8 @@
           "endIfUnaffected": {
             "condition": "failedSave"
           },
-          "areaAnimation": {
-            "animation": {
+          "spellAnimation": {
+            "areaAnimation": {
               "source": "chris-premades-native",
               "identifier": "castArea"
             }
@@ -266,7 +266,7 @@
       },
       "animationGenericConfig": {
         "chris-premades": {
-          "areaAnimation": {
+          "spellAnimation": {
             "chris-premades": {
               "castArea": {
                 "color": "purple"
@@ -335,7 +335,7 @@
           {
             "key": "flags.midi-qol.OverTime",
             "type": "override",
-            "value": "turn=end,saveAbility=wis,saveDC=$activity.dc,saveMagic=true,saveRemove=true,label=Slow",
+            "value": "turn=end,saveAbility=wis,saveDC=$activity.dc,saveMagic=true,saveCount=1,label=Slow",
             "priority": 20
           }
         ],
@@ -358,7 +358,7 @@
       "_key": "!items.effects!yqUDoxk4x0NWG5Bz.YtN8kTDQyxFaxpEx"
     }
   ],
-  "folder": null,
+  "folder": "fmUgbBpzksaKMBK8",
   "_stats": {
     "coreVersion": "14.369",
     "systemId": "dnd5e",

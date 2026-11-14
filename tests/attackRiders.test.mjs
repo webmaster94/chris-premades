@@ -15,8 +15,17 @@ const subjects = {
 };
 
 class Tokens extends Set {
+    get count() { return this.size; }
+    get tokens() { return Array.from(this); }
+    get documents() { return this.tokens.map(token => token.document); }
     first() { return this.values().next().value; }
     map(fn) { return Array.from(this).map(fn); }
+}
+
+class DocumentTokens extends Tokens {
+    *values() { yield* this.documents; }
+    [Symbol.iterator]() { return this.values(); }
+    get tokens() { return Array.from(Set.prototype.values.call(this)); }
 }
 
 function setProperty(object, key, value) {
@@ -123,6 +132,16 @@ async function fire(name, state) {
     let macro = await load(name, state);
     await macro.midi.actor.find(macro => macro.pass === 'damageRollComplete').macro({trigger: {entity: state.feature}, workflow: state.workflow});
     return macro;
+}
+
+for (const name of ['legacySneak', 'modernSneak', 'legacySmite', 'modernSmite']) {
+    test(`${name} handles document-mode Midi targets without using collection iteration`, async () => {
+        const state = fixture({modern: name.startsWith('modern'), smite: name.endsWith('Smite'), limited: false});
+        state.workflow.targets = new DocumentTokens([state.target]);
+        state.workflow.hitTargets = new DocumentTokens([state.target]);
+        await fire(name, state);
+        assert.equal(state.bonus.length, 1);
+    });
 }
 
 test('2024 NPC Sneak Attack without a class use counter adds its configured damage', async () => {

@@ -88,7 +88,7 @@ async function use({workflow}) {
 }
 export let astralTrance = {
     name: 'Astral Trance',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

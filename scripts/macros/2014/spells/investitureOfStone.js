@@ -23,13 +23,13 @@ async function use({workflow}) {
         ]}
     };
     await effectUtils.createEffect(workflow.actor, effectData, {
-        concentrationItem: workflow.item, 
-        strictlyInterdependent: true, 
-        identifier: 'investitureOfStone', 
+        concentrationItem: workflow.item,
+        strictlyInterdependent: true,
+        identifier: 'investitureOfStone',
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'investitureOfStone', 
+            identifier: 'investitureOfStone',
             activityIdentifier: 'investitureOfStoneEarthquake'
         }],
         unhideActivities: {
@@ -45,7 +45,7 @@ async function early({dialog}) {
 }
 export let investitureOfStone = {
     name: 'Investiture of Stone',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

@@ -1,6 +1,6 @@
 import {compendiumUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils} from '../../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let itemData = await compendiumUtils.getItemFromCompendium(constants.featurePacks.classFeatureItems, 'Magnificent Feast', {object: true, getDescription: true, translate: 'CHRISPREMADES.Macros.MagnificentFeast.MagnificentFeast'});
     if (!itemData) return;
     let classIdentifier = itemUtils.getConfig(workflow.item, 'classIdentifier');
@@ -24,7 +24,7 @@ async function use({trigger, workflow}) {
         }
     };
     itemData.effects = [effectData];
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         await itemUtils.createItems(token.actor, [itemData]);
     }));
 }
@@ -54,7 +54,7 @@ async function remove({trigger: {entity: effect}}) {
 }
 export let magnificentFeast = {
     name: 'Channel Divinity: Magnificent Feast',
-    version: '1.3.151',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

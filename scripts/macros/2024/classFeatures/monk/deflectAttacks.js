@@ -15,7 +15,7 @@ async function damageApplication({trigger: {entity: item}, workflow, ditem}) {
     if (!selection) return;
     let reduceActivity = activityUtils.getActivityByIdentifier(item, 'use', {strict: true});
     if (!reduceActivity) return;
-    let targetWorkflow = await workflowUtils.syntheticActivityRoll(reduceActivity, [workflow.hitTargets.first()], {userId});
+    let targetWorkflow = await workflowUtils.syntheticActivityRoll(reduceActivity, [workflow.hitTargets.tokens[0]], {userId});
     let reduction = targetWorkflow.utilityRolls[0].total;
     let originalDetail = genericUtils.deepClone(ditem.damageDetail);
     for (let dmg of originalDetail) {
@@ -30,7 +30,7 @@ async function damageApplication({trigger: {entity: item}, workflow, ditem}) {
     let monksFocus = itemUtils.getItemByIdentifier(item.actor, 'monksFocus');
     if (!monksFocus?.system?.uses?.value) return;
     let range = workflowUtils.isAttackType(workflow, 'meleeAttack') ? 5 : 60;
-    let nearby = tokenUtils.findNearby(workflow.hitTargets.first(), range, 'all', {includeIncapacitated: true});
+    let nearby = tokenUtils.findNearby(workflow.hitTargets.tokens[0], range, 'all', {includeIncapacitated: true});
     if (!nearby.length) return;
     let targetSelection = await dialogUtils.selectTargetDialog(item.name, 'CHRISPREMADES.Macros.DeflectAttacks.UseAndTarget', nearby, {skipDeadAndUnconscious: false, userId, buttons: 'yesNo'});
     if (!targetSelection || !targetSelection[0]) return;
@@ -46,7 +46,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let deflectAttacks = {
     name: 'Deflect Attacks',
-    version: '1.3.141',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [
@@ -131,6 +131,6 @@ export let deflectAttacks = {
                 title: 'Martial Arts'
             }
         }
-        
+
     ]
 };

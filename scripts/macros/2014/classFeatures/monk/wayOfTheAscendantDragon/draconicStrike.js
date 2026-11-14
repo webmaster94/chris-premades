@@ -1,7 +1,7 @@
 import {constants, dialogUtils, genericUtils, itemUtils, rollUtils, workflowUtils} from '../../../../../utils.js';
 
 async function damage({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!constants.unarmedAttacks.includes(genericUtils.getIdentifier(workflow.item))) return;
     let buttons = [
         ['DND5E.DAMAGE.Type.Acid', 'acid', {image: 'icons/magic/acid/projectile-faceted-glob.webp'}],
@@ -18,7 +18,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let draconicStrike = {
     name: 'Draconic Strike',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

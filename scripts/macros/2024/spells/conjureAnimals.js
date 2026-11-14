@@ -117,7 +117,7 @@ async function saveHelper(affectedTokens, effect, token, turnToCheck) {
 }
 export let conjureAnimals = {
     name: 'Conjure Animals',
-    version: '1.3.84',
+    version: '2.3.0',
     rules: 'modern',
     hasAnimation: true,
     midi: {

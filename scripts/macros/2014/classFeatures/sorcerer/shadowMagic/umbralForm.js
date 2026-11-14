@@ -26,7 +26,7 @@ async function dismiss({trigger, workflow}) {
 }
 export let umbralForm = {
     name: 'Umbral Form',
-    version: '1.4.20',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

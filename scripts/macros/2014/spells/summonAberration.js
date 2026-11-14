@@ -96,8 +96,8 @@ async function use({workflow}){
     }
     let animation = itemUtils.getConfig(workflow.item, creatureType + 'Animation') ?? 'none';
     await Summons.spawn(sourceActor, updates, workflow.item, workflow.token, {
-        duration: 3600, 
-        range: 90, 
+        duration: 3600,
+        range: 90,
         animation,
         initiativeType: 'follows',
         additionalSummonVaeButtons:
@@ -111,7 +111,7 @@ async function turnStart({trigger: {entity: item}}) {
 }
 export let summonAberration = {
     name: 'Summon Aberration',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

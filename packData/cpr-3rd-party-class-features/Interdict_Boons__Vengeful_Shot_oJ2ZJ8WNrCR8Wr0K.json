@@ -237,7 +237,7 @@
         "identifier": "interdictBoonVengefulShot",
         "rules": "legacy",
         "source": "chris-premades",
-        "version": "1.7.77"
+        "version": "2.3.0"
       },
       "macros": {
         "item": [

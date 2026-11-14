@@ -1,8 +1,8 @@
 import {dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../../utils.js';
 
 async function attack({trigger: {entity: item}, workflow}) {
-    if (workflow.targets.size !== 1 || workflow.isFumble) return;
-    let targetToken = workflow.targets.first();
+    if (workflow.targets.count !== 1 || workflow.isFumble) return;
+    let targetToken = workflow.targets.tokens[0];
     let attackTotal = workflow.attackTotal;
     if (targetToken.actor.system.attributes.ac.value <= attackTotal) return;
     let ki = itemUtils.getItemByIdentifier(workflow.actor, 'ki');
@@ -23,7 +23,7 @@ async function attack({trigger: {entity: item}, workflow}) {
 }
 export let focusedAim = {
     name: 'Focused Aim',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

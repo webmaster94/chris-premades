@@ -609,7 +609,7 @@
         "identifier": "cunningAction",
         "source": "chris-premades",
         "rules": "modern",
-        "version": "1.3.61",
+        "version": "2.3.0",
         "hasAnimation": true
       },
       "macros": {

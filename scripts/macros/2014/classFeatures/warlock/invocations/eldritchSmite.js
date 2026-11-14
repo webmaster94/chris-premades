@@ -1,6 +1,6 @@
 import {actorUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     let isSummonedPactWeapon = genericUtils.getIdentifier(workflow.item) === 'pactWeapon';
     let isEnchantedPactWeapon = Array.from(workflow.item.allApplicableEffects()).find(i => genericUtils.getIdentifier(i) === 'pactWeapon');
@@ -14,7 +14,7 @@ async function damage({trigger: {entity: item}, workflow}) {
     let bonusFormula = (1 + pactInfo.level) + 'd8';
     await workflowUtils.bonusDamage(workflow, bonusFormula, {damageType});
     await item.displayCard();
-    let targetActor = workflow.targets.first().actor;
+    let targetActor = workflow.targets.tokens[0].actor;
     if (actorUtils.getSize(targetActor) > 4 || effectUtils.getEffectByStatusID(targetActor, 'prone')) return;
     let selection2 = await dialogUtils.confirm(item.name, 'CHRISPREMADES.Macros.EldritchSmite.Prone');
     if (!selection2) return;
@@ -22,7 +22,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let eldritchSmite = {
     name: 'Eldritch Invocations: Eldritch Smite',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -1,6 +1,6 @@
 import {actorUtils, dialogUtils, genericUtils, socketUtils, tokenUtils, workflowUtils} from '../../../../utils.js';
 async function attacked({trigger: {token: target, entity: item}, workflow}) {
-    if (!workflow.targets.size || !workflow.token) return;
+    if (!workflow.targets.count || !workflow.token) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     if (actorUtils.hasUsedReaction(target.actor)) return;
     let nearby = tokenUtils.findNearby(target, 5, 'ally', {includeIncapacitated: true}).filter(i => i.document.id != workflow.token.document.id && [1, 2].includes(actorUtils.getSize(i.actor)));
@@ -9,14 +9,14 @@ async function attacked({trigger: {token: target, entity: item}, workflow}) {
     if (!selection) return;
     let changes = [
         {
-            document: workflow.targets.first().document,
+            document: workflow.targets.tokens[0].document,
             x: selection[0].x,
             y: selection[0].y
         },
         {
             document: selection[0].document,
-            x: workflow.targets.first().document.x,
-            y: workflow.targets.first().document.y
+            x: workflow.targets.tokens[0].document.x,
+            y: workflow.targets.tokens[0].document.y
         }
     ];
     await Promise.all(changes.map(async change => {
@@ -27,7 +27,7 @@ async function attacked({trigger: {token: target, entity: item}, workflow}) {
 }
 export let goblinBossRedirectAttack = {
     name: 'Redirect Attack',
-    version: '1.3.130',
+    version: '2.3.0',
     rules: 'modern',
     monsters: [
         'Goblin Boss'

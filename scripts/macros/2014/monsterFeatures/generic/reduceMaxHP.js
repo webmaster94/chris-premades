@@ -1,6 +1,6 @@
 import {effectUtils, genericUtils, itemUtils} from '../../../../utils.js';
 async function late({workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'reduceMaxHP');
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
@@ -14,7 +14,7 @@ async function late({workflow}) {
         damageApplied = roll.total;
         if (config.halfDamage) damageApplied = Math.floor(damageApplied / 2);
     }
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         if (config.checkSaves && !workflow.failedSaves.has(token)) {
             let effect = await effectUtils.getAllEffectsByIdentifier(token.actor, 'reduceMaxHP').find(async i => (await effectUtils.getOriginItem(i))?.uuid === workflow.item.uuid);
             if (effect && config.removeOnSave) await genericUtils.remove(effect);
@@ -83,7 +83,7 @@ async function late({workflow}) {
 export let reduceMaxHP = {
     name: 'Reduce Maximum HP',
     translation: 'CHRISPREMADES.Macros.ReduceMaxHP.Name',
-    version: '0.12.77',
+    version: '2.3.0',
     midi: {
         item: [
             {

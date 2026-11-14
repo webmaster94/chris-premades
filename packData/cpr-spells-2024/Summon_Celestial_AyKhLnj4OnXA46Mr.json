@@ -320,7 +320,7 @@
     "chris-premades": {
       "info": {
         "name": "Summon Celestial",
-        "version": "1.2.32",
+        "version": "2.3.0",
         "identifier": "summonCelestial",
         "source": "chris-premades",
         "hasAnimation": true,

@@ -9,12 +9,12 @@ async function use({workflow}) {
         duration: itemUtils.convertDuration(workflow.item)
     };
     await effectUtils.createEffect(workflow.actor, effectData, {
-        concentrationItem: workflow.item, 
+        concentrationItem: workflow.item,
         strictlyInterdependent: true,
         vae: [{
-            type: 'use', 
-            name: feature.name, 
-            identifier: 'auraOfVitality', 
+            type: 'use',
+            name: feature.name,
+            identifier: 'auraOfVitality',
             activityIdentifier: 'auraOfVitalityHealing'
         }],
         identifier: 'auraOfVitality',
@@ -30,7 +30,7 @@ async function use({workflow}) {
     if (!validTypes.includes(workflow.item.system.method)) return;
     let castLevel = workflowUtils.getCastLevel(workflow);
     if (!castLevel) return;
-    if (workflow.targets.size === 1 && workflow.targets.first().document.uuid === workflow.token.document.uuid) return;
+    if (workflow.targets.count === 1 && workflow.targets.tokens[0].document.uuid === workflow.token.document.uuid) return;
     let activity = activityUtils.getActivityByIdentifier(blessedHealer, 'heal', {strict: true});
     if (!activity) return;
     let itemData = genericUtils.duplicate(blessedHealer.toObject());
@@ -42,7 +42,7 @@ async function early({dialog}) {
 }
 export let auraOfVitality = {
     name: 'Aura of Vitality',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

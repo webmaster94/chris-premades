@@ -2,7 +2,7 @@ import {actorUtils, dialogUtils, genericUtils, itemUtils, workflowUtils} from '.
 import {Teleport} from '../../../../../lib/teleport.js';
 import {teleportEffects} from '../../../../animations/teleportEffects.js';
 async function attacked({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size || !workflowUtils.isAttackType(workflow, 'attack') || !workflow.token) return;
+    if (!workflow.targets.count || !workflowUtils.isAttackType(workflow, 'attack') || !workflow.token) return;
     let actor = item.actor;
     if (!actor) return;
     if (actorUtils.hasUsedReaction(actor)) return;
@@ -19,7 +19,7 @@ async function rollFinished({trigger: {entity: item, token}, workflow}) {
 }
 export let shadowyDodge = {
     name: 'Shadowy Dodge',
-    version: '1.3.81',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [
@@ -49,8 +49,8 @@ export let shadowyDodge = {
             type: 'select',
             default: 'default',
             options: Object.entries(teleportEffects).map(([key, value]) => ({
-                value: key, 
-                label: value.name, 
+                value: key,
+                label: value.name,
                 requiredModules: value.requiredModules ?? []
             })),
             category: 'animation'

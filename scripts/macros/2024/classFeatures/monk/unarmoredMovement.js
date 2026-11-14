@@ -15,7 +15,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let unarmoredMovement = {
     name: 'Unarmored Movement',
-    version: '1.3.138',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {

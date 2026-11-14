@@ -18,7 +18,7 @@ async function psychicWhispersUse({trigger, workflow}) {
     effectData.duration = {value: workflow.utilityRolls[0].total * 3600, units: 'seconds'};
     effectData.start = {time: game.time?.worldTime ?? 0};
     workflow.targets.add(workflow.token);
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         await effectUtils.createEffect(token.actor, effectData);
     }));
 }
@@ -65,7 +65,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let psionicPower = {
     name: 'Psionic Power',
-    version: '1.3.57',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

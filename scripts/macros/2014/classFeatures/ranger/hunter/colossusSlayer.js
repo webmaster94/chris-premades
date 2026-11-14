@@ -1,10 +1,10 @@
 import {constants} from '../../../../../lib/constants.js';
 import {combatUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     if (!combatUtils.perTurnCheck(item, 'colossusSlayer')) return;
-    if (workflow.targets.first().actor.system.attributes.hp.value >= workflow.targets.first().actor.system.attributes.hp.max) return;
+    if (workflow.targets.tokens[0].actor.system.attributes.hp.value >= workflow.targets.tokens[0].actor.system.attributes.hp.max) return;
     let formula = itemUtils.getConfig(item, 'formula');
     await workflowUtils.bonusDamage(workflow, formula, {damageType: workflow.defaultDamageType});
     if (combatUtils.inCombat()) await combatUtils.setTurnCheck(item, 'colossusSlayer');
@@ -16,7 +16,7 @@ async function combatEnd({trigger}) {
 export let colossusSlayer = {
     name: 'Colossus Slayer',
     aliases: ['Hunter\'s Prey: Colossus Slayer'],
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -9,7 +9,7 @@ async function skill({trigger: {entity: item, saveId, options, actor}}) {
 }
 export let dangerSense = {
     name: 'Danger Sense',
-    version: '1.1.22',
+    version: '2.3.0',
     rules: 'modern',
     save: [
         {

@@ -14,7 +14,7 @@ async function heal({trigger, workflow}) {
 }
 export let healingSurge = {
     name: 'Healing Surge',
-    version: '1.3.122',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

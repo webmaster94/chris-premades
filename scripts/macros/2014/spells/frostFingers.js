@@ -16,7 +16,7 @@ async function early({workflow}) {
             .belowTokens()
             .waitUntilFinished(-5000)
             .play();
-        for (let i of workflow.targets) {
+        for (let i of workflow.targets.tokens) {
             new Sequence({moduleName:'chris-premades', softFail:true})
                 .effect()
                 .file('jb2a.markers.snowflake.blue.01')
@@ -34,7 +34,7 @@ async function late({workflow}) {
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     await genericUtils.sleep(2000);
     if (!playAnimation || !animationUtils.jb2aCheck()) return;
-    for (let i of workflow.failedSaves) {
+    for (let i of workflow.failedSaves.tokens) {
         new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('jb2a.impact_themed.ice_shard.blue')
@@ -44,7 +44,7 @@ async function late({workflow}) {
             .playbackRate(0.75)
             .play();
     }
-    for (let i of workflow.saves) {
+    for (let i of workflow.saves.tokens) {
         new Sequence({moduleName:'chris-premades', softFail:true})
             .effect()
             .file('jb2a.energy_field.02.above.blue')
@@ -58,7 +58,7 @@ async function late({workflow}) {
 }
 export let frostFingers = {
     name: 'Frost Fingers',
-    version: '1.1.10',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

@@ -36,7 +36,7 @@ async function grappleShove({trigger, workflow}) {
     let isUnarmed = constants.unarmedAttacks.includes(genericUtils.getIdentifier(workflow.item));
     if (!isUnarmed) return;
     let identifier = activityUtils.getIdentifier(workflow.activity);
-    if (!identifier) return; 
+    if (!identifier) return;
     if (!['grapple', 'shoveProne', 'shovePush'].includes(identifier)) return;
     let defaultType = workflow.activity.save.dc.calculation;
     let bestType = actorUtils.getBestAbility(workflow.actor, [defaultType, 'dex']);
@@ -51,7 +51,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let martialArts = {
     name: 'Martial Arts',
-    version: '1.3.136',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [
@@ -149,6 +149,6 @@ export let martialArts = {
                 title: 'Martial Arts'
             }
         }
-        
+
     ]
 };

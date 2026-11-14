@@ -23,13 +23,13 @@ async function use({trigger, workflow}) {
             }
         }
     }
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         await effectUtils.createEffect(token.actor, effectData, {concentrationItem: workflow.item});
     }));
 }
 export let bless = {
     name: 'Bless',
-    version: '1.3.153',
+    version: '2.3.0',
     midi: {
         item: [
             {

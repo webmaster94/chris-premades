@@ -377,7 +377,7 @@
     "chris-premades": {
       "info": {
         "name": "Tentacle of the Deeps: Summon",
-        "version": "1.5.36",
+        "version": "2.3.0",
         "identifier": "tentacleOfTheDeeps",
         "source": "chris-premades",
         "hasAnimation": true

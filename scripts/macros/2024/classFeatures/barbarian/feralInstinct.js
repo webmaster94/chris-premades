@@ -1,5 +1,5 @@
 export let feralInstinct = {
     name: 'Feral Instinct',
-    version: '1.1.22',
+    version: '2.3.0',
     rules: 'modern'
 };

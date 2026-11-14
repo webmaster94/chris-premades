@@ -34,16 +34,16 @@ async function attack({trigger, workflow}) {
     workflow.tracker.disadvantage.add(genericUtils.translate('CHRISPREMADES.Macros.Underwater.Underwater'), genericUtils.translate('CHRISPREMADES.Macros.Underwater.Underwater'));
 }
 async function range({trigger, workflow}) {
-    if (workflow.targets.size != 1) return;
+    if (workflow.targets.count != 1) return;
     if (workflowUtils.getActionType(workflow) != 'rwak') return;
-    let distance = tokenUtils.getDistance(workflow.token, workflow.targets.first());
+    let distance = tokenUtils.getDistance(workflow.token, workflow.targets.tokens[0]);
     if (distance <= (workflow.activity.range.value ?? workflow.activity.range.reach)) return;
     genericUtils.notify('CHRISPREMADES.Macros.Underwater.TooFar', 'warn');
     return true;
 }
 export let underwater = {
     name: 'Underwater',
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let underwaterEffect = {
     name: underwater.name,

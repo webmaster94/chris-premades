@@ -1,10 +1,10 @@
 import {activityUtils, dialogUtils, effectUtils, genericUtils, itemUtils, socketUtils, workflowUtils} from '../../../../utils.js';
 let heals = [
-    'cure-wounds', 
-    'healing-word', 
-    'massCureWounds', 
-    'mass-cure-wounds', 
-    'mass-healing-word', 
+    'cure-wounds',
+    'healing-word',
+    'massCureWounds',
+    'mass-cure-wounds',
+    'mass-healing-word',
     'spare-the-dying'
 ];
 async function targeted({trigger: {entity: item}, workflow}) {
@@ -75,7 +75,7 @@ async function healTheConstruct(item) {
 }
 export let healingMachine = {
     name: 'Healing Machine',
-    version: '1.5.28',
+    version: '2.3.0',
     midi: {
         actor: [
             {

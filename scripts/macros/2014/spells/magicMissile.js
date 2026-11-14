@@ -1,9 +1,9 @@
 import {activityUtils, actorUtils, animationUtils, dialogUtils, effectUtils, errors, genericUtils, itemUtils, socketUtils, workflowUtils} from '../../../utils.js';
 async function use({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let castLevel = workflowUtils.getCastLevel(workflow);
     let maxMissiles = 2 + castLevel;
-    let selection = await dialogUtils.selectTargetDialog(workflow.item.name, genericUtils.format('CHRISPREMADES.Macros.MagicMissile.Select', {maxMissiles}), workflow.targets, {
+    let selection = await dialogUtils.selectTargetDialog(workflow.item.name, genericUtils.format('CHRISPREMADES.Macros.MagicMissile.Select', {maxMissiles}), workflow.targets.tokens, {
         type: 'selectAmount',
         maxAmount: maxMissiles
     });
@@ -75,11 +75,11 @@ async function use({workflow}) {
                     .stretchTo(targetToken)
                     .randomizeMirrorY()
                     .missed(isShielded)
-                    
+
                     .sound()
                     .playIf(sound)
                     .file(sound)
-                    
+
                     .play();
             }
             const options = {
@@ -102,7 +102,7 @@ async function use({workflow}) {
 }
 export let magicMissile = {
     name: 'Magic Missile',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

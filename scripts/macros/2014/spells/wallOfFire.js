@@ -146,7 +146,7 @@ async function early({trigger, workflow}) {
                 hole: false
             });
             regionData.shapes[1].hole = true;
-            
+
         } else {
             regionData.shapes[0].radiusX = templateScale * (radius + wallWidth);
             regionData.shapes[0].radiusY = templateScale * (radius + wallWidth);
@@ -423,7 +423,7 @@ async function endCombat({trigger}) {
 }
 export let wallOfFire = {
     name: 'Wall of Fire',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

@@ -1,6 +1,6 @@
 export let zhentilarSoldierKnockDown = {
     name: 'Knock Down',
-    version: '1.3.132',
+    version: '2.3.0',
     rules: 'modern',
     monsters: [
         'Zhentilar Soldier'

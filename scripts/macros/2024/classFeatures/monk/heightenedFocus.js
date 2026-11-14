@@ -1,6 +1,6 @@
 export let heightenedFocus = {
     name: 'Heightened Focus',
-    version: '1.3.141',
+    version: '2.3.0',
     rules: 'modern',
     config: [
         {

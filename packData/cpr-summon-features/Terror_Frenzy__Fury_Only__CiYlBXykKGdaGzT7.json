@@ -66,7 +66,7 @@
         "changes": [
           {
             "key": "flags.midi-qol.advantage.attack.all",
-            "value": "workflow.targets.first().actor.statuses.has('frightened')",
+            "value": "workflow.targets.tokens[0].actor.statuses.has('frightened')",
             "priority": 20,
             "type": "custom",
             "phase": "initial"

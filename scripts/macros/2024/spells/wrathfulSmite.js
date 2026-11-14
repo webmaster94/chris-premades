@@ -1,7 +1,7 @@
 import {actorUtils, constants, effectUtils, itemUtils} from '../../../utils.js';
 import {divineSmite} from './divineSmite.js';
 async function use({trigger, workflow}) {
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let effectData = {
         name: workflow.item.name,
         img: workflow.item.img,
@@ -16,14 +16,14 @@ async function use({trigger, workflow}) {
             }
         ]}
     };
-    await Promise.all(workflow.failedSaves.map(async token => {
+    await Promise.all(workflow.failedSaves.tokens.map(async token => {
         if (actorUtils.checkTrait(token.actor, 'ci', 'frightened')) return;
         await effectUtils.createEffect(token.actor, effectData, {conditions: ['frightened']});
     }));
 }
 export let wrathfulSmite = {
     name: 'Wrathful Smite',
-    version: '1.1.14',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: divineSmite.midi.actor,

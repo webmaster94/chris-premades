@@ -179,7 +179,7 @@
         "identifier": "heroicWarrior",
         "rules": "modern",
         "source": "chris-premades",
-        "version": "1.5.12"
+        "version": "2.3.0"
       },
       "macros": {
         "combat": [

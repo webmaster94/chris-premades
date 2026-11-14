@@ -184,7 +184,7 @@
     "chris-premades": {
       "info": {
         "identifier": "interception",
-        "version": "1.4.24",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern"
       },

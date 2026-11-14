@@ -93,7 +93,7 @@ async function veryEarly({dialog}) {
 }
 export let alterSelf = {
     name: 'Alter Self',
-    version: '1.2.28',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

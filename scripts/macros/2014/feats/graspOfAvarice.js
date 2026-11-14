@@ -1,12 +1,12 @@
 import {actorUtils, combatUtils, dialogUtils, genericUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 
 async function damage({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (['healing', 'temphp'].includes(workflow.defaultDamageType)) return;
     if (workflow.item.uuid === item.uuid) return;
     if (!item.system.uses.value) return;
     if (!combatUtils.perTurnCheck(item, 'graspOfAvarice')) return;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     if (tokenUtils.getDistance(workflow.token, targetToken) > 60) return;
     let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name}));
     if (!selection) return;
@@ -23,13 +23,13 @@ async function damage({trigger: {entity: item}, workflow}) {
     if (damageApplied) await workflowUtils.applyDamage([workflow.token], damageApplied, 'healing');
 }
 async function damageApplication({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size < 2) return;
+    if (workflow.hitTargets.count < 2) return;
     if (['healing', 'temphp'].includes(workflow.defaultDamageType)) return;
     if (workflow.item.uuid === item.uuid) return;
     if (!item.system.uses.value) return;
     if (workflow.graspOfAvariceChoseNo) return;
     if (!combatUtils.perTurnCheck(item, 'graspOfAvarice')) return;
-    let targetTokens = Array.from(workflow.hitTargets.filter(i => tokenUtils.getDistance(workflow.token, i) <= 60));
+    let targetTokens = Array.from(new Set(workflow.hitTargets.tokens).filter(i => tokenUtils.getDistance(workflow.token, i) <= 60));
     if (!targetTokens.length) return;
     let selection = await dialogUtils.selectTargetDialog(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name}), targetTokens);
     workflow.graspOfAvariceChoseNo = true;
@@ -69,7 +69,7 @@ async function combatEnd({trigger: {entity: item}}) {
 }
 export let graspOfAvarice = {
     name: 'Baleful Scion: Grasp of Avarice',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -99,7 +99,7 @@ async function turnEnd({trigger: {entity: effect, token}}) {
 }
 export let blink = {
     name: 'Blink',
-    version: '1.1.17',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

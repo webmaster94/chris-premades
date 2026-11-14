@@ -1,6 +1,6 @@
 import {flamingSphere as flamingSphereLegacy} from '../../../legacyMacros.js';
 export let flamingSphere = {
     ...flamingSphereLegacy,
-    version: '1.2.28',
+    version: '2.3.0',
     rules: 'modern'
 };

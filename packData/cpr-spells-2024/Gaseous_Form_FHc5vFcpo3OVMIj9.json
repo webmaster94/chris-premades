@@ -184,7 +184,7 @@
     "chris-premades": {
       "info": {
         "name": "Gaseous Form",
-        "version": "1.5.1",
+        "version": "2.3.0",
         "identifier": "gaseousForm",
         "source": "chris-premades",
         "rules": "modern"

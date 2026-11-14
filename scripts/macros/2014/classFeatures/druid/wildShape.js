@@ -19,7 +19,7 @@ async function use({workflow}) {
     }
     if (circleForms) {
         maxCR = Math.max(Math.floor(druidLevel / 3), 1);
-    } 
+    }
     let featureData = await compendiumUtils.getItemFromCompendium(constants.featurePacks.classFeatureItems, 'Wild Shape: Revert', {object: true, getDescription: true, translate: 'CHRISPREMADES.Macros.WildShape.Revert', identifier: 'wildShapeRevert'});
     if (!featureData) {
         errors.missingPackItem();
@@ -204,7 +204,7 @@ async function hit({trigger: {entity: effect}, workflow}) {
 }
 export let wildShape = {
     name: 'Wild Shape',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

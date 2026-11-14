@@ -158,8 +158,8 @@ async function use({workflow}) {
 
             .play();
     }
-    if (!workflow.failedSaves.size) return;
-    for (let target of workflow.failedSaves) {
+    if (!workflow.failedSaves.count) return;
+    for (let target of workflow.failedSaves.tokens) {
         await effectUtils.createEffect(target.actor, effectData, {concentrationItem: workflow.item});
         if (shouldAnimate) {
             new Sequence({moduleName:'chris-premades', softFail:true})
@@ -173,7 +173,7 @@ async function use({workflow}) {
                 .fadeOut(1500, {ease: 'easeInSine'})
                 .name('Faerie Fire')
                 .private()
-    
+
                 .effect()
                 .copySprite(target)
                 .belowTokens()
@@ -200,7 +200,7 @@ async function end({trigger: {entity}}) {
 }
 export let faerieFire = {
     name: 'Faerie Fire',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

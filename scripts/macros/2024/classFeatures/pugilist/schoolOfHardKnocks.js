@@ -4,7 +4,7 @@ async function damage({trigger: {entity: item}, workflow}) {
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     let validateWeaponType = itemUtils.getConfig(item, 'validateWeaponType');
     if (validateWeaponType && !['simpleM', 'improv'].includes(workflow.item.system.type.value)) return;
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!combatUtils.perTurnCheck(item, 'schoolOfHardKnocks')) return;
     let selection = await dialogUtils.selectDocumentDialog(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name}), item.system.activities.contents);
     if (!selection) return;
@@ -18,14 +18,14 @@ async function damage({trigger: {entity: item}, workflow}) {
         await workflowUtils.bonusDamage(workflow, formula, {ignoreCrit: true, damageType});
         await workflowUtils.syntheticActivityDataRoll(activityData, item, item.parent, []);
     } else {
-        await workflowUtils.syntheticActivityRoll(selection, workflow.hitTargets, {options: {originWorkflow: workflow.id}});
+        await workflowUtils.syntheticActivityRoll(selection, workflow.hitTargets.tokens, {options: {originWorkflow: workflow.id}});
     }
 }
 async function combatEnd({trigger: {entity: item}}) {
     await combatUtils.setTurnCheck(item, 'schoolOfHardKnocks', true);
 }
 async function applyEffect({trigger: {token: self}, workflow}) {
-    let target = workflow.targets.first()?.actor;
+    let target = workflow.targets.tokens[0]?.actor;
     if (!target) return;
     let id = activityUtils.getIdentifier(workflow.activity);
     let effectData = {
@@ -40,7 +40,7 @@ async function applyEffect({trigger: {token: self}, workflow}) {
         }
     };
     switch (id) {
-        case 'endanger': 
+        case 'endanger':
             effectUtils.addMacro(effectData, 'midi.actor', ['schoolOfHardKnocksEndanger']);
             genericUtils.setProperty(effectData, 'flags.chris-premades.originWorkflow', workflow.workflowOptions.originWorkflow);
             break;
@@ -48,12 +48,12 @@ async function applyEffect({trigger: {token: self}, workflow}) {
             effectData.system.changes = [{
                 key: 'flags.midi-qol.disadvantage.attack.all',
                 type: 'custom',
-                value: `!workflow.targets.some(t => t.id === '${self.id}')`,
+                value: `!workflow.targets.tokens.some(t => t.id === '${self.id}')`,
                 priority: 20
             }];
             genericUtils.setProperty(effectData, 'flags.dae.specialDuration', ['turnEndSource']);
             break;
-        default: 
+        default:
             return;
     }
     await effectUtils.createEffect(target, effectData, {identifier: 'schoolOfHardKnocksEndanger', rules: schoolOfHardKnocksEndanger.rules});
@@ -61,14 +61,14 @@ async function applyEffect({trigger: {token: self}, workflow}) {
 async function endangerDamage({trigger: {entity: effect}, workflow}) {
     if (effect.flags['chris-premades']?.originWorkflow === workflow.id) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     await Promise.all(workflow.damageRolls.map(async (roll, i, rolls) => rolls[i] = await roll.reroll({maximize: true})));
     await workflow.setDamageRolls(workflow.damageRolls);
     await genericUtils.remove(effect);
 }
 export let schoolOfHardKnocks = {
     name: 'School of Hard Knocks',
-    version: '1.4.29',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

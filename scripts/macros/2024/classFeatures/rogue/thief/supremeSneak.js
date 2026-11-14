@@ -1,5 +1,5 @@
 export let supremeSneak = {
     name: 'Supreme Sneak',
-    version: '1.3.61',
+    version: '2.3.0',
     rules: 'modern'
 };

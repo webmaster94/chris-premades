@@ -2,7 +2,7 @@ import {effectUtils, genericUtils, workflowUtils} from '../../../utils.js';
 
 async function use({workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (!workflow.failedSaves.size) {
+    if (!workflow.failedSaves.count) {
         await genericUtils.remove(concentrationEffect);
         return;
     }
@@ -13,7 +13,7 @@ async function everyTurn({trigger: {entity: effect}}) {
 }
 export let hypnoticPattern = {
     name: 'Hypnotic Pattern',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

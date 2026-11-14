@@ -1089,7 +1089,7 @@
         "identifier": "armorModel",
         "rules": "modern",
         "source": "chris-premades",
-        "version": "1.5.32"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

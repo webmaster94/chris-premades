@@ -1,13 +1,13 @@
 import {actorUtils, effectUtils, genericUtils, itemUtils, rollUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (workflow.targets.size != 1) return;
-    let targetActor = workflow.targets.first().actor;
+    if (workflow.targets.count != 1) return;
+    let targetActor = workflow.targets.tokens[0].actor;
     let dead = effectUtils.getEffectByStatusID(targetActor, 'dead');
     if (dead) return;
     let unconscious = effectUtils.getEffectByStatusID(targetActor, 'unconscious');
     if (!unconscious) return;
     let roll = await workflow.actor.rollSkill({skill: 'med'});
-    if (roll[0].total < 10 || !workflow.targets.size) return;
+    if (roll[0].total < 10 || !workflow.targets.count) return;
     let remarkableRecovery = itemUtils.getItemByIdentifier(targetActor, 'remarkableRecovery');
     if (!remarkableRecovery) {
         await genericUtils.update(targetActor, {'system.attributes.death.success': 0, 'system.attributes.death.failure': 0});
@@ -28,12 +28,12 @@ async function use({trigger, workflow}) {
         await effectUtils.createEffect(targetActor, effectData);
         await rollUtils.rollDice('1d4[' + genericUtils.translate('DND5E.TimeHour') + ']', {chatMessage: true, mode: 'blindroll', flavor: genericUtils.translate('CHRISPREMADES.Macros.Stabilize.WakeUp')});
     } else {
-        await workflowUtils.syntheticItemRoll(remarkableRecovery, [workflow.targets.first()]);
+        await workflowUtils.syntheticItemRoll(remarkableRecovery, [workflow.targets.tokens[0]]);
     }
 }
 export let stabilize = {
     name: 'Stabilize',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

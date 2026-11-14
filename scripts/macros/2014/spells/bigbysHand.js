@@ -104,8 +104,8 @@ async function early({workflow}) {
 }
 async function late({workflow}) {
     let identifier = genericUtils.getIdentifier(workflow.item);
-    if (workflow.targets.size !== 1) return;
-    let targetToken = workflow.targets.first();
+    if (workflow.targets.count !== 1) return;
+    let targetToken = workflow.targets.tokens[0];
     let targetActor = targetToken.actor;
     if (!targetActor) return;
     if (identifier === 'forcefulHand') {
@@ -141,35 +141,35 @@ async function late({workflow}) {
         let {x: ax, y: ay} = targetToken.center;
         let bx, by;
         switch (selection) {
-            case 'north': 
+            case 'north':
                 bx = ax;
                 by = ay - 100;
                 break;
-            case 'northeast': 
+            case 'northeast':
                 bx = ax + 100;
                 by = ay - 100;
                 break;
-            case 'east': 
+            case 'east':
                 bx = ax + 100;
                 by = ay;
                 break;
-            case 'southeast': 
+            case 'southeast':
                 bx = ax + 100;
                 by = ay + 100;
                 break;
-            case 'south': 
+            case 'south':
                 bx = ax;
                 by = ay + 100;
                 break;
-            case 'southwest': 
+            case 'southwest':
                 bx = ax - 100;
                 by = ay + 100;
                 break;
-            case 'west': 
+            case 'west':
                 bx = ax - 100;
                 by = ay;
                 break;
-            case 'northwest': 
+            case 'northwest':
                 bx = ax - 100;
                 by = ay - 100;
                 break;
@@ -227,11 +227,11 @@ async function late({workflow}) {
             }
         };
         let effect = await effectUtils.createEffect(workflow.actor, effectData, {
-            identifier: 'graspingHand', 
+            identifier: 'graspingHand',
             vae: [{
-                type: 'use', 
+                type: 'use',
                 name: feature.name,
-                identifier: 'graspingHand', 
+                identifier: 'graspingHand',
                 activityIdentifier: 'graspingHandCrush'
             }],
             unhideActivities: {
@@ -247,8 +247,8 @@ async function late({workflow}) {
 }
 async function otherEarly({trigger, workflow}) {
     // Interposing actor onuse is on someone
-    if (workflow.targets.size !== 1 || workflow.disadvantage) return;
-    let targetActor = workflow.targets.first().actor;
+    if (workflow.targets.count !== 1 || workflow.disadvantage) return;
+    let targetActor = workflow.targets.tokens[0].actor;
     let bigbyOwnerActor = await fromUuid((await fromUuid(trigger.entity.origin))?.parent?.flags['chris-premades'].summons.control.actor);
     if (bigbyOwnerActor !== targetActor) return;
     let effectData = {
@@ -294,8 +294,8 @@ async function otherEarly({trigger, workflow}) {
     await effectUtils.createEffect(targetActor, effectData, {identifier: 'halfCover'});
 }
 async function otherLate({trigger, workflow}) {
-    if (workflow.targets.size !== 1 || workflow.disadvantage) return;
-    let targetActor = workflow.targets.first().actor;
+    if (workflow.targets.count !== 1 || workflow.disadvantage) return;
+    let targetActor = workflow.targets.tokens[0].actor;
     let targetHalfCover = effectUtils.getEffectByIdentifier(targetActor, 'halfCover');
     if (!targetHalfCover) return;
     if (targetHalfCover.origin !== trigger.entity.uuid) return;
@@ -306,7 +306,7 @@ async function veryEarly({dialog}) {
 }
 export let bigbysHand = {
     name: 'Bigby\'s Hand',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

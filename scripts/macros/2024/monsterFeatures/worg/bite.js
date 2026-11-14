@@ -1,6 +1,6 @@
 export let worgBite = {
     name: 'Bite',
-    version: '1.3.130',
+    version: '2.3.0',
     rules: 'modern',
     monsters: [
         'Worg'

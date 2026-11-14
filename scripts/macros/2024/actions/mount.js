@@ -1,8 +1,8 @@
 import {activityUtils, actorUtils, effectUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size || !workflow.token) return;
+    if (!workflow.targets.count || !workflow.token) return;
     if (workflow.targets.has(workflow.token)) return;
-    let mounted = await tokenUtils.mountToken(workflow.token, workflow.targets.first(), {
+    let mounted = await tokenUtils.mountToken(workflow.token, workflow.targets.tokens[0], {
         unhideActivities: [{
             itemUuid: workflow.item.uuid,
             activityIdentifiers: ['dismount', 'fallOff'],
@@ -28,7 +28,7 @@ async function dismount({trigger, workflow}) {
     await genericUtils.remove(effect);
 }
 async function fallOff({trigger, workflow}) {
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     await effectUtils.applyConditions(workflow.actor, ['prone']);
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'mountedRider');
     if (!effect) return;
@@ -56,7 +56,7 @@ async function proneHorse({trigger: {entity: effect, target}}) {
 }
 export let mount = {
     name: 'Mount',
-    version: '1.3.156',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

@@ -1,5 +1,5 @@
 import {effectUtils, genericUtils, workflowUtils} from '../../../../../utils.js';
-async function use({workflow}) {  
+async function use({workflow}) {
     let effectData = {
         name: genericUtils.format('CHRISPREMADES.Auras.Source', {auraName: workflow.item.name}),
         img: workflow.item.img,
@@ -14,9 +14,9 @@ async function use({workflow}) {
     genericUtils.setProperty(effectData, 'flags.dae.showIcon', true);
     effectData.name = workflow.item.name;
     effectUtils.addMacro(effectData, 'midi.actor', ['giftOfTheProtectorsProtected']);
-    await Promise.all(workflow.targets.map(t => effectUtils.createEffect(t.actor, effectData, {identifier: 'giftOfTheProtectorsTarget', interdependent: true, parentEntity: source})));
+    await Promise.all(workflow.targets.tokens.map(t => effectUtils.createEffect(t.actor, effectData, {identifier: 'giftOfTheProtectorsTarget', interdependent: true, parentEntity: source})));
 }
-async function damageApplication({trigger: {entity: effect}, ditem}) {    
+async function damageApplication({trigger: {entity: effect}, ditem}) {
     if (ditem.newHP > 0 || !ditem.isHit) return;
     workflowUtils.preventDeath(ditem);
     let source = await fromUuid(effect.flags['chris-premades']?.parentEntityUuid);
@@ -27,7 +27,7 @@ async function damageApplication({trigger: {entity: effect}, ditem}) {
 }
 export let giftOfTheProtectors = {
     name: 'Eldritch Invocations: Gift of the Protectors',
-    version: '1.5.26',
+    version: '2.3.0',
     midi: {
         item: [
             {

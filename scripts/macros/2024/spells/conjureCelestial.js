@@ -55,8 +55,8 @@ async function use({workflow}) {
             favorite: true
         }
     });
-    let friendlyTargets = workflow.targets.filter(t => t.document.disposition === workflow.token.document.disposition);
-    let enemyTargets = workflow.targets.difference(friendlyTargets);
+    let friendlyTargets = new Set(workflow.targets.tokens).filter(t => t.document.disposition === workflow.token.document.disposition);
+    let enemyTargets = new Set(workflow.targets.tokens).difference(friendlyTargets);
     if (friendlyTargets.size) {
         let healFeature = activityUtils.getActivityByIdentifier(workflow.item, 'conjureCelestialHeal', {strict: true});
         if (healFeature) await workflowUtils.syntheticActivityRoll(healFeature, Array.from(friendlyTargets), {atLevel: workflow.castData.castLevel});
@@ -135,7 +135,7 @@ async function early({dialog}) {
 }
 export let conjureCelestial = {
     name: 'Conjure Celestial',
-    version: '1.3.84',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

@@ -4,7 +4,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let eyesOfTheDark = {
     name: 'Eyes of the Dark',
-    version: '1.4.19',
+    version: '2.3.0',
     rules: 'legacy',
     item: [
         {

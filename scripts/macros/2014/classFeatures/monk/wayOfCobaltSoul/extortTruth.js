@@ -7,7 +7,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let extortTruth = {
     name: 'Extort Truth',
-    version: '1.3.165',
+    version: '2.3.0',
     rules: 'legacy',
     item: [
         {

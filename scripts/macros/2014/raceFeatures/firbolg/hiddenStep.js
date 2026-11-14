@@ -5,7 +5,7 @@ async function late({trigger: {entity: effect}, workflow}) {
 }
 export let hiddenStep = {
     name: 'Hidden Step',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

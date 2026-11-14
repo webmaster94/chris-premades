@@ -32,7 +32,7 @@ async function use({trigger, workflow}) {
                     minAmount: 0,
                     maxAmount: missingSlots,
                     currentAmount: 0,
-                    weight: i 
+                    weight: i
                 }
             });
         }
@@ -40,18 +40,18 @@ async function use({trigger, workflow}) {
     if (!inputFields.length) return;
     let inputs = [
         [
-            'selectAmount', 
-            inputFields, 
+            'selectAmount',
+            inputFields,
             {
-                totalMax: totalSlots, 
+                totalMax: totalSlots,
                 displayAsRows: true
             }
         ]
     ];
     let selection = await DialogApp.dialog(
-        workflow.item.name, 
-        genericUtils.format('CHRISPREMADES.Macros.ArcaneRecovery.Context', {totalSlots}), 
-        inputs, 
+        workflow.item.name,
+        genericUtils.format('CHRISPREMADES.Macros.ArcaneRecovery.Context', {totalSlots}),
+        inputs,
         'okCancel'
     );
     if (!selection?.buttons) return;
@@ -69,7 +69,7 @@ async function use({trigger, workflow}) {
 export let arcaneRecovery = {
     name: 'Arcane Recovery',
     rules: 'modern',
-    version: '1.5.30',
+    version: '2.3.0',
     midi: {
         item: [
             {

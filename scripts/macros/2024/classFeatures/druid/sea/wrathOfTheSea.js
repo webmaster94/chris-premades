@@ -83,7 +83,7 @@ async function use({workflow}) {
     }
 }
 async function push({workflow}) {
-    let targetToken = workflow.failedSaves.first();
+    let targetToken = workflow.failedSaves.tokens[0];
     if (!targetToken) return;
     if (actorUtils.getSize(targetToken.actor, false) > 3) return;
     await tokenUtils.pushToken(workflow.token, targetToken, 15);
@@ -93,7 +93,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let wrathOfTheSea = {
     name: 'Wrath of the Sea',
-    version: '1.3.83',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

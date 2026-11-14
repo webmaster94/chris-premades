@@ -1,4 +1,4 @@
 export let peerlessAthlete = {
     name: 'Channel Divinity: Peerless Athlete',
-    version: '1.1.0'
+    version: '2.3.0'
 };

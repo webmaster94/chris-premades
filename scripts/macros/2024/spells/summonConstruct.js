@@ -113,7 +113,7 @@ async function turnStartMetal({trigger: {entity: item, token, target}}) {
 }
 export let summonConstruct = {
     name: 'Summon Construct',
-    version: '1.2.32',
+    version: '2.3.0',
     rules: 'modern',
     hasAnimation: true,
     midi: {

@@ -22,7 +22,7 @@ async function compressionLock({trigger: {entity: item, token}, workflow}) {
     await workflowUtils.syntheticActivityRoll(feature, targets);
 }
 async function inescapable({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let id = activityUtils.getIdentifier(workflow.activity);
     if (!['grapple', 'shovePush', 'shoveProne'].includes(id)) return;
     let moxie = itemUtils.getItemByIdentifier(workflow.actor, 'moxie');
@@ -43,33 +43,33 @@ async function inescapable({trigger: {entity: item}, workflow}) {
         ]}
     };
     let choice = await dialogUtils.confirm(
-        item.name, 
+        item.name,
         genericUtils.format('CHRISPREMADES.Dialog.UseExtraCost', {
-            itemName: inescapable.name, 
-            quantity: 1, 
+            itemName: inescapable.name,
+            quantity: 1,
             quantityName: moxie.name
         }) + '<br>' +
         genericUtils.format('CHRISPREMADES.Macros.Groundwork.Inescapable', {activityName: workflow.activity.name})
     );
     if (!choice) return;
-    await Promise.all(workflow.targets.map(async token => 
+    await Promise.all(workflow.targets.tokens.map(async token =>
         effectUtils.createEffect(token.document.actor, effectData, {identifier: 'inescapable', animate: false})
     ));
     await workflowUtils.completeActivityUse(inescapable);
     await genericUtils.update(moxie, {'system.uses.spent': moxie.system.uses.spent + 1});
 }
 async function inescapableCleanup({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let id = activityUtils.getIdentifier(workflow.activity);
     if (!['grapple', 'shovePush', 'shoveProne'].includes(id)) return;
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         let effect = effectUtils.getEffectByIdentifier(token.actor, 'inescapable');
         if (effect) await genericUtils.remove(effect);
     }));
 }
 export let groundwork = {
     name: 'Groundwork',
-    version: '1.4.25',
+    version: '2.3.0',
     rules: 'modern',
     combat: [
         {

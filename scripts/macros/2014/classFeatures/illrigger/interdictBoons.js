@@ -1,5 +1,5 @@
 export let interdictBoons = {
     name: 'Interdict Boons',
-    version: '1.3.76',
+    version: '2.3.0',
     rules: 'legacy'
 };

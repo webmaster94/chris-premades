@@ -1,10 +1,13 @@
-import {automationUtils, constants, genericUtils, tokenUtils, workflowUtils} from '../../proxy.mjs';
+import {automationUtils, constants, documentUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../proxy.mjs';
 async function coverBonus({document, identifier, workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
+    if (!itemUtils.getEquipmentState(document)) return;
     const config = automationUtils.getGenericConfigValues(document, 'chris-premades-native', 'ignoreCover', Object.keys(ignoreCover.genericConfig));
     if (!config.cover) return;
     if (config.attack && !workflowUtils.isAttackType(workflow, config.attack)) return;
-    const cover = tokenUtils.checkCover(workflow.token.document, workflow.targets.first().document, {activity: workflow.activity});
+    const target = workflow.targets.tokens[0];
+    if (!target) return;
+    const cover = tokenUtils.checkCover(workflow.token.document, target.document, {activity: workflow.activity});
     if (!cover) return;
     if (cover === 999 && config.cover == 999) {
         workflow.tracker.attribution.NOCOVER = {[identifier]: document.name};
@@ -15,13 +18,33 @@ async function coverBonus({document, identifier, workflow}) {
         await workflowUtils.bonusAttack(workflow, cover);
     }
 }
+// Midi refuses a total cover target before the attack bonus pass, so the item is enchanted for the use.
+async function fullCover({document, activity}) {
+    if (!itemUtils.getEquipmentState(document)) return;
+    const config = automationUtils.getGenericConfigValues(document, 'chris-premades-native', 'ignoreCover', Object.keys(ignoreCover.genericConfig));
+    if (config.cover != 999) return;
+    if (config.attack && !workflowUtils.isAttackType({activity}, config.attack)) return;
+    const effectData = documentUtils.getBaseEffectData(document, {
+        name: document.name,
+        img: constants.tempConditionIcon,
+        origin: document.uuid,
+        changes: [{key: 'system.activities.' + activity.id + '.midiProperties.ignoreFullCover', type: 'override', value: true, priority: 20}],
+        specialDuration: ['endOfWorkflow']
+    });
+    await itemUtils.enchantItem(activity.actor.items.get(activity.item.id), effectData);
+}
 export const ignoreCover = {
     rules: 'all',
-    version: '2.1.3',
+    version: '2.1.7',
     category: 'utility',
     generic: true,
     documents: ['activeeffect', 'item'],
     roll: [
+        {
+            pass: 'actorPreTargeting',
+            macro: fullCover,
+            priority: 50
+        },
         {
             pass: 'actorAttackRollBonuses',
             macro: coverBonus,

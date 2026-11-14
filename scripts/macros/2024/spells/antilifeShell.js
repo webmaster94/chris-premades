@@ -46,7 +46,7 @@ async function movedNear({trigger}) {
 }
 export let antilifeShell = {
     name: 'Antilife Shell',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

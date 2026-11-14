@@ -381,7 +381,7 @@
       "info": {
         "identifier": "digDeep",
         "rules": "modern",
-        "version": "1.4.29",
+        "version": "2.3.0",
         "source": "chris-premades"
       },
       "macros": {

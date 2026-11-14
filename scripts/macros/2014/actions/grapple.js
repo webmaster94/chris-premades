@@ -1,8 +1,8 @@
 import {compendiumUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils, rollUtils, tokenUtils} from '../../../utils.js';
 
 async function use({trigger, workflow}) {
-    if (!workflow.token || workflow.targets.size != 1) return;
-    let targetToken = workflow.targets.first();
+    if (!workflow.token || workflow.targets.count != 1) return;
+    let targetToken = workflow.targets.tokens[0];
     await tokenUtils.grappleHelper(workflow.token, targetToken, workflow.item);
 }
 async function escape({workflow}) {
@@ -34,11 +34,11 @@ async function escape({workflow}) {
     if (!escapeFlags?.dc) {
         // TODO: more generic version of this? Does it come up elsewhere?
         let result = await rollUtils.contestedRoll({
-            sourceToken: workflow.token, 
-            targetToken, 
-            sourceRollType: 'skill', 
-            targetRollType: 'skill', 
-            sourceAbilities: [selection], 
+            sourceToken: workflow.token,
+            targetToken,
+            sourceRollType: 'skill',
+            targetRollType: 'skill',
+            sourceAbilities: [selection],
             targetAbilities: ['ath'],
             sourceRollOptions,
             targetRollOptions
@@ -63,7 +63,7 @@ async function remove({trigger}) {
 }
 export let grapple = {
     name: 'Grapple',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

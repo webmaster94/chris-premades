@@ -11,7 +11,7 @@ async function use({workflow}) {
     }
     let damageType = itemUtils.getConfig(workflow.item, 'damageType');
     Object.values(featureDataSummon.system.activities).forEach(activity =>
-        activity.damage?.parts.forEach(part => 
+        activity.damage?.parts.forEach(part =>
             part.types = [damageType]
         )
     );
@@ -84,7 +84,7 @@ async function moveOrStart({trigger: {entity: effect, token, target}}) {
 }
 export let guardianOfFaith = {
     name: 'Guardian of Faith',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

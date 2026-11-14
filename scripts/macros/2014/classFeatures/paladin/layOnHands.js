@@ -16,8 +16,8 @@ function early({activity}) {
 }
 async function late({workflow}) {
     let activityIdentifier = activityUtils.getIdentifier(workflow.activity);
-    if (!workflow.targets.size) return;
-    let targetToken = workflow.targets.first();
+    if (!workflow.targets.count) return;
+    let targetToken = workflow.targets.tokens[0];
     if (activityIdentifier === 'layOnHandsPoison') {
         let poisoned = effectUtils.getEffectByStatusID(targetToken.actor, 'poisoned');
         if (poisoned) await genericUtils.remove(poisoned);
@@ -32,7 +32,7 @@ async function late({workflow}) {
 export let layOnHands = {
     name: 'Lay on Hands',
     aliases: ['Lay On Hands'],
-    version: '1.1.2',
+    version: '2.3.0',
     midi: {
         item: [
             {

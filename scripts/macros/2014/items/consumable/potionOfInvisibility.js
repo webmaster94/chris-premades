@@ -1,4 +1,4 @@
 export let potionOfInvisibility = {
     name: 'Potion of Invisibility',
-    version: '1.1.0'
+    version: '2.3.0'
 };

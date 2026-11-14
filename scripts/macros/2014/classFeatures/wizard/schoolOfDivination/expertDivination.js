@@ -21,7 +21,7 @@ async function late({trigger: {entity: item}, workflow}) {
 }
 export let expertDivination = {
     name: 'Expert Divination',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -46,11 +46,11 @@ async function use({workflow}) {
     };
     effectUtils.addMacro(effectData, 'effect', ['farStepStepping']);
     await effectUtils.createEffect(workflow.actor, effectData, {
-        concentrationItem: workflow.item, 
-        strictlyInterdependent: true, 
-        identifier: 'farStep', 
+        concentrationItem: workflow.item,
+        strictlyInterdependent: true,
+        identifier: 'farStep',
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
             identifier: 'farStep',
             activityIdentifier: 'farStepTeleport'
@@ -84,7 +84,7 @@ async function early({dialog}) {
 }
 export let farStep = {
     name: 'Far Step',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

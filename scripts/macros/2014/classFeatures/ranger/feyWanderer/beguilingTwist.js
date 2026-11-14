@@ -1,7 +1,7 @@
 import {dialogUtils, effectUtils, genericUtils, itemUtils} from '../../../../../utils.js';
 
 async function use({workflow}) {
-    if (workflow.targets.size !== 1 || !workflow.failedSaves.size) return;
+    if (workflow.targets.count !== 1 || !workflow.failedSaves.count) return;
     let selection = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.BeguilingTwist.Select', [
         ['DND5E.ConCharmed', 'charmed'],
         ['DND5E.ConFrightened', 'frightened']
@@ -29,11 +29,11 @@ async function use({workflow}) {
             }
         }
     };
-    await effectUtils.createEffect(workflow.targets.first().actor, effectData);
+    await effectUtils.createEffect(workflow.targets.tokens[0].actor, effectData);
 }
 export let beguilingTwist = {
     name: 'Beguiling Twist',
-    version: '1.3.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

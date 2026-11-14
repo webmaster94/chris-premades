@@ -1,9 +1,9 @@
 import {DialogApp} from '../../../../applications/dialog.js';
 import {constants, activityUtils, dialogUtils, genericUtils, itemUtils, workflowUtils, tokenUtils} from '../../../../utils.js';
 async function hit({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     if (targetToken.actor.system.attributes.hp.value <= 0 && !itemUtils.getConfig(item, 'promptOnDefeated')) return;
     if (tokenUtils.isGrappledBy(targetToken, workflow.token) && !itemUtils.getConfig(item, 'promptAlreadyGrappled')) return;
     let unarmedStrikeItem = workflow.item;
@@ -15,10 +15,10 @@ async function hit({trigger: {entity: item}, workflow}) {
     let groundwork = itemUtils.getItemByIdentifier(workflow.actor, 'groundwork');
     let selection;
     if (groundwork) {
-        await doStopandDrop(); 
+        await doStopandDrop();
     } else {
         selection = await dialogUtils.selectDocumentDialog(unarmedStrikeItem.name, genericUtils.format('CHRISPREMADES.Dialog.UseOn', {itemName:item.name, tokenName: targetToken.name}), [grapple, shoveProne, shovePush], {sortAlphabetical: true, displayReference: true});
-    } 
+    }
     if (!selection) return;
     await workflowUtils.syntheticActivityRoll(selection, [targetToken]);
 
@@ -68,7 +68,7 @@ async function hit({trigger: {entity: item}, workflow}) {
 }
 export let heavyHitter = {
     name: 'Heavy Hitter',
-    version: '1.4.25',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

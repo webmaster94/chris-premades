@@ -100,7 +100,7 @@ async function use({workflow}) {
         range: 90,
         animation,
         initiativeType: 'follows',
-        additionalSummonVaeButtons: 
+        additionalSummonVaeButtons:
             updates.actor.items
                 .filter(i => !['summonShadowspawnTerrorFrenzy', 'summonShadowspawnWeightOfSorrow'].includes(i.flags['chris-premades'].info.identifier))
                 .map(i => {return {type: 'use', name: i.name, identifier: i.flags['chris-premades'].info.identifier};})
@@ -113,7 +113,7 @@ async function turnStart({trigger: {entity: item, token, target}}) {
 }
 export let summonShadowspawn = {
     name: 'Summon Shadowspawn',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

@@ -220,7 +220,7 @@
     "chris-premades": {
       "info": {
         "identifier": "alert",
-        "version": "1.5.42",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern"
       },

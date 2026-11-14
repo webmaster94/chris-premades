@@ -7,15 +7,15 @@ async function rollFinished({trigger, workflow}) {
         genericUtils.notify('CHRISPREMADES.Macros.ActivityOnRest.NoActivity', 'error');
         return;
     }
-    let targets = new Set();
+    let targets = [];
     if (config.checkHit) {
-        targets = workflow.hitTargets;
+        targets = workflow.hitTargets.tokens;
     }
     if (config.checkSave) {
-        if (!targets.size) targets = workflow.failedSaves;
+        if (!targets.length) targets = workflow.failedSaves.tokens;
         else targets = targets.filter(i => workflow.failedSaves.has(i));
     }
-    if (!targets.size) return;
+    if (!targets.length) return;
     let effectUuids = (await workflow.activity.getApplicableEffects() ?? []).map(effect => effect.uuid);
     await Promise.all(targets.map(async i => {
         let effect = actorUtils?.getEffects(i.actor)?.find(j => effectUuids.includes(j?.origin));
@@ -43,7 +43,7 @@ async function rest({trigger: {entity, data}, actor}) {
 export let activityOnRest = {
     name: 'Activity on Rest',
     translation: 'CHRISPREMADES.Macros.ActivityOnRest.Name',
-    version: '1.3.31',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -101,7 +101,7 @@ export let activityOnRest = {
 };
 export let activityOnRestActor = {
     name: 'Activity On Rest Actor',
-    version: '1.3.30',
+    version: '2.3.0',
     rest: [
         {
             pass: 'short',

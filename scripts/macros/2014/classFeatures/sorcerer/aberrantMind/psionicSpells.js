@@ -8,7 +8,7 @@ async function use({trigger, workflow}) {
 }
 export let psionicSpells = {
     name: 'Psionic Spells',
-    version: '1.2.17',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

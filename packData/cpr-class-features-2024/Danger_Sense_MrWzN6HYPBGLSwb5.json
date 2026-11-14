@@ -48,7 +48,7 @@
         "identifier": "dangerSense",
         "source": "chris-premades",
         "rules": "modern",
-        "version": "1.1.22"
+        "version": "2.3.0"
       },
       "macros": {
         "save": [

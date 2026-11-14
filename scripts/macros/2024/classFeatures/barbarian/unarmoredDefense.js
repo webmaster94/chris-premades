@@ -13,7 +13,7 @@ async function change({trigger: {item}}) {
 export let unarmoredDefenseBarbarian = {
     name: 'Unarmored Defense (Barbarian)',
     aliases: ['Unarmored Defense'],
-    version: '1.1.138',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {

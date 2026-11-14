@@ -1,6 +1,6 @@
 import {effectUtils, genericUtils, itemUtils} from '../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'transform');
     let {avatarImg, avatarImgPriority, tokenImg, tokenImgPriority, items} = {};
     if ((config?.profileOneActivities?.length && config?.profileOneActivities.includes(workflow.activity.id)) || (!config?.profileOneActivities?.length && !config?.profileTwoActivities?.length)) {
@@ -21,7 +21,7 @@ async function use({trigger, workflow}) {
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
     effectData.origin = sourceEffect.uuid;
     effectData.duration = itemUtils.convertDuration(workflow.activity);
-    await Promise.all(workflow.hitTargets.map(async token => {
+    await Promise.all(workflow.hitTargets.tokens.map(async token => {
         if (config.checkSaves && !workflow.failedSaves.has(token)) return;
         let effect = await effectUtils.createEffect(token.actor, effectData, {
             avatarImg,
@@ -39,7 +39,7 @@ async function use({trigger, workflow}) {
         }))).filter(i => i);
         await itemUtils.createItems(token.actor, itemData, {favorite: true, parentEntity: effect});
     }));
-    
+
 }
 async function early({trigger, workflow}) {
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'transform');
@@ -52,7 +52,7 @@ async function early({trigger, workflow}) {
 export let transform = {
     name: 'Transform',
     translation: 'CHRISPREMADES.Macros.Transform.Name',
-    version: '1.3.138',
+    version: '2.3.0',
     midi: {
         item: [
             {

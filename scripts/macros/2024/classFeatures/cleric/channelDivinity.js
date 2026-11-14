@@ -1,19 +1,19 @@
 import {activityUtils, actorUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../../utils.js';
 async function spark({trigger, workflow}) {
-    if (!workflow.actor || !workflow.targets.size) return;
+    if (!workflow.actor || !workflow.targets.count) return;
     let disposition = workflow.token?.document?.disposition ?? workflow.actor.prototype.token.disposition;
     if (disposition === 0) disposition = 1;
     let activity;
-    if (workflow.targets.first().document.disposition === disposition) {
+    if (workflow.targets.tokens[0].document.disposition === disposition) {
         activity = activityUtils.getActivityByIdentifier(workflow.item, 'heal', {strict: true});
     } else {
         activity = activityUtils.getActivityByIdentifier(workflow.item, 'damage', {strict: true});
     }
     if (!activity) return;
-    await workflowUtils.syntheticActivityRoll(activity, [workflow.targets.first()]);
+    await workflowUtils.syntheticActivityRoll(activity, [workflow.targets.tokens[0]]);
 }
 async function turnEarly({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let advData = {
         name: 'Turn Advantage',
         img: constants.tempConditionIcon,
@@ -66,7 +66,7 @@ async function turnEarly({trigger, workflow}) {
     };
     let validTargets = [];
     let validTypes = itemUtils.getConfig(workflow.item, 'creatureTypes');
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         let type = actorUtils.typeOrRace(token.actor);
         if (!validTypes.includes(type)) return;
         if (token.actor.flags['chris-premades']?.turnResistance) await effectUtils.createEffect(token.actor, advData);
@@ -76,7 +76,7 @@ async function turnEarly({trigger, workflow}) {
     await workflowUtils.updateTargets(workflow, validTargets);
 }
 async function turnLate({trigger, workflow}) {
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let sourceEffect = workflow.item.effects.contents?.[1];
     let sourceTurnEffect = workflow.item.effects.contents?.[0];
     if (!sourceTurnEffect || !sourceEffect) return;
@@ -86,8 +86,8 @@ async function turnLate({trigger, workflow}) {
     turnEffectData.duration = itemUtils.convertDuration(workflow.activity);
     let effect = await effectUtils.createEffect(workflow.actor, effectData);
     let searUndead = itemUtils.getItemByIdentifier(workflow.actor, 'searUndead');
-    if (searUndead) await workflowUtils.syntheticItemRoll(searUndead, Array.from(workflow.failedSaves));
-    await Promise.all(workflow.failedSaves.map(async token => {
+    if (searUndead) await workflowUtils.syntheticItemRoll(searUndead, Array.from(workflow.failedSaves.tokens));
+    await Promise.all(workflow.failedSaves.tokens.map(async token => {
         await effectUtils.createEffect(token.actor, turnEffectData, {parentEntity: effect});
     }));
 }
@@ -110,7 +110,7 @@ async function added({trigger: {entity: item}}) {
 export let channelDivinity = {
     name: 'Channel Divinity (Cleric)',
     aliases: ['Channel Divinity'],
-    version: '1.2.13',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

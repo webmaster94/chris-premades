@@ -1,9 +1,9 @@
 import {actorUtils, constants, dialogUtils, genericUtils, itemUtils, socketUtils, tokenUtils, workflowUtils} from '../../../../../utils.js';
 
 async function attack({trigger, workflow}) {
-    if (!workflow.targets.size || !workflow.item || !workflow.isCritical || !workflowUtils.isAttackType(workflow, 'attack')) return;
+    if (!workflow.targets.count || !workflow.item || !workflow.isCritical || !workflowUtils.isAttackType(workflow, 'attack')) return;
     if (genericUtils.getIdentifier(workflow.item) === 'sentinelAtDeathsDoor') return;
-    let nearbyTokens = tokenUtils.findNearby(workflow.targets.first(), 30, 'ally').filter(token => {
+    let nearbyTokens = tokenUtils.findNearby(workflow.targets.tokens[0], 30, 'ally').filter(token => {
         if (actorUtils.hasUsedReaction(token.actor)) return;
         let sentinelAtDeathsDoor = itemUtils.getItemByIdentifier(token.actor, 'sentinelAtDeathsDoor');
         if (!sentinelAtDeathsDoor) return;
@@ -14,7 +14,7 @@ async function attack({trigger, workflow}) {
     for (let token of nearbyTokens) {
         let item = itemUtils.getItemByIdentifier(token.actor, 'sentinelAtDeathsDoor');
         if (!item || !item.system.uses.value) continue;
-        let target = workflow.targets.first();
+        let target = workflow.targets.tokens[0];
         let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Macros.SentinelAtDeathsDoor.Attack', {item: item.name, name: target.document.name}), {userId: socketUtils.firstOwner(token.actor, true)});
         if (!selection) continue;
         await workflowUtils.syntheticItemRoll(item, [target], {consumeResources: true, userId: socketUtils.firstOwner(token.actor, true)});
@@ -25,7 +25,7 @@ async function attack({trigger, workflow}) {
 
 export let sentinelAtDeathsDoor = {
     name: 'Sentinel at Death\'s Door',
-    version: '1.2.32',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         actor: [

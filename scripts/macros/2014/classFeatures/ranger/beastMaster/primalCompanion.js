@@ -143,12 +143,12 @@ async function use({workflow}) {
         range: 10,
         animation,
         initiativeType: 'follows',
-        additionalSummonVaeButtons: 
+        additionalSummonVaeButtons:
             updates.actor.items
                 .filter(i => identifiersToVae.includes(i.flags['chris-premades'].info.identifier))
                 .map(i => ({type: 'use', name: i.name, identifier: i.flags['chris-premades'].info.identifier})),
         additionalVaeButtons: [{
-            type: 'use', 
+            type: 'use',
             name: commandFeature.name,
             identifier: 'primalCompanion',
             activityIdentifier: 'primalCompanionCommand'
@@ -174,7 +174,7 @@ async function earlySea({workflow}) {
 }
 export let primalCompanion = {
     name: 'Primal Companion',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

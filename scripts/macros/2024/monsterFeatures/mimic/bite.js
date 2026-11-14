@@ -1,6 +1,6 @@
 export let mimicBite = {
     name: 'Bite',
-    version: '1.3.132',
+    version: '2.3.0',
     rules: 'modern',
     monsters: [
         'Mimic'

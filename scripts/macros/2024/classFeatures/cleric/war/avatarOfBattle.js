@@ -1,5 +1,5 @@
 export let avatarOfBattle = {
     name: 'Avatar of Battle',
-    version: '1.3.31',
+    version: '2.3.0',
     rules: 'modern'
 };

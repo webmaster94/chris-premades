@@ -8,13 +8,13 @@ async function use({trigger, workflow}) {
     let targetEffectData = genericUtils.duplicate(targetSourceEffect.toObject());
     targetEffectData.duration = itemUtils.convertDuration(workflow.activity);
     let effect = await effectUtils.createEffect(workflow.actor, actorEffectData);
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         await effectUtils.createEffect(token.actor, targetEffectData, {parentEntity: effect});
     }));
 }
 export let telepathicSpeech = {
     name: 'Telepathic Speech',
-    version: '1.2.17',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

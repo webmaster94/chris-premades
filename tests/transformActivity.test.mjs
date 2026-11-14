@@ -30,6 +30,7 @@ async function loadPatch({polymorphFromActivity}) {
         identifier: subjectPath
     });
     await subject.link(async specifier => {
+        if (specifier === '../lib/riderFlags.js') return createSyntheticModule(context, {mergeRiderFlags() {}}, specifier);
         if (specifier !== '../utils.js') throw new Error(`Unexpected import: ${specifier}`);
         return createSyntheticModule(context, {
             activityUtils: {},

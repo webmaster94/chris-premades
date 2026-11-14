@@ -1,8 +1,8 @@
 import {actorUtils, dialogUtils, effectUtils, genericUtils, itemUtils, rollUtils, socketUtils, tokenUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (workflow.targets.size != 1) return;
+    if (workflow.targets.count != 1) return;
     let skipCheck = false;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     if (workflow.actor.uuid === targetToken.actor.uuid) return;
     let heavy = !!itemUtils.getItemByIdentifier(workflow.actor, 'heavyweight');
     if ((actorUtils.getSize(targetToken.actor)) > (actorUtils.getSize(workflow.actor) + 1 + heavy)) {
@@ -17,11 +17,11 @@ async function use({trigger, workflow}) {
         if (!selection) return;
         if (selection != 'skip') {
             let result = await rollUtils.contestedRoll({
-                sourceToken: workflow.token, 
-                targetToken, 
-                sourceRollType: 'skill', 
-                targetRollType: 'skill', 
-                sourceAbilities: ['ath'], 
+                sourceToken: workflow.token,
+                targetToken,
+                sourceRollType: 'skill',
+                targetRollType: 'skill',
+                sourceAbilities: ['ath'],
                 targetAbilities: [selection]
             });
             if (result <= 0) return;
@@ -42,7 +42,7 @@ async function use({trigger, workflow}) {
 }
 export let shove = {
     name: 'Shove',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

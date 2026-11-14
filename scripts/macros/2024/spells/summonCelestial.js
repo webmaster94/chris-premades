@@ -93,7 +93,7 @@ async function use({workflow}) {
     });
 }
 async function late({workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let nearbyTargets = tokenUtils.findNearby(workflow.token, 10, 'ally', {includeIncapacitated: true, includeToken: true});
     if (!nearbyTargets.length) return;
     let targetToken = nearbyTargets[0];
@@ -112,7 +112,7 @@ async function late({workflow}) {
 }
 export let summonCelestial = {
     name: 'Summon Celestial',
-    version: '1.2.32',
+    version: '2.3.0',
     rules: 'modern',
     hasAnimation: true,
     midi: {

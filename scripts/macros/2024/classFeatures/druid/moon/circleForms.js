@@ -7,7 +7,7 @@ async function use({trigger, workflow}) {
 }
 export let circleForms = {
     name: 'Circle Forms',
-    version: '1.3.124',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

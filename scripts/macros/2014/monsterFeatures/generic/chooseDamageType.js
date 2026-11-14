@@ -8,9 +8,19 @@ async function damage({workflow}) {
     if (!selection) return;
     await workflowUtils.replaceDamage(workflow, workflow.damageRoll.formula, {damageType: selection, ignoreCrit: true});
 }
+function skipDNDPrompt(config, dialog) {
+    const item = config.subject?.item;
+    const binding = item?.flags?.['chris-premades']?.macros?.midi?.item ?? [];
+    if (!binding.includes('chooseDamageType')) return;
+    const selected = itemUtils.getGenericFeatureConfig(item, 'chooseDamageType');
+    const activities = selected.activities ?? [];
+    if (activities.length && !activities.includes(config.subject.id)) return;
+    if ((selected.damageTypes?.length ?? 0) < 2) return;
+    dialog.configure = false;
+}
 export let chooseDamageType = {
     name: 'Choose Damage',
-    version: '1.3.39',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -36,3 +46,4 @@ export let chooseDamageType = {
         }
     ]
 };
+export {skipDNDPrompt};

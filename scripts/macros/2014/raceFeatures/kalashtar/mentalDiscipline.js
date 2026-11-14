@@ -1,6 +1,6 @@
 export let mentalDisciplineKalashtar = {
     name: 'Mental Discipline (Kalashtar)',
-    version: '1.1.0',
+    version: '2.3.0',
     ddbi: {
         restrictedItems: {
             'Mental Discipline 1': {

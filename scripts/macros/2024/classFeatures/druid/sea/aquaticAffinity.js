@@ -1,5 +1,5 @@
 export let aquaticAffinity = {
     name: 'Aquatic Affinity',
-    version: '1.3.83',
+    version: '2.3.0',
     rules: 'modern'
 };

@@ -2,7 +2,7 @@ import {Teleport} from '../../../../../lib/teleport.js';
 import {animationUtils, itemUtils} from '../../../../../utils.js';
 
 async function use({workflow}) {
-    let targetToken = workflow.targets.first() ?? workflow.token;
+    let targetToken = workflow.targets.tokens[0] ?? workflow.token;
     let maxRange = targetToken.actor === workflow.actor ? 60 : 30;
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.jb2aCheck();
     await Teleport.target(targetToken, workflow.token, {
@@ -12,7 +12,7 @@ async function use({workflow}) {
 }
 export let hiddenPaths = {
     name: 'Hidden Paths',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

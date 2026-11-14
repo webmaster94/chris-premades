@@ -1,7 +1,7 @@
 import {compendiumUtils, constants, effectUtils, errors, genericUtils, itemUtils} from '../../../../utils.js';
 
 async function use({workflow}) {
-    let actor = workflow.targets.first?.actor ?? workflow.actor;
+    let actor = workflow.targets.documents[0]?.actor ?? workflow.actor;
     let featureData = await compendiumUtils.getItemFromCompendium(constants.featurePacks.itemFeatures, 'Potion of Fire Breath Attack', {object: true, getDescription: true, translate: 'CHRISPREMADES.Macros.PotionOfFireBreath.Attack', identifier: 'potionOfFireBreathAttack'});
     if (!featureData) {
         errors.missingPackItem();
@@ -24,7 +24,7 @@ async function late({workflow}) {
 }
 export let potionOfFireBreath = {
     name: 'Potion of Fire Breath',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

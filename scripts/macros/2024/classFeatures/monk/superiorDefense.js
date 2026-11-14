@@ -4,7 +4,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let superiorDefense = {
     name: 'Superior Defense',
-    version: '1.3.162',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {

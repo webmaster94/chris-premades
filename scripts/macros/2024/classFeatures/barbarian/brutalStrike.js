@@ -2,7 +2,7 @@ import {combatUtils} from '../../../../lib/utilities/combatUtils.js';
 import {activityUtils, dialogUtils, effectUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../utils.js';
 async function early({trigger: {entity: item}, workflow}) {
     if (!item.system.uses.value) return;
-    if (!workflow.token || !workflow.targets.size || workflow.disadvantage || (workflow.disadvantage && workflow.advantage) || !combatUtils.isOwnTurn(workflow.token) || !workflowUtils.isAttackType(workflow, 'attack')) return;
+    if (!workflow.token || !workflow.targets.count || workflow.disadvantage || (workflow.disadvantage && workflow.advantage) || !combatUtils.isOwnTurn(workflow.token) || !workflowUtils.isAttackType(workflow, 'attack')) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'recklessAttackEffect');
     if (!effect) return;
     let classIdentifier = itemUtils.getConfig(item, 'classIdentifier');
@@ -30,7 +30,7 @@ async function early({trigger: {entity: item}, workflow}) {
     workflow.tracker.disadvantage.add(item.name, item.name);
 }
 async function damage({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let activitiesIdentifiers = workflow['chris-premades']?.brutalStrike;
     if (!activitiesIdentifiers) return;
     let classIdentifier = itemUtils.getConfig(item, 'classIdentifier');
@@ -41,17 +41,17 @@ async function damage({trigger: {entity: item}, workflow}) {
     await workflowUtils.bonusDamage(workflow, formula, {damageType: workflow.defaultDamageType});
 }
 async function late({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let activitiesIdentifiers = workflow['chris-premades']?.brutalStrike;
     if (!activitiesIdentifiers) return;
     let activities = activitiesIdentifiers.map(i => activityUtils.getActivityByIdentifier(item, i, {strict: true}));
     for (let activity of activities) {
-        await workflowUtils.syntheticActivityRoll(activity, [workflow.targets.first()]);
+        await workflowUtils.syntheticActivityRoll(activity, [workflow.targets.tokens[0]]);
     }
 }
 async function forcefulBlow({trigger, workflow}) {
-    if (!workflow.token || !workflow.targets.size) return;
-    await tokenUtils.pushToken(workflow.token, workflow.targets.first(), 15);
+    if (!workflow.token || !workflow.targets.count) return;
+    await tokenUtils.pushToken(workflow.token, workflow.targets.tokens[0], 15);
 }
 async function sunderingBlowAttacked({trigger: {entity: effect}, workflow}) {
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
@@ -64,7 +64,7 @@ async function sunderingBlowAttacked({trigger: {entity: effect}, workflow}) {
 }
 export let brutalStrike = {
     name: 'Brutal Strike',
-    version: '1.5.5',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

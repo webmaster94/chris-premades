@@ -42,7 +42,7 @@ async function late({trigger: {entity: item}, workflow}) {
 }
 export let aberrantDragonmark = {
     name: 'Aberrant Dragonmark',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

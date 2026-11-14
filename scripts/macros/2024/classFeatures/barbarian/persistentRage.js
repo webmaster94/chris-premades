@@ -6,7 +6,7 @@ async function use({trigger, workflow}) {
 }
 export let persistentRage = {
     name: 'Persistent Rage',
-    version: '1.1.22',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

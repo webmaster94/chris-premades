@@ -3,7 +3,7 @@ async function use({workflow}) {
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'activityOnEffectExpiry');
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
-    let targets = workflow.hitTargets;
+    let targets = workflow.hitTargets.tokens;
     let effectUuids = (await workflow.activity.getApplicableEffects() ?? []).map(effect => effect.uuid);
     await Promise.all(targets.map(async i => {
         let effect = actorUtils?.getEffects(i.actor)?.find(j => effectUuids.includes(j?.origin));
@@ -27,7 +27,7 @@ async function deleted({trigger: {entity, options}}) {
 export let activityOnEffectExpiry = {
     name: 'Activity on Effect Expiry',
     translation: 'CHRISPREMADES.Macros.ActivityOnEffectExpiry.Name',
-    version: '1.3.38',
+    version: '2.3.0',
     midi: {
         item: [
             {

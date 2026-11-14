@@ -1,6 +1,6 @@
 import {constants, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function damage({trigger, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let charge = itemUtils.getItemByIdentifier(workflow.actor, 'minotaurCharge');
     if (!charge) return;
     let selection = await dialogUtils.confirm(charge.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: charge.name}));
@@ -8,11 +8,11 @@ async function damage({trigger, workflow}) {
     let formula = itemUtils.getConfig(workflow.item, 'formula');
     let damageType = itemUtils.getConfig(workflow.item, 'damageType');
     await workflowUtils.bonusDamage(workflow, formula, {damageType: damageType});
-    await workflowUtils.syntheticItemRoll(charge, Array.from(workflow.targets));
+    await workflowUtils.syntheticItemRoll(charge, Array.from(workflow.targets.tokens));
 }
 export let minotaurGore = {
     name: 'Gore',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

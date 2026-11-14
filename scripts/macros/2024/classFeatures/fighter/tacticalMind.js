@@ -28,7 +28,7 @@ async function checkLate({trigger: {entity: item, roll, actor, options}}) {
 }
 export let tacticalMind = {
     name: 'Tactical Mind',
-    version: '1.5.34',
+    version: '2.3.0',
     rules: 'modern',
     skill: [
         {

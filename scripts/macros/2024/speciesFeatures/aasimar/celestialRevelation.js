@@ -33,16 +33,16 @@ async function turnEnd({trigger: {entity: effect}}) {
     await workflowUtils.syntheticActivityRoll(activity, nearby);
 }
 async function damage({trigger: {entity: effect}, workflow}) {
-    if (!workflow.targets.size || !(workflow.item.type === 'spell' || workflowUtils.isAttackType(workflow, 'attack'))) return;
+    if (!workflow.targets.count || !(workflow.item.type === 'spell' || workflowUtils.isAttackType(workflow, 'attack'))) return;
     if (!combatUtils.perTurnCheck(effect, 'celestialRevelation', true, workflow.token.id)) return;
     let damageType = effect.flags['chris-premades']?.celestialRevelation?.damageType;
     if (!damageType) return;
-    if (workflow.targets.size === 1) {
+    if (workflow.targets.count === 1) {
         let selection = await dialogUtils.confirmUseItem(effect);
         if (!selection) return;
         await workflowUtils.bonusDamage(workflow, String(workflow.actor.system.attributes.prof), {damageType});
     } else {
-        let result = await dialogUtils.selectTargetDialog(effect.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: effect.name}), workflow.targets, {skipDeadAndUnconscious: false});
+        let result = await dialogUtils.selectTargetDialog(effect.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: effect.name}), workflow.targets.tokens, {skipDeadAndUnconscious: false});
         if (!result) return;
         genericUtils.setProperty(workflow, 'chris-premades.celestialRevelation', {target: result[0].document.uuid, damage: workflow.actor.system.attributes.prof, damageType});
     }
@@ -56,7 +56,7 @@ async function applyDamage({trigger, workflow, ditem}) {
 }
 export let celestialRevelation = {
     name: 'Celestial Revelation',
-    version: '1.3.146',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

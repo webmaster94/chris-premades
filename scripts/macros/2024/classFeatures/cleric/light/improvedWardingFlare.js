@@ -14,7 +14,7 @@ async function added({trigger: {entity: item, actor}}) {
 }
 export let improvedWardingFlare = {
     name: 'Improved Warding Flare',
-    version: '1.3.10',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {

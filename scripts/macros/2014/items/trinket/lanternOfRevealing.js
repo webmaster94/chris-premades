@@ -109,7 +109,7 @@ async function create({trigger: {entity: effect, target, identifier}}) {
 }
 export let lanternOfRevealing = {
     name: 'Lantern of Revealing',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

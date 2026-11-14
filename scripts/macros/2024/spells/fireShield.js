@@ -1,6 +1,6 @@
 import {fireShield as fireShieldLegacy} from '../../../legacyMacros.js';
 export let fireShield = {
     ...fireShieldLegacy,
-    version: '1.2.40',
+    version: '2.3.0',
     rules: 'modern'
 };

@@ -1,12 +1,12 @@
 import {constants, dialogUtils, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function early({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     if (workflow.item.type !== 'spell') return;
     if (workflow.item.system.school !== 'evo') return;
     if (!workflow.hasSave) return;
     let max = 1 + workflowUtils.getCastLevel(workflow);
     let allowEnemies = itemUtils.getConfig(item, 'allowEnemies');
-    let selection = allowEnemies ? Array.from(workflow.targets) : Array.from(workflow.targets).filter(i => i.document.disposition === workflow.token.document.disposition);
+    let selection = allowEnemies ? Array.from(workflow.targets.tokens) : Array.from(workflow.targets.tokens).filter(i => i.document.disposition === workflow.token.document.disposition);
     if (selection.length > max || allowEnemies) {
         selection = await dialogUtils.selectTargetDialog(item.name, genericUtils.format('CHRISPREMADES.Macros.SculptSpells.Select', {max}), selection, {
             type: 'multiple',
@@ -55,7 +55,7 @@ async function late({trigger: {entity: effect}}) {
 }
 export let sculptSpells ={
     name: 'Sculpt Spells',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -30,8 +30,8 @@ async function remove({trigger: {entity: effect}}) {
     await genericUtils.deleteEmbeddedDocuments(game.combat, 'Combatant', combatants.map(i => i.id));
 }
 async function targetOther({trigger: {entity: effect}, workflow}) {
-    if (!workflow.targets.size) return;
-    if (!workflow.targets.filter(token => token != workflow.token).size) return;
+    if (!workflow.targets.count) return;
+    if (!new Set(workflow.targets.tokens).filter(token => token != workflow.token).size) return;
     let selection = await dialogUtils.confirm(effect.name, 'CHRISPREMADES.Macros.TimeStop.Affect', {userId: socketUtils.gmID()});
     if (!selection) return;
     await genericUtils.remove(effect);
@@ -42,7 +42,7 @@ async function turnEnd({trigger: {entity: effect}}) {
 }
 export let timeStop = {
     name: 'Time Stop',
-    version: '1.3.44',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

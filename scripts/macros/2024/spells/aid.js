@@ -1,6 +1,6 @@
 import {effectUtils, itemUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let effectData = {
         name: workflow.item.name,
         img: workflow.item.img,
@@ -15,13 +15,13 @@ async function use({trigger, workflow}) {
         ]},
         origin: workflow.item.uuid
     };
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         await effectUtils.createEffect(token.actor, effectData);
     }));
 }
 export let aid = {
     name: 'Aid',
-    version: '1.1.7',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

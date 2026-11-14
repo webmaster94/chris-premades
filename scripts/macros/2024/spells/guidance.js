@@ -1,6 +1,6 @@
 import {activityUtils, combatUtils, dialogUtils, effectUtils, genericUtils, itemUtils, rollUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size || !workflow.activity) return;
+    if (!workflow.targets.count || !workflow.activity) return;
     let options = Object.entries(CONFIG.DND5E.skills).map(([key, value]) => ({
         name: value.label,
         id: key,
@@ -17,7 +17,7 @@ async function use({trigger, workflow}) {
     let formula = itemUtils.getConfig(workflow.item, 'formula');
     effectData.changes[0].value = '+ ' + formula;
     effectData.img = options.find(i => i.id === selection.id)?.img ?? sourceEffect.img;
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         await effectUtils.createEffect(token.actor, effectData, {concentrationItem: workflow.item});
     }));
 }
@@ -38,7 +38,7 @@ async function skillCheck({trigger: {actor, entity: item, roll, token}}) {
 }
 export let guidance = {
     name: 'Guidance',
-    version: '1.3.78',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

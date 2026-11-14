@@ -1,6 +1,6 @@
 import {actorUtils, constants, effectUtils, genericUtils, itemUtils, rollUtils, workflowUtils} from '../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.hitTargets.size || !workflow.damageRolls || !workflow.item) return;
+    if (!workflow.hitTargets.count || !workflow.damageRolls || !workflow.item) return;
     let {damageTypes, criticalOnly, checkSaves, reduceMaxHP, maxHPCure, excessAsTemp, ignoredCreatureTypes, formula, displayFormulaRoll, healingType, percentage, activities, validItems} = itemUtils.getGenericFeatureConfig(trigger.entity, 'lifesteal');
     if (trigger.entity.uuid === workflow.item.uuid) {
         if (validItems?.length && !validItems?.includes('thisItem')) return;
@@ -27,7 +27,7 @@ async function use({trigger, workflow}) {
     if (!damageTypes.length) damageTypes = Object.keys(CONFIG.DND5E.damageTypes);
     if ((!damageTypes.some(i => workflowDamageTypes.has(i)))) return;
     if (criticalOnly && !workflow.isCritical) return;
-    let validTargets = workflow.hitTargets.filter(token => {
+    let validTargets = new Set(workflow.hitTargets.tokens).filter(token => {
         if (checkSaves) if (!workflow.failedSaves.has(token)) return false;
         if (ignoredCreatureTypes.includes(actorUtils.typeOrRace(token.actor))) return false;
         return true;
@@ -120,14 +120,14 @@ async function use({trigger, workflow}) {
                 }
             }
         } else {
-            workflowUtils.applyDamage([workflow.token], totalHeal, healingType);  
+            workflowUtils.applyDamage([workflow.token], totalHeal, healingType);
         }
     }
 }
 export let lifesteal = {
     name: 'Lifesteal',
     translation: 'CHRISPREMADES.Macros.Lifesteal.Name',
-    version: '1.0.34',
+    version: '2.3.0',
     isGenericFeature: true,
     midi: {
         actor: [

@@ -96,7 +96,7 @@ async function keenHearingAndSmell({trigger: {skillId}}) {
 }
 export let amuletOfTheLycanthrope = {
     name: 'Amulet of the Lycanthrope',
-    version: '1.3.163',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

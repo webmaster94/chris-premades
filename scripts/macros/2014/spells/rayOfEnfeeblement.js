@@ -2,7 +2,7 @@ import {effectUtils, genericUtils, itemUtils} from '../../../utils.js';
 
 async function use({workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (!workflow.hitTargets.size) {
+    if (!workflow.hitTargets.count) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
@@ -21,7 +21,7 @@ async function use({workflow}) {
         ]}
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['rayOfEnfeeblementEnfeebled']);
-    for (let target of workflow.hitTargets) {
+    for (let target of workflow.hitTargets.tokens) {
         await effectUtils.createEffect(target.actor, effectData, {concentrationItem: workflow.item, interdependent: true, identifier: 'rayOfEnfeeblementEnfeebled'});
     }
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
@@ -39,7 +39,7 @@ async function damage({workflow}) {
 }
 export let rayOfEnfeeblement = {
     name: 'Ray of Enfeeblement',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

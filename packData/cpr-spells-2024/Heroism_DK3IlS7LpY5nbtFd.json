@@ -237,7 +237,7 @@
     "core": {},
     "chris-premades": {
       "info": {
-        "version": "1.2.29",
+        "version": "2.3.0",
         "identifier": "heroism",
         "source": "chris-premades",
         "rules": "modern"

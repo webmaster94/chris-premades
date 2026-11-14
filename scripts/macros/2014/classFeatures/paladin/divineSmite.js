@@ -7,7 +7,7 @@ async function manual(args) {
     return await attackRiders.manual(args, 'divineSmite');
 }
 async function applyDamage({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!itemUtils.getConfig(item, 'allowUnarmed') && constants.unarmedAttacks.includes(genericUtils.getIdentifier(workflow.item))) return;
     let validTypes = ['mwak'];
     if (itemUtils.getConfig(item, 'allowRanged')) {
@@ -45,7 +45,7 @@ async function applyDamage({trigger: {entity: item}, workflow}) {
 }
 export let divineSmite = {
     name: 'Divine Smite',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [{pass: 'preTargeting', macro: manual, priority: 50}],
         actor: [

@@ -1,7 +1,7 @@
 import {actorUtils, animationUtils, dialogUtils, effectUtils, genericUtils, itemUtils, tokenUtils} from '../../../utils.js';
 async function use({workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (!workflow.failedSaves.size) {
+    if (!workflow.failedSaves.count) {
         await genericUtils.remove(concentrationEffect);
         return;
     }
@@ -85,7 +85,7 @@ async function use({workflow}) {
             ]);
         }
         effectUtils.addMacro(effectData, 'effect', ['enlargeReduceChanged']);
-        for (let targetToken of workflow.failedSaves) {
+        for (let targetToken of workflow.failedSaves.tokens) {
             let currEffectData = genericUtils.duplicate(effectData);
             let doGrow = true;
             let targetSize = targetToken.actor.system.traits.size;
@@ -163,7 +163,7 @@ async function use({workflow}) {
             }
         };
         effectUtils.addMacro(effectData, 'effect', ['enlargeReduceChanged']);
-        for (let targetToken of workflow.failedSaves) {
+        for (let targetToken of workflow.failedSaves.tokens) {
             let currEffectData = genericUtils.duplicate(effectData);
             let targetSize = targetToken.actor.system.traits.size;
             let newSize = targetSize;
@@ -229,7 +229,7 @@ export async function start({trigger: {entity: effect}}) {
             .fadeIn(250)
             .fadeOut(250)
             .zIndex(2)
-            
+
             .effect()
             .copySprite(token)
             .atLocation(token)
@@ -241,11 +241,11 @@ export async function start({trigger: {entity: effect}}) {
             .repeats(3, 500, 500)
             .opacity(0.2)
             .zIndex(1)
-            
+
             .animation()
             .on(token)
             .opacity(0)
-            
+
             .effect()
             .copySprite(token)
             .atLocation(token)
@@ -254,7 +254,7 @@ export async function start({trigger: {entity: effect}}) {
             .duration(2000)
             .waitUntilFinished(-200)
             .zIndex(0)
-            
+
             .thenDo(async () => {
                 let updates = {
                     system: {changes: effect.system.changes.concat(
@@ -272,16 +272,16 @@ export async function start({trigger: {entity: effect}}) {
                 };
                 await genericUtils.update(effect, updates2);
             })
-            
+
             .wait(200)
-            
+
             .effect()
             .copySprite(token)
             .atLocation(token)
             .scaleToObject(1)
             .duration(3000)
             .scaleIn(0.25,700, {ease: 'easeOutBounce'})
-            
+
             .effect()
             .file('jb2a.extras.tmfx.outpulse.circle.01.fast')
             .atLocation(token)
@@ -289,14 +289,14 @@ export async function start({trigger: {entity: effect}}) {
             .opacity(0.75)
             .scaleToObject(2)
             .zIndex(1)
-            
+
             .effect()
             .file('jb2a.impact.ground_crack.orange.02')
             .atLocation(token)
             .belowTokens()
             .scaleToObject(2)
             .zIndex(0)
-            
+
             .effect()
             .file('jb2a.particles.outward.orange.01.04')
             .scaleIn(0.25, 500, {ease: 'easeOutQuint'})
@@ -307,7 +307,7 @@ export async function start({trigger: {entity: effect}}) {
             .duration(3000)
             .scaleToObject(1.5)
             .zIndex(4)
-            
+
             .effect()
             .file('jb2a.static_electricity.03.orange')
             .atLocation(token)
@@ -316,11 +316,11 @@ export async function start({trigger: {entity: effect}}) {
             .fadeIn(250)
             .fadeOut(250)
             .waitUntilFinished(-3000)
-            
+
             .animation()
             .on(token)
             .opacity(1)
-            
+
             .play();
     } else {
         let scale = 1;
@@ -439,7 +439,7 @@ export async function start({trigger: {entity: effect}}) {
 }
 export let enlargeReduce = {
     name: 'Enlarge/Reduce',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

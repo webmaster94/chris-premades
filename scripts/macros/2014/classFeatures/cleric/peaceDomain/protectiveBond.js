@@ -1,6 +1,6 @@
 export let protectiveBond = {
     name: 'Protective Bond',
-    version: '1.1.0',
+    version: '2.3.0',
     config: [
         {
             value: 'promptTargetInstead',

@@ -3,7 +3,7 @@ async function use({workflow}) {
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'failedByAmount');
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
-    let targets = workflow.failedSaves.filter(i => workflow.tokenSaves[i.document.uuid].total <= (workflow.saveDC - config.amount));
+    let targets = new Set(workflow.failedSaves.tokens).filter(i => workflow.tokenSaves[i.document.uuid].total <= (workflow.saveDC - config.amount));
     if (!targets.size) return;
     let triggerActivities = config.triggerActivities.map(i => workflow.item.system.activities.find(j => j.id === i));
     if (!triggerActivities.length) return;
@@ -12,7 +12,7 @@ async function use({workflow}) {
 export let failedByAmount = {
     name: 'Failed By Amount',
     translation: 'CHRISPREMADES.Macros.FailedByAmount.Name',
-    version: '1.3.39',
+    version: '2.3.0',
     midi: {
         item: [
             {

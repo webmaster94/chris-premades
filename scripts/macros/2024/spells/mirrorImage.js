@@ -25,9 +25,9 @@ async function use({workflow}) {
     await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'mirrorImage', rules: 'modern'});
 }
 async function attacked({trigger: {entity: effect}, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (workflow.isFumble) return;
-    let targetToken = workflow.hitTargets.first();
+    let targetToken = workflow.hitTargets.tokens[0];
     let attackingToken = workflow.token;
     if (!tokenUtils.canSee(attackingToken, targetToken)) return;
     if (tokenUtils.canSense(attackingToken, targetToken, ['blindsight', 'seeAll'])) return;
@@ -62,7 +62,7 @@ async function attacked({trigger: {entity: effect}, workflow}) {
 }
 export let mirrorImage = {
     name: 'Mirror Image',
-    version: '1.2.30',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

@@ -11,7 +11,7 @@ async function use({workflow}) {
     effectUtils.addMacro(effectData, 'check', ['potionOfAdvantage']);
     effectUtils.addMacro(effectData, 'save', ['potionOfAdvantage']);
     effectUtils.addMacro(effectData, 'skill', ['potionOfAdvantage']);
-    await effectUtils.createEffect(workflow.targets.first()?.actor ?? workflow.actor, effectData, {identifier: 'potionOfAdvantage'});
+    await effectUtils.createEffect(workflow.targets.tokens[0]?.actor ?? workflow.actor, effectData, {identifier: 'potionOfAdvantage'});
 }
 async function situational({trigger: {entity: effect, options}}) {
     let selection = await dialogUtils.confirm(effect.name, 'CHRISPREMADES.Macros.PotionOfAdvantage.Select');
@@ -28,7 +28,7 @@ async function early({trigger: {entity: effect}, workflow}) {
 }
 export let potionOfAdvantage = {
     name: 'Potion of Advantage',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

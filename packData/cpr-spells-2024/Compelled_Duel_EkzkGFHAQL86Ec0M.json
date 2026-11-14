@@ -231,7 +231,7 @@
     "chris-premades": {
       "info": {
         "name": "Compelled Duel",
-        "version": "1.2.21",
+        "version": "2.3.0",
         "identifier": "compelledDuel",
         "source": "chris-premades",
         "rules": "modern"

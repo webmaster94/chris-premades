@@ -35,7 +35,7 @@ async function turnStart({trigger: {entity: effect, target}}) {
 }
 export let holyNimbus = {
     name: 'Holy Nimbus',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

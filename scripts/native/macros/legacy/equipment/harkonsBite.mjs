@@ -42,19 +42,19 @@ async function human({workflow}) {
     if (effect) await documentUtils.deleteDocument(effect);
 }
 async function curse(document, workflow) {
-    const target = workflow.hitTargets.first();
+    const target = workflow.hitTargets.documents[0];
     if (actorUtils.typeOrRace(target.actor) !== 'humanoid') return;
     if (documentUtils.getEffectByIdentifier(target.actor, 'curseOfLycanthropy')) return;
     const activity = itemUtils.getActivityByIdentifier(document, 'humanoid');
     if (!activity) return;
-    await workflowUtils.completeActivityUse(activity, Array.from(workflow.hitTargets, token => token.document ?? token));
+    await workflowUtils.completeActivityUse(activity, workflow.hitTargets.documents);
 }
 async function bite({document, workflow}) {
-    if (workflow.activity.identifier !== 'bite' || !workflow.hitTargets.size) return;
+    if (workflow.activity.identifier !== 'bite' || !workflow.hitTargets.count) return;
     await curse(document, workflow);
 }
 async function otherBite({document, workflow}) {
-    if (!workflow.hitTargets.size || !workflowUtils.isAttackType(workflow, 'attack')) return;
+    if (!workflow.hitTargets.count || !workflowUtils.isAttackType(workflow, 'attack')) return;
     if (workflow.item.system.type?.value !== 'natural') return;
     const biteActivity = itemUtils.getActivityByIdentifier(document, 'bite');
     if (biteActivity?.name !== workflow.activity.name) return;
@@ -68,32 +68,21 @@ async function reequip({document: effect}) {
 }
 export const harkonsBiteEffect = {
     name: 'Harkon\'s Bite: Shapechanged',
-    version: '2.0.0',
+    version: '2.1.7',
     rules: '2014',
     effect: [
         {pass: 'deleted', macro: reequip, priority: 50}
     ]
 };
-async function keenHearingAndSmell({document, skillId}) {
-    if (skillId !== 'prc') return;
-    if (!itemUtils.getEquipmentState(document)) return;
-    return {
-        label: 'CHRISPREMADES.Macros.Legacy.HarkonsBite.Keen',
-        type: 'advantage'
-    };
-}
 export const harkonsBite = {
     name: 'Harkon\'s Bite',
-    version: '2.0.0',
+    version: '2.1.7',
     rules: '2014',
     roll: [
         {pass: 'itemRollFinished', macro: shapechange, priority: 50},
         {pass: 'itemRollFinished', macro: human, priority: 50},
         {pass: 'itemRollFinished', macro: bite, priority: 50},
         {pass: 'actorRollFinished', macro: otherBite, priority: 50}
-    ],
-    skill: [
-        {pass: 'actorContext', macro: keenHearingAndSmell, priority: 50}
     ],
     get config() {
         return {

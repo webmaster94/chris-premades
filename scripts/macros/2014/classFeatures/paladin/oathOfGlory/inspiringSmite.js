@@ -27,7 +27,7 @@ async function use({workflow}) {
 }
 export let inspiringSmite = {
     name: 'Channel Divinity: Inspiring Smite',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

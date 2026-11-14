@@ -1,9 +1,9 @@
 import {actorUtils, dialogUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../../utils.js';
 
 async function late({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size || !workflow.damageRoll) return;
+    if (!workflow.hitTargets.count || !workflow.damageRoll) return;
     if (!workflowUtils.getDamageTypes(workflow.damageRolls).has('lightning')) return;
-    let validTargets = Array.from(workflow.hitTargets.filter(i => actorUtils.getSize(i.actor) <= 3));
+    let validTargets = Array.from(new Set(workflow.hitTargets.tokens).filter(i => actorUtils.getSize(i.actor) <= 3));
     if (!validTargets.length) return;
     let selection = await dialogUtils.selectTargetDialog(item.name, 'CHRISPREMADES.Macros.ThunderboltStrike.Select', validTargets, {
         type: 'multiple',
@@ -16,7 +16,7 @@ async function late({trigger: {entity: item}, workflow}) {
 }
 export let thunderboltStrike = {
     name: 'Thunderbolt Strike',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

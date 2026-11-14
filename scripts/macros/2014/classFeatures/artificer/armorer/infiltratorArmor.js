@@ -47,7 +47,7 @@ async function use({workflow}) {
     await itemUtils.createItems(workflow.actor, [featureData], {favorite: true, parentEntity: effect});
 }
 async function damage({workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!combatUtils.perTurnCheck(workflow.item, 'lightningLauncher', true, workflow.token.id)) return;
     let selection = await dialogUtils.confirm(workflow.item.name, 'CHRISPREMADES.Macros.InfiltratorArmor.ExtraDamage');
     if (!selection) return;
@@ -65,7 +65,7 @@ async function early({trigger, workflow}) {
 }
 export let infiltratorArmor = {
     name: 'Arcane Armor: Infiltrator Model',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

@@ -26,7 +26,7 @@ async function turnStart({trigger: {entity: item}}) {
     }));
 }
 async function attack({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size || !workflow.item) return;
+    if (!workflow.hitTargets.count || !workflow.item) return;
     let weaponProperties = itemUtils.getConfig(item, 'weaponProperties');
     if (!weaponProperties.length) return;
     if (!workflow.item.system.properties.some(i => weaponProperties.includes(i))) return;
@@ -46,7 +46,7 @@ async function attack({trigger: {entity: item}, workflow}) {
 }
 export let batteringRoots = {
     name: 'Battering Roots',
-    version: '1.2.30',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

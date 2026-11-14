@@ -1,7 +1,7 @@
 import {constants, tokenUtils, workflowUtils} from '../../../../utils.js';
 async function early({workflow}) {
     if (!workflowUtils.isAttackType(workflow, 'spellAttack')) return;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     if (!targetToken) return;
     let coverBonus = tokenUtils.checkCover(workflow.token, targetToken, {activity: workflow.activity});
     if (coverBonus != 2) return;
@@ -9,7 +9,7 @@ async function early({workflow}) {
 }
 export let wandOfTheWarMage = {
     name: 'Wand of the War Mage',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -304,7 +304,7 @@
       "info": {
         "identifier": "armorModelThunderPulse",
         "rules": "modern",
-        "version": "1.5.32",
+        "version": "2.3.0",
         "source": "chris-premades"
       }
     }

@@ -12,7 +12,7 @@ async function saveBonus({trigger: {saveId, roll, actor, config}}) {
 }
 export let relentlessHunter = {
     name: 'Relentless Hunter',
-    version: '1.3.78',
+    version: '2.3.0',
     save: [
         {
             pass: 'bonus',

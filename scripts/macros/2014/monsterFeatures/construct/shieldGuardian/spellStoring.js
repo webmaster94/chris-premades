@@ -1,7 +1,7 @@
 import {actorUtils, dialogUtils, effectUtils, genericUtils, itemUtils} from '../../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
-    let targetActor = workflow.targets.first().actor;
+    if (!workflow.targets.count) return;
+    let targetActor = workflow.targets.tokens[0].actor;
     let amulet = itemUtils.getItemByIdentifier(targetActor, 'mastersAmulet');
     if (!amulet) return;
     let actorUuid = amulet.flags['chris-premades']?.mastersAmulet?.actorUuid;
@@ -107,7 +107,7 @@ async function earlySpell({trigger, workflow}) {
 }
 export let shieldGuardianSpellStoring = {
     name: 'Spell Storing',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

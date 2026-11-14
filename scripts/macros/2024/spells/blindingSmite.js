@@ -1,7 +1,7 @@
 import {actorUtils, constants, effectUtils, itemUtils} from '../../../utils.js';
 import {divineSmite} from './divineSmite.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let ability = itemUtils.getConfig(workflow.item, 'ability');
     let effectData = {
         name: workflow.item.name,
@@ -17,14 +17,14 @@ async function use({trigger, workflow}) {
             }
         ]}
     };
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         if (actorUtils.checkTrait(token.actor, 'ci', 'blinded')) return;
         await effectUtils.createEffect(token.actor, effectData, {conditions: ['blinded']});
     }));
 }
 export let blindingSmite = {
     name: 'Blinding Smite',
-    version: '1.1.14',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: divineSmite.midi.actor,

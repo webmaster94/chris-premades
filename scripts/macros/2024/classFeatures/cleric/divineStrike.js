@@ -1,6 +1,6 @@
 import {combatUtils, constants, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size || !workflow.activity) return;
+    if (!workflow.hitTargets.count || !workflow.activity) return;
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     if (!item.system.uses.value) return;
     if (!combatUtils.isOwnTurn(workflow.token)) return;
@@ -16,12 +16,12 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let divineStrike = {
     name: 'Blessed Strikes: Divine Strike',
-    version: '1.2.12',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [
             {
-                pass: 'damageRollComplete', 
+                pass: 'damageRollComplete',
                 macro: damage,
                 priority: 50
             }

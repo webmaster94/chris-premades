@@ -10,11 +10,11 @@ async function useAnObject({trigger, workflow}) {
     let activities = selection.system.activities.filter(activity => activity.activation.type === 'action' && !activityUtils.isHidden(activity));
     let activitySelection = await dialogUtils.selectDocumentDialog(workflow.item.name, 'CHRISPREMADES.Generic.SelectAnActivity', activities, {sortAlphabetical: true});
     if (!selection) return;
-    await workflowUtils.specialItemUse(selection, Array.from(workflow.targets), workflow.item, {activity: activitySelection});
+    await workflowUtils.specialItemUse(selection, Array.from(workflow.targets.tokens), workflow.item, {activity: activitySelection});
 }
 export let fastHands = {
     name: 'Fast Hands',
-    version: '1.3.60',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

@@ -9,7 +9,7 @@ async function sceneDamageApplication({trigger: {token, targetToken}, ditem}) {
 }
 export let projectedWard = {
     name: 'Projected Ward',
-    version: '1.3.10',
+    version: '2.3.0',
     midi: {
         actor: [
             {

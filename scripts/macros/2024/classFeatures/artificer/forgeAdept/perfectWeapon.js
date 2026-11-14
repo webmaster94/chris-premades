@@ -48,12 +48,12 @@ async function attack({trigger: {entity: item}, workflow}) {
             }
         ]}
     };
-    await itemUtils.enchantItem(activeGhaalShaarat.parent, enchantmentData, {identifier: 'perfectWeaponOverride', parentEntity: effect, strictlyInterdependent: true});    
+    await itemUtils.enchantItem(activeGhaalShaarat.parent, enchantmentData, {identifier: 'perfectWeaponOverride', parentEntity: effect, strictlyInterdependent: true});
     workflow.item = activeGhaalShaarat.parent;
     workflow.activity = workflow.item.system.activities.get(workflow.activity.id);
 }
 async function damage({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let activeGhaalShaarat = await fromUuid(workflow.actor.flags['chris-premades']?.activeGhaalShaarat);
     if (activeGhaalShaarat?.parent.uuid !== workflow.item.uuid) return;
     let {damageType, replace} = item.flags['chris-premades']?.perfectWeaponChoices ?? {};
@@ -79,10 +79,10 @@ async function damage({trigger: {entity: item}, workflow}) {
             ]
         ];
         let selection = await DialogApp.dialog(
-            item.name, 
-            genericUtils.format('CHRISPREMADES.Dialog.UseWeaponDamageExtra', {itemName: item.name, bonusFormula: formula}), 
-            inputs, 
-            'okCancel', 
+            item.name,
+            genericUtils.format('CHRISPREMADES.Dialog.UseWeaponDamageExtra', {itemName: item.name, bonusFormula: formula}),
+            inputs,
+            'okCancel',
             {width: 400}
         );
         if (!selection || !selection.buttons) return;
@@ -109,7 +109,7 @@ async function reset({trigger: {entity: item}}) {
 }
 export let perfectWeapon = {
     name:'Perfect Weapon',
-    version: '1.5.21',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

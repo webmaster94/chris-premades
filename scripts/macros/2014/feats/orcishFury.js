@@ -11,7 +11,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let orcishFury = {
     name: 'Orcish Fury: Extra Damage',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -1,7 +1,7 @@
 import {activityUtils, actorUtils, compendiumUtils, constants, dialogUtils, errors, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 
 async function use({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let weapons = workflow.actor.items.filter(i => i.type === 'weapon' && i.system.equipped && constants.meleeWeaponTypes.includes(i.system.type?.value));
     if (!weapons.length) {
         genericUtils.notify('CHRISPREMADES.Macros.GreenFlameBlade.NoWeapons', 'warn');
@@ -30,10 +30,10 @@ async function use({workflow}) {
         }
     }
     genericUtils.setProperty(weaponData, 'flags.chris-premades.bladeCantrip', workflow.item.name);
-    let attackWorkflow = await workflowUtils.syntheticItemDataRoll(weaponData, workflow.actor, [workflow.targets.first()]);
+    let attackWorkflow = await workflowUtils.syntheticItemDataRoll(weaponData, workflow.actor, [workflow.targets.tokens[0]]);
     if (!attackWorkflow) return;
     if (!attackWorkflow.hitTargets.size) return;
-    let nearbyTargets = tokenUtils.findNearby(workflow.targets.first(), 5, 'ally');
+    let nearbyTargets = tokenUtils.findNearby(workflow.targets.tokens[0], 5, 'ally');
     if (!nearbyTargets.length) return;
     let target = nearbyTargets[0];
     if (nearbyTargets.length > 1) {
@@ -47,7 +47,7 @@ async function use({workflow}) {
 }
 export let greenFlameBlade = {
     name: 'Green-Flame Blade',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

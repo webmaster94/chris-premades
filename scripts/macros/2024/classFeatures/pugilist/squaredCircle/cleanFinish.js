@@ -26,13 +26,13 @@ async function adjustConsumption({activity, actor, config}) {
 async function use({trigger: {entity: item}, workflow}) {
     await actorUtils.setReactionUsed(workflow.actor);
     if (!workflow.workflowOptions['chris-premades']?.cleanFinish) return;
-    let target = workflow.failedSaves.first();
+    let target = workflow.failedSaves.tokens[0];
     if (!target) return;
     await workflowUtils.applyDamage([target], target.actor.system.attributes.hp.value, 'none');
 }
 export let cleanFinish = {
     name: 'Clean Finish',
-    version: '1.5.32',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

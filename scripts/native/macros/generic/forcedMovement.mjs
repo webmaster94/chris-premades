@@ -1,8 +1,9 @@
-import {actorUtils, automationUtils, constants, dialogUtils, genericUtils, rollUtils, tokenUtils, workflowUtils} from '../../proxy.mjs';
+import {actorUtils, automationUtils, constants, dialogUtils, rollUtils, tokenUtils, workflowUtils} from '../../proxy.mjs';
 const variants = {
     pullOnFail: {direction: -1, targets: 'failedSaves'},
     pullOnHit: {direction: -1, targets: 'hitTargets'},
-    pushOnFail: {direction: 1, targets: 'failedSaves'}
+    pushOnFail: {direction: 1, targets: 'failedSaves'},
+    pushOnHit: {direction: 1, targets: 'hitTargets'}
 };
 async function getDistance(activity, config, sourceToken, targetToken, direction, maximum) {
     if (config.maxSize && actorUtils.getSize(targetToken.actor) > CONFIG.DND5E.actorSizes[config.maxSize]?.numerical) return 0;
@@ -10,11 +11,9 @@ async function getDistance(activity, config, sourceToken, targetToken, direction
     if (direction < 0 && config.stopAdjacent) limit = Math.min(limit, Math.floor((tokenUtils.getDistance(sourceToken, targetToken) - 4) / 5) * 5);
     if (limit <= 0) return 0;
     if (!config.choose) return limit;
-    const scene = sourceToken.parent;
     const steps = Array.from({length: Math.floor(limit / 5)}, (_, index) => (index + 1) * 5);
     if (!steps.length) return 0;
-    const buttons = [[_loc('CHRISPREMADES.Config.None'), 0], ...steps.map(distance => [dnd5e.utils.formatLength(genericUtils.convertDistance(scene, distance), scene.grid.units), distance])];
-    return Number(await dialogUtils.buttonDialog(activity.item.name, _loc('CHRISPREMADES.Macros.Generic.PushOnFail.Prompt', {target: targetToken.name}), buttons));
+    return await dialogUtils.distanceDialog(activity.item.name, _loc('CHRISPREMADES.Macros.Generic.PushOnFail.Prompt', {target: targetToken.name}), steps, {none: _loc('CHRISPREMADES.Config.None'), scene: sourceToken.parent});
 }
 async function moveTarget(activity, config, sourceToken, targetToken, direction, maximum, {animation, options}, damageType) {
     const distance = await getDistance(activity, config, sourceToken, targetToken, direction, maximum);
@@ -22,7 +21,7 @@ async function moveTarget(activity, config, sourceToken, targetToken, direction,
     const move = distance ? async () => {
         if (moved) return;
         moved = true;
-        await tokenUtils.slideToken(targetToken, {sourceToken, distance: direction * genericUtils.convertDistance(sourceToken.parent, distance)});
+        await tokenUtils.slideToken(targetToken, {sourceToken, distance: direction * distance});
     } : undefined;
     if (animation?.macros?.play) await animation.macros.play(sourceToken, targetToken, {...options, damageType, move});
     if (move) await move();
@@ -31,10 +30,10 @@ async function moveTarget(activity, config, sourceToken, targetToken, direction,
 async function finished({document: activity, macroClass: {identifier}, workflow}) {
     if (!workflow.token) return;
     const {direction, targets} = variants[identifier];
-    const tokens = Array.from(workflow[targets]).filter(token => token.actor);
+    const tokens = workflow[targets].tokens.filter(token => token.actor);
     if (!tokens.length) return;
     const config = automationUtils.getGenericConfigValues(activity, 'chris-premades-native', identifier, configKeys);
-    const maximum = (await rollUtils.rollDice(config.distance, {document: activity}))?.total ?? 5;
+    const maximum = (await rollUtils.rollDice(config.distance, {workflow}))?.total ?? 5;
     const animation = automationUtils.getResolvedAnimation(activity, 'animation', {source: 'chris-premades-native', identifier});
     const damageType = workflowUtils.getDamageTypes(workflow.damageRolls ?? []).first();
     const move = token => moveTarget(activity, config, workflow.token.document, token.document, direction, maximum, animation, damageType);
@@ -45,7 +44,7 @@ function buildConfig(animationIdentifier) {
     return {
         distance: {
             default: '5',
-            type: 'text',
+            type: 'formula',
             category: 'behavior',
             label: 'CHRISPREMADES.Config.Distance',
             hint: 'CHRISPREMADES.Macros.Generic.PushOnFail.DistanceHint'
@@ -87,7 +86,7 @@ function buildConfig(animationIdentifier) {
 }
 const base = {
     rules: 'all',
-    version: '2.1.0',
+    version: '2.1.4',
     category: 'utility',
     generic: true,
     documents: ['activity'],
@@ -107,6 +106,7 @@ const base = {
  * - `pushOnFail`: pushes targets that failed the save.
  * - `pullOnFail`: pulls targets that failed the save.
  * - `pullOnHit`: pulls targets that were hit.
+ * - `pushOnHit`: pushes targets that were hit.
  *
  * Config:
  * - `distance`: maximum distance in feet. Accepts a formula, rolled once per use.
@@ -118,4 +118,5 @@ const base = {
 export const pushOnFail = {...base, genericConfig: buildConfig()};
 export const pullOnFail = {...base, genericConfig: buildConfig('castBeam')};
 export const pullOnHit = {...base, genericConfig: buildConfig('castBeam')};
+export const pushOnHit = {...base, genericConfig: buildConfig()};
 const configKeys = Object.keys(pushOnFail.genericConfig);

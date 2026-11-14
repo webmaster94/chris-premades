@@ -26,7 +26,7 @@ async function early({workflow}) {
 }
 export let fightingStyleUnarmedFighting = {
     name: 'Fighting Style: Unarmed Fighting',
-    version: '1.1.10',
+    version: '2.3.0',
     combat: [
         {
             pass: 'turnStart',
@@ -45,7 +45,7 @@ export let fightingStyleUnarmedFighting = {
 };
 export let fightingStyleUnarmedFightingUnarmedStrike = {
     name: 'Unarmed Strike (Unarmed Fighting)',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

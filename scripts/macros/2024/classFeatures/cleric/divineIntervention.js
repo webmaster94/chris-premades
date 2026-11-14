@@ -42,7 +42,7 @@ async function use({trigger: {entity: item}, workflow}) {
 }
 export let divineIntervention = {
     name: 'Divine Intervention',
-    version: '1.2.27',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

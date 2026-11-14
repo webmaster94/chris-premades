@@ -1,6 +1,6 @@
 import {heatMetal as heatMetalLegacy} from '../../../legacyMacros.js';
 export let heatMetal = {
     ...heatMetalLegacy,
-    version: '1.2.28',
+    version: '2.3.0',
     rules: 'modern'
 };

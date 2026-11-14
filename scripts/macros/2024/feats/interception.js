@@ -13,7 +13,7 @@ async function interceptionHelper(token, targetToken, ditem) {
     return true;
 }
 async function damageApplication({trigger: {targetToken}, workflow, ditem}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     let nearbyTokens = tokenUtils.findNearby(targetToken, 5, 'ally', {includeIncapacitated: false, includeToken: false});
     for (let i of nearbyTokens) {
@@ -23,7 +23,7 @@ async function damageApplication({trigger: {targetToken}, workflow, ditem}) {
 }
 export let interception = {
     name: 'Interception',
-    version: '1.4.24',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

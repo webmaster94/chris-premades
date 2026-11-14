@@ -55,7 +55,7 @@ async function use({workflow}) {
 }
 export let conjureMinorElementals = {
     name: 'Conjure Minor Elementals',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

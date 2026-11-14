@@ -10,7 +10,7 @@ async function backbreakerUse({trigger, workflow}) {
 }
 export let backbreaker = {
     name: 'Backbreaker',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -61,7 +61,7 @@ async function braceMeleeDamageUse({trigger, workflow}) {
 }
 export let braceMelee = {
     name: 'Brace (Melee)',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -90,7 +90,7 @@ async function cleaveUse({trigger, workflow}) {
 }
 export let cleave = {
     name: 'Cleave',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -103,8 +103,8 @@ export let cleave = {
 };
 async function concussiveSmashUsed({trigger, workflow}) {
     await used(workflow.actor, 'concussiveSmash', trigger.entity.system.uses.value);
-    if (!workflow.failedSaves.size) return;
-    await Promise.all(workflow.failedSaves.map(async token => {
+    if (!workflow.failedSaves.count) return;
+    await Promise.all(workflow.failedSaves.tokens.map(async token => {
         let effectData = {
             name: genericUtils.translate('CHRISPREMADES.BG3.Dazed'),
             img: 'modules/chris-premades/images/bg3/Dazed.webp',
@@ -152,7 +152,7 @@ async function concussiveSmashUsed({trigger, workflow}) {
 }
 export let concussiveSmash = {
     name: 'Concussive Smash',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -165,7 +165,7 @@ export let concussiveSmash = {
 };
 async function maimingStrikeUse({trigger, workflow}) {
     await used(workflow.actor, 'maimingStrike', trigger.entity.system.uses.value);
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.Maimed'),
         img: 'modules/chris-premades/images/bg3/Maimed.webp',
@@ -219,14 +219,14 @@ async function maimingStrikeUse({trigger, workflow}) {
             }
         }
     };
-    await Promise.all(workflow.failedSaves.map(async token => {
+    await Promise.all(workflow.failedSaves.tokens.map(async token => {
         if (token.actor.system.attributes.movement.fly > 0) return;
         await effectUtils.createEffect(token.actor, effectData);
     }));
 }
 export let maimingStrike = {
     name: 'Maiming Strike',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -242,7 +242,7 @@ async function disarmingStrikeUse({trigger, workflow}) {
 }
 export let disarmingStrike = {
     name: 'Disarming Strike',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -255,7 +255,7 @@ export let disarmingStrike = {
 };
 async function flourishUse({trigger, workflow}) {
     await used(workflow.actor, 'flourish', trigger.entity.system.uses.value);
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.OffBalance'),
         img: 'modules/chris-premades/images/bg3/OffBalance.webp',
@@ -297,11 +297,11 @@ async function flourishUse({trigger, workflow}) {
             }
         }
     };
-    await Promise.all(workflow.failedSaves.map(async token => effectUtils.createEffect(token.actor, effectData)));
+    await Promise.all(workflow.failedSaves.tokens.map(async token => effectUtils.createEffect(token.actor, effectData)));
 }
 export let flourish = {
     name: 'Flourish',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -314,7 +314,7 @@ export let flourish = {
 };
 async function heartstopperUse({trigger, workflow}) {
     await used(workflow.actor, 'heartstopper', trigger.entity.system.uses.value);
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.ChestTrauma'),
         img: 'modules/chris-premades/images/bg3/ChestTrauma.webp',
@@ -344,11 +344,11 @@ async function heartstopperUse({trigger, workflow}) {
             }
         }
     };
-    await Promise.all(workflow.failedSaves.map(async token => effectUtils.createEffect(token.actor, effectData)));
+    await Promise.all(workflow.failedSaves.tokens.map(async token => effectUtils.createEffect(token.actor, effectData)));
 }
 export let heartstopper = {
     name: 'Heartstopper',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -361,7 +361,7 @@ export let heartstopper = {
 };
 async function lacerateUse({trigger, workflow}) {
     await used(workflow.actor, 'lacerate', trigger.entity.system.uses.value);
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.Bleeding'),
         img: 'modules/chris-premades/images/bg3/Bleeding.webp',
@@ -401,14 +401,14 @@ async function lacerateUse({trigger, workflow}) {
         'construct',
         'undead'
     ];
-    await Promise.all(workflow.failedSaves.map(async token => {
+    await Promise.all(workflow.failedSaves.tokens.map(async token => {
         if (invalidCreatures.includes(actorUtils.typeOrRace(token.actor))) return;
         await effectUtils.createEffect(token.actor, effectData);
     }));
 }
 export let lacerate = {
     name: 'Lacerate',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -421,7 +421,7 @@ export let lacerate = {
 };
 async function piercingStrikeUse({trigger, workflow}) {
     await used(workflow.actor, 'piercingStrike', trigger.entity.system.uses.value);
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.GapingWounds'),
         img: 'modules/chris-premades/images/bg3/GapingWounds.webp',
@@ -446,7 +446,7 @@ async function piercingStrikeUse({trigger, workflow}) {
         'undead'
     ];
     effectUtils.addMacro(effectData, 'midi.actor', ['piercingStrikeEffect']);
-    await Promise.all(workflow.failedSaves.map(async token => {
+    await Promise.all(workflow.failedSaves.tokens.map(async token => {
         if (invalidCreatures.includes(actorUtils.typeOrRace(token.actor))) return;
         await effectUtils.createEffect(token.actor, effectData);
     }));
@@ -458,7 +458,7 @@ async function piercingStrikeDamage({trigger, workflow}) {
 }
 export let piercingStrike = {
     name: 'Piercing Strike',
-    version: '1.2.34',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -484,8 +484,8 @@ export let piercingStrikeEffect = {
 };
 async function pommelStrikeUse({trigger, workflow}) {
     await used(workflow.actor, 'pommelStrike', trigger.entity.system.uses.value);
-    if (!workflow.failedSaves.size) return;
-    await Promise.all(workflow.failedSaves.map(async token => {
+    if (!workflow.failedSaves.count) return;
+    await Promise.all(workflow.failedSaves.tokens.map(async token => {
         let effectData = {
             name: genericUtils.translate('CHRISPREMADES.BG3.Dazed'),
             img: 'modules/chris-premades/images/bg3/Dazed.webp',
@@ -533,7 +533,7 @@ async function pommelStrikeUse({trigger, workflow}) {
 }
 export let pommelStrike = {
     name: 'Pommel Strike',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -572,7 +572,7 @@ async function prepareUse({trigger, workflow}) {
 }
 export let prepare = {
     name: 'Prepare',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -585,7 +585,7 @@ export let prepare = {
 };
 async function rushUse({trigger, workflow}) {
     await used(workflow.actor, 'rush', trigger.entity.system.uses.value);
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.OffBalance'),
         img: 'modules/chris-premades/images/bg3/OffBalance.webp',
@@ -627,11 +627,11 @@ async function rushUse({trigger, workflow}) {
             }
         }
     };
-    await Promise.all(workflow.failedSaves.map(async token => effectUtils.createEffect(token.actor, effectData)));
+    await Promise.all(workflow.failedSaves.tokens.map(async token => effectUtils.createEffect(token.actor, effectData)));
 }
 export let rush = {
     name: 'Rush',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -647,7 +647,7 @@ async function tenacityUse({trigger, workflow}) {
 }
 export let tenacity = {
     name: 'Tenacity',
-    version: '1.3.10',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -664,7 +664,7 @@ async function toppleUse({trigger, workflow}) {
 }
 export let topple = {
     name: 'Topple',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -677,7 +677,7 @@ export let topple = {
 };
 async function weakeningStrikeUse({trigger, workflow}) {
     await used(workflow.actor, 'weakeningStrike', trigger.entity.system.uses.value);
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.WeakGrip'),
         img: 'modules/chris-premades/images/bg3/WeakGrip.webp',
@@ -707,7 +707,7 @@ async function weakeningStrikeUse({trigger, workflow}) {
         origin: workflow.item.uuid
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['piercingStrikeEffect']);
-    await Promise.all(workflow.failedSaves.map(async token => {
+    await Promise.all(workflow.failedSaves.tokens.map(async token => {
         let weapons = token.actor.items.filter(i => i.type === 'weapon' && i.system.equipped);
         if (!weapons.length) return;
         await effectUtils.createEffect(token.actor, effectData);
@@ -715,7 +715,7 @@ async function weakeningStrikeUse({trigger, workflow}) {
 }
 export let weakeningStrike = {
     name: 'Weakening Strike',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -766,7 +766,7 @@ async function braceRangedDamageUse({trigger, workflow}) {
 }
 export let braceRanged = {
     name: 'Brace (Ranged)',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -792,7 +792,7 @@ export let braceRangedDamage = {
 };
 async function hamstringShotUse({trigger, workflow}) {
     await used(workflow.actor, 'hamstringShot', trigger.entity.system.uses.value);
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.Hamstrung'),
         img: 'modules/chris-premades/images/bg3/Hamstrung.webp',
@@ -822,11 +822,11 @@ async function hamstringShotUse({trigger, workflow}) {
             }
         }
     };
-    await Promise.all(workflow.failedSaves.map(async token => effectUtils.createEffect(token.actor, effectData)));
+    await Promise.all(workflow.failedSaves.tokens.map(async token => effectUtils.createEffect(token.actor, effectData)));
 }
 export let hamstringShot = {
     name: 'Hamstring Shot',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -842,7 +842,7 @@ async function mobileShotUse({trigger, workflow}) {
 }
 export let mobileShot = {
     name: 'Mobile Shot',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -855,7 +855,7 @@ export let mobileShot = {
 };
 async function piercingShotUse({trigger, workflow}) {
     await used(workflow.actor, 'piercingShot', trigger.entity.system.uses.value);
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.BG3.GapingWounds'),
         img: 'modules/chris-premades/images/bg3/GapingWounds.webp',
@@ -880,14 +880,14 @@ async function piercingShotUse({trigger, workflow}) {
         'undead'
     ];
     effectUtils.addMacro(effectData, 'midi.actor', ['piercingStrikeEffect']);
-    await Promise.all(workflow.failedSaves.map(async token => {
+    await Promise.all(workflow.failedSaves.tokens.map(async token => {
         if (invalidCreatures.includes(actorUtils.typeOrRace(token.actor))) return;
         await effectUtils.createEffect(token.actor, effectData);
     }));
 }
 export let piercingShot = {
     name: 'Piercing Shot',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

@@ -164,7 +164,8 @@
     "chris-premades": {
       "info": {
         "identifier": "felineFormRevert",
-        "rules": "modern"
+        "rules": "modern",
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

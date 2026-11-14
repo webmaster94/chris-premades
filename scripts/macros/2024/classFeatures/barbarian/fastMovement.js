@@ -11,7 +11,7 @@ async function change({trigger: {item}}) {
 }
 export let fastMovement = {
     name: 'Fast Movement',
-    version: '1.3.105',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {

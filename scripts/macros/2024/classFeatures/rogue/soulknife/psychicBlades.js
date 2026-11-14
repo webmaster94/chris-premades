@@ -1,12 +1,12 @@
 import {activityUtils, dialogUtils, effectUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../../utils.js';
 import {psionicPower} from './psionicPower.js';
 async function attack({trigger, workflow}) {
-    if (workflow.targets.size !== 1 || workflow.isFumble) return;
+    if (workflow.targets.count !== 1 || workflow.isFumble) return;
     let soulBlades = itemUtils.getItemByIdentifier(workflow.actor, 'soulBlades');
     if (!soulBlades) return;
     let psionicPower = itemUtils.getItemByIdentifier(workflow.actor, 'psionicPower');
     if (!psionicPower?.system?.uses?.value) return;
-    if (workflow.targets.first().actor.system.attributes.ac.value <= workflow.attackTotal) return;
+    if (workflow.targets.tokens[0].actor.system.attributes.ac.value <= workflow.attackTotal) return;
     let subclassIdentifier = itemUtils.getConfig(workflow.item, 'subclassIdentifier');
     let scaleIdentifier = itemUtils.getConfig(workflow.item, 'scaleIdentifier');
     let scale = workflow.actor.system.scale[subclassIdentifier]?.[scaleIdentifier];
@@ -19,9 +19,9 @@ async function attack({trigger, workflow}) {
     await workflowUtils.syntheticActivityRoll(activity, []);
 }
 async function range({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     if (itemUtils.getItemByIdentifier(workflow.actor, 'sharpshooter')) return;
-    let distance = tokenUtils.getDistance(workflow.token, workflow.targets.first());
+    let distance = tokenUtils.getDistance(workflow.token, workflow.targets.tokens[0]);
     if (distance <= 60) return;
     workflow.tracker.disadvantage.add(genericUtils.translate('CHRISPREMADES.Generic.Range'), genericUtils.translate('CHRISPREMADES.Generic.Range'));
 }
@@ -77,12 +77,12 @@ async function use({trigger, workflow}) {
     }
     if (!workflow['chris-premades']?.soulBlades?.used) return;
     let psionicPower = itemUtils.getItemByIdentifier(workflow.actor, 'psionicPower');
-    if (!psionicPower || !workflow.hitTargets.size) return;
+    if (!psionicPower || !workflow.hitTargets.count) return;
     await genericUtils.update(psionicPower, {'system.uses.spent': psionicPower.system.uses.spent + 1});
 }
 export let psychicBlades = {
     name: 'Psychic Blades',
-    version: '1.3.58',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

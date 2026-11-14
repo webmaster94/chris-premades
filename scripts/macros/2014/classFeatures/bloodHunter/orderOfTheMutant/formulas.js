@@ -488,11 +488,11 @@ async function use({workflow}) {
 async function earlyNighteye({trigger: {entity: effect}, workflow}) {
     if (workflow.disadvantage) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let lightLevelSource = tokenUtils.getLightLevel(workflow.token);
-    let lightLevelTarget = tokenUtils.getLightLevel(workflow.targets.first());
+    let lightLevelTarget = tokenUtils.getLightLevel(workflow.targets.tokens[0]);
     if (lightLevelSource !== 'bright' && lightLevelTarget !== 'bright') return;
-    let selection = await dialogUtils.confirm(effect.name, genericUtils.format('CHRISPREMADES.Macros.Mutagencraft.AttackSunlight', {sourceTokenName: workflow.token.name, targetTokenName: workflow.targets.first().name}), {userId: socketUtils.gmID()});
+    let selection = await dialogUtils.confirm(effect.name, genericUtils.format('CHRISPREMADES.Macros.Mutagencraft.AttackSunlight', {sourceTokenName: workflow.token.name, targetTokenName: workflow.targets.tokens[0].name}), {userId: socketUtils.gmID()});
     if (!selection) return;
     workflow.tracker.disadvantage.add(effect.name, effect.name);
 }
@@ -519,7 +519,7 @@ async function turnStartReconstruction({trigger: {token}}) {
 }
 export let formulas = {
     name: 'Formulas: Generic',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -609,7 +609,7 @@ export let formulaRapidity = {
 };
 export let formulaReconstruction = {
     name: 'Formulas: Reconstruction',
-    version: '1.1.1',
+    version: '2.3.0',
     combat: [
         {
             pass: 'turnStart',

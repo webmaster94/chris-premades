@@ -1,4 +1,4 @@
 export let luckyFootwork = {
     name: 'Lucky Footwork',
-    version: '1.1.0'
+    version: '2.3.0'
 };

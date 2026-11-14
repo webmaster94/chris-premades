@@ -4,7 +4,7 @@ async function death({trigger}) {
 export let deathBurst = {
     name: 'Death Burst',
     translation: 'CHRISPREMADES.Macros.DeathBurst.Name',
-    version: '0.12.78',
+    version: '2.3.0',
     death: [
         {
             pass: 'dead',

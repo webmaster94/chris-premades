@@ -39,7 +39,7 @@ export const animations = {
         saturate: .71,
         brightness: .58
     },
-    'jb2a.energy_field.02.above.blue': { 
+    'jb2a.energy_field.02.above.blue': {
         hue: 189,
         saturate: .80,
         brightness: .75
@@ -165,5 +165,5 @@ export const colors = {
 export const defaultMatrix = {
     brightness: .5,
     saturate: 0,
-    hue: 0    
+    hue: 0
 };

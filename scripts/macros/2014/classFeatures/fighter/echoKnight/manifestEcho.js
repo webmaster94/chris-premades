@@ -107,17 +107,17 @@ async function use({workflow}) {
             vignettingBlur: 0.2,
             animated:
             {
-                seed: { 
-                    active: true, 
-                    animType: 'randomNumber', 
-                    val1: 0, 
-                    val2: 1 
+                seed: {
+                    active: true,
+                    animType: 'randomNumber',
+                    val1: 0,
+                    val2: 1
                 },
-                vignetting: { 
-                    active: true, 
-                    animType: 'syncCosOscillation' , 
-                    loopDuration: 2000, 
-                    val1: 0.2, 
+                vignetting: {
+                    active: true,
+                    animType: 'syncCosOscillation' ,
+                    loopDuration: 2000,
+                    val1: 0.2,
                     val2: 0.4
                 }
             }
@@ -138,10 +138,10 @@ async function use({workflow}) {
             dimX: 1,
             dimY: 1,
             animated: {
-                time: { 
-                    active: true, 
-                    speed: 2.2, 
-                    animType: 'move' 
+                time: {
+                    active: true,
+                    speed: 2.2,
+                    animType: 'move'
                 }
             }
         }
@@ -190,7 +190,7 @@ async function teleport({workflow}) {
     await Promise.all([origTeleport._move(), newTeleport._move()]);
 }
 export async function attack({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'manifestEcho');
     if (!effect) return;
     let sceneEchos = effect.flags['chris-premades'].summons.ids[effect.name].map(i => workflow.token.scene.tokens.get(i)?.object).filter(i => i);
@@ -239,7 +239,7 @@ export async function attack({workflow}) {
     };
     let effect1 = await effectUtils.createEffect(workflow.actor, effectData);
     let effect2 = await effectUtils.createEffect(targetToken.actor, effectData);
-    await workflowUtils.syntheticItemRoll(feature, Array.from(workflow.targets));
+    await workflowUtils.syntheticItemRoll(feature, Array.from(workflow.targets.tokens));
     await genericUtils.remove(effect1);
     await genericUtils.remove(effect2);
 }
@@ -278,7 +278,7 @@ async function targetApplyDamage({trigger, ditem}) {
 }
 export let manifestEcho = {
     name: 'Manifest Echo',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

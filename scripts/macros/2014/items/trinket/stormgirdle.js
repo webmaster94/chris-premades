@@ -76,7 +76,7 @@ async function damage({trigger, workflow}) {
 }
 export let stormgirdleD = {
     name: 'Stormgirdle (Dormant)',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

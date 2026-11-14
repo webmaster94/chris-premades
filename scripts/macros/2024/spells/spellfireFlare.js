@@ -1,18 +1,18 @@
 import {activityUtils, animationUtils, dialogUtils, itemUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let blastsLeft = workflowUtils.getCastLevel(workflow) + itemUtils.getConfig(workflow.item, 'baseAttacks');
     let blast = activityUtils.getActivityByIdentifier(workflow.item, 'blast', {strict: true});
     if (!blast) return;
     while (blastsLeft) {
         let selection, skip;
-        if (workflow.targets.size > 1) {
-            let choice = await dialogUtils.selectTargetDialog(workflow.item.name, 'CHRISPREMADES.Macros.EldritchBlast.Target', Array.from(workflow.targets), {type: 'selectAmount', skipDeadAndUnconscious: true, coverToken: workflow.token, maxAmount: blastsLeft});
+        if (workflow.targets.count > 1) {
+            let choice = await dialogUtils.selectTargetDialog(workflow.item.name, 'CHRISPREMADES.Macros.EldritchBlast.Target', Array.from(workflow.targets.tokens), {type: 'selectAmount', skipDeadAndUnconscious: true, coverToken: workflow.token, maxAmount: blastsLeft});
             if (!choice) return;
             [selection, skip] = choice;
             if (!selection) return;
         } else {
-            selection = [{document: workflow.targets.first(), value: 1}];
+            selection = [{document: workflow.targets.tokens[0], value: 1}];
         }
         for (let i of selection) {
             for (let j = 0; j < i.value; j++) {
@@ -35,16 +35,16 @@ async function blast({trigger, workflow}) {
     }
     if (!color) return;
     let animation = 'jb2a.ranged.03.projectile.01.' + color;
-    animationUtils.simpleAttack(workflow.token, workflow.targets.first(), animation, {sound: sound, missed: !workflow.hitTargets.has(workflow.targets.first())});
+    animationUtils.simpleAttack(workflow.token, workflow.targets.tokens[0], animation, {sound: sound, missed: !workflow.hitTargets.has(workflow.targets.tokens[0])});
 }
 async function attack({trigger, workflow}) {
-    let coverBonus = tokenUtils.checkCover(workflow.token, workflow.targets.first(), {activity: workflow.activity});
+    let coverBonus = tokenUtils.checkCover(workflow.token, workflow.targets.tokens[0], {activity: workflow.activity});
     if (!(coverBonus == 2 || coverBonus == 5)) return;
     await workflowUtils.bonusAttack(workflow, String(coverBonus));
 }
 export let spellfireFlare = {
     name: 'Spellfire Flare',
-    version: '1.3.167',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

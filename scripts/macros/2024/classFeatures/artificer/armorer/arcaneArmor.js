@@ -34,7 +34,7 @@ async function donDoff({trigger, workflow}) {
 }
 export let arcaneArmor = {
     name: 'Arcane Armor',
-    version: '1.5.32',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

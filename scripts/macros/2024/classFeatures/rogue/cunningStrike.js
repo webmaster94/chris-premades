@@ -8,7 +8,7 @@ async function use({trigger: {entity: item}, workflow}) {
         let activity = await fromUuid(activityUuid);
         if (!activity) break;
         let identifier = activityUtils.getIdentifier(activity);
-        let targets = Array.from(workflow.targets);
+        let targets = Array.from(workflow.targets.tokens);
         if (versatileTrickster && identifier === 'trip' && workflow.token) {
             let mageHand = itemUtils.getItemByIdentifier(workflow.actor, 'mageHand');
             let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'mageHand');
@@ -31,7 +31,7 @@ async function use({trigger: {entity: item}, workflow}) {
 }
 export let cunningStrike = {
     name: 'Cunning Strike',
-    version: '1.3.36',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

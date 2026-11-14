@@ -199,7 +199,7 @@
     "chris-premades": {
       "info": {
         "identifier": "healersKit",
-        "version": "1.2.37",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern"
       },

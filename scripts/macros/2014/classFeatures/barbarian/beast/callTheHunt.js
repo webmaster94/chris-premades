@@ -1,10 +1,10 @@
 import {dialogUtils, effectUtils, genericUtils, workflowUtils} from '../../../../../utils.js';
 
 async function early({workflow}) {
-    if (!workflow.targets.size) return;
-    let oldTargets = Array.from(workflow.targets);
+    if (!workflow.targets.count) return;
+    let oldTargets = Array.from(workflow.targets.tokens);
     let maxTargets = Math.max(workflow.actor.system.abilities.con.mod, 1);
-    if (workflow.targets.size > maxTargets) {
+    if (workflow.targets.count > maxTargets) {
         let newTargets;
         let selection = await dialogUtils.selectTargetDialog(workflow.item.name, genericUtils.format('CHRISPREMADES.Macros.CallTheHunt.Select', {maxTargets}), oldTargets, {type: 'multiple', maxAmount: maxTargets});
         if (!selection?.length) {
@@ -16,8 +16,8 @@ async function early({workflow}) {
     }
 }
 async function late({workflow}) {
-    if (!workflow.targets.size || !workflow.token) return;
-    let damageRoll = await new CONFIG.Dice.DamageRoll(workflow.targets.size * 5 + '[temphp]', {}, {type: 'temphp'}).evaluate();
+    if (!workflow.targets.count || !workflow.token) return;
+    let damageRoll = await new CONFIG.Dice.DamageRoll(workflow.targets.count * 5 + '[temphp]', {}, {type: 'temphp'}).evaluate();
     await workflowUtils.applyDamage([workflow.token], damageRoll.total, 'temphp');
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'rage');
     if (!effect) return;
@@ -55,13 +55,13 @@ async function late({workflow}) {
             ]
         }
     };
-    for (let target of workflow.targets) {
+    for (let target of workflow.targets.tokens) {
         await effectUtils.createEffect(target.actor, effectData, {parentEntity: effect, identifier: 'callTheHunt'});
     }
 }
 export let callTheHunt = {
     name: 'Call the Hunt',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

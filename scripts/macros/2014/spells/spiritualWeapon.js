@@ -101,10 +101,10 @@ async function use({workflow}) {
         activityIdentifier: 'spiritualWeaponAttack'
     };
     let summonedTokens = await Summons.spawn(sourceActor, updates, workflow.item, workflow.token, {
-        duration: itemUtils.convertDuration(workflow.item).seconds, 
-        range: 60, 
-        animation, 
-        initiativeType: 'none', 
+        duration: itemUtils.convertDuration(workflow.item).seconds,
+        range: 60,
+        animation,
+        initiativeType: 'none',
         additionalVaeButtons: [attackButton],
         additionalSummonVaeButtons: [{
             ...attackButton,
@@ -179,7 +179,7 @@ async function late({workflow}) {
 }
 export let spiritualWeapon = {
     name: 'Spiritual Weapon',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

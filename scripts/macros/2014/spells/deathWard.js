@@ -7,7 +7,7 @@ async function use({workflow}) {
         duration: itemUtils.convertDuration(workflow.item)
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['deathWardWarded']);
-    for (let target of workflow.targets) {
+    for (let target of workflow.targets.tokens) {
         await effectUtils.createEffect(target.actor, effectData, {identifier: 'deathWardTarget'});
     }
 }
@@ -18,7 +18,7 @@ async function damageApplication({trigger: {entity: effect}, ditem}) {
 }
 export let deathWard = {
     name: 'Death Ward',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

@@ -9,7 +9,7 @@ async function ability({trigger: {entity: item, actor, roll, checkId, saveId}}) 
 }
 export let indomitableMight = {
     name: 'Indomitable Might',
-    version: '1.1.22',
+    version: '2.3.0',
     rules: 'modern',
     check: [
         {

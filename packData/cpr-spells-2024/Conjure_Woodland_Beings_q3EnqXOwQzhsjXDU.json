@@ -321,7 +321,7 @@
     "chris-premades": {
       "info": {
         "identifier": "conjureWoodlandBeings",
-        "version": "1.3.84",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern"
       },

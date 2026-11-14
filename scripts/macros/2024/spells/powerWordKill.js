@@ -8,7 +8,7 @@ async function damage({trigger: {entity: item}, workflow, ditem}) {
 }
 export let powerWordKill = {
     name: 'Power Word Kill',
-    version: '1.1.34',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

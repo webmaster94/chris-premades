@@ -2,8 +2,8 @@ import {dialogUtils, genericUtils, workflowUtils} from '../../../../../utils.js'
 
 async function early({workflow}) {
     let maxTargets = 10;
-    if (workflow.targets.size <= maxTargets) return;
-    let oldTargets = Array.from(workflow.targets);
+    if (workflow.targets.count <= maxTargets) return;
+    let oldTargets = Array.from(workflow.targets.tokens);
     let newTargets;
     let selection = await dialogUtils.selectTargetDialog(workflow.item.name, genericUtils.format('CHRISPREMADES.Macros.ZealousPresence.Select', {maxTargets}), oldTargets, {type: 'multiple', skipDeadAndUnconscious: true, maxAmount: maxTargets});
     if (!selection) {
@@ -15,7 +15,7 @@ async function early({workflow}) {
 }
 export let zealousPresence = {
     name: 'Zealous Presence',
-    version: '1.5.1',
+    version: '2.3.0',
     midi: {
         item: [
             {

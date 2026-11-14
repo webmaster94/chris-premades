@@ -39,13 +39,13 @@ async function use({workflow}) {
     effectUtils.addMacro(effectData, 'effect', ['investitureOfIceIcy']);
     // TODO: Need to disable autoanims here? If so should we do for others?
     let effect = await effectUtils.createEffect(workflow.actor, effectData, {
-        concentrationItem: workflow.item, 
-        strictlyInterdependent: true, 
-        identifier: 'investitureOfIce', 
+        concentrationItem: workflow.item,
+        strictlyInterdependent: true,
+        identifier: 'investitureOfIce',
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'investitureOfIce', 
+            identifier: 'investitureOfIce',
             activityIdentifier: 'investitureOfIceCone'
         }],
         unhideActivities: {
@@ -69,7 +69,7 @@ async function early({dialog}) {
 }
 export let investitureOfIce = {
     name: 'Investiture of Ice',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

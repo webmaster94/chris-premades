@@ -1,7 +1,7 @@
 import {constants, errors, dialogUtils, effectUtils, genericUtils, itemUtils, workflowUtils, compendiumUtils, activityUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (!workflow.targets.size) {
+    if (!workflow.targets.count) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
@@ -51,7 +51,7 @@ async function use({trigger, workflow}) {
         flags: {
             'chris-premades': {
                 hex: {
-                    targets: Array.from(workflow.targets).map(i => i.document.uuid),
+                    targets: Array.from(workflow.targets.tokens).map(i => i.document.uuid),
                     damageType: itemUtils.getConfig(workflow.item, 'damageType'),
                     formula: itemUtils.getConfig(workflow.item, 'formula'),
                     ability: selection
@@ -66,12 +66,12 @@ async function use({trigger, workflow}) {
         return;
     }
     let casterEffect = await effectUtils.createEffect(workflow.actor, casterEffectData, {
-        concentrationItem: workflow.item, 
-        identifier: 'hex', 
+        concentrationItem: workflow.item,
+        identifier: 'hex',
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'hex', 
+            identifier: 'hex',
             activityIdentifier: 'hexMove'
         }],
         unhideActivities: {
@@ -80,13 +80,13 @@ async function use({trigger, workflow}) {
             favorite: true
         }
     });
-    for (let i of workflow.targets) {
+    for (let i of workflow.targets.tokens) {
         if (i.actor) await effectUtils.createEffect(i.actor, targetEffectData, {parentEntity: casterEffect, identifier: 'hexed'});
     }
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {'duration.value': seconds, 'duration.units': 'seconds'});
 }
 async function move({workflow}) {
-    if (workflow.targets.size != 1) return;
+    if (workflow.targets.count != 1) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'hex');
     if (!effect) return;
     let oldTargets = effect.flags['chris-premades'].hex.targets;
@@ -107,7 +107,7 @@ async function move({workflow}) {
         if (effect) await genericUtils.remove(effect);
     }
     oldTargets = oldTargets.filter(i => i != selection.document.uuid);
-    oldTargets.push(workflow.targets.first().document.uuid);
+    oldTargets.push(workflow.targets.tokens[0].document.uuid);
     await genericUtils.setFlag(effect, 'chris-premades', 'hex.targets', oldTargets);
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.Macros.Hex.Hexed'),
@@ -123,15 +123,15 @@ async function move({workflow}) {
             }
         ]}
     };
-    await effectUtils.createEffect(workflow.targets.first().actor, effectData, {parentEntity: effect, identifier: 'hexed'});
+    await effectUtils.createEffect(workflow.targets.tokens[0].actor, effectData, {parentEntity: effect, identifier: 'hexed'});
 }
 async function damage({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'hex');
     if (!effect) return;
     let validTargetUuids = effect.flags['chris-premades'].hex.targets;
-    if (!workflow.hitTargets.find(i => validTargetUuids.includes(i.document.uuid))) return;
+    if (!workflow.hitTargets.tokens.find(i => validTargetUuids.includes(i.document.uuid))) return;
     let damageType = effect.flags['chris-premades'].hex.damageType;
     let formula = effect.flags['chris-premades'].hex.formula;
     await workflowUtils.bonusDamage(workflow, formula, {damageType: damageType});
@@ -141,7 +141,7 @@ async function early({dialog}) {
 }
 export let hex = {
     name: 'Hex',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

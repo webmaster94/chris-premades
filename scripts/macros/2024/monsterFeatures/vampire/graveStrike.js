@@ -4,6 +4,6 @@ export let graveStrike = {
     monsters: [
         'Vampire'
     ],
-    version: '1.3.126',
+    version: '2.3.0',
     rules: 'modern'
 };

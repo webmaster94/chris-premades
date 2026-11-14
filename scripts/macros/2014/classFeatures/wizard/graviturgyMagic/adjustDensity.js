@@ -1,16 +1,16 @@
 import {actorUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function early({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let classIdentifier = itemUtils.getConfig(workflow, 'classIdentifier');
     let levels = workflow.actor.classes[classIdentifier]?.system?.levels;
     if (!levels) return;
     let maxSize = levels >= 10 ? 4 : 3;
-    if (actorUtils.getSize(workflow.targets.first().actor, false) <= maxSize) return;
+    if (actorUtils.getSize(workflow.targets.tokens[0].actor, false) <= maxSize) return;
     await workflowUtils.updateTargets(workflow, []);
 }
 export let adjustDensity = {
     name: 'Adjust Density',
-    version: '1.5.31',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

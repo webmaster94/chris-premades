@@ -2,7 +2,7 @@ import {constants} from '../../../../../utils.js';
 
 export let lunarForm = {
     name: 'Lunar Form',
-    version: '1.3.83',
+    version: '2.3.0',
     rules: 'modern',
     config: [
         {

@@ -10,8 +10,8 @@ async function flurryOfBlows({trigger, workflow}) {
     if (animationUtils.jb2aCheck() != 'patreon') playAnimation = false;
     let target;
     let nearby;
-    if (workflow.targets.size) {
-        target = workflow.targets.first();
+    if (workflow.targets.count) {
+        target = workflow.targets.tokens[0];
     } else {
         nearby = tokenUtils.findNearby(workflow.token, 5, 'enemy', {includeIncapacitated: true});
         if (!nearby.length) return;
@@ -115,11 +115,11 @@ async function patientDefense({trigger, workflow}) {
     let cancelled = false;
     while (!cancelled) {
         positions[i] = await crosshairUtils.aimCrosshair({
-            token: workflow.token, 
-            maxRange: workflow.actor.system.attributes.movement.walk, 
-            centerpoint: workflow.token.center, 
-            drawBoundries: true, 
-            trackDistance: true, 
+            token: workflow.token,
+            maxRange: workflow.actor.system.attributes.movement.walk,
+            centerpoint: workflow.token.center,
+            drawBoundries: true,
+            trackDistance: true,
             fudgeDistance: workflow.token.document.width * canvas.dimensions.distance / 2,
             crosshairsConfig: {
                 size: workflow.token.document.parent.grid.distance * workflow.token.document.width / 2,
@@ -162,7 +162,7 @@ async function patientDefense({trigger, workflow}) {
                         .locally()
                     .play();
                 /* eslint-enable indent */
-        } else { 
+        } else {
             cancelled = true;
         }
     }
@@ -191,7 +191,7 @@ async function stepOfTheWind({trigger, workflow}) {
                 otherToken = selection[0];
                 await genericUtils.update(otherToken.document, {alpha: 0});
             }
-        } 
+        }
     }
     let displayHint = itemUtils.getConfig(workflow.item, 'displayHint');
     if (displayHint) genericUtils.notify('CHRISPREMADES.Macros.Dash.Notify', 'info', {localize: true});
@@ -203,11 +203,11 @@ async function stepOfTheWind({trigger, workflow}) {
     let cancelled = false;
     while (!cancelled) {
         positions[i] = await crosshairUtils.aimCrosshair({
-            token: workflow.token, 
-            maxRange: workflow.actor.system.attributes.movement.walk, 
-            centerpoint: workflow.token.center, 
-            drawBoundries: true, 
-            trackDistance: true, 
+            token: workflow.token,
+            maxRange: workflow.actor.system.attributes.movement.walk,
+            centerpoint: workflow.token.center,
+            drawBoundries: true,
+            trackDistance: true,
             fudgeDistance: workflow.token.document.width * canvas.dimensions.distance / 2,
             crosshairsConfig: {
                 size: workflow.token.document.parent.grid.distance * workflow.token.document.width / 2,
@@ -250,7 +250,7 @@ async function stepOfTheWind({trigger, workflow}) {
                         .locally()
                     .play();
                 /* eslint-enable indent */
-        } else { 
+        } else {
             cancelled = true;
         }
     }
@@ -290,7 +290,7 @@ async function stepOfTheWind({trigger, workflow}) {
 }
 export let monksFocus = {
     name: 'Monk\'s Focus',
-    version: '1.5.1',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

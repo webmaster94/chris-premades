@@ -1,10 +1,11 @@
-import {automationUtils, dialogUtils, actorUtils, documentUtils, workflowUtils, tokenUtils, Logging} from '../../proxy.mjs';
+import {automationUtils, dialogUtils, actorUtils, documentUtils, itemUtils, workflowUtils, tokenUtils, Logging} from '../../proxy.mjs';
 async function use({document: activity, workflow, macroClass: {source, identifier}}) {
     const config = automationUtils.getGenericConfigValues(activity, source, identifier, Object.keys(extraAttack.genericConfig));
     if (!config.prompt) return;
     const strike = actorUtils.getItemByIdentifier(workflow.actor, config.identifier);
     if (!strike) return Logging.addMacroWarning('CPR', documentUtils.getIdentifier(workflow.item), 'Attack item not found on actor.', {notify: 'warn'});
-    const range = strike.system.range.value || strike.system.range.reach;
+    const {value, reach} = itemUtils.getRange(strike);
+    const range = value || reach;
     const bonuses = await automationUtils.calledEvent('extraAttack', workflow.actor, {multiResult: true, canOverlap: true, data: {workflow, baseCount: config.attacks, macroActivity: activity}}) ?? [];
     let totalAttacks = config.attacks;
     if (bonuses && bonuses.length) {
@@ -14,10 +15,11 @@ async function use({document: activity, workflow, macroClass: {source, identifie
         }, totalAttacks);
     }
     if (totalAttacks === 0) return;
-    const preselected = workflow.targets.map(t => t.document).filter(t => t.disposition !== workflow.token.document.disposition);
+    const preselected = workflow.targets.documents.filter(t => t.disposition !== workflow.token.document.disposition);
     let targetData = await getTargets(workflow, range, totalAttacks, config.skip, Array.from(preselected));
     if (!targetData) return;
     const {animation, options: animationOptions} = automationUtils.getResolvedAnimation(workflow.item, 'animation', {source, identifier});
+    const ownAnimation = animation?.macros?.attack;
     while (totalAttacks > 0) {
         for (let s = 0; s < targetData.result.length; s++) {
             const target = targetData.result[s].document;
@@ -26,8 +28,8 @@ async function use({document: activity, workflow, macroClass: {source, identifie
             if (targetData.skip && target.actor.system.attributes.hp.value <= 0) continue;
             for (let i = 0; i < attacks; i++) {
                 if (targetData.skip && target.actor.system.attributes.hp.value <= 0) break;
-                const workflow = await workflowUtils.syntheticItemRoll(strike, [target]);
-                if (animation?.macros?.attack) await animation.macros.attack(workflow.token.document, [target], {missed: !workflow.hitTargets.size, ...animationOptions});
+                const workflow = await workflowUtils.syntheticItemRoll(strike, [target], {options: ownAnimation ? {cat: {skipWeaponAnimation: true}} : {}});
+                if (ownAnimation && target.object) await ownAnimation(workflow.token.document, [target], {missed: !workflow.hitTargets.count, ...animationOptions});
                 totalAttacks--;
                 if (targetData.skip && target.actor.system.attributes.hp.value <= 0) break;
             }
@@ -73,7 +75,7 @@ async function getTargets(workflow, range, maxAmount, skipDeadAndUnconscious, ne
  */
 export const extraAttack = {
     rules: 'all',
-    version: '2.0.4',
+    version: '2.1.5',
     category: 'targeting',
     generic: true,
     documents: ['activity'],

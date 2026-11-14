@@ -1,7 +1,7 @@
 import {activityUtils, compendiumUtils, constants, dialogUtils, effectUtils, errors, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
 async function use({workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (!workflow.targets.size) {
+    if (!workflow.targets.count) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
@@ -44,7 +44,7 @@ async function use({workflow}) {
         flags: {
             'chris-premades': {
                 huntersMark: {
-                    targets: Array.from(workflow.targets).map(i => i.document.uuid),
+                    targets: Array.from(workflow.targets.tokens).map(i => i.document.uuid),
                     formula: itemUtils.getConfig(damageFormulaItem, 'formula'),
                     damageType: itemUtils.getConfig(damageFormulaItem, 'damageType')
                 }
@@ -52,14 +52,14 @@ async function use({workflow}) {
         }
     };
     let casterEffect = await effectUtils.createEffect(workflow.actor, casterEffectData, {
-        concentrationItem: workflow.item, 
-        strictlyInterdependent: true, 
+        concentrationItem: workflow.item,
+        strictlyInterdependent: true,
         vae: [{
-            type: 'use', 
-            name: feature.name, 
+            type: 'use',
+            name: feature.name,
             identifier: 'huntersMark',
             activityIdentifier: 'huntersMarkMove'
-        }], 
+        }],
         identifier: 'huntersMark',
         rules: 'modern',
         macros: [{type: 'midi.actor', macros: ['huntersMarkSource']}],
@@ -69,11 +69,11 @@ async function use({workflow}) {
             favorite: true
         }
     });
-    await Promise.all(workflow.targets.map(async i => await effectUtils.createEffect(i.actor, targetEffectData, {parentEntity: casterEffect, identifier: 'huntersMarkMarked'})));
+    await Promise.all(workflow.targets.tokens.map(async i => await effectUtils.createEffect(i.actor, targetEffectData, {parentEntity: casterEffect, identifier: 'huntersMarkMarked'})));
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {'duration.value': seconds, 'duration.units': 'seconds'});
 }
 async function move({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'huntersMark');
     if (!effect) return;
     let targetUuids = effect.flags['chris-premades'].huntersMark.targets;
@@ -93,7 +93,7 @@ async function move({workflow}) {
         if (effect) await genericUtils.remove(effect);
     }
     targetUuids = targetUuids.filter(i => i !== selection?.document.uuid);
-    targetUuids.push(workflow.targets.first().document.uuid);
+    targetUuids.push(workflow.targets.tokens[0].document.uuid);
     await genericUtils.setFlag(effect, 'chris-premades', 'huntersMark.targets', targetUuids);
     let seconds = effectUtils.getRemainingDurationSeconds(effect);
     let effectData = {
@@ -102,25 +102,25 @@ async function move({workflow}) {
         origin: workflow.item.uuid,
         duration: {value: seconds, units: 'seconds'}, start: {time: game.time?.worldTime ?? 0}
     };
-    await effectUtils.createEffect(workflow.targets.first().actor, effectData, {parentEntity: effect, identifier: 'huntersMarkMarked'});
+    await effectUtils.createEffect(workflow.targets.tokens[0].actor, effectData, {parentEntity: effect, identifier: 'huntersMarkMarked'});
 }
 async function attack({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let preciseHunter = itemUtils.getItemByIdentifier(workflow.actor, 'preciseHunter');
     if (!preciseHunter) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'huntersMark');
     if (!effect) return;
     let {targets: validTargetUuids} = effect.flags['chris-premades'].huntersMark;
-    if (!validTargetUuids.includes(workflow.targets.first().document.uuid)) return;
+    if (!validTargetUuids.includes(workflow.targets.tokens[0].document.uuid)) return;
     workflow.tracker.advantage.add(preciseHunter.name, preciseHunter.name);
 }
 async function damage({workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'huntersMark');
     if (!effect) return;
     let {targets: validTargetUuids, formula, damageType} = effect.flags['chris-premades'].huntersMark;
-    if (!validTargetUuids.includes(workflow.hitTargets.first().document.uuid)) return;
+    if (!validTargetUuids.includes(workflow.hitTargets.tokens[0].document.uuid)) return;
     await workflowUtils.bonusDamage(workflow, formula, {damageType});
 }
 async function early({dialog}) {
@@ -128,7 +128,7 @@ async function early({dialog}) {
 }
 export let huntersMark = {
     name: 'Hunter\'s Mark',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

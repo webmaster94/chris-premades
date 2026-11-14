@@ -31,7 +31,7 @@ async function use({workflow}) {
             dialogContent = genericUtils.format('CHRISPREMADES.Macros.ExperimentalElixir.MakeAnotherPact', {slotValue, slotMax});
         } else {
             dialogContent = genericUtils.format('CHRISPREMADES.Macros.ExperimentalElixir.MakeAnother', {slotLevel, slotValue, slotMax});
-        } 
+        }
         let elixirType = await dialogUtils.buttonDialog(workflow.item.name, dialogContent, buttons);
         if (!elixirType?.length || elixirType === 'no') return;
         await elixirHelper(elixirType, workflow.actor);
@@ -67,11 +67,11 @@ async function longRest({trigger: {entity: item}}) {
 async function late({workflow}) {
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'experimentalElixirHeal', {strict: true});
     if (!feature) return;
-    await workflowUtils.syntheticActivityRoll(feature, Array.from(workflow.targets));
+    await workflowUtils.syntheticActivityRoll(feature, Array.from(workflow.targets.tokens));
 }
 export let experimentalElixir = {
     name: 'Experimental Elixir',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

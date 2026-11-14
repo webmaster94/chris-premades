@@ -51,7 +51,7 @@ async function longRest({trigger: {entity: item}}) {
 }
 export let overchannel = {
     name: 'Overchannel',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         actor: [
             {

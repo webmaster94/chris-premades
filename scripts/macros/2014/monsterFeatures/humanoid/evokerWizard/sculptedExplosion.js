@@ -1,6 +1,6 @@
 import {constants, dialogUtils, effectUtils, genericUtils, itemUtils} from '../../../../../utils.js';
 async function damage({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let buttons = [
         ['DND5E.DAMAGE.Type.Cold', 'cold', {image: 'icons/magic/air/wind-tornado-wall-blue.webp'}],
         ['DND5E.DAMAGE.Type.Fire', 'fire', {image: 'icons/magic/fire/beam-jet-stream-embers.webp'}],
@@ -18,7 +18,7 @@ async function damage({trigger, workflow}) {
 }
 async function early({trigger, workflow}) {
     let max = Number(itemUtils.getConfig(workflow.item, 'maxAmount'));
-    let selection = Array.from(workflow.targets.filter(i => i.document.disposition === workflow.token.document.disposition));
+    let selection = Array.from(new Set(workflow.targets.tokens).filter(i => i.document.disposition === workflow.token.document.disposition));
     if (!selection.length) return;
     if (selection.length > max) {
         selection = await dialogUtils.selectTargetDialog(workflow.item.name, genericUtils.format('CHRISPREMADES.Macros.SculptSpells.Select', {max}), selection, {
@@ -62,7 +62,7 @@ async function early({trigger, workflow}) {
 }
 export let sculptedExplosion = {
     name: 'Sculpted Explosion',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

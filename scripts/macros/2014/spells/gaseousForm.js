@@ -1,4 +1,4 @@
 export let gaseousForm = {
     name: 'Gaseous Form',
-    version: '1.5.1'
+    version: '2.3.0'
 };

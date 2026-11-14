@@ -15,20 +15,20 @@ async function damaged({trigger: {entity: effect, token}, ditem}) {
     }
     let targets = token.scene.tokens.filter(t => t.actor && t.id !== token.id && ['adventurersAtlas', 'adventurersAtlasCreator'].some(i => effectUtils.getEffectByIdentifier(t.actor, i))).map(t => t.object);
     let userId = socketUtils.firstOwner(token.actor, true);
-    let selection; 
+    let selection;
     let target;
     if (!targets.length)
         selection = await dialogUtils.confirmUseItem(feature, {userId});
     else {
         target = await dialogUtils.selectTargetDialog(
-            feature.name, 
-            genericUtils.format('CHRISPREMADES.Macros.SuperiorAtlas.Prompt', {itemName: feature.name, newHP}), 
+            feature.name,
+            genericUtils.format('CHRISPREMADES.Macros.SuperiorAtlas.Prompt', {itemName: feature.name, newHP}),
             targets,
             {userId}
         );
         target = target?.[0];
         selection = !!target;
-    }   
+    }
     if (!selection) return;
     ditem.totalDamage = ditem.oldHP - newHP;
     ditem.newHP = newHP;
@@ -48,7 +48,7 @@ async function preChecks({workflow}) {
 }
 export let superiorAtlas = {
     name: 'Superior Atlas',
-    version: '1.5.17',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

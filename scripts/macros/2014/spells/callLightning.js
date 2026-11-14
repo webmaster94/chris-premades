@@ -20,13 +20,13 @@ async function use({workflow}) {
         }
     };
     let effect = await effectUtils.createEffect(workflow.actor, effectData, {
-        concentrationItem: workflow.item, 
-        strictlyInterdependent: true, 
-        identifier: 'callLightning', 
+        concentrationItem: workflow.item,
+        strictlyInterdependent: true,
+        identifier: 'callLightning',
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'callLightning', 
+            identifier: 'callLightning',
             activityIdentifier: 'stormBolt'
         }],
         unhideActivities: {
@@ -66,10 +66,10 @@ function animation(workflow, dependent) {
             .persist()
         .play();
     /* eslint-enable indent */
-} 
+}
 export let callLightning = {
     name: 'Call Lightning',
-    version: '1.5.36',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

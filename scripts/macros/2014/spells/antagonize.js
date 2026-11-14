@@ -1,7 +1,7 @@
 import {actorUtils, dialogUtils, effectUtils, genericUtils, socketUtils, tokenUtils} from '../../../utils.js';
 async function use({workflow}) {
-    if (!workflow.failedSaves.size) return;
-    for (let targetToken of workflow.failedSaves) {
+    if (!workflow.failedSaves.count) return;
+    for (let targetToken of workflow.failedSaves.tokens) {
         if (tokenUtils.checkIncapacitated(targetToken)) {
             continue;
         }
@@ -71,7 +71,7 @@ async function use({workflow}) {
 }
 export let antagonize = {
     name: 'Antagonize',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

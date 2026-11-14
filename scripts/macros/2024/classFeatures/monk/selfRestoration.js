@@ -14,7 +14,7 @@ async function use({trigger, workflow}) {
 }
 export let selfRestoration = {
     name: 'Self-Restoration',
-    version: '1.3.162',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

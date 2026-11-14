@@ -1,7 +1,7 @@
 import {effectUtils, genericUtils} from '../../../../utils.js';
 
 async function use({workflow}) {
-    let actor = workflow.targets.first()?.actor ?? workflow.actor;
+    let actor = workflow.targets.tokens[0]?.actor ?? workflow.actor;
     let poisoned = effectUtils.getEffectByStatusID(actor, 'poisoned');
     if (poisoned) await genericUtils.remove(poisoned);
     if (actor.system.attributes.exhaustion) {
@@ -10,7 +10,7 @@ async function use({workflow}) {
 }
 export let potionOfVitality = {
     name: 'Potion of Vitality',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

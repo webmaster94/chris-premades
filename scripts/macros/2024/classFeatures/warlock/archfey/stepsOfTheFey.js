@@ -26,7 +26,7 @@ async function taunt({trigger, workflow}) {
 }
 export let stepsOfTheFey = {
     name: 'Steps of the Fey',
-    version: '1.3.156',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

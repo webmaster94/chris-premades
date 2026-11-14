@@ -277,7 +277,7 @@
         "identifier": "momentaryStasis",
         "rules": "legacy",
         "source": "chris-premades",
-        "version": "1.5.32"
+        "version": "2.3.0"
       }
     }
   },

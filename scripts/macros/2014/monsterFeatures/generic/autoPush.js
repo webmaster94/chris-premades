@@ -1,11 +1,11 @@
 import {itemUtils, tokenUtils, actorUtils} from '../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.token || !workflow.targets.size) return;
+    if (!workflow.token || !workflow.targets.count) return;
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'autoPush');
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
     if (isNaN(Number(config.distance))) return;
-    workflow.targets.forEach(token => {
+    workflow.targets.tokens.forEach(token => {
         if (config.failed && !workflow.failedSaves.has(token)) return;
         if (config.hit && !workflow.hitTargets.has(token)) return;
         if (config.maxSize && config.maxSize != 'none' && !actorUtils.compareSize(token, config.maxSize, '<=')) return;
@@ -27,7 +27,7 @@ function actorSizes() {
 export let autoPush = {
     name: 'Auto Push',
     translation: 'CHRISPREMADES.Macros.AutoPush.Name',
-    version: '1.0.45',
+    version: '2.3.0',
     midi: {
         item: [
             {

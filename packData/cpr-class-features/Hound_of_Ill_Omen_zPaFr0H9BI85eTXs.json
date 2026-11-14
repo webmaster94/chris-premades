@@ -251,7 +251,7 @@
         "identifier": "houndOfIllOmen",
         "rules": "legacy",
         "source": "chris-premades",
-        "version": "1.4.19"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

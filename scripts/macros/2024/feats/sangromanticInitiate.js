@@ -1,7 +1,7 @@
 import {constants} from '../../../utils.js';
 export let sangromanticInitiate = {
     name: 'Sangromantic Initiate',
-    version: '1.5.11',
+    version: '2.3.0',
     rules: 'modern',
     config: [
         {

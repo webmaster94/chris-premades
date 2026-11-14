@@ -2,7 +2,7 @@ import {combatUtils, constants, dialogUtils, genericUtils, itemUtils, workflowUt
 async function damage({trigger, workflow}) {
     let item = itemUtils.getItemByIdentifier(workflow.actor, 'divineFury');
     if (!item) return;
-    if (!workflow.hitTargets.size || !workflowUtils.isAttackType(workflow, 'weaponAttack') || !item.system.uses.value) return;
+    if (!workflow.hitTargets.count || !workflowUtils.isAttackType(workflow, 'weaponAttack') || !item.system.uses.value) return;
     let damageTypes = itemUtils.getConfig(item, 'damageTypes');
     if (!damageTypes.length) return;
     let classIdentifier = itemUtils.getConfig(item, 'classIdentifier');
@@ -16,7 +16,7 @@ async function damage({trigger, workflow}) {
 }
 export let divineFury = {
     name: 'Divine Fury',
-    version: '1.1.27',
+    version: '2.3.0',
     rules: 'modern',
     config: [
         {

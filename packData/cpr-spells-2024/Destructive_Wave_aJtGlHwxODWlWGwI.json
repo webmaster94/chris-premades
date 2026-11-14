@@ -264,7 +264,7 @@
     "chris-premades": {
       "info": {
         "name": "Destructive Wave",
-        "version": "1.2.21",
+        "version": "2.3.0",
         "hasAnimation": true,
         "identifier": "destructiveWave",
         "source": "chris-premades",

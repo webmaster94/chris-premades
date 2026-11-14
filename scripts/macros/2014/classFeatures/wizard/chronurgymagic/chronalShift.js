@@ -1,7 +1,7 @@
 import {actorUtils, dialogUtils, genericUtils, itemUtils, workflowUtils, tokenUtils, socketUtils} from '../../../../../utils.js';
 let inUse = false;
 async function selfRoll({trigger: {entity: item, roll}}, rollType, abilityId) {
-    if (inUse || !item.system.uses.value || actorUtils.hasUsedReaction(item.actor)) return; 
+    if (inUse || !item.system.uses.value || actorUtils.hasUsedReaction(item.actor)) return;
     let targetValue = roll.options.target;
     if (targetValue && (roll.total >= targetValue)) return;
     let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Dialog.UseRollTotal', {itemName: item.name, rollTotal: roll.total}));
@@ -47,8 +47,8 @@ async function thirdPartyRoll({trigger: {entity: item, config, sourceActor, roll
         let feature = itemUtils.getItemByIdentifier(target.actor, 'chronalShift');
         let userId = socketUtils.firstOwner(target.actor, true);
         let selection = await dialogUtils.queuedConfirmDialog(
-            target.actor.name + ': ' + feature.name, 
-            genericUtils.format('CHRISPREMADES.Dialog.UseRollTotalBy', {itemName: feature.name, rollTotal: roll.total, name: sourceActor.name}), 
+            target.actor.name + ': ' + feature.name,
+            genericUtils.format('CHRISPREMADES.Dialog.UseRollTotalBy', {itemName: feature.name, rollTotal: roll.total, name: sourceActor.name}),
             {actor: target.actor, reason: 'reaction', userId}
         );
         if (!selection) continue;
@@ -72,7 +72,7 @@ async function thirdPartySave(args) {return thirdPartyRoll(args, 'save');}
 async function thirdPartyCheck(args) {return thirdPartyRoll(args, 'check');}
 async function thirdPartySkill(args) {return thirdPartyRoll(args, 'skill');}
 async function selfAttack({trigger: {entity: item}, workflow}) {
-    if (!item.system.uses.value || actorUtils.hasUsedReaction(item.actor)) return; 
+    if (!item.system.uses.value || actorUtils.hasUsedReaction(item.actor)) return;
     let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Dialog.UseRollTotal', {itemName: item.name, rollTotal: workflow.attackRoll.total}));
     if (!selection) return;
     await workflowUtils.syntheticItemRoll(item, [], {consumeUsage: true, consumeResources: true});
@@ -80,9 +80,9 @@ async function selfAttack({trigger: {entity: item}, workflow}) {
     if (newRoll) await workflow.setAttackRoll(newRoll);
 }
 async function thirdPartyAttack({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size || !itemUtils.getConfig(item, 'enable3rdPartyReaction')) return;
+    if (!workflow.targets.count || !itemUtils.getConfig(item, 'enable3rdPartyReaction')) return;
     let token = workflow.token;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     let targetAC = targetToken.actor.system.attributes.ac.value;
     let isSuccess;
     if (workflow.isCritical) {
@@ -106,8 +106,8 @@ async function thirdPartyAttack({trigger: {entity: item}, workflow}) {
         let feature = itemUtils.getItemByIdentifier(target.actor, 'chronalShift');
         let userId = socketUtils.firstOwner(target.actor, true);
         let selection = await dialogUtils.queuedConfirmDialog(
-            target.actor.name + ': ' + feature.name, 
-            genericUtils.format('CHRISPREMADES.Dialog.UseRollTotalBy', {itemName: feature.name, rollTotal: workflow.attackRoll.total, name: token.name}), 
+            target.actor.name + ': ' + feature.name,
+            genericUtils.format('CHRISPREMADES.Dialog.UseRollTotalBy', {itemName: feature.name, rollTotal: workflow.attackRoll.total, name: token.name}),
             {actor: target.actor, reason: 'reaction', userId}
         );
         if (!selection) continue;
@@ -115,13 +115,13 @@ async function thirdPartyAttack({trigger: {entity: item}, workflow}) {
         let [newRoll] = await workflow.activity.rollAttack({}, undefined, {create: false});
         if (newRoll) {
             await workflow.setAttackRoll(newRoll);
-            break; 
+            break;
         }
     }
 }
 export let chronalShift = {
     name: 'Chronal Shift',
-    version: '1.5.32',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         actor: [

@@ -913,7 +913,7 @@
         "identifier": "command",
         "hasAnimation": false,
         "rules": "modern",
-        "version": "1.1.38"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

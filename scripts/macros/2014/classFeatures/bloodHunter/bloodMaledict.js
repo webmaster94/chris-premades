@@ -1,6 +1,6 @@
 export let bloodMaledict = {
     name: 'Blood Maledict',
-    version: '1.1.0',
+    version: '2.3.0',
     ddbi: {
         correctedItems: {
             'Blood Maledict': {

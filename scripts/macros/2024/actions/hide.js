@@ -1,6 +1,6 @@
 import {activityUtils, actorUtils, animationUtils, dialogUtils, effectUtils, genericUtils, itemUtils, socketUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (workflow.failedSaves.size) return;
+    if (workflow.failedSaves.count) return;
     let sourceEffect = itemUtils.getEffectByIdentifier(workflow.item, 'hideEffect');
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
@@ -104,7 +104,7 @@ async function turn({trigger: {entity: effect}}) {
 }
 export let hide = {
     name: 'Hide',
-    version: '1.3.61',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

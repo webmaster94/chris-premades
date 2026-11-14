@@ -1,7 +1,7 @@
 import {effectUtils, itemUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 async function attacked({trigger, workflow}) {
-    if (!workflow.targets.size || !workflowUtils.isAttackType(workflow, 'attack') || !workflow.token) return;
-    if (tokenUtils.canSense(workflow.token, workflow.targets.first(), ['blindsight', 'seeAll'])) return;
+    if (!workflow.targets.count || !workflowUtils.isAttackType(workflow, 'attack') || !workflow.token) return;
+    if (tokenUtils.canSense(workflow.token, workflow.targets.tokens[0], ['blindsight', 'seeAll'])) return;
     workflow.tracker.disadvantage.add(trigger.entity.name, trigger.entity.name);
 }
 async function use({trigger, workflow}) {
@@ -21,7 +21,7 @@ async function use({trigger, workflow}) {
 }
 export let blur = {
     name: 'Blur',
-    version: '1.1.17',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

@@ -76,7 +76,7 @@ async function use({workflow}) {
 export let sacredWeapon = {
     name: 'Channel Divinity: Sacred Weapon',
     aliases: ['Sacred Weapon'],
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

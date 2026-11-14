@@ -33,7 +33,7 @@ async function create({trigger: {entity: effect, target, identifier}}) {
         flags: {
             'chris-premades': {
                 aura: true,
-                damageType: effect.flags['chris-premades'].damageType, 
+                damageType: effect.flags['chris-premades'].damageType,
                 effect: {
                     noAnimation: true
                 },
@@ -58,7 +58,7 @@ async function damageBonus({trigger: {entity: effect}, workflow}) {
 }
 export let runesOfWar = {
     name:'Runes of War',
-    version: '1.5.21',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

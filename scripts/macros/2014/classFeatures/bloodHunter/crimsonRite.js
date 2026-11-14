@@ -12,11 +12,11 @@ async function use({workflow}) {
         return;
     }
     let riteIds = [
-        ['riteOfTheFlame', 'fire'], 
-        ['riteOfTheFrozen', 'cold'], 
-        ['riteOfTheStorm', 'lightning'], 
-        ['riteOfTheDead', 'necrotic'], 
-        ['riteOfTheOracle', 'psychic'], 
+        ['riteOfTheFlame', 'fire'],
+        ['riteOfTheFrozen', 'cold'],
+        ['riteOfTheStorm', 'lightning'],
+        ['riteOfTheDead', 'necrotic'],
+        ['riteOfTheOracle', 'psychic'],
         ['riteOfTheRoar', 'thunder'],
         ['riteOfTheDawn', 'radiant']
     ];
@@ -121,7 +121,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let crimsonRite = {
     name: 'Crimson Rite',
-    version: '1.3.97',
+    version: '2.3.0',
     midi: {
         item: [
             {

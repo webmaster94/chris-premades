@@ -1,6 +1,6 @@
 import {activityUtils, dialogUtils, effectUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function use({workflow}) {
-    let target = workflow.targets.first();
+    let target = workflow.targets.tokens[0];
     if (!target) return;
     let failedSave = false;
     let clairvoyant = itemUtils.getItemByIdentifier(workflow.actor, 'clairvoyantCombatant');
@@ -46,7 +46,7 @@ async function use({workflow}) {
 }
 export let awakenedMind = {
     name: 'Awakened Mind',
-    version: '1.5.21',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

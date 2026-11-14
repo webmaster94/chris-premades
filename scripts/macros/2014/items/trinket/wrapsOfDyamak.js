@@ -28,7 +28,7 @@ async function damage({trigger: {entity: item}, workflow}) {
             if (selection) {
                 await workflowUtils.bonusDamage(workflow, '6d6[necrotic]', {damageType: 'necrotic'});
                 genericUtils.setProperty(workflow, 'chrisPremades.strikeUsed', true);
-                await workflowUtils.syntheticActivityRoll(ravenousActivity, [workflow.targets.first()], {config: {consumeUsage: true, consume: {resources: true}}, options: {configureDialog: false}});
+                await workflowUtils.syntheticActivityRoll(ravenousActivity, [workflow.targets.tokens[0]], {config: {consumeUsage: true, consume: {resources: true}}, options: {configureDialog: false}});
             }
         }
     }
@@ -59,7 +59,7 @@ async function useMist({workflow}) {
 }
 export let wrapsOfDyamak = {
     name: 'Wraps of Dyamak',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {
@@ -89,19 +89,19 @@ export let wrapsOfDyamak = {
 };
 export let wrapsOfDyamak0 = {
     name: 'Wraps of Dyamak (Dormant)',
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let wrapsOfDyamak1 = {
     name: 'Wraps of Dyamak (Awakened)',
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let wrapsOfDyamak2 = {
     name: 'Wraps of Dyamak (Exalted)',
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let crimsonMist = {
     name: 'Crimson Mist',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

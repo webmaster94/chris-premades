@@ -2,7 +2,7 @@ import {activityUtils, compendiumUtils, constants, dialogUtils, effectUtils, gen
 
 async function late({workflow}) {
     if (!workflow.item.system.uses.value) return;
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     let radiantDone = workflow.damageList[0].damageDetail[1].value;
     if (!radiantDone) return;
     let feature = await activityUtils.getActivityByIdentifier(workflow.item, 'crystalBladeHeal', {strict: true});
@@ -86,7 +86,7 @@ async function light({workflow}) {
 }
 export let crystalBlade = {
     name: 'Crystal Blade',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

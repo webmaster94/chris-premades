@@ -215,7 +215,7 @@
     "chris-premades": {
       "info": {
         "name": "Conjure Elemental",
-        "version": "1.1.0",
+        "version": "2.3.0",
         "identifier": "conjureElemental",
         "source": "chris-premades",
         "hasAnimation": true

@@ -13,7 +13,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let strigoiBloodline = {
     name: 'Stage 1 Boon: Strigoi Bloodline',
-    version: '1.4.6',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

@@ -422,7 +422,7 @@
     "chris-premades": {
       "info": {
         "name": "Summon Fey",
-        "version": "1.2.32",
+        "version": "2.3.0",
         "identifier": "summonFey",
         "source": "chris-premades",
         "hasAnimation": true,

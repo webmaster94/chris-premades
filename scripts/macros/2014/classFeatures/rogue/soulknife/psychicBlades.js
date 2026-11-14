@@ -1,11 +1,11 @@
 import {activityUtils, actorUtils, combatUtils, dialogUtils, effectUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../../utils.js';
 
 async function early({workflow}) {
-    if (!workflow.targets.size || !workflow.token) return;
+    if (!workflow.targets.count || !workflow.token) return;
     let str = workflow.actor.system.abilities.str.mod;
     let dex = workflow.actor.system.abilities.dex.mod;
     let ability = dex > str ? 'dex' : 'str';
-    let type = (tokenUtils.getDistance(workflow.token, workflow.targets.first()) > 5) ? 'ranged' : 'melee';
+    let type = (tokenUtils.getDistance(workflow.token, workflow.targets.tokens[0]) > 5) ? 'ranged' : 'melee';
     await genericUtils.setFlag(workflow.item, 'chris-premades', 'homingStrikes.used', false);
     await genericUtils.setFlag(workflow.item, 'chris-premades', 'rendMind.prompt', false);
     workflow.activity.attack.ability = ability;
@@ -15,7 +15,7 @@ async function late({workflow}) {
     let psionicEnergy = itemUtils.getItemByIdentifier(workflow.actor, 'psionicEnergy');
     let trueItem = itemUtils.getItemByIdentifier(workflow.actor, 'psychicBlades');
     if (trueItem?.flags['chris-premades']?.homingStrikes?.used) {
-        if (workflow.hitTargets.size && psionicEnergy) await genericUtils.update(psionicEnergy, {'system.uses.spent': psionicEnergy.system.uses.spent + 1});
+        if (workflow.hitTargets.count && psionicEnergy) await genericUtils.update(psionicEnergy, {'system.uses.spent': psionicEnergy.system.uses.spent + 1});
         await genericUtils.setFlag(workflow.item, 'chris-premades', 'homingStrikes.used', false);
     }
     if (trueItem?.flags['chris-premades']?.rendMind?.prompt) {
@@ -31,7 +31,7 @@ async function late({workflow}) {
                 selection = await dialogUtils.confirm(rendMind.name, genericUtils.format('CHRISPREMADES.Dialog.UseExtraCost', {itemName: rendMind.name, quantity: '3', quantityName: psionicEnergy.name}));
                 if (selection) await genericUtils.update(psionicEnergy, {'system.uses.spent': psionicEnergy.system.uses.spent + 3});
             }
-            if (selection) await workflowUtils.syntheticItemRoll(rendMind, [workflow.targets.first()]);
+            if (selection) await workflowUtils.syntheticItemRoll(rendMind, [workflow.targets.tokens[0]]);
         }
         await genericUtils.setFlag(workflow.item, 'chris-premades', 'rendMind.prompt', false);
     }
@@ -62,9 +62,9 @@ async function late({workflow}) {
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'psychicBladesBonus', {strict: true});
     if (!feature) return;
     effect = await effectUtils.createEffect(workflow.actor, effectData, {
-        identifier: 'psychicBladesBonus', 
+        identifier: 'psychicBladesBonus',
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
             identifier: 'psychicBlades',
             activityIdentifier: 'psychicBladesBonus'
@@ -84,9 +84,9 @@ async function attack({workflow}) {
     if (workflow.isFumble) return;
     let homingFeature = itemUtils.getItemByIdentifier(workflow.actor, 'homingStrikes');
     let psionicEnergy = itemUtils.getItemByIdentifier(workflow.actor, 'psionicEnergy');
-    if (!homingFeature || !psionicEnergy?.system.uses.value || !workflow.targets.size) return;
+    if (!homingFeature || !psionicEnergy?.system.uses.value || !workflow.targets.count) return;
     let attackTotal = workflow.attackTotal;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     let targetAC = targetToken.actor.system.attributes.ac.value;
     if (targetAC <= attackTotal) return;
     let selection = await dialogUtils.confirm(homingFeature.name, genericUtils.format('CHRISPREMADES.Dialog.Missed', {attackTotal, itemName: homingFeature.name}));
@@ -98,7 +98,7 @@ async function attack({workflow}) {
 }
 export let psychicBlades = {
     name: 'Psychic Blades',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

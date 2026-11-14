@@ -40,31 +40,16 @@ async function saveBonus({document, workflow}) {
     const activityData = workflow.activity.toObject();
     activityData.save.dc.calculation = '';
     activityData.save.dc.formula = String(workflow.activity.save.dc.value + bonus);
-    workflowUtils.setActivity(workflow, activityData);
+    await workflowUtils.setActivity(workflow, activityData);
 }
 async function damage({document, workflow}) {
     if (!isHarkonsActivity(document, workflow, ['bite', 'claws'])) return;
     const config = automationUtils.getConfigValues(document, ['formula', 'damageType']);
     await workflowUtils.bonusDamage(workflow, config.formula, {damageType: config.damageType});
 }
-async function keenHearingAndSmell({skillId}) {
-    if (skillId !== 'prc') return;
-    return {
-        label: 'CHRISPREMADES.Macros.Legacy.HarkonsBite.Keen',
-        type: 'advantage'
-    };
-}
-export const amuletOfTheLycanthropeEffect = {
-    name: 'Amulet of the Lycanthrope: Bestial Form',
-    version: '2.0.0',
-    rules: '2014',
-    skill: [
-        {pass: 'actorContext', macro: keenHearingAndSmell, priority: 50}
-    ]
-};
 export const amuletOfTheLycanthrope = {
     name: 'Amulet of the Lycanthrope',
-    version: '2.0.0',
+    version: '2.1.7',
     rules: '2014',
     roll: [
         {pass: 'itemRollFinished', macro: use, priority: 50},
@@ -77,7 +62,7 @@ export const amuletOfTheLycanthrope = {
             ...effectUtils.getImageConfig(),
             formula: {
                 default: '1d8',
-                type: 'text',
+                type: 'formula',
                 label: 'CHRISPREMADES.Config.Formula',
                 category: 'homebrew'
             },

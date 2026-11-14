@@ -1,8 +1,8 @@
 import {itemUtils, tokenUtils} from '../../../../../utils.js';
 import {proneOnFail} from '../../../generic/proneOnFail.js';
 async function push({trigger, workflow}) {
-    if (!workflow.token || !workflow.failedSaves.size) return;
-    await tokenUtils.pushToken(workflow.token, workflow.failedSaves.first(), 15);
+    if (!workflow.token || !workflow.failedSaves.count) return;
+    await tokenUtils.pushToken(workflow.token, workflow.failedSaves.tokens[0], 15);
 }
 async function added({trigger: {entity: item}}) {
     await itemUtils.multiCorrectActivityItemConsumption(item, ['push', 'prone'], {
@@ -13,7 +13,7 @@ async function added({trigger: {entity: item}}) {
 export let telekineticSeal = {
     name: 'Dispater\'s Interdiction: Telekinetic Seal',
     aliases: ['Telekinetic Seal'],
-    version: '1.3.78',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

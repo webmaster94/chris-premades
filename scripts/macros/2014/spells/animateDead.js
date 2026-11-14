@@ -30,13 +30,13 @@ async function use({workflow}) {
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'animateDeadCommand', {strict: true});
     if (!feature) return;
     await Summons.spawn(sourceActors, updates, workflow.item, workflow.token, {
-        duration: 86400, 
-        range: 10, 
-        animation, 
+        duration: 86400,
+        range: 10,
+        animation,
         additionalVaeButtons: [{
-            type: 'use', 
-            name: feature.name, 
-            identifier: 'animateDead', 
+            type: 'use',
+            name: feature.name,
+            identifier: 'animateDead',
             activityIdentifier: 'animateDeadCommand'
         }],
         unhideActivities: {
@@ -51,7 +51,7 @@ async function early({dialog}) {
 }
 export let animateDead = {
     name: 'Animate Dead',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

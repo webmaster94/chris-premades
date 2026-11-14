@@ -1,6 +1,6 @@
 import {combatUtils, constants, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function sourceAttack({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'rage');
     if (!effect) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
@@ -25,7 +25,7 @@ async function sourceAttack({trigger: {entity: item}, workflow}) {
         }
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['ancestralProtectorsTarget']);
-    await effectUtils.createEffect(workflow.hitTargets.first().actor, effectData, {parentEntity: effect, identifier: 'ancestralProtectorsTarget'});
+    await effectUtils.createEffect(workflow.hitTargets.tokens[0].actor, effectData, {parentEntity: effect, identifier: 'ancestralProtectorsTarget'});
     await combatUtils.setTurnCheck(item, 'ancestralProtectors');
 }
 async function early({workflow}) {
@@ -34,18 +34,18 @@ async function early({workflow}) {
     let origin = await effectUtils.getOriginItem(effect);
     if (!origin) return;
     let originActorUuid = origin.actor.uuid;
-    let targetActorUuid = workflow.targets.first().actor.uuid;
+    let targetActorUuid = workflow.targets.tokens[0].actor.uuid;
     if (originActorUuid === targetActorUuid) return;
     workflow.tracker.disadvantage.add(origin.name, origin.name);
 }
 async function late({workflow}) {
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'ancestralProtectorsTarget');
     let origin = await effectUtils.getOriginItem(effect);
     if (!origin) return;
     let originActorUuid = origin.actor.uuid;
-    let targetActorUuid = workflow.hitTargets.first().actor.uuid;
+    let targetActorUuid = workflow.hitTargets.tokens[0].actor.uuid;
     if (originActorUuid === targetActorUuid) return;
     let effectData = {
         name: origin.name + ' Resistance',
@@ -73,14 +73,14 @@ async function late({workflow}) {
             }
         }
     };
-    await effectUtils.createEffect(workflow.hitTargets.first().actor, effectData, {identifier: 'ancestralProtectorsResistance'});
+    await effectUtils.createEffect(workflow.hitTargets.tokens[0].actor, effectData, {identifier: 'ancestralProtectorsResistance'});
 }
 async function combatEnd({trigger: {entity: item}}) {
     await combatUtils.setTurnCheck(item, 'ancestralProtectors', true);
 }
 export let ancestralProtectors = {
     name: 'Ancestral Protectors',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -159,7 +159,8 @@
     "chris-premades": {
       "info": {
         "identifier": "wildShapeRevert",
-        "rules": "modern"
+        "rules": "modern",
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

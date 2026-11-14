@@ -1,6 +1,6 @@
 import {actorUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
-    if (!itemUtils.getEquipmentState(item) || !item.system.uses.value || !workflow.hitTargets.size || !workflowUtils.isAttackType(workflow, 'meleeAttack') || !workflow.token) return;
+    if (!itemUtils.getEquipmentState(item) || !item.system.uses.value || !workflow.hitTargets.count || !workflowUtils.isAttackType(workflow, 'meleeAttack') || !workflow.token) return;
     let selection = await dialogUtils.confirmUseItem(item);
     if (!selection) return;
     let formula = itemUtils.getConfig(item, 'formula');
@@ -9,9 +9,9 @@ async function damage({trigger: {entity: item}, workflow}) {
     genericUtils.setProperty(workflow, 'chris-premades.forceGauntlet', true);
 }
 async function used({trigger: {entity: item}, workflow}) {
-    if ( !workflow['chris-premades']?.forceGauntlet || !workflow.targets.size) return;
+    if ( !workflow['chris-premades']?.forceGauntlet || !workflow.targets.count) return;
     let sourceSize = actorUtils.getSize(workflow.actor);
-    let targetSize = actorUtils.getSize(workflow.targets.first().actor);
+    let targetSize = actorUtils.getSize(workflow.targets.tokens[0].actor);
     if (targetSize - 2 >= sourceSize) {
         let effectData = {
             name: genericUtils.translate('CHRISPREMADES.GenericEffects.InvalidTarget'),
@@ -39,18 +39,18 @@ async function used({trigger: {entity: item}, workflow}) {
                 }
             }
         };
-        await effectUtils.createEffect(workflow.targets.first().actor, effectData);
+        await effectUtils.createEffect(workflow.targets.tokens[0].actor, effectData);
     }
-    let targetWorkflow = await workflowUtils.syntheticItemRoll(item, Array.from(workflow.targets), {consumeResources: true, consumeUsage: true});
+    let targetWorkflow = await workflowUtils.syntheticItemRoll(item, Array.from(workflow.targets.tokens), {consumeResources: true, consumeUsage: true});
     if (targetWorkflow.failedSaves.size) {
-        await tokenUtils.pushToken(workflow.token, workflow.targets.first(), 10);
+        await tokenUtils.pushToken(workflow.token, workflow.targets.tokens[0], 10);
     } else {
-        await tokenUtils.pushToken(workflow.targets.first(), workflow.token, 10);
+        await tokenUtils.pushToken(workflow.targets.tokens[0], workflow.token, 10);
     }
 }
 export let forceGauntlet = {
     name: 'Force Gauntlet',
-    version: '1.5.25',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

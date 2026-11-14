@@ -13,9 +13,9 @@ async function setTurnCheck(actor, mastery) {
 }
 async function cleave({workflow}) {
     if (!perTurnCheck(workflow.actor, 'cleave')) return;
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (workflow.item.flags['chris-premades']?.cleaveMastery) return;
-    let target = workflow.hitTargets.first();
+    let target = workflow.hitTargets.tokens[0];
     let targetNearbyAllies = tokenUtils.findNearby(target, 5, 'ally');
     let nearbyTargets = tokenUtils.findNearby(workflow.token, workflow.rangeDetails.range ?? 5, 'enemy').filter(i => i != target && targetNearbyAllies.includes(i));
     if (!nearbyTargets.length) return;
@@ -43,20 +43,20 @@ async function cleave({workflow}) {
     }
 }
 async function graze({workflow}) {
-    if (workflow.hitTargets.size) return;
+    if (workflow.hitTargets.count) return;
     let mod = activityUtils.getMod(workflow.activity);
     if (!mod) return;
-    await workflowUtils.applyDamage([workflow.targets.first()], mod, workflow.defaultDamageType);
+    await workflowUtils.applyDamage([workflow.targets.tokens[0]], mod, workflow.defaultDamageType);
 }
 async function push({workflow}) {
-    if (!workflow.hitTargets.size) return;
-    if (actorUtils.getSize(workflow.targets.first().actor, false) > 3) return;
+    if (!workflow.hitTargets.count) return;
+    if (actorUtils.getSize(workflow.targets.tokens[0].actor, false) > 3) return;
     let selection = await dialogUtils.confirm('CHRISPREMADES.Mastery.Push.Name', 'CHRISPREMADES.Mastery.Push.Context');
     if (!selection) return;
-    await tokenUtils.pushToken(workflow.token, workflow.targets.first(), 10);
+    await tokenUtils.pushToken(workflow.token, workflow.targets.tokens[0], 10);
 }
 async function sap({workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let effectData = {
         system: {changes: [
             {
@@ -81,10 +81,10 @@ async function sap({workflow}) {
             }
         }
     };
-    await effectUtils.createEffect(workflow.targets.first().actor, effectData);
+    await effectUtils.createEffect(workflow.targets.tokens[0].actor, effectData);
 }
 async function slow({workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let effectData = {
         system: {changes: [
             {
@@ -108,11 +108,11 @@ async function slow({workflow}) {
             }
         }
     };
-    await effectUtils.createEffect(workflow.targets.first().actor, effectData);
+    await effectUtils.createEffect(workflow.targets.tokens[0].actor, effectData);
 }
 async function topple({workflow}) {
-    if (!workflow.hitTargets.size) return;
-    let target = workflow.targets.first();
+    if (!workflow.hitTargets.count) return;
+    let target = workflow.targets.tokens[0];
     if (target.actor?.statuses.has('prone')) return;
     let selection = await dialogUtils.confirm('CHRISPREMADES.Mastery.Topple.Name', 'CHRISPREMADES.Mastery.Topple.Context');
     if (!selection) return;
@@ -121,13 +121,13 @@ async function topple({workflow}) {
 }
 async function vex({workflow}) {
     if (!workflow.damageItem) return;
-    if (!workflow.hitTargets.size || (workflow.damageItem.oldHP === workflow.damageItem.newHP && workflow.damageItem.oldTempHP === workflow.damageItem.newTempHP)) return;
+    if (!workflow.hitTargets.count || (workflow.damageItem.oldHP === workflow.damageItem.newHP && workflow.damageItem.oldTempHP === workflow.damageItem.newTempHP)) return;
     let effectData = {
         system: {changes: [
             {
                 key: 'flags.midi-qol.advantage.attack.all',
                 type: 'add',
-                value: 'workflow.targets.first().id === "' + workflow.targets.first().id + '"',
+                value: 'workflow.targets.tokens[0].id === "' + workflow.targets.tokens[0].id + '"',
                 priority: 20
             }
         ]},
@@ -146,7 +146,7 @@ async function vex({workflow}) {
             'chris-premades': {
                 mastery: {
                     vex: {
-                        target: workflow.targets.first().id
+                        target: workflow.targets.tokens[0].id
                     }
                 }
             }
@@ -155,8 +155,8 @@ async function vex({workflow}) {
     await effectUtils.createEffect(workflow.actor, effectData);
 }
 async function RollComplete(workflow) {
-    if (!workflow.targets.size || !workflow.item || !workflow.activity || !workflow.actor || !workflow.token) return;
-    let effects = actorUtils.getEffects(workflow.actor).filter(i => i.flags['chris-premades']?.mastery?.vex?.target === workflow.targets.first().id);
+    if (!workflow.targets.count || !workflow.item || !workflow.activity || !workflow.actor || !workflow.token) return;
+    let effects = actorUtils.getEffects(workflow.actor).filter(i => i.flags['chris-premades']?.mastery?.vex?.target === workflow.targets.tokens[0].id);
     if (effects.length) await genericUtils.deleteEmbeddedDocuments(workflow.actor, 'ActiveEffect', effects.map(i => i.id));
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     let masterySetting = genericUtils.getCPRSetting('weaponMastery');
@@ -199,36 +199,36 @@ export let masteries = {
 };
 export let cleaveMastery = {
     name: 'Mastery: Cleave',
-    version: '1.1.0',
+    version: '2.3.0',
     masteryMacro: cleave
 };
 export let grazeMastery = {
     name: 'Mastery: Graze',
-    version: '1.1.0',
+    version: '2.3.0',
     masteryMacro: graze
 };
 export let pushMastery = {
     name: 'Mastery: Push',
-    version: '1.1.0',
+    version: '2.3.0',
     masteryMacro: push
 };
 export let sapMastery = {
     name: 'Mastery: Sap',
-    version: '1.1.0',
+    version: '2.3.0',
     masteryMacro: sap
 };
 export let slowMastery = {
     name: 'Mastery: Slow',
-    version: '1.1.0',
+    version: '2.3.0',
     masteryMacro: slow
 };
 export let toppleMastery = {
     name: 'Mastery: Topple',
-    version: '1.1.0',
+    version: '2.3.0',
     masteryMacro: topple
 };
 export let vexMastery = {
     name: 'Mastery: Vex',
-    version: '1.1.0',
+    version: '2.3.0',
     masteryMacro: vex
 };

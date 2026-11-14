@@ -47,7 +47,7 @@ async function use({trigger, workflow}) {
 }
 export let thrumOfTheLand = {
     name: 'Thrum of the Land',
-    version: '1.3.149',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

@@ -7,7 +7,7 @@ async function attack({trigger: {entity: item}, workflow}) {
         let isUnarmed = constants.unarmedAttacks.includes(genericUtils.getIdentifier(workflow.item));
         if (!isUnarmed && isNatural) return;
         if (['two', 'hvy'].some(p => workflow.item.system.properties.has(p))) return;
-        if (workflow.item.system.type.value !== 'simpleM' && workflow.item.system.type.baseItem !== 'shortsword') return; 
+        if (workflow.item.system.type.value !== 'simpleM' && workflow.item.system.type.baseItem !== 'shortsword') return;
     }
     let classIdentifier = itemUtils.getConfig(item, 'classIdentifier');
     let scaleIdentifier = itemUtils.getConfig(item, 'scaleIdentifier');
@@ -36,7 +36,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let martialArts = {
     name: 'Martial Arts',
-    version: '1.5.35',
+    version: '2.3.0',
     midi: {
         actor: [
             {
@@ -128,6 +128,6 @@ export let martialArts = {
                 title: 'Martial Arts'
             }
         }
-        
+
     ]
 };

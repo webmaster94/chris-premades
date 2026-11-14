@@ -43,11 +43,10 @@ async function completeActivityUse(activity, config = {}, dialog = {}, message =
         fixSets = true;
     }
     let workflow = await MidiQOL.completeActivityUse(activity, config, dialog, message);
+    if (!workflow) return workflow;
     workflow = workflow.workflow ?? workflow;
     if (fixSets) {
-        if (workflow.failedSaves) workflow.failedSaves = new Set(workflow.failedSaves);
-        if (workflow.hitTargets) workflow.hitTargets = new Set(workflow.hitTargets);
-        if (workflow.targets) workflow.targets = new Set(workflow.targets);
+        MidiQOL.restoreWorkflowTokenSets(workflow);
     }
     return workflow;
 }
@@ -65,9 +64,7 @@ async function completeItemUse(item, config = {}, options = {}) {
     config.midiOptions = genericUtils.mergeObject(config.midiOptions ?? {}, options);
     let workflow = await MidiQOL.completeItemUse(item, config);
     if (fixSets) {
-        if (workflow.failedSaves) workflow.failedSaves = new Set(workflow.failedSaves);
-        if (workflow.hitTargets) workflow.hitTargets = new Set(workflow.hitTargets);
-        if (workflow.targets) workflow.targets = new Set(workflow.targets);
+        if (workflow) MidiQOL.restoreWorkflowTokenSets(workflow);
     }
     return workflow;
 }
@@ -82,7 +79,7 @@ async function syntheticActivityRoll(activity, targets = [], {options = {}, conf
     let autoRollDamage = MidiQOL.configSettings().autoRollDamage;
     if (!['always', 'onHit'].includes(autoRollDamage)) autoRollDamage = 'onHit';
     let defaultOptions = {
-        targetUuids: targets.map(i => i.document.uuid),
+        targetUuids: Array.from(targets.documents ?? targets, i => (i.document ?? i).uuid),
         configureDialog: false,
         //ignoreUserTargets: true,
         workflowOptions: {
@@ -112,7 +109,7 @@ async function syntheticItemRoll(item, targets, {options = {}, config = {}, user
     let autoRollDamage = MidiQOL.configSettings().autoRollDamage;
     if (!['always', 'onHit'].includes(autoRollDamage)) autoRollDamage = 'onHit';
     let defaultOptions = {
-        targetUuids: targets.map(i => i.document.uuid),
+        targetUuids: Array.from(targets.documents ?? targets, i => (i.document ?? i).uuid),
         configureDialog: false,
         //ignoreUserTargets: true,
         workflowOptions: {
@@ -138,10 +135,8 @@ async function syntheticItemDataRoll(itemData, actor, targets, {options = {}, co
         let item = await itemUtils.syntheticItem(itemData, actor);
         return await syntheticItemRoll(item, targets, {options, config});
     } else {
-        let workflowData = await socket.executeAsGM(sockets.syntheticItemDataRoll.name, itemData, actor.uuid, targets.map(i => i.document.uuid), {options, config});
-        if (workflowData.failedSaves) workflowData.failedSaves = new Set(workflowData.failedSaves);
-        if (workflowData.hitTargets) workflowData.hitTargets = new Set(workflowData.hitTargets);
-        if (workflowData.targets) workflowData.targets = new Set(workflowData.targets);
+        let workflowData = await socket.executeAsGM(sockets.syntheticItemDataRoll.name, itemData, actor.uuid, Array.from(targets.documents ?? targets, i => (i.document ?? i).uuid), {options, config});
+        if (workflowData) MidiQOL.restoreWorkflowTokenSets(workflowData);
         return workflowData;
     }
 }
@@ -298,12 +293,12 @@ async function specialItemUse(item, targets, sourceFeature, {activity, consumeUs
     await genericUtils.remove(effect);
 }
 async function updateTargets(workflow, targets, {userId} = {}) {
-    workflow.targets = new Set(targets);
+    workflow.targets = new MidiQOL.TokenDocumentSet(targets);
     await genericUtils.updateTargets(targets, userId);
 }
 async function removeTargets(workflow, tokens, {userId} = {}) {
-    let targets = Array.from(workflow.targets).filter(token => !tokens.includes(token));
-    workflow.targets = new Set(targets);
+    let targets = Array.from(workflow.targets.tokens).filter(token => !tokens.includes(token));
+    workflow.targets = new MidiQOL.TokenDocumentSet(targets);
     await genericUtils.updateTargets(targets, userId);
 }
 function getActionType(workflow) {
@@ -345,7 +340,7 @@ function addEntityRemoval(workflow, entities) {
     let current = workflow['chris-premades']?.removeEntityUuids ?? [];
     genericUtils.setProperty(workflow, 'chris-premades.removeEntityUuids', [...current, ...entities.map(i => i.uuid)]);
 }
-function isSustainedRoll(workflow) {    
+function isSustainedRoll(workflow) {
     let identifier = activityUtils.getIdentifier(workflow.activity);
     if (!identifier) return [
         'workflowOptions.isOverTime',

@@ -1,11 +1,11 @@
 import {effectUtils, genericUtils, templateUtils, tokenUtils} from '../../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.failedSaves.size || !workflow.token || !workflow.template) return;
+    if (!workflow.failedSaves.count || !workflow.token || !workflow.template) return;
     let regionDoc = templateUtils.getRegionDoc(workflow.template);
     let templateDoc = regionDoc ? foundry.documents.MeasuredTemplateDocument._fromRegion(regionDoc) : workflow.template;
     let templateAngle = Math.toRadians(templateDoc.direction ?? 0);
     let templateDistance = (templateDoc.distance ?? 0) * canvas.dimensions.distancePixels;
-    await Promise.all(workflow.failedSaves.map(async token => {
+    await Promise.all(workflow.failedSaves.tokens.map(async token => {
         let ray = foundry.canvas.geometry.Ray.fromAngle(token.x, token.y, templateAngle, templateDistance);
         await tokenUtils.moveTokenAlongRay(token, ray, 30);
         await effectUtils.applyConditions(token.actor, ['prone']);
@@ -15,7 +15,7 @@ async function use({trigger, workflow}) {
 }
 export let shieldCharge = {
     name: 'Shield Charge',
-    version: '1.3.73',
+    version: '2.3.0',
     monster: {
         name: 'Fire Giant Dreadnought'
     },

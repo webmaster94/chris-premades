@@ -1,6 +1,6 @@
 import {animationUtils, automationUtils, DamageBonus, Logging, workflowUtils} from '../../../../proxy.mjs';
 async function damage({document: activity, workflow}) {
-    if (workflow.hitTargets.size !== 1 || workflow.isFumble || !workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
+    if (workflow.hitTargets.count !== 1 || workflow.isFumble || !workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     if (!activity.item.system.uses.value) return Logging.addMacroWarning('CPR', 'divine-strike', 'Already used this turn.');
     const config = automationUtils.getConfigValues(activity.item, ['formula', 'classIdentifier']);
     const subclass = workflow.actor.classes[config.classIdentifier]?.subclass?.identifier;
@@ -21,7 +21,8 @@ async function damage({document: activity, workflow}) {
         .withDefaultCosts()
         .withOnUse(async ({workflow}) => {
             if (playAnimation) animation.animation.macros.play(workflow);
-            await workflowUtils.syntheticActivityRoll(activity, []);
+            const combat = !!workflow.token.document.combatant;
+            await workflowUtils.syntheticActivityRoll(activity, [], {consumeResources: combat, consumeUsage: combat});
         });
 }
 export const divineStrike = {
@@ -48,7 +49,7 @@ export const divineStrike = {
         },
         formula: {
             default: '@scale.cleric.divine-strike',
-            type: 'text',
+            type: 'formula',
             label: 'CHRISPREMADES.Config.DamageBonus',
             category: 'behavior'
         },

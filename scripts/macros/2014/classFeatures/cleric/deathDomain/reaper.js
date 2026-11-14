@@ -1,9 +1,9 @@
 import {dialogUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../../utils.js';
 
 async function late({trigger: {entity: item}, workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     if (workflow.item.type !== 'spell' || workflow.item.system.level !== 0 || workflow.item.system.school !== 'nec' || workflow.item.flags['chris-premades']?.reap) return;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     let nearbyTargets = tokenUtils.findNearby(targetToken, 5, 'ally');
     if (!nearbyTargets.length) return;
     let selected = await dialogUtils.selectTargetDialog(workflow.item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name}), nearbyTargets);
@@ -16,7 +16,7 @@ async function late({trigger: {entity: item}, workflow}) {
 }
 export let reaper = {
     name: 'Reaper',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

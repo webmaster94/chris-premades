@@ -4,7 +4,7 @@ async function use({workflow}) {
         // Clear flags
         await genericUtils.setFlag(workflow.item, 'chris-premades', '-=chaosBolt', null);
     }
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let chrisFlags = workflow.item.flags['chris-premades'];
     let buttons = [
         ['DND5E.DAMAGE.Type.Acid', 'acid', {image: 'icons/magic/acid/projectile-faceted-glob.webp'}],
@@ -16,7 +16,7 @@ async function use({workflow}) {
         ['DND5E.DAMAGE.Type.Psychic', 'psychic', {image: 'icons/magic/control/fear-fright-monster-grin-red-orange.webp'}],
         ['DND5E.DAMAGE.Type.Thunder', 'thunder', {image: 'icons/magic/sonic/explosion-shock-wave-teal.webp'}]
     ];
-    let currentTarget = workflow.targets.first();
+    let currentTarget = workflow.targets.tokens[0];
     let origTargetUuid = chrisFlags?.chaosBolt?.targetUuid;
     let animSource = origTargetUuid ? (await fromUuid(origTargetUuid)).object : workflow.token;
     let castLevel = chrisFlags?.chaosBolt?.castLevel ?? workflowUtils.getCastLevel(workflow);
@@ -39,13 +39,13 @@ async function use({workflow}) {
             .atLocation(animSource)
             .stretchTo(currentTarget)
             .file(anim)
-            .missed(!workflow.hitTargets.size)
+            .missed(!workflow.hitTargets.count)
             .filter('ColorMatrix', animationUtils.colorMatrix(anim, damageType))
             .waitUntilFinished()
             .play();
     }
     ignoreList.push(currentTarget.document.uuid);
-    if ((dice1 === dice2 && workflow.hitTargets.size) || alwaysBounce) {
+    if ((dice1 === dice2 && workflow.hitTargets.count) || alwaysBounce) {
         let nearbyTargets = await tokenUtils.findNearby(currentTarget, 30, 'ally', {includeIncapacitated: true}).filter(i => !ignoreList.includes(i.document.uuid));
         if (!nearbyTargets.length) return;
         let nextTarget = nearbyTargets[0];
@@ -67,7 +67,7 @@ async function use({workflow}) {
 }
 export let chaosBolt = {
     name: 'Chaos Bolt',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

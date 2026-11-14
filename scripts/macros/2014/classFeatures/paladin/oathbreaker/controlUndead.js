@@ -1,7 +1,7 @@
 import {actorUtils, animationUtils, constants, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function early({workflow}) {
-    if (!workflow.targets.size) return;
-    let validTargets = workflow.targets.filter(i => actorUtils.typeOrRace(i.actor) === 'undead');
+    if (!workflow.targets.count) return;
+    let validTargets = new Set(workflow.targets.tokens).filter(i => actorUtils.typeOrRace(i.actor) === 'undead');
     await workflowUtils.updateTargets(workflow, validTargets);
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.GenericEffects.InvalidTarget'),
@@ -46,9 +46,9 @@ async function early({workflow}) {
 async function use({workflow}) {
     let existingEffect = effectUtils.getEffectByIdentifier(workflow.actor, 'controlUndead');
     if (existingEffect) await genericUtils.remove(existingEffect);
-    if (!workflow.targets.size) return;
-    let failedSave = workflow.failedSaves.size;
-    let targetToken = workflow.targets.first();
+    if (!workflow.targets.count) return;
+    let failedSave = workflow.failedSaves.count;
+    let targetToken = workflow.targets.tokens[0];
     let effectData = {
         name: workflow.item.name,
         img: workflow.item.img,
@@ -230,7 +230,7 @@ async function end({trigger: {entity: effect}}) {
 }
 export let controlUndead = {
     name: 'Channel Divinity: Control Undead',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

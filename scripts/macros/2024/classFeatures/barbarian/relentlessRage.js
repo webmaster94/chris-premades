@@ -26,7 +26,7 @@ async function rest({trigger: {entity: item}}) {
 }
 export let relentlessRage = {
     name: 'Relentless Rage',
-    version: '1.1.22',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

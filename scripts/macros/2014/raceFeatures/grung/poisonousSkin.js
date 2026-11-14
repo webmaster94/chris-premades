@@ -1,6 +1,6 @@
 import {activityUtils, constants, dialogUtils, genericUtils, workflowUtils} from '../../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     if (workflow.item.type !== 'weapon') return;
     if (!workflowUtils.getDamageTypes(workflow.damageRolls).has('piercing')) return;
@@ -8,11 +8,11 @@ async function damage({trigger: {entity: item}, workflow}) {
     if (!selection) return;
     let feature = activityUtils.getActivityByIdentifier(item, 'grungPoison', {strict: true});
     if (!feature) return;
-    await workflowUtils.syntheticActivityRoll(feature, [workflow.hitTargets.first()]);
+    await workflowUtils.syntheticActivityRoll(feature, [workflow.hitTargets.tokens[0]]);
 }
 export let poisonousSkin = {
     name: 'Poisonous Skin',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         actor: [
             {

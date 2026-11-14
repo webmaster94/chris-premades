@@ -3,7 +3,7 @@ import {upcastTargets} from '../../generic/upcastTargets.js';
 
 async function use({workflow}) {
     let concentrationEffect = await effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (!workflow.failedSaves.size) {
+    if (!workflow.failedSaves.count) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
@@ -11,7 +11,7 @@ async function use({workflow}) {
 async function early({workflow}) {
     let concentrationEffect = await effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
     await upcastTargets.plusOne({workflow});
-    if (!workflow.targets.size) {
+    if (!workflow.targets.count) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
@@ -50,13 +50,13 @@ async function early({workflow}) {
             }
         }
     };
-    for (let target of workflow.targets) {
+    for (let target of workflow.targets.tokens) {
         if (actorUtils.typeOrRace(target.actor) !== 'humanoid' && target.targeted.has(game.user)) await effectUtils.createEffect(target.actor, effectData, {identifier: 'holdPersonInvalidTarget'});
     }
 }
 export let holdPerson = {
     name: 'Hold Person',
-    version: '1.2.21',
+    version: '2.3.0',
     midi: {
         item: [
             {

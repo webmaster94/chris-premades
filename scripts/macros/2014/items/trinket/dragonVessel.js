@@ -3,37 +3,37 @@ import {compendiumUtils, constants, dialogUtils, effectUtils, errors, genericUti
 
 async function use({workflow}) {
     let nameMap = {
-        PotionOfHealingNormal: 'Potion of Healing (Normal)', 
-        PotionOfClimbing: 'Potion of Climbing', 
-        PotionOfHealingGreater: 'Potion of Healing (Greater)', 
-        PotionOfFlying: 'Potion of Flying', 
-        PotionOfHealingSuperior: 'Potion of Healing (Superior)', 
-        PotionOfHealingSupreme: 'Potion of Healing (Supreme)', 
+        PotionOfHealingNormal: 'Potion of Healing (Normal)',
+        PotionOfClimbing: 'Potion of Climbing',
+        PotionOfHealingGreater: 'Potion of Healing (Greater)',
+        PotionOfFlying: 'Potion of Flying',
+        PotionOfHealingSuperior: 'Potion of Healing (Superior)',
+        PotionOfHealingSupreme: 'Potion of Healing (Supreme)',
         PotionOfDragonsMajesty: 'Potion of Dragon\'s Majesty.'
     };
     let buttons = [];
     switch (genericUtils.getIdentifier(workflow.item)) {
         case 'dragonVessel3':
             buttons.push(
-                [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.PotionOfHealingSupreme'), 'PotionOfHealingSupreme'], 
+                [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.PotionOfHealingSupreme'), 'PotionOfHealingSupreme'],
                 [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.PotionOfDragonsMajesty'), 'PotionOfDragonsMajesty'],
                 [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.Whiskey'), false]
             );
         case 'dragonVessel2':
             buttons.push(
-                [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.PotionOfHealingSuperior'), 'PotionOfHealingSuperior'], 
+                [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.PotionOfHealingSuperior'), 'PotionOfHealingSuperior'],
                 [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.PotionOfFlying'), 'PotionOfFlying'],
                 [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.Wine'), false]
             );
         case 'dragonVessel1':
             buttons.push(
-                [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.PotionOfHealingGreater'), 'PotionOfHealingGreater'], 
+                [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.PotionOfHealingGreater'), 'PotionOfHealingGreater'],
                 [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.PotionOfFireBreath'), 'PotionOfFireBreath'],
                 [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.Mead'), false]
             );
         default:
             buttons.push(
-                [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.PotionOfHealingNormal'), 'PotionOfHealingNormal'], 
+                [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.PotionOfHealingNormal'), 'PotionOfHealingNormal'],
                 [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.PotionOfClimbing'), 'PotionOfClimbing'],
                 [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.Ale'), false],
                 [genericUtils.translate('CHRISPREMADES.Macros.DragonVessel.OliveOil'), false]
@@ -79,7 +79,7 @@ async function use({workflow}) {
 }
 export let dragonVessel = {
     name: 'Dragon Vessel',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

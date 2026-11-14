@@ -489,7 +489,7 @@
     "chris-premades": {
       "info": {
         "identifier": "wardingBond",
-        "version": "1.2.28",
+        "version": "2.3.0",
         "source": "chris-premades"
       },
       "macros": {

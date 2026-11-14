@@ -23,7 +23,7 @@ async function damage({trigger: {entity: effect}, workflow}) {
 }
 export let downButNotOut = {
     name: 'Down But Not Out',
-    version: '1.4.29',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [
@@ -33,7 +33,7 @@ export let downButNotOut = {
                 priority: 50
             }
         ]
-    },   
+    },
     config: [
         {
             value: 'validateWeaponType',

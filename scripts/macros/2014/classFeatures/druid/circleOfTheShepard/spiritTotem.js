@@ -18,7 +18,7 @@ async function use({workflow}){
     }
     if (!totemType) return;
     let name = itemUtils.getConfig(workflow.item, totemType + 'Name');
-    if (!name?.length) name = genericUtils.translate('CHRISPREMADES.Summons.CreatureNames.SpiritTotem' + totemType.capitalize());   
+    if (!name?.length) name = genericUtils.translate('CHRISPREMADES.Summons.CreatureNames.SpiritTotem' + totemType.capitalize());
     let tokenUpdates = {
         name,
         disposition: workflow.token.document.disposition
@@ -55,14 +55,14 @@ async function use({workflow}){
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'spiritTotemMove', {strict: true});
     if (!feature) return;
     let summonedTokens = await Summons.spawn(sourceActor, updates, workflow.item, workflow.token, {
-        duration: itemUtils.convertDuration(workflow.activity)?.seconds ?? 60, 
-        range: workflow.rangeDetails.range ?? 60, 
-        animation, 
-        initiativeType: 'none', 
+        duration: itemUtils.convertDuration(workflow.activity)?.seconds ?? 60,
+        range: workflow.rangeDetails.range ?? 60,
+        animation,
+        initiativeType: 'none',
         additionalVaeButtons: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'spiritTotem', 
+            identifier: 'spiritTotem',
             activityIdentifier: 'spiritTotemMove'
         }],
         unhideActivities: {
@@ -198,7 +198,7 @@ async function sceneAttackRoll({trigger: {entity: effect}, workflow}) {
     if (target?.document.disposition !== source?.document.disposition) return;
     let totem = canvas.tokens.get(effect.flags['chris-premades']?.summons?.ids[effect.name][0]);
     if (!totem) return;
-    if (!workflow.targets.some(t => tokenUtils.getDistance(totem, t) <= 30)) return;
+    if (!workflow.targets.tokens.some(t => tokenUtils.getDistance(totem, t) <= 30)) return;
     let feature = itemUtils.getItemByIdentifier(effect.parent, 'spiritTotem');
     if (!feature) return;
     let activity = activityUtils.getActivityByIdentifier(feature, 'hawkSpirit', {strict: true});
@@ -220,7 +220,7 @@ async function late({trigger: {entity: effect}, workflow}) {
     let activity = activityUtils.getActivityByIdentifier(feature, 'unicornSpirit', {strict: true});
     if (!activity) return;
     let totem = canvas.tokens.get(effect.flags['chris-premades']?.summons?.ids[effect.name][0]);
-    if (!totem) return;            
+    if (!totem) return;
     let nearbyTargets = tokenUtils.findNearby(totem, 30, 'any').filter(i => i.document.disposition === workflow.token.document.disposition);
     if (!nearbyTargets.length) return;
     let classIdentifier = itemUtils.getConfig(feature, 'classIdentifier') || 'druid';
@@ -237,10 +237,10 @@ async function sceneSituational({trigger: {actor, entity: effect, options, sourc
         if (target?.document.disposition !== source?.document.disposition) return;
     }
     let selection = await dialogUtils.confirm(
-        effect.name, 
-        genericUtils.translate('CHRISPREMADES.Macros.SpiritTotem.UnicornCheck') + 
-        '<br>' + 
-        genericUtils.translate('CHRISPREMADES.Macros.PotionOfAdvantage.Select'), 
+        effect.name,
+        genericUtils.translate('CHRISPREMADES.Macros.SpiritTotem.UnicornCheck') +
+        '<br>' +
+        genericUtils.translate('CHRISPREMADES.Macros.PotionOfAdvantage.Select'),
         {userId: socketUtils.gmID()}
     );
     if (!selection) return;
@@ -248,7 +248,7 @@ async function sceneSituational({trigger: {actor, entity: effect, options, sourc
 }
 export let spiritTotem = {
     name: 'Spirit Totem',
-    version: '1.5.14',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

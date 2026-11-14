@@ -24,11 +24,11 @@ async function use({workflow}) {
         }, {identifier: 'instinctivePounce'});
     }
     let position = await crosshairUtils.aimCrosshair({
-        token: workflow.token, 
-        maxRange, 
-        centerpoint: workflow.token.center, 
-        drawBoundries: true, 
-        trackDistance: true, 
+        token: workflow.token,
+        maxRange,
+        centerpoint: workflow.token.center,
+        drawBoundries: true,
+        trackDistance: true,
         fudgeDistance: workflow.token.document.width * canvas.dimensions.distance / 2,
         crosshairsConfig: {
             size:  workflow.token.document.parent.grid.distance * workflow.token.document.width / 2,
@@ -49,7 +49,7 @@ async function use({workflow}) {
             .belowTokens()
         .effect()
             .copySprite(workflow.token)
-            .atLocation(workflow.token)   
+            .atLocation(workflow.token)
             .opacity(1)
             .duration(1000)
             .anchor({ x: 0.5, y: 1 })
@@ -58,7 +58,7 @@ async function use({workflow}) {
             .zIndex(2)
         .effect()
             .copySprite(workflow.token)
-            .atLocation(workflow.token)   
+            .atLocation(workflow.token)
             .opacity(0.5)
             .scale(0.9)
             .belowTokens()
@@ -84,7 +84,7 @@ async function use({workflow}) {
 }
 export let instinctivePounce = {
     name: 'Instinctive Pounce',
-    version: '1.5.49',
+    version: '2.3.0',
     midi: {
         item: [
             {

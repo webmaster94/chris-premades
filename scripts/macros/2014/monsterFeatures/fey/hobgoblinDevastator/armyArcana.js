@@ -31,12 +31,12 @@ async function early({trigger, workflow}) {
         }
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['sculptSpellsTarget']);
-    let targets = workflow.targets.filter(i => i.document.disposition === workflow.token.document.disposition);
+    let targets = new Set(workflow.targets.tokens).filter(i => i.document.disposition === workflow.token.document.disposition);
     await Promise.all(targets.map(async i => await effectUtils.createEffect(i.actor, effectData)));
 }
 export let armyArcana = {
     name: 'Army Arcana',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -20,7 +20,7 @@ async function use({workflow}) {
     });
 }
 async function late({trigger: {entity: effect}, workflow}) {
-    if (workflow.hitTargets.size != 1) return;
+    if (workflow.hitTargets.count != 1) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     if (combatUtils.inCombat() && !combatUtils.isOwnTurn(workflow.token)) return;
     let origin = await effectUtils.getOriginItem(effect);
@@ -31,11 +31,11 @@ async function late({trigger: {entity: effect}, workflow}) {
     let selection = await dialogUtils.confirm(activity.name, 'CHRISPREMADES.Macros.FormOfDread.Use');
     if (!selection) return;
     let inCombat = combatUtils.inCombat();
-    await workflowUtils.syntheticActivityRoll(activity, Array.from(workflow.hitTargets), {consumeResources: inCombat, consumeUsage: inCombat});
+    await workflowUtils.syntheticActivityRoll(activity, Array.from(workflow.hitTargets.tokens), {consumeResources: inCombat, consumeUsage: inCombat});
 }
 export let formOfDread = {
     name: 'Form of Dread',
-    version: '1.4.4',
+    version: '2.3.0',
     midi: {
         item: [
             {

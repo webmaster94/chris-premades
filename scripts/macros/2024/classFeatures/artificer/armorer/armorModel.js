@@ -66,25 +66,25 @@ async function use({trigger, workflow}) {
     await itemUtils.createItems(workflow.actor, [itemData], {favorite: true, parentEntity: effect});
 }
 async function forceDemolisher({trigger, workflow}) {
-    if (!workflow.hitTargets.size) return;
-    if (!actorUtils.compareSize(workflow.actor, workflow.hitTargets.first().actor, '>')) return;
-    let distance = tokenUtils.getDistance(workflow.token, workflow.hitTargets.first());
+    if (!workflow.hitTargets.count) return;
+    if (!actorUtils.compareSize(workflow.actor, workflow.hitTargets.tokens[0].actor, '>')) return;
+    let distance = tokenUtils.getDistance(workflow.token, workflow.hitTargets.tokens[0]);
     let options = [['CHRISPREMADES.Macros.ArmorModel.Push10', 10], ['CHRISPREMADES.Macros.ArmorModel.Push5', 5], ['CHRISPREMADES.Generic.No', false]];
     if (distance >= 15) options.unshift(['CHRISPREMADES.Macros.ArmorModel.Pull10', -10]);
     if (distance >= 10) options.unshift(['CHRISPREMADES.Macros.ArmorModel.Pull5', -5]);
     let selection = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.ArmorModel.PushPull', options, {displayAsRows: true});
     if (!selection) return;
-    await tokenUtils.pushToken(workflow.token, workflow.hitTargets.first(), selection);
+    await tokenUtils.pushToken(workflow.token, workflow.hitTargets.tokens[0], selection);
 }
 async function thunderPulseEffect({trigger: {entity: effect}, workflow}) {
-    if (workflow.targets.size !== 1 || !workflowUtils.isAttackType(workflow, 'attack')) return;
+    if (workflow.targets.count !== 1 || !workflowUtils.isAttackType(workflow, 'attack')) return;
     let item = await effectUtils.getOriginItem(effect);
     if (!item?.actor) return;
-    if (item.actor === workflow.targets.first().actor) return;
+    if (item.actor === workflow.targets.tokens[0].actor) return;
     workflow.tracker.disadvantage.add(effect.name, effect.name);
 }
 async function lightningLauncher({trigger, workflow}) {
-    if (!workflow.item.system.uses.value || !workflow.token || !combatUtils.isOwnTurn(workflow.token) || !workflow.hitTargets.size) return;
+    if (!workflow.item.system.uses.value || !workflow.token || !combatUtils.isOwnTurn(workflow.token) || !workflow.hitTargets.count) return;
     let selection = await dialogUtils.confirm(workflow.item.name, 'CHRISPREMADES.Macros.ArmorModel.LightningLauncher.Use');
     if (!selection) return;
     await workflowUtils.bonusDamage(workflow, '1d6', {damageType: 'lightning'});
@@ -170,7 +170,7 @@ async function giantStature({trigger, workflow}) {
 }
 export let armorModel = {
     name: 'Armor Model',
-    version: '1.5.32',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

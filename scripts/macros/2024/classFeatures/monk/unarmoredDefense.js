@@ -13,7 +13,7 @@ async function change({trigger: {item}}) {
 export let unarmoredDefenseMonk = {
     name: 'Unarmored Defense (Monk)',
     aliases: ['Unarmored Defense'],
-    version: '1.3.138',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {

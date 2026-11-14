@@ -14,7 +14,7 @@ async function applyDamage({workflow, ditem}) {
 }
 export let circleOfMortality = {
     name: 'Circle of Mortality',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

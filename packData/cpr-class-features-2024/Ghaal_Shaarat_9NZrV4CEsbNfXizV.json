@@ -149,7 +149,7 @@
     "chris-premades": {
       "info": {
         "identifier": "ghaalShaarat",
-        "version": "1.5.21",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern"
       },

@@ -6,7 +6,7 @@ async function skill({trigger: {entity: item, skillId}}) {
 }
 export let bootsOfElvenkind = {
     name: 'Boots of Elvenkind',
-    version: '1.1.0',
+    version: '2.3.0',
     skill: [
         {
             pass: 'context',

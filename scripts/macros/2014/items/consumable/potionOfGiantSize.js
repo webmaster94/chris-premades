@@ -1,7 +1,7 @@
 import {actorUtils, effectUtils, genericUtils, itemUtils} from '../../../../utils.js';
 
 async function use({workflow}) {
-    let actor = workflow.targets.first()?.actor ?? workflow.actor;
+    let actor = workflow.targets.tokens[0]?.actor ?? workflow.actor;
     if (actorUtils.getSize(actor) > 2) return;
     let effectData = {
         name: workflow.item.name,
@@ -49,7 +49,7 @@ async function use({workflow}) {
     await genericUtils.update(actor, {'system.attributes.hp.value': actor.system.attributes.hp.value * 2});
 }
 async function damage({workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (workflow.item.type !== 'weapon') return;
     let numWeaponDamageRolls = workflow.activity.damage.parts.length;
     let newRolls = [];
@@ -86,7 +86,7 @@ async function end({trigger: {entity: effect}}) {
 }
 export let potionOfGiantSize = {
     name: 'Potion of Giant Size',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

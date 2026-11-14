@@ -42,15 +42,15 @@ async function use({workflow}) {
         }
     };
     await effectUtils.createEffect(workflow.actor, effectData, {
-        concentrationItem: workflow.item, 
+        concentrationItem: workflow.item,
         strictlyInterdependent: true,
         rules: 'modern',
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'gustOfWind', 
+            identifier: 'gustOfWind',
             activityIdentifier: 'gustOfWindMove'
-        }], 
+        }],
         identifier: 'gustOfWind',
         unhideActivities: {
             itemUuid: workflow.item.uuid,
@@ -106,7 +106,7 @@ async function early({dialog}) {
 }
 export let gustOfWind = {
     name: 'Gust of Wind',
-    version: '1.2.29',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

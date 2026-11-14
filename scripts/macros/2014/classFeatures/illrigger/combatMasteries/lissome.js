@@ -1,6 +1,6 @@
 import {effectUtils, genericUtils, workflowUtils} from '../../../../../utils.js';
 async function attack({trigger: {entity: item}, workflow}) {
-    if (!workflow.activity || !workflow.hitTargets.size) return;
+    if (!workflow.activity || !workflow.hitTargets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'meleeAttack')) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'combatMasteryLissomeEffect');
     if (effect && !effect.duration?.expired && !effect.disabled) return;
@@ -14,7 +14,7 @@ async function attack({trigger: {entity: item}, workflow}) {
 export let combatMasteryLissome = {
     name: 'Combat Mastery: Lissome',
     aliases: ['Lissome'],
-    version: '1.3.66',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         actor: [

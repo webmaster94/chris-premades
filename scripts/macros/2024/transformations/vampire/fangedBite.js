@@ -1,18 +1,18 @@
 import {activityUtils, actorUtils, constants, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../../utils.js';
 async function damage({trigger, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let selection = await dialogUtils.confirm(workflow.item.name, 'CHRISPREMADES.Macros.Transformations.Vampire.FangedBite.HasBlood');
     if (!selection) return;
     let activity = activityUtils.getActivityByIdentifier(workflow.item, 'blood', {strict: true});
     if (!activity) return;
-    let targetWorkflow = await workflowUtils.syntheticActivityRoll(activity, Array.from(workflow.hitTargets));
+    let targetWorkflow = await workflowUtils.syntheticActivityRoll(activity, Array.from(workflow.hitTargets.tokens));
     if (!targetWorkflow.failedSaves.size) return;
     await workflowUtils.bonusDamage(workflow, itemUtils.getConfig(workflow.item, 'formula'), {ignoreCrit: true, damageType: itemUtils.getConfig(workflow.item, 'damageType')});
     genericUtils.setProperty(workflow, 'chris-premades.fangedBiteFailed', true);
 }
 async function use({trigger, workflow}) {
     if (!workflow['chris-premades']?.fangedBiteFailed) return;
-    let total = workflowUtils.getTotalDamageOfType(workflow.damageDetail, workflow.targets.first().actor, itemUtils.getConfig(workflow.item, 'damageType'));
+    let total = workflowUtils.getTotalDamageOfType(workflow.damageDetail, workflow.targets.tokens[0].actor, itemUtils.getConfig(workflow.item, 'damageType'));
     if (!total) return;
     await workflowUtils.applyDamage([workflow.token], total, 'healing');
     let sangromancySpecialist = itemUtils.getItemByIdentifier(workflow.actor, 'sangromancySpecialist');
@@ -31,7 +31,7 @@ async function early({trigger, workflow}) {
 }
 export let vampireFangedBite = {
     name: 'Stage 1 Boon: Fanged Bite',
-    version: '1.4.6',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

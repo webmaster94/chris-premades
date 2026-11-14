@@ -1,8 +1,8 @@
 import {actorUtils, constants, effectUtils, genericUtils} from '../../../utils.js';
 async function damage({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let newDamageRoll = '';
-    let creatureTypes = Array.from(workflow.targets).map(target => actorUtils.typeOrRace(target.actor));
+    let creatureTypes = Array.from(workflow.targets.tokens).map(target => actorUtils.typeOrRace(target.actor));
     if (creatureTypes.some(type => type === 'plant')) {
         if (!creatureTypes.every(type => type === 'plant')) return;
         for (let term of workflow.damageRoll.terms) {
@@ -20,8 +20,8 @@ async function damage({workflow}) {
     await workflow.setDamageRoll(damageRoll);
 }
 async function damageApplication({trigger, workflow, ditem}) {
-    if (!workflow.targets.size) return;
-    let creatureTypes = Array.from(workflow.targets).map(target => actorUtils.typeOrRace(target.actor));
+    if (!workflow.targets.count) return;
+    let creatureTypes = Array.from(workflow.targets.tokens).map(target => actorUtils.typeOrRace(target.actor));
     if (creatureTypes.every(type => type === 'plant')) return;
     let targetActor = await fromUuid(ditem.actorUuid);
     let creatureType = actorUtils.typeOrRace(targetActor);
@@ -44,7 +44,7 @@ async function damageApplication({trigger, workflow, ditem}) {
         if (hasDR) maxDamage = Math.floor(maxDamage / 2);
         let hasDV = actorUtils.checkTrait(targetActor, 'dv', workflow.defaultDamageType);
         if (hasDV) maxDamage *= 2;
-        let saved = !workflow.failedSaves.map(token => token.actor).has(targetActor);
+        let saved = !workflow.failedSaves.tokens.map(token => token.actor).has(targetActor);
         if (saved) maxDamage = Math.floor(maxDamage / 2);
         ditem.damageDetail[0].value = maxDamage;
         let remainingDamage = maxDamage - Math.min(ditem.oldTempHP, maxDamage);
@@ -58,11 +58,11 @@ async function damageApplication({trigger, workflow, ditem}) {
     }
 }
 async function early({workflow}) {
-    if (!workflow.targets.size) return;
-    let creatureTypes = Array.from(workflow.targets).map(target => actorUtils.typeOrRace(target.actor));
+    if (!workflow.targets.count) return;
+    let creatureTypes = Array.from(workflow.targets.tokens).map(target => actorUtils.typeOrRace(target.actor));
     if (!creatureTypes.some(type => ['plant', 'undead', 'construct'].includes(type))) return;
     if (creatureTypes.every(type => ['undead', 'construct'].includes(type))) return;
-    for (let target of workflow.targets) {
+    for (let target of workflow.targets.tokens) {
         let creatureType = actorUtils.typeOrRace(target.actor);
         let effectData;
         if (creatureType === 'plant') {
@@ -146,14 +146,14 @@ async function early({workflow}) {
 }
 export let blight = {
     name: 'Blight',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {
                 pass: 'damageRollComplete',
                 macro: damage,
                 priority: 250
-            }, 
+            },
             {
                 pass: 'preambleComplete',
                 macro: early,

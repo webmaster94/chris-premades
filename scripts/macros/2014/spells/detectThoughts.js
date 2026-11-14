@@ -14,12 +14,12 @@ async function use({workflow}) {
         duration: itemUtils.convertDuration(workflow.item)
     };
     await effectUtils.createEffect(workflow.actor, effectData, {
-        concentrationItem: workflow.item, 
-        strictlyInterdependent: true, 
-        identifier: 'detectThoughts', 
+        concentrationItem: workflow.item,
+        strictlyInterdependent: true,
+        identifier: 'detectThoughts',
         vae: [{
-            type: 'use', 
-            name: feature.name, 
+            type: 'use',
+            name: feature.name,
             identifier: 'detectThoughts',
             activityIdentifier: 'probeDeeper'
         }],
@@ -32,7 +32,7 @@ async function use({workflow}) {
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
 }
 async function late({workflow}) {
-    if (workflow.failedSaves.size) return;
+    if (workflow.failedSaves.count) return;
     let effect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item.origin);
     if (effect) await genericUtils.remove(effect);
 }
@@ -41,7 +41,7 @@ async function early({dialog}) {
 }
 export let detectThoughts = {
     name: 'Detect Thoughts',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

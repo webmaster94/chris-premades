@@ -25,7 +25,7 @@ async function damage({trigger: {token, entity: item}, ditem, workflow}) {
 }
 export let iSurvivedToTellTheTale = {
     name: 'I Survived to Tell the Tale',
-    version: '1.4.5',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

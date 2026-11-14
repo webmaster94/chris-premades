@@ -1,7 +1,7 @@
 import {actorUtils, dialogUtils, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 
 async function early({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let bloodMaledict = itemUtils.getItemByIdentifier(workflow.actor, 'bloodMaledict');
     if (!bloodMaledict?.system.uses.value) {
         genericUtils.notify('CHRISPREMADES.Generic.NoMoreResource', 'info');
@@ -10,7 +10,7 @@ async function early({workflow}) {
     let amplify = await dialogUtils.confirm(workflow.item.name, 'CHRISPREMADES.Macros.BloodCurses.Amplify');
     if (!amplify) {
         await genericUtils.setFlag(workflow.item, 'chris-premades', 'curseOfBinding.amplify', false);
-        if (actorUtils.getSize(workflow.targets.first().actor)  > 3) {
+        if (actorUtils.getSize(workflow.targets.tokens[0].actor)  > 3) {
             genericUtils.notify('CHRISPREMADES.Macros.BigbysHand.Big', 'info');
             workflow.aborted = true;
         }
@@ -36,7 +36,7 @@ async function use({workflow}) {
     let bloodMaledict = itemUtils.getItemByIdentifier(workflow.actor, 'bloodMaledict');
     if (!bloodMaledict) return;
     await genericUtils.update(bloodMaledict, {'system.uses.spent': bloodMaledict.system.uses.spent + 1});
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let effectData = {
         name: workflow.item.name,
         img: workflow.item.img,
@@ -80,11 +80,11 @@ async function use({workflow}) {
             priority: 20
         });
     }
-    await effectUtils.createEffect(workflow.failedSaves.first().actor, effectData);
+    await effectUtils.createEffect(workflow.failedSaves.tokens[0].actor, effectData);
 }
 export let curseOfBinding = {
     name: 'Blood Curse of Binding',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

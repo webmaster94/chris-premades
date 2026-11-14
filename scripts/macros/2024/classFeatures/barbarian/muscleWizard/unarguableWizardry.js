@@ -4,7 +4,7 @@ async function skill({trigger: {skillId}}) {
 }
 export let unarguableWizardry = {
     name: 'Unarguable Wizardry',
-    version: '1.3.91',
+    version: '2.3.0',
     rules: 'modern',
     skill: [
         {

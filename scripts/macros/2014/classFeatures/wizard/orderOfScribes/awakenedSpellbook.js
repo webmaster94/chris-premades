@@ -8,7 +8,7 @@ function getDamageTypes(item) {
     return allTypes;
 }
 async function damage({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     if (workflow.item.type !== 'spell') {
         if (workflow.item.type !== 'feat') return;
         if (!workflow.item.flags?.['chris-premades']?.castData?.castLevel) return;
@@ -59,7 +59,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let awakenedSpellbook = {
     name: 'Awakened Spellbook: Replace Damage',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

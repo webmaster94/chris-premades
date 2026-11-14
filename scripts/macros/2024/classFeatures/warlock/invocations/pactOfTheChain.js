@@ -1,6 +1,6 @@
 import {activityUtils, actorUtils, combatUtils, dialogUtils, effectUtils, spellUtils, workflowUtils} from '../../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'findFamiliar');
     if (!effect) return;
     let familiarToken = canvas.scene.tokens.get(effect.flags['chris-premades'].summons.ids[effect.name][0]);
@@ -15,7 +15,7 @@ async function use({trigger, workflow}) {
         selection = await dialogUtils.selectDocumentDialog(workflow.item.name, 'CHRISPREMADES.Macros.PactOfTheChain.Attack', attacks, {sortAlphabetical: true});
         if (!selection) return;
     }
-    await workflowUtils.specialItemUse(selection, Array.from(workflow.targets), workflow.item, {consumeResources: true, consumeUsage: true});
+    await workflowUtils.specialItemUse(selection, Array.from(workflow.targets.tokens), workflow.item, {consumeResources: true, consumeUsage: true});
     if (combatUtils.inCombat()) await actorUtils.setReactionUsed(familiarToken.actor);
 }
 async function added({trigger: {entity: item}}) {
@@ -27,7 +27,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let pactOfTheChain = {
     name: 'Eldritch Invocations: Pact of the Chain',
-    version: '1.3.105',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

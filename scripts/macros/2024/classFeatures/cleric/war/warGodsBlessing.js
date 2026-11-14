@@ -31,7 +31,7 @@ async function use({trigger, workflow}) {
         }
     };
     if (identifier === 'shieldOfFaith') {
-        let selectionWorkflow = await workflowUtils.syntheticItemDataRoll(selectionData, workflow.actor, workflow.targets.size ? Array.from(workflow.targets) : [workflow.token]);
+        let selectionWorkflow = await workflowUtils.syntheticItemDataRoll(selectionData, workflow.actor, workflow.targets.count ? Array.from(workflow.targets.tokens) : [workflow.token]);
         let sourceEffect = selection.effects.contents?.[0];
         if (!sourceEffect) return;
         let targetEffect = actorUtils.getEffects(selectionWorkflow.targets.first().actor).find(effect => effect.name === sourceEffect.name);
@@ -87,7 +87,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let warGodsBlessing = {
     name: 'War God\'s Blessing',
-    version: '1.3.30',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

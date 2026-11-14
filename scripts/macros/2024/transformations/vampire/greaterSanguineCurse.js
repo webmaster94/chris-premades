@@ -11,7 +11,7 @@ async function early({trigger: {entity: item}, workflow}) {
 }
 export let greaterSanguineCurse = {
     name: 'Stage 2 Flaw: Greater Sanguine Curse',
-    version: '1.5.4',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

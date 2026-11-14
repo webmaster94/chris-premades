@@ -1,11 +1,11 @@
 import {effectUtils, genericUtils, workflowUtils} from '../../../../utils.js';
 async function early({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let conditions = ['grappled', 'incapacitated', 'restrained'];
-    let valid = conditions.find(i => effectUtils.getEffectByStatusID(workflow.targets.first().actor, i));
-    let charmed = effectUtils.getEffectByIdentifier(workflow.targets.first().actor, 'charmPersonEffect');
+    let valid = conditions.find(i => effectUtils.getEffectByStatusID(workflow.targets.tokens[0].actor, i));
+    let charmed = effectUtils.getEffectByIdentifier(workflow.targets.tokens[0].actor, 'charmPersonEffect');
     if (!valid && !charmed) {
-        workflowUtils.removeTargets(workflow, [workflow.targets.first()]);
+        workflowUtils.removeTargets(workflow, [workflow.targets.tokens[0]]);
         return;
     }
     if (charmed) {
@@ -19,7 +19,7 @@ export let vampireBite = {
     monsters: [
         'Vampire'
     ],
-    version: '1.3.126',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

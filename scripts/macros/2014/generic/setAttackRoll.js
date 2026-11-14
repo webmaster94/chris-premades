@@ -14,7 +14,7 @@ async function attack({trigger, workflow}) {
 }
 export let setAttackRoll = {
     name: 'Set Attack Roll',
-    version: '0.12.52',
+    version: '2.3.0',
     midi: {
         item: [
             {

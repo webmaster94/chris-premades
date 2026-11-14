@@ -1,6 +1,6 @@
 import {activityUtils, documentUtils, effectUtils, Logging} from '../../../../../proxy.mjs';
 async function use({document, workflow}) {
-    const target = workflow.targets.first()?.actor ?? workflow.actor;
+    const target = workflow.targets.documents[0]?.actor ?? workflow.actor;
     const targetUuid = document.flags['chris-premades']?.blessingOfTheTrickster?.targetUuid;
     let effect;
     if (targetUuid) effect = await fromUuid(targetUuid);
@@ -13,7 +13,7 @@ async function use({document, workflow}) {
 }
 export const blessingOfTheTrickster = {
     name: 'Blessing of the Trickster',
-    version: '2.0.0',
+    version: '2.1.4',
     rules: '2024',
     roll: [
         {

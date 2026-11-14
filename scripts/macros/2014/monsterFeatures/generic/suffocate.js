@@ -1,12 +1,12 @@
 import {actorUtils, itemUtils} from '../../../../utils.js';
 import {suffocation} from '../../../2024/actions/suffocation.js';
 async function use({trigger: {entity}, workflow}) {
-    if (!workflow.targets) return;
+    if (!workflow.targets.tokens) return;
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'suffocate');
     let activities = config.activities;
     if (activities?.length && !activities.includes(workflow.activity.id)) return;
     let effectUuids = (await workflow.activity.getApplicableEffects() ?? []).map(effect => effect.uuid);
-    await Promise.all(workflow.targets.map(async i => {
+    await Promise.all(workflow.targets.tokens.map(async i => {
         let effect = actorUtils.getEffects(i.actor).find(j => effectUuids.includes(j.origin));
         if (!effect) return;
         await suffocation.utilFunctions.apply(i.actor, entity, {parentEffect: effect, startsOutOfAir: config.startsOutOfAir});
@@ -15,7 +15,7 @@ async function use({trigger: {entity}, workflow}) {
 export let suffocate = {
     name: 'Suffocate',
     translation: 'CHRISPREMADES.Macros.Suffocate.Name',
-    version: '1.3.34',
+    version: '2.3.0',
     midi: {
         item: [
             {

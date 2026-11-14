@@ -37,10 +37,10 @@ async function use({workflow}) {
             }
         }
         let cannonItemData = await Summons.getSummonItem(cannonName, {}, workflow.item, {
-            flatAttack: cannonType === 'ForceBallista', 
-            damageBonus, 
-            flatDC: cannonType === 'Flamethrower', 
-            translate: 'CHRISPREMADES.Macros.EldritchCannon.' + cannonType, 
+            flatAttack: cannonType === 'ForceBallista',
+            damageBonus,
+            flatDC: cannonType === 'Flamethrower',
+            translate: 'CHRISPREMADES.Macros.EldritchCannon.' + cannonType,
             identifier: 'eldritchCannon' + cannonType
         });
         if (!cannonItemData) return;
@@ -110,7 +110,7 @@ async function use({workflow}) {
                     dialogContent = genericUtils.format('CHRISPREMADES.Macros.EldritchCannon.SpendPactAgain', {slotValue, slotMax});
                 } else {
                     dialogContent = genericUtils.format('CHRISPREMADES.Macros.EldritchCannon.SpendSlotAgain', {slotLevel, slotValue, slotMax});
-                } 
+                }
                 let selection = await dialogUtils.confirm(workflow.item.name, dialogContent);
                 if (selection) {
                     let newUpdates = await cannonUpdates();
@@ -118,7 +118,7 @@ async function use({workflow}) {
                         updates.push(newUpdates);
                         costsSlotType = slotType;
                         sourceActors.push(sourceActor);
-                    } 
+                    }
                 }
             }
         }
@@ -169,7 +169,7 @@ async function early({activity, token, actor, dialog}) {
             dialogContent = genericUtils.format('CHRISPREMADES.Macros.EldritchCannon.SpendPact', {slotValue, slotMax});
         } else {
             dialogContent = genericUtils.format('CHRISPREMADES.Macros.EldritchCannon.SpendSlot', {slotLevel, slotValue, slotMax});
-        } 
+        }
         let selection = await dialogUtils.confirm(activity.item.name, dialogContent);
         if (!selection) return true;
         await genericUtils.update(actor, {['system.spells.' + slotType + '.value']: slotValue - 1});
@@ -178,12 +178,12 @@ async function early({activity, token, actor, dialog}) {
     }
 }
 async function lateForceBallista({workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
-    await tokenUtils.pushToken(workflow.token, workflow.targets.first(), 5);
+    if (workflow.hitTargets.count !== 1) return;
+    await tokenUtils.pushToken(workflow.token, workflow.targets.tokens[0], 5);
 }
 async function fortifiedPosition({workflow}) {
-    if (workflow.targets.size !== 1 || !workflow.item || !constants.attacks.includes(workflow.activity?.actionType)) return;
-    let targetToken = workflow.targets.first();
+    if (workflow.targets.count !== 1 || !workflow.item || !constants.attacks.includes(workflow.activity?.actionType)) return;
+    let targetToken = workflow.targets.tokens[0];
     let coverBonus = tokenUtils.checkCover(workflow.token, targetToken, {activity: workflow.activity});
     if (coverBonus >= 2) return;
     let nearbyCannons = tokenUtils.findNearby(targetToken, 10, 'ally', {includeIncapacitated: false, includeToken: true}).filter(i => itemUtils.getItemByIdentifier(i.actor, 'eldritchCannonFortifiedPosition'));
@@ -192,7 +192,7 @@ async function fortifiedPosition({workflow}) {
 }
 export let eldritchCannon = {
     name: 'Create Eldritch Cannon',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

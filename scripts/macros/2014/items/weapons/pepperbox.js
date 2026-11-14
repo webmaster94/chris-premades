@@ -2,7 +2,7 @@ import {firearm} from '../../mechanics/firearm.js';
 
 export let pepperbox = {
     name: 'Pepperbox (Exandria)',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: firearm.midi,
     config: [
         {

@@ -1,5 +1,5 @@
 export let masterOfTactics = {
     name: 'Master of Tactics',
-    version: '1.3.109',
+    version: '2.3.0',
     rules: 'legacy'
 };

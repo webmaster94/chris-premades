@@ -211,7 +211,7 @@
     "chris-premades": {
       "info": {
         "identifier": "elementalWeapon",
-        "version": "1.2.22",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern"
       },

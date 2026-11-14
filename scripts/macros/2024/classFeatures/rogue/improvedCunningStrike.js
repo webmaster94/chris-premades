@@ -1,6 +1,6 @@
 export let improvedCunningStrike = {
     name: 'Improved Cunning Strike',
-    version: '1.3.33',
+    version: '2.3.0',
     rules: 'modern',
     config: [
         {

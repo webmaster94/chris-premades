@@ -10,15 +10,15 @@ async function attack({trigger, workflow}) {
     }
 }
 async function range({trigger, workflow}) {
-    if (workflow.targets.size != 1 || !workflowUtils.isAttackType(workflow, 'attack')) return;
-    let distance = tokenUtils.getDistance(workflow.token, workflow.targets.first());
+    if (workflow.targets.count != 1 || !workflowUtils.isAttackType(workflow, 'attack')) return;
+    let distance = tokenUtils.getDistance(workflow.token, workflow.targets.tokens[0]);
     if (distance <= (workflow.activity.range.value ?? workflow.activity.range.reach)) return;
     genericUtils.notify('CHRISPREMADES.Macros.Underwater.TooFar', 'warn');
     return true;
 }
 export let underwater = {
     name: 'Underwater',
-    version: '1.3.115',
+    version: '2.3.0',
     rules: 'modern'
 };
 export let underwaterEffect = {

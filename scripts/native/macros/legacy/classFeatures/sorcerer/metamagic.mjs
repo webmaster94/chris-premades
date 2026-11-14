@@ -1,4 +1,4 @@
-import {actorUtils, automationUtils, constants, dialogUtils, documentUtils, effectUtils, genericUtils, itemUtils, Logging, rollUtils, workflowUtils} from '../../../../proxy.mjs';
+import {actorUtils, automationUtils, constants, dialogUtils, documentUtils, effectUtils, genericUtils, itemUtils, Logging, workflowUtils} from '../../../../proxy.mjs';
 export const subtleComponents = ['vocal', 'somatic'];
 function getAvailablePoints(actor) {
     return actorUtils.getItemByIdentifier(actor, 'font-of-magic')?.system.uses.value ?? 0;
@@ -16,7 +16,7 @@ function getValidSpells(actor, predicate) {
     return actorUtils.getCastableSpells(actor).filter(predicate);
 }
 function getTargets(workflow) {
-    return Array.from(workflow.targets, token => token.document ?? token);
+    return workflow.targets.documents;
 }
 async function selectSpell(item, spells) {
     if (!spells.length) {
@@ -58,24 +58,30 @@ async function useCareful({document, workflow}) {
     await useMarked(document, workflow, 'careful-spell-effect');
 }
 async function earlyCareful({document: effect, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     const max = getCharismaMax(workflow.actor);
     const originItem = (await effectUtils.getOriginActivity(effect))?.item;
     let targets = getTargets(workflow);
     if (!originItem || !automationUtils.getConfigValue(originItem, 'allowEnemies')) targets = targets.filter(target => target.disposition === workflow.token.document.disposition);
     if (!targets.length) return;
-    const selection = await dialogUtils.selectTargetDialog(effect.name, _loc('CHRISPREMADES.Macros.Legacy.Metamagic.CarefulWhich', {max}), targets, {type: 'multiple', maxAmount: max});
+    const preselected = targets.reduce((obj, t) => (obj[t.id] = obj.count++ < max, obj), {count: 0});
+    const selection = await dialogUtils.selectTargetDialog(effect.name, _loc('CHRISPREMADES.Macros.Legacy.Metamagic.CarefulWhich', {max}), targets, {
+        skipDeadAndUnconscious: false,
+        type: 'multiple',
+        maxAmount: max,
+        preselected
+    });
     if (!selection?.result?.length) return;
     selection.result.forEach(target => workflowUtils.grantRollModifier(workflow, 'succeed', target.id, 'careful-spell', effect.name));
 }
 async function useDistant({document, workflow}) {
-    const selection = await selectSpell(document, getValidSpells(workflow.actor, spell => ['touch', 'ft'].includes(spell.system.range.units) && spell.system.target.affects.type && spell.system.target.affects.type !== 'self'));
+    const selection = await selectSpell(document, getValidSpells(workflow.actor, spell => (spell.system.range.units === 'touch' || spell.system.range.units in CONFIG.DND5E.movementUnits) && spell.system.target.affects.type && spell.system.target.affects.type !== 'self'));
     if (!selection) return;
     const updates = selection.system.range.units === 'touch' ? {'system.range': {units: 'ft', value: '30'}} : {'system.range.value': String(selection.system.range.value * 2)};
     await recast(selection, workflow, updates);
 }
 async function damageEmpowered({document, workflow}) {
-    if (!workflow.hitTargets.size || workflow.item.type !== 'spell' || !workflow.damageRolls?.length) return;
+    if (!workflow.hitTargets.count || workflow.item.type !== 'spell' || !workflow.damageRolls?.length) return;
     const activity = getMetamagicActivity(document);
     const cost = getCost(activity);
     if (getAvailablePoints(workflow.actor) < cost) return Logging.addMacroWarning('CPR', 'empowered-spell', 'Not enough sorcery points.');
@@ -83,36 +89,7 @@ async function damageEmpowered({document, workflow}) {
     const selection = await dialogUtils.selectDie(workflow.damageRolls, document.name, _loc('CHRISPREMADES.Macros.Legacy.Metamagic.Empowered', {cost, max}), {max});
     if (!selection?.length) return;
     await workflowUtils.completeActivityUse(activity, []);
-    const rollData = document.getRollData();
-    const rerolls = [];
-    for (const key of selection) {
-        const [rollIndex, termIndex, resultIndex] = key.split('-').map(Number);
-        const term = workflow.damageRolls[rollIndex]?.terms[termIndex];
-        const result = term?.results[resultIndex];
-        if (!result) continue;
-        rerolls.push({result, faces: term.faces, original: result.result});
-    }
-    if (!rerolls.length) return;
-    const groups = rerolls.reduce((accumulator, reroll) => {
-        const group = accumulator.get(reroll.faces) ?? [];
-        group.push(reroll);
-        return accumulator.set(reroll.faces, group);
-    }, new Map());
-    const rolls = Array.from(groups, ([faces, group]) => new Roll(group.length + 'd' + faces, rollData));
-    const resolved = await rollUtils.resolveManualRolls(rolls, workflow.actor, document.name, {rollClass: Roll});
-    if (resolved === rolls) await Promise.all(rolls.map(async roll => await roll.evaluate()));
-    Array.from(groups.values()).forEach((group, groupIndex) => {
-        const results = resolved[groupIndex].terms[0].results;
-        group.forEach((reroll, index) => reroll.result.result = results[index].result);
-    });
-    const messageData = {
-        speaker: ChatMessage.implementation.getSpeaker({actor: workflow.actor}),
-        flavor: _loc('CHRISPREMADES.Macros.Legacy.Metamagic.Rerolled', {dice: rerolls.map(reroll => 'd' + reroll.faces + ' (' + reroll.original + ')').join(', ')}),
-        rolls: resolved
-    };
-    ChatMessage.implementation.applyMode(messageData, CONFIG.Dice.BasicRoll.getMessageMode());
-    await ChatMessage.implementation.create(messageData);
-    await workflow.setDamageRolls(workflow.damageRolls);
+    await workflowUtils.rerollDamageDice(workflow, selection, document);
 }
 async function useExtended({document, workflow}) {
     const selection = await selectSpell(document, getValidSpells(workflow.actor, spell => (effectUtils.durationToSeconds(spell.system.duration.getEffectData()) ?? 0) >= 60));
@@ -120,7 +97,7 @@ async function useExtended({document, workflow}) {
     const oldSeconds = effectUtils.durationToSeconds(selection.system.duration.getEffectData());
     const newSeconds = Math.min(86400, oldSeconds * 2);
     const castWorkflow = await recast(selection, workflow, {'system.duration': {value: String(newSeconds / 60), units: 'minute'}});
-    const actors = new Set([workflow.actor, ...Array.from(castWorkflow?.targets ?? [], token => (token.document ?? token).actor)].filter(actor => actor));
+    const actors = new Set([workflow.actor, ...(castWorkflow?.targets?.documents ?? []).map(token => token.actor)].filter(actor => actor));
     await Promise.all(Array.from(actors, async actor => {
         const effects = actor.effects.filter(effect => effect.origin?.startsWith(selection.uuid) && effectUtils.durationToSeconds(effect.duration) === oldSeconds);
         await Promise.all(effects.map(async effect => await documentUtils.update(effect, {'duration.value': newSeconds, 'duration.units': 'seconds'})));
@@ -130,7 +107,7 @@ async function useHeightened({document, workflow}) {
     await useMarked(document, workflow, 'heightened-spell-effect');
 }
 async function earlyHeightened({document: effect, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     const targets = getTargets(workflow).filter(target => target.disposition !== workflow.token.document.disposition);
     if (!targets.length) return;
     const selection = await dialogUtils.selectTargetDialog(effect.name, _loc('CHRISPREMADES.Macros.Legacy.Metamagic.HeightenedWhich'), targets);
@@ -143,8 +120,8 @@ async function useQuickened({document, workflow}) {
     await recast(selection, workflow, {'system.activation.type': 'bonus'});
 }
 async function attackSeeking({document, workflow}) {
-    if (!workflow.attackRoll || !workflow.targets.size || workflow.item.type !== 'spell') return;
-    if (Array.from(workflow.targets).every(target => (target.actor?.system.attributes.ac.value ?? Infinity) <= workflow.attackRoll.total)) return;
+    if (!workflow.attackRoll || !workflow.targets.count || workflow.item.type !== 'spell') return;
+    if (workflow.targets.documents.every(target => (target.actor?.system.attributes.ac.value ?? Infinity) <= workflow.attackRoll.total)) return;
     const activity = getMetamagicActivity(document);
     if (getAvailablePoints(workflow.actor) < getCost(activity)) return Logging.addMacroWarning('CPR', 'seeking-spell', 'Not enough sorcery points.');
     const selection = await dialogUtils.confirmUseForRollTotal(document, workflow.item.name, workflow.attackRoll.total);
@@ -244,7 +221,7 @@ async function earlyTwinned({workflow}) {
 }
 export const carefulSpell = {
     name: 'Metamagic: Careful Spell',
-    version: '2.0.4',
+    version: '2.1.6',
     rules: '2014',
     roll: [
         {pass: 'itemRollFinished', macro: useCareful, priority: 50}

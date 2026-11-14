@@ -1,6 +1,6 @@
 import {combatUtils, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function cast({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size || !workflow.item) return;
+    if (!workflow.targets.count || !workflow.item) return;
     if (!(itemUtils.isSpellFeature(workflow.item) || workflow.item.type === 'spell')) return;
     if (!workflow.actor.statuses.has('invisible')) return;
     if (!combatUtils.isOwnTurn(workflow.token)) return;
@@ -12,7 +12,7 @@ async function cast({trigger: {entity: item}, workflow}) {
     effectData.start = {time: game.time?.worldTime ?? 0};
     genericUtils.setProperty(effectData, 'flags.chris-premades.magicalAmbush.spellUuid', workflow.item.uuid);
     effectData.name += ': ' + workflow.item.name;
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         await effectUtils.createEffect(token.actor, effectData);
     }));
 }
@@ -28,7 +28,7 @@ async function save({trigger: {sourceActor, config}}) {
 }
 export let magicalAmbush = {
     name: 'Magical Ambush',
-    version: '1.3.50',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

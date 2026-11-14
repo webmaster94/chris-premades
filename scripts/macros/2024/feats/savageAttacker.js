@@ -1,6 +1,6 @@
 import {dialogUtils, genericUtils, workflowUtils} from '../../../utils.js';
 async function attack({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1 || item.system.uses.value == 0 || !workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
+    if (workflow.hitTargets.count !== 1 || item.system.uses.value == 0 || !workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name}));
     if (!selection) return;
     await workflowUtils.completeItemUse(item, {}, {configureDialog: false});
@@ -15,7 +15,7 @@ async function damage({trigger: {entity: item}, workflow}) {
         let currRoll = workflow.damageRolls[i];
         trueOld.push(currRoll);
         trueNew.push(await new CONFIG.Dice.DamageRoll(currRoll.formula, currRoll.data, currRoll.options).evaluate());
-    }    
+    }
     let oldTotal = trueOld.reduce((acc, i) => acc + i.total, 0);
     let newTotal = trueNew.reduce((acc, i) => acc + i.total, 0);
     let highRolls = oldTotal < newTotal ? trueNew : trueOld;
@@ -43,7 +43,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let savageAttacker = {
     name: 'Savage Attacker',
-    version: '1.5.10',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

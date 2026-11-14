@@ -1,8 +1,8 @@
 import {actorUtils, genericUtils, workflowUtils} from '../../../../utils.js';
 
 async function damageDawn({workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
-    if (actorUtils.typeOrRace(workflow.hitTargets.first().actor) !== 'undead') return;
+    if (workflow.hitTargets.count !== 1) return;
+    if (actorUtils.typeOrRace(workflow.hitTargets.tokens[0].actor) !== 'undead') return;
     let enchant = Array.from(workflow.item.allApplicableEffects()).find(i => genericUtils.getIdentifier(i) === 'crimsonRite');
     if (!enchant) return;
     if (enchant.flags['chris-premades']?.crimsonRite?.chosenRite !== 'riteOfTheDawn') return;

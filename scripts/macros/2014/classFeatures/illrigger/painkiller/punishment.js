@@ -1,7 +1,7 @@
 import {activityUtils, actorUtils, dialogUtils, genericUtils, itemUtils, socketUtils, workflowUtils} from '../../../../../utils.js';
 async function attacked({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size || !workflow.token) return;
-    if (!workflowUtils.isAttackType(workflow, 'attack') || actorUtils.hasUsedReaction(workflow.targets.first().actor) || !itemUtils.canUse(item)) return;
+    if (!workflow.hitTargets.count || !workflow.token) return;
+    if (!workflowUtils.isAttackType(workflow, 'attack') || actorUtils.hasUsedReaction(workflow.targets.tokens[0].actor) || !itemUtils.canUse(item)) return;
     let tookDamage = workflow.damageList.find(i => i.totalDamage);
     if (!tookDamage) return;
     let selection = await dialogUtils.confirmUseItem(item, {userId: socketUtils.firstOwner(item.actor, true)});
@@ -17,7 +17,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let punishment = {
     name: 'Invoke Hell: Punishment',
-    version: '1.3.78',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         actor: [

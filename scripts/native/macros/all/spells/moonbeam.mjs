@@ -1,26 +1,26 @@
 import {actorUtils, automationUtils, regionUtils, workflowUtils} from '../../../proxy.mjs';
-import {playAreaAnimation} from '../../generic/areaAnimation.mjs';
-import {createRegionLight, prepareMovableRegion} from '../../generic/moveRegion.mjs';
+import {playAreaAnimation} from '../../generic/spellAnimation.mjs';
+import {prepareMovableRegion} from '../../generic/moveRegion.mjs';
 async function created({document: region, workflow}) {
     const originItem = regionUtils.getActivity(region)?.item;
     if (!originItem) return;
     await prepareMovableRegion(region, originItem, 'moonbeamMove');
     const color = automationUtils.getConfigValue(originItem, 'lightColor');
     const animationType = automationUtils.getConfigValue(originItem, 'lightAnimation');
-    await createRegionLight(region, {color: color || null, animation: {type: animationType || null}});
+    await regionUtils.createRegionLight(region, {color: color || null, animation: {type: animationType || null}});
     playAreaAnimation(workflow, automationUtils.getResolvedAnimation(originItem, 'animation'), {region});
 }
-async function moved({document: region}) {
+export async function moved({document: region}) {
     const originItem = regionUtils.getActivity(region)?.item;
     if (!originItem) return;
     const {animation, options} = automationUtils.getResolvedAnimation(originItem, 'animation');
     if (animation?.macros?.move) await animation.macros.move(region, options);
 }
 async function pulse({document, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     const {animation, options} = automationUtils.getResolvedAnimation(document.item, 'animation');
     if (!animation?.macros?.pulse) return;
-    workflow.targets.forEach(token => animation.macros.pulse(token.document, options));
+    workflow.targets.tokens.forEach(token => animation.macros.pulse(token.document, options));
 }
 function isShapechanger(actor, identifiers) {
     if (!actor) return false;
@@ -30,7 +30,7 @@ function isShapechanger(actor, identifiers) {
 }
 async function shapechanger({document, workflow}) {
     const identifiers = automationUtils.getConfigValue(document.item, 'shapechangerIdentifiers') ?? [];
-    workflow.targets.forEach(token => {
+    workflow.targets.documents.forEach(token => {
         if (isShapechanger(token.actor, identifiers)) workflowUtils.grantRollModifier(workflow, 'dis', token.id, 'moonbeam-shapechanger', _loc('CHRISPREMADES.Macros.All.Moonbeam.ShapechangerDisadvantage'));
     });
 }

@@ -1,7 +1,7 @@
 import {activityUtils, effectUtils, itemUtils} from '../../../utils.js';
 import {upcastTargets} from '../../generic/upcastTargets.js';
 async function use({trigger, workflow}) {
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let identifier = activityUtils.getIdentifier(workflow.activity);
     if (!identifier) return;
     let effectData = {
@@ -17,13 +17,13 @@ async function use({trigger, workflow}) {
             }
         ]}
     };
-    await Promise.all(workflow.failedSaves.map(async token => {
+    await Promise.all(workflow.failedSaves.tokens.map(async token => {
         await effectUtils.createEffect(token.actor, effectData, {concentrationItem: workflow.item, conditions: [identifier]});
     }));
 }
 export let blindnessDeafness = {
     name: 'Blindness/Deafness',
-    version: '1.1.17',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

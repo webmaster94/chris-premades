@@ -24,7 +24,7 @@ async function makeMaps({trigger: {entity: item}, workflow}) {
     }];
     genericUtils.setProperty(effectData, 'flags.dae.showIcon', true);
     if (itemUtils.getItemByIdentifier(workflow.actor, 'superiorAtlas')) effectUtils.addMacro(effectData, 'midi.actor', ['superiorAtlasEffect']);
-    await Promise.allSettled(workflow.targets.map(t => effectUtils.createEffect(t.actor, effectData, {
+    await Promise.allSettled(workflow.targets.tokens.map(t => effectUtils.createEffect(t.actor, effectData, {
         identifier: 'adventurersAtlas',
         parentEntity: source,
         rules: 'modern'
@@ -44,9 +44,9 @@ async function rest({trigger: {entity: item}, actor}) {
     let maxAmount = Math.max(1 + actor.system.abilities.int.mod, 2);
     let minAmount = 2;
     let targets = await dialogUtils.selectTargetDialog(
-        item.name, 
-        genericUtils.format('CHRISPREMADES.Macros.AdventurersAtlas.Use', {itemName: item.name, maxAmount, minAmount}), 
-        near, 
+        item.name,
+        genericUtils.format('CHRISPREMADES.Macros.AdventurersAtlas.Use', {itemName: item.name, maxAmount, minAmount}),
+        near,
         {type: 'multiple', maxAmount, minAmount, userId}
     );
     if (!targets || !targets[0]?.length) return;
@@ -58,7 +58,7 @@ async function death({trigger: {actor}}) {
 }
 export let adventurersAtlas = {
     name: 'Adventurer\'s Atlas',
-    version: '1.5.17',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

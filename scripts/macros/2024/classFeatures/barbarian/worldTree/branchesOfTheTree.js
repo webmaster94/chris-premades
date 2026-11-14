@@ -7,22 +7,22 @@ async function early({trigger, workflow}) {
     workflow.aborted = true;
 }
 async function use({trigger, workflow}) {
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let animation = itemUtils.getConfig(workflow.item, 'animation');
-    if (animationUtils.jb2aCheck() === 'free' && animation != 'none') animation = 'mistyStep'; 
+    if (animationUtils.jb2aCheck() === 'free' && animation != 'none') animation = 'mistyStep';
     let range = itemUtils.getConfig(workflow.item, 'range');
-    await Teleport.target(workflow.failedSaves.first(), workflow.token, {animation, range});
-    if (workflow.token.document.disposition === workflow.failedSaves.first().document.disposition) return;
+    await Teleport.target(workflow.failedSaves.tokens[0], workflow.token, {animation, range});
+    if (workflow.token.document.disposition === workflow.failedSaves.tokens[0].document.disposition) return;
     let effect = workflow.item.effects.contents?.[0];
     if (!effect) return;
     let effectData = genericUtils.duplicate(effect.toObject());
     delete effectData._id;
     effectData.duration = itemUtils.convertDuration(workflow.activity);
-    await effectUtils.createEffect(workflow.failedSaves.first().actor, effectData);
+    await effectUtils.createEffect(workflow.failedSaves.tokens[0].actor, effectData);
 }
 export let branchesOfTheTree = {
     name: 'Branches of the Tree',
-    version: '1.3.10',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

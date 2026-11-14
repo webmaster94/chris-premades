@@ -359,7 +359,7 @@
       "info": {
         "identifier": "spiritGuardians",
         "source": "chris-premades",
-        "version": "1.2.28",
+        "version": "2.3.0",
         "hasAnimation": true,
         "rules": "modern"
       },

@@ -33,8 +33,8 @@ async function use({workflow}) {
         animation,
         initiativeType: 'none',
         additionalVaeButtons: [{
-            type: 'use', 
-            name: feature.name, 
+            type: 'use',
+            name: feature.name,
             identifier: 'tentacleOfTheDeeps',
             activityIdentifier: 'tentacleOfTheDeepsAttack'
         }],
@@ -90,7 +90,7 @@ async function late({workflow}) {
 export let tentacleOfTheDeeps = {
     name: 'Tentacle of the Deeps: Summon',
     aliases: ['Tentacle of the Deeps'],
-    version: '1.5.36',
+    version: '2.3.0',
     midi: {
         item: [
             {

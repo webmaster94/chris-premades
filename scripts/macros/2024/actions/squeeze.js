@@ -1,6 +1,6 @@
 import {squeeze as legacySqueeze} from '../../../legacyMacros.js';
 export let squeeze = {
     ...legacySqueeze,
-    version: '1.5.5',
+    version: '2.3.0',
     rules: 'modern'
 };

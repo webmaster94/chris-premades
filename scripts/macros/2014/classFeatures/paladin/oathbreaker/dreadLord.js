@@ -37,10 +37,10 @@ async function use({workflow}) {
     effectUtils.addMacro(effectData, 'effect', ['dreadLordAura']);
     effectUtils.addMacro(effectData, 'combat', ['dreadLordAura']);
     let effect = await effectUtils.createEffect(workflow.actor, effectData, {
-        identifier: 'dreadLord', 
+        identifier: 'dreadLord',
         vae: [{
-            type: 'use', 
-            name: feature.name, 
+            type: 'use',
+            name: feature.name,
             identifier: 'dreadLord',
             activityIdentifier: 'dreadLordShadowAttack'
         }],
@@ -84,7 +84,7 @@ async function use({workflow}) {
         .tint('#e51e19')
         .belowTokens()
         .zIndex(2);
-        
+
     if (canvas.scene.background.src) {
         mainSequence = mainSequence
             .effect()
@@ -232,12 +232,12 @@ async function use({workflow}) {
 
 }
 async function late({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'dreadLord');
     if (!effect) return;
     let playAnimation = effect.flags['chris-premades'].dreadLord.playAnimation && animationUtils.jb2aCheck() === 'patreon';
     if (!playAnimation) return;
-    let target = workflow.targets.first();
+    let target = workflow.targets.tokens[0];
     //Animation by Eskiemoh
     new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
@@ -251,7 +251,7 @@ async function late({workflow}) {
         .filter('ColorMatrix', {saturate: -1, brightness: 0})
         .rotate(180)
         .zIndex(1)
-        
+
         .effect()
         .from(target)
         .attachTo(target)
@@ -262,7 +262,7 @@ async function late({workflow}) {
         .scaleToObject(1, {considerTokenScale: true})
         .opacity(0.65)
         .zIndex(0.1)
-        
+
         .play();
 }
 async function end({trigger: {entity: effect}}) {
@@ -306,7 +306,7 @@ async function create({trigger: {entity: effect, target, identifier}}) {
             changes: [
                 {
                     key: 'flags.midi-qol.grants.disadvantage.attack.all',
-                    value: '!canSense(tokenUuid, workflow.targets.first(), ' + JSON.stringify(nonSightDetectionModes) + ')',
+                    value: '!canSense(tokenUuid, workflow.targets.tokens[0], ' + JSON.stringify(nonSightDetectionModes) + ')',
                     type: 'override',
                     priority: 20
                 }
@@ -333,7 +333,7 @@ async function turnStart({trigger: {entity: effect, token, target}}) {
     let frightened = effectUtils.getEffectByStatusID(target.actor, 'frightened');
     if (!frightened) return;
     let validKeys = ['macro.CE', 'macro.CUB', 'macro.StatusEffect', 'StatusEffect'];
-    let frightenedOfActor = await actorUtils.getEffects(target.actor).find(async i => 
+    let frightenedOfActor = await actorUtils.getEffects(target.actor).find(async i =>
         (
             i.statuses.has('frightened') || // Status Effect dropdown on details page
             i.flags['chris-premades']?.conditions?.includes('frightened') || // CPR effect medkit
@@ -348,7 +348,7 @@ async function turnStart({trigger: {entity: effect, token, target}}) {
 }
 export let dreadLord = {
     name: 'Dread Lord',
-    version: '1.1.10',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

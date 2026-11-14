@@ -18,7 +18,7 @@ async function attack({trigger: {entity: item}, workflow}) {
 }
 export let empoweredStrikes = {
     name: 'Empowered Strikes',
-    version: '1.3.141',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

@@ -312,7 +312,7 @@
         "identifier": "iFoughtILived",
         "rules": "modern",
         "source": "chris-premades",
-        "version": "1.4.5"
+        "version": "2.3.0"
       },
       "macros": {
         "combat": [

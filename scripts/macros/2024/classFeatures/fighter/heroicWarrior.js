@@ -7,7 +7,7 @@ async function turnStart({trigger: {entity: item, token}}) {
 }
 export let heroicWarrior = {
     name: 'Heroic Warrior',
-    version: '1.5.12',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

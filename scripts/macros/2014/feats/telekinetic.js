@@ -1,18 +1,18 @@
 import {dialogUtils, tokenUtils} from '../../../utils.js';
 
 async function use({workflow}) {
-    if (!workflow.failedSaves.size) return;
-    let targetToken = await workflow.targets.first();
+    if (!workflow.failedSaves.count) return;
+    let targetToken = await workflow.targets.tokens[0];
     let selection = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.Telekinetic.Select', [
         ['CHRISPREMADES.Direction.Towards', -5],
-        ['CHRISPREMADES.Direction.Away', 5] 
+        ['CHRISPREMADES.Direction.Away', 5]
     ]);
     if (!selection) return;
     await tokenUtils.pushToken(workflow.token, targetToken, selection);
 }
 export let telekineticShove = {
     name: 'Telekinetic: Shove',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

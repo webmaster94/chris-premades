@@ -1,8 +1,8 @@
 import {activityUtils, animationUtils, dialogUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 async function use({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let maxTargets = workflowUtils.getCastLevel(workflow) - 3;
-    for (let targetToken of workflow.targets) {
+    for (let targetToken of workflow.targets.tokens) {
         let nearbyTokens = tokenUtils.findNearby(targetToken, 30, 'ally', {});
         let newTargets = nearbyTokens;
         if (!nearbyTokens.length) continue;
@@ -53,7 +53,7 @@ async function use({workflow}) {
 }
 export let chainLightning = {
     name: 'Chain Lightning',
-    version: '1.2.34',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

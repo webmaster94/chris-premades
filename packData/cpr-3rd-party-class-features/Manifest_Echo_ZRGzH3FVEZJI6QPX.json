@@ -525,7 +525,7 @@
     "chris-premades": {
       "info": {
         "name": "Manifest Echo",
-        "version": "1.1.0",
+        "version": "2.3.0",
         "identifier": "manifestEcho",
         "source": "chris-premades",
         "hasAnimation": true

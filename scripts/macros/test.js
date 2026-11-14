@@ -7,7 +7,7 @@ async function damage({trigger, workflow}) {
 }
 export let test = {
     name: 'test',
-    version: '0.12.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -25,7 +25,7 @@ export let test = {
 };
 export let test2 = {
     name: 'test2',
-    version: '0.12.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

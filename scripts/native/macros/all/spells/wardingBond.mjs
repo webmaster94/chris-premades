@@ -9,7 +9,7 @@ async function endExistingBonds(actor) {
 async function use({document, workflow}) {
     if (workflow.activity.identifier !== 'warding-bond') return;
     if (!workflow.token) return Logging.addMacroWarning('CPR', 'warding-bond', 'CHRISPREMADES.Macros.All.WardingBond.NoToken', {notify: true});
-    const targets = Array.from(workflow.targets).filter(token => token.actor && token.document.uuid !== workflow.token.document.uuid);
+    const targets = workflow.targets.documents.filter(token => token.actor && token.uuid !== workflow.tokenDocument.uuid);
     if (!targets.length) return Logging.addMacroWarning('CPR', 'warding-bond', 'No target selected.');
     const sourceEffect = documentUtils.getEffectByIdentifier(document, 'wardingBondSource');
     const targetEffect = documentUtils.getEffectByIdentifier(document, 'wardingBondTarget');
@@ -17,7 +17,7 @@ async function use({document, workflow}) {
     const maxDistance = automationUtils.getConfigValue(document, 'maxDistance');
     for (const target of targets) await endExistingBonds(target.actor);
     const sourceEffectData = documentUtils.getEffectData(workflow.activity, sourceEffect.id, {activityUuid: workflow.activity.uuid});
-    genericUtils.setProperty(sourceEffectData, 'flags.chris-premades.wardingBond', {tokens: targets.map(token => token.document.uuid), maxDistance});
+    genericUtils.setProperty(sourceEffectData, 'flags.chris-premades.wardingBond', {tokens: targets.map(token => token.uuid), maxDistance});
     const [casterEffect] = await effectUtils.createEffects(workflow.actor, [sourceEffectData]);
     if (!casterEffect) return;
     const targetEffectData = documentUtils.getEffectData(workflow.activity, targetEffect.id, {parentEntity: casterEffect, activityUuid: workflow.activity.uuid});
@@ -45,7 +45,7 @@ async function moved({document: effect, token}) {
     const {tokens, maxDistance} = getBondData(effect);
     if (!maxDistance) return;
     const partners = tokens.map(uuid => fromUuidSync(uuid, {strict: false})).filter(partner => partner?.parent === token.parent);
-    if (!partners.some(partner => tokenUtils.getDistance(token, partner) > maxDistance)) return;
+    if (!partners.some(partner => !tokenUtils.isWithinDistance(token, partner, maxDistance))) return;
     const selection = await dialogUtils.confirm(effect.name, _loc('CHRISPREMADES.Macros.All.WardingBond.Distance'), {userId: queryUtils.gmID()});
     if (!selection) return;
     await documentUtils.deleteDocument(effect);

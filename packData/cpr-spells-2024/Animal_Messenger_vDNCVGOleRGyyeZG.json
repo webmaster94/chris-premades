@@ -205,7 +205,7 @@
     "chris-premades": {
       "info": {
         "identifier": "animalMessenger",
-        "version": "1.2.34",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern"
       },

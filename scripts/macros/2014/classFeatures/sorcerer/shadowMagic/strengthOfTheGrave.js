@@ -18,7 +18,7 @@ async function damageApplication({trigger: {entity: item, token}, workflow, dite
 }
 export let strengthOfTheGrave = {
     name: 'Strength of the Grave',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

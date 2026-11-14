@@ -339,7 +339,7 @@
     },
     "chris-premades": {
       "info": {
-        "version": "1.2.34",
+        "version": "2.3.0",
         "identifier": "sleetStorm",
         "source": "chris-premades",
         "rules": "modern"

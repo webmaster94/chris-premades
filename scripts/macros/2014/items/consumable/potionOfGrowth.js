@@ -1,7 +1,7 @@
 import {effectUtils, genericUtils, itemUtils, tokenUtils} from '../../../../utils.js';
 
 async function use({workflow}) {
-    let token = workflow.targets.first() ?? workflow.token;
+    let token = workflow.targets.tokens[0] ?? workflow.token;
     let actor = token.actor;
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     let roll = await new Roll('1d4').evaluate();
@@ -95,7 +95,7 @@ async function use({workflow}) {
 }
 export let potionOfGrowth = {
     name: 'Potion of Growth',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

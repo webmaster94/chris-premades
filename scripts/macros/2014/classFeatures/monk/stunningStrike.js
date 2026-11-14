@@ -1,6 +1,6 @@
 import {dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../../utils.js';
 async function late({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'meleeAttack')) return;
     let ki = itemUtils.getItemByIdentifier(workflow.actor, 'ki');
     if (!ki || !ki.system.uses.value) return;
@@ -13,7 +13,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let stunningStrike = {
     name: 'Stunning Strike',
-    version: '1.5.35',
+    version: '2.3.0',
     midi: {
         actor: [
             {

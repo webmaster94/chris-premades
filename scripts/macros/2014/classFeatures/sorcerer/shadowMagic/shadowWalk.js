@@ -10,7 +10,7 @@ async function use({workflow}) {
 }
 export let shadowWalk = {
     name: 'Shadow Walk',
-    version: '1.4.19',
+    version: '2.3.0',
     midi: {
         item: [
             {

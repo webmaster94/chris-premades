@@ -276,7 +276,7 @@
     "chris-premades": {
       "info": {
         "name": "Ice Storm",
-        "version": "1.1.10",
+        "version": "2.3.0",
         "hasAnimation": true,
         "identifier": "iceStorm",
         "source": "chris-premades"

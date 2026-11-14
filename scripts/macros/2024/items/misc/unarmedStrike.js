@@ -3,7 +3,7 @@ async function sizeCheck({workflow}) {
     let heavy = !!itemUtils.getItemByIdentifier(workflow.actor, 'heavyweight');
     let size = actorUtils.getSize(workflow.actor, false) + heavy;
     let id = activityUtils.getIdentifier(workflow.activity);
-    for (let t of workflow.targets) {
+    for (let t of workflow.targets.tokens) {
         if (actorUtils.getSize(t.actor, false) <= (size + 1)) continue;
         let warning = id === 'grapple' ? 'Grapple.Size' : 'Shove.Big';
         genericUtils.notify('CHRISPREMADES.Macros.' + warning, 'info');
@@ -12,23 +12,23 @@ async function sizeCheck({workflow}) {
     }
 }
 async function grapple({workflow}) {
-    if (!workflow.failedSaves.size) return;
-    await Promise.all(workflow.failedSaves.map(async token => await tokenUtils.grappleHelper(workflow.token, token, workflow.item, {noContest: true, flatDC: workflow.activity.save.dc.value})));
+    if (!workflow.failedSaves.count) return;
+    await Promise.all(workflow.failedSaves.tokens.map(async token => await tokenUtils.grappleHelper(workflow.token, token, workflow.item, {noContest: true, flatDC: workflow.activity.save.dc.value})));
 }
 async function shove({workflow}) {
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     switch(activityUtils.getIdentifier(workflow.activity)) {
         case 'shoveProne':
-            await Promise.all(workflow.failedSaves.map(async token => await effectUtils.applyConditions(token.actor, ['prone'])));
+            await Promise.all(workflow.failedSaves.tokens.map(async token => await effectUtils.applyConditions(token.actor, ['prone'])));
             break;
         case 'shovePush':
-            await Promise.all(workflow.failedSaves.map(async token => await tokenUtils.pushToken(workflow.token, token, 5)));
+            await Promise.all(workflow.failedSaves.tokens.map(async token => await tokenUtils.pushToken(workflow.token, token, 5)));
             break;
     }
 }
 export let unarmedStrike = {
     name: 'Unarmed Strike',
-    version: '1.5.34',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

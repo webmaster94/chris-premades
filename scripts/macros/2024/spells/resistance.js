@@ -1,7 +1,7 @@
 import {combatUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils, rollUtils, workflowUtils} from '../../../utils.js';
 async function targeted({trigger, workflow}) {
-    if (!workflow.targets.size) return;
-    await Promise.all(workflow.targets.map(async token => {
+    if (!workflow.targets.count) return;
+    await Promise.all(workflow.targets.tokens.map(async token => {
         let effect = effectUtils.getEffectByIdentifier(token.actor, 'resistanceEffect');
         if (!effect) return;
         if (genericUtils.getRules(effect) === 'legacy') return;
@@ -35,9 +35,9 @@ async function targeted({trigger, workflow}) {
     }));
 }
 async function used({trigger, workflow}) {
-    if (!workflow.targets.size || !workflow.damageRolls?.length || !combatUtils.inCombat()) return;
+    if (!workflow.targets.count || !workflow.damageRolls?.length || !combatUtils.inCombat()) return;
     let damageTypes = workflowUtils.getDamageTypes(workflow.damageRolls);
-    await Promise.all(workflow.hitTargets.map(async token => {
+    await Promise.all(workflow.hitTargets.tokens.map(async token => {
         let effect = effectUtils.getEffectByIdentifier(token.actor, 'resistanceEffect');
         if (!effect) return;
         if (genericUtils.getRules(effect) === 'legacy') return;
@@ -60,7 +60,7 @@ async function used({trigger, workflow}) {
     }));
 }
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let damageTypes = itemUtils.getConfig(workflow.item, 'damageTypes');
     let damageType = await dialogUtils.selectDamageType(damageTypes, workflow.item.name, 'CHRISPREMADES.Generic.SelectDamageType');
     if (!damageType) return;
@@ -73,13 +73,13 @@ async function use({trigger, workflow}) {
         damageType: damageType,
         formula: itemUtils.getConfig(workflow.item, 'formula')
     });
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         await effectUtils.createEffect(token.actor, effectData, {concentrationItem: workflow.item});
     }));
 }
 export let resistance = {
     name: 'Resistance',
-    version: '1.4.143',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

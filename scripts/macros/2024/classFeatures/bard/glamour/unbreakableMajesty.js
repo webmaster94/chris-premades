@@ -1,6 +1,6 @@
 import {activityUtils, constants, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function attacked({trigger: {entity: effect}, workflow}) {
-    if (!workflow.hitTargets.size || !workflow.token) return;
+    if (!workflow.hitTargets.count || !workflow.token) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     if (!effect.origin) return;
     let item = await effectUtils.getOriginItem(effect);
@@ -30,7 +30,7 @@ async function use({trigger, workflow}) {
 }
 export let unbreakableMajesty = {
     name: 'Unbreakable Majesty',
-    version: '1.1.41',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

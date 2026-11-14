@@ -12,7 +12,7 @@ async function use({trigger, workflow}) {
         if (!weapon) return;
     }
     let targets;
-    if (!workflow.targets.size) {
+    if (!workflow.targets.count) {
         let activity = weapon.system.activities.find(i => i.type === 'attack');
         if (!activity) return;
         let nearby = tokenUtils.findNearby(workflow.token, activity.range.value, 'enemy', {includeIncapacitated: true});
@@ -21,13 +21,13 @@ async function use({trigger, workflow}) {
         if (!targets?.length) return;
         targets = [targets[0]];
     } else {
-        targets = Array.from(workflow.targets);
+        targets = Array.from(workflow.targets.tokens);
     }
     await workflowUtils.specialItemUse(weapon, targets, workflow.item);
 }
 export let warPriest = {
     name: 'War Priest',
-    version: '1.3.27',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

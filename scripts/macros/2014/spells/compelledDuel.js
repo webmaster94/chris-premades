@@ -1,7 +1,7 @@
 import {activityUtils, actorUtils, animationUtils, combatUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils, socketUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 
 async function use({workflow}) {
-    if (!workflow.failedSaves.size) {
+    if (!workflow.failedSaves.count) {
         let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
@@ -30,7 +30,7 @@ async function use({workflow}) {
         flags: {
             'chris-premades': {
                 compelledDuel: {
-                    targetUuids: Array.from(workflow.failedSaves).map(target => target.document.uuid)
+                    targetUuids: Array.from(workflow.failedSaves.tokens).map(target => target.document.uuid)
                 }
             }
         }
@@ -38,7 +38,7 @@ async function use({workflow}) {
     effectUtils.addMacro(casterEffectData, 'midi.actor', ['compelledDuelSource']);
     effectUtils.addMacro(casterEffectData, 'combat', ['compelledDuelSource']);
     let effect = await effectUtils.createEffect(workflow.actor, casterEffectData, {concentrationItem: workflow.item, strictlyInterdependent: true, identifier: 'compelledDuelSource'});
-    for (let target of workflow.failedSaves) {
+    for (let target of workflow.failedSaves.tokens) {
         await effectUtils.createEffect(target.actor, targetEffectData, {parentEntity: effect, strictlyInterdependent: true, identifier: 'compelledDuelTarget'});
     }
 
@@ -62,25 +62,25 @@ async function turnEnd({trigger}) {
     }
 }
 async function targetAttack({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'compelledDuelTarget');
     if (!effect) return;
     let origin = await effectUtils.getOriginItem(effect);
     if (!origin) return;
-    let targetUuid = workflow.targets.first().document.uuid;
+    let targetUuid = workflow.targets.tokens[0].document.uuid;
     let sourceUuid = effect.flags['chris-premades']?.compelledDuel?.sourceUuid;
     if (targetUuid === sourceUuid || !sourceUuid) return;
     workflow.tracker.disadvantage.add(origin.name, origin.name);
 }
 async function sourceAttack({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'compelledDuelSource');
     if (!effect) return;
     let targetUuids = effect.flags['chris-premades']?.compelledDuel?.targetUuids;
     if (!targetUuids) return;
     let endSpell = false;
-    for (let target of workflow.targets) {
+    for (let target of workflow.targets.tokens) {
         if (workflowUtils.isAttackType(workflow, 'attack')) {
             if (!targetUuids.includes(target.document.uuid)) {
                 endSpell = true;
@@ -171,7 +171,7 @@ async function targetMoved({trigger: {entity: effect}, options}) {
 }
 export let compelledDuel = {
     name: 'Compelled Duel',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

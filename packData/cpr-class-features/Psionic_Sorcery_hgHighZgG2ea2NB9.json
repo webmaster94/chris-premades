@@ -152,7 +152,7 @@
         "identifier": "psionicSorcery",
         "source": "chris-premades",
         "rules": "legacy",
-        "version": "1.2.17"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

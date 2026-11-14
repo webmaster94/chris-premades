@@ -60,7 +60,7 @@ async function end({trigger: {entity: effect}}) {
 }
 export let strangeMetabolism = {
     name: 'Strange Metabolism',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

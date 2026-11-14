@@ -48,7 +48,7 @@ async function use({workflow}) {
 }
 export let blessingOfTheRavenQueen = {
     name: 'Blessing of the Raven Queen',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

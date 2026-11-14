@@ -1,5 +1,5 @@
 export let crownOfMadness = {
     name: 'Crown of Madness',
-    version: '1.2.21',
+    version: '2.3.0',
     rules: 'modern'
 };

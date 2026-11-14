@@ -6,7 +6,7 @@ async function use({trigger, workflow}) {
 }
 export let mageHandLegerdemain = {
     name: 'Mage Hand Legerdemain',
-    version: '1.3.47',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

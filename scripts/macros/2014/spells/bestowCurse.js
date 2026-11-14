@@ -1,6 +1,6 @@
 import {activityUtils, actorUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
 async function use({workflow}) {
-    if (!workflow.failedSaves.size) {
+    if (!workflow.failedSaves.count) {
         let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
@@ -93,7 +93,7 @@ async function use({workflow}) {
                 flags: {
                     'chris-premades': {
                         bestowCurse: {
-                            targets: Array.from(workflow.failedSaves).map(target => target.document.uuid),
+                            targets: Array.from(workflow.failedSaves.tokens).map(target => target.document.uuid),
                             damageType: itemUtils.getConfig(workflow.item, 'damageType'),
                             formula: itemUtils.getConfig(workflow.item, 'formula')
                         }
@@ -149,7 +149,7 @@ async function use({workflow}) {
         targetEffectOptions.interdependent = true;
     }
     effectUtils.addMacro(targetEffectData, 'effect', ['bestowCurse']);
-    for (let targetToken of workflow.failedSaves) {
+    for (let targetToken of workflow.failedSaves.tokens) {
         await effectUtils.createEffect(targetToken.actor, targetEffectData, targetEffectOptions);
     }
     if (concentration && !isNaN(duration)) {
@@ -158,30 +158,30 @@ async function use({workflow}) {
     }
 }
 async function attack({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'bestowCurseAttack');
     if (!effect) return;
     let sourceActorUuid = effect.flags['chris-premades'].bestowCurse.sourceActor;
-    if (workflow.targets.map(target => target.actor?.uuid).has(sourceActorUuid)) workflow.tracker.disadvantage.add(effect.name, effect.name);
+    if (workflow.targets.tokens.map(target => target.actor?.uuid).has(sourceActorUuid)) workflow.tracker.disadvantage.add(effect.name, effect.name);
 }
 async function damage({workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'bestowCurseSource');
     if (!effect) return;
     let {targets: validTargetUuids, damageType, formula} = effect.flags['chris-premades'].bestowCurse;
-    if (!workflow.hitTargets.every(target => validTargetUuids.includes(target.document.uuid))) return;
+    if (!workflow.hitTargets.tokens.every(target => validTargetUuids.includes(target.document.uuid))) return;
     await workflowUtils.bonusDamage(workflow, formula, {damageType: damageType});
 }
 async function damageApplication({trigger, workflow, ditem}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (workflowUtils.isAttackType(workflow, 'attack')) return;
     let casterEffect = effectUtils.getEffectByIdentifier(workflow.actor, 'bestowCurseSource');
     if (!casterEffect) return;
     let {targets: validTargetUuids, damageType, formula} = casterEffect.flags['chris-premades'].bestowCurse;
-    if (workflow.hitTargets.every(target => validTargetUuids.includes(target.document.uuid))) return;
-    let extraDamageTargets = workflow.hitTargets.filter(target => validTargetUuids.includes(target.document.uuid));
+    if (workflow.hitTargets.tokens.every(target => validTargetUuids.includes(target.document.uuid))) return;
+    let extraDamageTargets = new Set(workflow.hitTargets.tokens).filter(target => validTargetUuids.includes(target.document.uuid));
     if (!extraDamageTargets.size) return;
     let targetActor = trigger.token.actor;
     let damageRoll = await new CONFIG.Dice.DamageRoll(formula, workflow.activity.getRollData()).evaluate();
@@ -218,7 +218,7 @@ async function remove({trigger: {entity}}) {
 }
 export let bestowCurse = {
     name: 'Bestow Curse',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -244,7 +244,7 @@ export let bestowCurse = {
             options: constants.damageTypeOptions,
             homebrew: true,
             category: 'homebrew'
-        }, 
+        },
         {
             value: 'formula',
             label: 'CHRISPREMADES.Config.Formula',

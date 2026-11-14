@@ -1,7 +1,7 @@
 import {constants} from '../../../../../utils.js';
 export let stalkersFlurry = {
     name: 'Stalker\'s Flurry',
-    version: '1.3.81',
+    version: '2.3.0',
     config: [
         {
             value: 'formula',

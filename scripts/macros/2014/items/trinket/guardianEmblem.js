@@ -1,8 +1,8 @@
 import {actorUtils, combatUtils, constants, dialogUtils, genericUtils, itemUtils, socketUtils, tokenUtils, workflowUtils} from '../../../../utils.js';
 async function attack({trigger, workflow}) {
-    if (!workflow.targets.size || !workflow.isCritical || !workflow.item) return;
+    if (!workflow.targets.count || !workflow.isCritical || !workflow.item) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
-    let target = workflow.targets.first();
+    let target = workflow.targets.tokens[0];
     let nearbyShields = tokenUtils.findNearby(target, 30, 'ally', {includeToken: true}).filter(i => {
         let item = itemUtils.getItemByIdentifier(i.actor, 'guardianEmblem');
         if (!item) return;
@@ -24,7 +24,7 @@ async function attack({trigger, workflow}) {
 }
 export let guardianEmblem = {
     name: 'Guardian Emblem',
-    version: '1.3.10',
+    version: '2.3.0',
     midi: {
         actor: [
             {

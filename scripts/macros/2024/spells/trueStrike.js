@@ -1,6 +1,6 @@
 import {actorUtils, constants, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
 async function use({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let weapons = workflow.actor.items.filter(i => i.type === 'weapon' && i.system.equipped && i.system.prof.hasProficiency && constants.weaponTypes.includes(i.system.type?.value));
     if (!weapons.length) {
         genericUtils.notify('CHRISPREMADES.Macros.TrueStrike.NoWeapons', 'warn');
@@ -26,7 +26,7 @@ async function use({workflow}) {
         weaponData.system.activities[attackId].attack.ability = workflow.item.system.ability.length ? workflow.item.system.ability : workflow.actor.system.attributes.spellcasting;
         if (selection) {
             weaponData.system.damage.base.types = [damageType];
-            weaponData.system.activities[attackId].damage.parts.forEach(part => 
+            weaponData.system.activities[attackId].damage.parts.forEach(part =>
                 part.types = [damageType]
             );
         }
@@ -38,11 +38,11 @@ async function use({workflow}) {
             });
         }
     }
-    await workflowUtils.syntheticItemDataRoll(weaponData, workflow.actor, [workflow.targets.first()]);
+    await workflowUtils.syntheticItemDataRoll(weaponData, workflow.actor, [workflow.targets.tokens[0]]);
 }
 export let trueStrike = {
     name: 'True Strike',
-    version: '1.5.48',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

@@ -1,11 +1,11 @@
 import {effectUtils, genericUtils} from '../../../../utils.js';
 async function use({trigger: {entity: item}, workflow}) {
-    if (!workflow.failedSaves.size || !workflow.damageRolls) return;
+    if (!workflow.failedSaves.count || !workflow.damageRolls) return;
     let uuid = workflow.item.flags.dnd5e?.cachedFor;
     if (!uuid) return;
     let activity = await fromUuid(uuid, {relative: workflow.actor});
     if (activity.item.uuid != item.uuid) return;
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         if (!workflow.failedSaves.has(token)) return;
         let ditem = workflow.damageList.find(i => i.actorId === token.actor.id);
         if (!ditem) return;
@@ -54,7 +54,7 @@ async function use({trigger: {entity: item}, workflow}) {
 }
 export let nightmareHaunting = {
     name: 'Nightmare Haunting',
-    version: '1.3.160',
+    version: '2.3.0',
     rules: 'modern',
     aliases: ['Nightmare Haunting (1/Day; Requires Soul Bag)'],
     monsters: [

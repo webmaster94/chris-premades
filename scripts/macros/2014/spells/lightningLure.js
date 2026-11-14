@@ -1,17 +1,17 @@
 import {animationUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 
 async function damage({workflow, ditem}) {
-    if (workflow.targets.size !== 1) return;
-    let targetToken = workflow.targets.first();
+    if (workflow.targets.count !== 1) return;
+    let targetToken = workflow.targets.tokens[0];
     let sourceToken = workflow.token;
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.aseCheck();
     let distance = tokenUtils.getDistance(sourceToken, targetToken);
     let pullDistance = 0;
-    if (workflow.failedSaves.size) {
+    if (workflow.failedSaves.count) {
         pullDistance = Math.min(10, ((distance - 1) - ((distance - 1) % 5)));
     }
     if (!playAnimation) {
-        if (workflow.failedSaves.size) {
+        if (workflow.failedSaves.count) {
             await tokenUtils.pushToken(sourceToken, targetToken, -pullDistance);
             await targetToken.animationContexts?.get('Token.' + targetToken.id + '.animate')?.promise ?? true;
         }
@@ -19,7 +19,7 @@ async function damage({workflow, ditem}) {
         let dirRay = new foundry.canvas.geometry.Ray(targetToken.center, sourceToken.center);
         let distPer = dirRay.distance / distance;
         let position = canvas.grid.getTopLeftPoint(dirRay.project((distPer * pullDistance) / dirRay.distance));
-        if (!workflow.failedSaves.size) position = targetToken.position;
+        if (!workflow.failedSaves.count) position = targetToken.position;
         if (isNaN(position?.x)) position = targetToken.position;
         let seq = new Sequence({moduleName:'chris-premades', softFail:true});
         if (targetToken !== sourceToken) {
@@ -32,7 +32,7 @@ async function damage({workflow, ditem}) {
                 .filter('ColorMatrix', {saturate:1, hue: 25})
                 .scaleIn(0, 750, {ease: 'easeOutQuint'})
                 .repeats(2, 600, 600)
-        
+
                 .wait(250);
         }
         await seq
@@ -106,7 +106,7 @@ async function damage({workflow, ditem}) {
 }
 export let lightningLure = {
     name: 'Lightning Lure',
-    version: '1.1.10',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

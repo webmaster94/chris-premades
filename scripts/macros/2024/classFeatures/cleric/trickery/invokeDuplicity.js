@@ -79,7 +79,7 @@ async function use({trigger, workflow}) {
     if (selection) await workflowUtils.completeItemUse(trickstersTransposition);
 }
 async function attack({trigger: {entity: effect}, workflow}) {
-    if (!workflow.activity || !workflow.targets.size) return;
+    if (!workflow.activity || !workflow.targets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     let origin = await fromUuid(effect.origin);
     if (!origin) return;
@@ -87,7 +87,7 @@ async function attack({trigger: {entity: effect}, workflow}) {
     let duplicityToken = actorUtils.getFirstToken(effect.parent);
     if (!duplicityToken) return;
     if (tokenUtils.getDistance(workflow.token, duplicityToken) > 5) return;
-    if (!tokenUtils.canSee(workflow.targets.first(), duplicityToken)) return;
+    if (!tokenUtils.canSee(workflow.targets.tokens[0], duplicityToken)) return;
     workflow.tracker.advantage.add(origin.name, origin.name);
 }
 async function spell({trigger, workflow}) {
@@ -133,7 +133,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let invokeDuplicity = {
     name: 'Invoke Duplicity',
-    version: '1.3.15',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

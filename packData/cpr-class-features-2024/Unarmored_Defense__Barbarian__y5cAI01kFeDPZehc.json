@@ -122,7 +122,7 @@
         "identifier": "unarmoredDefenseBarbarian",
         "source": "chris-premades",
         "rules": "modern",
-        "version": "1.1.138"
+        "version": "2.3.0"
       },
       "macros": {
         "item": [

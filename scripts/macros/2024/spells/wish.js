@@ -44,8 +44,8 @@ async function instantHealth({trigger, workflow}) {
         }));
         await genericUtils.update(token.actor, {'system.attributes.hp.value': token.actor.system.attributes.hp.max});
     }
-    if (!workflow.targets.includes(workflow.token)) await targetHelper(workflow.token);
-    await Promise.all(workflow.targets.map(async token => await targetHelper(token)));
+    if (!workflow.targets.tokens.includes(workflow.token)) await targetHelper(workflow.token);
+    await Promise.all(workflow.targets.tokens.map(async token => await targetHelper(token)));
 }
 async function resistance({trigger, workflow}) {
     let selection = await dialogUtils.selectDamageType(Object.keys(CONFIG.DND5E.damageTypes).filter(i => !['midi-none', 'none'].includes(i)), workflow.item.name, 'CHRISPREMADES.Generic.SelectDamageType');
@@ -55,10 +55,10 @@ async function resistance({trigger, workflow}) {
     let effectData = genericUtils.duplicate(resistanceEffect.toObject());
     effectData.origin = workflow.item.uuid;
     effectData.system.changes[0].value = selection;
-    await Promise.all(workflow.targets.map(async token => await effectUtils.createEffect(token.actor, effectData)));
+    await Promise.all(workflow.targets.tokens.map(async token => await effectUtils.createEffect(token.actor, effectData)));
 }
 async function spellImmunity({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let key = genericUtils.getCPRSetting('spellCompendium');
     let pack = game.packs.get(key);
     if (!pack) {
@@ -77,7 +77,7 @@ async function spellImmunity({trigger, workflow}) {
     effectData.duration = itemUtils.convertDuration(workflow.activity);
     effectData.origin = workflow.item.uuid;
     genericUtils.setProperty(effectData, 'flags.chris-premades.wish.spellImmunity', item.name);
-    await Promise.all(workflow.targets.map(async token => await effectUtils.createEffect(token.actor, effectData)));
+    await Promise.all(workflow.targets.tokens.map(async token => await effectUtils.createEffect(token.actor, effectData)));
 }
 async function duplicateSpell({trigger, workflow}) {
     let key = genericUtils.getCPRSetting('spellCompendium');
@@ -137,12 +137,12 @@ async function targeted({trigger: {entity: effect, token}, workflow}) {
     let spellName = effect.flags['chris-premades']?.wish?.spellImmunity;
     if (!spellName) return;
     if (workflow.item.name != spellName) return;
-    let newTargets = workflow.targets.difference(new Set([token]));
+    let newTargets = new Set(workflow.targets.tokens).difference(new Set([token]));
     await workflowUtils.updateTargets(workflow, newTargets);
 }
 export let wish = {
     name: 'Wish',
-    version: '1.1.19',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

@@ -1,14 +1,14 @@
 import {activityUtils, dialogUtils, effectUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function attack({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size || !workflowUtils.isAttackType(workflow, 'rangedWeaponAttack')) return;
+    if (!workflow.hitTargets.count || !workflowUtils.isAttackType(workflow, 'rangedWeaponAttack')) return;
     let activity = activityUtils.getActivityByIdentifier(item, 'use', {strict: true});
     if (!activity) return;
     if (!activityUtils.canUse(activity)) return;
-    let effects = effectUtils.getAllEffectsByIdentifier(workflow.hitTargets.first().actor, 'balefulInterdictEffect');
+    let effects = effectUtils.getAllEffectsByIdentifier(workflow.hitTargets.tokens[0].actor, 'balefulInterdictEffect');
     if (!effects.length) return;
     let selection = await dialogUtils.confirmUseItem(item);
     if (!selection) return;
-    await workflowUtils.syntheticActivityRoll(activity, Array.from(workflow.hitTargets), {consumeResources: true, consumeUsage: true});
+    await workflowUtils.syntheticActivityRoll(activity, Array.from(workflow.hitTargets.tokens), {consumeResources: true, consumeUsage: true});
 }
 async function added({trigger: {entity: item}}) {
     await itemUtils.multiCorrectActivityItemConsumption(item, ['use'], {
@@ -19,7 +19,7 @@ async function added({trigger: {entity: item}}) {
 export let interdictBoonImpalingShot = {
     name: 'Interdict Boons: Impaling Shot',
     aliases: ['Impaling Shot'],
-    version: '1.3.76',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         actor: [

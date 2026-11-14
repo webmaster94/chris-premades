@@ -17,7 +17,7 @@ async function create({trigger, workflow}) {
 }
 export let vampiresPlaything = {
     name: 'Vampire\'s Plaything',
-    version: '1.4.5',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

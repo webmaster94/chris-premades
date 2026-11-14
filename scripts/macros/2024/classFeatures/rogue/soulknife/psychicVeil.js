@@ -33,7 +33,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let psychicVeil = {
     name: 'Psychic Veil',
-    version: '1.3.58',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

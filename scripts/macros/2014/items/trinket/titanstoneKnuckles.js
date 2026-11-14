@@ -1,7 +1,7 @@
 import {genericUtils} from '../../../../lib/utilities/genericUtils.js';
 export let titanstoneKnucklesD = {
     name: 'Titanstone Knuckles (Dormant)',
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let titanstoneKnucklesA = {
     name: 'Titanstone Knuckles (Awakened)',

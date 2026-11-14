@@ -175,7 +175,7 @@
     "chris-premades": {
       "info": {
         "identifier": "instinctivePounce",
-        "version": "1.5.49",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern",
         "hasAnimation": true

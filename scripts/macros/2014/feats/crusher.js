@@ -1,8 +1,8 @@
 import {actorUtils, combatUtils, constants, crosshairUtils, dialogUtils, effectUtils, genericUtils, workflowUtils} from '../../../utils.js';
 async function late({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1 || !workflow.damageRoll || !workflowUtils.isAttackType(workflow, 'attack')) return;
+    if (workflow.hitTargets.count !== 1 || !workflow.damageRoll || !workflowUtils.isAttackType(workflow, 'attack')) return;
     if (!workflowUtils.getDamageTypes(workflow.damageRolls).has('bludgeoning')) return;
-    let targetToken = workflow.hitTargets.first();
+    let targetToken = workflow.hitTargets.tokens[0];
     if (actorUtils.getSize(targetToken.actor) > actorUtils.getSize(workflow.actor) + 1) return;
     if (!combatUtils.perTurnCheck(item, 'crusher')) return;
     let selection = await dialogUtils.confirm(item.name, 'CHRISPREMADES.Macros.Crusher.Move');
@@ -36,7 +36,7 @@ async function late({trigger: {entity: item}, workflow}) {
 }
 async function lateCrit({trigger: {entity: item}, workflow}) {
     if (!workflow.isCritical) return;
-    if (workflow.hitTargets.size !== 1 || !workflow.damageRoll || !workflowUtils.isAttackType(workflow, 'attack')) return;
+    if (workflow.hitTargets.count !== 1 || !workflow.damageRoll || !workflowUtils.isAttackType(workflow, 'attack')) return;
     if (!workflowUtils.getDamageTypes(workflow.damageRolls).has('bludgeoning')) return;
     let effectData = {
         name: item.name,
@@ -65,12 +65,12 @@ async function lateCrit({trigger: {entity: item}, workflow}) {
             }
         }
     };
-    await effectUtils.createEffect(workflow.hitTargets.first().actor, effectData);
+    await effectUtils.createEffect(workflow.hitTargets.tokens[0].actor, effectData);
     await item.displayCard();
 }
 export let crusher = {
     name: 'Crusher',
-    version: '1.1.42',
+    version: '2.3.0',
     midi: {
         actor: [
             {

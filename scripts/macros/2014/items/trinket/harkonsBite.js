@@ -380,7 +380,7 @@ async function shapeChange(token, {callback} = {}) {
             .filter('Blur', {blurX: 5, blurY: 5})
             .zIndex(0)
             .waitUntilFinished(-500)
-        .thenDo(callback)    
+        .thenDo(callback)
         .effect()
             .file('jb2a.claws.200px.dark_red')
             .atLocation(token)
@@ -498,32 +498,32 @@ async function removed({trigger: {token}}) {
     Sequencer.EffectManager.endEffects({name: 'Moon Frenzy', object: token});
 }
 async function bite({trigger, workflow}) {
-    if (!workflow.hitTargets.size) return;
-    if (actorUtils.typeOrRace(workflow.hitTargets.first().actor) != 'humanoid') return;
-    let effect = effectUtils.getEffectByIdentifier(workflow.hitTargets.first().actor, 'curseOfLycanthropy');
+    if (!workflow.hitTargets.count) return;
+    if (actorUtils.typeOrRace(workflow.hitTargets.tokens[0].actor) != 'humanoid') return;
+    let effect = effectUtils.getEffectByIdentifier(workflow.hitTargets.tokens[0].actor, 'curseOfLycanthropy');
     if (effect) return;
     let activity = activityUtils.getActivityByIdentifier(workflow.item, 'humanoid', {strict: true});
     if (!activity) return;
-    await workflowUtils.syntheticActivityRoll(activity, Array.from(workflow.hitTargets), {consumeResources: true, consumeUsage: true});
+    await workflowUtils.syntheticActivityRoll(activity, Array.from(workflow.hitTargets.tokens), {consumeResources: true, consumeUsage: true});
 }
 async function otherBite({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     let isNatural = workflow.item.system.type?.value === 'natural';
     if (!isNatural) return;
-    if (actorUtils.typeOrRace(workflow.hitTargets.first().actor) != 'humanoid') return;
+    if (actorUtils.typeOrRace(workflow.hitTargets.tokens[0].actor) != 'humanoid') return;
     let biteActivity = activityUtils.getActivityByIdentifier(item, 'bite', {strict: true});
     if (!biteActivity) return;
     if (biteActivity.name != workflow.activity.name) return;
-    let effect = effectUtils.getEffectByIdentifier(workflow.hitTargets.first().actor, 'curseOfLycanthropy');
+    let effect = effectUtils.getEffectByIdentifier(workflow.hitTargets.tokens[0].actor, 'curseOfLycanthropy');
     if (effect) return;
     let activity = activityUtils.getActivityByIdentifier(item, 'humanoid', {strict: true});
     if (!activity) return;
-    await workflowUtils.syntheticActivityRoll(activity, Array.from(workflow.hitTargets), {consumeResources: true, consumeUsage: true});
+    await workflowUtils.syntheticActivityRoll(activity, Array.from(workflow.hitTargets.tokens), {consumeResources: true, consumeUsage: true});
 }
 export let harkonsBite = {
     name: 'Harkon\'s Bite',
-    version: '1.4.15',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

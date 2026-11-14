@@ -1,5 +1,5 @@
 export let searUndead = {
     name: 'Sear Undead',
-    version: '1.2.12',
+    version: '2.3.0',
     rules: 'modern'
 };

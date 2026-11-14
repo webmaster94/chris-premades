@@ -29,7 +29,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let agonizingBlast = {
     name: 'Eldritch Invocations: Agonizing Blast',
-    version: '1.3.156',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

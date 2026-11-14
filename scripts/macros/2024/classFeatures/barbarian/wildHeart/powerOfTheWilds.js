@@ -1,22 +1,22 @@
 import {actorUtils, constants, dialogUtils, effectUtils, tokenUtils, workflowUtils} from '../../../../../utils.js';
 async function lion({trigger: {entity: effect}, workflow}) {
-    if (!workflow.targets.size || !workflowUtils.isAttackType(workflow, 'attack') || !workflow.token) return;
-    let nearbyTargets = tokenUtils.findNearby(workflow.token, 5, 'enemy', {includeIncapacitated: false}).filter(i => actorUtils.getEffects(i.actor).find(j => j.flags['chris-premades']?.powerOfTheWildsLion)).filter(k => k.document.id != workflow.targets.first().document.id);
+    if (!workflow.targets.count || !workflowUtils.isAttackType(workflow, 'attack') || !workflow.token) return;
+    let nearbyTargets = tokenUtils.findNearby(workflow.token, 5, 'enemy', {includeIncapacitated: false}).filter(i => actorUtils.getEffects(i.actor).find(j => j.flags['chris-premades']?.powerOfTheWildsLion)).filter(k => k.document.id != workflow.targets.tokens[0].document.id);
     if (!nearbyTargets.length) return;
     workflow.tracker.disadvantage.add(effect.name, effect.name);
 }
 async function ram({trigger: {entity: effect}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (workflowUtils.getActionType(workflow) != 'mwak') return;
-    if (effectUtils.getEffectByStatusID(workflow.hitTargets.first().actor, 'prone')) return;
-    if (actorUtils.getSize(workflow.hitTargets.first().actor, false) > 3) return;
+    if (effectUtils.getEffectByStatusID(workflow.hitTargets.tokens[0].actor, 'prone')) return;
+    if (actorUtils.getSize(workflow.hitTargets.tokens[0].actor, false) > 3) return;
     let selection = await dialogUtils.confirm(effect.name, 'CHRISPREMADES.Macros.PowerOfTheWilds.RamProne');
     if (!selection) return;
-    await effectUtils.applyConditions(workflow.targets.first().actor, ['prone']);
+    await effectUtils.applyConditions(workflow.targets.tokens[0].actor, ['prone']);
 }
 export let powerOfTheWilds = {
     name: 'Power of the Wilds',
-    version: '1.1.23',
+    version: '2.3.0',
     rules: 'modern'
 };
 export let powerOfTheWildsLion = {

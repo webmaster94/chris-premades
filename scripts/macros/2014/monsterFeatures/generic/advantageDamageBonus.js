@@ -12,7 +12,7 @@ async function damage({workflow}) {
 export let advantageDamageBonus = {
     name: 'Advantage Damage Bonus',
     translation: 'CHRISPREMADES.Macros.AdvantageDamageBonus.Name',
-    version: '0.12.78',
+    version: '2.3.0',
     midi: {
         item: [
             {

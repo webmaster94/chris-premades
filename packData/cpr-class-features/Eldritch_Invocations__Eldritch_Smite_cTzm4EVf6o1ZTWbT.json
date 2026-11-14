@@ -77,7 +77,7 @@
     "chris-premades": {
       "info": {
         "name": "Eldritch Invocations: Eldritch Smite",
-        "version": "1.1.0",
+        "version": "2.3.0",
         "identifier": "eldritchSmite",
         "source": "chris-premades"
       },

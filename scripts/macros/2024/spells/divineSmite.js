@@ -7,7 +7,7 @@ async function manual(args) {
     return await attackRiders.manual(args, 'divineSmite', {modern: true});
 }
 async function applyDamage({trigger, workflow}) {
-    if (!workflow.hitTargets.size || workflowUtils.getActionType(workflow) != 'mwak') return;
+    if (!workflow.hitTargets.count || workflowUtils.getActionType(workflow) != 'mwak') return;
     let feature = trigger.entity;
     if (workflow.actor.type === 'npc' && feature.type === 'feat' && genericUtils.getIdentifier(feature) === 'divineSmite' && attackRiders.itemDamage(feature)) {
         if (!attackRiders.available(feature, workflow, 'divineSmite')) return;
@@ -144,7 +144,7 @@ async function complete({trigger, workflow}) {
 }
 export let divineSmite = {
     name: 'Divine Smite',
-    version: '1.1.14',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [{pass: 'preTargeting', macro: manual, priority: 50}],

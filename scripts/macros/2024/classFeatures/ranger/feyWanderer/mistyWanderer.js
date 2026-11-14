@@ -8,7 +8,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let mistyWanderer  = {
     name: 'Misty Wanderer',
-    version: '1.3.99',
+    version: '2.3.0',
     rules: 'modern',
     item: [
         {

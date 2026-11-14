@@ -15,7 +15,7 @@ async function veryEarly({dialog}) {
 }
 export let findGreaterSteed = {
     name: 'Find Greater Steed',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

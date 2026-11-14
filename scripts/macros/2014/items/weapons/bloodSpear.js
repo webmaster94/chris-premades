@@ -1,7 +1,7 @@
 import {workflowUtils} from '../../../../utils.js';
 
 async function late({workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     let ditem = workflow.damageList[0];
     if (ditem.newHP || !ditem.oldHP) return;
     let damageRoll = await new Roll('2d6[temphp]').evaluate();
@@ -15,7 +15,7 @@ async function late({workflow}) {
 }
 export let bloodSpear = {
     name: 'Blood Spear',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

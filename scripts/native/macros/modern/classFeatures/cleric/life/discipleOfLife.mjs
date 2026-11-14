@@ -1,7 +1,7 @@
 import {itemUtils, workflowUtils} from '../../../../../proxy.mjs';
 async function heal({document, workflow}) {
     const validTypes = ['spell', 'pact'];
-    if (!workflow.targets.size || !workflow.item || !workflow.damageRolls) return;
+    if (!workflow.targets.count || !workflow.item || !workflow.damageRolls) return;
     if (!(workflow.item.type === 'spell' || workflow.item.system.type?.value === 'spellFeature')) return;
     if (workflow.item.type === 'spell' && !validTypes.includes(workflow.item.system.method)) return;
     const castData = workflow.castData ?? itemUtils.getSavedCastData(workflow.item);
@@ -13,7 +13,7 @@ async function heal({document, workflow}) {
 }
 export const discipleOfLife = {
     name: 'Disciple of Life',
-    version: '2.0.0',
+    version: '2.1.4',
     rules: '2024',
     roll: [
         {

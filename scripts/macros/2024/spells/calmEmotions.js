@@ -1,15 +1,15 @@
 import {actorUtils, constants, dialogUtils, effectUtils, itemUtils, workflowUtils} from '../../../utils.js';
 async function early({trigger, workflow}) {
-    if (!workflow.targets.size) return;
-    await Promise.all(workflow.targets.map(async token => {
+    if (!workflow.targets.count) return;
+    await Promise.all(workflow.targets.tokens.map(async token => {
         if (actorUtils.typeOrRace(token.actor) === 'humanoid') return;
         await effectUtils.createEffect(token.actor, constants.immuneEffectData);
     }));
 }
 async function use({trigger, workflow}) {
     await workflowUtils.handleInstantTemplate(workflow);
-    if (!workflow.failedSaves.size) return;
-    let selection = await dialogUtils.selectTargetDialog(workflow.item.name, 'CHRISPREMADES.Generic.SelectTargetEffect', Array.from(workflow.failedSaves), {
+    if (!workflow.failedSaves.count) return;
+    let selection = await dialogUtils.selectTargetDialog(workflow.item.name, 'CHRISPREMADES.Generic.SelectTargetEffect', Array.from(workflow.failedSaves.tokens), {
         type: 'select',
         skipDeadAndUnconscious: false,
         selectOptions: [
@@ -40,7 +40,7 @@ async function use({trigger, workflow}) {
 }
 export let calmEmotions = {
     name: 'Calm Emotions',
-    version: '1.1.19',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

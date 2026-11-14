@@ -3,7 +3,7 @@ async function early({trigger, workflow}) {
     if (!workflow.token) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'coronaOfLightEffect');
     if (!effect) return;
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         let distance = tokenUtils.getDistance(workflow.token, token);
         if (distance > 60) return;
         await effectUtils.createEffect(token.actor, constants.disadvantageEffectData);
@@ -23,7 +23,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let radianceOfTheDawn = {
     name: 'Radiance of the Dawn',
-    version: '1.3.8',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

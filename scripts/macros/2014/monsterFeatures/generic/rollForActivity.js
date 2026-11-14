@@ -9,15 +9,15 @@ async function use({trigger, workflow}) {
     let rolledActivities = itemActivities.filter(i => (new RegExp(`(?<!\\d)${rollTotal}(?!\\d)`).test(i.name)) && (i.id != workflow.activity.id));
     if (!rolledActivities.length) genericUtils.notify(genericUtils.format('CHRISPREMADES.Macros.RollForActivity.Error', {name: workflow.item.name, total: rollTotal}), 'error');
     if (config.reroll && !rolledActivities.filter(i => i.uses?.value != 0).length) {
-        await workflowUtils.syntheticActivityRoll(workflow.activity, workflow.targets);
+        await workflowUtils.syntheticActivityRoll(workflow.activity, workflow.targets.tokens);
         return;
     }
-    for (let i of rolledActivities) await workflowUtils.syntheticActivityRoll(i, workflow.targets, {consumeUsage: true, consumeResources: true});
+    for (let i of rolledActivities) await workflowUtils.syntheticActivityRoll(i, workflow.targets.tokens, {consumeUsage: true, consumeResources: true});
 }
 export let rollForActivity = {
     name: 'Roll for Activity',
     translation: 'CHRISPREMADES.Macros.RollForActivity.Name',
-    version: '1.3.34',
+    version: '2.3.0',
     midi: {
         item: [
             {

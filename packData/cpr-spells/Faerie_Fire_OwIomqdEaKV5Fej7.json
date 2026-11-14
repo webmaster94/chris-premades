@@ -232,7 +232,7 @@
       },
       "info": {
         "name": "Faerie Fire",
-        "version": "1.1.0",
+        "version": "2.3.0",
         "hasAnimation": true,
         "identifier": "faerieFire",
         "source": "chris-premades"

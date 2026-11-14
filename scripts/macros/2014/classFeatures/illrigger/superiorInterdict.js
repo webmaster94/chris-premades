@@ -4,7 +4,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let superiorInterdict = {
     name: 'Superior Interdict',
-    version: '1.3.70',
+    version: '2.3.0',
     rules: 'legacy',
     item: [
         {

@@ -128,8 +128,8 @@ async function use({workflow}) {
     effectUtils.addMacro(effectData, 'effect', ['rimesBindingIceFrozen']);
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.jb2aCheck() === 'patreon';
     await workflowUtils.handleInstantTemplate(workflow);
-    if (!workflow.failedSaves.size) return;
-    for (let target of workflow.failedSaves) {
+    if (!workflow.failedSaves.count) return;
+    for (let target of workflow.failedSaves.tokens) {
         await effectUtils.createEffect(target.actor, effectData, {identifier: 'rimesBindingIceFrozen'});
         if (playAnimation) freeze(target, 'bindingIce');
     }
@@ -153,7 +153,7 @@ export async function freeze(target, name) {
         .scaleIn(0, 6000, {ease: 'easeOutExpo'})
         .fadeIn(6000, {delay: 1000, ease: 'easeOutExpo'})
         .persist()
-        
+
         .effect()
         .delay(1250)
         .name(name)
@@ -165,7 +165,7 @@ export async function freeze(target, name) {
         .scaleIn(0, 6000, {ease: 'easeOutExpo'})
         .fadeIn(6000, {delay: 1000, ease: 'easeOutExpo'})
         .persist()
-        
+
         .effect()
         .delay(1250)
         .name(name)
@@ -204,7 +204,7 @@ export async function unfreeze(token, name) {
 }
 export let rimesBindingIce = {
     name: 'Rime\'s Binding Ice',
-    version: '1.1.10',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

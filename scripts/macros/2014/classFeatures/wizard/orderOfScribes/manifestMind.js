@@ -37,13 +37,13 @@ async function use({workflow}) {
         initiativeType: 'none',
         dismissActivity: dismissFeature,
         additionalVaeButtons: [{
-            type: 'use', 
-            name: castFeature.name, 
+            type: 'use',
+            name: castFeature.name,
             identifier: 'manifestMind',
             activityIdentifier: 'manifestMindCast'
         }, {
-            type: 'use', 
-            name: moveFeature.name, 
+            type: 'use',
+            name: moveFeature.name,
             identifier: 'manifestMind',
             activityIdentifier: 'manifestMindMove'
         }],
@@ -124,7 +124,7 @@ async function early({activity, actor}) {
 }
 export let manifestMind = {
     name: 'Manifest Mind: Summon',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

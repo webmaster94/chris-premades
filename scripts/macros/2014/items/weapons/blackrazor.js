@@ -1,8 +1,8 @@
 import {activityUtils, actorUtils, compendiumUtils, constants, effectUtils, errors, genericUtils, workflowUtils} from '../../../../utils.js';
 
 async function damage({workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
-    if (actorUtils.typeOrRace(workflow.hitTargets.first().actor) !== 'undead') return;
+    if (workflow.hitTargets.count !== 1) return;
+    if (actorUtils.typeOrRace(workflow.hitTargets.tokens[0].actor) !== 'undead') return;
     let damageRoll = await new CONFIG.Dice.DamageRoll('1d10[healing]', {}, {type: 'healing'}).evaluate();
     await workflow.setDamageRolls([damageRoll]);
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'blackrazorBacklash', {strict: true});
@@ -10,10 +10,10 @@ async function damage({workflow}) {
     await workflowUtils.syntheticActivityRoll(feature, [workflow.token]);
 }
 async function late({workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     let ditem = workflow.damageList[0];
     if (ditem.newHP || !ditem.oldHP) return;
-    let maxHP = workflow.hitTargets.first().actor.system.attributes.hp.max;
+    let maxHP = workflow.hitTargets.tokens[0].actor.system.attributes.hp.max;
     let currTempHP = workflow.actor.system.attributes.hp.temp;
     if (currTempHP <= maxHP) await workflowUtils.applyDamage([workflow.token], maxHP, 'temphp');
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'blackrazor');
@@ -61,7 +61,7 @@ async function onHit({trigger: {entity: effect}}) {
 }
 export let blackrazor = {
     name: 'Blackrazor',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

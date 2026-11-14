@@ -1,7 +1,7 @@
 import {activityUtils, genericUtils, itemUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
-    let validTargets = workflow.targets.filter(i => i.actor.system.attributes.hp.value < i.actor.system.attributes.hp.effectiveMax);
+    if (!workflow.targets.count) return;
+    let validTargets = new Set(workflow.targets.tokens).filter(i => i.actor.system.attributes.hp.value < i.actor.system.attributes.hp.effectiveMax);
     if (!validTargets.size) return;
     let formula = itemUtils.getConfig(workflow.item, 'formula');
     let activityData = activityUtils.withChangedDamage(workflow.activity, formula);
@@ -12,7 +12,7 @@ async function use({trigger, workflow}) {
 }
 export let tollTheDead = {
     name: 'Toll the Dead',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

@@ -35,7 +35,7 @@ async function use({trigger, workflow}) {
 }
 export let sproutFoliage = {
     name: 'Sprout Foliage',
-    version: '1.3.114',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

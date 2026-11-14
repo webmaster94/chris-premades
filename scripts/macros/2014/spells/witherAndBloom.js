@@ -1,7 +1,7 @@
 import {activityUtils, compendiumUtils, constants, dialogUtils, genericUtils, itemUtils, socketUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
-    let friendlyTargets = workflow.targets.filter(i => i.document.disposition === workflow.token.document.disposition && i.actor.type === 'character');
+    if (!workflow.targets.count) return;
+    let friendlyTargets = new Set(workflow.targets.tokens).filter(i => i.document.disposition === workflow.token.document.disposition && i.actor.type === 'character');
     if (!friendlyTargets.size) return;
     let selection;
     if (friendlyTargets.size === 1) {
@@ -32,7 +32,7 @@ async function damage({trigger, workflow, ditem}) {
 }
 export let witherAndBloom = {
     name: 'Wither and Bloom',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

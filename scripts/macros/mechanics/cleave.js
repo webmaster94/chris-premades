@@ -1,7 +1,7 @@
 import {compendiumUtils, constants, dialogUtils, genericUtils, tokenUtils, workflowUtils} from '../../utils.js';
 export async function cleave(workflow) {
-    if (!workflow.token || workflow.hitTargets.size != 1 || workflow.activity?.actionType != 'mwak' || !workflow.damageList || !workflow.item) return;
-    let target = workflow.targets.first();
+    if (!workflow.token || workflow.hitTargets.count != 1 || workflow.activity?.actionType != 'mwak' || !workflow.damageList || !workflow.item) return;
+    let target = workflow.targets.tokens[0];
     let newHP = workflow.damageList[0].newHP;
     if (newHP != 0) return;
     if (target.actor.items.getName('Minion')) return;

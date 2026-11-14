@@ -13,7 +13,7 @@ async function use({workflow}) {
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
 }
 async function damage({trigger: {entity: effect}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (workflowUtils.getActionType(workflow) !== 'mwak') return;
     let originItem = await effectUtils.getOriginItem(effect);
     let damageType = itemUtils.getConfig(originItem, 'damageType');
@@ -21,16 +21,16 @@ async function damage({trigger: {entity: effect}, workflow}) {
     await workflowUtils.bonusDamage(workflow, formula, {damageType: damageType});
     let feature = activityUtils.getActivityByIdentifier(originItem, 'thunderousSmitePush', {strict: true});
     if (!feature) return;
-    let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, [workflow.hitTargets.first()]);
+    let featureWorkflow = await workflowUtils.syntheticActivityRoll(feature, [workflow.hitTargets.tokens[0]]);
     if (featureWorkflow.failedSaves.size) {
-        let targetToken = workflow.targets.first();
+        let targetToken = workflow.targets.tokens[0];
         await tokenUtils.pushToken(workflow.token, targetToken, 10);
     }
     await genericUtils.remove(effect);
 }
 export let thunderousSmite = {
     name: 'Thunderous Smite',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

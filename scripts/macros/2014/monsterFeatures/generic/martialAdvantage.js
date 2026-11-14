@@ -1,10 +1,10 @@
 import {constants, dialogUtils, genericUtils, itemUtils, tokenUtils, workflowUtils, combatUtils} from '../../../../utils.js';
 import {sneakAttack} from '../../../../legacyMacros.js';
 async function damage({trigger, workflow}) {
-    if (workflow.hitTargets.size != 1 || !workflow.item) return;
+    if (workflow.hitTargets.count != 1 || !workflow.item) return;
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     if (!combatUtils.perTurnCheck(trigger.entity, 'martialAdvantage', false, workflow.token.id)) return;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     let nearbyTokens = tokenUtils.findNearby(targetToken, 5, 'enemy', {includeIncapacitated: false}).filter(i => i.id != workflow.token.id);
     if (!nearbyTokens.length) return;
     let auto = itemUtils.getGenericFeatureConfig(trigger.entity, 'martialAdvantage').auto;
@@ -28,7 +28,7 @@ async function combatEnd({trigger}) {
 export let martialAdvantage = {
     name: 'Martial Advantage',
     translation: 'CHRISPREMADES.Macros.MartialAdvantage.Name',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -8,7 +8,7 @@ async function combatStart({trigger: {token}}) {
 }
 export let relentless = {
     name: 'Relentless',
-    version: '1.1.0',
+    version: '2.3.0',
     combat: [
         {
             pass: 'combatStart',

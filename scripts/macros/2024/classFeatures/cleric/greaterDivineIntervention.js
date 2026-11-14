@@ -1,7 +1,7 @@
 import {genericUtils} from '../../../../utils.js';
 export let greaterDivineIntervention = {
     name: 'Greater Divine Intervention',
-    version: '1.2.27',
+    version: '2.3.0',
     rules: 'modern',
     config: [
         {

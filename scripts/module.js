@@ -38,6 +38,8 @@ import {quickConditions} from './extensions/quickConditions.js';
 import {setupConstants} from './lib/constants.js';
 import {attackRiders} from './lib/attackRiders.js';
 import {catIntegration} from './integrations/cat.js';
+import {registerNativeHooks} from './integrations/nativeHooks.js';
+registerNativeHooks();
 Hooks.once('socketlib.ready', registerSockets);
 Hooks.once('init', () => {
     // v14: suppress known deprecation noise from intentional shim usage (template previews via the

@@ -5,10 +5,10 @@ async function reactionAttack({trigger: {entity: item}, workflow}) {
 async function battleCry({trigger, workflow}) {
     if (!workflow.token) return;
     workflow.targets.add(workflow.token);
-    workflowUtils.updateTargets(workflow, Array.from(workflow.targets));
+    workflowUtils.updateTargets(workflow, Array.from(workflow.targets.tokens));
 }
 async function kill({trigger, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let ditem = workflow.damageList[0];
     if (ditem.newHP || !ditem.oldHP) return;
     let activity = activityUtils.getActivityByIdentifier(workflow.item, 'heal', {strict: true});
@@ -22,7 +22,7 @@ async function kill({trigger, workflow}) {
 }
 export let ruinsWakeD = {
     name: 'Ruin\'s Wake (Dormant)',
-    version: '1.3.94',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

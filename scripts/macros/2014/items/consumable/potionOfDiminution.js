@@ -1,7 +1,7 @@
 import {effectUtils, itemUtils} from '../../../../utils.js';
 
 async function use({workflow}) {
-    let actor = workflow.targets.first()?.actor ?? workflow.actor;
+    let actor = workflow.targets.tokens[0]?.actor ?? workflow.actor;
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
     let roll = await new Roll('1d4').evaluate();
     roll.toMessage({
@@ -86,7 +86,7 @@ async function use({workflow}) {
 }
 export let potionOfDiminution = {
     name: 'Potion of Diminution',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

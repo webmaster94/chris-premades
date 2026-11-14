@@ -1,6 +1,6 @@
 import {actorUtils, combatUtils, effectUtils, genericUtils} from '../../../utils.js';
 async function use({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let effectData = {
         name: workflow.item.name,
         img: workflow.item.img,
@@ -24,7 +24,7 @@ async function use({workflow}) {
             }
         }
     };
-    await Promise.all(workflow.hitTargets.map(async token => {
+    await Promise.all(workflow.hitTargets.tokens.map(async token => {
         if (actorUtils.typeOrRace(token.actor)?.toLowerCase() === 'undead') {
             let newEffect = genericUtils.duplicate(effectData);
             newEffect.name = genericUtils.translate('CHRISPREMADES.Macros.ChillTouch.Undead');
@@ -38,11 +38,11 @@ async function use({workflow}) {
     }));
 }
 async function attack({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'chillTouchChilled');
     if (!effect) return;
     let sourceActor = (await effectUtils.getOriginItem(effect))?.actor;
-    if (workflow.targets.first().actor !== sourceActor) return;
+    if (workflow.targets.tokens[0].actor !== sourceActor) return;
     workflow.tracker.disadvantage.add(effect.name, effect.name);
 }
 async function turnStart({trigger: {entity: effect}}) {
@@ -53,7 +53,7 @@ async function turnStart({trigger: {entity: effect}}) {
 }
 export let chillTouch = {
     name: 'Chill Touch',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

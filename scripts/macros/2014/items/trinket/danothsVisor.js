@@ -21,7 +21,7 @@ async function skillE({trigger}) {
 }
 export let danothsVisorD = {
     name: 'Danoth\'s Visor (Dormant)',
-    version: '1.1.0',
+    version: '2.3.0',
     skill: [
         {
             pass: 'context',
@@ -32,7 +32,7 @@ export let danothsVisorD = {
 };
 export let danothsVisorA = {
     name: 'Danoth\'s Visor (Awakened)',
-    version: '1.1.0',
+    version: '2.3.0',
     skill: [
         {
             pass: 'context',
@@ -67,7 +67,7 @@ export let danothsVisorA = {
 };
 export let danothsVisorE = {
     name: 'Danoth\'s Visor (Exalted)',
-    version: '1.1.0',
+    version: '2.3.0',
     skill: [
         {
             pass: 'context',

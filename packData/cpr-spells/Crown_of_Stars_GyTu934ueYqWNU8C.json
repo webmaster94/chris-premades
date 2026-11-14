@@ -435,7 +435,7 @@
         "identifier": "crownOfStars",
         "source": "chris-premades",
         "rules": "legacy",
-        "version": "1.3.43",
+        "version": "2.3.0",
         "hasAnimation": true
       },
       "macros": {

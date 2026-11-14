@@ -7,7 +7,7 @@ async function rest({trigger: {entity: item}}) {
 }
 export let tireless = {
     name: 'Tireless',
-    version: '1.3.78',
+    version: '2.3.0',
     rest: [
         {
             pass: 'short',

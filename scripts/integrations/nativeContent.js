@@ -3,6 +3,8 @@ let collections;
 export async function registerNativeContent() {
     collections = await import('../native/macros.mjs');
     const animations = await import('../native/macros/animations.mjs');
+    const masteries = await import('../native/macros/weaponMasteries.mjs');
+    for (const [mastery, definition] of Object.entries(masteries)) cat.api.registerMastery({...definition, mastery});
     for (const [identifier, animation] of Object.entries(animations)) cat.api.registerAnimation({...animation, identifier, source: 'chris-premades-native'});
     for (const collection of [collections.all, collections.generic, collections.legacy, collections.modern]) {
         for (const [identifier, macro] of Object.entries(collection)) {

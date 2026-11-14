@@ -19,7 +19,7 @@ async function early({trigger: {entity: item}, workflow}) {
 }
 export let dazzlingFootwork = {
     name: 'Dazzling Footwork',
-    version: '1.3.57',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

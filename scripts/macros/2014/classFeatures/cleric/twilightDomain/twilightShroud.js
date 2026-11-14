@@ -1,7 +1,7 @@
 import {constants, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../../utils.js';
 async function attack({trigger: {token}, workflow}) {
-    if (workflow.targets.size !== 1 || !workflow.item || !workflowUtils.isAttackType(workflow, 'attack')) return;
-    let targetToken = workflow.targets.first();
+    if (workflow.targets.count !== 1 || !workflow.item || !workflowUtils.isAttackType(workflow, 'attack')) return;
+    let targetToken = workflow.targets.tokens[0];
     if (targetToken.document.disposition !== token.document.disposition) return;
     let coverBonus = tokenUtils.checkCover(workflow.token, targetToken, {activity: workflow.activity});
     if (coverBonus >= 2) return;
@@ -13,7 +13,7 @@ async function attack({trigger: {token}, workflow}) {
 }
 export let twilightShroud = {
     name: 'Twilight Shroud',
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let twilightShroudActive = {
     name: 'Twilight Shroud: Active',

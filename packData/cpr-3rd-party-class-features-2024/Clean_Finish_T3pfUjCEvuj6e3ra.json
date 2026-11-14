@@ -251,7 +251,7 @@
       "info": {
         "identifier": "cleanFinish",
         "rules": "modern",
-        "version": "1.5.32",
+        "version": "2.3.0",
         "source": "chris-premades"
       },
       "macros": {

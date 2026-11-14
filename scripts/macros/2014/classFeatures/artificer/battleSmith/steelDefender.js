@@ -88,12 +88,12 @@ async function use({workflow}) {
         animation,
         initiativeType: 'follows',
         additionalVaeButtons: [{
-            type: 'use', 
-            name: commandFeature.name, 
-            identifier: 'steelDefender', 
+            type: 'use',
+            name: commandFeature.name,
+            identifier: 'steelDefender',
             activityIdentifier: 'steelDefenderCommand'
         }],
-        additionalSummonVaeButtons: 
+        additionalSummonVaeButtons:
             itemsToAdd
                 .filter(i => ['steelDefenderForceEmpoweredRend', 'steelDefenderRepair', 'steelDefenderDodge'].includes(i.flags['chris-premades'].info.identifier))
                 .map(i => ({type: 'use', name: i.name, identifier: i.flags['chris-premades'].info.identifier})),
@@ -105,7 +105,7 @@ async function use({workflow}) {
     });
 }
 async function arcaneJolt({workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'steelDefenderArcaneJolt');
     let originItem = await effectUtils.getOriginItem(effect);
     if (!originItem || originItem.system.uses.value === 0) return;
@@ -136,7 +136,7 @@ async function repair({workflow}) {
 }
 export let steelDefender = {
     name: 'Steel Defender',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

@@ -4,9 +4,9 @@ async function early({trigger: {entity: item}, workflow}) {
     workflow.tracker.advantage.add(item.name, genericUtils.translate('CHRISPREMADES.Macros.VampiricBite.LowHealth'));
 }
 async function late({workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!workflow.item.system.uses.value) return;
-    let target = workflow.targets.first();
+    let target = workflow.targets.tokens[0];
     if (['undead', 'construct'].includes(actorUtils.typeOrRace(target.actor))) return;
     let damageDealt = workflow.damageItem.damageDetail[0].value;
     if (!damageDealt) return;
@@ -55,7 +55,7 @@ async function late({workflow}) {
 }
 export let vampiricBite = {
     name: 'Fanged Bite',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

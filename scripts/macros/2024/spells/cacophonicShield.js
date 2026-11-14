@@ -122,7 +122,7 @@ async function moveOrTurn({trigger: {target, token, entity: effect}, options}) {
 }
 export let cacophonicShield = {
     name: 'Cacophonic Shield',
-    version: '1.3.140',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

@@ -1,7 +1,7 @@
 import {constants, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
 import {divineSmite} from './divineSmite.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let damageType = itemUtils.getConfig(workflow.item, 'damageType');
     let diceSize = itemUtils.getConfig(workflow.item, 'diceSize');
     let diceNumber = itemUtils.getConfig(workflow.item, 'baseDiceNumber');
@@ -20,13 +20,13 @@ async function use({trigger, workflow}) {
             }
         ]}
     };
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         await effectUtils.createEffect(token.actor, effectData);
     }));
 }
 export let searingSmite = {
     name: 'Searing Smite',
-    version: '1.2.21',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: divineSmite.midi.actor,

@@ -236,7 +236,7 @@
     "chris-premades": {
       "info": {
         "name": "Potion of Vitality",
-        "version": "1.1.0",
+        "version": "2.3.0",
         "identifier": "potionOfVitality",
         "source": "chris-premades"
       },

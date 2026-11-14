@@ -41,7 +41,7 @@ async function rest({trigger: {entity: item}}) {
 }
 export let createMutagen = {
     name: 'Mutagencraft: Create Mutagen',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

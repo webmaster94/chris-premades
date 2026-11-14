@@ -6,7 +6,7 @@ async function skill(actor, skillId) {
 }
 export let labyrinthineRecall = {
     name: 'Labyrinthine Recall',
-    version: '1.1.0',
+    version: '2.3.0',
     skill: [
         {
             pass: 'context',

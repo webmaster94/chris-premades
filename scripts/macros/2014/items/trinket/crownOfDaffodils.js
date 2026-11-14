@@ -22,7 +22,7 @@ async function rest({trigger: {entity: item}}) {
 }
 export let crownOfDaffodils = {
     name: 'Crown of Daffodils',
-    version: '1.3.124',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

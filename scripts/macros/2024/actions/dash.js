@@ -276,7 +276,7 @@ async function cunningAction(token, positions) {
                     .waitUntilFinished(-300)
                 .play();
             /* eslint-enable indent */
-        } 
+        }
     }
 }
 async function use({trigger, workflow}) {
@@ -292,11 +292,11 @@ async function use({trigger, workflow}) {
     let cancelled = false;
     while (!cancelled) {
         positions[i] = await crosshairUtils.aimCrosshair({
-            token: workflow.token, 
-            maxRange: workflow.actor.system.attributes.movement.walk, 
-            centerpoint: workflow.token.center, 
-            drawBoundries: true, 
-            trackDistance: true, 
+            token: workflow.token,
+            maxRange: workflow.actor.system.attributes.movement.walk,
+            centerpoint: workflow.token.center,
+            drawBoundries: true,
+            trackDistance: true,
             fudgeDistance: workflow.token.document.width * canvas.dimensions.distance / 2,
             crosshairsConfig: {
                 size: workflow.token.document.parent.grid.distance * workflow.token.document.width / 2,
@@ -339,7 +339,7 @@ async function use({trigger, workflow}) {
                     .locally()
                 .play();
             /* eslint-enable indent */
-        } else { 
+        } else {
             cancelled = true;
         }
     }
@@ -353,7 +353,7 @@ async function use({trigger, workflow}) {
 }
 export let dash = {
     name: 'Dash',
-    version: '1.3.34',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

@@ -1,13 +1,13 @@
 import {activityUtils, genericUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 async function heal({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size || !workflow.item || !workflow.token || !workflow.damageRolls) return;
+    if (!workflow.targets.count || !workflow.item || !workflow.token || !workflow.damageRolls) return;
     if (workflow.item.type != 'spell' || workflowUtils.isSustainedRoll(workflow)) return;
     if (!workflowUtils.getDamageTypes(workflow.damageRolls).has('healing')) return;
     let validTypes = ['spell', 'pact'];
     if (!validTypes.includes(workflow.item.system.method)) return;
     let castLevel = workflowUtils.getCastLevel(workflow);
     if (!castLevel) return;
-    if (workflow.targets.size === 1 && workflow.targets.first().document.uuid === workflow.token.document.uuid) return;
+    if (workflow.targets.count === 1 && workflow.targets.tokens[0].document.uuid === workflow.token.document.uuid) return;
     let activity = activityUtils.getActivityByIdentifier(item, 'heal', {strict: true});
     if (!activity) return;
     let itemData = genericUtils.duplicate(item.toObject());
@@ -16,7 +16,7 @@ async function heal({trigger: {entity: item}, workflow}) {
 }
 export let blessedHealer = {
     name: 'Blessed Healer',
-    version: '1.2.18',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -345,7 +345,48 @@
       "UtilityRollAsDamage": "Utility Roll As Damage",
       "ValidateWeapon": "Validate Weapon",
       "Weapon": "Weapon",
-      "SpellList": "Spell List"
+      "SpellList": "Spell List",
+      "CheckAbilities": "Check Abilities",
+      "Weapons": {
+        "Butterflysword": "Butterfly Sword",
+        "Bone": "Bone",
+        "Hammer": "Hammer",
+        "Wrench": "Wrench",
+        "Pan": "Frying Pan",
+        "Greatbone": "Great Bone",
+        "Khybersword": "Khyber Sword",
+        "Falchion": "Falchion",
+        "Katana": "Katana",
+        "Scythe": "Scythe",
+        "Nodachi": "Nodachi",
+        "MagicSword": {
+          "Yellow": "Magic Sword (Yellow)",
+          "DarkGreen": "Magic Sword (Dark Green)",
+          "DarkPurple": "Magic Sword (Dark Purple)",
+          "Blue": "Magic Sword (Blue)",
+          "Orange": "Magic Sword (Orange)",
+          "Random": "Magic Sword (Random)"
+        },
+        "MagicalGreatsword": {
+          "DarkGreen": "Magical Greatsword (Dark Green)",
+          "DarkPurple": "Magical Greatsword (Dark Purple)",
+          "Blue": "Magical Greatsword (Blue)",
+          "Orange": "Magical Greatsword (Orange)",
+          "Random": "Magical Greatsword (Random)"
+        },
+        "Chakram": {
+          "Style01": "Chakram (Style 1)",
+          "Style02": "Chakram (Style 2)",
+          "Style03": "Chakram (Style 3)"
+        },
+        "Shield": {
+          "Style01": "Shield (Style 1)",
+          "Style02": "Shield (Style 2)",
+          "Style04": "Shield (Style 3)"
+        }
+      },
+      "Label": "Label",
+      "Masteries": "Masteries"
     },
     "Cover": {
       "Full": "Full Cover",
@@ -3297,6 +3338,171 @@
         },
         "WallOfStone": {
           "Escape": "{name} is enclosed by the wall. Use its reaction to move out?"
+        },
+        "GenericActions": {
+          "Actions": "Offered Actions",
+          "HideDC": "Hide: DC",
+          "InfluenceMinimumDC": "Influence: Minimum DC",
+          "KnockOutAttackTypes": "Knock Out: Attack Types",
+          "InfluenceSkills": "Influence: Skills",
+          "KnockOutPromptOnZero": "Knock Out: Prompt on Every Attack",
+          "ReadySpellActivationTypes": "Ready: Spell Activation Types",
+          "ReadySpellTurnStart": "Ready: Spell Turn Start",
+          "SuffocationBreathFormula": "Hold Breath: Breath Duration",
+          "SuffocationStartsOutOfAir": "Hold Breath: Starts Out of Air",
+          "SuffocationSurvivalFormula": "Hold Breath: Rounds Out of Air",
+          "UnderwaterMeleeDamageTypes": "Underwater: Melee Damage Types",
+          "UnderwaterMeleeWeapons": "Underwater: Melee Weapons",
+          "UnderwaterRangedWeapons": "Underwater: Ranged Weapons",
+          "ActionsHint": "Actions the picker offers. Leave empty to offer every action.",
+          "HealingSurgeUsed": "Healing Surge has already been used since the last rest.",
+          "Select": "Which action?"
+        },
+        "GrinningSinner": {
+          "Jinx": "Sinner's Jinx"
+        },
+        "ReadySpell": {
+          "ActivationTypes": "Activation Types",
+          "ActivationTypesHint": "Spells with one of these casting times can be readied.",
+          "Lost": "{actor}'s readied {spell} is lost.",
+          "NoSpells": "No spell can be readied.",
+          "NotReadied": "No spell is readied.",
+          "ReleaseNow": "Release the readied {spell} now? If not, it is lost.",
+          "SelectSlot": "Which spell slot?",
+          "TurnStart": "Turn Start",
+          "TurnStartHint": "What happens to an unreleased spell at the start of the creature's next turn.",
+          "TurnStartLose": "Lose the spell",
+          "TurnStartPrompt": "Ask to release it",
+          "SelectSpell": "Which spell?"
+        },
+        "Stabilize": {
+          "Check": "Requires a DC 10 Medicine Check",
+          "WakeUp": "Hours Until 1 Hit Point"
+        },
+        "CheckCover": {
+          "TargetCover": "Cover each creature has from you:",
+          "YourCover": "Cover you have from each creature:"
+        },
+        "Underwater": {
+          "MeleeDamageTypes": "Melee Damage Types",
+          "MeleeDamageTypesHint": "Melee weapons that deal one of these damage types attack without disadvantage.",
+          "MeleeWeapons": "Melee Weapons",
+          "MeleeWeaponsHint": "Melee attacks with these weapons have no disadvantage.",
+          "RangedWeapons": "Ranged Weapons",
+          "RangedWeaponsHint": "Ranged attacks with these weapons have no disadvantage within normal range.",
+          "TooFar": "Underwater, a ranged weapon attack beyond its normal range automatically misses."
+        },
+        "DeckOfIllusions": {
+          "Cards": "Cards",
+          "CardsHint": "Entries with the same name are one card.",
+          "DrawerCards": "Card Drawer Cards",
+          "Empty": "The deck has no cards left.",
+          "Missing": "{name} has no linked creature. It stays in the deck.",
+          "Drawer": "The Card Drawer ({index})"
+        },
+        "RobeOfUsefulItems": {
+          "Gold": "Bag of 100 GP",
+          "NoPatch": "The Patch item is missing from the CPR equipment compendium."
+        },
+        "WingsOfFlying": {
+          "Recharging": "Recharging"
+        },
+        "RingOfSpellStoring": {
+          "Caster": "Who casts the spell into the ring?",
+          "Full": "The ring has no room for another spell.",
+          "NoSpells": "No one nearby has a spell that fits in the ring.",
+          "SelectSpell": "Choose the spell to store.",
+          "SelectSlot": "Choose the spell slot to cast it with."
+        },
+        "CharlatansDie": {
+          "Use": "Choose the number rolled."
+        },
+        "CuttingWords": {
+          "Immune": "The target is immune to this feature!",
+          "Prompt": "Use {item} to reduce the roll from {name}? (Total: {total})",
+          "PromptLegacy": "Use {item} to reduce the roll from {name}?"
+        },
+        "DivineFury": {
+          "FormulaHint": "An additional bonus. Evaluated and simplified into a numeric term."
+        },
+        "KnockOut": {
+          "AttackTypes": "Attack Types",
+          "AttackTypesHint": "Attacks of these types can knock a creature out. The Knock Out action only offers weapons with these attack types.",
+          "Prompt": "Knock out {name} instead?",
+          "PromptOnZero": "Prompt on Every Attack",
+          "PromptOnZeroHint": "Ask whether to knock out a creature whenever an attack of the chosen types drops it to 0 hit points."
+        },
+        "MantleOfInspiration": "Use your reaction to move up to your speed?",
+        "Retaliation": "Spend a reaction to make a counterattack?",
+        "FireStorm": {
+          "Place": "Place up to ten 10-foot cubes. Each must share a face with an earlier one. Right-click to finish.",
+          "SparePlants": "Spare Plants",
+          "SparePlantsHint": "Plant creatures in the storm are not affected."
+        },
+        "ChainLightning": {
+          "Select": "Choose up to {maxTargets} creatures for the lightning to leap to.",
+          "AnyCreature": "Leap to Any Creature",
+          "AnyCreatureHint": "Leaps can target any creature near the first target. When off, only creatures sharing the first target's disposition."
+        },
+        "Disintegrate": {
+          "Select": "Choose the creation of magical force to disintegrate.",
+          "Destroy": "Disintegrate {name}?",
+          "ForceCreations": "Force Creations",
+          "WallOfForce": "Wall of Force"
+        },
+        "Teleport": {
+          "Select": "Choose up to eight willing creatures within 10 feet to teleport with you.",
+          "Familiarity": "How familiar is the caster with the destination?",
+          "PermanentCircle": "Permanent Circle",
+          "AssociatedObject": "Associated Object",
+          "LinkedObject": "Linked Object",
+          "VeryFamiliar": "Very Familiar",
+          "SeenCasually": "Seen Casually",
+          "ViewedOnce": "Viewed Once",
+          "Description": "Description",
+          "ViewedOnceDescribed": "Viewed Once or Described",
+          "FalseDestination": "False Destination",
+          "Mishap": "Mishap",
+          "SimilarArea": "Similar Area",
+          "OffTarget": "Off Target",
+          "OnTarget": "On Target",
+          "Distance": "Off Target: Distance",
+          "Direction": "Off Target: Direction",
+          "HowFar": "How far is the intended destination?",
+          "TravelDistance": "Distance",
+          "Units": "Which unit is that distance in?",
+          "Miles": "Miles",
+          "Feet": "Feet",
+          "OffTargetString": "The travelers arrive {distance} {units} to the {direction} of the destination.",
+          "Directions": {
+            "North": "north",
+            "Northeast": "northeast",
+            "East": "east",
+            "Southeast": "southeast",
+            "South": "south",
+            "Southwest": "southwest",
+            "West": "west",
+            "Northwest": "northwest"
+          }
+        },
+        "PotionOfFireBreath": {
+          "Attack": "Potion of Fire Breath Attack",
+          "Dice": "Fire Damage Dice (d6)",
+          "Uses": "Exhalations"
+        },
+        "PotionOfPoison": {
+          "Dice": "Poison Damage Dice (d6)",
+          "DiceHint": "0 uses the potion's own dice."
+        },
+        "OilOfSharpness": {
+          "NoWeapons": "No eligible weapon or ammunition to coat.",
+          "Select": "Which weapon or ammunition to coat?",
+          "Ammunition": "Ammunition Coated",
+          "MeleeOnly": "Melee Weapons Only"
+        },
+        "Haste": {
+          "Lethargic": "Haste: Lethargic",
+          "NoActions": "You can't take actions while lethargic."
         }
       },
       "Generic": {
@@ -3308,7 +3514,9 @@
           "TargetHint": "Any value less than one will count as unlimited."
         },
         "AuraDesignation": {
-          "Prompt": "Choose creatures the spell leaves unaffected. You are always one."
+          "Prompt": "Choose creatures the spell leaves unaffected. You are always one.",
+          "Choose": "Choose on Cast",
+          "ChooseHint": "Prompt for unaffected creatures on cast. When off, only enemies are affected."
         },
         "AttackRider": {
           "BonusDamageTypeHint": "Damage type of the extra damage. Uses the attack's damage type when empty.",
@@ -3419,7 +3627,11 @@
           "AttackerRange": "Attacker Range",
           "AttackerRangeHint": "Only add the bonus against targets within this many feet of the attacker. 0 ignores distance.",
           "RequireHit": "Require Hit",
-          "RequireHitHint": "Only apply this bonus to targets that were hit."
+          "RequireHitHint": "Only apply this bonus to targets that were hit.",
+          "ApplyTo": "Apply To",
+          "ApplyToHint": "This bonus applies to damage, healing, or both.",
+          "FirstCast": "First Spell Cast Only",
+          "FirstCastHint": "Bonus applies only on the initial cast for a spell."
         },
         "ExtraAttack": "Identifier of the attack item.",
         "Grapple": {
@@ -3586,7 +3798,12 @@
           "InvertHint": "Remove targets of the selected creature types instead of keeping them.",
           "MaxSizeHint": "Remove targets larger than this size.",
           "MaxCR": "Maximum CR",
-          "MaxCRHint": "Remove targets above this challenge rating. -1 skips the check."
+          "MaxCRHint": "Remove targets above this challenge rating. -1 skips the check.",
+          "CanSee": "Can See",
+          "CanSeeHint": "Keep only targets visible to the attacker.",
+          "ExcludeSelf": "Exclude Self",
+          "ExcludeSelfHint": "The user is removed from targets.",
+          "LimitHint": "A checklist of remaining targets is shown if the filtered list includes more than this limit."
         },
         "Teleport": {
           "CompanionMaxSize": "Companions No Larger Than User",
@@ -3607,7 +3824,10 @@
           "Swap": "Swap With a Target",
           "ExcludeUser": "Exclude the User",
           "ExcludeUserHint": "On a self teleport, remove the user from the activity's targets. Use for areas centred on the space the user leaves.",
-          "SelectNear": "Choose the creature to appear next to."
+          "SelectNear": "Choose the creature to appear next to.",
+          "VisitedThisTurn": "Only Spaces Visited This Turn",
+          "VisitedThisTurnHint": "On a self teleport, only allow spaces the user occupied earlier this turn.",
+          "NoVisited": "You haven't occupied any other space this turn."
         },
         "UseOnEvent": {
           "Empty": "All Empty",
@@ -3665,6 +3885,123 @@
           "Zone": "Within 20 Feet",
           "FrigidAir": "Frigid Air",
           "Designate": "Choose creatures that can pass through and stay near the wall without harm. You are always one."
+        },
+        "Breathing": {
+          "Mode": "Breathes",
+          "ModeHint": "Environment areas don't make the creature hold its breath where it can breathe.",
+          "None": "Doesn't need to breathe",
+          "Water": "Water and air"
+        },
+        "Environment": {
+          "Always": "Always",
+          "BreathableAir": "Breathable Air",
+          "ColdDC": "Extreme Cold: DC",
+          "ColdDCHint": "DC of the Extreme Cold save.",
+          "ColdIdentifiers": "Cold Save Exemptions",
+          "ColdIdentifiersHint": "Identifiers of equipped items or effects that make the creature succeed on Extreme Cold saves.",
+          "Combat": "Combat",
+          "Environments": "Environments",
+          "Exhaustion": "Exhaustion on a Failed Save",
+          "ExhaustionHint": "Exhaustion levels a failed Extreme Cold or Extreme Heat save gives.",
+          "ExtremeCold": "Extreme Cold",
+          "ExtremeHeat": "Extreme Heat",
+          "HeatArmorTypes": "Extreme Heat: Disadvantage Armor",
+          "HeatArmorTypesHint": "Creatures wearing armor of these types have disadvantage on the Extreme Heat save.",
+          "HeatDC": "Extreme Heat: First DC",
+          "HeatDCHint": "DC of the first Extreme Heat save.",
+          "HeatDCIncrease": "Extreme Heat: DC Increase",
+          "HeatDCIncreaseHint": "Added to the Extreme Heat DC for each save after the first.",
+          "HeatDisadvantageIdentifiers": "Heat Save Disadvantage",
+          "HeatDisadvantageIdentifiersHint": "Identifiers of equipped items or effects that give disadvantage on Extreme Heat saves, such as heavy clothing.",
+          "HeatIdentifiers": "Heat Save Exemptions",
+          "HeatIdentifiersHint": "Identifiers of equipped items or effects that make the creature succeed on Extreme Heat saves.",
+          "HighAltitude": "High Altitude",
+          "NoAir": "No Air",
+          "SaveInterval": "Save Interval",
+          "SaveIntervalHint": "Seconds of world time between Extreme Cold or Extreme Heat saves. A combat round is 6 seconds.",
+          "Timing": "Timing",
+          "TimingHint": "When tokens in this area are affected.",
+          "Underwater": "Underwater"
+        },
+        "StoredItem": {
+          "Missing": "The stored item could not be found."
+        },
+        "PackTactics": {
+          "Allies": "Allies",
+          "Grant": "Grant Advantage",
+          "GrantHint": "Who gains advantage when the conditions of this feature are met.",
+          "SelfAndAllies": "Self and Allies"
+        },
+        "Hide": {
+          "DCHint": "Formula the Stealth check must reach to hide. Leave blank for no DC."
+        },
+        "HeroicInspiration": {
+          "Affects": "Recipients",
+          "AffectsHint": "Give Heroic Inspiration to the activity's user or to its targets.",
+          "Self": "Self",
+          "Targets": "Targets"
+        },
+        "FeatAbility": {
+          "AbilitiesHint": "Abilities the feat chooses between. The ability picked in the feat's Ability Score Improvement sets save DCs, attack rolls and cast spells. Without a recorded pick, save DCs keep their formula and the others use the highest listed ability."
+        },
+        "IgnoreTraits": {
+          "DamageTypesHint": "Damage of these types ignores the chosen traits.",
+          "Traits": "Ignored Traits",
+          "TraitsHint": "Damage traits ignored by the listed damage types. Downgrade Immunity treats immunity as resistance."
+        },
+        "ProneOnHit": {
+          "MaxSizeHint": "Targets larger than this size are not knocked prone."
+        },
+        "WeaponAnimation": {
+          "ActivityHint": "Only animate this activity. Leave empty for all of them.",
+          "Advanced": "Advanced",
+          "AdvancedHint": "Play the Advanced Animation instead. Its options add blood, screen shake and thrown attacks.",
+          "AdvancedAnimation": "Advanced Animation"
+        },
+        "SpellAnimation": {
+          "TargetAnimation": "Target Animation",
+          "TargetAnimationHint": "Plays from the caster to each target.",
+          "AreaAnimation": "Area Animation",
+          "AreaAnimationHint": "Plays on the area, or around the caster if there is none.",
+          "AreaOnly": "Area Activities Only",
+          "AreaOnlyHint": "Skip the area animation for activities without an area.",
+          "IncludeSelf": "Animate Self Utility"
+        },
+        "ModifyNextDamage": {
+          "Mode": "Mode",
+          "Maximize": "Maximize",
+          "Double": "Double",
+          "Consume": "Remove After Use"
+        },
+        "RolledDuration": {
+          "Units": "Duration Units"
+        },
+        "Firearm": {
+          "Misfire": "Misfire Score",
+          "UnproficientPenalty": "Misfire Increase Without Proficiency",
+          "Damaged": "Damaged",
+          "Broken": "Broken",
+          "Unusable": "{item} is {status} and can't attack.",
+          "Misfired": "{item} misfired!",
+          "NoTinkers": "You have no Tinker's Tools to make the repair with!",
+          "Repaired": "{item} is successfully repaired!",
+          "Broke": "{item} is now broken!",
+          "Type": "Firearm",
+          "Proficiency": "Firearms",
+          "Recoil": "{item}'s recoil prevents attacks beyond its normal range until the end of the turn.",
+          "Properties": {
+            "Barrel": "Barrel",
+            "Blackpowder": "Blackpowder",
+            "Blaring": "Blaring",
+            "BurstFire": "Burst Fire",
+            "Cumbersome": "Cumbersome",
+            "Explosive": "Explosive",
+            "Loud": "Loud",
+            "Magazine": "Magazine",
+            "Recoil": "Recoil",
+            "SpreadFire": "Spread Fire",
+            "TwinnedBarrel": "Twinned Barrel"
+          }
         }
       },
       "Legacy": {
@@ -3773,7 +4110,11 @@
           "Use": "Frighten the target?"
         },
         "FormOfTheBeast": {
-          "Keen": "Tracking or Stalking Prey"
+          "Keen": "Tracking or Stalking Prey",
+          "Choose": "Choose a bestial form.",
+          "Bite": "Bite",
+          "Claws": "Claws",
+          "Tail": "Tail"
         },
         "GraspOfHadar": {
           "Select": "Choose a creature to pull with {item}."
@@ -4029,6 +4370,141 @@
           "Big": "The target is too large to grasp.",
           "NoGrapple": "The hand is not grappling a creature.",
           "HalfCover": "Half Cover (Bigby's Hand)"
+        },
+        "AspectBeastBear": "Is this a check to push, pull, lift, or break?",
+        "BladeFlourish": {
+          "Label": "Flourish",
+          "Reaction": "Use your reaction to move up to the pushed target?",
+          "Warning": "You have no remaining {resource}! {feature} is required to use {item}."
+        },
+        "BolsteringMagic": "The target must finish a long rest before gaining this benefit again!",
+        "DemiurgicColossus": "This overrides the setting from the previous feature.",
+        "ElementalCleaver": {
+          "Damage": "Elemental Cleaver Damage Bonus",
+          "NoActive": "You have no active Elemental Cleaver!"
+        },
+        "Frenzy": "Make a bonus action attack with a melee weapon?",
+        "GiantsHavoc": {
+          "PromptSingle": "Do you have room to grow to {size} size?",
+          "PromptMany": "Choose a size for which you have room."
+        },
+        "InfectiousFury": {
+          "Curses": "Curses",
+          "WeaponPrompt": "{name} has been cursed by {feature} and must choose a weapon to attack a nearby target."
+        },
+        "IntimidatingPresence": {
+          "Immune": "Immune",
+          "ImmunityDuration": "Immunity Duration",
+          "Range": "<b>{effect}</b> ends on {target} because they moved out of range!",
+          "RangeLimit": "Effect ends beyond this range.",
+          "Sight": "<b>{effect}</b> ends on {target} because they are out of sight!"
+        },
+        "MightyImpel": {
+          "Size": "Mighty Impel Size Limit"
+        },
+        "TotemSpiritTiger": {
+          "High": "High Jump Bonus",
+          "Long": "Long Jump Bonus"
+        },
+        "UnbreakableMajesty": "You must choose a new target or waste the attack.",
+        "PotionOfAdvantage": {
+          "Use": "Gain advantage on this roll?"
+        },
+        "PotionOfGiantSize": {
+          "DiceMultiplier": "Weapon Damage Dice Multiplier",
+          "Strength": "Strength Score",
+          "Size": "Size"
+        },
+        "BG3WeaponActions": {
+          "NoWeapon": "You need an equipped weapon this action works with.",
+          "NoUses": "No weapon action uses left until you rest.",
+          "Weapons": {
+            "backbreaker": "Backbreaker",
+            "brace-melee": "Brace (Melee)",
+            "brace-ranged": "Brace (Ranged)",
+            "cleave": "Cleave",
+            "concussive-smash": "Concussive Smash",
+            "disarming-strike": "Disarming Strike",
+            "flourish": "Flourish",
+            "hamstring-shot": "Hamstring Shot",
+            "heartstopper": "Heartstopper",
+            "lacerate": "Lacerate",
+            "maiming-strike": "Maiming Strike",
+            "mobile-shot": "Mobile Shot",
+            "piercing-shot": "Piercing Shot",
+            "piercing-strike": "Piercing Strike",
+            "pommel-strike": "Pommel Strike",
+            "prepare": "Prepare",
+            "rush": "Rush",
+            "tenacity": "Tenacity",
+            "topple": "Topple",
+            "weakening-strike": "Weakening Strike"
+          }
+        },
+        "DmgCleave": {
+          "Use": "Carry the leftover damage to another creature?"
+        },
+        "Grovelthrash": {
+          "Damage": "Deal an extra 2d6 bludgeoning damage and take 1d6 psychic damage?"
+        },
+        "DeckOfMiscellany": {
+          "NoCard": "The Miscellany Card item is missing from the CPR equipment compendium.",
+          "Wooden": "Wooden",
+          "Silk": "Silk",
+          "Leather": "Leather",
+          "Burlap": "Burlap"
+        },
+        "MastersAmulet": {
+          "Guardian": "Linked Shield Guardian",
+          "MissingBound": "That creature isn't bound to an amulet. Only a shield guardian with Bound can be linked.",
+          "Unlinked": "This shield guardian's token isn't linked to its actor, so damage goes to its first token.",
+          "Linked": "The amulet is linked to {name}."
+        },
+        "DeckOfWonder": {
+          "Size": "Deck Size",
+          "MysteryDrawn": "Mystery Drawn",
+          "SelectCardConfig": "Choose Cards Instead of Drawing",
+          "SelectCard": "Choose a card:",
+          "NoItems": "No matching items were found in the item compendiums set in CAT.",
+          "NoSpell": "No spell with the identifier {identifier} was found in the spell compendiums set in CAT.",
+          "Knife": "Choose an uncommon magic weapon:",
+          "Student": "Choose a saving throw proficiency:",
+          "Justice": "Use your reaction to cancel advantage and disadvantage on {name}'s roll?",
+          "Mischief": {
+            "Choose": "Take an uncommon wondrous item or draw two more cards?",
+            "Cards": "Draw Two Cards",
+            "Item": "Wondrous Item",
+            "Select": "Choose an uncommon wondrous item:"
+          },
+          "Vulture": {
+            "Select": "Choose a nonmagical item that disappears:",
+            "Lost": "{name} (Lost)",
+            "Found": "Was {name} found with a DC 15 Wisdom (Perception) check?"
+          }
+        },
+        "DragonVessel": {
+          "Select": "What does the vessel fill with?",
+          "Missing": "That potion isn't in any item compendium.",
+          "PotionOfHealing": "Potion of Healing",
+          "PotionOfClimbing": "Potion of Climbing",
+          "PotionOfGreaterHealing": "Potion of Greater Healing",
+          "PotionOfFireBreath": "Potion of Fire Breath",
+          "PotionOfSuperiorHealing": "Potion of Superior Healing",
+          "PotionOfFlying": "Potion of Flying",
+          "PotionOfSupremeHealing": "Potion of Supreme Healing",
+          "PotionOfDragonsMajesty": "Potion of Dragon's Majesty",
+          "Ale": "Ale",
+          "OliveOil": "Olive Oil",
+          "Mead": "Mead",
+          "Wine": "Wine",
+          "Whiskey": "Whiskey"
+        },
+        "GuardianEmblem": {
+          "Protect": "Use {item} to turn the critical hit on {name} into a normal hit?"
+        },
+        "PariahsShield": {
+          "Protect": "Use your reaction and {item} to take the damage dealt to {name}?",
+          "MaxBonus": "Maximum AC Bonus"
         }
       },
       "Modern": {
@@ -4223,6 +4699,244 @@
         },
         "SummerWinds": {
           "MissingActivity": "Summer Winds is missing its undead save activity."
+        },
+        "SupremeSneak": {
+          "TurnEnd": "Are you behind Three-Quarters Cover or Total Cover? If not, you stop hiding."
+        },
+        "Influence": {
+          "Attitude": "What is the creature's attitude?",
+          "Friendly": "Friendly",
+          "Hesitant": "Hesitant",
+          "Hostile": "Hostile",
+          "HowWilling": "How willing is the creature?",
+          "Indifferent": "Indifferent",
+          "MinimumDC": "Minimum DC",
+          "MinimumDCHint": "The check's DC is this or the creature's Intelligence score, whichever is higher.",
+          "SkillsHint": "Skills offered for the check. With one skill, it is used without a prompt.",
+          "Skill": "Which skill?",
+          "Unwilling": "Unwilling",
+          "Willing": "Willing"
+        },
+        "Suffocation": {
+          "BreathFormula": "Breath Duration",
+          "BreathFormulaHint": "Seconds the creature can hold its breath.",
+          "StartsOutOfAir": "Starts Out of Air",
+          "StartsOutOfAirHint": "Skip holding breath and start running out of air, for choking or arriving with no air.",
+          "SurvivalFormula": "Rounds Out of Air",
+          "SurvivalFormulaHint": "Rounds the creature survives out of air. At the start of its next turn, it drops to 0 Hit Points."
+        },
+        "ShieldGuardian": {
+          "Wearer": "Amulet Wearer",
+          "Bound": "The shield guardian is bound to {name}.",
+          "Protect": "Use {item} to give {name} +5 AC against this attack?"
+        },
+        "Healer": {
+          "SelectHitDie": "Choose a Hit Point Die to spend:",
+          "Spells": "Reroll 1s on Healing Spells"
+        },
+        "BranchesOfTheTree": {
+          "Rage": "You must be raging to use this feature!",
+          "Reaction": "You have already used your reaction!"
+        },
+        "Cantrips": {
+          "TrueStrike": "True Strike Bonus",
+          "TrueStrikeAbility": "True Strike Attack Ability",
+          "TrueStrikeRage": "True Strike Raging Bonus"
+        },
+        "DanceVirtuoso": "Does this check involve you dancing?",
+        "Heavyweight": {
+          "SizeBonus": "Size Bonus"
+        },
+        "InspiringMovement": "Ask an ally if they can spend their reaction to move up to half their speed.",
+        "RageOfTheGods": "Use {item} to save {token}?",
+        "RageOfTheWilds": {
+          "Active": "You must have Rage of the {type} active to use this feature!",
+          "Dual": "Choose addtional rage effects.",
+          "Eagle": "Dash and Disengage with Rage of the Eagle?",
+          "Single": "Choose a rage effect."
+        },
+        "Spells": {
+          "BurningHandsDamage": "Burning Hands Damage",
+          "BurningHandsType": "Burning Hands Type",
+          "MagicMissile": "Choose your missiles:",
+          "MagicMissileAttacks": "Magic Missile Attacks",
+          "MagicMissileAttackAbility": "Magic Missile Attack Ability",
+          "MagicMissileHint": "Weapon options in addition to those that match other restrictions.",
+          "MagicMissileNote": "Throwing {weapon} ({num} of {total})",
+          "MagicMissileWeapons": "Magic Missile Weapons",
+          "MagicMissileWeaponProps": "Magic Missile Weapon Properties"
+        },
+        "TandemFootWork": {
+          "Change": "Initiative Changes",
+          "Combatant": "Combatants Only",
+          "CombatantHint": "This feature only applies to characters who have a combatant in the combat tracker."
+        },
+        "TravelAlongTheTree": {
+          "Group": "Teleporting {name} ({num} of {total})",
+          "Prompt": "Use {feature} to teleport?"
+        },
+        "AdventurersAtlas": {
+          "NeedTools": "{itemName} needs Cartographer's Tools.",
+          "RangeHint": "Creatures within this many feet are offered maps when Make Maps is used without at least two targets.",
+          "RequireTools": "Require Cartographer's Tools",
+          "Select": "Choose up to {maxAmount} creatures to receive a map. At least two are needed.",
+          "TooFew": "Adventurer's Atlas needs at least two creatures."
+        },
+        "AuraOfElementalShielding": {
+          "Ask": "Ask Each Turn",
+          "DamageTypeHint": "A fixed damage type skips the prompt when the item is added and at the start of each turn.",
+          "Select": "Choose the damage type your aura grants Resistance to."
+        },
+        "BewitchedEffigy": {
+          "NoEffigy": "You have no effigy.",
+          "OutsideAura": "The target isn't within your effigy's aura.",
+          "Sacrifice": "{name} took damage in your effigy's aura. Use your Reaction to burn it?",
+          "WrongAura": "Your effigy doesn't radiate this aura."
+        },
+        "Combo": {
+          "BonusStep": "Bonus Increase per Hit",
+          "StartBonus": "Starting Bonus"
+        },
+        "ElementalStrike": {
+          "FuryRange": "Efreeti's Fury Range",
+          "Select": "Expend a use of Channel Divinity to invoke a genie?",
+          "SelectFury": "Choose another creature for the fire to jump to.",
+          "SelectSurge": "Choose the creatures in the emanation that make the saving throw.",
+          "SurgeRange": "Marid's Surge Range"
+        },
+        "EntanglingVines": {
+          "Airborne": "{name} is too far off the ground for the vines to reach.",
+          "Ask": "Ask When Added",
+          "AutumnRange": "Autumn Second Target Range",
+          "Season": "Season",
+          "SeasonHint": "The season the Mandrake was harvested in, which sets the extra effect.",
+          "SeasonLevel": "Season Effect Level",
+          "Seasons": {
+            "autumn": "Autumn",
+            "spring": "Spring",
+            "summer": "Summer",
+            "winter": "Winter"
+          },
+          "SecondTarget": "Choose a second creature for the vines to grasp.",
+          "SelectSeason": "Choose the season you were harvested in.",
+          "SpringHeight": "Spring Maximum Height",
+          "SummerDistance": "Summer Move Distance",
+          "TooLarge": "{name} is too large for the vines to grasp."
+        },
+        "ExploitOpening": {
+          "Ask": "Ask Each Time",
+          "Choose": "Choose which damage roll to use.",
+          "First": "First Roll: {total}",
+          "Higher": "Always Use the Higher Roll",
+          "Keep": "Damage Roll to Keep",
+          "Second": "Second Roll: {total}"
+        },
+        "GuidedPrecision": {
+          "ConcentrationSpells": "Protected Concentration Spells",
+          "TargetEffects": "Marking Effects"
+        },
+        "IngeniousMovement": {
+          "Select": "Choose a creature to teleport up to {range} feet."
+        },
+        "MappingMagic": {
+          "NoHolder": "Portal Jump needs a target holding one of your Adventurer's Atlas maps.",
+          "NoMovement": "Portal Jump needs movement equal to half your Speed.",
+          "NoSpeed": "Portal Jump can't be used while your Speed is 0.",
+          "NotTurn": "Portal Jump can only be used on your turn."
+        },
+        "NobleScion": {
+          "DistanceHint": "Minor Wish reaches creatures within this many feet, matching Aura of Protection."
+        },
+        "OldBlessing": {
+          "Charms": "Wicker Charms",
+          "NoCharm": "Old Blessing only targets creatures carrying one of your wicker charms. Removed: {names}.",
+          "Poppet": "Soulbound Poppet"
+        },
+        "PackHunter": {
+          "Attack": "Use your reaction to give {name} Advantage on its attack roll?",
+          "Save": "Use your reaction to give {name} Advantage on its saving throw?"
+        },
+        "RootMagic": {
+          "AbilityHint": "Spellcasting ability for the spells cast with this trait.",
+          "Ask": "Ask When Added",
+          "Limb": "Limb (Club)",
+          "SelectAbility": "Choose your spellcasting ability for Root Magic."
+        },
+        "SoulboundPoppet": {
+          "Doll": "Soulbound Poppet ({name})"
+        },
+        "SuperiorAtlas": {
+          "Confirm": "Destroy your map? Your hit points become {hitPoints}.",
+          "HaveMap": "Unerring Path needs you to hold one of your Adventurer's Atlas maps.",
+          "HitPoints": "Safe Haven Hit Points",
+          "Prompt": "Destroy your map? Your hit points become {hitPoints}, and you teleport next to the chosen creature."
+        },
+        "TwistedHex": {
+          "Ability": "Choose the ability to hex.",
+          "Ask": "Ask Each Time",
+          "Charm": "Twisted Hex",
+          "Target": "Twisted Hex needs another creature as its target."
+        },
+        "VampiricBite": {
+          "Drain": "Drain",
+          "Empower": "Your bite dealt {damage} damage. Empower yourself?",
+          "Strengthen": "Strengthen"
+        },
+        "WickerRising": {
+          "Ask": "Ask Each Effigy",
+          "DamageTypeHint": "A fixed damage type skips the prompt when a Ward effigy is created.",
+          "HitPointCost": "Hit Point Cost",
+          "HitPointCostHint": "Effigy Hit Points spent to remove a condition with Soothe.",
+          "RemoveCondition": "Spend {cost} of your effigy's Hit Points to remove a condition from {name}?",
+          "SelectDamageType": "Choose the damage type your effigy wards against."
+        },
+        "ManifoldTool": {
+          "Select": "Transform into which Artisan's Tools?"
+        },
+        "WickerToken": {
+          "Give": "Give a Wicker Token to up to {quantity} creatures. Unassigned tokens stay with you.",
+          "PartyMembers": "Offer Party Members",
+          "PartyMembersHint": "The long rest prompt also lists members of the primary party who are not on the scene.",
+          "Quantity": "Token Quantity",
+          "Token": "Wicker Token"
+        },
+        "WickerZenith": {
+          "AbilityHint": "A fixed ability skips the prompt when a Ward effigy is created.",
+          "Ask": "Ask Each Effigy",
+          "ChangeAura": "Change your effigy's aura?",
+          "Keep": "Keep Current Aura",
+          "SelectAbility": "Choose the ability your effigy grants Advantage on saving throws with."
+        },
+        "LuckyCharm": {
+          "MissingEffect": "Lucky Charm is missing its caster effect.",
+          "MissingItem": "The Lucky Charm item is missing from the automation items compendium."
+        },
+        "SanctumOfTheShepherd": {
+          "CreaturesHint": "Number of other creatures that can be chosen.",
+          "MissingEffect": "Sanctum of the Shepherd is missing one of its effects.",
+          "Select": "Choose up to {max} creatures to share the sanctum."
+        },
+        "TimeStop": {
+          "Affect": "The caster affected another creature. End Time Stop?"
+        },
+        "VitalityOfTheTree": {
+          "Prompt": "Select an ally to grant temporary hit points:",
+          "Tag": "Current {amount}"
+        },
+        "Wish": {
+          "Blocked": "You are unable to cast this spell!",
+          "BlockedLabel": "Wish Use Blocked",
+          "BlockedHint": "Set after the stress roll when you lose the ability to cast Wish.",
+          "ChanceFormula": "Blocked Chance Formula",
+          "ChanceNumber": "Blocked Chance",
+          "ChanceNumberHint": "Wish is blocked when the chance roll is at or below this number. 0 turns it off.",
+          "InstantHealthConditions": "Instant Health Conditions",
+          "MaxLevel": "Max Spell Level",
+          "Rest": "Did you spend the day only doing light activity?",
+          "StressDuration": "Stress Duration Formula"
+        },
+        "BatteringRoots": {
+          "Select": "Also use a mastery property from Battering Roots?"
         }
       }
     },
@@ -4752,6 +5466,54 @@
         "3": "Player & NPC (Homebrew)",
         "Hint": "Enable PHB 2024 weapon mastery automation.",
         "Name": "Weapon Mastery Automation"
+      },
+      "AddActions": {
+        "Name": "Add Actions to Tokens",
+        "Hint": "Which creatures get actions when their token is placed.",
+        "Off": "None - No Actions",
+        "All": "All - Any Creature",
+        "Character": "All Characters Only",
+        "Linked": "All Linked Only",
+        "PlayerLinked": "Player Owned Linked Only",
+        "Player": "All Player Owned and Controlled"
+      },
+      "GenericActionsItem": {
+        "Name": "Add as One Generic Actions Item",
+        "Hint": "Add one Generic Actions item that picks an action. When off, every action is added as its own item."
+      },
+      "HealingSurge": {
+        "Name": "Healing Surge",
+        "Hint": "Include Healing Surge with the added actions. From the 2014 Dungeon Master's Guide."
+      },
+      "Mechanics": {
+        "Name": "Game Mechanic Options",
+        "Label": "Game Mechanics",
+        "Hint": "Settings for game mechanics."
+      },
+      "Homebrew": {
+        "Name": "Homebrew Options",
+        "Label": "Homebrew",
+        "Hint": "Optional and variant rules."
+      },
+      "DmgCleave": {
+        "Name": "DMG Cleave",
+        "Hint": "Leftover melee damage that drops a creature carries to another creature within reach. From the 2014 Dungeon Master's Guide.",
+        "Off": "Disabled",
+        "Any": "Enabled (Any Health)",
+        "Full": "Enabled (Full Health Only)"
+      },
+      "Bg3WeaponActions": {
+        "Name": "BG3 Weapon Actions",
+        "Hint": "Equipped weapons gain weapon actions from Baldur's Gate 3."
+      },
+      "Bg3WeaponActionUses": {
+        "Name": "BG3 Weapon Action Uses",
+        "Hint": "Weapon actions each creature can use between rests."
+      },
+      "Bg3Weapons": {
+        "Name": "BG3 Action Weapons",
+        "Label": "Configure",
+        "Hint": "Weapons that grant each weapon action."
       }
     },
     "SkillCheck": {
@@ -4877,7 +5639,8 @@
         "UndeadSpiritSkeletal": "Undead Spirit (Skeletal)",
         "WaterElemental": "Water Elemental",
         "WildfireSpirit": "Wildfire Spirit",
-        "Zombie": "Zombie"
+        "Zombie": "Zombie",
+        "BewitchedEffigy": "Bewitched Effigy"
       },
       "CustomAvatar": "{option} Custom Avatar",
       "CustomName": "{option} Custom Name",
@@ -5089,7 +5852,9 @@
         "Persist": "Persistent Area",
         "PersistHint": "Keep a looping effect over the area until the area is removed.",
         "Shimmer": "Heat Embers",
-        "Tether": "Tether"
+        "Tether": "Tether",
+        "Ground": "Ground",
+        "Tint": "Damage Tint"
       },
       "StepOfTheWind": "Step of the Wind",
       "SummonSoundHint": "Audio file played as the summon appears.",
@@ -5234,7 +5999,116 @@
       "WallOfIce": "Wall of Ice",
       "WallOfThorns": "Wall of Thorns",
       "WallOfGloom": "Wall of Gloom",
-      "PrismaticWall": "Prismatic Wall"
+      "PrismaticWall": "Prismatic Wall",
+      "SteelWindStrike": {
+        "Name": "Steel Wind Strike",
+        "CameraZoom": "Camera Zoom",
+        "CameraZoomHint": "Pan and zoom the camera in on the caster as they vanish.",
+        "SoundHint": "Played on each strike."
+      },
+      "AirDash": "Air Dash",
+      "BewitchedEffigySummon": "Bewitched Effigy Summon",
+      "Combo": "Combo",
+      "ElementalStrike": "Elemental Strike",
+      "EnergyBlast": "Energy Blast",
+      "KnockOut": "K.O.",
+      "EntanglingVines": {
+        "Name": "Entangling Vines",
+        "ColorHint": "Color of the cast and the vines that grip the target. Colors beyond green need JB2A Patreon."
+      },
+      "GlobeOfInvulnerability": {
+        "Name": "Globe of Invulnerability",
+        "OpacityHint": "Opacity of the dome."
+      },
+      "FireStorm": {
+        "Name": "Fire Storm",
+        "GroundHint": "Leave scorched cracks under each cube."
+      },
+      "CrownOfStars": "Crown of Stars",
+      "CrownOfStarsCrownColor": "Crown Color",
+      "CrownOfStarsBoltColor": "Bolt Color",
+      "ChainLightning": "Chain Lightning",
+      "Disintegrate": "Disintegrate",
+      "TeleportSpell": "Teleport",
+      "ConjureCelestial": "Conjure Celestial",
+      "WeaponAttack": {
+        "Name": "Weapon Attack",
+        "StyleHint": "Auto picks a swing, throw or shot based on the weapon and how it attacks.",
+        "Styles": {
+          "Auto": "Auto",
+          "Melee": "Melee Swing",
+          "Thrown": "Thrown",
+          "Ranged": "Ranged Projectile",
+          "Firearm": "Firearm"
+        },
+        "WeaponHint": "Auto uses the base weapon, or its damage type if that weapon has no animation of its own.",
+        "Projectile": "Projectile",
+        "ProjectileHint": "Auto uses the ammunition, then the base weapon.",
+        "TintHint": "Tints the weapon for non-physical damage.",
+        "ImpactHint": "Plays an impact on targets hit with non-physical damage.",
+        "SoundHint": "Plays with each attack.",
+        "Generic": "Generic Slash",
+        "Boulder": "Boulder",
+        "FlameJet": "Flame Jet"
+      }
+    },
+    "WeaponMasteries": {
+      "Automatic": {
+        "Label": "Automatic",
+        "Prompt": "Make two attacks with Disadvantage instead of one?"
+      },
+      "Brutal": {
+        "Label": "Brutal"
+      },
+      "Defending": {
+        "Label": "Defending",
+        "Prompt": "Use your Reaction to parry with {weapon}?"
+      },
+      "Disarming": {
+        "Label": "Disarming",
+        "Prompt": "Use your Bonus Action to disarm {target}?",
+        "Which": "Which weapon falls from the target's grasp?",
+        "Catch": "Catch {weapon} in your free hand?"
+      },
+      "Entangling": {
+        "Label": "Entangling",
+        "Prompt": "Use your Bonus Action to entangle {target}?",
+        "Restricted": "You can't attack a different creature while it is entangled by this weapon."
+      },
+      "Explode": {
+        "Label": "Explode",
+        "Prompt": "Replace this attack with an explosion?"
+      },
+      "Pull": {
+        "Label": "Pull",
+        "Prompt": "Pull {target} 5 feet toward you?",
+        "StepBack": "Move back 5 feet?"
+      },
+      "ScatterGHPG": {
+        "Label": "Scatter (Grim Hollow)",
+        "Range": "Scatter Range"
+      },
+      "ScatterVSoS": {
+        "Label": "Scatter (Valda's Spire)"
+      },
+      "Set": {
+        "Label": "Set",
+        "Prompt": "Use your Reaction to attack {target} with {weapon}?"
+      },
+      "Sighted": {
+        "Label": "Sighted",
+        "Prompt": "Choose damage dice to reroll."
+      },
+      "StrongDraw": {
+        "Label": "Strong-Draw"
+      },
+      "Swift": {
+        "Label": "Swift"
+      }
+    },
+    "Welcome": {
+      "Title": "Cauldron of Plentiful Resources",
+      "Content": "<p>Make Cauldron of Plentiful Resources your first automation source, then apply its automations with the CatKit.</p><p>Its options are in the CAT settings. For help, check the FAQ channel in the Coven's Discord, then ask in #support.</p><a class=\"cat-welcome-discord\" href=\"https://discord.gg/BumxBcQDrT\" target=\"_blank\" rel=\"noopener\"><i class=\"fa-brands fa-discord\"></i> Join the Coven's Discord</a><div class=\"cat-welcome-tours\"><button type=\"button\" data-cat-tour=\"cat.sources\"><i class=\"fa-solid fa-layer-group\"></i> Set Up Automation Sources</button></div>"
     }
   },
   "CONTROLS": {

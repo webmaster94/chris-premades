@@ -262,7 +262,7 @@
         "identifier": "timeStop",
         "source": "chris-premades",
         "rules": "modern",
-        "version": "1.3.44"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

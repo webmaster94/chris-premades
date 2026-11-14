@@ -1,6 +1,6 @@
 import {dialogUtils, genericUtils, itemUtils, workflowUtils, constants} from '../../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (workflow.item.type === 'spell') {
         if (workflowUtils.getCastLevel(workflow) != 0) return;
     } else {
@@ -36,11 +36,11 @@ async function damage({trigger: {entity: item}, workflow}) {
     }
     let damageType = itemUtils.getConfig(item, 'damageType');
     await workflowUtils.bonusDamage(workflow, formula, {damageType});
-    await workflowUtils.syntheticItemRoll(item, Array.from(workflow.targets));
+    await workflowUtils.syntheticItemRoll(item, Array.from(workflow.targets.tokens));
 }
 export let sangromancySpecialist = {
     name: 'Stage 3 Boon: Sangromancy Specialist',
-    version: '1.5.11',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

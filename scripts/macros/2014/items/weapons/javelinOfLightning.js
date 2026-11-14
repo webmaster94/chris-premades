@@ -1,10 +1,10 @@
 import {activityUtils, animationUtils, dialogUtils, effectUtils, genericUtils, itemUtils, templateUtils, workflowUtils} from '../../../../utils.js';
 async function early({workflow}) {
-    if (!workflow.item.system.uses.value || !workflow.targets.size) return;
+    if (!workflow.item.system.uses.value || !workflow.targets.count) return;
     let selection = await dialogUtils.confirm(workflow.item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: workflow.item.name}));
     if (!selection) return;
     await genericUtils.update(workflow.item, {'system.uses.spent': workflow.item.system.uses.spent + 1});
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     let ray = new foundry.canvas.geometry.Ray(workflow.token.center, targetToken.center);
     if (!ray.distance) return;
     let templateData = {
@@ -54,7 +54,7 @@ async function damage({workflow}) {
 }
 export let javelinOfLightning = {
     name: 'Javelin of Lightning',
-    version: '1.1.10',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

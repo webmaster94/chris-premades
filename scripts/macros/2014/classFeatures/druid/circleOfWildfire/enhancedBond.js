@@ -16,7 +16,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let enhancedBond = {
     name: 'Enhanced Bond',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

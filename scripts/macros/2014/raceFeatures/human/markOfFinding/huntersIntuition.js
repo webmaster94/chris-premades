@@ -1,4 +1,4 @@
 export let huntersIntuition = {
     name: 'Hunter\'s Intuition',
-    version: '1.3.89'
+    version: '2.3.0'
 };

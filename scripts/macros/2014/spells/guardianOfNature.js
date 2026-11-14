@@ -81,7 +81,7 @@ async function use({workflow}) {
 }
 export let guardianOfNature = {
     name: 'Guardian of Nature',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

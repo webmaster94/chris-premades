@@ -16,9 +16,9 @@ async function use({workflow}) {
     await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'armorOfAgathys'});
 }
 async function hit({trigger: {entity: effect}, workflow}) {
-    if (!workflow.hitTargets.size || !workflow.activity) return;
+    if (!workflow.hitTargets.count || !workflow.activity) return;
     if (workflow.item.uuid === effect.origin) return;
-    let targetToken = workflow.hitTargets.first();
+    let targetToken = workflow.hitTargets.tokens[0];
     let tempHP = targetToken.actor.system.attributes.hp.temp;
     if (tempHP === 0) await genericUtils.remove(effect);
     if (!workflowUtils.isAttackType(workflow, 'meleeAttack')) return;
@@ -105,7 +105,7 @@ async function start({trigger: {entity}}) {
         .extraEndDuration(1500)
         .private()
         .persist()
-        
+
         .effect()
         .attachTo(token)
         .name('Armor of Agathys')
@@ -121,8 +121,8 @@ async function start({trigger: {entity}}) {
         .zIndex(1)
         .private()
         .persist()
-        
-        .effect()   
+
+        .effect()
         .attachTo(token)
         .name('Armor of Agathys')
         .file('jb2a.template_circle.symbol.normal.snowflake.blue')
@@ -137,7 +137,7 @@ async function start({trigger: {entity}}) {
         .zIndex(2)
         .private()
         .persist()
-        
+
         .effect()
         .attachTo(token)
         .name('Armor of Agathys')
@@ -148,7 +148,7 @@ async function start({trigger: {entity}}) {
         .fadeOut(500)
         .zIndex(1)
         .persist()
-        
+
         .waitUntilFinished(-1000)
         .play();
 }
@@ -172,7 +172,7 @@ async function end({trigger: {entity}}) {
 }
 export let armorOfAgathys = {
     name: 'Armor of Agathys',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [
@@ -211,7 +211,7 @@ export let armorOfAgathysArmor = {
             pass: 'created',
             macro: start,
             priority: 50
-        }, 
+        },
         {
             pass: 'deleted',
             macro: end,

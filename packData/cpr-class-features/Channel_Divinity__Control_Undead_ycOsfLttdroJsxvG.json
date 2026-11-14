@@ -213,7 +213,7 @@
     "chris-premades": {
       "info": {
         "name": "Channel Divinity: Control Undead",
-        "version": "1.1.0",
+        "version": "2.3.0",
         "identifier": "controlUndead",
         "source": "chris-premades",
         "hasAnimation": true

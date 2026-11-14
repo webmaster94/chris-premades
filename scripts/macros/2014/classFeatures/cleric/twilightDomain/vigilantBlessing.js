@@ -1,9 +1,9 @@
 import {animationUtils, itemUtils} from '../../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     if (!itemUtils.getConfig(workflow.item, 'playAnimation')) return;
     if (!animationUtils.aseCheck() || animationUtils.jb2aCheck() != 'patreon') return;
-    let target = workflow.targets.first();
+    let target = workflow.targets.tokens[0];
     /* eslint-disable indent */
     new Sequence({moduleName:'chris-premades', softFail:true})
         .effect()
@@ -97,7 +97,7 @@ async function use({trigger, workflow}) {
 }
 export let vigilantBlessing = {
     name: 'Vigilant Blessing',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

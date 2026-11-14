@@ -2,7 +2,7 @@ import {actorUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils
 import {banishmentHelper} from '../../../spells/banishment.js';
 
 async function early({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let validTypes = ['celestial', 'elemental', 'fey', 'fiend'];
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.GenericEffects.InvalidTarget'),
@@ -39,14 +39,14 @@ async function early({workflow}) {
             }
         }
     };
-    for (let i of workflow.targets) {
+    for (let i of workflow.targets.tokens) {
         if (!validTypes.includes(actorUtils.typeOrRace(i.actor))) await effectUtils.createEffect(i.actor, effectData);
     }
 }
 async function use({workflow}) {
-    if (workflow.failedSaves.size !== 1) return;
+    if (workflow.failedSaves.count !== 1) return;
     let classLevels = workflow.actor.classes.cleric?.system?.levels ?? 0;
-    let target = workflow.targets.first();
+    let target = workflow.targets.tokens[0];
     if (classLevels >= 5) {
         let maxCR = workflow.actor.system.scale.cleric?.['destroy-undead']?.value;
         if (!maxCR) maxCR = Math.clamp(Math.floor((classLevels - 5) / 3), 0.5, 4);
@@ -80,7 +80,7 @@ async function use({workflow}) {
 }
 export let arcaneAbjuration = {
     name: 'Channel Divinity: Arcane Abjuration',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

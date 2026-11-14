@@ -1,6 +1,6 @@
 import {actorUtils, animationUtils, constants, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../../utils.js';
 async function early({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let advData = {
         name: 'Turn Advantage',
         img: constants.tempConditionIcon,
@@ -70,7 +70,7 @@ async function early({workflow}) {
         }
     };
     let validTargets = [];
-    for (let i of workflow.targets) {
+    for (let i of workflow.targets.tokens) {
         if (actorUtils.typeOrRace(i.actor) !== 'undead') continue;
         if (i.actor.system.attributes.hp.value === 0) continue;
         if (i.actor.flags['chris-premades']?.turnResistance) await effectUtils.createEffect(i.actor, advData);
@@ -80,7 +80,7 @@ async function early({workflow}) {
     await workflowUtils.updateTargets(workflow, validTargets);
 }
 async function use({workflow}) {
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let classIdentifier = itemUtils.getConfig(workflow.item, 'classIdentifier') ?? 'cleric';
     let classLevels = workflow.actor.classes[classIdentifier]?.system?.levels;
     if (!classLevels || classLevels < 5) return;
@@ -88,7 +88,7 @@ async function use({workflow}) {
     if (!destroyLevel) destroyLevel = Math.clamp(Math.floor((classLevels - 5) / 3), 0.5, 4);
     let destroyTokens = [];
     let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation') && animationUtils.jb2aCheck();
-    for (let i of workflow.failedSaves) {
+    for (let i of workflow.failedSaves.tokens) {
         let CR = actorUtils.getLevelOrCR(i.actor) ?? 0;
         if (CR > destroyLevel) continue;
         destroyTokens.push(i);
@@ -100,7 +100,7 @@ async function use({workflow}) {
 export let turnUndead = {
     name: 'Channel Divinity: Turn Undead',
     aliases: ['Channel Divinity'],
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

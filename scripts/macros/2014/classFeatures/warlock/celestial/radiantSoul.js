@@ -1,7 +1,7 @@
 import {combatUtils, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 
 async function damage({trigger: {entity: item}, workflow})  {
-    if (workflow.item.type !== 'spell' || workflow.hitTargets.size !== 1) return;
+    if (workflow.item.type !== 'spell' || workflow.hitTargets.count !== 1) return;
     let damageTypes= workflowUtils.getDamageTypes(workflow.damageRolls);
     if (!damageTypes.has('fire') && !damageTypes.has('radiant')) return;
     let buttons = [];
@@ -15,12 +15,12 @@ async function damage({trigger: {entity: item}, workflow})  {
     await workflowUtils.bonusDamage(workflow, bonusFormula, {damageType: selected});
 }
 async function applyDamage({trigger: {entity: item}, workflow}) {
-    if (workflow.item.type !== 'spell' || workflow.hitTargets.size < 2) return;
+    if (workflow.item.type !== 'spell' || workflow.hitTargets.count < 2) return;
     if (!combatUtils.perTurnCheck(item, 'radiantSoul')) return;
     let damageTypes= workflowUtils.getDamageTypes(workflow.damageRolls);
     if (!damageTypes.has('fire') && !damageTypes.has('radiant')) return;
     await combatUtils.setTurnCheck(item, 'radiantSoul');
-    let selection = await dialogUtils.selectTargetDialog(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name}), Array.from(workflow.hitTargets));
+    let selection = await dialogUtils.selectTargetDialog(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name}), Array.from(workflow.hitTargets.tokens));
     if (!selection?.length) return;
     let target = selection[0];
     let buttons = [];
@@ -45,12 +45,12 @@ async function applyDamage({trigger: {entity: item}, workflow}) {
     ditem.hpDamage += modDamage;
 }
 async function late({trigger: {entity: item}, workflow}) {
-    if (workflow.item.type !== 'spell' || !workflow.hitTargets.size) return;
+    if (workflow.item.type !== 'spell' || !workflow.hitTargets.count) return;
     await combatUtils.setTurnCheck(item, 'radiantSoul', true);
 }
 export let radiantSoul = {
     name: 'Radiant Soul',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

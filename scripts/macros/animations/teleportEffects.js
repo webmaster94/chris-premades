@@ -313,18 +313,18 @@ async function farStepPre(token, cornerPosition) {
         .scaleIn(0, 500, {ease: 'easeOutCubic'})
         .fadeOut(1000)
         .scale({x: token.width / 4, y: token.height / 4})
-        
+
         .animation()
         .on(token)
         .opacity(0)
-        
+
         .effect()
         .file('jb2a.energy_strands.range.standard.blue.04')
         .atLocation(token)
         .stretchTo(position)
         .waitUntilFinished(-500)
         .playbackRate(1.25)
-        
+
         .effect()
         .file('jb2a.explosion.07.bluewhite')
         .atLocation(position)

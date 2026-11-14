@@ -225,7 +225,7 @@
     "chris-premades": {
       "info": {
         "name": "Potion of Aqueous Form",
-        "version": "1.5.1",
+        "version": "2.3.0",
         "identifier": "potionOfAqueousForm",
         "source": "chris-premades"
       }

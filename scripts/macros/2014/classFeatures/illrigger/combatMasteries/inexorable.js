@@ -8,7 +8,7 @@ async function save({trigger: {token, roll}}) {
 export let combatMasteryInexorable = {
     name: 'Combat Mastery: Inexorable',
     aliases: ['Inexorable'],
-    version: '1.3.66',
+    version: '2.3.0',
     rules: 'legacy',
     save: [
         {

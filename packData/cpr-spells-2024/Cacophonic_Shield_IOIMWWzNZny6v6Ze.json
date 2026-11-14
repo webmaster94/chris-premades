@@ -507,7 +507,7 @@
         "identifier": "cacophonicShield",
         "rules": "modern",
         "source": "chris-premades",
-        "version": "1.3.140",
+        "version": "2.3.0",
         "hasAnimation": true
       },
       "macros": {

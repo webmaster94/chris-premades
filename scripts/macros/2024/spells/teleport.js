@@ -192,7 +192,7 @@ async function use({workflow}) {
         .opacity(0)
 
         .thenDo(function() {
-            toTeleport.filter(i => i.uuid != selected.document.uuid).forEach(target => {  
+            toTeleport.filter(i => i.uuid != selected.document.uuid).forEach(target => {
                 new Sequence({moduleName:'chris-premades', softFail:true})
                     .animation()
                     .on(target)
@@ -283,14 +283,14 @@ async function use({workflow}) {
         .duration(500)
         .attachTo(selected, {bindAlpha: false})
         .waitUntilFinished(-300)
-        
+
         .effect()
         .file('modules/animated-spell-effects-cartoon/spell-effects/cartoon/energy/energy_pulse_yellow_CIRCLE.webm')
         .atLocation(selected)
         .opacity(1)
         .scaleToObject(4)
         .filter('ColorMatrix', {saturate:-1, hue: 160,brightness: 2})
-        
+
         .effect()
         .file('jb2a.particles.outward.blue.01.03')
         .atLocation(selected)
@@ -301,7 +301,7 @@ async function use({workflow}) {
         .filter('ColorMatrix', {saturate: -1, brightness: 2})
         .scaleToObject(5)
         .duration(10000)
-        
+
         .effect()
         .from(selected)
         .atLocation(selected)
@@ -312,14 +312,14 @@ async function use({workflow}) {
         .scaleIn(0, 500, {ease: 'easeOutCubic'})
         .duration(1200)
         .attachTo(selected, {bindAlpha: false})
-        
+
         .animation()
         .on(selected)
         .opacity(1.0)
         .show()
-        
+
         .thenDo(function() {
-            toTeleport.forEach(target => {  
+            toTeleport.forEach(target => {
                 new Sequence({moduleName:'chris-premades', softFail:true})
                     .effect()
                     .from(target)
@@ -331,7 +331,7 @@ async function use({workflow}) {
                     .scaleIn(0, 500, {ease: 'easeOutCubic'})
                     .duration(1200)
                     .attachTo(target, {bindAlpha: false})
-                    
+
                     .animation()
                     .on(target)
                     .opacity(1.0)
@@ -350,7 +350,7 @@ async function use({workflow}) {
         .fadeOut(4000)
         .duration(5000)
         .waitUntilFinished(-4000)
-        
+
         .effect()
         .file('jb2a.magic_signs.circle.02.conjuration.loop.blue')
         .atLocation(selected)
@@ -366,7 +366,7 @@ async function use({workflow}) {
 }
 export let teleport = {
     name: 'Teleport',
-    version: '1.2.29',
+    version: '2.3.0',
     rules: 'modern',
     hasAnimation: true,
     midi: {

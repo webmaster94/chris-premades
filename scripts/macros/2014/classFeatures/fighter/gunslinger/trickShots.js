@@ -13,12 +13,12 @@ async function skillBullying({trigger: {entity: item, skillId, options}}) {
 async function lateHelper(workflow, effect, activityIdentifier) {
     await genericUtils.remove(effect);
     await genericUtils.sleep(100);
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     let originItem = await effectUtils.getOriginItem(effect);
     if (!originItem) return;
     let feature = await activityUtils.getActivityByIdentifier(originItem, activityIdentifier, {strict: true});
     if (!feature) return;
-    let targetToken = workflow.hitTargets.first();
+    let targetToken = workflow.hitTargets.tokens[0];
     return await workflowUtils.syntheticActivityRoll(feature, [targetToken]);
 }
 async function lateDazing({trigger: {entity: effect}, workflow}) {
@@ -103,7 +103,7 @@ async function lateWinging({trigger: {entity: effect}, workflow}) {
 }
 export let bullyingShot = {
     name: 'Bullying Shot',
-    version: '1.1.0',
+    version: '2.3.0',
     skill: [
         {
             pass: 'situational',
@@ -114,7 +114,7 @@ export let bullyingShot = {
 };
 export let dazingShot = {
     name: 'Dazing Shot',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {
@@ -127,11 +127,11 @@ export let dazingShot = {
 };
 export let deadeyeShot = {
     name: 'Deadeye Shot',
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let disarmingShot = {
     name: 'Disarming Shot',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {
@@ -144,7 +144,7 @@ export let disarmingShot = {
 };
 export let forcefulShot = {
     name: 'Forceful Shot',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {
@@ -157,7 +157,7 @@ export let forcefulShot = {
 };
 export let piercingShotTrickshot = {
     name: 'Piercing Shot',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -170,11 +170,11 @@ export let piercingShotTrickshot = {
 };
 export let violentShot = {
     name: 'Violent Shot',
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let wingingShot = {
     name: 'Winging Shot',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -15,7 +15,7 @@ async function attack({trigger: {entity: item}, workflow}) {
 }
 export let moxieFueledFists = {
     name: 'Moxie Fueled Fists',
-    version: '1.4.27',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [
@@ -25,7 +25,7 @@ export let moxieFueledFists = {
                 priority: 50
             }
         ]
-    },   
+    },
     config: [
         {
             value: 'validateWeaponType',

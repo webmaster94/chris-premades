@@ -6,12 +6,12 @@ async function damageApplication({trigger: {entity: item}, workflow, ditem}) {
     if (identifier != 'fall') return;
     let selection = await dialogUtils.confirmUseItem(item, {userId: socketUtils.firstOwner(item.actor, true)});
     if (!selection) return;
-    let targetWorkflow = await workflowUtils.syntheticItemRoll(item, [workflow.targets.first()]);
+    let targetWorkflow = await workflowUtils.syntheticItemRoll(item, [workflow.targets.tokens[0]]);
     workflowUtils.modifyDamageAppliedFlat(ditem, -targetWorkflow.utilityRolls[0].total);
 }
 export let slowFall = {
     name: 'Slow Fall',
-    version: '1.5.35',
+    version: '2.3.0',
     midi: {
         actor: [
             {

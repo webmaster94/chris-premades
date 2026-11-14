@@ -2,11 +2,11 @@ import {activityUtils, compendiumUtils, constants, dialogUtils, effectUtils, err
 
 async function use({workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (workflow.targets.size !== 1) {
+    if (workflow.targets.count !== 1) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     let weapons = targetToken.actor.items.filter(i => i.type === 'weapon' && i.system.equipped);
     let selectedWeapon;
     if (!weapons.length) {
@@ -91,14 +91,14 @@ async function use({workflow}) {
         return;
     }
     let casterEffect = await effectUtils.createEffect(workflow.actor, casterEffectData, {
-        concentrationItem: workflow.item, 
-        strictlyInterdependent: true, 
+        concentrationItem: workflow.item,
+        strictlyInterdependent: true,
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'holyWeapon', 
+            identifier: 'holyWeapon',
             activityIdentifier: 'holyWeaponDismiss'
-        }], 
+        }],
         identifier: 'holyWeapon',
         unhideActivities: {
             itemUuid: workflow.item.uuid,
@@ -127,7 +127,7 @@ async function early({dialog}) {
 }
 export let holyWeapon = {
     name: 'Holy Weapon',
-    version: '1.2.28',
+    version: '2.3.0',
     midi: {
         item: [
             {

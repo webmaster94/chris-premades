@@ -1,15 +1,15 @@
 import {dialogUtils, effectUtils, genericUtils, rollUtils, socketUtils, workflowUtils} from '../../../utils.js';
 async function early({trigger: {entity: item}, workflow}) {
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let grapplingEffects = effectUtils.getAllEffectsByIdentifier(workflow.actor, 'grappling');
     if (!grapplingEffects.length) return;
-    if (!grapplingEffects.some(i => i.flags['chris-premades'].grapple.tokenId === workflow.targets.first()?.id)) return;
+    if (!grapplingEffects.some(i => i.flags['chris-premades'].grapple.tokenId === workflow.targets.tokens[0]?.id)) return;
     workflow.tracker.advantage.add(item.name, item.name);
 }
 async function use({workflow}) {
-    if (!workflow.token || workflow.targets.size !== 1) return;
-    let targetToken = workflow.targets.first();
+    if (!workflow.token || workflow.targets.count !== 1) return;
+    let targetToken = workflow.targets.tokens[0];
     let grapplingEffects = effectUtils.getAllEffectsByIdentifier(workflow.actor, 'grappling');
     if (!grapplingEffects.length) return;
     let grapplingEffect = grapplingEffects.find(i => i.flags['chris-premades'].grapple.tokenId === targetToken.id);
@@ -20,11 +20,11 @@ async function use({workflow}) {
     if (!selection) return;
     if (selection != 'skip') {
         let result = await rollUtils.contestedRoll({
-            sourceToken: workflow.token, 
-            targetToken, 
-            sourceRollType: 'skill', 
-            targetRollType: 'skill', 
-            sourceAbilities: ['ath'], 
+            sourceToken: workflow.token,
+            targetToken,
+            sourceRollType: 'skill',
+            targetRollType: 'skill',
+            sourceAbilities: ['ath'],
             targetAbilities: [selection]
         });
         if (result <= 0) return;
@@ -48,7 +48,7 @@ async function use({workflow}) {
 }
 export let grappler = {
     name: 'Grappler',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

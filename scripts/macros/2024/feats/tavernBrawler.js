@@ -1,10 +1,10 @@
 import {combatUtils, constants, dialogUtils, genericUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 async function late({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (workflowUtils.getActionType(workflow) !== 'mwak') return;
     if (!constants.unarmedAttacks.includes(genericUtils.getIdentifier(workflow.item))) return;
     if (!combatUtils.perTurnCheck(item, 'tavernBrawler')) return;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Dialog.UseOn', {itemName: item.name, tokenName: targetToken.name}));
     if (!selection) return;
     await combatUtils.setTurnCheck(item, 'tavernBrawler');
@@ -13,7 +13,7 @@ async function late({trigger: {entity: item}, workflow}) {
 }
 export let tavernBrawler = {
     name: 'Tavern Brawler',
-    version: '1.2.36',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [
@@ -37,7 +37,7 @@ export let tavernBrawler = {
 };
 export let tavernBrawlerUnarmedStrike = {
     name: 'Unarmed Strike (Tavern Brawler)',
-    version: '1.5.34',
+    version: '2.3.0',
     rules: 'modern',
     ddbi: {
         restrictedItems: {

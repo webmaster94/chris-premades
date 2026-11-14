@@ -17,15 +17,15 @@ async function group({trigger, workflow}) {
     let animation = itemUtils.getConfig(workflow.item, 'animation');
     if (animationUtils.jb2aCheck() === 'free' && animation != 'none') animation = 'mistyStep';
     let targets = [workflow.token];
-    if (workflow.targets.size) {
-        let selection = await dialogUtils.selectTargetDialog(workflow.item.name, 'CHRISPREMADES.Macros.TravelAlongTheTree.WillingCreatures', Array.from(workflow.targets), {type: 'multiple', skipDeadAndUnconscious: false, maxAmount: 6});
+    if (workflow.targets.count) {
+        let selection = await dialogUtils.selectTargetDialog(workflow.item.name, 'CHRISPREMADES.Macros.TravelAlongTheTree.WillingCreatures', Array.from(workflow.targets.tokens), {type: 'multiple', skipDeadAndUnconscious: false, maxAmount: 6});
         if (selection?.[0]) targets.push(...selection[0]);
     }
     await Teleport.group(targets, workflow.token, {animation, range: workflow.activity.range.value});
 }
 export let travelAlongTheTree = {
     name: 'Travel along the Tree',
-    version: '1.1.27',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

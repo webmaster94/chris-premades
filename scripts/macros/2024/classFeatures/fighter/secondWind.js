@@ -20,7 +20,7 @@ async function use({trigger, workflow}) {
 }
 export let secondWind = {
     name: 'Second Wind',
-    version: '1.3.146',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

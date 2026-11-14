@@ -48,7 +48,7 @@
     "chris-premades": {
       "info": {
         "name": "Crusader's Mantle",
-        "version": "1.2.21",
+        "version": "2.3.0",
         "identifier": "crusadersMantle",
         "source": "chris-premades",
         "rules": "modern"

@@ -1,13 +1,13 @@
 import {dialogUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../utils.js';
 async function target({trigger: {entity: item}, workflow}) {
-    if (!workflow.targets.size || !workflow.item) return;
+    if (!workflow.targets.count || !workflow.item) return;
     let validIdentifiers = ['powerWordHeal', 'powerWordKill'];
     let identifier = genericUtils.getIdentifier(workflow.item);
     if (!identifier) return;
     if (!validIdentifiers.includes(identifier)) return;
     let nearbyTargets = [];
     let range = itemUtils.getConfig(item, 'range');
-    workflow.targets.forEach(token => {
+    workflow.targets.tokens.forEach(token => {
         nearbyTargets.push(...tokenUtils.findNearby(token, range, 'ally', {includeIncapacitated: true}));
     });
     if (!nearbyTargets.length) return;
@@ -19,14 +19,14 @@ async function target({trigger: {entity: item}, workflow}) {
         if (!selection) return;
         selection = selection[0];
     }
-    let targets = Array.from(workflow.targets);
+    let targets = Array.from(workflow.targets.tokens);
     targets.push(selection);
     await workflowUtils.updateTargets(workflow, targets);
     await item.displayCard();
 }
 export let wordsOfCreation = {
     name: 'Words of Creation',
-    version: '1.1.34',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

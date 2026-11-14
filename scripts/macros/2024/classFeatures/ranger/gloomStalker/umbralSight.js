@@ -1,6 +1,6 @@
 import {umbralSight as umbralSightLegacy} from '../../../../../legacyMacros.js';
 export let umbralSight = {
     ...umbralSightLegacy,
-    version: '1.5.22',
+    version: '2.3.0',
     rules: 'modern'
 };

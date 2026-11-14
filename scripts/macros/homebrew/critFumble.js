@@ -26,8 +26,8 @@ async function rollItem(type, token, targets) {
 }
 async function attack(workflow) {
     if (!workflow.attackRoll || (!workflow.isCritical && !workflow.isFumble) || !workflow.token) return;
-    if (workflow.isCritical) await rollItem('critical', workflow.token, Array.from(workflow.targets));
-    if (workflow.isFumble) await rollItem('fumble', workflow.token, Array.from(workflow.targets));
+    if (workflow.isCritical) await rollItem('critical', workflow.token, Array.from(workflow.targets.tokens));
+    if (workflow.isFumble) await rollItem('fumble', workflow.token, Array.from(workflow.targets.tokens));
 }
 export let critFumble = {
     attack
@@ -52,7 +52,7 @@ async function maxDamageDamage({trigger, workflow}) {
 }
 export let maxDamage = {
     name: 'Maximize Damage',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -94,7 +94,7 @@ async function doubleDamageDamage({trigger, workflow}) {
 }
 export let doubleDamage = {
     name: 'Double Damage',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

@@ -49,7 +49,7 @@
     "chris-premades": {
       "info": {
         "identifier": "relentlessHunter",
-        "version": "1.3.78",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern"
       },

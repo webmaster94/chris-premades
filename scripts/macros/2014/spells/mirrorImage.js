@@ -25,9 +25,9 @@ async function use({workflow}) {
     await effectUtils.createEffect(workflow.actor, effectData, {identifier: 'mirrorImage'});
 }
 async function attacked({trigger: {entity: effect}, workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     if (workflow.isFumble) return;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     let targetActor = targetToken.actor;
     let attackingToken = workflow.token;
     if (!tokenUtils.canSee(attackingToken, targetToken)) return;
@@ -53,7 +53,7 @@ async function attacked({trigger: {entity: effect}, workflow}) {
             rollNeeded = 11;
     }
     if (rollTotal < rollNeeded) return;
-    if (workflow.hitTargets.size) workflow.hitTargets.delete(targetToken);
+    if (workflow.hitTargets.count) workflow.hitTargets.delete(targetToken);
     let duplicateAC = 10 + targetActor.system.abilities.dex.mod;
     if (workflow.attackTotal >= duplicateAC) {
         ChatMessage.create({
@@ -81,7 +81,7 @@ async function attacked({trigger: {entity: effect}, workflow}) {
 }
 export let mirrorImage = {
     name: 'Mirror Image',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

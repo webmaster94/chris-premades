@@ -19,7 +19,7 @@ async function turnStart({trigger: {entity: effect, target}}) {
     let activity = activityUtils.getActivityByIdentifier(origin.parent, 'fear', {strict: true});
     if (!activity) return;
     let workflow = await workflowUtils.syntheticActivityRoll(activity, [target]);
-    if (workflow.failedSaves.size) return;
+    if (workflow.failedSaves.count) return;
     let sourceEffect = await workflow.activity.effects[1]?.getEffect();
     if (!sourceEffect) return;
     let effectData = genericUtils.duplicate(sourceEffect.toObject());
@@ -31,7 +31,7 @@ async function turnStart({trigger: {entity: effect, target}}) {
 }
 export let orbOfDamara = {
     name: 'Orb of Damara',
-    version: '1.4.2',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

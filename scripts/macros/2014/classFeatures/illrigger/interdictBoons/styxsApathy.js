@@ -14,7 +14,7 @@ async function added({trigger: {entity: item}}) {
 export let interdictBoonStyxsApathy = {
     name: 'Interdict Boons: Styx\'s Apathy',
     aliases: ['Styx\'s Apathy'],
-    version: '1.3.76',
+    version: '2.3.0',
     rules: 'legacy',
     item: [
         {

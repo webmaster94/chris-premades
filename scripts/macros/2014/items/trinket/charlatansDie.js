@@ -12,7 +12,7 @@ async function use({trigger, workflow}) {
 }
 export let charlatansDie = {
     name: 'Charlatan\'s Die',
-    version: '1.3.95',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

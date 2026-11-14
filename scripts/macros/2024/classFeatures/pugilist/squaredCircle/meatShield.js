@@ -16,7 +16,7 @@ async function isMissed({trigger: {entity: item, token}, workflow}) {
     if (!grapples) return;
     let cover = effectUtils.getEffectByIdentifier(token.actor, 'meatShieldCover');
     if (cover) await genericUtils.remove(cover);
-    if (workflow.hitTargets.some(t => t.id === token.id)) return;
+    if (workflow.hitTargets.tokens.some(t => t.id === token.id)) return;
     if (actorUtils.hasUsedReaction(token.actor)) return;
     let reaction = activityUtils.getActivityByIdentifier(item, 'use', {strict: true});
     if (!reaction) return;
@@ -38,7 +38,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let meatShield = {
     name: 'Meat Shield',
-    version: '1.5.2',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

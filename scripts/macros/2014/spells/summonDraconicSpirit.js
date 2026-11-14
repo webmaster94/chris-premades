@@ -131,7 +131,7 @@ async function damage({workflow}) {
 }
 export let summonDraconicSpirit = {
     name: 'Summon Draconic Spirit',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

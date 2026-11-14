@@ -1,6 +1,6 @@
 import {combatUtils, constants, dialogUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../../utils.js';
 export async function arcaneJoltHelper(workflow, originItem) {
-    let targetToken = workflow.hitTargets.first();
+    let targetToken = workflow.hitTargets.tokens[0];
     let subclassIdentifier = itemUtils.getConfig(originItem, 'subclassIdentifier');
     let scaleIdentifier = itemUtils.getConfig(originItem, 'scaleIdentifier');
     let scale = originItem.actor.system?.scale?.[subclassIdentifier]?.[scaleIdentifier]?.formula;
@@ -26,7 +26,7 @@ export async function arcaneJoltHelper(workflow, originItem) {
     await workflowUtils.completeItemUse(originItem, {consumeUsage: true}, {configureDialog: false});
 }
 async function damage({trigger, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     if (!workflow.item.system.properties.has('mgc')) return;
     if (!combatUtils.perTurnCheck(trigger.entity, 'arcaneJolt')) return;
@@ -45,7 +45,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let arcaneJolt = {
     name: 'Arcane Jolt',
-    version: '1.3.57',
+    version: '2.3.0',
     midi: {
         actor: [
             {

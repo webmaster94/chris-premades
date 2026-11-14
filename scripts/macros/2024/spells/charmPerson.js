@@ -1,7 +1,7 @@
 import {actorUtils, combatUtils, constants, effectUtils} from '../../../utils.js';
 async function early({trigger, workflow}) {
-    if (!workflow.targets.size) return;
-    await Promise.all(workflow.targets.map(async token => {
+    if (!workflow.targets.count) return;
+    await Promise.all(workflow.targets.tokens.map(async token => {
         if (actorUtils.typeOrRace(token.actor) != 'humanoid') {
             await effectUtils.createEffect(token.actor, constants.immuneEffectData);
             return;
@@ -12,7 +12,7 @@ async function early({trigger, workflow}) {
 }
 export let charmPerson = {
     name: 'Charm Person',
-    version: '1.3.126',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

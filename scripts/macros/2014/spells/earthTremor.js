@@ -2,6 +2,6 @@ import {proneOnFail} from '../generic/proneOnFail.js';
 
 export let earthTremor = {
     name: 'Earth Tremor',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: proneOnFail.midi
 };

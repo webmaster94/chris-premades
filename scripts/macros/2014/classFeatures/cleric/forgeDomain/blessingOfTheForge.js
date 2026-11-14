@@ -1,7 +1,7 @@
 import {dialogUtils, genericUtils, itemUtils} from '../../../../../utils.js';
 async function use({workflow}) {
-    if (workflow.targets.size !== 1) return;
-    let targetActor = workflow.targets.first()?.actor;
+    if (workflow.targets.count !== 1) return;
+    let targetActor = workflow.targets.tokens[0]?.actor;
     if (!targetActor) return;
     let weapons = targetActor.items.filter(i => i.type === 'weapon' && !i.system.properties.has('mgc') && i.system.equipped);
     let armor = targetActor.items.filter(i => i.system.isArmor && i.system.type?.value !== 'shield' && !i.system.properties.has('mgc') && i.system.equipped);
@@ -54,7 +54,7 @@ async function longRest({trigger: {entity: item}}) {
 }
 export let blessingOfTheForge = {
     name: 'Blessing of the Forge',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

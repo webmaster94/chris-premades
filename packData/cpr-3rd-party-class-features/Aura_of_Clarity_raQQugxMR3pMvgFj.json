@@ -190,7 +190,7 @@
     "chris-premades": {
       "info": {
         "identifier": "auraOfClarity",
-        "version": "1.2.32",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "legacy"
       },

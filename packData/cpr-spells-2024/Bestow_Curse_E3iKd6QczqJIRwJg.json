@@ -687,7 +687,7 @@
     "chris-premades": {
       "info": {
         "name": "Bestow Curse",
-        "version": "1.2.21",
+        "version": "2.3.0",
         "identifier": "bestowCurse",
         "source": "chris-premades",
         "rules": "modern"

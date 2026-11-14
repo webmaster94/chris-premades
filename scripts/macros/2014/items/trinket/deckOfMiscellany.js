@@ -172,7 +172,7 @@ async function updated({trigger: {entity, item, updates}}) {
 }
 export let deckOfMiscellany = {
     name: 'Deck of Miscellany',
-    version: '1.3.98',
+    version: '2.3.0',
     rules: 'legacy',
     item: [
         {
@@ -218,5 +218,5 @@ export let miscellanyCard = {
                 priority: 50
             }
         ]
-    } 
+    }
 };

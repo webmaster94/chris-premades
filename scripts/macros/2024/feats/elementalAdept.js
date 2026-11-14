@@ -1,7 +1,7 @@
 import {elementalAdeptA as elementalAdeptALegacy, elementalAdeptC as elementalAdeptCLegacy, elementalAdeptF as elementalAdeptFLegacy, elementalAdeptL as elementalAdeptLLegacy, elementalAdeptT as elementalAdeptTLegacy} from '../../../legacyMacros.js';
 export let elementalAdeptA = {
     ...elementalAdeptALegacy,
-    version: '1.2.36',
+    version: '2.3.0',
     rules: 'modern'
 };
 export let elementalAdeptC = {

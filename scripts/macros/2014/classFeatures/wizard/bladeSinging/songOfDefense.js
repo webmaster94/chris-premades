@@ -27,7 +27,7 @@ async function damageApplication({trigger: {token}, ditem}) {
 }
 export let songOfDefense = {
     name: 'Song of Defense',
-    version: '1.3.10',
+    version: '2.3.0',
     midi: {
         actor: [
             {

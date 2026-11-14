@@ -18,15 +18,15 @@ async function use({workflow}) {
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
 }
 async function early({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     if (!workflow.item.system.properties.has('thr') && workflowUtils.getActionType(workflow) !== 'rwak') return;
     genericUtils.setProperty(workflow, 'workflowOptions.autoRollDamage', 'always');
 }
 async function damage({trigger: {entity: effect}, workflow}) {
     if (activityUtils.getIdentifier(workflow.activity) === 'lightningArrowBurst') return;
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     if (!workflow.item.system.properties.has('thr') && workflowUtils.getActionType(workflow) !== 'rwak') return;
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     let diceNumber = 1 + effect.flags['chris-premades'].castData.castLevel;
     let originItem = await effectUtils.getOriginItem(effect);
     let feature = activityUtils.getActivityByIdentifier(originItem, 'lightningArrowBurst', {strict: true});
@@ -34,7 +34,7 @@ async function damage({trigger: {entity: effect}, workflow}) {
     let damageType = feature.damage.parts[0].types.first();
     let damageFormula = diceNumber + 'd8 + @mod';
     await workflowUtils.replaceDamage(workflow, damageFormula, {damageType});
-    if (workflow.hitTargets.size === 0) await workflowUtils.applyDamage([targetToken], Math.floor(workflow.damageRolls[0].total / 2), damageType);
+    if (workflow.hitTargets.count === 0) await workflowUtils.applyDamage([targetToken], Math.floor(workflow.damageRolls[0].total / 2), damageType);
     let newTargets = tokenUtils.findNearby(targetToken, 10);
     let playAnimation = itemUtils.getConfig(originItem, 'playAnimation') && animationUtils.jb2aCheck();
     let anim = 'jb2a.chain_lightning.secondary.blue';
@@ -52,7 +52,7 @@ async function damage({trigger: {entity: effect}, workflow}) {
 }
 export let lightningArrow = {
     name: 'Lightning Arrow',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

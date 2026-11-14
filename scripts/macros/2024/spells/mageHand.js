@@ -34,9 +34,9 @@ async function use({trigger, workflow}) {
     let moveActivity = activityUtils.getActivityByIdentifier(workflow.item, 'move');
     if (!moveActivity) return;
     let additionalVaeButtons = [{
-        type: 'use', 
+        type: 'use',
         name: moveActivity.name,
-        identifier: 'mageHand', 
+        identifier: 'mageHand',
         activityIdentifier: 'move'
     }];
     let unhideActivities = {
@@ -72,7 +72,7 @@ async function move({trigger: {entity: effect, token}}) {
 }
 export let mageHand = {
     name: 'Mage Hand',
-    version: '1.3.38',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

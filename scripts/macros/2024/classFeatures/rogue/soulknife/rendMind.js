@@ -29,7 +29,7 @@ async function restore({trigger, workflow}) {
 }
 export let rendMind = {
     name: 'Rend Mind',
-    version: '1.3.58',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

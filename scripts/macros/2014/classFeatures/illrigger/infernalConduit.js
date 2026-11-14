@@ -1,13 +1,13 @@
 import {activityUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../utils.js';
 async function damage({trigger, workflow}) {
-    if (!workflow.token || !workflow.targets.size) return;
+    if (!workflow.token || !workflow.targets.count) return;
     let identifier = activityUtils.getIdentifier(workflow.activity);
     if (!identifier) return;
     await workflowUtils.replaceDamage(workflow, '(@scaling)d10', {damageType: identifier});
 }
 async function use({trigger, workflow}) {
     let damageTypes = workflowUtils.getDamageTypes(workflow.damageRolls);
-    let damage = workflowUtils.getTotalDamageOfType(workflow.damageDetail, workflow.targets.first().actor, damageTypes.first());
+    let damage = workflowUtils.getTotalDamageOfType(workflow.damageDetail, workflow.targets.tokens[0].actor, damageTypes.first());
     await workflowUtils.applyDamage([workflow.token], damage, damageTypes.first() === 'necrotic' ? 'healing' : 'none');
     if (workflow.actor.system.attributes.hp.value != 0) return;
     await genericUtils.update(workflow.actor, {'system.attributes.death.success': 3});
@@ -15,7 +15,7 @@ async function use({trigger, workflow}) {
 async function distance({trigger, workflow}) {
     let combatMasteryUnfettered = itemUtils.getItemByIdentifier(workflow.actor, 'combatMasteryUnfettered');
     let maxDistance = combatMasteryUnfettered ? 30 : 5;
-    if (tokenUtils.getDistance(workflow.token, workflow.targets.first()) <= maxDistance) return;
+    if (tokenUtils.getDistance(workflow.token, workflow.targets.tokens[0]) <= maxDistance) return;
     workflow.aborted = true;
     genericUtils.notify('CHRISPREMADES.Macros.BalefulInterdict.Move.TooFar', 'info', {localize: true});
 }
@@ -32,7 +32,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let infernalConduit = {
     name: 'Infernal Conduit',
-    version: '1.3.84',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

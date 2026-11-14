@@ -1,7 +1,7 @@
 export let channelDivinityPaladin = {
     name: 'Channel Divinity (Paladin)',
     aliases: ['Channel Divinity'],
-    version: '1.5.28',
+    version: '2.3.0',
     rules: 'modern',
     config: [
         {

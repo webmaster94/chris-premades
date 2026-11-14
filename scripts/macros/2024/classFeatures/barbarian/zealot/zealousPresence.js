@@ -10,8 +10,8 @@ async function veryEarly({activity, dialog, actor, config}) {
     await genericUtils.update(rage, {'system.uses.spent': rage.system.uses.spent + 1});
 }
 async function early({trigger, workflow}) {
-    if (workflow.targets.size <= 10) return;
-    let oldTargets = Array.from(workflow.targets);
+    if (workflow.targets.count <= 10) return;
+    let oldTargets = Array.from(workflow.targets.tokens);
     let newTargets;
     let selection = await dialogUtils.selectTargetDialog(workflow.item.name, genericUtils.format('CHRISPREMADES.Macros.UpcastTargets.Select', {maxTargets: 10}), oldTargets, {type: 'multiple', maxAmount: 10, skipDeadAndUnconscious: false});
     if (!selection) {
@@ -23,7 +23,7 @@ async function early({trigger, workflow}) {
 }
 export let zealousPresence = {
     name: 'Zealous Presence',
-    version: '1.5.1',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

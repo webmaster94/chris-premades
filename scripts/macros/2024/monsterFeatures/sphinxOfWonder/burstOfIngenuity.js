@@ -39,7 +39,7 @@ export let burstOfIngenuity = {
     monsters: [
         'Sphinx of Wonder'
     ],
-    version: '1.3.107',
+    version: '2.3.0',
     rules: 'modern',
     skill: [
         {

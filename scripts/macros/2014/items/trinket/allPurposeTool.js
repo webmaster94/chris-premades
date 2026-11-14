@@ -73,7 +73,7 @@ async function attack({trigger: {entity: item}, workflow}) {
 }
 export let allPurposeTool1 = {
     name: 'All Purpose Tool + 1',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

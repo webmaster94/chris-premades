@@ -1,6 +1,6 @@
 export let unarmoredDefenseBarbarian = {
     name: 'Unarmored Defense (Barbarian)',
-    version: '1.1.0',
+    version: '2.3.0',
     ddbi: {
         restrictedItems: {
             'Unarmored Defense 1': {

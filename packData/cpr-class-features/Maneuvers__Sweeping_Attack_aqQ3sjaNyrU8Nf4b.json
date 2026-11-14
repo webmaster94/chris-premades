@@ -348,7 +348,7 @@
     "chris-premades": {
       "info": {
         "name": "Maneuvers: Sweeping Attack",
-        "version": "1.1.0",
+        "version": "2.3.0",
         "identifier": "maneuversSweepingAttack",
         "source": "chris-premades"
       },

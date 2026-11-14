@@ -2,7 +2,7 @@ import {actorUtils, animationUtils, combatUtils, constants, dialogUtils, effectU
 
 async function use({workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (!workflow.failedSaves.size) {
+    if (!workflow.failedSaves.count) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
@@ -14,7 +14,7 @@ async function use({workflow}) {
         flags: {
             'chris-premades': {
                 compelledDuel: {
-                    targetUuids: Array.from(workflow.failedSaves).map(target => target.document.uuid)
+                    targetUuids: Array.from(workflow.failedSaves.tokens).map(target => target.document.uuid)
                 }
             }
         }
@@ -42,7 +42,7 @@ async function use({workflow}) {
             }
         }
     };
-    for (let target of workflow.failedSaves) {
+    for (let target of workflow.failedSaves.tokens) {
         await effectUtils.createEffect(target.actor, targetEffectData, {
             parentEntity: effect,
             strictlyInterdependent: true,
@@ -73,21 +73,21 @@ async function turnEnd({trigger: {entity: effect, token: sourceToken}}) {
     }
 }
 async function targetAttack({trigger: {entity: effect}, workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     let origin = await effectUtils.getOriginItem(effect);
     if (!origin) return;
-    let targetUuid = workflow.targets.first().document.uuid;
+    let targetUuid = workflow.targets.tokens[0].document.uuid;
     let sourceUuid = effect.flags['chris-premades']?.compelledDuel?.sourceUuid;
     if (targetUuid === sourceUuid || !sourceUuid) return;
     workflow.tracker.disadvantage.add(origin.name, origin.name);
 }
 async function sourceAttack({trigger: {entity: effect}, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let targetUuids = effect.flags['chris-premades']?.compelledDuel?.targetUuids;
     if (!targetUuids) return;
     let endSpell = false;
-    for (let target of workflow.targets) {
+    for (let target of workflow.targets.tokens) {
         if (workflowUtils.isAttackType(workflow, 'attack')) {
             if (!targetUuids.includes(target.document.uuid)) {
                 endSpell = true;
@@ -163,7 +163,7 @@ async function targetMoved({trigger: {entity: effect, token}, options}) {
 }
 export let compelledDuel = {
     name: 'Compelled Duel',
-    version: '1.2.21',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

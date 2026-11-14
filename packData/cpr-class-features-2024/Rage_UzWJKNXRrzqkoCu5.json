@@ -367,7 +367,7 @@
         "identifier": "rage",
         "source": "chris-premades",
         "rules": "modern",
-        "version": "1.5.10",
+        "version": "2.3.0",
         "hasAnimation": true
       },
       "macros": {

@@ -1,13 +1,13 @@
 import {dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let validTypes = itemUtils.getConfig(workflow.item, 'damageTypes');
     let formula = itemUtils.getConfig(workflow.item, 'formula');
     let buttons = validTypes.map(i => ([CONFIG.DND5E.damageTypes[i].label, Object.keys(CONFIG.DND5E.damageTypes).find(j => j === i)]));
     if (!buttons.length) return;
     let selection = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Dialog.DamageType', buttons);
     if (!selection) return;
-    for (let token of workflow.targets) {
+    for (let token of workflow.targets.tokens) {
         if (!token.actor) return;
         let weapons = token.actor.items.filter(i => i.type === 'weapon' && !i.system.properties.has('mgc') && i.system.equipped);
         let selectedWeapon;
@@ -65,7 +65,7 @@ async function use({trigger, workflow}) {
 }
 export let elementalWeapon = {
     name: 'Elemental Weapon',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

@@ -1,7 +1,7 @@
 import {activityUtils, actorUtils, dialogUtils, effectUtils, itemUtils, tokenUtils, workflowUtils} from '../../../../../utils.js';
 async function attack({trigger: {entity: effect}, workflow}) {
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
-    let nearbyInvokeDuplicity = tokenUtils.findNearby(workflow.targets.first(), 5, 'enemy').find(token => {
+    let nearbyInvokeDuplicity = tokenUtils.findNearby(workflow.targets.tokens[0], 5, 'enemy').find(token => {
         let effect = effectUtils.getEffectByIdentifier(token.actor, 'summonedEffect');
         if (!effect) return;
         if (effect.flags['chris-premades']?.macros?.midi?.actor?.find(i => i === 'improvedDuplicityEffect')) return true;
@@ -37,7 +37,7 @@ async function removed({trigger: {entity: effect}}) {
 }
 export let improvedDuplicity = {
     name: 'Improved Duplicity',
-    version: '1.3.20',
+    version: '2.3.0',
     rules: 'modern'
 };
 export let improvedDuplicityEffect = {

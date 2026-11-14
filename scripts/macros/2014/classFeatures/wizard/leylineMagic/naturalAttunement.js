@@ -81,7 +81,7 @@ async function use({trigger, workflow}) {
 }
 export let naturalAttunement = {
     name: 'Natural Attunement',
-    version: '1.3.149',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

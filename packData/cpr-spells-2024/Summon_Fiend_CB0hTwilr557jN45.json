@@ -422,7 +422,7 @@
     "chris-premades": {
       "info": {
         "name": "Summon Fiend",
-        "version": "1.2.32",
+        "version": "2.3.0",
         "identifier": "summonFiend",
         "source": "chris-premades",
         "hasAnimation": true,

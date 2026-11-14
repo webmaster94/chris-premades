@@ -17,7 +17,7 @@ async function skill({trigger: {skillId}}) {
 }
 export let iPiercedTheIllusion = {
     name: 'I Pierced the Illusion',
-    version: '1.4.5',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

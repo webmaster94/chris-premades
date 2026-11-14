@@ -5,14 +5,14 @@ async function attack({trigger: {entity: item}, workflow}) {
     let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Macros.GuidedStrike.Attack', {attackRoll: workflow.attackRoll.total, item: item.name}));
     if (!selection) return;
     await workflowUtils.bonusAttack(workflow, '10');
-    await workflowUtils.syntheticItemRoll(item, Array.from(workflow.targets), {consumeResources: true, consumeUsage: true});
+    await workflowUtils.syntheticItemRoll(item, Array.from(workflow.targets.tokens), {consumeResources: true, consumeUsage: true});
 }
 async function added({trigger: {entity: item}}) {
     await itemUtils.correctActivityItemConsumption(item, ['use'], 'channelDivinity');
 }
 export let guidedStrike = {
     name: 'Guided Strike',
-    version: '1.5.1',
+    version: '2.3.0',
     midi: {
         actor: [
             {

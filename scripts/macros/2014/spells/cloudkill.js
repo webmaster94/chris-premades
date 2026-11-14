@@ -112,7 +112,7 @@ async function endCombat({trigger}) {
 // TODO: Maybe add darkness source attached to template
 export let cloudkill = {
     name: 'Cloudkill',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

@@ -16,7 +16,7 @@ async function change({trigger: {item}}) {
 }
 export let dualWielder = {
     name: 'Dual Wielder',
-    version: '1.2.36',
+    version: '2.3.0',
     item: [
         {
             pass: 'actorEquipped',

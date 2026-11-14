@@ -2,7 +2,7 @@ import {combatUtils, constants, effectUtils, genericUtils} from '../../../utils.
 import {upcastTargets} from '../../generic/upcastTargets.js';
 async function early({workflow}) {
     await upcastTargets.plusOne({workflow});
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     if (!combatUtils.inCombat()) return;
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.GenericEffects.ConditionAdvantage'),
@@ -39,13 +39,13 @@ async function early({workflow}) {
             }
         }
     };
-    for (let target of workflow.targets) {
+    for (let target of workflow.targets.tokens) {
         await effectUtils.createEffect(target.actor, effectData);
     }
 }
 export let charmPerson = {
     name: 'Charm Person',
-    version: '1.1.32',
+    version: '2.3.0',
     midi: {
         item: [
             {

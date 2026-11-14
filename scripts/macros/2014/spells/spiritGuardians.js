@@ -8,7 +8,7 @@ async function use({trigger, workflow}) {
         damageType = 'radiant';
     } else {
         damageType = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.SpiritGuardians.Alignment', [['CHRISPREMADES.Alignment.Good', 'radiant'], ['CHRISPREMADES.Alignment.Neutral', 'radiant'], ['CHRISPREMADES.Alignment.Evil', 'necrotic']], {displayAsRows: true});
-        if (!damageType) damageType = 'radiant';        
+        if (!damageType) damageType = 'radiant';
     }
     let effectData = {
         name: workflow.item.name,
@@ -111,7 +111,7 @@ async function removed({trigger}) {
 }
 export let spiritGuardians = {
     name: 'Spirit Guardians',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

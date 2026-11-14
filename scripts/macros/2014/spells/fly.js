@@ -27,7 +27,7 @@ async function use({workflow}) {
         }
     };
     effectUtils.addMacro(effectData, 'effect', ['flyFlying']);
-    for (let token of workflow.targets) {
+    for (let token of workflow.targets.tokens) {
         await effectUtils.createEffect(token.actor, effectData, {concentrationItem: workflow.item, interdependent: true});
     }
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
@@ -51,7 +51,7 @@ async function start({trigger: {entity: effect}}) {
         .effect()
         .copySprite(token)
         .name('Fly')
-        .atLocation(token)   
+        .atLocation(token)
         .opacity(1)
         .duration(800)
         .anchor({x: 0.5, y: 0.7})
@@ -91,7 +91,7 @@ async function end({trigger: {entity: effect}}) {
 }
 export let fly = {
     name: 'Fly',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

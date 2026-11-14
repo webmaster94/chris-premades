@@ -332,7 +332,7 @@
     "chris-premades": {
       "info": {
         "source": "chris-premades",
-        "version": "1.2.28",
+        "version": "2.3.0",
         "identifier": "zoneOfTruth",
         "rules": "modern"
       },

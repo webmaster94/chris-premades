@@ -48,11 +48,11 @@ async function use({workflow}) {
         return;
     }
     let spawnedTokens = await Summons.spawn(sourceActor, updates, workflow.item, workflow.token, {
-        duration: 60, 
-        range: 60, 
+        duration: 60,
+        range: 60,
         animation: 'none',
-        initiativeType: 'none', 
-        additionalVaeButtons: [{type: 'use', name: feature.name, identifier: 'healingSpirit', activityIdentifier: 'healingSpiritMove'}], 
+        initiativeType: 'none',
+        additionalVaeButtons: [{type: 'use', name: feature.name, identifier: 'healingSpirit', activityIdentifier: 'healingSpiritMove'}],
         additionalSummonedVaeButtons: [{type: 'use', name: featureDataSummon.name, identifier: 'healingSpiritHeal'}],
         unhideActivities: {
             itemUuid: workflow.item.uuid,
@@ -201,7 +201,7 @@ async function early({dialog}) {
 }
 export let healingSpirit = {
     name: 'Healing Spirit',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

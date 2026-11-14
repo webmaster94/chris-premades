@@ -1,6 +1,6 @@
 import {actorUtils, automationUtils, constants, dialogUtils, queryUtils, tokenUtils, workflowUtils} from '../../proxy.mjs';
 async function redirect({document: item, workflow, sourceToken, token: attackerToken}) {
-    if (!attackerToken || !workflowUtils.isAttackType(workflow, 'attack')) return;
+    if (!attackerToken || !sourceToken.object || !workflowUtils.isAttackType(workflow, 'attack')) return;
     if (actorUtils.hasUsedReaction(sourceToken.actor)) return;
     const config = automationUtils.getGenericConfigValues(item, 'chris-premades-native', 'redirectAttack', configKeys);
     if (config.requireCover && !tokenUtils.checkCover(attackerToken, sourceToken, {activity: workflow.activity})) return;
@@ -20,7 +20,7 @@ async function redirect({document: item, workflow, sourceToken, token: attackerT
     const used = activity ? await workflowUtils.completeActivityUse(activity, [sourceToken]) : await workflowUtils.completeItemUse(item, [sourceToken]);
     if (!used) return;
     if (config.swapPlaces) await tokenUtils.swapTokens(sourceToken, newTarget);
-    const targets = Array.from(workflow.targets, t => t.document ?? t).filter(t => t.id !== sourceToken.id);
+    const targets = workflow.targets.documents.filter(t => t.id !== sourceToken.id);
     await workflowUtils.updateTargets(workflow, [...targets, newTarget]);
 }
 /**
@@ -38,7 +38,7 @@ async function redirect({document: item, workflow, sourceToken, token: attackerT
  */
 export const redirectAttack = {
     rules: 'all',
-    version: '2.0.0',
+    version: '2.1.4',
     category: 'targeting',
     generic: true,
     documents: ['item'],
@@ -70,7 +70,7 @@ export const redirectAttack = {
             category: 'behavior',
             label: 'CHRISPREMADES.Config.Disposition',
             hint: 'CHRISPREMADES.Macros.Generic.RedirectAttack.DispositionHint',
-            get options() { return [{value: '', label: _loc('CHRISPREMADES.Config.All')}, ...constants.dispositionOptions]; }
+            get options() { return [{value: '', label: 'CHRISPREMADES.Config.All'}, ...constants.dispositionOptions]; }
         },
         sizes: {
             default: [],

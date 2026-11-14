@@ -350,7 +350,7 @@
         "identifier": "steelWindStrike",
         "source": "chris-premades",
         "rules": "modern",
-        "version": "1.4.41"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

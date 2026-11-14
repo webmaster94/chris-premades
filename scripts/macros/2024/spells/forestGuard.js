@@ -57,7 +57,7 @@ async function use({trigger, workflow}) {
     await genericUtils.setFlag(effect, 'chris-premades', 'macros.combat', ['forestGuardEffect']);
 }
 async function attack({trigger, workflow}) {
-    let nearbyBushes = tokenUtils.findNearby(workflow.targets.first(), 10, 'ally').find(token => token.actor.flags['chris-premades']?.forestGuard?.ownerUuid === workflow.actor.uuid);
+    let nearbyBushes = tokenUtils.findNearby(workflow.targets.tokens[0], 10, 'ally').find(token => token.actor.flags['chris-premades']?.forestGuard?.ownerUuid === workflow.actor.uuid);
     if (nearbyBushes) return;
     workflow.aborted = true;
     genericUtils.notify('CHRISPREMADES.Macros.ForestGuard.NoShrub', 'warn', {localize: true});
@@ -110,14 +110,14 @@ async function endTurn({trigger: {entity: effect}}) {
     }
 }
 async function damage({trigger, workflow}) {
-    if (!workflow.hitTargets.size) return;
-    let nearbyBushes = tokenUtils.findNearby(workflow.hitTargets.first(), 10, 'enemy').filter(token => token.actor.flags['chris-premades']?.forestGuard?.ownerUuid === workflow.actor.uuid);
+    if (!workflow.hitTargets.count) return;
+    let nearbyBushes = tokenUtils.findNearby(workflow.hitTargets.tokens[0], 10, 'enemy').filter(token => token.actor.flags['chris-premades']?.forestGuard?.ownerUuid === workflow.actor.uuid);
     if (nearbyBushes.length <= 1) return;
     await workflowUtils.bonusDamage(workflow, nearbyBushes.length - 1 + 'd4');
 }
 export let forestGuard = {
     name: 'Forest Guard',
-    version: '1.3.114',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

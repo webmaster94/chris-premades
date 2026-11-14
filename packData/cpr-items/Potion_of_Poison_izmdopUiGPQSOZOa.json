@@ -385,7 +385,7 @@
     "chris-premades": {
       "info": {
         "name": "Potion of Poison",
-        "version": "1.1.10",
+        "version": "2.3.0",
         "identifier": "potionOfPoison",
         "source": "chris-premades"
       },

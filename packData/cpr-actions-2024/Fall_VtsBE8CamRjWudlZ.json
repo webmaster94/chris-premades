@@ -219,7 +219,7 @@
         "identifier": "fall",
         "source": "chris-premades",
         "rules": "modern",
-        "version": "1.3.115"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

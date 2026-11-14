@@ -113,7 +113,7 @@
     "chris-premades": {
       "info": {
         "name": "Hold Person",
-        "version": "1.2.21",
+        "version": "2.3.0",
         "identifier": "holdPerson",
         "source": "chris-premades"
       },

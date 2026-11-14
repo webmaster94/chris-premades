@@ -1,7 +1,7 @@
 import {Summons} from '../../../lib/summons.js';
 import {activityUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils, tokenUtils, workflowUtils} from '../../../utils.js';
 async function use({workflow}) {
-    await findSteedHelper(workflow, 'Steed', 'Steeds', 'findSteed'); 
+    await findSteedHelper(workflow, 'Steed', 'Steeds', 'findSteed');
 }
 async function dismiss({workflow}) {
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'findSteed');
@@ -70,9 +70,9 @@ export async function findSteedHelper(workflow, defaultNameSuffix, defaultFolder
     };
     let animation = itemUtils.getConfig(workflow.item, creatureType + 'Animation') ?? 'none';
     await Summons.spawn(sourceActor, updates, workflow.item, workflow.token, {
-        duration: 86400, 
-        range: 30, 
-        animation, 
+        duration: 86400,
+        range: 30,
+        animation,
         dismissActivity: feature,
         unhideActivities: {
             itemUuid: workflow.item.uuid,
@@ -86,8 +86,8 @@ export async function findSteedHelper(workflow, defaultNameSuffix, defaultFolder
 }
 export async function findSteedEarlyHelper(workflow, identifier) {
     if (workflow.item.type !== 'spell') return;
-    if (workflow.targets.size !== 1) return;
-    if (workflow.targets.first().id !== workflow.token.id) return;
+    if (workflow.targets.count !== 1) return;
+    if (workflow.targets.tokens[0].id !== workflow.token.id) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, identifier);
     if (!effect) return;
     let originItem = await effectUtils.getOriginItem(effect);
@@ -104,7 +104,7 @@ async function veryEarly({dialog}) {
 }
 export let findSteed = {
     name: 'Find Steed',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

@@ -1,4 +1,4 @@
-import {actorUtils, automationUtils, compendiumUtils, constants, documentUtils, effectUtils, genericUtils, itemUtils} from '../../../../proxy.mjs';
+import {actorUtils, automationUtils, compendiumUtils, constants, effectUtils, genericUtils, itemUtils} from '../../../../proxy.mjs';
 const itemIDs = new Set([
     'ball-bearings', 'basket', 'bedroll', 'bell', 'blanket', 'block-and-tackle', 'bottle-glass', 'bucket',
     'caltrops', 'candle',
@@ -16,13 +16,16 @@ const itemIDs = new Set([
     'tinderbox', 'torch',
     'vial'
 ]);
+async function requireTools({workflow}) {
+    const requiredTools = automationUtils.getConfigValue(workflow.item, 'requireTools');
+    if (!requiredTools?.length || actorUtils.hasTools(workflow.actor, requiredTools)) return;
+    const tools = constants.toolOptions.filter(o => requiredTools.includes(o.value)).map(t => t.label).join(', ');
+    genericUtils.notify('CHRISPREMADES.Macros.Modern.TinkersMagic.NeedTools', {type: 'warn', format: {feature: workflow.item.name, tools}});
+    workflow.aborted = true;
+    return true;
+}
 async function use({workflow}) {
     const config = automationUtils.getConfigValues(workflow.item, Object.keys(tinkersMagic.config));
-    if (config.requireTools?.length && !workflow.actor.itemTypes.tool.some(t => t.system.equipped && config.requireTools.includes(t.system.type?.baseItem))) {
-        const tools = constants.toolOptions.filter(o => config.requireTools.includes(o.value)).map(t => t.label).join(', ');
-        genericUtils.notify('CHRISPREMADES.Macros.Modern.TinkersMagic.NeedTools', {type: 'warn', format: {feature: workflow.item.name, tools}});
-        return;
-    }
     const options = {
         maxAmount: 1,
         icon: workflow.item.img,
@@ -55,15 +58,20 @@ async function use({workflow}) {
         }
     }]))?.[0];
     if (!parentEntity) return;
-    const target = workflow.targets.first()?.actor ?? workflow.actor;
+    const target = workflow.targets.documents[0]?.actor ?? workflow.actor;
     await itemUtils.createItems(target, [item.toObject()], {parentEntity});
 }
 export const tinkersMagic = {
     name: 'Tinker\'s Magic',
-    version: '2.1.3',
+    version: '2.1.4',
     rules: '2024',
     notes: 'Target a willing creature to create an item in their inventory. The item is otherwise made on this character.',
     roll: [
+        {
+            pass: 'activityPreItemRoll',
+            macro: requireTools,
+            priority: 50
+        },
         {
             pass: 'activityRollFinished',
             macro: use,

@@ -44,8 +44,8 @@ async function use({workflow}) {
     await itemUtils.createItems(workflow.actor, [featureData], {favorite: true, parentEntity: effect});
 }
 async function late({workflow}) {
-    if (!workflow.hitTargets.size) return;
-    let target = workflow.targets.first();
+    if (!workflow.hitTargets.count) return;
+    let target = workflow.targets.tokens[0];
     if (!target?.actor) return;
     let effectData = {
         name: genericUtils.translate('CHRISPREMADES.Macros.GuardianArmor.Distracted'),
@@ -64,11 +64,11 @@ async function late({workflow}) {
     await effectUtils.createEffect(target.actor, effectData, {identifier: 'thunderGauntletsDistracted'});
 }
 async function attack({workflow}) {
-    if (workflow.targets.size !== 1 || workflow.disadvantage) return;
+    if (workflow.targets.count !== 1 || workflow.disadvantage) return;
     let effect = effectUtils.getEffectByIdentifier(workflow.actor, 'thunderGauntletsDistracted');
     let originItem = await effectUtils.getOriginItem(effect);
     let originActor = originItem?.actor;
-    if (originActor === workflow.targets.first().actor) return;
+    if (originActor === workflow.targets.tokens[0].actor) return;
     workflow.tracker.disadvantage.add(effect.name, effect.name);
 }
 async function early({trigger, workflow}) {
@@ -81,7 +81,7 @@ async function early({trigger, workflow}) {
 }
 export let guardianArmor = {
     name: 'Arcane Armor: Guardian Model',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

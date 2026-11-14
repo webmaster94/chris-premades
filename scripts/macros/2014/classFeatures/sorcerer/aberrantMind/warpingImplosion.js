@@ -24,13 +24,13 @@ async function use({trigger, workflow}) {
         delta: {ownership: workflow.token.actor.ownership}
     }, {parent: canvas.scene});
     await Teleport.target([workflow.token], workflow.token, {title: workflow.item.name, range: workflow.activity.range.value, animation});
-    await Promise.all(workflow.failedSaves.map(token => {
+    await Promise.all(workflow.failedSaves.tokens.map(token => {
         tokenUtils.pushToken(tempToken.object, token, Math.min(0, 5 - tokenUtils.getDistance(tempToken.object, token)));
     }));
 }
 export let warpingImplosion = {
     name: 'Warping Implosion',
-    version: '1.2.17',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

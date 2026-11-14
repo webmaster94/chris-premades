@@ -1,6 +1,6 @@
 import {activityUtils, dialogUtils, effectUtils, genericUtils, socketUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.token || !workflow.targets.size) return;
+    if (!workflow.token || !workflow.targets.count) return;
     let willing = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.Influence.HowWilling', [
         ['CHRISPREMADES.Macros.Influence.Willing', false],
         ['CHRISPREMADES.Macros.Influence.Unwilling', false],
@@ -37,12 +37,12 @@ async function use({trigger, workflow}) {
     if (!activity) return;
     let activityData = genericUtils.duplicate(activity.toObject());
     activityData.check.associated = [skill];
-    activityData.check.dc.formula = Math.max(15, workflow.targets.first().actor.system.abilities.int.value);
+    activityData.check.dc.formula = Math.max(15, workflow.targets.tokens[0].actor.system.abilities.int.value);
     await workflowUtils.syntheticActivityDataRoll(activityData, workflow.item, workflow.actor, [workflow.token]);
 }
 export let influence = {
     name: 'Influence',
-    version: '1.3.115',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

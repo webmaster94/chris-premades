@@ -50,8 +50,8 @@ async function use({workflow}) {
 }
 async function late({workflow}) {
     let casterEffect = effectUtils.getEffectByIdentifier(workflow.actor, 'maximiliansEarthenGrasp');
-    if (!workflow.failedSaves.size) return;
-    let target = workflow.failedSaves.first();
+    if (!workflow.failedSaves.count) return;
+    let target = workflow.failedSaves.tokens[0];
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'maximiliansEarthenGraspCrush', {strict: true});
     if (!feature) return;
     let effectData = {
@@ -68,12 +68,12 @@ async function late({workflow}) {
         }
     };
     let effect = await effectUtils.createEffect(workflow.actor, effectData, {
-        parentEntity: casterEffect, 
-        identifier: 'maximiliansEarthenGraspGrasping', 
+        parentEntity: casterEffect,
+        identifier: 'maximiliansEarthenGraspGrasping',
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'maximiliansEarthenGrasp', 
+            identifier: 'maximiliansEarthenGrasp',
             activityIdentifier: 'maximiliansEarthenGraspCrush'
         }],
         unhideActivities: {
@@ -129,7 +129,7 @@ async function veryEarly({dialog}) {
 }
 export let maximiliansEarthenGrasp = {
     name: 'Maximilian\'s Earthen Grasp',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

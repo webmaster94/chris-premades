@@ -1,18 +1,18 @@
 import {activityUtils, actorUtils, dialogUtils, effectUtils, genericUtils, itemUtils, socketUtils, tokenUtils, workflowUtils} from '../../../../../utils.js';
 
 async function attack({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!item?.system.uses.value) return;
     let isNatural = workflow.item.system.type?.value === 'natural';
     isNatural ||= activityUtils.getIdentifier(workflow.activity)?.includes('formOfTheBeast');
     if (!isNatural) return;
     let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Dialog.Use', {itemName: item.name}));
     if (!selection) return;
-    await workflowUtils.syntheticItemRoll(item, [workflow.hitTargets.first()]);
+    await workflowUtils.syntheticItemRoll(item, [workflow.hitTargets.tokens[0]]);
 }
 async function use({workflow}) {
-    if (!workflow.failedSaves.size) return;
-    let targetToken = workflow.failedSaves.first();
+    if (!workflow.failedSaves.count) return;
+    let targetToken = workflow.failedSaves.tokens[0];
     let nearbyTargets;
     let usedReaction = actorUtils.hasUsedReaction(targetToken.actor);
     if (!usedReaction) {
@@ -60,7 +60,7 @@ async function use({workflow}) {
 }
 export let infectiousFury = {
     name: 'Infectious Fury',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

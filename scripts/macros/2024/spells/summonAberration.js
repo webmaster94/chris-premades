@@ -98,8 +98,8 @@ async function use({workflow}){
     if (workflow.workflowOptions['chris-premades']?.createThrall) updates = addThrallBonuses(updates, workflow);
     let animation = itemUtils.getConfig(workflow.item, creatureType + 'Animation') ?? 'none';
     await Summons.spawn(sourceActor, updates, workflow.item, workflow.token, {
-        duration: itemUtils.convertDuration(workflow.activity)?.seconds || 3600, 
-        range: 90, 
+        duration: itemUtils.convertDuration(workflow.activity)?.seconds || 3600,
+        range: 90,
         animation,
         initiativeType: 'follows',
         additionalSummonVaeButtons:
@@ -113,7 +113,7 @@ async function turnStart({trigger: {entity: item}}) {
 }
 export let summonAberration = {
     name: 'Summon Aberration',
-    version: '1.2.32',
+    version: '2.3.0',
     rules: 'modern',
     hasAnimation: true,
     midi: {

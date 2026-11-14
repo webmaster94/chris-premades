@@ -3,7 +3,7 @@ import {upcastTargets} from '../../generic/upcastTargets.js';
 
 async function use({workflow}) {
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
-    if (!workflow.targets.size) {
+    if (!workflow.targets.count) {
         if (concentrationEffect) await genericUtils.remove(concentrationEffect);
         return;
     }
@@ -29,7 +29,7 @@ async function use({workflow}) {
         }
     };
     effectUtils.addMacro(effectData, 'combat', ['heroismHeroic']);
-    for (let target of workflow.targets) {
+    for (let target of workflow.targets.tokens) {
         await effectUtils.createEffect(target.actor, effectData, {
             concentrationItem: workflow.item,
             interdependent: true,
@@ -47,7 +47,7 @@ async function turnStart({trigger: {entity: effect, token}}) {
 }
 export let heroism = {
     name: 'Heroism',
-    version: '1.2.29',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

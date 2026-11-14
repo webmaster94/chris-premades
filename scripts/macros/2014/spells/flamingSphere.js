@@ -57,13 +57,13 @@ async function use({trigger, workflow}) {
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'flamingSphereMove', {strict: true});
     if (!feature) return await removeConcentration();
     let token = await Summons.spawn(actor, updates, workflow.item, workflow.token, {
-        duration: itemUtils.convertDuration(workflow.item).seconds, 
-        range: 60, 
-        animation, 
-        initiativeType: 'none', 
+        duration: itemUtils.convertDuration(workflow.item).seconds,
+        range: 60,
+        animation,
+        initiativeType: 'none',
         additionalVaeButtons: [{
-            type: 'use', 
-            name: feature.name, 
+            type: 'use',
+            name: feature.name,
             identifier: 'flamingSphere',
             activityIdentifier: 'flamingSphereMove'
         }],
@@ -90,11 +90,11 @@ async function move({workflow}) {
     if (!token) return;
     await workflow.actor.sheet.minimize();
     let position = await crosshairUtils.aimCrosshair({
-        token: token.object, 
-        maxRange: 30, 
-        centerpoint: token.object.center, 
-        drawBoundries: true, 
-        trackDistance: true, 
+        token: token.object,
+        maxRange: 30,
+        centerpoint: token.object.center,
+        drawBoundries: true,
+        trackDistance: true,
         fudgeDistance: token.width * canvas.dimensions.distance / 2,
         crosshairsConfig: {
             size: canvas.grid.distance * token.width / 2,
@@ -130,7 +130,7 @@ async function early({dialog}) {
 }
 export let flamingSphere = {
     name: 'Flaming Sphere',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [
@@ -216,7 +216,7 @@ export let flamingSphere = {
 };
 export let flamingSphereEndTurn = {
     name: 'Flaming Sphere: End Turn',
-    version: '1.0.25',
+    version: '2.3.0',
     combat: [
         {
             pass: 'turnEndNear',
@@ -228,5 +228,5 @@ export let flamingSphereEndTurn = {
 };
 export let flamingSphereRam = {
     name: 'Flaming Sphere: Ram',
-    version: '1.0.25'
+    version: '2.3.0'
 };

@@ -8,7 +8,7 @@ async function combatStart({trigger: {entity: item}}) {
 }
 export let superiorInspiration = {
     name: 'Superior Inspiration',
-    version: '1.1.34',
+    version: '2.3.0',
     rules: 'modern',
     combat: [
         {

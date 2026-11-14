@@ -19,7 +19,7 @@ async function damage({workflow}) {
 }
 export let destructiveWave = {
     name: 'Destructive Wave',
-    version: '1.1.10',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

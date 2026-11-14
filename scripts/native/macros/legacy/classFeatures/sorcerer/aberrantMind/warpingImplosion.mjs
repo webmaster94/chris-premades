@@ -1,4 +1,4 @@
-import {actorUtils, automationUtils, dialogUtils, genericUtils, itemUtils, Logging, tokenUtils, workflowUtils} from '../../../../../proxy.mjs';
+import {activityUtils, actorUtils, automationUtils, dialogUtils, genericUtils, itemUtils, Logging, tokenUtils, workflowUtils} from '../../../../../proxy.mjs';
 async function early({document, config, dialog}) {
     if (document.item.system.uses.value) return;
     const spendActivity = itemUtils.getActivityByIdentifier(document.item, 'warping-implosion-cost');
@@ -21,7 +21,7 @@ async function early({document, config, dialog}) {
 async function use({document, workflow}) {
     if (!workflow.token) return;
     const sourceToken = workflow.token.document;
-    const pulled = Array.from(workflow.failedSaves, target => target.document ?? target)
+    const pulled = workflow.failedSaves.tokens.map(target => target.document)
         .map(targetToken => ({targetToken, distance: tokenUtils.getDistance(sourceToken, targetToken)}))
         .sort((a, b) => a.distance - b.distance);
     for (const {targetToken, distance} of pulled) {
@@ -29,7 +29,7 @@ async function use({document, workflow}) {
         if (slide) await tokenUtils.slideToken(targetToken, {sourceToken, distance: slide});
     }
     const {animation, options} = automationUtils.getResolvedAnimation(document, 'animation');
-    await tokenUtils.teleportToken(sourceToken, {animation, options, range: workflow.activity.range.value});
+    await tokenUtils.teleportToken(sourceToken, {animation, options, range: activityUtils.getRange(workflow.activity)});
 }
 export const warpingImplosion = {
     name: 'Warping Implosion',

@@ -1,6 +1,6 @@
 import {dialogUtils, effectUtils, genericUtils, workflowUtils} from '../../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size || !workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
+    if (!workflow.hitTargets.count || !workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     let damageType = item.flags['chris-premades']?.terrorizingForce?.damageType ?? 'fire';
     let infernalMajestyEffect = effectUtils.getEffectByIdentifier(item.actor, 'infernalMajestyEffect');
     let formula = infernalMajestyEffect ? '2d8': '1d8';
@@ -13,7 +13,7 @@ async function use({trigger, workflow}) {
 }
 export let terrorizingForce = {
     name: 'Terrorizing Force',
-    version: '1.3.70',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

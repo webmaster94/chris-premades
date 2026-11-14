@@ -1,6 +1,6 @@
 import {constants, dialogUtils, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../../utils.js';
 async function hit({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!itemUtils.canUse(item)) return;
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     let martialArts = itemUtils.getItemByIdentifier(workflow.actor, 'martialArts');
@@ -14,10 +14,10 @@ async function hit({trigger: {entity: item}, workflow}) {
     }
     let selection = await dialogUtils.confirmUseItem(item);
     if (!selection) return;
-    await workflowUtils.syntheticItemRoll(item, [workflow.hitTargets.first()], {consumeResources: true, consumeUsage: true});
+    await workflowUtils.syntheticItemRoll(item, [workflow.hitTargets.tokens[0]], {consumeResources: true, consumeUsage: true});
 }
 async function use({trigger, workflow}) {
-    if (workflow.failedSaves.size) return;
+    if (workflow.failedSaves.count) return;
     let stunningStrikeSlow = itemUtils.getEffectByIdentifier(workflow.item, 'stunningStrikeSlow');
     let stunningStrikeAdvantage = itemUtils.getEffectByIdentifier(workflow.item, 'stunningStrikeAdvantage');
     if (!stunningStrikeSlow || !stunningStrikeAdvantage) return;
@@ -27,7 +27,7 @@ async function use({trigger, workflow}) {
     stunningStrikeSlowData.origin = stunningStrikeSlow.uuid;
     stunningStrikeSlowData.duration = itemUtils.convertDuration(workflow.activity);
     stunningStrikeAdvantageData.duration = itemUtils.convertDuration(workflow.activity);
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         if (workflow.failedSaves.has(token)) return;
         await effectUtils.createEffects(token.actor, [stunningStrikeAdvantageData, stunningStrikeSlowData], [{}, {}]);
     }));
@@ -37,7 +37,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let stunningStrike = {
     name: 'Stunning Strike',
-    version: '1.3.141',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

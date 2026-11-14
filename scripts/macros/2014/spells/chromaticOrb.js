@@ -1,6 +1,6 @@
 import {animationUtils, dialogUtils, genericUtils, itemUtils} from '../../../utils.js';
 async function damage({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let buttons = [
         ['DND5E.DAMAGE.Type.Acid', 'acid', {image: 'icons/magic/acid/projectile-faceted-glob.webp'}],
         ['DND5E.DAMAGE.Type.Cold', 'cold', {image: 'icons/magic/air/wind-tornado-wall-blue.webp'}],
@@ -44,7 +44,7 @@ async function damage({workflow}) {
         } else {
             anim = 'jb2a.guiding_bolt.01.blueyellow';
         }
-        for (let target of workflow.targets) {
+        for (let target of workflow.targets.tokens) {
             animationUtils.simpleAttack(workflow.token, target, anim, {missed: !workflow.hitTargets.has(target)});
         }
     }
@@ -54,7 +54,7 @@ async function early({workflow}) {
 }
 export let chromaticOrb = {
     name: 'Chromatic Orb',
-    version: '1.1.10',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

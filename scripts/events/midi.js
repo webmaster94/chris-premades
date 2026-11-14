@@ -205,7 +205,7 @@ async function executeMacroPass(workflow, pass) {
 async function executeTargetMacroPass(workflow, pass, onlyHit = false) {
     genericUtils.log('dev', 'Executing Midi Macro Pass: ' + pass);
     let triggers = [];
-    let targets = onlyHit ? workflow.hitTargets : workflow.targets;
+    let targets = onlyHit ? workflow.hitTargets.tokens : workflow.targets.tokens;
     targets?.filter(i => i).forEach(i => {
         triggers.push(...getSortedTriggers({token: i, actor: i.actor}, pass));
     });
@@ -344,7 +344,7 @@ async function damageRollComplete(workflow) {
     if (genericUtils.getCPRSetting('diceSoNice') && game.modules.get('dice-so-nice')?.active) await diceSoNice.damageRollComplete(workflow);
     if (genericUtils.getCPRSetting('explodingHeals')) await explodingHeals(workflow);
     let manualRollsEnabled = genericUtils.getCPRSetting('manualRollsEnabled');
-    if (manualRollsEnabled && (workflow.hitTargets?.size === 0 ? genericUtils.getCPRSetting('manualRollsPromptOnMiss') : true)) await _manualRollsNewRolls(workflow);
+    if (manualRollsEnabled && (workflow.hitTargets.count === 0 ? genericUtils.getCPRSetting('manualRollsPromptOnMiss') : true)) await _manualRollsNewRolls(workflow);
 }
 async function utilityRollComplete(workflow) {
     await executeMacroPass(workflow, 'utilityRollComplete');

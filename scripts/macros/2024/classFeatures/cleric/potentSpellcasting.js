@@ -11,7 +11,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let potentSpellcasting = {
     name: 'Blessed Strikes: Potent Spellcasting',
-    version: '1.2.12',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

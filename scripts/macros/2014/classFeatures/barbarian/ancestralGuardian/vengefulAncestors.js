@@ -1,5 +1,5 @@
 export let vengefulAncestors = {
     name: 'Vengeful Ancestors',
-    version: '1.2.6',
+    version: '2.3.0',
     rules: 'legacy'
 };

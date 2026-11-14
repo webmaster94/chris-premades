@@ -1,8 +1,8 @@
 import {dialogUtils, effectUtils, genericUtils, itemUtils} from '../../../../../utils.js';
 
 async function use({workflow}) {
-    if (!workflow.targets.size) return;
-    let targetToken = workflow.targets.first();
+    if (!workflow.targets.count) return;
+    let targetToken = workflow.targets.tokens[0];
     let targetActor = targetToken.actor;
     let selection = await dialogUtils.buttonDialog(workflow.item.name, 'CHRISPREMADES.Macros.BolsteringMagic.Select', [
         ['CHRISPREMADES.Macros.BolsteringMagic.Bonus', 'd3'],
@@ -62,7 +62,7 @@ async function use({workflow}) {
 }
 export let bolsteringMagic = {
     name: 'Bolstering Magic',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

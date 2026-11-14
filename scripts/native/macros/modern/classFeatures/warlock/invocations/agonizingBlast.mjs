@@ -14,8 +14,8 @@ async function use({document, workflow}) {
     await documentUtils.setFlag(document, 'chris-premades', 'agonizingBlast.spells', chosen.map(spell => spell.name));
 }
 function damage({document, workflow}) {
-    if (!workflow.hitTargets.size) return;
-    const name = workflow.item.type === 'spell' ? workflow.item.name : workflow.item.flags['chris-premades']?.bladeCantrip;
+    if (!workflow.hitTargets.count) return;
+    const name = workflow.item.type === 'spell' ? workflow.item.name : workflow.item.flags['chris-premades']?.bladeCantrip?.name;
     if (!name) return;
     const spellNames = document.flags['chris-premades']?.agonizingBlast?.spells;
     if (!spellNames?.includes(name)) return;
@@ -38,7 +38,7 @@ export const agonizingBlast = {
         },
         formula: {
             default: '@abilities.cha.mod',
-            type: 'text',
+            type: 'formula',
             label: 'CHRISPREMADES.Config.Formula',
             category: 'homebrew'
         }

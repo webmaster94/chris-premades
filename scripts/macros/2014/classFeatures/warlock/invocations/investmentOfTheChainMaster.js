@@ -13,7 +13,7 @@ async function hit({trigger: {entity: item, token}, workflow}) {
 }
 export let investmentOfTheChainMaster = {
     name: 'Eldritch Invocations: Investment of the Chain Master',
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let investmentOfTheChainMasterActive = {
     name: 'Investment of the Chain Master: Active',

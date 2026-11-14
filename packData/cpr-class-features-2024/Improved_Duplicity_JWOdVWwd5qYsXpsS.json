@@ -173,7 +173,7 @@
         "identifier": "improvedDuplicity",
         "source": "chris-premades",
         "rules": "modern",
-        "version": "1.3.20"
+        "version": "2.3.0"
       },
       "hiddenActivities": [
         "heal"

@@ -47,7 +47,7 @@ async function useCracker({workflow}) {
 }
 export let planarAdaptation = {
     name: 'Planar Wanderer: Planar Adaptation',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -67,7 +67,7 @@ export let planarAdaptation = {
 };
 export let portalCracker = {
     name: 'Planar Wanderer: Portal Cracker',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

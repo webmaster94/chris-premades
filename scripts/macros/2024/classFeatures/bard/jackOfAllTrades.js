@@ -1,5 +1,5 @@
 export let jackOfAllTrades = {
     name: 'Jack of All Trades',
-    version: '1.1.30',
+    version: '2.3.0',
     rules: 'modern'
 };

@@ -1,7 +1,7 @@
 import {dialogUtils, effectUtils, genericUtils, itemUtils, workflowUtils} from '../../../../../utils.js';
 
 async function use({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let bloodMaledict = itemUtils.getItemByIdentifier(workflow.actor, 'bloodMaledict');
     if (!bloodMaledict?.system.uses.value) {
         genericUtils.notify('CHRISPREMADES.Generic.NoMoreResource', 'info');
@@ -49,11 +49,11 @@ async function use({workflow}) {
         await workflowUtils.applyDamage([workflow.token], damageRoll.total, 'none');
     }
     await genericUtils.update(bloodMaledict, {'system.uses.spent': bloodMaledict.system.uses.spent + 1});
-    await effectUtils.createEffect(workflow.targets.first().actor, effectData);
+    await effectUtils.createEffect(workflow.targets.tokens[0].actor, effectData);
 }
 export let curseOfTheMuddledMind = {
     name: 'Blood Curse of the Muddled Mind',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

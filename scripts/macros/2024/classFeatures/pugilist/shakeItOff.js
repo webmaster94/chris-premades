@@ -19,7 +19,7 @@ async function use({trigger: {entity: item, token}}) {
     let use = activityUtils.getActivityByIdentifier(item, 'use');
     await workflowUtils.completeActivityUse(use, {midiOptions: {asUser: userId}});
     if (selection.id === digging?.id) {
-        let img = exhaustion <= 0 ? 
+        let img = exhaustion <= 0 ?
             itemUtils.getItemByIdentifier(token.actor, 'digDeep')?.img ?? '' :
             `systems/dnd5e/icons/svg/statuses/exhaustion-${exhaustion}.svg`;
         await genericUtils.update(digging, {flags: {'chris-premades': {exhaustion}}, img});
@@ -31,7 +31,7 @@ async function use({trigger: {entity: item, token}}) {
 }
 export let shakeItOff = {
     name: 'Shake It Off',
-    version: '1.4.25',
+    version: '2.3.0',
     rules: 'modern',
     combat: [
         {

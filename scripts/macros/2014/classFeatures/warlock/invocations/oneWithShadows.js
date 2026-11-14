@@ -7,7 +7,7 @@ async function early({workflow}) {
 }
 export let oneWithShadows = {
     name: 'Eldritch Invocations: One with Shadows',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

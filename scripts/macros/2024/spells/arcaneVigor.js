@@ -15,7 +15,7 @@ async function damage({trigger, workflow}) {
 }
 export let arcaneVigor = {
     name: 'Arcane Vigor',
-    version: '1.1.12',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

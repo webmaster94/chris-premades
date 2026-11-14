@@ -1,12 +1,12 @@
 import {itemUtils, tokenUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.failedSaves.size) return;
+    if (!workflow.failedSaves.count) return;
     let distance = Number(itemUtils.getConfig(workflow.item, 'distance'));
-    await Promise.all(workflow.failedSaves.map(async i => await tokenUtils.pushToken(workflow.token, i, distance)));
+    await Promise.all(workflow.failedSaves.tokens.map(async i => await tokenUtils.pushToken(workflow.token, i, distance)));
 }
 export let thunderwave = {
     name: 'Thunderwave',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

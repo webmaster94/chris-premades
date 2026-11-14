@@ -31,7 +31,7 @@ async function spell({trigger: {entity: item}, workflow}) {
 }
 export let beguilingMagic = {
     name: 'Beguiling Magic',
-    version: '1.1.39',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

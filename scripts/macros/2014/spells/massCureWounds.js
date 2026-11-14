@@ -1,8 +1,8 @@
 import {actorUtils, dialogUtils, genericUtils, workflowUtils} from '../../../utils.js';
 async function early({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let sourceDisposition = workflow.token.document.disposition;
-    let targetTokens = Array.from(workflow.targets.filter(i => i.document.disposition === sourceDisposition && !['construct', 'undead'].includes(actorUtils.typeOrRace(i.actor))));
+    let targetTokens = Array.from(new Set(workflow.targets.tokens).filter(i => i.document.disposition === sourceDisposition && !['construct', 'undead'].includes(actorUtils.typeOrRace(i.actor))));
     if (!targetTokens.length || targetTokens.length <= 6) {
         await workflowUtils.updateTargets(workflow, targetTokens);
         return;
@@ -18,7 +18,7 @@ async function early({workflow}) {
 }
 export let massCureWounds = {
     name: 'Mass Cure Wounds',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

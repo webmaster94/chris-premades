@@ -40,14 +40,14 @@ async function use({workflow}) {
         }
     };
     let effect = await effectUtils.createEffect(workflow.actor, effectData, {
-        concentrationItem: workflow.item, 
-        strictlyInterdependent: true, 
+        concentrationItem: workflow.item,
+        strictlyInterdependent: true,
         vae: [{
-            type: 'use', 
+            type: 'use',
             name: feature.name,
-            identifier: 'moonbeam', 
+            identifier: 'moonbeam',
             activityIdentifier: 'moonbeamMove'
-        }], 
+        }],
         identifier: 'moonbeam',
         unhideActivities: {
             itemUuid: workflow.item.uuid,
@@ -110,7 +110,7 @@ async function early({dialog}) {
 }
 export let moonbeam = {
     name: 'Moonbeam',
-    version: '1.2.28',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

@@ -4,7 +4,7 @@ async function damage({workflow}) {
     await workflow.setDamageRolls([damageRoll]);
 }
 async function late({workflow}) {
-    let targetToken = workflow.targets.first() ?? workflow.token;
+    let targetToken = workflow.targets.tokens[0] ?? workflow.token;
     let feature = await activityUtils.getActivityByIdentifier(workflow.item, 'potionOfPoisonDamage', {strict: true});
     if (!feature) return;
     let activityData = activityUtils.withChangedDamage(feature, {number: 3, denomination: 6}, ['poison']);
@@ -45,7 +45,7 @@ async function turnStart({trigger: {entity: effect, token}}) {
 }
 export let potionOfPoison = {
     name: 'Potion of Poison',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {

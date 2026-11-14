@@ -8,7 +8,7 @@ async function added({trigger: {entity: item}}) {
 export let interdictBoonHellsight = {
     name: 'Interdict Boons: Hellsight',
     aliases: ['Hellsight'],
-    version: '1.7.76',
+    version: '2.3.0',
     rules: 'legacy',
     item: [
         {

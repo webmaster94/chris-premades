@@ -12,7 +12,7 @@ async function use({trigger, workflow}) {
     await genericUtils.remove(frightened);
 }
 async function damage({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     if (Math.floor(workflow.actor.system.attributes.hp.pct) > 50) return;
     let activity = activityUtils.getActivityByIdentifier(item, 'defiantStrike', {strict: true});
@@ -28,7 +28,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 }
 export let iFoughtILived = {
     name: 'I Fought, I Lived',
-    version: '1.4.5',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

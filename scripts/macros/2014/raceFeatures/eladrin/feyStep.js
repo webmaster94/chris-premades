@@ -280,7 +280,7 @@ async function combinedAnimation(season, sourceToken, teleToken, targetTokens, f
         .filter('ColorMatrix', {hue})
         .opacity(0.8)
         .waitUntilFinished(-2000)
-        
+
         .thenDo(async function() {
             await Teleport.target(teleToken, sourceToken, {
                 animation: 'none',
@@ -492,7 +492,7 @@ async function combinedAnimation(season, sourceToken, teleToken, targetTokens, f
 }
 export let eladrinFeyStep = {
     name: 'Fey Step',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

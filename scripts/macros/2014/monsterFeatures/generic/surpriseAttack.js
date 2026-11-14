@@ -1,6 +1,6 @@
 import {combatUtils, constants, dialogUtils, effectUtils, itemUtils, workflowUtils} from '../../../../utils.js';
 async function damage({trigger: {entity: item}, workflow}) {
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     if (!combatUtils.inCombat()) return;
     if (game.combat.round !== 1) return;
@@ -9,7 +9,7 @@ async function damage({trigger: {entity: item}, workflow}) {
         let selection = await dialogUtils.confirm(item.name, 'CHRISPREMADES.Macros.SurpriseAttack.Surprised');
         if (!selection) return;
     } else {
-        if (!effectUtils.getEffectByStatusID(workflow.hitTargets.first().actor, 'surprised')) return;
+        if (!effectUtils.getEffectByStatusID(workflow.hitTargets.tokens[0].actor, 'surprised')) return;
     }
     let damageFormula = config.formula;
     let damageType = workflow.defaultDamageType;
@@ -19,7 +19,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 export let surpriseAttack = {
     name: 'Surprise Attack',
     translation: 'CHRISPREMADES.Macros.SurpriseAttack.Name',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -18,8 +18,8 @@ async function attack({trigger: {entity: item}, workflow}) {
 async function saved({trigger: {entity: item}, workflow}) {
     if (workflow.actor.system.attributes.inspiration) return;
     if (!activityUtils.hasSave(workflow.activity)) return;
-    if (!workflow.failedSaves.size) return;
-    let validTargets = workflow.failedSaves.filter(token => token.actor.system.details.cr);
+    if (!workflow.failedSaves.count) return;
+    let validTargets = new Set(workflow.failedSaves.tokens).filter(token => token.actor.system.details.cr);
     if (!validTargets.size) return;
     await actorUtils.giveHeroicInspiration(workflow.actor);
     let activity = activityUtils.getActivityByIdentifier(item, 'betBig', {strict: true});
@@ -40,7 +40,7 @@ async function heal({trigger, workflow}) {
 }
 export let fateGambler = {
     name: 'Fate Gambler',
-    version: '1.4.14',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

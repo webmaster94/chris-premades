@@ -7,7 +7,7 @@ async function damage({workflow}) {
 }
 export let elementalFuryPotentSpellcasting = {
     name: 'Elemental Fury: Potent Spellcasting',
-    version: '1.3.83',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

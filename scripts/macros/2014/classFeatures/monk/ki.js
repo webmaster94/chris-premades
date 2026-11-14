@@ -9,8 +9,8 @@ async function flurryOfBlows({trigger, workflow}) {
     if (animationUtils.jb2aCheck() != 'patreon') playAnimation = false;
     let target;
     let nearby;
-    if (workflow.targets.size) {
-        target = workflow.targets.first();
+    if (workflow.targets.count) {
+        target = workflow.targets.tokens[0];
     } else {
         nearby = tokenUtils.findNearby(workflow.token, 5, 'enemy', {includeIncapacitated: true});
         if (!nearby.length) return;
@@ -100,11 +100,11 @@ async function flurryOfBlows({trigger, workflow}) {
     let cancelled = false;
     while (!cancelled) {
         positions[i] = await crosshairUtils.aimCrosshair({
-            token: workflow.token, 
-            maxRange: workflow.actor.system.attributes.movement.walk, 
-            centerpoint: workflow.token.center, 
-            drawBoundries: true, 
-            trackDistance: true, 
+            token: workflow.token,
+            maxRange: workflow.actor.system.attributes.movement.walk,
+            centerpoint: workflow.token.center,
+            drawBoundries: true,
+            trackDistance: true,
             fudgeDistance: workflow.token.document.width * canvas.dimensions.distance / 2,
             crosshairsConfig: {
                 size: workflow.token.document.parent.grid.distance * workflow.token.document.width / 2,
@@ -147,7 +147,7 @@ async function flurryOfBlows({trigger, workflow}) {
                         .locally()
                     .play();
                 /* eslint-enable indent */
-        } else { 
+        } else {
             cancelled = true;
         }
     }
@@ -162,7 +162,7 @@ async function flurryOfBlows({trigger, workflow}) {
 export let ki = {
     name: 'Ki Points',
     aliases: ['Ki'],
-    version: '1.5.35',
+    version: '2.3.0',
     midi: {
         item: [
             {

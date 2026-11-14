@@ -7,13 +7,13 @@ async function use({workflow}) {
     let items = workflow.item?.actor?.items.filter(i => itemIds.includes(i.id));
     if (!items.length) return;
     for (let i of items) {
-        await workflowUtils.specialItemUse(i, workflow.targets, workflow.item);
+        await workflowUtils.specialItemUse(i, workflow.targets.tokens, workflow.item);
     }
 }
 export let specialItemUse = {
     name: 'Special Item Use',
     translation: 'CHRISPREMADES.Macros.SpecialItemUse.Name',
-    version: '1.3.37',
+    version: '2.3.0',
     midi: {
         item: [
             {

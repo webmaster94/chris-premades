@@ -2,7 +2,7 @@ import {firearm} from '../../mechanics/firearm.js';
 
 export let pistol = {
     name: 'Pistol (Exandria)',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: firearm.midi,
     config: firearm.config,
     ddbi: {

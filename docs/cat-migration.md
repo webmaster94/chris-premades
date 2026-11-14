@@ -1,6 +1,6 @@
 # CAT integration
 
-CPR 2.2.0 requires Coven's Automation Toolkit 0.1.3, Foundry 14.369 or later, D&D 6.0.x, Midi-QOL 14.6.4, and DAE 14.6.3.
+CPR 2.3.0 targets D&D 6.1.0 and requires Foundry 14.369+, CAT 0.1.8+, Midi-QOL 14.6.12+, and DAE 14.6.9+. Midi's installed build must also allow D&D 6.1; the public upstream 14.6.12 manifest still caps support at 6.0.x.
 
 CAT is the sole automation catalog, updater, and version authority. CPR's separate Medkit applications, update warnings, and source preferences have been removed. CAT lists CPR's existing compendiums and the additional native content, and renders their configuration and shared dialogs. The existing CPR functions and event bindings remain in use. Legacy workflow bindings are not registered a second time as CAT event handlers. Only their item setup callbacks bridge to CAT updates. New upstream content uses native CAT callbacks under `chris-premades-native`, which prevents collisions with legacy generic helpers. The public `chrisPremades` API remains available to world macros.
 

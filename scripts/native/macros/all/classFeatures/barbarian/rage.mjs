@@ -53,7 +53,7 @@ async function spellcasting({document: effect, workflow}) {
     if (!effect.flags['chris-premades']?.rage?.allowSpellcasting) return exit('Spellcasting');
 }
 async function rageDamage({document: effect, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (workflow.activity.ability !== 'str') return;
     const allowedAttack = documentUtils.getRules(effect) === '2024' ? 'attack' : 'meleeWeaponAttack';
     if (!workflowUtils.isAttackType(workflow, allowedAttack)) return;
@@ -63,7 +63,7 @@ async function rageDamage({document: effect, workflow}) {
 }
 export const rage = {
     name: 'Rage',
-    version: '2.1.0',
+    version: '2.1.8',
     rules: 'all',
     notes: 'Use the "actorPreCreateRageEffect" called event (async) to modify the rage effect.\n\tData available: actor, activity, effectData, rules, token.\nUse "actorRageBegin" (async) to respond when rage starts.\n\tData available: actor, activity, effect, rules, token.',
     roll: [
@@ -109,7 +109,7 @@ export const rage = {
         },
         bonus: {
             default: '@scale.barbarian.rage-damage',
-            type: 'text',
+            type: 'formula',
             label: 'CHRISPREMADES.Config.DamageBonus',
             category: 'behavior'
         },

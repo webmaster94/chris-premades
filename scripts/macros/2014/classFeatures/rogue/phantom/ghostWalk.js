@@ -7,7 +7,7 @@ async function preUse({trigger: {entity: item}}) {
     let tokenActivity = activityUtils.getActivityByIdentifier(tokensOfTheDeparted, 'useWail', {strict: true});
     if (!tokenActivity) return;
     if (!await dialogUtils.confirm(
-        item.name, 
+        item.name,
         genericUtils.format('CHRISPREMADES.Macros.TokensOfTheDeparted.MustSpend', {name: tokensOfTheDeparted.name, feature: item.name}),
         {buttons: 'okCancel'}
     )) return true;
@@ -15,7 +15,7 @@ async function preUse({trigger: {entity: item}}) {
 }
 export let ghostWalk = {
     name: 'Ghost Walk',
-    version: '1.5.15',
+    version: '2.3.0',
     midi: {
         item: [
             {

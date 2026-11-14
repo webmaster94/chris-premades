@@ -50,8 +50,8 @@ async function use({workflow}) {
         effectUtils.addMacro(effectData, 'midi.actor', ['elementalEpitomeEmpoweredStrikes']);
     }
     let effect = await effectUtils.createEffect(workflow.actor, effectData, {
-        identifier: 'elementalAttunementEffect', 
-        rules: 'modern',        
+        identifier: 'elementalAttunementEffect',
+        rules: 'modern',
         avatarImg: itemUtils.getConfig(workflow.item, 'avatarImg'),
         tokenImg: itemUtils.getConfig(workflow.item, 'tokenImg'),
         avatarImgPriority: itemUtils.getConfig(workflow.item, 'avatarImgPriority'),
@@ -78,7 +78,7 @@ async function use({workflow}) {
     }));
 }
 async function damage({trigger: {entity: effect}, workflow}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (!constants.unarmedAttacks.includes(genericUtils.getIdentifier(workflow.item))) return;
     if (activityUtils.getIdentifier(workflow.activity) !== 'punch') return;
     let item = await effectUtils.getOriginItem(effect);
@@ -117,15 +117,15 @@ async function damage({trigger: {entity: effect}, workflow}) {
 }
 async function late({trigger: {entity: effect}, workflow}) {
     if (!workflow['chris-premades']?.elementalAttunementUsed) return;
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let item = await effectUtils.getOriginItem(effect);
     if (!item) return;
     let activity = activityUtils.getActivityByIdentifier(item, 'move', {strict: true});
     if(!activity) return;
-    let target = workflow.hitTargets.first();
+    let target = workflow.hitTargets.tokens[0];
     let current = tokenUtils.getDistance(workflow.token, target);
-    let label = (dist, dir) => 
-        genericUtils.translate('CHRISPREMADES.Distance.' + dist) + 
+    let label = (dist, dir) =>
+        genericUtils.translate('CHRISPREMADES.Distance.' + dist) +
         ' ' + genericUtils.translate('CHRISPREMADES.Direction.' + dir);
     let buttons  = [
         [label(10, 'Away'), 10],
@@ -136,7 +136,7 @@ async function late({trigger: {entity: effect}, workflow}) {
     if (current > 10) buttons.push([label(10, 'Towards'), -10]);
     let distance = await dialogUtils.buttonDialog(item.name, 'CHRISPREMADES.Macros.Crusher.Move', buttons);
     if (!distance || distance === '0') return;
-    let save = await workflowUtils.syntheticActivityRoll(activity, workflow.hitTargets);
+    let save = await workflowUtils.syntheticActivityRoll(activity, workflow.hitTargets.tokens);
     if (!save?.failedSaves.size) return;
     await tokenUtils.pushToken(workflow.token, target, distance);
 }
@@ -145,7 +145,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let elementalAttunement = {
     name: 'Elemental Attunement',
-    version: '1.5.22',
+    version: '2.3.0',
     rules: 'modern',
     hasAnimation: true,
     midi: {

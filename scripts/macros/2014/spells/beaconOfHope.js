@@ -1,6 +1,6 @@
 import {actorUtils, effectUtils, genericUtils, itemUtils} from '../../../utils.js';
 async function use({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let effectData = {
         name: workflow.item.name,
         img: workflow.item.img,
@@ -24,14 +24,14 @@ async function use({workflow}) {
         }
     };
     effectUtils.addMacro(effectData, 'midi.actor', ['beaconOfHopeHopeful']);
-    for (let token of workflow.targets) {
+    for (let token of workflow.targets.tokens) {
         await effectUtils.createEffect(token.actor, effectData, {concentrationItem: workflow.item, identifier: 'beaconOfHope'});
     }
     let concentrationEffect = effectUtils.getConcentrationEffect(workflow.actor, workflow.item);
     if (concentrationEffect) await genericUtils.update(concentrationEffect, {duration: effectData.duration});
 }
 async function damageApplication({workflow, ditem}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     if (!workflow.damageRoll) return;
     let healingType = CONFIG.DND5E.healingTypes['healing'].label.toLowerCase();
     let defaultDamageType = workflow.defaultDamageType;
@@ -59,7 +59,7 @@ async function damageApplication({workflow, ditem}) {
 }
 export let beaconOfHope = {
     name: 'Beacon of Hope',
-    version: '1.2.32',
+    version: '2.3.0',
     midi: {
         item: [
             {

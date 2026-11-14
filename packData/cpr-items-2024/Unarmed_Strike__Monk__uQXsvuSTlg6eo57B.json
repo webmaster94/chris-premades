@@ -648,7 +648,7 @@
         "identifier": "monkUnarmedStrike",
         "source": "chris-premades",
         "rules": "modern",
-        "version": "1.5.35"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

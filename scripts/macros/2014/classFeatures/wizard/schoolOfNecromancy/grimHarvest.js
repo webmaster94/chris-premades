@@ -1,7 +1,7 @@
 import {activityUtils, actorUtils, combatUtils, workflowUtils} from '../../../../../utils.js';
 
 async function late({trigger: {entity: item}, workflow}) {
-    if (!workflow.hitTargets.size || !workflow.damageList) return;
+    if (!workflow.hitTargets.count || !workflow.damageList) return;
     if (!combatUtils.perTurnCheck(item, 'grimHarvest')) return;
     let doHealing = false;
     for (let i of workflow.damageList) {
@@ -35,7 +35,7 @@ async function combatEnd({trigger: {entity: item}}) {
 }
 export let grimHarvest = {
     name: 'Grim Harvest',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

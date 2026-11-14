@@ -105,7 +105,7 @@ async function use({workflow}) {
         range: 90,
         animation,
         initiativeType: 'follows',
-        additionalSummonVaeButtons: 
+        additionalSummonVaeButtons:
             updates.actor.items
                 .filter(i => !['summonUndeadIncorporealPassage', 'summonUndeadFesteringAura', 'summonUndeadRottingClawParalyze'].includes(i.flags['chris-premades'].info.identifier))
                 .map(i => {return {type: 'use', name: i.name, identifier: i.flags['chris-premades'].info.identifier};})
@@ -117,8 +117,8 @@ async function turnStart({trigger: {entity: item, token, target}}) {
     await workflowUtils.syntheticItemRoll(item, [target]);
 }
 async function late({workflow}) {
-    if (!workflow.hitTargets.size) return;
-    let target = workflow.targets.first();
+    if (!workflow.hitTargets.count) return;
+    let target = workflow.targets.tokens[0];
     if (!target.actor?.statuses?.has('poisoned')) return;
     let item = itemUtils.getItemByIdentifier(workflow.actor, 'summonUndeadRottingClawParalyze');
     if (!item) return;
@@ -126,7 +126,7 @@ async function late({workflow}) {
 }
 export let summonUndead = {
     name: 'Summon Undead',
-    version: '1.2.32',
+    version: '2.3.0',
     rules: 'modern',
     hasAnimation: true,
     midi: {

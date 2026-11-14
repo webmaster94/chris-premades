@@ -8,7 +8,7 @@ async function early({workflow}) {
     // Check distance
     if (tokenUtils.getLinearDistanceMoved(workflow.token) < config.distance) return;
     // Check size
-    if (config.maxSize && config.maxSize != 'none' && !actorUtils.compareSize(workflow.targets.first(), config.maxSize, '<=')) return;
+    if (config.maxSize && config.maxSize != 'none' && !actorUtils.compareSize(workflow.targets.tokens[0], config.maxSize, '<=')) return;
     let lastMovementId = workflow.token.document.movementHistory.at(-1).movementId;
     let combatant = game?.combat.combatants.find(i => i.tokenId === workflow.token.id);
     if (combatant.flags['chris-premades']?.movementBonusActivity?.lastMovementId === lastMovementId) return;
@@ -21,7 +21,7 @@ async function early({workflow}) {
     }
 }
 async function late({workflow}) {
-    let targets = workflow.hitTargets;
+    let targets = workflow.hitTargets.tokens;
     if (!targets) return;
     let config = itemUtils.getGenericFeatureConfig(workflow.item, 'movementBonusActivity');
     // Check activities
@@ -30,9 +30,9 @@ async function late({workflow}) {
     // Check distance
     if (tokenUtils.getLinearDistanceMoved(workflow.token) < config.distance) return;
     // Check size
-    if (config.maxSize && config.maxSize != 'none' && !actorUtils.compareSize(workflow.hitTargets.first(), config.maxSize, '<=')) return;
+    if (config.maxSize && config.maxSize != 'none' && !actorUtils.compareSize(workflow.hitTargets.tokens[0], config.maxSize, '<=')) return;
     // Check saves
-    if (config.checkSaves && !workflow.failedSaves.size) return;
+    if (config.checkSaves && !workflow.failedSaves.count) return;
     let combatant = game?.combat.combatants.find(i => i.tokenId === workflow.token.id);
     if (combatant) {
         let lastMovementId = workflow.token.document.movementHistory.at(-1).movementId;
@@ -43,7 +43,7 @@ async function late({workflow}) {
     let triggerActivities = itemActivities.filter(i => config.triggerActivities.includes(i.id));
     if (!triggerActivities.length) return;
     for (let i of triggerActivities) {
-        await workflowUtils.syntheticActivityRoll(i, [workflow.hitTargets.first()]);
+        await workflowUtils.syntheticActivityRoll(i, [workflow.hitTargets.tokens[0]]);
     }
 }
 function actorSizes() {
@@ -56,7 +56,7 @@ function actorSizes() {
 export let movementBonusActivity = {
     name: 'Movement Bonus Activity',
     translation: 'CHRISPREMADES.Macros.MovementBonusActivity.Name',
-    version: '1.3.37',
+    version: '2.3.0',
     midi: {
         item: [
             {

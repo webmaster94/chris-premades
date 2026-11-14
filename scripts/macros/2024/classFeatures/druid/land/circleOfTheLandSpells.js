@@ -57,7 +57,7 @@ async function use({workflow}) {
 }
 export let circleOfTheLandSpells = {
     name: 'Circle of the Land Spells',
-    version: '1.3.83',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

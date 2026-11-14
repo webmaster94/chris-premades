@@ -1,6 +1,6 @@
 import {dialogUtils, genericUtils} from '../../../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let options = [
         ['CHRISPREMADES.Macros.InsightfulManipulator.IntScore', 'int'],
         ['CHRISPREMADES.Macros.InsightfulManipulator.WisScore', 'wis'],
@@ -18,7 +18,7 @@ async function use({trigger, workflow}) {
             case 'wis':
             case 'cha': {
                 let sourceScore = workflow.actor.system.abilities[type].value;
-                let targetScore = workflow.targets.first().actor.system.abilities[type].value;
+                let targetScore = workflow.targets.tokens[0].actor.system.abilities[type].value;
                 if (sourceScore > targetScore) {
                     message += genericUtils.format('CHRISPREMADES.Macros.InsightfulManipulator.Lower', {ability: genericUtils.translate('DND5E.Ability' + type.capitalize())});
                 } else if (sourceScore < targetScore) {
@@ -30,7 +30,7 @@ async function use({trigger, workflow}) {
             }
             case 'levels': {
                 let sourceLevel = workflow.actor.system.details.level;
-                let targetLevel = workflow.targets.first().actor.system.details.level;
+                let targetLevel = workflow.targets.tokens[0].actor.system.details.level;
                 if (!targetLevel) {
                     message += genericUtils.translate('CHRISPREMADES.Macros.InsightfulManipulator.NoLevel');
                 } else if (sourceLevel > targetLevel) {
@@ -54,7 +54,7 @@ async function use({trigger, workflow}) {
 }
 export let insightfulManipulator = {
     name: 'Insightful Manipulator',
-    version: '1.3.130',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

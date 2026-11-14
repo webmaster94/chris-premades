@@ -120,7 +120,8 @@
     "core": {},
     "chris-premades": {
       "info": {
-        "hasAnimation": true
+        "hasAnimation": true,
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

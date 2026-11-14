@@ -5,7 +5,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let maskOfMonstrousForms = {
     name: 'Mask of Monstrous Forms',
-    version: '1.4.12',
+    version: '2.3.0',
     rules: 'modern',
     midi: wildShape.midi,
     item: [

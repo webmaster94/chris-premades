@@ -364,7 +364,7 @@
         "identifier": "infernalConduit",
         "rules": "legacy",
         "source": "chris-premades",
-        "version": "1.3.84"
+        "version": "2.3.0"
       },
       "macros": {
         "midi": {

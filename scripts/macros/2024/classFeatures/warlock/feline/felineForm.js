@@ -85,7 +85,7 @@ async function hit({trigger: {entity: effect}, workflow}) {
 }
 export let felineForm = {
     name: 'Feline Form',
-    version: '1.4.17',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

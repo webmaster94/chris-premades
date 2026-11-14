@@ -282,7 +282,7 @@
         "identifier": "naturesWrath",
         "source": "chris-premades",
         "rules": "modern",
-        "version": "1.5.28"
+        "version": "2.3.0"
       },
       "macros": {
         "item": [

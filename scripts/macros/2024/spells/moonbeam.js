@@ -48,7 +48,7 @@ async function use({workflow}) {
             name: feature.name,
             identifier: 'moonbeam',
             activityIdentifier: 'moonbeamMove'
-        }], 
+        }],
         identifier: 'moonbeam',
         unhideActivities: {
             itemUuid: workflow.item.uuid,
@@ -56,7 +56,7 @@ async function use({workflow}) {
             favorite: true
         }
     });
-    for (let target of workflow.targets) {
+    for (let target of workflow.targets.tokens) {
         let targetCombatant = target.combatant;
         if (!targetCombatant) continue;
         await combatUtils.setTurnCheck(targetCombatant, 'moonbeam');
@@ -113,7 +113,7 @@ async function early({dialog}) {
 }
 export let moonbeam = {
     name: 'Moonbeam',
-    version: '1.2.14',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

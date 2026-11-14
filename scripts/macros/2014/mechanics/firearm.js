@@ -166,7 +166,7 @@ async function late({workflow}) {
     if (!adeptMarksman) return;
     let viciousIntent = itemUtils.getItemByIdentifier(workflow.actor, 'viciousIntent');
     let hemorrhagingCritical = itemUtils.getItemByIdentifier(workflow.actor, 'hemorrhagingCritical');
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     let critRoll = viciousIntent ? 19 : 20;
     let regained = 0;
     let ditem = workflow.damageItem;
@@ -205,7 +205,7 @@ async function late({workflow}) {
                     }
                 }
             };
-            await effectUtils.createEffect(workflow.hitTargets.first().actor, effectData);
+            await effectUtils.createEffect(workflow.hitTargets.tokens[0].actor, effectData);
             await workflowUtils.completeItemUse(hemorrhagingCritical);
         }
     }
@@ -308,7 +308,7 @@ async function reload({workflow}) {
 }
 export let firearm = {
     name: 'Firearm (CR)',
-    version: '1.1.10',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -371,7 +371,7 @@ export let firearm = {
 };
 export let firearmRepair = {
     name: 'Repair Firearm',
-    version: '0.12.86',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -384,7 +384,7 @@ export let firearmRepair = {
 };
 export let firearmReload = {
     name: 'Reload Firearm',
-    version: '0.12.86',
+    version: '2.3.0',
     midi: {
         item: [
             {

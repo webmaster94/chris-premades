@@ -103,7 +103,7 @@
         "identifier": "auraOfAuthority",
         "rules": "modern",
         "source": "chris-premades",
-        "version": "1.5.1"
+        "version": "2.3.0"
       },
       "macros": {
         "aura": [

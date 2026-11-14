@@ -2,8 +2,8 @@ import {activityUtils, actorUtils, compendiumUtils, constants, dialogUtils, effe
 import {proneOnFail} from '../../../generic/proneOnFail.js';
 import {determineSuperiorityDie} from './superiorityDice.js';
 async function useBaitAndSwitch({workflow}) {
-    if (workflow.targets.size !== 1) return;
-    let targetToken = workflow.targets.first();
+    if (workflow.targets.count !== 1) return;
+    let targetToken = workflow.targets.tokens[0];
     if (targetToken.id === workflow.token.id || targetToken.document.disposition * workflow.token.document.disposition < 0) return;
     let [itemToUse, superiorityDie] = await determineSuperiorityDie(workflow.actor);
     if (!itemToUse?.system.uses.value) return;
@@ -56,7 +56,7 @@ async function useBaitAndSwitch({workflow}) {
     await effectUtils.createEffect(selection ? targetToken.actor : workflow.actor, effectData);
 }
 async function useBrace({workflow}) {
-    if (workflow.targets.size !== 1) return;
+    if (workflow.targets.count !== 1) return;
     let weapons = workflow.token.actor.items.filter(i => i.type === 'weapon' && i.system.equipped && i.system.activities.getByType('attack').some(j => j.actionType === 'mwak'));
     if (!weapons.length) return;
     let [itemToUse, superiorityDie] = await determineSuperiorityDie(workflow.actor);
@@ -84,7 +84,7 @@ async function useBrace({workflow}) {
         }
     };
     let effect = await effectUtils.createEffect(workflow.actor, effectData);
-    await workflowUtils.syntheticItemRoll(selected, [workflow.targets.first()]);
+    await workflowUtils.syntheticItemRoll(selected, [workflow.targets.tokens[0]]);
     if (effect) await genericUtils.remove(effect);
     await genericUtils.update(itemToUse, {'system.uses.spent': itemToUse.system.uses.spent + 1});
 }
@@ -142,8 +142,8 @@ async function useCommandersStrike({workflow}) {
     await genericUtils.update(itemToUse, {'system.uses.spent': itemToUse.system.uses.spent + 1});
 }
 async function useDistractingStrike({workflow}) {
-    if (workflow.targets.size !== 1) return;
-    let targetActor = workflow.targets.first()?.actor;
+    if (workflow.targets.count !== 1) return;
+    let targetActor = workflow.targets.tokens[0]?.actor;
     if (!targetActor) return;
     let effectData = {
         name: workflow.item.name,
@@ -179,15 +179,15 @@ async function useDistractingStrike({workflow}) {
     await effectUtils.createEffect(targetActor, effectData);
 }
 async function distractingStrikeEffectHit({trigger: {entity: effect}, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     let originItem = await fromUuid(effect.origin);
     if (originItem.actor === workflow.actor) return;
     await genericUtils.remove(effect);
 }
 async function useGoadingAttack({workflow}) {
-    if (!workflow.failedSaves.size) return;
-    let targetActor = workflow.targets.first()?.actor;
+    if (!workflow.failedSaves.count) return;
+    let targetActor = workflow.targets.tokens[0]?.actor;
     if (!targetActor) return;
     let effectData = {
         name: workflow.item.name,
@@ -222,7 +222,7 @@ async function useGoadingAttack({workflow}) {
     await effectUtils.createEffect(targetActor, effectData);
 }
 async function useGrapplingStrike({workflow}) {
-    let target = workflow.targets.first();
+    let target = workflow.targets.tokens[0];
     if (!target) return;
     let feature = itemUtils.getItemByIdentifier(workflow.actor, 'grapple');
     let featureData;
@@ -320,7 +320,7 @@ async function promptParry({trigger: {entity: item}, workflow, ditem}) {
     await genericUtils.update(itemToUse, {'system.uses.spent': itemToUse.system.uses.spent + 1});
 }
 async function usePushingAttack({workflow}) {
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     let targetActor = targetToken?.actor;
     if (!targetActor) return;
     if (actorUtils.getSize(targetActor) > 3) return;
@@ -334,7 +334,7 @@ async function usePushingAttack({workflow}) {
     await tokenUtils.pushToken(workflow.token, targetToken, distance);
 }
 async function useSweepingAttack({workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let superiorityDie = workflow.actor.system.scale?.['battle-master']?.['combat-superiority-die']?.die ?? 'd6';
     let useSmall = genericUtils.getProperty(workflow.actor, 'flags.chris-premades.useSmallSuperiorityDie');
     if (useSmall) superiorityDie = 'd6';
@@ -342,7 +342,7 @@ async function useSweepingAttack({workflow}) {
     if (!currAttackRoll) return;
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'sweepingAttackAttack', {strict: true});
     if (!feature) return;
-    let nearbyTargets = tokenUtils.findNearby(workflow.targets.first(), 5, 'ally');
+    let nearbyTargets = tokenUtils.findNearby(workflow.targets.tokens[0], 5, 'ally');
     let realNearbyTargets = tokenUtils.findNearby(workflow.token, currRange, 'enemy').filter(i => nearbyTargets.includes(i));
     if (!realNearbyTargets.length) return;
     let target;
@@ -364,7 +364,7 @@ async function sweepingAttackAttack({workflow}) {
     await workflow.setAttackRoll(replacementRoll);
 }
 async function useTripAttack({workflow}) {
-    let targetToken = workflow.targets.first();
+    let targetToken = workflow.targets.tokens[0];
     let targetActor = targetToken?.actor;
     if (!targetActor) return;
     if (actorUtils.getSize(targetActor) > 3) return;
@@ -377,12 +377,12 @@ async function added({trigger: {entity: item}}) {
 }
 export let maneuversAmbush = {
     name: 'Maneuvers: Ambush',
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let maneuversBaitAndSwitch = {
     name: 'Maneuvers: Bait and Switch',
     aliases: ['Maneuver: Bait and Switch'],
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -396,7 +396,7 @@ export let maneuversBaitAndSwitch = {
 export let maneuversBrace = {
     name: 'Maneuvers: Brace',
     aliases: ['Maneuver: Brace'],
-    version: '1.3.10',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -410,7 +410,7 @@ export let maneuversBrace = {
 export let maneuversCommandersStrike = {
     name: 'Maneuvers: Commander\'s Strike',
     aliases: ['Maneuver: Commander\'s Strike'],
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -424,17 +424,17 @@ export let maneuversCommandersStrike = {
 export let maneuversCommandingPresence = {
     name: 'Maneuvers: Commanding Presence',
     aliases: ['Maneuver: Commanding Presence'],
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let maneuversDisarmingAttack = {
     name: 'Maneuvers: Disarming Attack',
     aliases: ['Maneuver: Disarming Attack'],
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let maneuversDistractingStrike = {
     name: 'Maneuvers: Distracting Strike',
     aliases: ['Maneuver: Distracting Strike'],
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -448,12 +448,12 @@ export let maneuversDistractingStrike = {
 export let maneuversEvasiveFootwork = {
     name: 'Maneuvers: Evasive Footwork',
     aliases: ['Maneuver: Evasive Footwork'],
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let maneuversFeintingAttack = {
     name: 'Maneuvers: Feinting Attack',
     aliases: ['Maneuver: Feinting Attack'],
-    version: '1.3.55',
+    version: '2.3.0',
     item: [
         {
             pass: 'created',
@@ -475,7 +475,7 @@ export let maneuversFeintingAttack = {
 export let maneuversGoadingAttack = {
     name: 'Maneuvers: Goading Attack',
     aliases: ['Maneuver: Goading Attack'],
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -489,7 +489,7 @@ export let maneuversGoadingAttack = {
 export let maneuversGrapplingStrike = {
     name: 'Maneuvers: Grappling Strike',
     aliases: ['Maneuver: Grappling Strike'],
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -503,7 +503,7 @@ export let maneuversGrapplingStrike = {
 export let maneuversLungingAttack = {
     name: 'Maneuvers: Lunging Attack',
     aliases: ['Maneuver: Lunging Attack'],
-    version: '1.3.55',
+    version: '2.3.0',
     item: [
         {
             pass: 'created',
@@ -525,7 +525,7 @@ export let maneuversLungingAttack = {
 export let maneuversManeuveringAttack = {
     name: 'Maneuvers: Maneuvering Attack',
     aliases: ['Maneuver: Maneuvering Attack'],
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -539,11 +539,11 @@ export let maneuversManeuveringAttack = {
 export let maneuversMenacingAttack = {
     name: 'Maneuvers: Menacing Attack',
     aliases: ['Maneuver: Menacing Attack'],
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let maneuversParry = {
     name: 'Maneuvers: Parry',
-    version: '1.5.20',
+    version: '2.3.0',
     midi: {
         actor: [
             {
@@ -557,12 +557,12 @@ export let maneuversParry = {
 export let maneuversPrecisionAttack = {
     name: 'Maneuvers: Precision Attack',
     aliases: ['Maneuver: Precision Attack'],
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let maneuversPushingAttack = {
     name: 'Maneuvers: Pushing Attack',
     aliases: ['Maneuver: Pushing Attack'],
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -577,7 +577,7 @@ export let maneuversPushingAttack = {
 export let maneuversQuickToss = {
     name: 'Maneuvers: Quick Toss',
     aliases: ['Maneuver: Quick Toss'],
-    version: '1.3.55',
+    version: '2.3.0',
     item: [
         {
             pass: 'created',
@@ -599,7 +599,7 @@ export let maneuversQuickToss = {
 export let maneuversRally = {
     name: 'Maneuvers: Rally',
     aliases: ['Maneuver: Rally'],
-    version: '1.3.55',
+    version: '2.3.0',
     item: [
         {
             pass: 'created',
@@ -621,7 +621,7 @@ export let maneuversRally = {
 export let maneuversRiposte = {
     name: 'Maneuvers: Riposte',
     aliases: ['Maneuver: Riposte'],
-    version: '1.3.55',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -652,7 +652,7 @@ export let maneuversRiposte = {
 export let maneuversSweepingAttack = {
     name: 'Maneuvers: Sweeping Attack',
     aliases: ['Maneuver: Sweeping Attack'],
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -673,12 +673,12 @@ export let maneuversSweepingAttack = {
 export let maneuversTacticalAssessment = {
     name: 'Maneuvers: Tactical Assessment',
     aliases: ['Maneuver: Tactical Assessment'],
-    version: '1.1.0'
+    version: '2.3.0'
 };
 export let maneuversTripAttack = {
     name: 'Maneuvers: Trip Attack',
     aliases: ['Maneuver: Trip Attack'],
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {
@@ -698,7 +698,7 @@ export let maneuversTripAttack = {
 };
 export let distractingStrikeEffect = {
     name: 'Distracting Strike: Effect',
-    version: '1.1.41',
+    version: '2.3.0',
     midi: {
         actor: [
             {

@@ -83,7 +83,7 @@ async function use({workflow}) {
         .persist(true)
         .belowTokens(true)
         .tieToDocuments(template)
-        
+
         .effect()
         .atLocation(template)
         .origin(template.uuid)
@@ -92,13 +92,13 @@ async function use({workflow}) {
         .tint('#941010')
         .persist(true)
         .tieToDocuments(template)
-        
+
         .play();
 
 }
 export let summonLesserDemons = {
     name: 'Summon Lesser Demons',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

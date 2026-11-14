@@ -209,7 +209,7 @@
     "chris-premades": {
       "info": {
         "name": "Maneuvers: Quick Toss",
-        "version": "1.3.55",
+        "version": "2.3.0",
         "identifier": "maneuversQuickToss",
         "source": "chris-premades"
       },

@@ -1,8 +1,8 @@
 import {genericUtils, templateUtils, tokenUtils, workflowUtils} from '../../utils.js';
 async function check(workflow) {
-    if (!workflow.item || !workflow.token || !workflow.targets.size || !workflow.activity) return;
+    if (!workflow.item || !workflow.token || !workflow.targets.count || !workflow.activity) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
-    let target = workflow.targets.first();
+    let target = workflow.targets.tokens[0];
     let source = workflow.token;
     let templates = source.scene.regions.filter(template => {
         if (!genericUtils.isTemplateRegion(template)) return false;

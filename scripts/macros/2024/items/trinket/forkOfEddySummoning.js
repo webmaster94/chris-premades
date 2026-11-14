@@ -26,7 +26,7 @@ async function use({trigger, workflow}) {
         updates.actor.prototypeToken.name = name;
     }
     await Summons.spawn(actor, updates, workflow.item, workflow.token, {
-        duration: itemUtils.convertDuration(workflow.activity).seconds, 
+        duration: itemUtils.convertDuration(workflow.activity).seconds,
         range: workflow.activity.range.value,
         animation,
         initiativeType: 'follows',
@@ -44,7 +44,7 @@ async function dismiss({trigger, workflow}) {
 }
 export let forkOfEddySummoning = {
     name: 'Fork of Eddy Summoning',
-    version: '1.4.25',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

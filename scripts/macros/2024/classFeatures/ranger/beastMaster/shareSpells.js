@@ -2,7 +2,7 @@ import {dialogUtils, effectUtils, genericUtils, itemUtils, tokenUtils, workflowU
 async function early({trigger: {entity: item}, workflow}) {
     let workflowItem = workflow.item;
     if (workflowItem.type !== 'spell') return;
-    if (!workflow.targets.some(t => t.document.uuid === workflow.token.document.uuid)) return;
+    if (!workflow.targets.tokens.some(t => t.document.uuid === workflow.token.document.uuid)) return;
     let primalCompanion = itemUtils.getItemByIdentifier(workflow.actor, 'primalCompanion');
     if (!primalCompanion) return;
     let primalCompanionEffect = effectUtils.getEffectByIdentifier(workflow.actor, 'primalCompanion');
@@ -13,13 +13,13 @@ async function early({trigger: {entity: item}, workflow}) {
     if (tokenUtils.getDistance(workflow.token, primalCompanionToken) > range) return;
     let selection = await dialogUtils.confirm(item.name, genericUtils.format('CHRISPREMADES.Macros.ShareSpells.Confirm', {spell: workflowItem.name, name: primalCompanionToken.actor.name}));
     if (!selection) return;
-    let targets = Array.from(workflow.targets);
+    let targets = Array.from(workflow.targets.tokens);
     targets.push(primalCompanionToken);
     workflowUtils.updateTargets(workflow, targets);
 }
 export let shareSpells  = {
     name: 'Share Spells',
-    version: '1.3.79',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

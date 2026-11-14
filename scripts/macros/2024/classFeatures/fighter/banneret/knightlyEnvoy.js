@@ -18,7 +18,7 @@ async function use({trigger, workflow}) {
 }
 export let knightlyEnvoy = {
     name: 'Knightly Envoy',
-    version: '1.3.164',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

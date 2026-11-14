@@ -31,7 +31,7 @@ async function use({workflow}) {
             }
         }
     });
-    await Promise.all(workflow.targets.map(i => effectUtils.createEffect(i.actor, effectData, {identifier: 'naturesSanctuary', parentEntity: template})));
+    await Promise.all(workflow.targets.tokens.map(i => effectUtils.createEffect(i.actor, effectData, {identifier: 'naturesSanctuary', parentEntity: template})));
     let feature = activityUtils.getActivityByIdentifier(workflow.item, 'naturesSanctuaryMove', {strict: true});
     if (!feature) return;
     let casterEffectData = {
@@ -68,7 +68,7 @@ async function move({workflow}) {
     let template = await fromUuid(templateUtils.normalizeTemplateUuid(effect?.flags['chris-premades'].naturesSanctuary.templateUuid));
     if (!template) return;
     let preTokens = new Set(template.parent.tokens.filter(t => t.actor && effectUtils.getEffectByIdentifier(t.actor, 'naturesSanctuary')).map(t => t.object));
-    let postTokens = workflow.targets;
+    let postTokens = new Set(workflow.targets.tokens);
     await templateUtils.moveTemplate(template, templateUtils.getPosition(newTemplate));
     await genericUtils.remove(newTemplate);
     let toRemove = preTokens.difference(postTokens);
@@ -100,7 +100,7 @@ async function added({trigger: {entity: item}}) {
 }
 export let naturesSanctuary = {
     name: 'Nature\'s Sanctuary',
-    version: '1.3.83',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

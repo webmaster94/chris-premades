@@ -1,3 +1,11 @@
+# 2.3.0 - D&D 6.1 and upstream automations
+- Targets D&D 6.1.0. Fixes rider flag deletion without losing effect riders or restoring removed activities.
+- Imports CPR's CAT-native 2.1.8 fixes and adds 143 previously missing item definitions, for 257 native catalog entries plus required payloads. Covers additional high-level spells, bard and barbarian subclasses, magic items, firearms, and third-party weapon masteries. Existing fork automations and UUIDs remain available.
+- Updates workflow readers to Midi's explicit token views and counts, retains document-aware target sets, and restores remote results through Midi's API. NPC Smite and Sneak Attack retain their manual fallback.
+- Ports maintained legacy-branch fixes for Blood Sacrifice, Flash of Genius visibility, Primal Strike recovery, Sneak Attack damage types, and duplicate damage-type prompts.
+- CAT remains the sole updater. Requires CAT 0.1.8+, Midi-QOL 14.6.12+, and DAE 14.6.9+. The installed Midi build must permit D&D 6.1; upstream 14.6.12 currently caps its manifest at 6.0.x.
+- Validated with regression tests, JavaScript/JSON checks, catalog binding/reference audits, compendium builds, and webpack. No new in-game validation or complete automation playthrough was performed.
+
 # 2.2.0 - CAT owns automation updates
 - Removes CPR's Medkit windows, status colors, version warnings, update checker, tours, and separate automation-source preferences. CAT alone selects, applies, updates, and reports automation versions. Public item-update helpers delegate to CAT.
 - Existing saved settings migrate without overwriting CAT choices. CAT updates retain older CPR setup callbacks so linked activities, resource consumption, and class scales still initialize.

@@ -15,8 +15,7 @@ async function naturalAttack({document, workflow}) {
         const part = itemData.system.activities[workflow.activity.id].damage.parts[0];
         part.denomination = Math.min(part.denomination + config.diceSteps, config.maxDenomination);
     }
-    workflow.item = itemUtils.syntheticItem(itemData, workflow.actor);
-    workflow.activity = workflow.item.system.activities.get(workflow.activity.id);
+    await workflowUtils.setItem(workflow, itemUtils.syntheticItem(itemData, workflow.actor));
 }
 async function use({document, workflow}) {
     if (workflow.activity.identifier !== 'transform') return;
@@ -57,11 +56,11 @@ async function attack({workflow}) {
     if (bestAbility === defaultAbility) return;
     const activityData = workflow.activity.toObject();
     activityData.attack.ability = bestAbility;
-    workflowUtils.setActivity(workflow, activityData);
+    await workflowUtils.setActivity(workflow, activityData);
 }
 export const formOfTheBeastWarlock = {
     name: 'Form of the Beast',
-    version: '2.0.0',
+    version: '2.1.7',
     rules: '2014',
     roll: [
         {pass: 'itemRollFinished', macro: use, priority: 50},
@@ -113,13 +112,6 @@ export const formOfTheBeastWarlock = {
         };
     }
 };
-async function supernaturallyKeen({skillId}) {
-    if (!['prc', 'ste', 'sur'].includes(skillId)) return;
-    return {
-        label: 'CHRISPREMADES.Macros.Legacy.FormOfTheBeast.Keen',
-        type: 'advantage'
-    };
-}
 async function removed({document: effect}) {
     const actor = effect.parent;
     const levels = actor.classes[automationUtils.getConfigValue(effect, 'classIdentifier')]?.system.levels ?? 0;
@@ -128,13 +120,10 @@ async function removed({document: effect}) {
 }
 export const formOfTheBeastWarlockEffect = {
     name: 'Form of the Beast: Transformed',
-    version: '2.0.0',
+    version: '2.1.7',
     rules: '2014',
     roll: [
         {pass: 'actorPreambleComplete', macro: naturalAttack, priority: 30}
-    ],
-    skill: [
-        {pass: 'actorContext', macro: supernaturallyKeen, priority: 50}
     ],
     effect: [
         {pass: 'deleted', macro: removed, priority: 50}

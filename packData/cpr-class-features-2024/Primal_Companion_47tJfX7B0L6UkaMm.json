@@ -547,7 +547,7 @@
     "chris-premades": {
       "info": {
         "name": "Primal Companion",
-        "version": "1.3.79",
+        "version": "2.3.0",
         "identifier": "primalCompanion",
         "source": "chris-premades",
         "hasAnimation": true,

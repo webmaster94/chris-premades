@@ -5,14 +5,14 @@ async function rest({trigger: {entity: item}, actor}) {
     if (!uses || uses.value > 0) return;
     let recovery = activityUtils.getActivityByIdentifier(item, 'recoverToken', {strict: true});
     if (!recovery) return;
-    await workflowUtils.syntheticActivityRoll(recovery, [], {consumeUsage: true, consumeResources: true}); 
+    await workflowUtils.syntheticActivityRoll(recovery, [], {consumeUsage: true, consumeResources: true});
 }
 async function added({trigger: {entity: item}}) {
     await itemUtils.correctActivityItemConsumption(item, ['recoverToken'], 'tokensOfTheDeparted');
 }
 export let deathsFriend = {
     name: 'Death\'s Friend',
-    version: '1.5.15',
+    version: '2.3.0',
     rest: [
         {
             pass: 'long',

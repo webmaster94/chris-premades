@@ -1,6 +1,6 @@
 import {activityUtils, animationUtils, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let maxBolts = 1 + workflowUtils.getCastLevel(workflow);
     let activity = activityUtils.getActivityByIdentifier(workflow.item, 'bolt', {strict: true});
     if (!activity) return;
@@ -12,15 +12,15 @@ async function use({trigger, workflow}) {
     let sound = itemUtils.getConfig(workflow.item, 'sound');
     let colors = darkBolt.config.find(i => i.value === 'color').options.map(j => j.value).filter(k => k != 'random');
     let details;
-    if (workflow.targets.size > 1) {
-        let selection = await dialogUtils.selectTargetDialog(workflow.item.name, genericUtils.format('CHRISPREMADES.Macros.DarkBolt.Select', {maxBolts}), Array.from(workflow.targets), {type: 'selectAmount', maxAmount: maxBolts, skipDeadAndUnconscious: false});
+    if (workflow.targets.count > 1) {
+        let selection = await dialogUtils.selectTargetDialog(workflow.item.name, genericUtils.format('CHRISPREMADES.Macros.DarkBolt.Select', {maxBolts}), Array.from(workflow.targets.tokens), {type: 'selectAmount', maxAmount: maxBolts, skipDeadAndUnconscious: false});
         if (!selection) return;
         details = selection[0].map(i => ({document: i.document, value: Number(i.value)})).filter(i => i.value);
         if (!details.length) return;
     } else {
         details = [
             {
-                document: workflow.targets.first(),
+                document: workflow.targets.tokens[0],
                 value: maxBolts
             }
         ];
@@ -40,7 +40,7 @@ async function use({trigger, workflow}) {
 }
 export let darkBolt = {
     name: 'Darkbolt',
-    version: '1.4.9',
+    version: '2.3.0',
     rules: 'legacy',
     midi: {
         item: [

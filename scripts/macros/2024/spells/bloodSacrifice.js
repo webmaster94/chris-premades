@@ -1,17 +1,18 @@
-import {dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
+import {actorUtils, dialogUtils, genericUtils, itemUtils, workflowUtils} from '../../../utils.js';
 import {constants, effectUtils} from '../../../utils.js';
 async function damage({trigger: {entity: effect}, workflow}) {
-    if (!workflow.hitTargets.size || !workflow.damageRolls) return;
-    if (workflow.item.type != 'spell' && !workflow.item.flags['chris-premades']?.trueStrike) return;
+    if (!workflow.hitTargets.count || !workflow.damageRolls || workflowUtils.isSustainedRoll(workflow)) return;
+    if (workflow.item.type !== 'spell' && !workflowUtils.isAttackType(workflow, 'spellAttack') &&
+        !(workflow.item.flags['chris-premades']?.bladeCantrip && Math.floor((actorUtils.getLevelOrCR(workflow.actor) + 1) / 6) > 0)) return;
     if (genericUtils.getProperty(workflow, 'workflowOptions.chris-premades.multiWorkflowAttack') > 0) return;
     let item = await effectUtils.getOriginItem(effect);
     if (!item) return;
     let dieSize = itemUtils.getConfig(item, 'dieSize');
     let formula = (effect.flags['midi-qol'].castData.castLevel - 1) + dieSize;
-    if (workflow.targets.size === 1) {
+    if (workflow.targets.count === 1) {
         await workflowUtils.bonusDamage(workflow, formula);
-    } else if (workflow.targets.size > 1) {
-        let result = await dialogUtils.selectTargetDialog(item.name, genericUtils.format('CHRISPREMADES.Macros.BloodSacrifice.Apply', {itemName: item.name}), workflow.targets, {skipDeadAndUnconscious: false});
+    } else if (workflow.targets.count > 1) {
+        let result = await dialogUtils.selectTargetDialog(item.name, genericUtils.format('CHRISPREMADES.Macros.BloodSacrifice.Apply', {itemName: item.name}), workflow.targets.tokens, {skipDeadAndUnconscious: false});
         if (!result) return;
         let damageRoll = await new CONFIG.Dice.DamageRoll(formula, {}, {type: workflow.defaultDamageType}).evaluate();
         damageRoll.toMessage({
@@ -33,7 +34,7 @@ async function applyDamage({trigger, workflow, ditem}) {
 }
 export let bloodSacrifice = {
     name: 'Blood Sacrifice',
-    version: '1.5.25',
+    version: '2.3.0',
     rules: 'modern',
     config: [
         {

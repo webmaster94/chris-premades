@@ -1,5 +1,5 @@
 export let combatInspiration = {
     name: 'Combat Inspiration',
-    version: '1.2.11',
+    version: '2.3.0',
     rules: 'modern'
 };

@@ -23,7 +23,7 @@ async function damage({trigger: {entity: item}, workflow}) {
 
 export let greatWeaponFighting = {
     name: 'Great Weapon Fighting',
-    version: '1.2.36',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

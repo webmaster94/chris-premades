@@ -58,8 +58,8 @@ async function use({workflow}) {
         animation,
         initiativeType: 'follows',
         additionalVaeButtons: [{
-            type: 'use', 
-            name: commandFeature.name, 
+            type: 'use',
+            name: commandFeature.name,
             identifier: 'summonWildfireSpirit',
             activityIdentifier: 'summonWildfireSpiritCommand'
         }],
@@ -95,7 +95,7 @@ async function teleport({workflow}) {
 }
 export let summonWildfireSpirit = {
     name: 'Summon Wildfire Spirit',
-    version: '1.1.0',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

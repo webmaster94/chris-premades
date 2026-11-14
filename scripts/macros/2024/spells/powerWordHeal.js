@@ -1,8 +1,8 @@
 import {actorUtils, constants, dialogUtils, effectUtils, genericUtils, itemUtils, socketUtils, workflowUtils} from '../../../utils.js';
 async function use({trigger, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     let validConditions = itemUtils.getConfig(workflow.item, 'conditions');
-    await Promise.all(workflow.targets.map(async token => {
+    await Promise.all(workflow.targets.tokens.map(async token => {
         let removeIds = Array.from(token.actor.statuses).filter(i => validConditions.includes(i)).map(j => effectUtils.getEffectByStatusID(token.actor, j)).map(k => k.id);
         if (removeIds.length) await genericUtils.deleteEmbeddedDocuments(token.actor, 'ActiveEffect', removeIds);
         if (token.actor.statuses.has('prone') && !actorUtils.hasUsedReaction(token.actor)) {
@@ -17,7 +17,7 @@ async function use({trigger, workflow}) {
 }
 export let powerWordHeal = {
     name: 'Power Word Heal',
-    version: '1.1.34',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

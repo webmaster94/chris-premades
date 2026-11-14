@@ -8,11 +8,11 @@ let spells = [
 ];
 async function damage({trigger: {entity: item}, workflow}) {
     if (!item.system.uses.value) return;
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     let sysID = workflow.item.system.identifier;
     let cprID = genericUtils.getIdentifier(workflow.item);
     let cartographerSpell = spells.some(s => sysID === s || cprID === s);
-    let faerieTarget = !!workflow.attackRoll && workflow.hitTargets.some(t => t.actor.effects.some(e => !!e.flags['chris-premades']?.faerieFire && e.origin.includes(workflow.actor.id)));
+    let faerieTarget = !!workflow.attackRoll && workflow.hitTargets.tokens.some(t => t.actor.effects.some(e => !!e.flags['chris-premades']?.faerieFire && e.origin.includes(workflow.actor.id)));
     if (!cartographerSpell && !faerieTarget) return;
     if (itemUtils.getConfig(item, 'auto') || await dialogUtils.confirmUseItem(item)) {
         await workflowUtils.syntheticItemRoll(item, [], {consumeUsage: true, consumeResources: true});
@@ -20,7 +20,7 @@ async function damage({trigger: {entity: item}, workflow}) {
     }
 }
 async function damaged({trigger: {entity: item}, workflow, ditem}) {
-    if (!workflow.hitTargets.size) return;
+    if (!workflow.hitTargets.count) return;
     if (ditem.oldHP === ditem.newHP && ditem.oldTempHP === ditem.newTempHP) return;
     if (!item.parent.concentration.items.some(i => genericUtils.getIdentifier(i) === 'faerieFire')) return;
     workflow.workflowOptions.noConcentrationCheck = true;
@@ -28,7 +28,7 @@ async function damaged({trigger: {entity: item}, workflow, ditem}) {
 }
 export let guidedPrecision = {
     name: 'Guided Precision',
-    version: '1.5.16',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

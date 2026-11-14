@@ -7,7 +7,7 @@ async function skill({trigger: {entity: item, skillId}}) {
 }
 export let eyesOfMinuteSeeing = {
     name: 'Eyes of Minute Seeing',
-    version: '1.1.0',
+    version: '2.3.0',
     skill: [
         {
             pass: 'context',

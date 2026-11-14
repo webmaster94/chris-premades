@@ -1,7 +1,7 @@
 import {zoneOfTruth as zoneOfTruthLegacy} from '../../../legacyMacros.js';
 export let zoneOfTruth = {
     ...zoneOfTruthLegacy,
-    version: '1.2.28',
+    version: '2.3.0',
     rules: 'modern',
     legacyTemplate: true
 };

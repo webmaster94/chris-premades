@@ -72,7 +72,7 @@ export function addThrallBonuses(summonData, workflow) {
     return summonData;
 }
 async function hexBonus({trigger: {entity: effect}, workflow}) {
-    if (!workflow.targets.size) return;
+    if (!workflow.targets.count) return;
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
     if (!combatUtils.perTurnCheck(effect, 'thrallHexBonus')) return;
     let summoner = await fromUuid(workflow.actor.flags['chris-premades']?.summonerUuid);
@@ -80,7 +80,7 @@ async function hexBonus({trigger: {entity: effect}, workflow}) {
     let hex = effectUtils.getEffectByIdentifier(summoner, 'hex');
     if (!hex) return;
     let validTargetUuids = hex.flags['chris-premades'].hex.targets;
-    if (!workflow.hitTargets.find(i => validTargetUuids.includes(i.document.uuid))) return;
+    if (!workflow.hitTargets.tokens.find(i => validTargetUuids.includes(i.document.uuid))) return;
     let damageType = workflow.actor.flags['chris-premades']?.hexBonusDamageType ?? 'psychic';
     let formula = hex.flags['chris-premades'].hex.formula;
     await combatUtils.setTurnCheck(effect, 'thrallHexBonus');
@@ -88,7 +88,7 @@ async function hexBonus({trigger: {entity: effect}, workflow}) {
 }
 export let createThrall = {
     name: 'Create Thrall',
-    version: '1.5.21',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         actor: [

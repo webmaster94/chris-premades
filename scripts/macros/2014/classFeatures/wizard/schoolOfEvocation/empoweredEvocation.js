@@ -8,7 +8,7 @@ async function damage({workflow}) {
 }
 export let empoweredEvocation = {
     name: 'Empowered Evocation',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         actor: [
             {

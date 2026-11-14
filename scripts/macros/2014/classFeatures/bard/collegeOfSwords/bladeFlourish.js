@@ -12,7 +12,7 @@ async function damage({trigger: {entity: item}, workflow}) {
     if (['boomingBlade', 'greenFlameBlade'].includes(genericUtils.getIdentifier(workflow.item))) return;
     if (!workflowUtils.isAttackType(workflow, 'weaponAttack')) return;
     if (!combatUtils.perTurnCheck(item, 'bladeFlourish', true, workflow.token.id)) return;
-    if (workflow.hitTargets.size !== 1) return;
+    if (workflow.hitTargets.count !== 1) return;
     let defensiveFeature = activityUtils.getActivityByIdentifier(item, 'defensiveFlourish', {strict: true});
     let mobileFeature = activityUtils.getActivityByIdentifier(item, 'mobileFlourish', {strict: true});
     let slashingFeature = activityUtils.getActivityByIdentifier(item, 'slashingFlourish', {strict: true});
@@ -52,11 +52,11 @@ async function damage({trigger: {entity: item}, workflow}) {
             break;
         case 'MF':
             await genericUtils.setFlag(item, 'chris-premades', 'mobileFlourish.roll', rollResult);
-            await workflowUtils.syntheticActivityRoll(mobileFeature, [workflow.hitTargets.first()]);
+            await workflowUtils.syntheticActivityRoll(mobileFeature, [workflow.hitTargets.tokens[0]]);
             break;
         case 'SF': {
             let activityData = activityUtils.withChangedDamage(slashingFeature, rollResult, [damageType]);
-            let nearbyTargets = tokenUtils.findNearby(workflow.token, 5, 'enemy').filter(i => i.document.uuid !== workflow.hitTargets.first().document.uuid);
+            let nearbyTargets = tokenUtils.findNearby(workflow.token, 5, 'enemy').filter(i => i.document.uuid !== workflow.hitTargets.tokens[0].document.uuid);
             if (nearbyTargets.length) await workflowUtils.syntheticActivityDataRoll(activityData, item, item.actor, nearbyTargets);
             break;
         }
@@ -66,11 +66,11 @@ async function mobilePush({workflow}) {
     let bardicResult = workflow.item.flags['chris-premades'].mobileFlourish.roll;
     let distance = Math.floor((5 + bardicResult) / 5) * 5;
     let push = await dialogUtils.confirm(workflow.item.name, genericUtils.format('CHRISPREMADES.Macros.BladeFlourish.Push', {distance}));
-    if (push) await tokenUtils.pushToken(workflow.token, workflow.targets.first(), distance);
+    if (push) await tokenUtils.pushToken(workflow.token, workflow.targets.tokens[0], distance);
 }
 export let bladeFlourish = {
     name: 'Blade Flourish',
-    version: '1.1.0',
+    version: '2.3.0',
     midi: {
         item: [
             {

@@ -19,7 +19,7 @@ async function use({workflow}) {
 }
 async function damage({trigger: {entity: effect}, workflow}) {
     if (!workflowUtils.isAttackType(workflow, 'attack')) return;
-    let target = workflow.targets.first();
+    let target = workflow.targets.tokens[0];
     if (!target) return;
     if (tokenUtils.getDistance(workflow.token, target) > 15) return;
     let originItem = await effectUtils.getOriginItem(effect);
@@ -33,7 +33,7 @@ async function damage({trigger: {entity: effect}, workflow}) {
 }
 export let conjureMinorElementals = {
     name: 'Conjure Minor Elementals',
-    version: '1.3.84',
+    version: '2.3.0',
     rules: 'modern',
     midi: {
         item: [

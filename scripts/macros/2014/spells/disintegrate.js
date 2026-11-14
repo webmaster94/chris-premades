@@ -1,8 +1,8 @@
 import {animationUtils, effectUtils, itemUtils} from '../../../utils.js';
 async function use({workflow}) {
     // Animations by: eskiemoh
-    if (!workflow.targets.size) return;
-    for (let target of workflow.targets) {
+    if (!workflow.targets.count) return;
+    for (let target of workflow.targets.tokens) {
         let targetDeath = workflow.damageList.find(i => i.targetUuid === target.document.uuid)?.newHP === 0;
         if (targetDeath && target.actor.type === 'character') await effectUtils.applyConditions(target.actor, ['dead']);
         let playAnimation = itemUtils.getConfig(workflow.item, 'playAnimation');
@@ -69,7 +69,7 @@ async function use({workflow}) {
                     .file('jb2a.disintegrate.green')
                     .atLocation(workflow.token)
                     .stretchTo(target)
-                    .missed(workflow.failedSaves.size === 0)
+                    .missed(workflow.failedSaves.count === 0)
                     .zIndex(1)
                     .wait(500);
         }
@@ -113,8 +113,8 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: canvas.grid.size * 0.1, y: -canvas.grid.size * 0.4} 
-                    
+                    offset: {x: canvas.grid.size * 0.1, y: -canvas.grid.size * 0.4}
+
                 })
                 .duration(1500)
                 .fadeOut(1000)
@@ -130,7 +130,7 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: canvas.grid.size * 0.1, y: -canvas.grid.size * 0.4}            
+                    offset: {x: canvas.grid.size * 0.1, y: -canvas.grid.size * 0.4}
                 })
                 .duration(1800)
                 .fadeOut(1000)
@@ -146,7 +146,7 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: canvas.grid.size * 0.1, y: -canvas.grid.size * 0.4} 
+                    offset: {x: canvas.grid.size * 0.1, y: -canvas.grid.size * 0.4}
                 })
                 .duration(2000)
                 .fadeOut(1000)
@@ -162,7 +162,7 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: canvas.grid.size * 0.1, y: -canvas.grid.size * 0.4} 
+                    offset: {x: canvas.grid.size * 0.1, y: -canvas.grid.size * 0.4}
                 })
                 .duration(2200)
                 .fadeOut(1000)
@@ -178,8 +178,8 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: canvas.grid.size * 0.1, y: -canvas.grid.size * 0.4} 
-                })   
+                    offset: {x: canvas.grid.size * 0.1, y: -canvas.grid.size * 0.4}
+                })
                 .duration(2400)
                 .fadeOut(1000)
                 .playIf(targetDeath)
@@ -194,7 +194,7 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: canvas.grid.size * 0.1, y: -canvas.grid.size * 0.4} 
+                    offset: {x: canvas.grid.size * 0.1, y: -canvas.grid.size * 0.4}
                 })
                 .duration(2600)
                 .fadeOut(1000)
@@ -210,8 +210,8 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: canvas.grid.size * 0.1, y: -canvas.grid.size * 0.4} 
-                })    
+                    offset: {x: canvas.grid.size * 0.1, y: -canvas.grid.size * 0.4}
+                })
                 .duration(2800)
                 .fadeOut(1000)
                 .playIf(targetDeath)
@@ -227,8 +227,8 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3} 
-                    
+                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3}
+
                 })
                 .duration(500)
                 .fadeOut(1000)
@@ -244,11 +244,11 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3}           
+                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3}
                 })
                 .duration(700)
                 .fadeOut(1000)
-                .playIf(targetDeath)               
+                .playIf(targetDeath)
             .effect()
                 .atLocation(centerPoint)
                 .copySprite(target)
@@ -260,7 +260,7 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3} 
+                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3}
                 })
                 .duration(900)
                 .fadeOut(1000)
@@ -276,7 +276,7 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3} 
+                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3}
                 })
                 .duration(1100)
                 .fadeOut(1000)
@@ -292,8 +292,8 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3} 
-                })   
+                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3}
+                })
                 .duration(1300)
                 .fadeOut(1000)
                 .playIf(targetDeath)
@@ -308,7 +308,7 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3} 
+                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3}
                 })
                 .duration(1500)
                 .fadeOut(1000)
@@ -324,8 +324,8 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3} 
-                })   
+                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3}
+                })
                 .duration(1700)
                 .fadeOut(1000)
                 .playIf(targetDeath)
@@ -340,8 +340,8 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3} 
-                }) 
+                    offset: {x: -canvas.grid.size * 0.4, y: canvas.grid.size * 0.3}
+                })
                 .duration(1900)
                 .fadeOut(1000)
                 .playIf(targetDeath)
@@ -356,7 +356,7 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: -canvas.grid.size * 0.4, y :canvas.grid.size * 0.3} 
+                    offset: {x: -canvas.grid.size * 0.4, y :canvas.grid.size * 0.3}
                 })
                 .duration(2100)
                 .fadeOut(1000)
@@ -373,7 +373,7 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: canvas.grid.size*0.5, y: canvas.grid.size*0.4} 
+                    offset: {x: canvas.grid.size*0.5, y: canvas.grid.size*0.4}
                 })
                 .duration(1500)
                 .fadeOut(1000)
@@ -381,7 +381,7 @@ async function use({workflow}) {
             .effect()
                 .atLocation(centerPoint)
                 .copySprite(target)
-                .scaleToObject(target.document.texture.scaleX) 
+                .scaleToObject(target.document.texture.scaleX)
                 .shape('circle', {
                     lineSize: 25,
                     lineColor: '#FF0000',
@@ -389,7 +389,7 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: canvas.grid.size * 0.5, y: canvas.grid.size * 0.4}  
+                    offset: {x: canvas.grid.size * 0.5, y: canvas.grid.size * 0.4}
                 })
                 .duration(1700)
                 .fadeOut(1000)
@@ -397,7 +397,7 @@ async function use({workflow}) {
             .effect()
                 .atLocation(centerPoint)
                 .copySprite(target)
-                .scaleToObject(target.document.texture.scaleX) 
+                .scaleToObject(target.document.texture.scaleX)
                 .shape('circle', {
                     lineSize: 25,
                     lineColor: '#FF0000',
@@ -405,7 +405,7 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: canvas.grid.size * 0.5, y: canvas.grid.size * 0.4}  
+                    offset: {x: canvas.grid.size * 0.5, y: canvas.grid.size * 0.4}
                 })
                 .duration(1900)
                 .fadeOut(1000)
@@ -421,7 +421,7 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: canvas.grid.size * 0.5, y: canvas.grid.size * 0.4} 
+                    offset: {x: canvas.grid.size * 0.5, y: canvas.grid.size * 0.4}
                 })
                 .duration(2100)
                 .fadeOut(1000)
@@ -437,8 +437,8 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: canvas.grid.size * 0.5, y: canvas.grid.size * 0.4} 
-                })   
+                    offset: {x: canvas.grid.size * 0.5, y: canvas.grid.size * 0.4}
+                })
                 .duration(2300)
                 .fadeOut(1000)
                 .playIf(targetDeath)
@@ -453,7 +453,7 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: canvas.grid.size * 0.5, y: canvas.grid.size * 0.4} 
+                    offset: {x: canvas.grid.size * 0.5, y: canvas.grid.size * 0.4}
                 })
                 .duration(2500)
                 .fadeOut(1000)
@@ -468,8 +468,8 @@ async function use({workflow}) {
                     gridUnits: true,
                     name: 'test',
                     isMask: true,
-                    offset: {x: canvas.grid.size * 0.5, y: canvas.grid.size * 0.4} 
-                })    
+                    offset: {x: canvas.grid.size * 0.5, y: canvas.grid.size * 0.4}
+                })
                 .duration(2700)
                 .fadeOut(1000)
                 .playIf(targetDeath)
@@ -487,7 +487,7 @@ async function use({workflow}) {
 }
 export let disintegrate ={
     name: 'Disintegrate',
-    version: '1.3.84',
+    version: '2.3.0',
     hasAnimation: true,
     midi: {
         item: [

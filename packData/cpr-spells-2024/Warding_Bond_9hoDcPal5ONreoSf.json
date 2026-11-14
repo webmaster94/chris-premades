@@ -372,7 +372,7 @@
     "chris-premades": {
       "info": {
         "identifier": "wardingBond",
-        "version": "1.2.29",
+        "version": "2.3.0",
         "source": "chris-premades",
         "rules": "modern"
       },
