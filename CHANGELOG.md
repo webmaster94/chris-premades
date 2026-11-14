@@ -1,3 +1,7 @@
+# 2.3.2 - Foundry 14.370
+- Updates the Foundry compatibility target to 14.370 and retains 14.369 as the minimum supported build.
+- Metadata-only release. Automation behavior and dependency requirements are unchanged.
+
 # 2.3.1 - Midi QOL Enhanced integration
 - Completes the token collection update for returned sub-workflows, including save-result counts and actor-only target lookups.
 - Accepts document-mode damage hooks and preserves the exact target actor. Removing targets keeps other off-canvas documents.

@@ -2,12 +2,12 @@
   "id": "chris-premades",
   "title": "Cauldron of Plentiful Resources",
   "description": "Premade items for high-automation Midi-Qol D&D games.",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "library": "false",
   "socket": true,
   "compatibility": {
     "minimum": "14.369",
-    "verified": "14.369",
+    "verified": "14.370",
     "maximum": "14.999"
   },
   "authors": [
